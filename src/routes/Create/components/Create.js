@@ -1,8 +1,11 @@
 import React from 'react'
 import classes from './Create.scss'
 
+import Header from 'components/Header'
+
 export const Create = (props) => (
-  <div className={classes['Create']}>   
+  <div className={classes['Create']}>
+    <Header></Header>
     <h4>Create</h4>
         <div>Personen: {props.persons.join(", ")}</div>
 
