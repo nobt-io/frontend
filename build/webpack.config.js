@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from '../config'
 import _debug from 'debug'
+import read from 'read-file'
 
 const debug = _debug('app:webpack:config')
 const paths = config.utils_paths
@@ -215,6 +216,7 @@ webpackConfig.module.loaders.push({
 // Style Configuration
 // ------------------------------------
 webpackConfig.sassLoader = {
+  data: read.sync(paths.client('styles/theme.scss')),
   includePaths: paths.client('styles')
 }
 
