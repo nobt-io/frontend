@@ -2,9 +2,7 @@ export const actionNames = {
   ADD_PERSON: 'Create.ADD_PERSON'
 }
 
-const initialState = {
-  persons: []
-}
+
 
 export const actionCreator = {
   addPerson: function(name){
@@ -22,7 +20,7 @@ export const actionHandlers = {
   }
 }
 
-export default function counterReducer (state = initialState, action) {
+export default function createReducer (state = initialState, action) {
   const handler = actionHandlers[action.type]
 
   return handler ? handler(state, action) : state
