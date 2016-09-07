@@ -2,8 +2,6 @@ export const actionNames = {
   ADD_PERSON: 'Create.ADD_PERSON'
 }
 
-
-
 export const actionCreator = {
   addPerson: function(name){
     return {
@@ -18,6 +16,10 @@ export const actionHandlers = {
     var persons = [action.payload.name, ...state.persons];
     return {...state, persons};
   }
+}
+
+const initialState = {
+  persons: []
 }
 
 export default function createReducer (state = initialState, action) {
