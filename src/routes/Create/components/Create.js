@@ -1,16 +1,20 @@
 import React from 'react'
-import classes from './Create.scss'
+import styles from './Create.scss'
+import Button from 'components/Button';
 
 import Header from 'components/Header'
+import AddPersonInput from 'components/AddPersonInput'
 
 export const Create = (props) => (
-  <div className={classes['Create']}>
-    <Header></Header>
-    <h4>Create</h4>
-        <div>Personen: {props.persons.join(", ")}</div>
-
-    <button className='btn btn-default' onClick={() => props.addPerson("david")}>Add David</button>
-    <button className='btn btn-default' onClick={() => props.addPerson("felix")}>Add Felix</button>
+  <div className={styles.Create}>
+    <section>
+      <Header showButton={true}>
+        <Button className={styles.button} icon="check_box">Create</Button>
+      </Header>
+    </section>
+    <section>
+      <AddPersonInput></AddPersonInput>
+    </section>
   </div>
 )
 
