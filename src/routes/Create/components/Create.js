@@ -32,19 +32,28 @@ export const Create = React.createClass({
     return newUserIsNotEmpty && userDoesNotExist;
   },
 
+  removePerson: function (personToRemove) {
+    this.setState({
+      ...this.state,
+      persons: this.state.persons.filter(person => person !== personToRemove)
+    });
+  },
+
   render: function () {
 
+    const createNobtIsDisabled = !this.state.persons.length > 0;
     const addPersonIsDisabled = !this.isUserValid(this.state.currentPerson);
 
     return (
       <div className={styles.Create}>
         <Header showButton={true}>
-          <Button className={styles.button} icon="check_box">Create</Button>
+          <Button className={styles.button} disabled={createNobtIsDisabled} icon="check_box">Create</Button>
         </Header>
-        <AddPersonPanel buttonIsDisabled={addPersonIsDisabled} buttonAction={this.addPerson} onValueChange={this.onValueChange}>
+        <AddPersonPanel
+          buttonIsDisabled={addPersonIsDisabled} onButtonClick={this.addPerson} onValueChange={this.onValueChange}>
           Who is involved in <b>das ist ein test</b>?
         </AddPersonPanel>
-        <PersonList persons={this.state.persons}></PersonList>
+        <PersonList persons={this.state.persons} onPersonRemove={this.removePerson}></PersonList>
       </div>)
   }
 });

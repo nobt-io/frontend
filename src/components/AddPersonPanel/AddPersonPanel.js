@@ -10,6 +10,7 @@ export const AddPersonPanel = React.createClass({
 
   componentDidMount: function(){
     ReactDOM.findDOMNode(this).querySelector('input').focus();
+    ReactDOM.findDOMNode(this).querySelector('input').autocomplete = "off";
   },
 
   onKeyDown: function (event) {
@@ -19,8 +20,9 @@ export const AddPersonPanel = React.createClass({
 
   onAction: function (event) {
     if (!this.props.buttonIsDisabled){
-      this.props.buttonAction();
+      this.props.onButtonClick();
       ReactDOM.findDOMNode(this).querySelector('input').value = "";
+      ReactDOM.findDOMNode(this).querySelector('input').focus();
     }
   },
 
@@ -33,7 +35,7 @@ export const AddPersonPanel = React.createClass({
       <section className={styles.AddPersonPanel}>
         {this.props.children}
         <div className={styles.AddPersonInput}>
-          <Input className={styles.InputContainer} type='text' name='name' onKeyPress={this.onKeyDown} onChange={this.onChange} maxLength={40}/>
+          <Input autocomplete="off" className={styles.InputContainer} type='text' name='name' onKeyPress={this.onKeyDown} onChange={this.onChange} maxLength={40}/>
           <Button className={styles.AddButton} icon='add_circle_outline' onClick={this.onAction} disabled={this.props.buttonIsDisabled} floating/>
         </div>
       </section>
@@ -43,14 +45,14 @@ export const AddPersonPanel = React.createClass({
   getDefaultProps: function () {
     return {
       buttonIsDisabled: false,
-      buttonAction: () => { },
+      onButtonClick: () => { },
       onValueChange: (val) => { }
     };
   },
 
   propTypes: {
     buttonIsDisabled: React.PropTypes.bool,
-    buttonAction: React.PropTypes.func,
+    onButtonClick: React.PropTypes.func,
     onValueChange: React.PropTypes.func
   }
 });
