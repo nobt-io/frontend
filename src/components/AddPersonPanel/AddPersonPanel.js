@@ -18,7 +18,10 @@ export const AddPersonPanel = React.createClass({
   },
 
   onAction: function (event) {
-    if (!this.props.buttonIsDisabled) this.props.buttonAction();
+    if (!this.props.buttonIsDisabled){
+      this.props.buttonAction();
+      ReactDOM.findDOMNode(this).querySelector('input').value = "";
+    }
   },
 
   onChange: function (value) {

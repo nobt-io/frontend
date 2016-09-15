@@ -7,8 +7,8 @@ export const PersonListPanel = React.createClass({
 
   render: function () {
 
-    const user = this.props.users.map((user) => (
-      <div className={styles.PersonItem} key={user}><Avatar name={user}></Avatar><span className={styles.PersonName}>{user}</span></div>
+    const user = this.props.persons.map((person) => (
+      <div className={styles.PersonItem} key={person}><Avatar name={person}></Avatar><span className={styles.PersonName}>{person}</span></div>
     ));
 
 
@@ -19,7 +19,7 @@ export const PersonListPanel = React.createClass({
 
   getDefaultProps: function() {
     return {
-      users: ["david", "heinz"],
+      persons: []
     }
   },
 });
