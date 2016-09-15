@@ -11,7 +11,8 @@ export const Create = React.createClass({
   getInitialState() {
     return {
       persons: [],
-      currentPerson: ""
+      currentPerson: "",
+      nobtName: this.props.params.nobtName || "your nobt"
     }
   },
   addPerson: function(){
@@ -41,6 +42,8 @@ export const Create = React.createClass({
 
   render: function () {
 
+    console.log(this.props.params.nobtName);
+
     const createNobtIsDisabled = !this.state.persons.length > 0;
     const addPersonIsDisabled = !this.isUserValid(this.state.currentPerson);
 
@@ -51,7 +54,7 @@ export const Create = React.createClass({
         </Header>
         <AddPersonPanel
           buttonIsDisabled={addPersonIsDisabled} onButtonClick={this.addPerson} onValueChange={this.onValueChange}>
-          Who is involved in <b>das ist ein test</b>?
+          Who is involved in <b>{this.state.nobtName}</b>?
         </AddPersonPanel>
         <PersonList persons={this.state.persons} onPersonRemove={this.removePerson}></PersonList>
       </div>)
