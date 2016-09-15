@@ -3,20 +3,23 @@ import styles from './Create.scss'
 import Button from 'components/Button';
 
 import Header from 'components/Header'
-import AddPersonInput from 'components/AddPersonInput'
+import AddPersonPanel from 'components/AddPersonPanel'
+import AvatarList from 'components/PersonList'
 
-export const Create = (props) => (
-  <div className={styles.Create}>
-    <section>
-      <Header showButton={true}>
-        <Button className={styles.button} icon="check_box">Create</Button>
-      </Header>
-    </section>
-    <section>
-      <AddPersonInput></AddPersonInput>
-    </section>
-  </div>
-)
+export const Create = React.createClass({
+  render: function () {
+    return (
+      <div className={styles.Create}>
+        <Header showButton={true}>
+          <Button className={styles.button} icon="check_box">Create</Button>
+        </Header>
+        <AddPersonPanel buttonAction={() => console.log("action123")}>
+          Who is involved in <b>das ist ein test</b>?
+        </AddPersonPanel>
+        <AvatarList></AvatarList>
+      </div>)
+  }
+});
 
 Create.propTypes = {
   persons: React.PropTypes.array.isRequired,
