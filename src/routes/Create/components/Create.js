@@ -8,17 +8,13 @@ import PersonList from 'components/PersonList'
 
 export const Create = React.createClass({
 
-  getInitialState() {
-    return {
-      persons: [],
-      currentPerson: "",
-      nobtName: this.props.params.nobtName || "your nobt"
-    }
+  componentWillMount(){
+    var nobtName = this.props.params.nobtName;
+    this.props.setNobtName(nobtName);
   },
-  addPerson: function(){
-    this.setState({
-      persons: [...this.state.persons, this.state.currentPerson]
-    });
+
+  getInitialState() {
+    return { currentPerson: "" }
   },
 
   onValueChange: function(person){
@@ -29,22 +25,13 @@ export const Create = React.createClass({
 
   isUserValid: function (person) {
     var newUserIsNotEmpty = person != "";
-    var userDoesNotExist = this.state.persons.filter(existingUser => existingUser === person).length == 0;
+    var userDoesNotExist = this.props.persons.filter(existingUser => existingUser === person).length == 0;
     return newUserIsNotEmpty && userDoesNotExist;
-  },
-
-  removePerson: function (personToRemove) {
-    this.setState({
-      ...this.state,
-      persons: this.state.persons.filter(person => person !== personToRemove)
-    });
   },
 
   render: function () {
 
-    console.log(this.props.params.nobtName);
-
-    const createNobtIsDisabled = !this.state.persons.length > 0;
+    const createNobtIsDisabled = !this.props.persons.length > 0;
     const addPersonIsDisabled = !this.isUserValid(this.state.currentPerson);
 
     return (
@@ -53,10 +40,10 @@ export const Create = React.createClass({
           <Button className={styles.button} disabled={createNobtIsDisabled} icon="check_box">Create</Button>
         </Header>
         <AddPersonPanel
-          buttonIsDisabled={addPersonIsDisabled} onButtonClick={this.addPerson} onValueChange={this.onValueChange}>
-          Who is involved in <b>{this.state.nobtName}</b>?
+          buttonIsDisabled={addPersonIsDisabled} onButtonClick={() => this.props.addPerson(this.state.currentPerson)} onValueChange={this.onValueChange}>
+          Who is involved in <b>{this.props.nobtName}</b>?
         </AddPersonPanel>
-        <PersonList persons={this.state.persons} onPersonRemove={this.removePerson}></PersonList>
+        <PersonList persons={this.props.persons} onPersonRemove={this.props.removePerson}></PersonList>
       </div>)
   }
 });
