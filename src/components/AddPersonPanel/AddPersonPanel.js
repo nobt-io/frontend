@@ -35,7 +35,7 @@ export const AddPersonPanel = React.createClass({
       <section className={styles.AddPersonPanel}>
         {this.props.children}
         <div className={styles.AddPersonInput}>
-          <Input autocomplete="off" className={styles.InputContainer} type='text' name='name' onKeyPress={this.onKeyDown} onChange={this.onChange} maxLength={40}/>
+          <Input autoComplete="off" className={styles.InputContainer} type='text' name='name' onKeyPress={this.onKeyDown} onChange={this.onChange} maxLength={40}/>
           <Button className={styles.AddButton} icon='add_circle_outline' onClick={this.onAction} disabled={this.props.buttonIsDisabled} floating/>
         </div>
       </section>
