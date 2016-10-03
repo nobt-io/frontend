@@ -28,11 +28,12 @@ const actionHandlers = {
     var total = action.payload.nobt.expenses.reduce((total, expense) => total + expense.shares.reduce((expenseTotal, share) => expenseTotal + share.amount, 0), 0);
     var name = action.payload.nobt.name;
     var members = action.payload.nobt.participatingPersons;
+    var expenses = action.payload.nobt.expenses;
 
     var transactionFactory = new PersonDebtSummaryFactory(action.payload.nobt.transactions);
     var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m));
 
-    return {...state, name : name, total: total, members: members, transactions: transactions};
+    return {...state, name : name, total: total, members: members, transactions: transactions, expenses: expenses};
   },
   [actionNames.CHANGE_TAB]: (state, action) => {
     var tabIndex = action.payload.tabIndex;
