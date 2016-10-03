@@ -37,7 +37,7 @@ export const Create = React.createClass({
     return (
       <div className={styles.Create}>
         <Header showButton={true}>
-          <Button className={styles.button} disabled={createNobtIsDisabled} icon="check_box">Create</Button>
+          <Button className={styles.button} disabled={createNobtIsDisabled} icon="check_box" onClick={() => {this.props.createNobt()}}>Create</Button>
         </Header>
         <AddPersonPanel
           buttonIsDisabled={addPersonIsDisabled} onButtonClick={() => this.props.addPerson(this.state.currentPerson)} onValueChange={this.onValueChange}>
