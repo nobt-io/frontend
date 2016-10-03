@@ -1,10 +1,13 @@
 import React from 'react'
 import styles from './Create.scss'
 import Button from 'components/Button';
+import { push } from 'react-router-redux';
 
 import Header from 'components/Header'
 import AddPersonPanel from 'components/AddPersonPanel'
 import PersonList from 'components/PersonList'
+
+import store from 'store/createStore'
 
 export const Create = React.createClass({
 
@@ -29,6 +32,14 @@ export const Create = React.createClass({
     return newUserIsNotEmpty && userDoesNotExist;
   },
 
+  createNobt: function(){
+    this.props.createNobt().then((response) => {
+      this.props.history.push(`/Nobt/${response.data.id}`);
+    }, () => {
+      //Todo: show error!
+    });
+  },
+
   render: function () {
 
     const createNobtIsDisabled = !this.props.persons.length > 0;
@@ -37,7 +48,7 @@ export const Create = React.createClass({
     return (
       <div className={styles.Create}>
         <Header showButton={true}>
-          <Button className={styles.button} disabled={createNobtIsDisabled} icon="check_box" onClick={() => {this.props.createNobt()}}>Create</Button>
+          <Button className={styles.button} disabled={createNobtIsDisabled} icon="check_box" onClick={() => {this.createNobt()}}>Create</Button>
         </Header>
         <AddPersonPanel
           buttonIsDisabled={addPersonIsDisabled} onButtonClick={() => this.props.addPerson(this.state.currentPerson)} onValueChange={this.onValueChange}>
