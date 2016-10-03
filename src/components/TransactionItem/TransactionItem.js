@@ -25,7 +25,7 @@ export const TransactionItem = (props) => {
         <div className={styles.content}>
           <div>
             <span className={styles.amountContent}>
-              <span>{getAmountKeyWord(total * -1)}</span>
+              <span>{getAmountKeyWord(total)}</span>
               <span className={styles.amount}>{getAbs(total)} €</span>
             </span>
             <span className={styles.name}>{me}</span>
