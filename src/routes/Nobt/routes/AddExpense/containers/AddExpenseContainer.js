@@ -1,5 +1,7 @@
 import { connect } from 'react-redux'
-import { increment, doubleAsync } from '../modules/AddExpense'
+import debug from 'debug';
+
+import { nobtActionFactory } from '../modules/AddExpense'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -13,13 +15,14 @@ import AddExpense from '../components/AddExpense'
     implementing our wrapper around increment; the component doesn't care   */
 
 const mapActionCreators = {
-  increment: () => increment(1),
-  doubleAsync
+  loadNobt: (id) => nobtActionFactory.loadNobt(id)
 }
 
-const mapStateToProps = (state) => ({
-  members: state.Nobt.members
-})
+const mapStateToProps = (state) => {
+  return {
+    members: state.AddExpense.members
+  };
+}
 
 /*  Note: mapStateToProps is where you should use `reselect` to create selectors, ie:
 
