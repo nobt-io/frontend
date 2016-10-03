@@ -1,14 +1,17 @@
 import {getNobt} from 'api/api';
+import debug from 'debug';
 
 const actionNames = {
   LOAD_NOBT: 'Nobt.LOAD_NOBT',
   SET_NOBT: 'Nobt.SET_NOBT',
   CHANGE_TAB: 'Nobt.CHANGE_TAB',
+  SHOW_ADD_EXPENSE_DRAWER: 'Nobt.SHOW_ADD_EXPENSE_DRAWER',
+  HIDE_ADD_EXPENSE_DRAWER: 'Nobt.HIDE_ADD_EXPENSE_DRAWER',
 };
 
 
 export const nobtActionFactory = {
-  changeTab: (tabIndex) => ({type: actionNames.CHANGE_TAB, payload: {tabIndex: tabIndex}}),
+  changeTab: (tabName) => ({type: actionNames.CHANGE_TAB, payload: {tabName: tabName}}),
 
   loadNobt: (id) => {
     return (dispatch, getState) => {
@@ -31,7 +34,16 @@ const actionHandlers = {
     return {...state, name : name, total: total, member: member};
   },
   [actionNames.CHANGE_TAB]: (state, action) => {
-    var tabIndex = action.payload.tabIndex;
+
+    var tabNameIndexMapping = {
+      'transactions': 0,
+      'expenses': 1
+    };
+
+    var tabIndex = tabNameIndexMapping[action.payload.tabName] || 0;
+
+    // TODO this is called often, maybe avoid somehow
+    // debug(actionNames.CHANGE_TAB)(`Calculated selected tab index ${tabIndex} from name '${action.payload.tabName}'.`);
 
     return {...state, tabIndex : tabIndex};
   }
@@ -40,7 +52,8 @@ const actionHandlers = {
 const initialState = {
   total: 0,
   name: '',
-  member: []
+  member: [],
+  addExpenseOverlayOpen: false
 };
 
 export default function nobtReducer (state = initialState, action) {

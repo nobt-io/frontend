@@ -1,24 +1,12 @@
-import { injectReducer } from '../../store/reducers'
+import SimpleLayout from 'layouts/SimpleLayout'
+import OverviewRoute from './routes/Overview';
+import AddExpenseRoute from './routes/AddExpense';
 
 export default (store) => ({
-  path: 'nobt/:id',
-  /*  Async getComponent is only invoked when route matches   */
-  getComponent (nextState, cb) {
-    /*  Webpack - use 'require.ensure' to create a split point
-        and embed an async module loader (jsonp) when bundling   */
-    require.ensure([], (require) => {
-      /*  Webpack - use require callback to define
-          dependencies for bundling   */
-      const Nobt = require('./containers/NobtContainer').default
-      const reducer = require('./modules/Nobt').default
-
-      /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'Nobt', reducer })
-
-      /*  Return getComponent   */
-      cb(null, Nobt)
-
-    /* Webpack named bundle   */
-    }, 'Nobt')
-  }
+  path: 'nobt/',
+  component: SimpleLayout,
+  childRoutes: [
+    OverviewRoute(store),
+    AddExpenseRoute(store)
+  ]
 })

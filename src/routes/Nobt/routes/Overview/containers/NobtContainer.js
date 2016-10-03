@@ -5,7 +5,7 @@ import Nobt from '../components/Nobt'
 
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),
-  changeTab: (tabIndex) => nobtActionFactory.changeTab(tabIndex)
+  changeTab: (tabName) => nobtActionFactory.changeTab(tabName),
 };
 
 const mapStateToProps = (state) => ({

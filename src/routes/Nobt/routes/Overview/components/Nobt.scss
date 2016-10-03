@@ -1,0 +1,17 @@
+.Nobt {
+
+  button{
+    color: white !important;
+  }
+
+  .bottomDrawer {
+
+    bottom: 0;
+    border-left: 1px solid black;
+    transition: transform 1000ms ease-in-out;
+
+    &:not(.active) {
+      transform: translateY(100%);
+    }
+  }
+}
