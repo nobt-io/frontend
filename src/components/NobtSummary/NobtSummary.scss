@@ -1,23 +1,29 @@
-
 .container{
+  background-color: $color-primary-light;
   font-family: $fancy-font;
   text-align: center;
   color: white;
   font-weight: normal;
+
+  .nobtName{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    margin: 0;
+    padding: 15px;
+    font-size: 23px;
+  }
 
   button{
     background-color: $color-primary-dark;
     color: white !important;
     border-radius: 3px;
     padding: 0;
-
-    &:disabled{
-      opacity: 0.3;
-    }
   }
 
-  .buttonContainer {
-    width: 100%;
-    text-align: right;
+  .nobtSummary {
+    margin-top: -5px;
+    padding: 15px;
+    padding-top: 0;
   }
 }
