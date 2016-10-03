@@ -1,10 +1,12 @@
 import React from 'react'
-import styles from './TransactionList.scss'
+import TransactionItem from 'components/TransactionItem'
 
-export const TransactionList = () => (
-  <div className={styles.TransactionList}>
-    <h1>TransactionList</h1>
-  </div>
-)
+export const TransactionList = (props) => {
+  var transactions = props.transactions || [];
+  var transactionItem = transactions.map(t => (<TransactionItem transaction={t}></TransactionItem>));
+
+  return <div>{transactionItem}</div>;
+
+};
 
 export default TransactionList

@@ -7,6 +7,7 @@ export const Avatar = (props) => (
 );
 
 Avatar.propTypes = {
+  name: React.PropTypes.string.isRequired,
   size: React.PropTypes.number.isRequired
 };
 

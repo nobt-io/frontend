@@ -1,4 +1,5 @@
 import {getNobt} from 'api/api';
+import PersonDebtSummaryFactory from './PersonDebtSummaryFactory'
 
 const actionNames = {
   LOAD_NOBT: 'Nobt.LOAD_NOBT',
@@ -24,12 +25,14 @@ export const nobtActionFactory = {
 const actionHandlers = {
   [actionNames.SET_NOBT]: (state, action) => {
 
-    var total = action.payload.nobt.expenses.reduce((acc, cur) => acc + cur, 0);
+    var total = action.payload.nobt.expenses.reduce((total, expense) => total + expense.shares.reduce((expenseTotal, share) => expenseTotal + share.amount, 0), 0);
     var name = action.payload.nobt.name;
     var members = action.payload.nobt.participatingPersons;
-    var transactions = action.payload.nobt.transactions;
 
-    return {...state, name : name, total: total, members: members};
+    var transactionFactory = new PersonDebtSummaryFactory(action.payload.nobt.transactions);
+    var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m));
+
+    return {...state, name : name, total: total, members: members, transactions: transactions};
   },
   [actionNames.CHANGE_TAB]: (state, action) => {
     var tabIndex = action.payload.tabIndex;

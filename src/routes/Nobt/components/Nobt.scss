@@ -8,7 +8,17 @@
   .pointer {
     background-color: $color-accent;
   }
+
   .tabs {
-    margin: 10px 15px;
+    margin: 0 0;
+
+    nav{
+      margin: 0 15px;
+    }
+  }
+
+  .tab {
+    padding: 0 !important;
+    margin-top: 10px;
   }
 }

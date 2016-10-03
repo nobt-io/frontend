@@ -29,11 +29,11 @@ export const Nobt = React.createClass({
         <NobtSummary nobtName={this.props.name} total={this.props.total} members={this.props.members}/>
         <div>
           <Tabs
-            theme={{pointer: styles.pointer, tabs: styles.tabs}}
+            theme={{pointer: styles.pointer, tabs: styles.tabs, tag: styles.tab}}
             index={this.props.tabIndex}
             onChange={this.props.changeTab} fixed>
-            <Tab label="Transactions"><TransactionList></TransactionList></Tab>
             <Tab label="Expenses"><small>Second Content</small></Tab>
+            <Tab label="Transactions"><TransactionList transactions={this.props.transactions}/></Tab>
           </Tabs>
         </div>
       </div>
