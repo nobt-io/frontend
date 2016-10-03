@@ -1,6 +1,14 @@
-.Nobt {
+.nobt {
+  background-color: $color-accent-light;
 
-  button{
+  button {
     color: white !important;
+  }
+
+  .pointer {
+    background-color: $color-accent;
+  }
+  .tabs {
+    margin: 10px 15px;
   }
 }
