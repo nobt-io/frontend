@@ -4,11 +4,11 @@ import styles from './PersonList.scss'
 import Avatar from 'components/Avatar'
 import {Button} from 'react-toolbox/lib/button';
 
-export const PersonListPanel = React.createClass({
+export const PersonList = React.createClass({
 
   render: function () {
 
-    const user = this.props.persons.map((person) => (
+    const persons = this.props.persons.map((person) => (
       <div className={styles.PersonItem} key={person}>
         <Avatar size={40} name={person}></Avatar><span className={styles.PersonName}>{person}</span>
         <Button className={styles.RemoveButton} icon='clear' onClick={() => this.props.onPersonRemove(person)} floating/>
@@ -17,7 +17,7 @@ export const PersonListPanel = React.createClass({
 
 
     return (
-      <section>{user}</section>
+      <section>{persons}</section>
     );
   },
 
@@ -30,4 +30,4 @@ export const PersonListPanel = React.createClass({
 });
 
 
-export default PersonListPanel
+export default PersonList
