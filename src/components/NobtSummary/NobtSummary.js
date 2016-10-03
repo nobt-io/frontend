@@ -1,9 +1,5 @@
-import React from 'react'
-import ReactFitText from "react-fittext";
-
-import AppBar from 'react-toolbox/lib/app_bar';
-
-import styles from './NobtSummary.scss';
+import React from "react";
+import styles from "./NobtSummary.scss";
 
 export const NobtSummary = (props) => {
 
