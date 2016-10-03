@@ -15,6 +15,8 @@ export const Nobt = React.createClass({
   componentWillMount(){
     var nobtId = this.props.params.id;
     this.props.loadNobt(nobtId);
+
+    this.props.changeTab(this.props.params.tab);
   },
 
   componentWillReceiveProps(nextProps) {

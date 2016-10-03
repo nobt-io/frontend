@@ -6,7 +6,7 @@ export default (store) => ({
   path: 'nobt/',
   component: SimpleLayout,
   childRoutes: [
-    OverviewRoute(store),
-    AddExpenseRoute(store)
+    AddExpenseRoute(store),
+    OverviewRoute(store)
   ]
 })
