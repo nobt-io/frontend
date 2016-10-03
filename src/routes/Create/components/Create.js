@@ -52,7 +52,7 @@ export const Create = React.createClass({
           buttonIsDisabled={addPersonIsDisabled} onButtonClick={() => this.props.addPerson(this.state.currentPerson)} onValueChange={this.onValueChange}>
           Who is involved in <b>{this.props.nobtName}</b>?
         </AddPersonPanel>
-        <PersonList persons={this.props.persons} onPersonRemove={this.props.removePerson}></PersonList>
+        <PersonList persons={this.props.persons} onPersonRemove={this.props.removePerson} />
       </div>)
   }
 });

@@ -1,7 +1,5 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
-import LandingRoute from './Landing'
-import CounterRoute from './Counter'
 import CreateRoute from './Create'
 import NobtRoute from './Nobt'
 
@@ -11,9 +9,7 @@ import NobtRoute from './Nobt'
 export const createRoutes = (store) => ({
   path: '/',
   component: CoreLayout,
-  indexRoute: LandingRoute(store),
   childRoutes: [
-    CounterRoute(store),
     CreateRoute(store),
     NobtRoute(store)
   ]

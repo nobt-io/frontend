@@ -1,6 +1,4 @@
 import {createNobt} from 'api/api';
-import {actionCreator as nobtActionCreator} from 'routes/Nobt/modules/Nobt'
-import { push } from 'react-router-redux';
 
 const actionNames = {
   ADD_PERSON: 'Create.ADD_PERSON',

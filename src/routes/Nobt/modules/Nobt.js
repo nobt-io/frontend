@@ -24,8 +24,6 @@ export const nobtActionFactory = {
 const actionHandlers = {
   [actionNames.SET_NOBT]: (state, action) => {
 
-    console.log(action.payload.nobt);
-
     var total = action.payload.nobt.expenses.reduce((acc, cur) => acc + cur, 0);
     var name = action.payload.nobt.name;
     var member = action.payload.nobt.participatingPersons;
