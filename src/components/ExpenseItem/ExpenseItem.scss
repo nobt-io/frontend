@@ -1,2 +1,35 @@
-.ExpenseItem {
+.title {
+  h5 {
+    margin: 0;
+    font-weight: bold !important;
+    font-family: inherit !important;
+  }
+}
+
+.container {
+  padding: 0 15px 15px;
+
+  .expenseDetails {
+    font-weight: bold;
+
+    .amount {
+      float: right;
+    }
+
+    padding-bottom: 5px;
+  }
+
+  .avatar {
+    div {
+      width: 15px;
+      height: 15px;
+    }
+    width: 20px;
+    float: left;
+    margin-top: 2px;
+  }
+
+  .debteeDetails {
+    margin-left: 20px;
+  }
 }
