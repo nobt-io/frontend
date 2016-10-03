@@ -1,12 +1,11 @@
 import {getNobt} from 'api/api';
 import debug from 'debug';
+import PersonDebtSummaryFactory from './PersonDebtSummaryFactory'
 
 const actionNames = {
   LOAD_NOBT: 'Nobt.LOAD_NOBT',
   SET_NOBT: 'Nobt.SET_NOBT',
   CHANGE_TAB: 'Nobt.CHANGE_TAB',
-  SHOW_ADD_EXPENSE_DRAWER: 'Nobt.SHOW_ADD_EXPENSE_DRAWER',
-  HIDE_ADD_EXPENSE_DRAWER: 'Nobt.HIDE_ADD_EXPENSE_DRAWER',
 };
 
 
@@ -27,11 +26,15 @@ export const nobtActionFactory = {
 const actionHandlers = {
   [actionNames.SET_NOBT]: (state, action) => {
 
-    var total = action.payload.nobt.expenses.reduce((acc, cur) => acc + cur, 0);
+    var total = action.payload.nobt.expenses.reduce((total, expense) => total + expense.shares.reduce((expenseTotal, share) => expenseTotal + share.amount, 0), 0);
     var name = action.payload.nobt.name;
-    var member = action.payload.nobt.participatingPersons;
+    var members = action.payload.nobt.participatingPersons;
+    var expenses = action.payload.nobt.expenses;
 
-    return {...state, name : name, total: total, member: member};
+    var transactionFactory = new PersonDebtSummaryFactory(action.payload.nobt.transactions);
+    var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m));
+
+    return {...state, name : name, total: total, members: members, transactions: transactions, expenses: expenses};
   },
   [actionNames.CHANGE_TAB]: (state, action) => {
 
@@ -49,11 +52,10 @@ const actionHandlers = {
   }
 };
 
-const initialState = {
+export const initialState = {
   total: 0,
   name: '',
-  member: [],
-  addExpenseOverlayOpen: false
+  member: []
 };
 
 export default function nobtReducer (state = initialState, action) {

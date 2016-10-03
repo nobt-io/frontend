@@ -1,0 +1,32 @@
+.container{
+  display: table;
+  width: 100%;
+
+  .row {
+    display: table-row;
+    font-size: 13px;
+
+    .avatarCell{
+      display: table-cell;
+      width: 30px;
+
+      div{
+        width: 25px;
+        height: 25px;
+      }
+    }
+    .nameCell{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .amountCell{
+      display: table-cell;
+      vertical-align: middle;
+      text-align: right;
+
+      .amount{
+        margin-left: 5px;
+      }
+    }
+  }
+}

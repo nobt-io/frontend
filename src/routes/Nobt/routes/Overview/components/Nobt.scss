@@ -1,17 +1,24 @@
-.Nobt {
+.nobt {
+  background-color: $color-accent-light;
 
-  button{
+  button {
     color: white !important;
   }
 
-  .bottomDrawer {
+  .pointer {
+    background-color: $color-accent;
+  }
 
-    bottom: 0;
-    border-left: 1px solid black;
-    transition: transform 1000ms ease-in-out;
+  .tabs {
+    margin: 0 0;
 
-    &:not(.active) {
-      transform: translateY(100%);
+    nav{
+      margin: 0 15px;
     }
+  }
+
+  .tab {
+    padding: 0 !important;
+    margin-top: 10px;
   }
 }

@@ -3,8 +3,10 @@ import styles from "./NobtSummary.scss";
 
 export const NobtSummary = (props) => {
 
+  var membersCount = (props.members || []).length;
+
   var nobtDetails = (props.total != 0)
-                      ? (<div className={styles.nobtSummary}>{props.total} € | {props.member.length} Members </div>)
+                      ? (<div className={styles.nobtSummary}>{props.total} € | {membersCount} Members </div>)
                       : "";
 
   return(
