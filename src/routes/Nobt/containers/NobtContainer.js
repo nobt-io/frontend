@@ -1,10 +1,10 @@
 import { connect } from 'react-redux'
-import { actionCreator } from '../modules/Nobt'
+import { nobtActionFactory } from '../modules/Nobt'
 
 import Nobt from '../components/Nobt'
 
 const mapActionCreators = {
-  setNobt: (name) => actionCreator.setNobt(name)
+  loadNobt: (id) => nobtActionFactory.loadNobt(id)
 };
 
 const mapStateToProps = (state) => ({

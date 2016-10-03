@@ -1,5 +1,6 @@
 import {createNobt} from 'api/api';
 import {actionCreator as nobtActionCreator} from 'routes/Nobt/modules/Nobt'
+import { push } from 'react-router-redux';
 
 const actionNames = {
   ADD_PERSON: 'Create.ADD_PERSON',
@@ -29,24 +30,15 @@ export const actionCreator = {
   },
   createNobt: () => {
     return (dispatch, getState) => {
-      return new Promise((resolve) => {
 
-        dispatch({type: actionNames.LOADING_STARTED});
+      var createState = getState().Create;
 
-        var createState = getState().Create;
+      var nobtToCreate = {
+        nobtName: createState.nobtName,
+        explicitParticipants: createState.persons
+      };
 
-        var nobtToCreate = {
-          nobtName: createState.nobtName,
-          explicitParticipants: createState.persons
-        };
-
-        createNobt(nobtToCreate, (response) => {
-          getState().Nobt = response.data;
-          dispatch({type: actionNames.LOADING_STARTED});
-          console.log("response");
-          resolve();
-        });
-      })
+      return createNobt(nobtToCreate);
     }
   }
 };
@@ -61,7 +53,6 @@ export const actionHandlers = {
     return {...state, persons};
   },
   [actionNames.SET_NOBTNAME]: (state, action) => {
-    console.log(state);
     var nobtName = action.payload.name;
     return {...state, nobtName};
   },

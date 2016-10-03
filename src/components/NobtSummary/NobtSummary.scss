@@ -1,12 +1,9 @@
 
-.header{
+.container{
   font-family: $fancy-font;
-  height: 50px;
-
-  h1{
-    font-size: 18px;
-    margin: 10px 0;
-  }
+  text-align: center;
+  color: white;
+  font-weight: normal;
 
   button{
     background-color: $color-primary-dark;
