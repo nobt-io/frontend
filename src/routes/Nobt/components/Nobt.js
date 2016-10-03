@@ -7,11 +7,17 @@ import NobtSummary from 'components/NobtSummary'
 import TransactionList from 'components/TransactionList'
 import {Tab, Tabs} from 'react-toolbox';
 
+import {initialState} from '../modules/Nobt'
+
 export const Nobt = React.createClass({
 
   componentWillMount(){
     var nobtId = this.props.params.id;
     this.props.loadNobt(nobtId);
+  },
+
+  getInitialState: function() {
+    return initialState;
   },
 
   render: function () {
@@ -20,7 +26,7 @@ export const Nobt = React.createClass({
         <Header showButton={true}>
           <Button className={styles.button} icon="add_box" onClick={this.createNobt}>Add Nobt</Button>
         </Header>
-        <NobtSummary nobtName={this.props.name} total={this.props.total} member={this.props.member}/>
+        <NobtSummary nobtName={this.props.name} total={this.props.total} members={this.props.members}/>
         <div>
           <Tabs
             theme={{pointer: styles.pointer, tabs: styles.tabs}}

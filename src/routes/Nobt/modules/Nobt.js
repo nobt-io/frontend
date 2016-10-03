@@ -26,9 +26,10 @@ const actionHandlers = {
 
     var total = action.payload.nobt.expenses.reduce((acc, cur) => acc + cur, 0);
     var name = action.payload.nobt.name;
-    var member = action.payload.nobt.participatingPersons;
+    var members = action.payload.nobt.participatingPersons;
+    var transactions = action.payload.nobt.transactions;
 
-    return {...state, name : name, total: total, member: member};
+    return {...state, name : name, total: total, members: members};
   },
   [actionNames.CHANGE_TAB]: (state, action) => {
     var tabIndex = action.payload.tabIndex;
@@ -37,7 +38,7 @@ const actionHandlers = {
   }
 };
 
-const initialState = {
+export const initialState = {
   total: 0,
   name: '',
   member: []

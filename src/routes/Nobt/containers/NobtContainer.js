@@ -11,8 +11,8 @@ const mapActionCreators = {
 const mapStateToProps = (state) => ({
   name: state.Nobt.name,
   total: state.Nobt.total + 10,
-  member: state.Nobt.member,
-  tabIndex: state.Nobt.tabIndex
+  members: state.Nobt.members,
+  tabIndex: state.Nobt.tabIndex,
 });
 
 export default connect(mapStateToProps, mapActionCreators)(Nobt)
