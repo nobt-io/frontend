@@ -5,15 +5,18 @@ import AppBar from 'react-toolbox/lib/app_bar';
 
 import styles from './NobtSummary.scss';
 
-export const NobtSummary = (props) => (
-  <div className={styles.container}>
-    <ReactFitText maxFontSize={40}>
-      <div className={styles.title}>Test</div>
-    </ReactFitText>
-    <div className={styles.buttonContainer}>
-      {props.children}
+export const NobtSummary = (props) => {
+
+  var nobtDetails = (props.total != 0)
+                      ? (<div className={styles.nobtSummary}>{props.total} € | {props.member.length} Members </div>)
+                      : "";
+
+  return(
+    <div className={styles.container}>
+      <h1 className={styles.nobtName}>{props.nobtName}</h1>
+      {nobtDetails}
     </div>
-  </div>
-);
+  );
+};
 
 export default NobtSummary
