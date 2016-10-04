@@ -84,10 +84,17 @@ export const SingleInputInlineForm = React.createClass({
       isButtonDisabled: (name) => false
     };
   },
-});
 
-SingleInputInlineForm.propTypes = {
-  // TODO
-};
+  propTypes: {
+    inputMaxLength: React.PropTypes.number,
+    placeholder: React.PropTypes.string,
+    containerClass: React.PropTypes.containerClass,
+    inputTheme: React.PropTypes.object,
+    buttonTheme: React.PropTypes.object,
+    buttonIcon: React.PropTypes.string,
+    onSubmit: React.PropTypes.func,
+    isButtonDisabled: React.PropTypes.func
+  },
+});
 
 export default SingleInputInlineForm
