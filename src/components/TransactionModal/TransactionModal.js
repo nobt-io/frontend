@@ -33,7 +33,7 @@ export const TransactionModal = (props) => {
             <div style={{clear: "both"}}></div>
           </div>
           <div className={styles.total}>
-            <span className={styles.name}><b>gives {absTotal},00 € to</b></span>
+            <span className={styles.name}><b>owes {absTotal},00 € to</b></span>
           </div>
           <div>
             <div style={{clear: "both"}}></div>
