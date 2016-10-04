@@ -2,7 +2,7 @@ import axios from 'axios';
 import debug from 'debug';
 
 var instance = axios.create({
-  baseURL: "http://localhost:8080/"
+  baseURL: "http://nobt-io-dev.cfapps.io/"
 });
 
 instance.interceptors.request.use(function (config) {
