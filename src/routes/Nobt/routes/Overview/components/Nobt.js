@@ -6,8 +6,8 @@ import Header from 'components/Header'
 import NobtSummary from 'components/NobtSummary'
 import TransactionList from 'components/TransactionList'
 import ExpenseList from 'components/ExpenseList'
-import {Tab, Tabs} from 'react-toolbox';
 
+import {Tab, Tabs} from 'react-toolbox';
 import {initialState} from '../modules/Nobt'
 
 export const Nobt = React.createClass({
@@ -35,6 +35,11 @@ export const Nobt = React.createClass({
 
   navigate(path) {
     this.props.history.push(path);
+  },
+
+
+  handleToggle() {
+    this.setState({active: !this.state.active});
   },
 
   onTabChange(index) {

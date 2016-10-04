@@ -2,34 +2,53 @@ import React from 'react'
 import styles from './ExpenseItem.scss'
 import Card from 'components/Card'
 import Avatar from 'components/Avatar'
+import ExpenseModal from 'components/ExpenseModal'
 
-export const ExpenseItem = (props) => {
+export const ExpenseItem = React.createClass({
 
-  const total = props.expense.shares.reduce((total, share) => total + share.amount, 0);
-  const name = props.expense.name;
-  const debtee = props.expense.debtee;
-  const persons = props.expense.shares.map(s => (<span><b>{s.amount}€</b>{s.debtor}</span>));
+  onModalClose: function() {
+    this.setState({ modalIsActive: false });
+  },
 
-  return (
-    <Card>
-      <div className={styles.container}>
-        <div className={styles.title}>
-          <div className={styles.right}>{total} €</div>
-          <div className={styles.left}>{name}</div>
-        </div>
-        <div className={styles.debtee}>
-          <div className={styles.left}><Avatar size="15" name={debtee}></Avatar></div>
-          <div className={styles.right}>paid by <b>{debtee}</b> on 20.01.1992</div>
-        </div>
+  onModalOpen: function() {
+    this.setState({ modalIsActive: true });
+  },
 
-        <div>
-          <div className={styles.debtors}>
-            {persons}
+  render: function() {
+
+    const { modalIsActive } = this.state || {modalIsActive: false};
+    const { expense } = this.props;
+
+    const total = expense.shares.reduce((total, share) => total + share.amount, 0);
+    const name = expense .name;
+    const debtee = expense.debtee;
+    const debtorsAvatars = expense.shares.map(s => (
+      <span className={styles.avatar}><Avatar name={s.debtor} size={20} fontSize={11}/></span>));
+
+    return (
+      <Card>
+        <ExpenseModal active={modalIsActive} onClose={this.onModalClose} expense={expense}/>
+        <div onClick={this.onModalOpen} className={styles.container}>
+          <div className={styles.title}>
+            <div className={styles.description}>
+              <span className={styles.amount}>{total} €</span>
+              <span className={styles.name}>{name}</span>
+            </div>
+            <div className={styles.date}>20-01-2015</div>
+            <div style={{clear: "both"}}></div>
+          </div>
+          <div className={styles.persons}>
+            <div className={styles.right}>{debtorsAvatars}</div>
+            <div className={styles.left}>
+              <span className={styles.avatar}><Avatar name={debtee} size={30}/></span>
+              <span className={styles.name}><b>{debtee}</b> paid</span>
+              <span className={styles.transition}></span>
+            </div>
           </div>
         </div>
-      </div>
-    </Card>
-  );
-};
+      </Card>
+    );
+  }
+});
 
 export default ExpenseItem

@@ -1,0 +1,54 @@
+.header {
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
+.added{
+  color: grey;
+  text-align: right;
+  font-style: italic;
+  font-size: 12px;
+
+  .serverDate{
+    float: right;
+    padding-top: 5px;
+    margin-right: 5px;
+  }
+  .serverIcon{
+    float: right;
+    font-size: 20px;
+    padding-top: 3px;
+  }
+
+
+  .addedDate{
+    float: left;
+    padding-top: 5px;
+    margin-left: 5px;
+  }
+  .addedIcon{
+    float: left;
+    font-size: 20px;
+    padding-top: 3px;
+  }
+
+}
+
+.debtee{
+  background-color: $color-primary-light;
+  color: white;
+  margin: 10px -30px;
+  padding: 10px 30px;
+  .avatar{
+    float: left;
+  }
+  .name{
+    padding: 5px 10px;
+    float: left;
+  }
+  .total{
+    float: right;
+    font-weight: bold;
+    padding-top: 5px;
+  }
+}

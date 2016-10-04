@@ -3,36 +3,38 @@ import styles from './TransactionItem.scss'
 
 import Avatar from 'components/Avatar'
 import Card from 'components/Card'
-import PersonMoneyList from 'components/PersonMoneyList'
+import FontIcon from 'react-toolbox/lib/font_icon';
 
-const getAmountKeyWord = (amount) => amount > 0 ? "gets" : "owes";
+const getKeyWord = (amount) => amount > 0 ? "gets" : "owes";
+const getPersonKeyWord = (amount) => amount > 0 ? "from" : "to";
+const getIcon = (amount) => amount > 0 ? "add_circle" : "remove_circle";
 const getAbs = (amount) => Math.abs(amount);
 
 export const TransactionItem = (props) => {
 
   const me = props.transaction.me;
   const total = props.transaction.total;
-  const persons = <PersonMoneyList persons={props.transaction.summaries}/>;
-
-
+  const debtorsAvatars = props.transaction.summaries.map(s => (
+    <span className={styles.personAvatar}><Avatar name={s.name} size={20} fontSize={11}/></span>));
 
   return (
     <Card>
-      <div className={styles.transactionItem}>
+      <div className={styles.container}>
         <div className={styles.avatar}>
-          <Avatar name={me} size={15}/>
+          <Avatar name={me} size={45}/>
+          <span className={styles.icon}><FontIcon value={getIcon(total)}/></span>
         </div>
-        <div className={styles.content}>
-          <div>
-            <span className={styles.amountContent}>
-              <span>{getAmountKeyWord(total)}</span>
-              <span className={styles.amount}>{getAbs(total)} €</span>
-            </span>
-            <span className={styles.name}>{me}</span>
+        <div className={styles.meContainer}>
+          <span className={styles.me}>{me}</span>
+          <span className={styles.transparent}></span>
+        </div>
+        <div className={styles.amountInfo}>
+          <div className={styles.amount}>
+            <span className={styles.total}>{getAbs(total)} €</span>
+            <span className={styles.keyword}>{getKeyWord(total)}</span>
+            <div style={{clear: "both"}}></div>
           </div>
-          <div className={styles.persons}>
-            {persons}
-          </div>
+          <div className={styles.persons}>{getPersonKeyWord(total)}{debtorsAvatars}</div>
         </div>
       </div>
     </Card>);
