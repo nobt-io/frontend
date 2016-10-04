@@ -1,0 +1,15 @@
+.overlay{
+  padding: 0 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.modal{
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100%;
+
+  .content{
+    padding: 15px;
+    display: block;
+  }
+}

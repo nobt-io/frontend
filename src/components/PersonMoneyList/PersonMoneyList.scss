@@ -1,14 +1,18 @@
 .container{
-  display: table;
   width: 100%;
 
+  .row:first-of-type {
+    border-top: 0px;
+  }
+
   .row {
-    display: table-row;
-    font-size: 13px;
+    margin-top: 8px;
+    border-top: 1px dashed grey;
+    padding-top: 8px;
 
     .avatarCell{
-      display: table-cell;
-      width: 30px;
+      width: 40px;
+      float: left;
 
       div{
         width: 25px;
@@ -16,17 +20,22 @@
       }
     }
     .nameCell{
-      display: table-cell;
       vertical-align: middle;
+      float: left;
+      padding-top: 5px;
     }
     .amountCell{
-      display: table-cell;
       vertical-align: middle;
-      text-align: right;
+      float: right;
+      padding-top: 5px;
 
       .amount{
         margin-left: 5px;
       }
     }
+  }
+
+  .spacingRow{
+    height: 10px;
   }
 }
