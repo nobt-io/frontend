@@ -18,6 +18,7 @@ $avatarSize: 25px;
       .amount {
         font-size: 20px;
         float: left;
+        font-weight: bold;
       }
     }
 
@@ -46,29 +47,32 @@ $avatarSize: 25px;
     .left {
       position: absolute;
       top: 5px;
-      background-color: white;
 
       .avatar {
-        margin-right: 5px;
+        background-color: white;
+        float: left;
 
         div {
           display: inline-block;
         }
       }
-    }
-  }
 
-  .debtors {
+      .name{
+        background-color: white;
+        float: left;
+        padding: 5px;
+      }
 
-    span {
-      background-color: $color-accent-light;
-      margin-right: 5px;
-      margin-bottom: 5px;
-      padding: 5px 10px;
-      display: inline-block;
+      .transition{
+        float: left;
+        width: 80px;
+        height: 30px;
+        display: inline-block;
 
-      b {
-        margin-left: 5px;
+        background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
       }
     }
   }

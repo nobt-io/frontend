@@ -25,7 +25,8 @@ export const ExpenseItem = (props) => {
           <div className={styles.right}>{debtorsAvatars}</div>
           <div className={styles.left}>
             <span className={styles.avatar}><Avatar name={debtee} size={30}/></span>
-            <span><b>{debtee}</b> paid</span>
+            <span className={styles.name}><b>{debtee}</b> paid</span>
+            <span className={styles.transition}></span>
           </div>
         </div>
       </div>

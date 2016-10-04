@@ -1,61 +1,83 @@
 .container {
   position: relative;
-  height: 90px;
+  height: 85px;
 
   .avatar {
     position: absolute;
     left: 0;
     top: 0;
+    bottom: 0;
     width: 75px;
-    bottom: 0;
 
-    padding: 15px;
-  }
-
-  .amount {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 15px 15px;
-    background-color: white;
+    padding: 20px 15px;
 
     .icon {
       float: right;
       padding-top: 2px;
-      margin-left: 5px;
-    }
-    .total {
-      float: right;
-      margin-left: 5px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .keyword {
-      padding-top: 5px;
-      float: right;
+      margin-right: -5px;
+      margin-top: -18px;
     }
   }
-  .transactionDetails {
-    padding: 15px 0px;
-    margin-left: 75px;
+  .meContainer {
+    position: absolute;
+    left: 80px;
+    top: 0;
+    bottom: 0;
+    font-size: 18px;
+    z-index: 1;
 
-    .me {
-      margin-bottom: 5px;
-      margin-top: 0px;
-      font-size: 20px;
-      font-weight: bold;
+    .me{
+      background-color: white;
+      float: left;
+      display: inline-block;
+      padding: 30px 0;
+
+    }
+    .transparent{
+      float: left;
+      display: inline-block;
+      width: 80px;
+      height: 85px;
+
+      background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+    }
+  }
+
+  .amountInfo {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 15px;
+    z-index: 0;
+
+    .amount {
+      .total {
+        float: right;
+        margin-left: 5px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .keyword {
+        padding-top: 5px;
+        float: right;
+      }
     }
 
     .persons {
+      padding-top: 5px;
       white-space: nowrap;
-    }
-    .personAvatar {
-      display: inline-block;
-      margin-left: 5px;
+      text-align: right;
+
+      .personAvatar {
+        display: inline-block;
+        margin-left: 5px;
+      }
     }
   }
-
 }
 
 
