@@ -7,8 +7,7 @@ import FontIcon from 'react-toolbox/lib/font_icon';
 
 export const ExpenseModal = (props) => {
 
-  const onClose = props.onClose || (() => {
-    });
+  const onClose = props.onClose || (() => { });
   const active = props.active || false;
   const expense = props.expense;
 
@@ -18,7 +17,7 @@ export const ExpenseModal = (props) => {
   const persons = expense.shares.map(s => ({amount: s.amount, name: s.debtor}));
 
   return (
-    <Modal active={props.active} onClose={onClose}>
+    <Modal active={active} onClose={onClose}>
       <div className={styles.header}>{name}</div>
       <PersonMoneyList persons={persons} showKeyword={false}></PersonMoneyList>
       <div className={styles.debtee}>
