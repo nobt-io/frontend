@@ -32,7 +32,7 @@ export const Create = React.createClass({
 
   createNobt: function(){
     this.props.createNobt().then((response) => {
-      this.props.history.push(`/nobt/${response.data.id}`);
+      this.props.history.push(`/nobt/${response.data.id}/transactions`);
     }, () => {
       //Todo: show error!
     });
