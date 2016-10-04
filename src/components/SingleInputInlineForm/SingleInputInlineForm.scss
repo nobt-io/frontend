@@ -1,0 +1,16 @@
+.SingleInputInlineForm {
+
+  position: relative;
+
+  .input {
+    padding: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+  }
+
+  .button {
+    right: 0;
+    position: absolute;
+  }
+}
