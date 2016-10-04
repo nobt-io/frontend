@@ -1,23 +1,24 @@
-export const actionNames = {
-  ACTION_NAME: 'AddExpense.ACTION_NAME'
-}
+import {getNobt} from 'api/api';
 
-export const actionCreator = {
-  actionCreatorOne: function(value){
-    return {
-      type: actionNames.ACTION_NAME,
-      payload: value
-    }
-  }
-}
+import {actionHandlers as globalNobtActionHandlers, actionFactory as globalNobtActionFactory} from '../../../modules/NobtModule'
 
-const actionHandlers = {
-  [actionNames.ACTION_NAME]: (state, action) => state
-}
+const actionNames = {
+};
 
-const initialState = { }
 
-export default function addExpenseReducer (state = initialState, action) {
+export const nobtActionFactory = {...globalNobtActionFactory,
+};
+
+const actionHandlers = {...globalNobtActionHandlers,
+};
+
+export const initialState = {
+  total: 0,
+  name: '',
+  member: []
+};
+
+export default function nobtReducer (state = initialState, action) {
   const handler = actionHandlers[action.type]
   return handler ? handler(state, action) : state
 }
