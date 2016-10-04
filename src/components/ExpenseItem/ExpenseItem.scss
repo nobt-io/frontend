@@ -1,44 +1,75 @@
-.container{
+$avatarSize: 25px;
+
+.container {
   padding: 15px;
 
-  .title{
-    font-weight: bold;
+  .title {
+    margin-bottom: 5px;
 
-    .right {
+    .description {
+      float: left;
+      white-space: nowrap;
+
+      .name {
+        margin: 4px 7px;
+        float: left;
+      }
+
+      .amount {
+        font-size: 20px;
+        float: left;
+      }
+    }
+
+    .date {
       float: right;
-      width: 50%;
-      text-align: right;
+      padding-top: 5px;
+      color: $color-accent;
 
     }
   }
 
-  .debtee{
-
-    padding: 10px 0;
+  .persons {
+    position: relative;
+    padding: 5px 0 10px 0;
 
     .right {
-      margin-left: 25px;
+      text-align: right;
+      margin-top: 5px;
 
+      .avatar {
+        margin-left: 5px;
+        display: inline-block;
+      }
     }
 
     .left {
-      float: left;
-      width: 20px;
+      position: absolute;
+      top: 5px;
+      background-color: white;
 
-      div{width: 20px; height: 20px;}
+      .avatar {
+        margin-right: 5px;
 
+        div {
+          display: inline-block;
+        }
+      }
     }
   }
 
-  .debtors{
-    span{
+  .debtors {
+
+    span {
       background-color: $color-accent-light;
       margin-right: 5px;
       margin-bottom: 5px;
       padding: 5px 10px;
       display: inline-block;
 
-      b{ margin-right: 5px;}
+      b {
+        margin-left: 5px;
+      }
     }
   }
 }

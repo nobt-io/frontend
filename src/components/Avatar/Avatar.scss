@@ -1,5 +1,7 @@
-.Avatar {
-  //https://stackoverflow.com/questions/12667926/hide-alt-tag-in-firefox
-  img { color: transparent; }
-
+.avatar{
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 50%;
+  vertical-align: middle;
 }

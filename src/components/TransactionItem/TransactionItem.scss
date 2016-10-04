@@ -1,31 +1,62 @@
-.transactionItem {
-  padding: 15px;
+.container {
+  position: relative;
+  height: 90px;
 
   .avatar {
-    float: left;
-    width: 50px;
-  }
-  .content{
-    margin-left: 50px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 75px;
+    bottom: 0;
 
-    .amountContent{
-      font-weight: bold;
+    padding: 15px;
+  }
+
+  .amount {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 15px 15px;
+    background-color: white;
+
+    .icon {
       float: right;
-      border-bottom: 1px solid black;
-      padding-bottom: 5px;
+      padding-top: 2px;
+      margin-left: 5px;
     }
-
-    .name{
+    .total {
+      float: right;
+      margin-left: 5px;
+      font-size: 20px;
       font-weight: bold;
     }
+    .keyword {
+      padding-top: 5px;
+      float: right;
+    }
+  }
+  .transactionDetails {
+    padding: 15px 0px;
+    margin-left: 75px;
+
+    .me {
+      margin-bottom: 5px;
+      margin-top: 0px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .persons {
+      white-space: nowrap;
+    }
+    .personAvatar {
+      display: inline-block;
+      margin-left: 5px;
+    }
   }
 
-  .persons{
-    padding-top: 5px;
-  }
-
-  .amount{
-    padding-left: 5px;
-  }
 }
+
+
 
