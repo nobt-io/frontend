@@ -64,7 +64,7 @@ export const Nobt = React.createClass({
         <NobtSummary nobtName={this.props.name} total={this.props.total} members={this.props.members}/>
         <div>
           <Tabs
-            theme={{pointer: styles.pointer, tabs: styles.tabs, tag: styles.tab}}
+            theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}
             index={this.props.tabIndex}
             onChange={this.onTabChange} fixed>
             <Tab label="Transactions"><TransactionList transactions={this.props.transactions}/></Tab>
