@@ -6,6 +6,7 @@ import Header from 'components/Header'
 import NobtSummary from 'components/NobtSummary'
 import TransactionList from 'components/TransactionList'
 import ExpenseList from 'components/ExpenseList'
+import ExpenseFilter from 'components/ExpenseFilter'
 
 import {Tab, Tabs} from 'react-toolbox';
 import {initialState} from '../modules/Nobt'
@@ -68,7 +69,10 @@ export const Nobt = React.createClass({
             index={this.props.tabIndex}
             onChange={this.onTabChange} fixed>
             <Tab label="Transactions"><TransactionList transactions={this.props.transactions}/></Tab>
-            <Tab label="Expenses"><ExpenseList expenses={this.props.expenses}/></Tab>
+            <Tab label="Expenses">
+              <ExpenseFilter filter={"All"} sort={"Date"}/>
+              <ExpenseList expenses={this.props.expenses}/>
+            </Tab>
           </Tabs>
         </div>
       </div>
