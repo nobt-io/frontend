@@ -11,22 +11,27 @@ import ExpenseFilter from 'components/ExpenseFilter'
 import {Tab, Tabs} from 'react-toolbox';
 import {initialState} from '../modules/Nobt'
 
+import _debug from 'debug';
+
 export const Nobt = React.createClass({
 
   componentWillMount(){
     var nobtId = this.props.params.id;
+    var tabIdentifier = this.props.location.hash.substring(1);
     this.props.loadNobt(nobtId);
 
-    this.props.changeTab(this.props.params.tab);
+    this.props.changeTab(tabIdentifier);
   },
 
   componentWillReceiveProps(nextProps) {
 
-    var newTab = nextProps.params.tab;
-    var oldTab = this.props.params.tab;
+    _debug('view:nobt')(`Received props: ${nextProps}`);
 
-    if (newTab !== oldTab) {
-      this.props.changeTab(newTab);
+    var currentTabIdentifier = this.props.location.hash.substring(1);
+    var nextTabIdentifier = nextProps.location.hash.substring(1);
+
+    if (currentTabIdentifier !== nextTabIdentifier) {
+      this.props.changeTab(nextTabIdentifier);
     }
   },
 
@@ -45,14 +50,14 @@ export const Nobt = React.createClass({
 
   onTabChange(index) {
 
-    var subRoutes = {
+    var indexHashMapping = {
       0: 'transactions',
       1: 'expenses'
     };
 
-    var subRoute = subRoutes[index] || 'transactions';
+    var hashRoute = indexHashMapping[index] || 'transactions';
 
-    this.navigate(`/nobt/${this.props.params.id}/${subRoute}`);
+    this.navigate(`/nobt/${this.props.params.id}#${hashRoute}`);
   },
 
   render: function () {
@@ -68,7 +73,9 @@ export const Nobt = React.createClass({
             theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}
             index={this.props.tabIndex}
             onChange={this.onTabChange} fixed>
-            <Tab label="Transactions"><TransactionList transactions={this.props.transactions}/></Tab>
+            <Tab label="Transactions">
+              <TransactionList transactions={this.props.transactions}/>
+            </Tab>
             <Tab label="Expenses">
               <ExpenseFilter
                 persons={this.props.members}
