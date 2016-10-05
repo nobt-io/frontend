@@ -33,6 +33,7 @@ export const actionCreator = {
 
       var nobtToCreate = {
         nobtName: createState.nobtName,
+        currency: "EUR",
         explicitParticipants: createState.persons
       };
 

@@ -7,12 +7,12 @@ export const PersonList = (props) => {
 
   const displayRemoveButton = props.hasDeleteButton ? "none" : "inline";
 
-  const persons = this.props.persons.map((person) => (
+  const persons = props.persons.map((person) => (
     <div className={styles.PersonItem} key={person}>
       <Avatar size={40} name={person}/>
       <span className={styles.PersonName}>{person}</span>
       <Button style={{display: displayRemoveButton}} className={styles.RemoveButton} icon='clear'
-              onClick={() => this.props.onPersonRemove(person)} floating/>
+              onClick={() => props.onPersonRemove(person)} floating/>
     </div>
   ));
 
@@ -32,6 +32,5 @@ PersonList.defaultProps = {
   onPersonRemove: () => { },
   hasDeleteButton: false,
 };
-
 
 export default PersonList

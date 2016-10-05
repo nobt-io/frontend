@@ -2,15 +2,15 @@ import React from "react";
 import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Avatar from "components/Avatar";
-import styles from "./TransactionModal.scss";
+import styles from "./DebtSummaryDetailModel.scss";
 
-export const TransactionModal = (props) => {
+export const DebtSummaryDetailModel = (props) => {
 
 
   const onClose = props.onClose || (() => {
     });
   const active = props.active || false;
-  const transaction = props.transaction;
+  const transaction = props.debtSummary;
 
   const me = transaction.me;
   const persons = transaction.persons;
@@ -62,10 +62,10 @@ export const TransactionModal = (props) => {
 
 };
 
-TransactionModal.propTypes = {
+DebtSummaryDetailModel.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
-  transaction: React.PropTypes.object.isRequired,
+  debtSummary: React.PropTypes.object.isRequired,
 };
 
-export default TransactionModal
+export default DebtSummaryDetailModel
