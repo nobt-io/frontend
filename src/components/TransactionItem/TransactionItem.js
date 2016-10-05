@@ -53,6 +53,8 @@ export const TransactionItem = React.createClass({
         </div>
       </Card>);
   }
+
+  // TODO: need to define prop types
 });
 
 

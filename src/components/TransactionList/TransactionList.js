@@ -3,7 +3,7 @@ import TransactionItem from 'components/TransactionItem'
 
 export const TransactionList = (props) => {
   var transactions = props.transactions || [];
-  var transactionItem = transactions.map(t => (<TransactionItem transaction={t}></TransactionItem>));
+  var transactionItem = transactions.map(t => (<TransactionItem key={t.me.name} transaction={t} />));
   return <div>{transactionItem}</div>;
 
 };
