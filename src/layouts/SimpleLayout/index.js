@@ -1,3 +1,3 @@
-import SimpleLayout from './SimpleLayout'
+import SimpleLayout from "./SimpleLayout";
 
 export default SimpleLayout

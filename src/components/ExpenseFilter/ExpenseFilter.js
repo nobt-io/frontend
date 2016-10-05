@@ -1,9 +1,9 @@
-import React from 'react'
-import styles from './ExpenseFilter.scss'
-import FontIcon from 'react-toolbox/lib/font_icon';
-import FilterByModal from 'components/FilterByModal';
-import SortByModal from 'components/SortByModal';
-import Avatar from 'components/Avatar';
+import React from "react";
+import styles from "./ExpenseFilter.scss";
+import FontIcon from "react-toolbox/lib/font_icon";
+import FilterByModal from "components/FilterByModal";
+import SortByModal from "components/SortByModal";
+import Avatar from "components/Avatar";
 
 export const ExpenseFilter = React.createClass({
 
@@ -32,14 +32,17 @@ export const ExpenseFilter = React.createClass({
 
     const filter = currentFilter == ''
       ? <b>All</b>
-      : <span className={styles.personFilter}><b>{currentFilter}</b><Avatar name={currentFilter} size={20} fontSize={11}/></span>
+      :
+      <span className={styles.personFilter}><b>{currentFilter}</b><Avatar name={currentFilter} size={20} fontSize={11}/></span>
 
     return (
       <div className={styles.container}>
-        <FilterByModal active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose} persons={persons}/>
+        <FilterByModal active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
+                       persons={persons}/>
         <SortByModal active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}/>
         <div>
-          <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}} className={styles.filterIcon}><FontIcon value='clear'/></span>
+          <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}
+                className={styles.filterIcon}><FontIcon value='clear'/></span>
           <span onClick={this.onSortModalOpen} className={styles.filter}>sort by <b>{currentSort}</b></span>
           <span onClick={this.onFilterModalOpen} className={styles.filter}>filter by {filter}</span>
         </div>

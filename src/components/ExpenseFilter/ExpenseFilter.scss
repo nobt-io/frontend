@@ -3,7 +3,7 @@
   padding-bottom: 5px;
   white-space: nowrap;
 
-  .filter, .filterIcon{
+  .filter, .filterIcon {
     height: 30px;
     overflow: hidden;
     float: left;
@@ -15,14 +15,17 @@
     color: #979797;
   }
 
-  .filterIcon{
+  .filterIcon {
     padding: 4px;
     float: right;
     margin-left: 10px;
   }
 }
 
-.personFilter{
+.personFilter {
   white-space: nowrap;
-  div{display: inline-block; margin: -2px 5px 0 5px;}
+  div {
+    display: inline-block;
+    margin: -2px 5px 0 5px;
+  }
 }

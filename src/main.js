@@ -1,10 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import { useRouterHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
-import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer'
+import React from "react";
+import ReactDOM from "react-dom";
+import createBrowserHistory from "history/lib/createBrowserHistory";
+import { useRouterHistory } from "react-router";
+import { syncHistoryWithStore } from "react-router-redux";
+import createStore from "./store/createStore";
+import AppContainer from "./containers/AppContainer";
 
 // ========================================================
 // Browser History Setup
@@ -61,7 +61,7 @@ if (__DEV__) {
     const renderError = (error) => {
       const RedBox = require('redbox-react').default
 
-      ReactDOM.render(<RedBox error={error} />, MOUNT_NODE)
+      ReactDOM.render(<RedBox error={error}/>, MOUNT_NODE)
     }
 
     // Wrap render in try/catch

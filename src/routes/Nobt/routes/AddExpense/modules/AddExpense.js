@@ -1,4 +1,4 @@
-import {getNobt} from "api/api";
+import { getNobt } from "api/api";
 import debug from "debug";
 
 const actionNames = {
@@ -35,21 +35,21 @@ const actionHandlers = {
   [actionNames.SET_NOBT]: (state, action) => {
 
     var name = action.payload.nobt.name;
-    var members = action.payload.nobt.participatingPersons.reduce( ( map, person ) => {
+    var members = action.payload.nobt.participatingPersons.reduce((map, person) => {
       map[person] = false;
       return map;
-    }, {} );
+    }, {});
 
     debug(actionNames.SET_NOBT)(members);
 
-    return {...state, name, members }
+    return {...state, name, members}
   },
 
   [actionNames.ADD_PERSON]: (state, action) => {
 
     state.members[action.payload.name] = true;
 
-    return {...state, members: state.members };
+    return {...state, members: state.members};
   },
 
   [actionNames.TOGGLE_PERSON]: (state, action) => {
@@ -57,7 +57,7 @@ const actionHandlers = {
     var checkState = state.members[action.payload.name];
     state.members[action.payload.name] = !checkState;
 
-    return {...state, members: state.members };
+    return {...state, members: state.members};
   }
 };
 
@@ -66,7 +66,7 @@ export const initialState = {
   members: {},
 };
 
-export default function nobtReducer (state = initialState, action) {
+export default function nobtReducer(state = initialState, action) {
   const handler = actionHandlers[action.type]
   return handler ? handler(state, action) : state
 }

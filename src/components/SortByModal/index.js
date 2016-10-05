@@ -1,3 +1,3 @@
-import SortByModal from './SortByModal'
+import SortByModal from "./SortByModal";
 
 export default SortByModal

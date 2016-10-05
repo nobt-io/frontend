@@ -1,20 +1,23 @@
-import React from 'react'
-import styles from './SortByModal.scss'
-import {List, ListItem, ListSubHeader, ListDivider, ListCheckbox} from 'react-toolbox/lib/list';
-import Modal from 'components/Modal'
-
-import Avatar from 'components/Avatar'
+import React from "react";
+import styles from "./SortByModal.scss";
+import { List, ListItem } from "react-toolbox/lib/list";
+import Modal from "components/Modal";
 
 export const SortByModal = (props) => {
 
-  const onClose = props.onClose || (() => { });
+  const onClose = props.onClose || (() => {
+    });
   const active = props.active || false;
-  const onSortChange = props.onSortChange || (() => { });
+  const onSortChange = props.onSortChange || (() => {
+    });
 
-  const onItemClick = (name) => {onSortChange(name); onClose();}
+  const onItemClick = (name) => {
+    onSortChange(name);
+    onClose();
+  }
 
   return (
-    <Modal header={"sort expenses by"} active={active} onClose={onClose} >
+    <Modal header={"sort expenses by"} active={active} onClose={onClose}>
       <div className={styles.listWrapper}>
         <List selectable ripple>
           <ListItem onClick={() => onItemClick('Date')} caption="Date" leftIcon="access_time"/>

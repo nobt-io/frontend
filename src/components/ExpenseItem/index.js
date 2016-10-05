@@ -1,3 +1,3 @@
-import ExpenseItem from './ExpenseItem'
+import ExpenseItem from "./ExpenseItem";
 
 export default ExpenseItem

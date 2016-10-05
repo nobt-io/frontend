@@ -1,8 +1,6 @@
-import React from 'react'
-
-import AppBar from 'react-toolbox/lib/app_bar';
-
-import styles from './Header.scss';
+import React from "react";
+import AppBar from "react-toolbox/lib/app_bar";
+import styles from "./Header.scss";
 
 export const Header = (props) => (
   <div className={styles.header}>

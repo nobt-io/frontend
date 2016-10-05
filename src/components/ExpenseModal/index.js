@@ -1,3 +1,3 @@
-import ExpenseModal from './ExpenseModal'
+import ExpenseModal from "./ExpenseModal";
 
 export default ExpenseModal

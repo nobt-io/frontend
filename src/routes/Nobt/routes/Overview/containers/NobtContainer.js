@@ -1,7 +1,6 @@
-import { connect } from 'react-redux'
-import { nobtActionFactory } from '../modules/Nobt'
-
-import Nobt from '../components/Nobt'
+import { connect } from "react-redux";
+import { nobtActionFactory } from "../modules/Nobt";
+import Nobt from "../components/Nobt";
 
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),

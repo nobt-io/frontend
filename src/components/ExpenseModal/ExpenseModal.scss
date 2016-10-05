@@ -1,26 +1,25 @@
-.added{
+.added {
   color: grey;
   text-align: right;
   font-size: 12px;
 
-  .serverDate{
+  .serverDate {
     float: right;
     padding-top: 5px;
     margin-right: 5px;
   }
-  .serverIcon{
+  .serverIcon {
     float: right;
     font-size: 20px;
     padding-top: 3px;
   }
 
-
-  .addedDate{
+  .addedDate {
     float: left;
     padding-top: 5px;
     margin-left: 5px;
   }
-  .addedIcon{
+  .addedIcon {
     float: left;
     font-size: 20px;
     padding-top: 3px;
@@ -28,19 +27,19 @@
 
 }
 
-.debtee{
+.debtee {
   background-color: $color-primary-light;
   color: white;
   margin: 10px -30px;
   padding: 10px 30px;
-  .avatar{
+  .avatar {
     float: left;
   }
-  .name{
+  .name {
     padding: 5px 10px;
     float: left;
   }
-  .total{
+  .total {
     float: right;
     font-weight: bold;
     padding-top: 5px;

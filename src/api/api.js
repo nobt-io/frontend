@@ -1,4 +1,4 @@
-import api from './axiosFactory'
+import api from "./axiosFactory";
 
 export function getNobt(identifier) {
   return api.get(`nobts/${identifier}`);

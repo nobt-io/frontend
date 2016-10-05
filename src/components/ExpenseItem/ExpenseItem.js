@@ -1,23 +1,23 @@
-import React from 'react'
-import styles from './ExpenseItem.scss'
-import Card from 'components/Card'
-import Avatar from 'components/Avatar'
-import ExpenseModal from 'components/ExpenseModal'
+import React from "react";
+import styles from "./ExpenseItem.scss";
+import Card from "components/Card";
+import Avatar from "components/Avatar";
+import ExpenseModal from "components/ExpenseModal";
 
 export const ExpenseItem = React.createClass({
 
-  onModalClose: function() {
-    this.setState({ modalIsActive: false });
+  onModalClose: function () {
+    this.setState({modalIsActive: false});
   },
 
-  onModalOpen: function() {
-    this.setState({ modalIsActive: true });
+  onModalOpen: function () {
+    this.setState({modalIsActive: true});
   },
 
-  render: function() {
+  render: function () {
 
-    const { modalIsActive } = this.state || {modalIsActive: false};
-    const { expense } = this.props;
+    const {modalIsActive} = this.state || {modalIsActive: false};
+    const {expense} = this.props;
 
     const debtee = expense.debtee;
     const debtorsAvatars = expense.debtors.map(d => (

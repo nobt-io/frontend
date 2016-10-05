@@ -1,9 +1,9 @@
 import React from "react";
 import Input from "react-toolbox/lib/input";
-import {IconButton} from "react-toolbox/lib/button";
+import { IconButton } from "react-toolbox/lib/button";
 import styles from "./SingleInputInlineForm.scss";
-import _debug from 'debug';
-import classnames from 'classnames';
+import _debug from "debug";
+import classnames from "classnames";
 
 export const SingleInputInlineForm = React.createClass({
 
@@ -80,7 +80,8 @@ export const SingleInputInlineForm = React.createClass({
       inputTheme: {},
       buttonTheme: {},
       buttonIcon: '',
-      onSubmit: (value) => { },
+      onSubmit: (value) => {
+      },
       isButtonDisabled: (name) => false
     };
   },

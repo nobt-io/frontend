@@ -1,4 +1,4 @@
-.container{
+.container {
   width: 100%;
 
   .row:first-of-type {
@@ -10,32 +10,32 @@
     border-top: 1px dashed grey;
     padding-top: 8px;
 
-    .avatarCell{
+    .avatarCell {
       width: 40px;
       float: left;
 
-      div{
+      div {
         width: 25px;
         height: 25px;
       }
     }
-    .nameCell{
+    .nameCell {
       vertical-align: middle;
       float: left;
       padding-top: 5px;
     }
-    .amountCell{
+    .amountCell {
       vertical-align: middle;
       float: right;
       padding-top: 5px;
 
-      .amount{
+      .amount {
         margin-left: 5px;
       }
     }
   }
 
-  .spacingRow{
+  .spacingRow {
     height: 10px;
   }
 }

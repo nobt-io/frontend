@@ -1,3 +1,3 @@
-import NobtSummary from './NobtSummary'
+import NobtSummary from "./NobtSummary";
 
 export default NobtSummary

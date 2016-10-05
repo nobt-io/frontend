@@ -1,9 +1,8 @@
-import React from 'react'
-import styles from './PersonMoneyList.scss'
+import React from "react";
+import styles from "./PersonMoneyList.scss";
+import Avatar from "components/Avatar";
 
 const getAmountKeyWord = (isPositive) => isPositive ? "gets" : "owes";
-
-import Avatar from 'components/Avatar'
 
 const getPersonMoneyListItem = (person, showKeyword) => (
   <div className={styles.row}>
@@ -21,9 +20,9 @@ export const PersonMoneyList = (props) => {
 
   const showKeyword = props.showKeyword;
 
-  const personItems = props.persons.map(p => getPersonMoneyListItem(p, showKeyword ));
+  const personItems = props.persons.map(p => getPersonMoneyListItem(p, showKeyword));
 
-  return(<div className={styles.container}>{personItems}</div>)
+  return (<div className={styles.container}>{personItems}</div>)
 }
 
 export default PersonMoneyList

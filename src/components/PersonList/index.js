@@ -1,3 +1,3 @@
-import PersonList from './PersonList'
+import PersonList from "./PersonList";
 
 export default PersonList

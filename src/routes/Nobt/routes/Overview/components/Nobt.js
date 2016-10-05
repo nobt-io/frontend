@@ -6,8 +6,8 @@ import NobtSummary from "components/NobtSummary";
 import TransactionList from "components/TransactionList";
 import ExpenseList from "components/ExpenseList";
 import ExpenseFilter from "components/ExpenseFilter";
-import {Tab, Tabs} from "react-toolbox";
-import {initialState} from "../modules/Nobt";
+import { Tab, Tabs } from "react-toolbox";
+import { initialState } from "../modules/Nobt";
 
 export const Nobt = React.createClass({
 
@@ -29,7 +29,7 @@ export const Nobt = React.createClass({
     }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return initialState;
   },
 

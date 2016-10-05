@@ -1,3 +1,3 @@
-import PersonMoneyList from './PersonMoneyList'
+import PersonMoneyList from "./PersonMoneyList";
 
 export default PersonMoneyList

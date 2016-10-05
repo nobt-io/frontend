@@ -1,8 +1,8 @@
-import format from 'format-number';
+import format from "format-number";
 
-class CurrencyFormatter{
+class CurrencyFormatter {
 
-  constructor(currencyKey){
+  constructor(currencyKey) {
     const currencyFormatLookup = {
       'EUR': {prefix: '€', suffix: ''},
       'GBR': {prefix: '£', suffix: ''}
@@ -11,7 +11,7 @@ class CurrencyFormatter{
     this.currencyFormat = format(currencyFormatLookup[currencyKey]);
   }
 
-  getCurrencyAmount(amount){
+  getCurrencyAmount(amount) {
     return this.currencyFormat(amount, {noSeparator: true});
   }
 }

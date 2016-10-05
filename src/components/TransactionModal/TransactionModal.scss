@@ -3,21 +3,21 @@
   font-size: 20px;
   font-weight: bold;
 
-  .avatar, .name{
+  .avatar, .name {
     float: left;
   }
-  .name{
+  .name {
     padding: 7px;
   }
 }
 
-.me{
+.me {
   background-color: $color-primary-light;
   color: white;
   margin: 0px -30px;
   padding: 10px 35px;
   line-height: 35px;
-  b{
+  b {
     border: 3px solid white;
     padding: 5px;
     border-radius: 3px;
@@ -29,12 +29,13 @@
 .singleLineHeader {
   text-align: center;
 }
-.singleLine{
+
+.singleLine {
   text-align: center;
   margin: 10px 0;
   font-weight: bold;
 
-  b{
+  b {
     color: $color-primary-light;
     border: 3px solid $color-primary-light;
     padding: 5px;
@@ -42,14 +43,14 @@
     white-space: nowrap;
   }
 
-  .total{
+  .total {
     margin: 7px;
     font-size: 15px;
   }
-  .avatar{
+  .avatar {
     display: inline-block;
   }
-  .name{
+  .name {
     padding: 5px 5px;
     display: inline-block;
   }

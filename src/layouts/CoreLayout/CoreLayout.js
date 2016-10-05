@@ -1,9 +1,8 @@
-import React from 'react'
-import Header from '../../components/Header'
-import classes from './CoreLayout.scss'
-import '../../styles/core.scss'
+import React from "react";
+import classes from "./CoreLayout.scss";
+import "../../styles/core.scss";
 
-export const CoreLayout = ({ children }) => (
+export const CoreLayout = ({children}) => (
   <div className='container' style={{padding: 0}}>
     <div className={classes.mainContainer}>
       {children}

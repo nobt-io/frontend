@@ -1,8 +1,8 @@
-import { applyMiddleware, compose, createStore } from 'redux'
-import { routerMiddleware } from 'react-router-redux'
-import thunk from 'redux-thunk'
-import makeRootReducer from './reducers'
-import createLogger from 'redux-logger';
+import { applyMiddleware, compose, createStore } from "redux";
+import { routerMiddleware } from "react-router-redux";
+import thunk from "redux-thunk";
+import makeRootReducer from "./reducers";
+import createLogger from "redux-logger";
 
 export default (initialState = {}, history) => {
   // ======================================================
@@ -10,7 +10,7 @@ export default (initialState = {}, history) => {
   // ======================================================
   const middleware = [thunk, routerMiddleware(history)]
 
-  if(__DEBUG__){
+  if (__DEBUG__) {
     const logger = createLogger();
     middleware.push(logger);
   }

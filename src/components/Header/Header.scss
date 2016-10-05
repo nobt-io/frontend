@@ -1,19 +1,19 @@
 
-.header{
+.header {
   height: 50px;
 
-  h1{
+  h1 {
     font-size: 18px;
     margin: 10px 0;
   }
 
-  button{
+  button {
     background-color: $color-primary-dark;
     color: white !important;
     border-radius: 3px;
     padding: 0;
 
-    &:disabled{
+    &:disabled {
       opacity: 0.3;
     }
   }

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import debug from 'debug';
+import axios from "axios";
+import debug from "debug";
 
 var instance = axios.create({
   baseURL: "http://nobt-io-dev.cfapps.io/"

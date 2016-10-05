@@ -1,3 +1,3 @@
-import ExpenseList from './ExpenseList'
+import ExpenseList from "./ExpenseList";
 
 export default ExpenseList

@@ -1,4 +1,4 @@
-import {createNobt} from 'api/api';
+import { createNobt } from "api/api";
 
 const actionNames = {
   ADD_PERSON: 'Create.ADD_PERSON',

@@ -1,7 +1,7 @@
-import { connect } from 'react-redux'
-import { actionCreator } from '../modules/Create'
-import { nobtActionFactory as nobtActionCreator} from '../../Nobt/routes/Overview/modules/Nobt'
-import Create from '../components/Create'
+import { connect } from "react-redux";
+import { actionCreator } from "../modules/Create";
+import { nobtActionFactory as nobtActionCreator } from "../../Nobt/routes/Overview/modules/Nobt";
+import Create from "../components/Create";
 
 const mapActionCreators = {
   addPerson: (name) => actionCreator.addPerson(name),

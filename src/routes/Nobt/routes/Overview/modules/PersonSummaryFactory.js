@@ -13,13 +13,13 @@ class PersonSummaryFactory {
     return this.cratePersonSummary(person);
   }
 
-  cratePersonSummary(person){
+  cratePersonSummary(person) {
     const isPositive = person.amount > 0;
     const raw = person.amount;
     const amount = this.currencyFormatter.getCurrencyAmount(Math.abs(person.amount));
     const name = person.name;
 
-    return {isPositive, raw, amount, name };
+    return {isPositive, raw, amount, name};
   }
 }
 

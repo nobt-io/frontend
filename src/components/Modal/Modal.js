@@ -1,6 +1,6 @@
-import React from 'react'
-import styles from './Modal.scss'
-import Modal from 'react-responsive-modal';
+import React from "react";
+import styles from "./Modal.scss";
+import Modal from "react-responsive-modal";
 
 export const LowerScreenModal = (props) => {
 

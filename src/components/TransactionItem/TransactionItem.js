@@ -1,10 +1,9 @@
-import React from 'react'
-import styles from './TransactionItem.scss'
-
-import Avatar from 'components/Avatar'
-import TransactionModal from 'components/TransactionModal'
-import Card from 'components/Card'
-import FontIcon from 'react-toolbox/lib/font_icon';
+import React from "react";
+import styles from "./TransactionItem.scss";
+import Avatar from "components/Avatar";
+import TransactionModal from "components/TransactionModal";
+import Card from "components/Card";
+import FontIcon from "react-toolbox/lib/font_icon";
 
 
 export const TransactionItem = React.createClass({
@@ -24,10 +23,11 @@ export const TransactionItem = React.createClass({
 
     const me = transaction.me;
     const persons =
-      transaction.persons.map(s => (<span className={styles.personAvatar}><Avatar name={s.name} size={20} fontSize={11}/></span>));
+      transaction.persons.map(s => (
+        <span className={styles.personAvatar}><Avatar name={s.name} size={20} fontSize={11}/></span>));
 
     const meKeyword = me.isPositive ? "gets" : "owes";
-    const personsKeyword= me.isPositive ? "from" : "to";
+    const personsKeyword = me.isPositive ? "from" : "to";
     const icon = me.isPositive ? "add_circle" : "remove_circle";
 
     return (

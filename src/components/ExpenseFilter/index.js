@@ -1,3 +1,3 @@
-import ExpenseFilter from './ExpenseFilter'
+import ExpenseFilter from "./ExpenseFilter";
 
 export default ExpenseFilter

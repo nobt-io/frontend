@@ -1,13 +1,14 @@
-import React from 'react'
-import Modal from 'components/Modal'
-import PersonMoneyList from 'components/PersonMoneyList'
-import Avatar from 'components/Avatar'
-import styles from './ExpenseModal.scss'
-import FontIcon from 'react-toolbox/lib/font_icon';
+import React from "react";
+import Modal from "components/Modal";
+import PersonMoneyList from "components/PersonMoneyList";
+import Avatar from "components/Avatar";
+import styles from "./ExpenseModal.scss";
+import FontIcon from "react-toolbox/lib/font_icon";
 
 export const ExpenseModal = (props) => {
 
-  const onClose = props.onClose || (() => { });
+  const onClose = props.onClose || (() => {
+    });
   const active = props.active || false;
   const expense = props.expense;
 

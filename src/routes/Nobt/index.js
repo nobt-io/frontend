@@ -1,6 +1,6 @@
-import SimpleLayout from 'layouts/SimpleLayout'
-import OverviewRoute from './routes/Overview';
-import AddExpenseRoute from './routes/AddExpense';
+import SimpleLayout from "layouts/SimpleLayout";
+import OverviewRoute from "./routes/Overview";
+import AddExpenseRoute from "./routes/AddExpense";
 
 export default (store) => ({
   path: 'nobt/',

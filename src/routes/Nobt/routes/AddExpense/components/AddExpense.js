@@ -1,11 +1,11 @@
 import React from "react";
-import {Button, IconButton} from "react-toolbox/lib/button";
+import { Button } from "react-toolbox/lib/button";
 import Header from "components/Header";
 import styles from "./AddExpense.scss";
-import {List, ListSubHeader, ListCheckbox} from "react-toolbox/lib/list";
+import { List, ListSubHeader, ListCheckbox } from "react-toolbox/lib/list";
 import Input from "react-toolbox/lib/input";
-import {initialState} from "../modules/AddExpense";
-import SingleInputInlineForm from 'components/SingleInputInlineForm';
+import { initialState } from "../modules/AddExpense";
+import SingleInputInlineForm from "components/SingleInputInlineForm";
 
 export const AddExpense = React.createClass({
 
@@ -38,7 +38,8 @@ export const AddExpense = React.createClass({
     return (
       <div className={styles.AddExpense}>
         <Header showButton={true}>
-          <Button className={styles.button} disabled={addExpenseDisabled} icon="add" onClick={this.addExpense}>Add to {this.props.nobtName}</Button>
+          <Button className={styles.button} disabled={addExpenseDisabled} icon="add" onClick={this.addExpense}>Add
+            to {this.props.nobtName}</Button>
         </Header>
         <section>
           <Input autoComplete="off" type="text" placeholder="What was bought?"/>

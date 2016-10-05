@@ -1,4 +1,4 @@
-.overlay{
+.overlay {
   padding: 0 !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
 }
@@ -9,14 +9,14 @@
   font-weight: bold;
 }
 
-.modal{
+.modal {
   position: absolute !important;
   bottom: 0 !important;
   width: 100%;
   max-height: 100%;
   padding: 0 !important;
 
-  .content{
+  .content {
     padding: 30px;
     display: block;
     background-color: white;

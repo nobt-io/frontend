@@ -1,9 +1,7 @@
-import {getNobt} from 'api/api';
-import PersonDebtSummaryFactory from './PersonDebtSummaryFactory'
-import CurrencyFormatter from './CurrencyFormatter'
-import PersonSummaryFactory from './PersonSummaryFactory'
-
-import debug from 'debug';
+import { getNobt } from "api/api";
+import PersonDebtSummaryFactory from "./PersonDebtSummaryFactory";
+import CurrencyFormatter from "./CurrencyFormatter";
+import PersonSummaryFactory from "./PersonSummaryFactory";
 
 const actionNames = {
   LOAD_NOBT: 'Nobt.LOAD_NOBT',
@@ -57,7 +55,7 @@ const actionHandlers = {
     // TODO this is called often, maybe avoid somehow
     // debug(actionNames.CHANGE_TAB)(`Calculated selected tab index ${tabIndex} from name '${action.payload.tabName}'.`);
 
-    return {...state, tabIndex : tabIndex};
+    return {...state, tabIndex: tabIndex};
   },
   [actionNames.CHANGE_EXPENSES_VIEW_INFO]: (state, action) => {
 
@@ -67,21 +65,21 @@ const actionHandlers = {
     var expensesFiltered = state.expenses;
 
     var filterIsNotAll = filter != '';
-    if(filterIsNotAll){
+    if (filterIsNotAll) {
       expensesFiltered = expensesFiltered.filter(e =>
-        e.debtee.name ==filter ||
-        e.debtors.filter(d => d.name ==filter).length > 0
+        e.debtee.name == filter ||
+        e.debtors.filter(d => d.name == filter).length > 0
       );
     }
 
     const sortFunction = {
-      "Date": (a,b) => (a.debtee.raw < b.debtee.raw) ? 1 : ((b.debtee.raw < a.debtee.raw) ? -1 : 0),
-      "Amount": (a,b) => (a.debtee.raw > b.debtee.raw) ? 1 : ((b.debtee.raw > a.debtee.raw) ? -1 : 0),
+      "Date": (a, b) => (a.debtee.raw < b.debtee.raw) ? 1 : ((b.debtee.raw < a.debtee.raw) ? -1 : 0),
+      "Amount": (a, b) => (a.debtee.raw > b.debtee.raw) ? 1 : ((b.debtee.raw > a.debtee.raw) ? -1 : 0),
     }[sort];
 
     expensesFiltered = expensesFiltered.sort(sortFunction);
 
-    return {...state, expensesFiltered,  expensesViewInfo: {...state.expensesViewInfo, filter, sort}};
+    return {...state, expensesFiltered, expensesViewInfo: {...state.expensesViewInfo, filter, sort}};
   }
 };
 
@@ -109,7 +107,7 @@ export const initialState = {
   expensesViewInfo: {filter: "", sort: "Date"}
 };
 
-export default function nobtReducer (state = initialState, action) {
+export default function nobtReducer(state = initialState, action) {
   const handler = actionHandlers[action.type]
   return handler ? handler(state, action) : state
 }

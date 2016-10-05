@@ -1,10 +1,9 @@
-import React from 'react'
-import styles from './Create.scss'
-
-import Button from 'components/Button';
-import Header from 'components/Header'
-import AddPersonPanel from 'components/AddPersonPanel'
-import PersonList from 'components/PersonList'
+import React from "react";
+import styles from "./Create.scss";
+import Button from "components/Button";
+import Header from "components/Header";
+import AddPersonPanel from "components/AddPersonPanel";
+import PersonList from "components/PersonList";
 
 
 export const Create = React.createClass({
@@ -15,10 +14,10 @@ export const Create = React.createClass({
   },
 
   getInitialState() {
-    return { currentPerson: "" }
+    return {currentPerson: ""}
   },
 
-  onValueChange: function(person){
+  onValueChange: function (person) {
     this.setState({
       currentPerson: person
     });
@@ -30,7 +29,7 @@ export const Create = React.createClass({
     return newUserIsNotEmpty && userDoesNotExist;
   },
 
-  createNobt: function(){
+  createNobt: function () {
     this.props.createNobt().then((response) => {
       this.props.history.push(`/nobt/${response.data.id}`);
     }, () => {
@@ -49,10 +48,11 @@ export const Create = React.createClass({
           <Button className={styles.button} disabled={createNobtIsDisabled} icon="check_box" onClick={this.createNobt}>Create</Button>
         </Header>
         <AddPersonPanel
-          buttonIsDisabled={addPersonIsDisabled} onButtonClick={() => this.props.addPerson(this.state.currentPerson)} onValueChange={this.onValueChange}>
+          buttonIsDisabled={addPersonIsDisabled} onButtonClick={() => this.props.addPerson(this.state.currentPerson)}
+          onValueChange={this.onValueChange}>
           Who is involved in <b>{this.props.nobtName}</b>?
         </AddPersonPanel>
-        <PersonList persons={this.props.persons} onPersonRemove={this.props.removePerson} />
+        <PersonList persons={this.props.persons} onPersonRemove={this.props.removePerson}/>
       </div>)
   }
 });

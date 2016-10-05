@@ -1,3 +1,3 @@
-import SingleInputInlineForm from './SingleInputInlineForm'
+import SingleInputInlineForm from "./SingleInputInlineForm";
 
 export default SingleInputInlineForm

@@ -1,14 +1,14 @@
-import React from 'react'
-import Modal from 'components/Modal'
-import PersonMoneyList from 'components/PersonMoneyList'
-import Avatar from 'components/Avatar'
-import styles from './TransactionModal.scss'
-import FontIcon from 'react-toolbox/lib/font_icon';
+import React from "react";
+import Modal from "components/Modal";
+import PersonMoneyList from "components/PersonMoneyList";
+import Avatar from "components/Avatar";
+import styles from "./TransactionModal.scss";
 
 export const TransactionModal = (props) => {
 
 
-  const onClose = props.onClose || (() => {});
+  const onClose = props.onClose || (() => {
+    });
   const active = props.active || false;
   const transaction = props.transaction;
 
