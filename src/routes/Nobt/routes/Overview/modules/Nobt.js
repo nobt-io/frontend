@@ -9,6 +9,7 @@ const actionNames = {
   CHANGE_TAB: 'Nobt.CHANGE_TAB',
   CHANGE_EXPENSES_VIEW_INFO: 'Nobt.CHANGE_EXPENSES_VIEW_INFO',
   SET_CREATE_EXPENSE_MODAL_VISIBILITY: 'Nobt.SET_CREATE_EXPENSE_MODAL_VISIBILITY',
+  CREATE_EXPENSE: 'Nobt.CREATE_EXPENSE',
 };
 
 
@@ -25,6 +26,7 @@ export const nobtActionFactory = {
   changeTab: (tabName) => ({type: actionNames.CHANGE_TAB, payload: {tabName: tabName}}),
   changeExpenseViewInfo: (filter, sort) => ({type: actionNames.CHANGE_EXPENSES_VIEW_INFO, payload: {filter, sort}}),
   setCreateExpenseModalVisibilty: (visibility) => ({type: actionNames.SET_CREATE_EXPENSE_MODAL_VISIBILITY, payload: {visibility}}),
+  createExpense: (expense) => ({type: actionNames.CREATE_EXPENSE, payload: {expense}}),
 };
 
 const actionHandlers = {

@@ -7,6 +7,7 @@ const mapActionCreators = {
   changeTab: (tabName) => nobtActionFactory.changeTab(tabName),
   closeCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(false),
   openCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(true),
+  createExpense: (expense) => nobtActionFactory.createExpense(expense),
   changeExpenseViewInfo: (filter, sort) => nobtActionFactory.changeExpenseViewInfo(filter, sort),
 };
 
