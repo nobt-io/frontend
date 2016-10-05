@@ -1,17 +1,13 @@
-import React from 'react'
-import styles from './Nobt.scss'
-
-import Button from 'components/Button';
-import Header from 'components/Header'
-import NobtSummary from 'components/NobtSummary'
-import TransactionList from 'components/TransactionList'
-import ExpenseList from 'components/ExpenseList'
-import ExpenseFilter from 'components/ExpenseFilter'
-
-import {Tab, Tabs} from 'react-toolbox';
-import {initialState} from '../modules/Nobt'
-
-import _debug from 'debug';
+import React from "react";
+import styles from "./Nobt.scss";
+import Button from "components/Button";
+import Header from "components/Header";
+import NobtSummary from "components/NobtSummary";
+import TransactionList from "components/TransactionList";
+import ExpenseList from "components/ExpenseList";
+import ExpenseFilter from "components/ExpenseFilter";
+import {Tab, Tabs} from "react-toolbox";
+import {initialState} from "../modules/Nobt";
 
 export const Nobt = React.createClass({
 
@@ -24,8 +20,6 @@ export const Nobt = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-
-    _debug('view:nobt')(`Received props: ${nextProps}`);
 
     var currentTabIdentifier = this.props.location.hash.substring(1);
     var nextTabIdentifier = nextProps.location.hash.substring(1);
