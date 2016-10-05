@@ -4,7 +4,9 @@ import { FullScreenModal } from "components/Modal";
 import Header from "components/Header";
 import Input from "react-toolbox/lib/input";
 import PersonSelectorModal from "components/PersonSelectorModal";
+import DatePickerModal from "components/DatePickerModal";
 import Avatar from "components/Avatar";
+import ReactDOM from "react-dom";
 
 export const CreateExpenseModal = React.createClass({
 
@@ -38,23 +40,36 @@ export const CreateExpenseModal = React.createClass({
     this.refreshState({paidByPerson: person})
   },
 
+  updateDate: function(date){
+    this.refreshState({creationDate: date})
+  },
   onPersonModalOpen: function () {
-    this.setState({personModalIsActive: true});
+    this.setState({...this.state, personModalIsActive: true});
   },
 
   onPersonModalClose: function () {
-    this.setState({personModalIsActive: false});
+    this.setState({...this.state, personModalIsActive: false});
+  },
+
+  onDateModalOpen: function () {
+    this.setState({...this.state, dateModalIsActive: true});
+  },
+
+  onDateModalClose: function () {
+    this.setState({...this.state, dateModalIsActive: false});
   },
 
   render: function () {
 
-    const {personModalIsActive} = this.state || {personModalIsActive: false};
+    const {personModalIsActive, dateModalIsActive} = this.state || {};
 
     const {amount, creationDate, selectedPersons, paidByPerson, subject} = this.props.editState;
     const {onClose, onCreateExpense, active, persons} = this.props;
 
     const dateString =
-      new Date().toDateString() === new Date(creationDate).toDateString() ? "today" : this.formatDate(new Date(creationDate));
+      new Date().toDateString() === new Date(creationDate).toDateString() ? "Today" : "on "+this.formatDate(new Date(creationDate));
+
+    var expenseIsValid = subject.length > 0;
 
     return (
       <FullScreenModal active={active} onClose={onClose}>
@@ -62,17 +77,21 @@ export const CreateExpenseModal = React.createClass({
           title={"Who paid?"} canInsertPerson={true}
           active={personModalIsActive} onClose={this.onPersonModalClose} onFilterChange={(p) => this.updatePaidByPerson(p)} persons={persons}
         />
+        <DatePickerModal
+          title={"When?"}
+          active={dateModalIsActive} onClose={this.onDateModalClose} onDateChange={(d) => this.updateDate(d)}
+        />
         <Header
           showNobtHeader={false}
-          rightButton={{icon: "check_box", onClick: () => onCreateExpense(), title: "Create expense"}}
+          rightButton={!expenseIsValid ? {} : {icon: "check_box", onClick: () => onCreateExpense(), title: "Create expense"}}
           leftButton={{icon: "arrow_back", onClick: () => onClose(), title: "Back"}}/>
         <div className={styles.headInput}>
           <div>
             <Input placeholder="What was bought?" value={subject} autoComplete="off" onChange={this.updateSubject} className={styles.subjectInput}/>
           </div>
           <div>
-            <span onClick={() => this.onPersonModalOpen()} className={styles.personPicker}>by <b>{paidByPerson}</b> <Avatar size={20} fontSize={11} name={paidByPerson} /></span>
-            <span className={styles.datePicker}>on <b>{dateString}</b></span>
+            <span onClick={() => this.onPersonModalOpen()} className={styles.personPicker}>by {paidByPerson}<Avatar size={20} fontSize={11} name={paidByPerson} /></span>
+            <span onClick={() => this.onDateModalOpen()} className={styles.datePicker}>{dateString}</span>
           </div>
         </div>
       </FullScreenModal>

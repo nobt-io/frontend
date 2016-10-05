@@ -1,5 +1,5 @@
 .container {
-  color: #979797;
+  color: $color-accent;
   padding-bottom: 5px;
   white-space: nowrap;
 
@@ -11,8 +11,8 @@
     margin-bottom: 10px;
     padding: 5px;
     border-radius: 3px;
-    background-color: #e8e8e8;
-    color: #979797;
+    background-color: $color-button-grey;
+    color: $color-accent;
   }
 
   .filterIcon {

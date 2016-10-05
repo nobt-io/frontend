@@ -45,9 +45,11 @@ const actionHandlers = {
     const expenses = action.payload.nobt.expenses.map(e => getExpense(e, personSummaryFactory));
     const expensesFiltered = expenses;
 
+    //set paidBy Person to first member
+    const createExpenseViewInfo = {...state.createExpenseViewInfo, state: {...state.createExpenseViewInfo.state, paidByPerson: members[0]}};
     var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m)).filter(t => t.me.raw != 0);
 
-    return {...state, name, total, members, transactions, expenses, expensesFiltered};
+    return {...state, name, total, members, transactions, expenses, expensesFiltered, createExpenseViewInfo};
   },
   [actionNames.CHANGE_TAB]: (state, action) => {
 
@@ -74,7 +76,7 @@ const actionHandlers = {
     if(state.members.indexOf(paidByPerson) < 0)
       members.push(paidByPerson);
 
-    return {...state, members, createExpenseViewInfo: {...state.createExpenseViewInfo, state: {...state.createExpenseViewInfo.editstate, ...action.payload.state}}};
+    return {...state, members, createExpenseViewInfo: {...state.createExpenseViewInfo, state: {...state.createExpenseViewInfo.state, ...action.payload.state}}};
   },
   [actionNames.CHANGE_EXPENSES_VIEW_INFO]: (state, action) => {
 

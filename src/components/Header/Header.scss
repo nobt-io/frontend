@@ -1,10 +1,11 @@
 
 .header {
   height: 50px;
+  z-index: 100 !important;
 
   h1 {
     font-size: 18px;
-    margin: 10px 0;
+    margin: 7px 0;
   }
 
   button {

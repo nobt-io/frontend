@@ -5,7 +5,7 @@ export const NobtSummary = (props) => {
 
    var nobtDetails = (props.nobtIsEmpty)
     ? ""
-    : (<div className={styles.nobtSummary}>{props.totalAmount.amount} | {props.memberCount} Members </div>);
+    : (<div className={styles.nobtSummary}>{props.totalAmount} | {props.memberCount} Members </div>);
 
   return (
     <div className={styles.container}>

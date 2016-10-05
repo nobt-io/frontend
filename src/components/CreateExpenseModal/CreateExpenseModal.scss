@@ -5,8 +5,12 @@
 
   .datePicker, .personPicker{
     margin-right: 10px;
+    font-weight: bold;
 
-    div{display: inline-block} //avatar
+    div{//avatar
+      margin-left: 5px;
+      display: inline-block;
+    }
   }
 
   .datePicker, .personPicker, .subjectInput{
