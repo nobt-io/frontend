@@ -1,6 +1,11 @@
 import {getNobt} from 'api/api';
 import PersonDebtSummaryFactory from './PersonDebtSummaryFactory'
+import CurrencyFormatter from './CurrencyFormatter'
+import PersonSummaryFactory from './PersonSummaryFactory'
+
 import debug from 'debug';
+
+
 
 const actionNames = {
   LOAD_NOBT: 'Nobt.LOAD_NOBT',
@@ -23,14 +28,33 @@ export const actionFactory = {
 export const actionHandlers = {
   [actionNames.SET_NOBT]: (state, action) => {
 
-    var total = action.payload.nobt.expenses.reduce((total, expense) => total + expense.shares.reduce((expenseTotal, share) => expenseTotal + share.amount, 0), 0);
-    var name = action.payload.nobt.name;
-    var members = action.payload.nobt.participatingPersons;
-    var expenses = action.payload.nobt.expenses;
+    //ioc for the poor
+    const currencyFormatter = new CurrencyFormatter("EUR");
+    const personSummaryFactory = new PersonSummaryFactory(currencyFormatter);
+    const transactionFactory = new PersonDebtSummaryFactory(action.payload.nobt.transactions, personSummaryFactory);
 
-    var transactionFactory = new PersonDebtSummaryFactory(action.payload.nobt.transactions);
+    const total = currencyFormatter.getCurrencyAmount(getTotal(action.payload.nobt.expenses));
+    const name = action.payload.nobt.name;
+    const members = action.payload.nobt.participatingPersons;
+    const expenses = action.payload.nobt.expenses.map(e => getExpense(e, personSummaryFactory));
+
     var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m));
 
-    return {...state, name : name, total: total, members: members, transactions: transactions, expenses: expenses};
+    return {...state, name, total, members, transactions, expenses};
   }
+};
+
+const getTotal = (expenses) => {
+  return expenses.reduce((total, expense) => total + expense.shares.reduce((expenseTotal, share) => expenseTotal + share.amount, 0), 0);
+};
+
+const getExpense = (expense, personSummaryFactory) => {
+  const total = expense.shares.reduce((expenseTotal, share) => expenseTotal + share.amount, 0);
+
+  const name = expense.name;
+  const strategy = expense.splitStrategy;
+  const debtee = personSummaryFactory.cratePersonSummary({name: expense.debtee, amount: total});
+  const debtors = expense.shares.map(s => personSummaryFactory.createExpensePerson(s));
+
+  return {name, strategy, debtee, debtors}
 };

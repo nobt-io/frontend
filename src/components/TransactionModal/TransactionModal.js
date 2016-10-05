@@ -8,21 +8,18 @@ import FontIcon from 'react-toolbox/lib/font_icon';
 export const TransactionModal = (props) => {
 
 
-  const onClose = props.onClose || (() => {
-    });
+  const onClose = props.onClose || (() => {});
   const active = props.active || false;
   const transaction = props.transaction;
 
-  const total = transaction.total;
-  const absTotal = Math.abs(total);
-  const name = transaction.me;
-  const persons = props.transaction.summaries;
+  const me = transaction.me;
+  const persons = transaction.persons;
 
   const isSinglePerson = persons.length == 1;
 
   if (isSinglePerson) {
-    const firstPerson = total < 0 ? name : persons[0].name;
-    const secondPerson = total > 0 ? name : persons[0].name;
+    const firstPerson = me.isPostive ? me.name : persons[0].name;
+    const secondPerson = me.isPostive ? me.name : persons[0].name;
 
     return (
       <Modal active={active} onClose={onClose}>
@@ -33,7 +30,7 @@ export const TransactionModal = (props) => {
             <div style={{clear: "both"}}></div>
           </div>
           <div className={styles.total}>
-            <span className={styles.name}><b>owes {absTotal},00 € to</b></span>
+            <span className={styles.name}><b>owes {me.amount} to</b></span>
           </div>
           <div>
             <div style={{clear: "both"}}></div>
@@ -46,17 +43,17 @@ export const TransactionModal = (props) => {
     );
   }
   else {
-    const keyword = total > 0 ? "get" : "owe";
-    const directionKeyword = total > 0 ? "from" : "to";
+    const keyword = me.isPostive ? "get" : "owe";
+    const directionKeyword = me.isPostive ? "from" : "to";
     return (
       <Modal active={active} onClose={onClose}>
         <div className={styles.header}>
-          <span className={styles.avatar}><Avatar name={name} size={40}/></span>
-          <span className={styles.name}>{name}</span>
+          <span className={styles.avatar}><Avatar name={me.name} size={40}/></span>
+          <span className={styles.name}>{me.name}</span>
           <div style={{clear: "both"}}></div>
         </div>
         <div className={styles.me}>
-          you <b>{keyword} {absTotal} €</b> {directionKeyword}&nbsp;<b>{persons.length} persons</b>
+          you <b>{keyword} {me.amount}</b> {directionKeyword}&nbsp;<b>{persons.length} persons</b>
         </div>
         <PersonMoneyList persons={persons} showKeyword={true}></PersonMoneyList>
       </Modal>);

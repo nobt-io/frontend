@@ -1,7 +1,8 @@
 class PersonDebtSummaryFactory {
 
-    constructor(transactions) {
+    constructor(transactions, personSummaryFactor) {
         this.transactions = transactions;
+        this.personSummaryFactor = personSummaryFactor;
     }
 
     computeSummaryForPerson(person) {
@@ -29,7 +30,10 @@ class PersonDebtSummaryFactory {
 
         var total = summaries.reduce((sum, tx) => sum + tx.amount, 0);
 
-        return { me: person, total: total, summaries: summaries };
+        return {
+          me: this.personSummaryFactor.cratePersonSummary({name: person, amount: total}),
+          persons: summaries.map(s => this.personSummaryFactor.cratePersonSummary(s))
+        };
     }
 }
 

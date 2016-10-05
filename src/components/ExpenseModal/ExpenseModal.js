@@ -11,19 +11,18 @@ export const ExpenseModal = (props) => {
   const active = props.active || false;
   const expense = props.expense;
 
-  const total = expense.shares.reduce((total, share) => total + share.amount, 0);
   const name = expense.name;
   const debtee = expense.debtee;
-  const persons = expense.shares.map(s => ({amount: s.amount, name: s.debtor}));
+  const persons = expense.debtors.map(s => ({amount: s.amount, name: s.name, isPositive: s.isPositive}));
 
   return (
     <Modal active={active} onClose={onClose}>
       <div className={styles.header}>{name}</div>
       <PersonMoneyList persons={persons} showKeyword={false}></PersonMoneyList>
       <div className={styles.debtee}>
-        <span className={styles.avatar}><Avatar name={debtee} size={30}/></span>
-        <span className={styles.name}>{debtee} <b>paid</b></span>
-        <span className={styles.total}>{total} €</span>
+        <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>
+        <span className={styles.name}>{debtee.name} <b>paid</b></span>
+        <span className={styles.total}>{debtee.amount}</span>
         <div style={{clear: "both"}}></div>
       </div>
       <div className={styles.added}>
