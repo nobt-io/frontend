@@ -1,6 +1,9 @@
 .PersonItem{
   margin-bottom: 10px;
 
+  div{
+    display: inline-block;
+  }
   .PersonName{
     font-weight: bold;
     margin-left: 10px;

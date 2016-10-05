@@ -42,7 +42,7 @@ export const Avatar = (props) => {
 
 Avatar.propTypes = {
   name: React.PropTypes.string.isRequired,
-  fontSize: React.PropTypes.number.isRequired,
+  fontSize: React.PropTypes.number,
   size: React.PropTypes.number.isRequired,
 
 };

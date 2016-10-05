@@ -16,8 +16,7 @@ export const ExpenseModal = (props) => {
   const persons = expense.debtors.map(s => ({amount: s.amount, name: s.name, isPositive: s.isPositive}));
 
   return (
-    <Modal active={active} onClose={onClose}>
-      <div className={styles.header}>{name}</div>
+    <Modal header={name} active={active} onClose={onClose}>
       <PersonMoneyList persons={persons} showKeyword={false}></PersonMoneyList>
       <div className={styles.debtee}>
         <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>

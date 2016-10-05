@@ -70,8 +70,14 @@ export const Nobt = React.createClass({
             onChange={this.onTabChange} fixed>
             <Tab label="Transactions"><TransactionList transactions={this.props.transactions}/></Tab>
             <Tab label="Expenses">
-              <ExpenseFilter filter={"All"} sort={"Date"}/>
-              <ExpenseList expenses={this.props.expenses}/>
+              <ExpenseFilter
+                persons={this.props.members}
+                onFilterChange={(filter) => this.props.changeExpenseViewInfo(filter, this.props.expensesViewInfo.sort)}
+                onSortChange={(sort) => this.props.changeExpenseViewInfo(this.props.expensesViewInfo.filter, sort)}
+                onReset={(sort) => this.props.changeExpenseViewInfo("", "Date")}
+                currentFilter={this.props.expensesViewInfo.filter}
+                currentSort={this.props.expensesViewInfo.sort}/>
+              <ExpenseList expenses={this.props.expensesFiltered}/>
             </Tab>
           </Tabs>
         </div>

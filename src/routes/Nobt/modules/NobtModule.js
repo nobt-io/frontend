@@ -37,10 +37,11 @@ export const actionHandlers = {
     const name = action.payload.nobt.name;
     const members = action.payload.nobt.participatingPersons;
     const expenses = action.payload.nobt.expenses.map(e => getExpense(e, personSummaryFactory));
+    const expensesFiltered = expenses;
 
     var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m));
 
-    return {...state, name, total, members, transactions, expenses};
+    return {...state, name, total, members, transactions, expenses, expensesFiltered};
   }
 };
 
