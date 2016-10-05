@@ -46,7 +46,7 @@ export const TransactionModal = (props) => {
     const keyword = me.isPositive ? "get" : "owe";
     const directionKeyword = me.isPositive ? "from" : "to";
     return (
-      <Modal active={active} onClose={onClose}>
+      <LowerScreenModal active={active} onClose={onClose}>
         <div className={styles.header}>
           <span className={styles.avatar}><Avatar name={me.name} size={40}/></span>
           <span className={styles.name}>{me.name}</span>
@@ -56,7 +56,7 @@ export const TransactionModal = (props) => {
           you <b>{keyword} {me.amount}</b> {directionKeyword}&nbsp;<b>{persons.length} persons</b>
         </div>
         <PersonMoneyList persons={persons} showKeyword={true}></PersonMoneyList>
-      </Modal>);
+      </LowerScreenModal>);
   }
 
 

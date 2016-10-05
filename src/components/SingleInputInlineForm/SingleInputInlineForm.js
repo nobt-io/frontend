@@ -87,7 +87,7 @@ SingleInputInlineForm.defaultProps = {
 SingleInputInlineForm.propTypes = {
   inputMaxLength: React.PropTypes.number,
   placeholder: React.PropTypes.string,
-  containerClass: React.PropTypes.containerClass,
+  containerClass: React.PropTypes.string,
   inputTheme: React.PropTypes.object,
   buttonTheme: React.PropTypes.object,
   buttonIcon: React.PropTypes.string,

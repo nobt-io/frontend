@@ -8,6 +8,7 @@ const mapActionCreators = {
   closeCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(false),
   openCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(true),
   createExpense: (expense) => nobtActionFactory.createExpense(expense),
+  updateCreateExpenseEditState: (state) => nobtActionFactory.updateCreateExpenseEditState(state),
   changeExpenseViewInfo: (filter, sort) => nobtActionFactory.changeExpenseViewInfo(filter, sort),
 };
 
@@ -20,6 +21,7 @@ const mapStateToProps = (state) => ({
   expensesViewInfo: state.Nobt.expensesViewInfo,
   expensesFiltered: state.Nobt.expensesFiltered,
   nobtIsEmpty: (state.Nobt.transactions || []).length == 0,
+  createExpenseEditState: state.Nobt.createExpenseViewInfo.state,
   showCreateExpenseModal: state.Nobt.createExpenseViewInfo.show
 });
 

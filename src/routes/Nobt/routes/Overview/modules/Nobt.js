@@ -10,6 +10,7 @@ const actionNames = {
   CHANGE_EXPENSES_VIEW_INFO: 'Nobt.CHANGE_EXPENSES_VIEW_INFO',
   SET_CREATE_EXPENSE_MODAL_VISIBILITY: 'Nobt.SET_CREATE_EXPENSE_MODAL_VISIBILITY',
   CREATE_EXPENSE: 'Nobt.CREATE_EXPENSE',
+  UPDATE_CREATE_EXPENSE_EDIT_STATE: 'Nobt.UPDATE_CREATE_EXPENSE_EDIT_STATE'
 };
 
 
@@ -27,6 +28,7 @@ export const nobtActionFactory = {
   changeExpenseViewInfo: (filter, sort) => ({type: actionNames.CHANGE_EXPENSES_VIEW_INFO, payload: {filter, sort}}),
   setCreateExpenseModalVisibilty: (visibility) => ({type: actionNames.SET_CREATE_EXPENSE_MODAL_VISIBILITY, payload: {visibility}}),
   createExpense: (expense) => ({type: actionNames.CREATE_EXPENSE, payload: {expense}}),
+  updateCreateExpenseEditState: (state) => ({type: actionNames.UPDATE_CREATE_EXPENSE_EDIT_STATE, payload: {state}}),
 };
 
 const actionHandlers = {
@@ -62,7 +64,17 @@ const actionHandlers = {
     return {...state, tabIndex: tabIndex};
   },
   [actionNames.SET_CREATE_EXPENSE_MODAL_VISIBILITY]: (state, action) => {
-    return {...state,  createExpenseViewInfo: {show: action.payload.visibility}};
+    return {...state,  createExpenseViewInfo: {...state.createExpenseViewInfo, show: action.payload.visibility}};
+  },
+  [actionNames.UPDATE_CREATE_EXPENSE_EDIT_STATE]: (state, action) => {
+
+    var paidByPerson = action.payload.state.paidByPerson;
+    var members = state.members;
+
+    if(state.members.indexOf(paidByPerson) < 0)
+      members.push(paidByPerson);
+
+    return {...state, members, createExpenseViewInfo: {...state.createExpenseViewInfo, state: {...state.createExpenseViewInfo.editstate, ...action.payload.state}}};
   },
   [actionNames.CHANGE_EXPENSES_VIEW_INFO]: (state, action) => {
 
@@ -114,8 +126,14 @@ export const initialState = {
   transactions: [],
   expenses: [],
   expensesFiltered: [],
-  createExpenseViewInfo: {show: false},
-  expensesViewInfo: {filter: "", sort: "Date"}
+  expensesViewInfo: {filter: "", sort: "Date"},
+  createExpenseViewInfo: {show: true, state: {
+    subject: "",
+    creationDate: new Date(),
+    selectedPersons: [],
+    paidByPerson: "",
+    amount: 0
+  }}
 };
 
 export default function nobtReducer(state = initialState, action) {

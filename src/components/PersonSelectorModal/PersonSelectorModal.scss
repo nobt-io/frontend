@@ -1,0 +1,24 @@
+.listItem {
+  div {
+    display: inline-block
+  }
+  span {
+    margin: 2px 0 0 26px;
+  }
+}
+
+.listWrapper {
+  margin: 0 -1.6rem;
+}
+
+.addPanel{
+  padding-top: 10px;
+  margin-left: 70px;
+
+  .addIcon{
+    margin-left: -50px;
+    display: inline;
+    float: left;
+    margin-top: 10px;
+  }
+}

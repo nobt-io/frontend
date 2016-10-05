@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ExpenseFilter.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
-import FilterByModal from "components/FilterByModal";
+import PersonSelectorModal from "components/PersonSelectorModal";
 import SortByModal from "components/SortByModal";
 import Avatar from "components/Avatar";
 
@@ -39,8 +39,10 @@ export const ExpenseFilter = React.createClass({
 
     return (
       <div className={styles.container}>
-        <FilterByModal active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
-                       persons={persons}/>
+        <PersonSelectorModal
+          title={"Filter expenses by"}
+          active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
+          persons={persons} canSelectAll={true}/>
         <SortByModal active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}/>
         <div>
           <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}

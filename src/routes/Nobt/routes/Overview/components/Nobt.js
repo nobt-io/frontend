@@ -53,9 +53,14 @@ export const Nobt = React.createClass({
     return (
       <div className={styles.nobt}>
         <Header rightButton={{icon:"add_box", onClick: this.props.openCreateExpenseModal, title: "Add expense", show: true}}/>
-        <CreateExpenseModal active={this.props.showCreateExpenseModal}
+        {this.props.showCreateExpenseModal &&
+          <CreateExpenseModal editState={this.props.createExpenseEditState}
+                            updateState={this.props.updateCreateExpenseEditState}
+                            active={this.props.showCreateExpenseModal}
+                            persons={this.props.members}
                             onClose={this.props.closeCreateExpenseModal}
                             onCreateExpense={this.props.createExpense}/>
+        }
         <NobtSummary
           nobtName={this.props.name} nobtIsEmpty={this.props.nobtIsEmpty}
           totalAmount={this.props.total} memberCount={this.props.members.length}/>
