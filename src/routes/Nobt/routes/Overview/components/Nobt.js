@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Nobt.scss";
-import { Button } from "react-toolbox/lib/button";
 import Header from "components/Header";
 import NobtSummary from "components/NobtSummary";
 import TransactionList from "components/TransactionList";
@@ -53,9 +52,7 @@ export const Nobt = React.createClass({
   render: function () {
     return (
       <div className={styles.nobt}>
-        <Header showButton={true}>
-          <Button className={styles.button} icon="add_box" onClick={this.props.openCreateExpenseModal}>Add expense</Button>
-        </Header>
+        <Header rightButton={{icon:"add_box", onClick: this.props.openCreateExpenseModal, title: "Add expense", show: true}}/>
         <CreateExpenseModal active={this.props.showCreateExpenseModal}
                             onClose={this.props.closeCreateExpenseModal}
                             onCreateExpense={this.props.createExpense}/>

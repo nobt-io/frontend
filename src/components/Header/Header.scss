@@ -17,9 +17,13 @@
       opacity: 0.3;
     }
   }
-
-  .buttonContainer {
+  .rightContainer {
     width: 100%;
     text-align: right;
+  }
+  .leftContainer {
+    width: 100%;
+    text-align: left;
+    margin-left: -15px;
   }
 }
