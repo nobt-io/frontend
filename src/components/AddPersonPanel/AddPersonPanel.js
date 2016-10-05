@@ -14,7 +14,7 @@ export const AddPersonPanel = React.createClass({
 
   onKeyDown: function (event) {
     var enterKey = '13';
-	  if (event.charCode == enterKey) {
+    if (event.charCode == enterKey) {
       this.onAction();
     }
   },
@@ -43,24 +43,19 @@ export const AddPersonPanel = React.createClass({
         </div>
       </section>
     );
-  },
-
-  getDefaultProps: function () {
-    return {
-      buttonIsDisabled: false,
-      onButtonClick: () => {
-      },
-      onValueChange: (val) => {
-      }
-    };
-  },
-
-  propTypes: {
-    buttonIsDisabled: React.PropTypes.bool,
-    onButtonClick: React.PropTypes.func,
-    onValueChange: React.PropTypes.func
   }
 });
 
+AddPersonPanel.defaultProps = {
+  buttonIsDisabled: false,
+  onButtonClick: () => { },
+  onValueChange: (val) => { }
+};
+
+AddPersonPanel.propTypes = {
+  buttonIsDisabled: React.PropTypes.bool,
+  onButtonClick: React.PropTypes.func,
+  onValueChange: React.PropTypes.func
+};
 
 export default AddPersonPanel

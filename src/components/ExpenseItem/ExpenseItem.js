@@ -46,7 +46,11 @@ export const ExpenseItem = React.createClass({
         </div>
       </Card>
     );
-  }
+  },
 });
+
+ExpenseItem.propTypes = {
+  expense: React.PropTypes.object.isRequired
+}
 
 export default ExpenseItem

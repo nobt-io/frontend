@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Create.scss";
-import Button from "components/Button";
+import { Button } from "react-toolbox/lib/button";
 import Header from "components/Header";
 import AddPersonPanel from "components/AddPersonPanel";
 import PersonList from "components/PersonList";

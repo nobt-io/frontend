@@ -70,32 +70,29 @@ export const SingleInputInlineForm = React.createClass({
         />
       </div>
     )
-  },
-
-  getDefaultProps: function () {
-    return {
-      inputMaxLength: 40,
-      placeholder: '',
-      containerClass: '',
-      inputTheme: {},
-      buttonTheme: {},
-      buttonIcon: '',
-      onSubmit: (value) => {
-      },
-      isButtonDisabled: (name) => false
-    };
-  },
-
-  propTypes: {
-    inputMaxLength: React.PropTypes.number,
-    placeholder: React.PropTypes.string,
-    containerClass: React.PropTypes.containerClass,
-    inputTheme: React.PropTypes.object,
-    buttonTheme: React.PropTypes.object,
-    buttonIcon: React.PropTypes.string,
-    onSubmit: React.PropTypes.func,
-    isButtonDisabled: React.PropTypes.func
-  },
+  }
 });
+SingleInputInlineForm.defaultProps = {
+  inputMaxLength: 40,
+  placeholder: '',
+  containerClass: '',
+  inputTheme: {},
+  buttonTheme: {},
+  buttonIcon: '',
+  onSubmit: (value) => {
+  },
+  isButtonDisabled: (name) => false
+};
+
+SingleInputInlineForm.propTypes = {
+  inputMaxLength: React.PropTypes.number,
+  placeholder: React.PropTypes.string,
+  containerClass: React.PropTypes.containerClass,
+  inputTheme: React.PropTypes.object,
+  buttonTheme: React.PropTypes.object,
+  buttonIcon: React.PropTypes.string,
+  onSubmit: React.PropTypes.func,
+  isButtonDisabled: React.PropTypes.func
+};
 
 export default SingleInputInlineForm

@@ -1,3 +1,3 @@
-import Modal from "./Modal";
+import LowerScreenModal from "./Modal";
 
-export default Modal
+export default LowerScreenModal

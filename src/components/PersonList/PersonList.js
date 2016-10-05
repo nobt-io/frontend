@@ -3,32 +3,35 @@ import styles from "./PersonList.scss";
 import Avatar from "components/Avatar";
 import { Button } from "react-toolbox/lib/button";
 
-export const PersonList = React.createClass({
+export const PersonList = (props) => {
 
-  render: function () {
+  const displayRemoveButton = props.hasDeleteButton ? "none" : "inline";
 
-    const displayRemoveButton = this.props.onPersonRemove == null ? "none" : "inline";
+  const persons = this.props.persons.map((person) => (
+    <div className={styles.PersonItem} key={person}>
+      <Avatar size={40} name={person}/>
+      <span className={styles.PersonName}>{person}</span>
+      <Button style={{display: displayRemoveButton}} className={styles.RemoveButton} icon='clear'
+              onClick={() => this.props.onPersonRemove(person)} floating/>
+    </div>
+  ));
 
-    const persons = this.props.persons.map((person) => (
-      <div className={styles.PersonItem} key={person}>
-        <Avatar size={40} name={person}></Avatar><span className={styles.PersonName}>{person}</span>
-        <Button style={{display: displayRemoveButton}} className={styles.RemoveButton} icon='clear'
-                onClick={() => this.props.onPersonRemove(person)} floating/>
-      </div>
-    ));
+  return (
+    <div>{persons}</div>
+  );
+};
 
-    return (
-      <div>{persons}</div>
-    );
-  },
+PersonList.propTypes = {
+  persons: React.PropTypes.array.isRequired,
+  onPersonRemove: React.PropTypes.func,
+  hasDeleteButton: React.PropTypes.bool
+};
 
-  getDefaultProps: function () {
-    return {
-      persons: [],
-      onPersonRemove: null
-    }
-  },
-});
+PersonList.defaultProps = {
+  persons: [],
+  onPersonRemove: () => { },
+  hasDeleteButton: false,
+};
 
 
 export default PersonList

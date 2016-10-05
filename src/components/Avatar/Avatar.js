@@ -50,7 +50,6 @@ Avatar.propTypes = {
   name: React.PropTypes.string.isRequired,
   fontSize: React.PropTypes.number,
   size: React.PropTypes.number.isRequired,
-
 };
 
 export default Avatar

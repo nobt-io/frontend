@@ -5,7 +5,7 @@ import Avatar from "components/Avatar";
 const getAmountKeyWord = (isPositive) => isPositive ? "gets" : "owes";
 
 const getPersonMoneyListItem = (person, showKeyword) => (
-  <div className={styles.row}>
+  <div key={person.name} className={styles.row}>
     <div className={styles.avatarCell}><Avatar name={person.name} size={30}/></div>
     <div className={styles.nameCell}>{person.name}</div>
     <div className={styles.amountCell}>
@@ -19,10 +19,18 @@ const getPersonMoneyListItem = (person, showKeyword) => (
 export const PersonMoneyList = (props) => {
 
   const showKeyword = props.showKeyword;
-
   const personItems = props.persons.map(p => getPersonMoneyListItem(p, showKeyword));
 
   return (<div className={styles.container}>{personItems}</div>)
-}
+};
+
+PersonMoneyList.propTypes = {
+  persons: React.PropTypes.array.isRequired,
+  showKeyword: React.PropTypes.bool
+};
+
+PersonMoneyList.defaultProps = {
+  showKeyword: false,
+};
 
 export default PersonMoneyList

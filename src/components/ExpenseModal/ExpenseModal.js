@@ -7,8 +7,7 @@ import FontIcon from "react-toolbox/lib/font_icon";
 
 export const ExpenseModal = (props) => {
 
-  const onClose = props.onClose || (() => {
-    });
+  const onClose = props.onClose || (() => { });
   const active = props.active || false;
   const expense = props.expense;
 
@@ -18,7 +17,7 @@ export const ExpenseModal = (props) => {
 
   return (
     <Modal header={name} active={active} onClose={onClose}>
-      <PersonMoneyList persons={persons} showKeyword={false}></PersonMoneyList>
+      <PersonMoneyList persons={persons} showKeyword={false}/>
       <div className={styles.debtee}>
         <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>
         <span className={styles.name}>{debtee.name} <b>paid</b></span>
@@ -26,9 +25,9 @@ export const ExpenseModal = (props) => {
         <div style={{clear: "both"}}></div>
       </div>
       <div className={styles.added}>
-        <FontIcon className={styles.serverIcon} value="cloud_done"></FontIcon>
+        <FontIcon className={styles.serverIcon} value="cloud_done"/>
         <span className={styles.serverDate}>added 2016-05-06</span>
-        <FontIcon className={styles.addedIcon} value="access_time"></FontIcon>
+        <FontIcon className={styles.addedIcon} value="access_time"/>
         <span className={styles.addedDate}>paid 2016-05-06</span>
         <div style={{clear: "both"}}></div>
       </div>
@@ -36,11 +35,10 @@ export const ExpenseModal = (props) => {
 
 };
 
-export default ExpenseModal
-
-
 ExpenseModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   expense: React.PropTypes.object.isRequired,
 };
+
+export default ExpenseModal

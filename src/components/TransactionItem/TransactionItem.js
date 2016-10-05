@@ -23,8 +23,8 @@ export const TransactionItem = React.createClass({
 
     const me = transaction.me;
     const persons =
-      transaction.persons.map(s => (
-        <span className={styles.personAvatar}><Avatar name={s.name} size={20} fontSize={11}/></span>));
+      transaction.persons.map(p => (
+        <span key={p.name} className={styles.personAvatar}><Avatar name={p.name} size={20} fontSize={11}/></span>));
 
     const meKeyword = me.isPositive ? "gets" : "owes";
     const personsKeyword = me.isPositive ? "from" : "to";
@@ -52,10 +52,11 @@ export const TransactionItem = React.createClass({
           </div>
         </div>
       </Card>);
-  }
-
-  // TODO: need to define prop types
+  },
 });
 
+TransactionItem.propTypes = {
+  transaction: React.PropTypes.object.isRequired
+};
 
 export default TransactionItem

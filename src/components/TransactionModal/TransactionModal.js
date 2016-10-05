@@ -62,11 +62,10 @@ export const TransactionModal = (props) => {
 
 };
 
-export default TransactionModal
-
-
 TransactionModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   transaction: React.PropTypes.object.isRequired,
 };
+
+export default TransactionModal

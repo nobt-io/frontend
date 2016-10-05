@@ -31,9 +31,11 @@ export const ExpenseFilter = React.createClass({
     const defaultFilter = currentSort == "Date" && currentFilter == "";
 
     const filter = currentFilter == ''
-      ? <b>All</b>
-      :
-      <span className={styles.personFilter}><b>{currentFilter}</b><Avatar name={currentFilter} size={20} fontSize={11}/></span>
+      ? (<b>All</b>)
+      : (<span className={styles.personFilter}>
+          <b>{currentFilter}</b>
+          <Avatar name={currentFilter} size={20} fontSize={11}/>
+        </span>);
 
     return (
       <div className={styles.container}>
@@ -47,7 +49,16 @@ export const ExpenseFilter = React.createClass({
           <span onClick={this.onFilterModalOpen} className={styles.filter}>filter by {filter}</span>
         </div>
       </div>);
-  }
+  },
 });
+
+ExpenseFilter.propTypes = {
+  persons: React.PropTypes.array.isRequired,
+  currentFilter: React.PropTypes.string.isRequired,
+  currentSort: React.PropTypes.string.isRequired,
+  onFilterChange: React.PropTypes.func.isRequired,
+  onSortChange: React.PropTypes.func.isRequired,
+  onReset: React.PropTypes.func.isRequired,
+};
 
 export default ExpenseFilter

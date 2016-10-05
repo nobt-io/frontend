@@ -6,23 +6,18 @@ import Avatar from "components/Avatar";
 
 export const FilterByModal = (props) => {
 
-  const onClose = props.onClose || (() => {
-    });
-  const active = props.active || false;
-  const onFilterChange = props.onFilterChange || (() => {
-    });
-
   const onItemClick = (name) => {
-    onFilterChange(name);
-    onClose();
-  }
+    props.onFilterChange(name);
+    props.onClose();
+  };
 
-  var persons = (props.persons || []).map(p => (
-    <ListItem onClick={() => onItemClick(p)}
-              itemContent={<div className={styles.listItem}><Avatar size={30} name={p}/><span>{p}</span></div>}/>));
+  var persons = props.persons.map(p => (
+    <ListItem onClick={() => onItemClick(p)} itemContent={
+      <div className={styles.listItem}><Avatar size={30} name={p}/><span>{p}</span></div>
+    }/>));
 
   return (
-    <Modal header={"filter expenses by"} active={active} onClose={onClose}>
+    <Modal header={"filter expenses by"} active={props.active} onClose={props.onClose}>
       <div className={styles.listWrapper}>
         <List selectable ripple>
           <ListItem onClick={() => onItemClick('')} caption="Show all members" leftIcon="apps"/>
@@ -32,6 +27,13 @@ export const FilterByModal = (props) => {
       </div>
     </Modal>
   );
-}
+};
+
+FilterByModal.propTypes = {
+  onClose: React.PropTypes.func.isRequired,
+  onFilterChange: React.PropTypes.func.isRequired,
+  active: React.PropTypes.bool.isRequired,
+  persons: React.PropTypes.array.isRequired,
+};
 
 export default FilterByModal

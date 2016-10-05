@@ -14,9 +14,9 @@ const mapStateToProps = (state) => ({
   members: state.Nobt.members,
   tabIndex: state.Nobt.tabIndex,
   transactions: state.Nobt.transactions,
-  expenses: state.Nobt.expenses,
   expensesViewInfo: state.Nobt.expensesViewInfo,
-  expensesFiltered: state.Nobt.expensesFiltered
+  expensesFiltered: state.Nobt.expensesFiltered,
+  nobtIsEmpty: (state.Nobt.transactions || []).length == 0
 });
 
 export default connect(mapStateToProps, mapActionCreators)(Nobt)

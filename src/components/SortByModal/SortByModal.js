@@ -5,19 +5,13 @@ import Modal from "components/Modal";
 
 export const SortByModal = (props) => {
 
-  const onClose = props.onClose || (() => {
-    });
-  const active = props.active || false;
-  const onSortChange = props.onSortChange || (() => {
-    });
-
   const onItemClick = (name) => {
-    onSortChange(name);
-    onClose();
-  }
+    props.onSortChange(name);
+    props.onClose();
+  };
 
   return (
-    <Modal header={"sort expenses by"} active={active} onClose={onClose}>
+    <Modal header={"sort expenses by"} active={props.active} onClose={props.onClose}>
       <div className={styles.listWrapper}>
         <List selectable ripple>
           <ListItem onClick={() => onItemClick('Date')} caption="Date" leftIcon="access_time"/>
@@ -26,6 +20,12 @@ export const SortByModal = (props) => {
       </div>
     </Modal>
   );
-}
+};
+
+SortByModal.propTypes = {
+  onClose: React.PropTypes.func.isRequired,
+  active: React.PropTypes.bool.isRequired,
+};
+
 
 export default SortByModal

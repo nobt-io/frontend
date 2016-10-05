@@ -39,7 +39,7 @@ const actionHandlers = {
     const expenses = action.payload.nobt.expenses.map(e => getExpense(e, personSummaryFactory));
     const expensesFiltered = expenses;
 
-    var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m));
+    var transactions = members.map(m => transactionFactory.computeSummaryForPerson(m)).filter(t => t.me.raw != 0);
 
     return {...state, name, total, members, transactions, expenses, expensesFiltered};
   },
@@ -100,14 +100,17 @@ const getExpense = (expense, personSummaryFactory) => {
 
 
 export const initialState = {
-  total: 0,
   name: '',
-  member: [],
+  total: '',
+  members: [],
   tabIndex: 0,
+  transactions: [],
+  expenses: [],
+  expensesFiltered: [],
   expensesViewInfo: {filter: "", sort: "Date"}
 };
 
 export default function nobtReducer(state = initialState, action) {
-  const handler = actionHandlers[action.type]
+  const handler = actionHandlers[action.type];
   return handler ? handler(state, action) : state
 }

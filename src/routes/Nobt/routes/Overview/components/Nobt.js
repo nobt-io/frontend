@@ -1,13 +1,12 @@
 import React from "react";
 import styles from "./Nobt.scss";
-import Button from "components/Button";
+import { Button } from "react-toolbox/lib/button";
 import Header from "components/Header";
 import NobtSummary from "components/NobtSummary";
 import TransactionList from "components/TransactionList";
 import ExpenseList from "components/ExpenseList";
 import ExpenseFilter from "components/ExpenseFilter";
 import { Tab, Tabs } from "react-toolbox";
-import { initialState } from "../modules/Nobt";
 
 export const Nobt = React.createClass({
 
@@ -27,10 +26,6 @@ export const Nobt = React.createClass({
     if (currentTabIdentifier !== nextTabIdentifier) {
       this.props.changeTab(nextTabIdentifier);
     }
-  },
-
-  getInitialState: function () {
-    return initialState;
   },
 
   navigate(path) {
@@ -61,7 +56,9 @@ export const Nobt = React.createClass({
           <Button className={styles.button} icon="add_box"
                   onClick={ () => this.navigate(`/nobt/${this.props.params.id}/expenses/add`) }>Add expense</Button>
         </Header>
-        <NobtSummary nobtName={this.props.name} total={this.props.total} members={this.props.members}/>
+        <NobtSummary
+          nobtName={this.props.name} nobtIsEmpty={this.props.nobtIsEmpty}
+          totalAmount={this.props.total} memberCount={this.props.members.length}/>
         <div>
           <Tabs
             theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}
@@ -86,5 +83,17 @@ export const Nobt = React.createClass({
     );
   }
 });
+
+Nobt.defaultProps = {
+  name: "",
+  nobtIsEmpty: true,
+  total: "",
+  members: [],
+  tabIndex: 0,
+  expensesFiltered: [],
+  transactions: [],
+  changeExpenseViewInfo: () => {},
+  expensesViewInfo: { sort: "Date", filter: "" },
+};
 
 export default Nobt
