@@ -25,7 +25,7 @@ export const ExpenseFilter = React.createClass({
 
   render: function () {
 
-    const {filterModalIsActive, sortModalIsActive} = this.state || {filterModalIsActive: false};
+    const {filterModalIsActive, sortModalIsActive} = this.state || {filterModalIsActive: false, sortModalIsActive: false};
     const {persons, onFilterChange, onSortChange, currentFilter, currentSort, onReset} = this.props;
 
     const defaultFilter = currentSort == "Date" && currentFilter == "";
