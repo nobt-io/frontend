@@ -20,7 +20,8 @@ export const FilterByModal = (props) => {
     <Modal header={"filter expenses by"} active={active} onClose={onClose} >
       <div className={styles.listWrapper}>
         <List selectable ripple>
-          <ListItem onClick={() => onItemClick('')} caption="All" leftIcon="apps"/>
+          <ListItem onClick={() => onItemClick('')} caption="Show all members" leftIcon="apps"/>
+          <ListDivider/>
           {persons}
         </List>
       </div>
