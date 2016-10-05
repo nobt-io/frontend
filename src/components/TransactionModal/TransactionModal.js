@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "components/Modal";
+import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Avatar from "components/Avatar";
 import styles from "./TransactionModal.scss";
@@ -22,7 +22,7 @@ export const TransactionModal = (props) => {
     const secondPerson = me.isPositive ? me.name : persons[0].name;
 
     return (
-      <Modal active={active} onClose={onClose}>
+      <LowerScreenModal active={active} onClose={onClose}>
         <div className={styles.singleLine}>
           <div>
             <span className={styles.avatar}><Avatar name={firstPerson} size={30}/></span>
@@ -39,7 +39,7 @@ export const TransactionModal = (props) => {
             <div style={{clear: "both"}}></div>
           </div>
         </div>
-      </Modal>
+      </LowerScreenModal>
     );
   }
   else {

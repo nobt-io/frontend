@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "components/Modal";
+import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Avatar from "components/Avatar";
 import styles from "./ExpenseModal.scss";
@@ -16,7 +16,7 @@ export const ExpenseModal = (props) => {
   const persons = expense.debtors.map(s => ({amount: s.amount, name: s.name, isPositive: s.isPositive}));
 
   return (
-    <Modal header={name} active={active} onClose={onClose}>
+    <LowerScreenModal header={name} active={active} onClose={onClose}>
       <PersonMoneyList persons={persons} showKeyword={false}/>
       <div className={styles.debtee}>
         <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>
@@ -31,7 +31,7 @@ export const ExpenseModal = (props) => {
         <span className={styles.addedDate}>paid 2016-05-06</span>
         <div style={{clear: "both"}}></div>
       </div>
-    </Modal>);
+    </LowerScreenModal>);
 
 };
 

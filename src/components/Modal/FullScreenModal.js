@@ -1,30 +1,27 @@
 import React from "react";
-import styles from "./Modal.scss";
+import styles from "./FullScreen.scss";
 import Modal from "react-responsive-modal";
 
-const LowerScreenModal = (props) => {
-
-  const headerIsEmpty = props.header == '';
+const FullScreenModal = (props) => {
 
   return (
-    <Modal overlayClassName={styles.overlay} modalClassName={styles.modal} open={props.active} onClose={props.onClose}>
+    <Modal overlayClassName={styles.overlay} modalClassName={styles.modal} open={props.active} onClose={props.onClose}
+           showCloseIcon={false}>
       <div className={styles.content}>
-        <div className={headerIsEmpty ? "" : styles.header}>{props.header}</div>
         {props.children}
       </div>
     </Modal>
   );
 };
 
-LowerScreenModal.propTypes = {
+FullScreenModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool,
-  header: React.PropTypes.string
 };
 
-LowerScreenModal.defaultProps = {
+FullScreenModal.defaultProps = {
   active: false,
   header: ''
 };
 
-export default LowerScreenModal;
+export default FullScreenModal ;

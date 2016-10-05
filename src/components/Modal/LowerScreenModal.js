@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./Modal.scss";
+import styles from "./LowerScreen.scss";
 import Modal from "react-responsive-modal";
 
-export const LowerScreenModal = (props) => {
+const LowerScreenModal = (props) => {
 
   const headerIsEmpty = props.header == '';
 

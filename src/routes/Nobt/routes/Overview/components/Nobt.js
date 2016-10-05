@@ -6,6 +6,7 @@ import NobtSummary from "components/NobtSummary";
 import TransactionList from "components/TransactionList";
 import ExpenseList from "components/ExpenseList";
 import ExpenseFilter from "components/ExpenseFilter";
+import CreateExpenseModal from "components/CreateExpenseModal";
 import { Tab, Tabs } from "react-toolbox";
 
 export const Nobt = React.createClass({
@@ -53,9 +54,11 @@ export const Nobt = React.createClass({
     return (
       <div className={styles.nobt}>
         <Header showButton={true}>
-          <Button className={styles.button} icon="add_box"
-                  onClick={ () => this.navigate(`/nobt/${this.props.params.id}/expenses/add`) }>Add expense</Button>
+          <Button className={styles.button} icon="add_box" onClick={this.props.openCreateExpenseModal}>Add expense</Button>
         </Header>
+        <CreateExpenseModal active={this.props.showCreateExpenseModal}
+                            onClose={this.props.closeCreateExpenseModal}
+                            onCreateExpense={this.props.createExpense}/>
         <NobtSummary
           nobtName={this.props.name} nobtIsEmpty={this.props.nobtIsEmpty}
           totalAmount={this.props.total} memberCount={this.props.members.length}/>
@@ -89,6 +92,7 @@ Nobt.defaultProps = {
   nobtIsEmpty: true,
   total: "",
   members: [],
+  showCreateExpenseModal: true,
   tabIndex: 0,
   expensesFiltered: [],
   transactions: [],

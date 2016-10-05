@@ -1,53 +1,18 @@
-.lowerScreen {
-  .overlay {
-    padding: 0 !important;
-    background-color: rgba(0, 0, 0, 0.5) !important;
-  }
-
-  .header {
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .modal {
-    position: absolute !important;
-    bottom: 0 !important;
-    width: 100%;
-    max-height: 100%;
-    padding: 0 !important;
-
-    .content {
-      padding: 30px;
-      display: block;
-      background-color: white;
-    }
-  }
+.overlay {
+  padding: 0 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
 }
 
-.fullScreen {
-  .overlay {
-    padding: 0 !important;
-    background-color: rgba(0, 0, 0, 0.5) !important;
-  }
+.modal {
+  position: absolute !important;
+  bottom: 0 !important;
+  width: 100%;
+  top: 0 !important;
+  padding: 0 !important;
 
-  .header {
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .modal {
-    position: absolute !important;
-    bottom: 0 !important;
-    width: 100%;
-    max-height: 100%;
-    padding: 0 !important;
-
-    .content {
-      padding: 30px;
-      display: block;
-      background-color: white;
-    }
+  .content {
+    padding: 0;
+    display: block;
+    background-color: white;
   }
 }

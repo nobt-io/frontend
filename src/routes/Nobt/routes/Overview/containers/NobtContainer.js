@@ -5,6 +5,8 @@ import Nobt from "../components/Nobt";
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),
   changeTab: (tabName) => nobtActionFactory.changeTab(tabName),
+  closeCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(false),
+  openCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(true),
   changeExpenseViewInfo: (filter, sort) => nobtActionFactory.changeExpenseViewInfo(filter, sort),
 };
 
@@ -16,7 +18,8 @@ const mapStateToProps = (state) => ({
   transactions: state.Nobt.transactions,
   expensesViewInfo: state.Nobt.expensesViewInfo,
   expensesFiltered: state.Nobt.expensesFiltered,
-  nobtIsEmpty: (state.Nobt.transactions || []).length == 0
+  nobtIsEmpty: (state.Nobt.transactions || []).length == 0,
+  showCreateExpenseModal: state.Nobt.createExpenseViewInfo.show
 });
 
 export default connect(mapStateToProps, mapActionCreators)(Nobt)

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./FilterByModal.scss";
 import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
-import Modal from "components/Modal";
+import {LowerScreenModal} from "components/Modal";
 import Avatar from "components/Avatar";
 
 export const FilterByModal = (props) => {
@@ -17,7 +17,7 @@ export const FilterByModal = (props) => {
     }/>));
 
   return (
-    <Modal header={"filter expenses by"} active={props.active} onClose={props.onClose}>
+    <LowerScreenModal header={"filter expenses by"} active={props.active} onClose={props.onClose}>
       <div className={styles.listWrapper}>
         <List selectable ripple>
           <ListItem onClick={() => onItemClick('')} caption="Show all members" leftIcon="apps"/>
@@ -25,7 +25,7 @@ export const FilterByModal = (props) => {
           {persons}
         </List>
       </div>
-    </Modal>
+    </LowerScreenModal>
   );
 };
 

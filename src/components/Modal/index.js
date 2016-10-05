@@ -1,3 +1,6 @@
-import LowerScreenModal from "./Modal";
+import LowerScreenModal from "./LowerScreenModal";
+import FullScreenModal from "./FullScreenModal";
 
-export default LowerScreenModal
+exports.LowerScreenModal = LowerScreenModal;
+exports.FullScreenModal = FullScreenModal;
+

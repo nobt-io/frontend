@@ -8,6 +8,7 @@ const actionNames = {
   SET_NOBT: 'Nobt.SET_NOBT',
   CHANGE_TAB: 'Nobt.CHANGE_TAB',
   CHANGE_EXPENSES_VIEW_INFO: 'Nobt.CHANGE_EXPENSES_VIEW_INFO',
+  SET_CREATE_EXPENSE_MODAL_VISIBILITY: 'Nobt.SET_CREATE_EXPENSE_MODAL_VISIBILITY',
 };
 
 
@@ -23,6 +24,7 @@ export const nobtActionFactory = {
   },
   changeTab: (tabName) => ({type: actionNames.CHANGE_TAB, payload: {tabName: tabName}}),
   changeExpenseViewInfo: (filter, sort) => ({type: actionNames.CHANGE_EXPENSES_VIEW_INFO, payload: {filter, sort}}),
+  setCreateExpenseModalVisibilty: (visibility) => ({type: actionNames.SET_CREATE_EXPENSE_MODAL_VISIBILITY, payload: {visibility}}),
 };
 
 const actionHandlers = {
@@ -56,6 +58,9 @@ const actionHandlers = {
     // debug(actionNames.CHANGE_TAB)(`Calculated selected tab index ${tabIndex} from name '${action.payload.tabName}'.`);
 
     return {...state, tabIndex: tabIndex};
+  },
+  [actionNames.SET_CREATE_EXPENSE_MODAL_VISIBILITY]: (state, action) => {
+    return {...state,  createExpenseViewInfo: {show: action.payload.visibility}};
   },
   [actionNames.CHANGE_EXPENSES_VIEW_INFO]: (state, action) => {
 
@@ -107,6 +112,7 @@ export const initialState = {
   transactions: [],
   expenses: [],
   expensesFiltered: [],
+  createExpenseViewInfo: {show: false},
   expensesViewInfo: {filter: "", sort: "Date"}
 };
 
