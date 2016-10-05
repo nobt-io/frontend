@@ -26,9 +26,9 @@ export const TransactionItem = React.createClass({
     const persons =
       transaction.persons.map(s => (<span className={styles.personAvatar}><Avatar name={s.name} size={20} fontSize={11}/></span>));
 
-    const meKeyword = me.isPositve ? "gets" : "owes";
-    const personsKeyword= me.isPositve ? "from" : "to";
-    const icon = me.isPositve ? "add_circle" : "remove_circle";
+    const meKeyword = me.isPositive ? "gets" : "owes";
+    const personsKeyword= me.isPositive ? "from" : "to";
+    const icon = me.isPositive ? "add_circle" : "remove_circle";
 
     return (
       <Card>

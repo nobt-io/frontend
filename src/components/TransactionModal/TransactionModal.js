@@ -18,8 +18,8 @@ export const TransactionModal = (props) => {
   const isSinglePerson = persons.length == 1;
 
   if (isSinglePerson) {
-    const firstPerson = me.isPostive ? me.name : persons[0].name;
-    const secondPerson = me.isPostive ? me.name : persons[0].name;
+    const firstPerson = !me.isPositive ? me.name : persons[0].name;
+    const secondPerson = me.isPositive ? me.name : persons[0].name;
 
     return (
       <Modal active={active} onClose={onClose}>
@@ -43,8 +43,8 @@ export const TransactionModal = (props) => {
     );
   }
   else {
-    const keyword = me.isPostive ? "get" : "owe";
-    const directionKeyword = me.isPostive ? "from" : "to";
+    const keyword = me.isPositive ? "get" : "owe";
+    const directionKeyword = me.isPositive ? "from" : "to";
     return (
       <Modal active={active} onClose={onClose}>
         <div className={styles.header}>
