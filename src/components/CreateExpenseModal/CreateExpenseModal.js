@@ -40,14 +40,31 @@ export const CreateExpenseModal = React.createClass({
 
   setModalState: function (state) { this.setState({...this.state, ...state}); },
 
+  createExpense: function () {
+
+    var expenseToCreate = {
+      name: this.props.metaData.subject,
+      debtee: this.props.metaData.paidByPerson,
+      date: this.props.metaData.creationDate,
+      splitStrategy: this.props.metaData.splitStrategy,
+      shares: this.props.personData.involvedPersons.map(p => ({debtor: p.name, amount: p.amount}))
+    };
+
+    this.props.createExpense(expenseToCreate).then((response) => {
+      this.props.reloadNobt();
+    }, () => {
+      //Todo: show error!
+    });
+  },
+
   render: function () {
 
     const {personModalIsActive, dateModalIsActive, shareModalIsActive} =
     this.state || {personModalIsActive: false, dateModalIsActive: false, shareModalIsActive: false};
 
-    const { metaDataIsValid, active, subject, creationDate, amount, paidByPerson, splitStrategy } = this.props.metaData;
-    const { involvedPersonsAreValid, involvedPersonsCalculationInfo, involvedPersons} = this.props.personData;
-    const { nobtMembers } = this.props;
+    const {metaDataIsValid, active, subject, creationDate, amount, paidByPerson, splitStrategy} = this.props.metaData;
+    const {involvedPersonsAreValid, involvedPersonsCalculationInfo, involvedPersons} = this.props.personData;
+    const {nobtMembers} = this.props;
 
     const expenseIsValid = involvedPersonsAreValid && metaDataIsValid;
 
@@ -66,7 +83,7 @@ export const CreateExpenseModal = React.createClass({
                                                                involvedPersons={involvedPersons}
                                                                involvedPersonsAreValid={involvedPersonsAreValid}
                                                                setPersonValue={this.setPersonValue}
-                                                               involvedPersonsCalculationInfo={involvedPersonsCalculationInfo}/>),
+                                                               involvedPersonsCalculationInfo={involvedPersonsCalculationInfo} />),
       [SplitStrategyNames.PERCENTAGE]: (<AmountPercentageSplitPersonList nobtMembers={nobtMembers}
                                                                          involvedPersons={involvedPersons}
                                                                          setPersonValue={this.setPersonValue}
@@ -104,7 +121,7 @@ export const CreateExpenseModal = React.createClass({
           showNobtHeader={false}
           rightButton={!expenseIsValid ? null : {
             icon: "check_box",
-            onClick: () => onCreateExpense(),
+            onClick: () => this.createExpense(),
             title: "Create expense"
           }}
           leftButton={{icon: "arrow_back", onClick: () => this.props.onClose(), title: "Back"}}
@@ -141,7 +158,8 @@ export const CreateExpenseModal = React.createClass({
 
 CreateExpenseModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
-  onCreateExpense: React.PropTypes.func.isRequired,
+  createExpense: React.PropTypes.func.isRequired,
+  reloadNobt: React.PropTypes.func.isRequired,
   nobtMembers: React.PropTypes.array.isRequired,
   setMetaData: React.PropTypes.func,
   setPersonValue: React.PropTypes.func,

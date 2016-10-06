@@ -71,7 +71,8 @@ export const Nobt = React.createClass({
                             setPersonValue={this.props.setNewExpensePersonValue}
                             nobtMembers={this.props.members}
                             onClose={() => this.props.closeNewExpenseOverlay()}
-                            onCreateExpense={this.props.createExpense}/>
+                            createExpense={this.props.createExpense}
+                            reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
         }
         <NobtSummary nobtName={this.props.name} totalAmount={this.props.total}
                      memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty}/>

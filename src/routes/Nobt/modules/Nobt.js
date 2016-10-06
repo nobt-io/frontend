@@ -1,5 +1,6 @@
 import { getNobt } from "api/api";
 import SplitStrategyNames from "const/SplitStrategyNames"
+import { createExpense } from "api/api";
 
 const actionNames = {
   LOAD_NOBT: 'Nobt.LOAD_NOBT',
@@ -27,11 +28,15 @@ export const nobtActionFactory = {
       });
     }
   },
+  createExpense: (expense) => {
+    return (dispatch, getState) => {
+      return createExpense(getState().Nobt.currentNobt.id, expense);
+    }
+  },
   changeTab: (tabName) => ({type: actionNames.CHANGE_TAB, payload: {tabName: tabName}}),
   updateExpensesFilter: (filter) => ({type: actionNames.UPDATE_EXPENSES_FILTER, payload: {filter: filter}}),
   updateExpenseSortProperty: (property) => ({type: actionNames.UPDATE_EXPENSES_SORT_PROPERTY, payload: {property: property}}),
   setNewExpenseOverlayVisibility: (visibility) => ({type: actionNames.SET_NEW_EXPENSE_OVERLAY_VISIBILITY, payload: {visibility}}),
-  createExpense: (expense) => ({type: actionNames.CREATE_EXPENSE, payload: {expense}}),
   setNewExpenseMetaData: (metaData) => ({type: actionNames.SET_NEW_EXPENSE_PERSON_METADATA, payload: {metaData}}),
   setNewExpensePersonValue: (name, value) => ({type: actionNames.SET_NEW_EXPENSE_PERSON_VALUE, payload: {name, value}})
 
@@ -40,10 +45,12 @@ export const nobtActionFactory = {
 const actionHandlers = {
   [actionNames.SET_NOBT]: (state, action) => {
 
-    const createExpenseViewInfo = {
-      ...state.createExpenseViewInfo,
-      paidByPerson: action.payload.nobt.participatingPersons[ 0 ]
-    };
+    var createExpenseViewInfo = {...state.createExpenseViewInfo};
+
+    //paidByPersonIsNotSet, reset it with first person
+    if(state.createExpenseViewInfo.paidByPerson === ""){
+      createExpenseViewInfo = { ...state.createExpenseViewInfo, paidByPerson: action.payload.nobt.participatingPersons[ 0 ] };
+    }
 
     return ({...state, currentNobt: action.payload.nobt, createExpenseViewInfo: createExpenseViewInfo});
   },
@@ -98,6 +105,7 @@ const actionHandlers = {
 
 const initialState = {
   currentNobt: {
+    id: "",
     name: "",
     currency: "",
     participatingPersons: [],
