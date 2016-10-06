@@ -81,7 +81,7 @@ const initialState = {
 
   activeTab: 'transactions',
   expenseFilter: '',
-  expenseSortProperty: 'DATE',
+  expenseSortProperty: 'Date',
 
   createExpenseViewInfo: {
     show: true, state: {

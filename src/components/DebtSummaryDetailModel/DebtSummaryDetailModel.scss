@@ -24,6 +24,10 @@
     white-space: nowrap;
     margin: 0 5px;
   }
+
+  .amountText {
+    font-weight: bold;
+  }
 }
 
 .singleLineHeader {
@@ -53,5 +57,6 @@
   .name {
     padding: 5px 5px;
     display: inline-block;
+    font-weight: bold;
   }
 }

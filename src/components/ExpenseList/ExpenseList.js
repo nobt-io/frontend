@@ -2,7 +2,7 @@ import React from "react";
 import ExpenseItem from "components/ExpenseItem";
 
 export const ExpenseList = (props) => {
-  var expenseItem = props.expenses.map(e => (<ExpenseItem expense={e}></ExpenseItem>));
+  var expenseItem = props.expenses.map(e => (<ExpenseItem key={e.id} expense={e} />));
   return <div>{expenseItem}</div>;
 };
 

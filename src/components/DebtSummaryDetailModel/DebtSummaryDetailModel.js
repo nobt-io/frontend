@@ -2,6 +2,7 @@ import React from "react";
 import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Avatar from "components/Avatar";
+import Amount from "components/Amount"
 import styles from "./DebtSummaryDetailModel.scss";
 
 export const DebtSummaryDetailModel = (props) => {
@@ -30,7 +31,11 @@ export const DebtSummaryDetailModel = (props) => {
             <div style={{clear: "both"}}></div>
           </div>
           <div className={styles.total}>
-            <span className={styles.name}><b>owes {me.amount} to</b></span>
+            <span className={styles.name}>
+              <span>owes</span>
+              <Amount value={me.amount}/>
+              <span>to</span>
+            </span>
           </div>
           <div>
             <div style={{clear: "both"}}></div>
@@ -53,7 +58,12 @@ export const DebtSummaryDetailModel = (props) => {
           <div style={{clear: "both"}}></div>
         </div>
         <div className={styles.me}>
-          you <b>{keyword} {me.amount}</b> {directionKeyword}&nbsp;<b>{persons.length} persons</b>
+          <span>you </span>
+          <span className={styles.amountText}>
+            <span>{keyword} </span>
+            <Amount value={me.amount}/>
+            <span> {directionKeyword}&nbsp;{persons.length} persons</span>
+          </span>
         </div>
         <PersonMoneyList persons={persons} showKeyword={true}></PersonMoneyList>
       </LowerScreenModal>);

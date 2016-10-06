@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { nobtActionFactory } from "../modules/Nobt";
 import Nobt from "../components/Nobt";
-import { getName, getCurrency, getMembers, getExpenses, getDebtSummaries, getTotal, getFilteredExpenses, getActiveTabIndex } from '../selectors'
+import { getName, getCurrency, getMembers, getExpenses, getDebtSummaries, getTotal, getFilteredExpenses, getActiveTabIndex, getExpensesFilter, getExpensesSortProperty } from '../selectors'
 
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),
@@ -25,6 +25,9 @@ const mapStateToProps = (state) => {
     members: getMembers(state),
     debtSummaries: getDebtSummaries(state),
     expenses: getFilteredExpenses(state),
+    expenseFilter: getExpensesFilter(state),
+    expenseSortProperty: getExpensesSortProperty(state),
+
     activeTabIndex: getActiveTabIndex(state),
     isNobtEmpty: getExpenses(state).length === 0,
 

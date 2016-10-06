@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./DebtSummaryItem.scss";
 import Avatar from "components/Avatar";
+import Amount from "components/Amount"
+
 import DebtSummaryDetailModel from "components/DebtSummaryDetailModel";
 import Card from "components/Card";
 import FontIcon from "react-toolbox/lib/font_icon";
@@ -34,6 +36,7 @@ export const DebtSummaryItem = React.createClass({
     return (
       <Card>
         <DebtSummaryDetailModel active={modalIsActive} onClose={this.onModalClose} debtSummary={summary}/>
+
         <div onClick={this.onModalOpen} className={styles.container}>
           <div className={styles.avatar}>
             <Avatar name={me.name} size={45}/>
@@ -41,11 +44,11 @@ export const DebtSummaryItem = React.createClass({
           </div>
           <div className={styles.meContainer}>
             <span className={styles.me}>{me.name}</span>
-            <span className={styles.transparent}></span>
+            <span className={styles.transparent} />
           </div>
           <div className={styles.amountInfo}>
             <div className={styles.amount}>
-              <span className={styles.total}>{me.amount}</span>
+              <Amount value={me.amount} theme={ {span: styles.total} }/>
               <span className={styles.keyword}>{meKeyword}</span>
               <div style={{clear: "both"}}></div>
             </div>

@@ -60,7 +60,7 @@ export const CreateExpenseModal = React.createClass({
       <FullScreenModal active={active} onClose={onClose}>
         <PersonSelectorModal
           title={"Who paid?"} canInsertPerson={true}
-          active={personModalIsActive} onClose={this.onPersonModalClose} onFilterChange={(p) => this.updatePaidByPerson(p)} persons={persons}
+          active={personModalIsActive} onClose={this.onPersonModalClose} onFilterChange={(p) => this.updatePaidByPerson(p)} names={persons}
         />
         <Header
           showNobtHeader={false}

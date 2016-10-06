@@ -28,6 +28,12 @@ export const Nobt = React.createClass({
     }
   },
 
+  getChildContext() {
+    return {
+      currency: this.props.currency
+    };
+  },
+
   navigate(path) {
     this.props.history.push(path);
   },
@@ -78,12 +84,12 @@ export const Nobt = React.createClass({
             </Tab>
             <Tab label="Expenses">
               <ExpenseFilter
-                persons={this.props.members}
+                personNames={this.props.members}
                 onFilterChange={(filter) => this.props.updateExpensesFilter(filter)}
                 onSortChange={(sort) => this.props.updateExpenseSortProperty(sort)}
                 onReset={() => {
                   this.props.updateExpensesFilter("");
-                  this.props.updateExpenseSortProperty("DATE");
+                  this.props.updateExpenseSortProperty("Date");
                 }}
                 currentFilter={this.props.expenseFilter}
                 currentSort={this.props.expenseSortProperty}/>
@@ -104,12 +110,16 @@ Nobt.defaultProps = {
   members: [],
   expenses: [],
   expenseFilter: '',
-  expenseSortProperty: 'DATE',
+  expenseSortProperty: 'Date',
   debtSummaries: [],
   activeTabIndex: 0,
 
   nobtIsEmpty: true,
   showCreateExpenseModal: true,
+};
+
+Nobt.childContextTypes = {
+  currency: React.PropTypes.string
 };
 
 export default Nobt

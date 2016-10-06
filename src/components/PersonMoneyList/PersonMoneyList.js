@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./PersonMoneyList.scss";
 import Avatar from "components/Avatar";
+import Amount from "components/Amount"
 
 const getAmountKeyWord = (isPositive) => isPositive ? "gets" : "owes";
 
@@ -9,8 +10,8 @@ const getPersonMoneyListItem = (person, showKeyword) => (
     <div className={styles.avatarCell}><Avatar name={person.name} size={30}/></div>
     <div className={styles.nameCell}>{person.name}</div>
     <div className={styles.amountCell}>
-      <span style={{display: (showKeyword) ? "inline" : "none"}}>{getAmountKeyWord(!person.isPositive)}</span>
-      <b className={styles.amount}>{person.amount}</b>
+      <span style={{display: (showKeyword) ? "inline" : "none"}}>{getAmountKeyWord(!(person.amount > 0))}</span>
+      <Amount value={person.amount} theme={ {span: styles.amount} } />
     </div>
     <div style={{clear: "both"}}></div>
   </div>

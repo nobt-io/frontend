@@ -26,7 +26,7 @@ export const ExpenseFilter = React.createClass({
   render: function () {
 
     const {filterModalIsActive, sortModalIsActive} = this.state || {filterModalIsActive: false, sortModalIsActive: false};
-    const {persons, onFilterChange, onSortChange, currentFilter, currentSort, onReset} = this.props;
+    const {personNames, onFilterChange, onSortChange, currentFilter, currentSort, onReset} = this.props;
 
     const defaultFilter = currentSort == "Date" && currentFilter == "";
 
@@ -42,7 +42,7 @@ export const ExpenseFilter = React.createClass({
         <PersonSelectorModal
           title={"Filter expenses by"}
           active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
-          persons={persons} canSelectAll={true}/>
+          names={personNames} canSelectAll={true}/>
         <SortByModal active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}/>
         <div>
           <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}
@@ -55,7 +55,7 @@ export const ExpenseFilter = React.createClass({
 });
 
 ExpenseFilter.propTypes = {
-  persons: React.PropTypes.array.isRequired,
+  personNames: React.PropTypes.array.isRequired,
   currentFilter: React.PropTypes.string.isRequired,
   currentSort: React.PropTypes.string.isRequired,
   onFilterChange: React.PropTypes.func.isRequired,
