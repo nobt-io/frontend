@@ -53,15 +53,17 @@ const actionHandlers = {
   [actionNames.UPDATE_CREATE_EXPENSE_EDIT_STATE]: (state, action) => {
 
     var paidByPerson = action.payload.state.paidByPerson;
-    var members = state.members;
+    var members = state.currentNobt.participatingPersons;
 
-    if (state.members.indexOf(paidByPerson) < 0) {
+    if (members.indexOf(paidByPerson) < 0) {
       members.push(paidByPerson);
     }
 
+    var newNobt = {...state.currentNobt, participatingPersons: members};
+
     return {
       ...state,
-      members,
+      newNobt,
       createExpenseViewInfo: {
         ...state.createExpenseViewInfo,
         state: {...state.createExpenseViewInfo.editstate, ...action.payload.state}
