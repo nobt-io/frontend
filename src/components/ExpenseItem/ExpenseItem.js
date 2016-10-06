@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "./ExpenseItem.scss";
 import Card from "components/Card";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import Amount from "components/Amount"
 import ExpenseModal from "components/ExpenseModal";
+import {FormattedDate} from "react-intl";
 
 export const ExpenseItem = React.createClass({
 
@@ -32,7 +33,9 @@ export const ExpenseItem = React.createClass({
               <Amount value={debtee.amount} spanClass={styles.amount} />
               <span className={styles.name}>{expense.name}</span>
             </div>
-            <div className={styles.date}>20-01-2015</div>
+            <div className={styles.date}>
+              <FormattedDate value={new Date(expense.date)} year='numeric' month='short' day='numeric' weekday='short' />
+            </div>
             <div style={{clear: "both"}}></div>
           </div>
           <div className={styles.persons}>

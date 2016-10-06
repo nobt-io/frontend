@@ -1,8 +1,9 @@
 import React from "react";
 import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import Amount from "components/Amount"
+import {FormattedDate} from "react-intl";
 
 import styles from "./ExpenseModal.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
@@ -28,9 +29,16 @@ export const ExpenseModal = (props) => {
       </div>
       <div className={styles.added}>
         <FontIcon className={styles.serverIcon} value="cloud_done"/>
-        <span className={styles.serverDate}>added 2016-05-06</span>
+
+        <span className={styles.serverDate}>
+          <span>added&nbsp;</span>
+          <FormattedDate value={new Date(expense.createdOn)} year='numeric' month='numeric' day='numeric' />
+        </span>
         <FontIcon className={styles.addedIcon} value="access_time"/>
-        <span className={styles.addedDate}>paid 2016-05-06</span>
+        <span className={styles.addedDate}>
+          <span>paid&nbsp;</span>
+          <FormattedDate value={new Date(expense.date)} year='numeric' month='numeric' day='numeric' />
+        </span>
         <div style={{clear: "both"}}></div>
       </div>
     </LowerScreenModal>);

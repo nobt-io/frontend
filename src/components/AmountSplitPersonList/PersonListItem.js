@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './PersonListItem.scss'
 
-import Avatar from 'components/Avatar'
+import {Avatar} from 'components/Avatar'
 
 export const PersonListItem = (props) => (
   <div {...props} className={styles.row}>

@@ -44,7 +44,8 @@ export const getFilteredExpenses = createSelector([ getExpenses, getExpensesFilt
   const NO_SORT = () => 0;
 
   const sortFunctions = {
-    "Amount": (e1, e2) => e1.debtee.amount - e2.debtee.amount,
+    "Amount": (e1, e2) => e2.debtee.amount - e1.debtee.amount,
+    "Date": (e1, e2) => new Date(e2.date).getTime() - new Date(e1.date).getTime()
   };
 
   var matchName = (name) => (filter === NO_FILTER) ? true : name === filter;

@@ -3,7 +3,7 @@ import styles from "./ExpenseFilter.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
 import PersonSelectorModal from "components/PersonSelectorModal";
 import ListSelectModal from "components/ListSelectModal";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 
 export const ExpenseFilter = React.createClass({
 

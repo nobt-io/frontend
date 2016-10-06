@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./PersonMoneyList.scss";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import Amount from "components/Amount"
 
 const getAmountKeyWord = (isPositive) => isPositive ? "gets" : "owes";

@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./DebtSummaryItem.scss";
-import Avatar from "components/Avatar";
-import Amount from "components/Amount"
-
-import DebtSummaryDetailModel from "components/DebtSummaryDetailModel";
+import { SmallAvatar } from "components/Avatar";
+import { Person, AvatarPosition, AvatarSize } from "components/Person";
+import Amount from "components/Amount";
+import DebtSummaryDetailModal from "components/DebtSummaryDetailModal";
 import Card from "components/Card";
 import FontIcon from "react-toolbox/lib/font_icon";
 
@@ -11,48 +11,54 @@ const isPositive = (personAmount) => personAmount.amount > 0;
 
 export const DebtSummaryItem = React.createClass({
 
-  onModalClose: function () {
-    this.setState({modalIsActive: false});
+  hideModalDialog: function () {
+    this.setState({showDetailModalDialog: false});
   },
 
-  onModalOpen: function () {
-    this.setState({modalIsActive: true});
+  showModalDialog: function () {
+    this.setState({showDetailModalDialog: true});
+  },
+
+  getInitialState: function () {
+    return {
+      showDetailModalDialog: false
+    };
   },
 
   render: function () {
-
-    const {modalIsActive} = this.state || {modalIsActive: false};
     const {summary} = this.props;
 
     const me = summary.me;
-
-    const persons = summary.persons.map(p => (
-        <span key={p.name} className={styles.personAvatar}><Avatar name={p.name} size={20} fontSize={11}/></span>));
-
-    const meKeyword = isPositive(me) ? "gets" : "owes";
-    const personsKeyword = isPositive(me) ? "from" : "to";
+    const persons = summary.persons.map(p => (<span key={p.name} className={styles.avatar}><SmallAvatar name={p.name} /></span>));
     const icon = isPositive(me) ? "add_circle" : "remove_circle";
 
     return (
       <Card>
-        <DebtSummaryDetailModel active={modalIsActive} onClose={this.onModalClose} debtSummary={summary}/>
+        <DebtSummaryDetailModal active={this.state.showDetailModalDialog} onClose={this.hideModalDialog} debtSummary={summary} />
 
-        <div onClick={this.onModalOpen} className={styles.container}>
-          <div className={styles.avatar}>
-            <Avatar name={me.name} size={45}/>
-            <span className={styles.icon}><FontIcon value={icon}/></span>
-          </div>
-          <div className={styles.meContainer}>
-            <span className={styles.me}>{me.name}</span>
-            <span className={styles.transparent} />
-          </div>
-          <div className={styles.amountInfo}>
-            <div className={styles.amount}>
-              <Amount value={me.amount} spanClass={styles.total}/>
-              <span className={styles.keyword}>{meKeyword}</span>
-              <div style={{clear: "both"}}></div>
+        <div onClick={this.showModalDialog} className={styles.container}>
+          <span className={styles.meContainer}>
+            <Person
+              avatarClass={styles.meAvatar}
+              avatarSize={AvatarSize.BIG}
+              avatarPosition={AvatarPosition.LEFT}
+              name={me.name}>
+              <FontIcon className={styles.meAvatarIcon} value={icon} />
+            </Person>
+          </span>
+
+          <div className={styles.debtSummaryContainer}>
+
+            <div className={styles.amountContainer}>
+              <span className={styles.verb}>{isPositive(me) ? "gets" : "owes"}</span>
+              <Amount spanClass={styles.amount} value={me.amount} />
             </div>
-            <div className={styles.persons}>{personsKeyword}{persons}</div>
+
+            <div className={styles.personsContainer}>
+
+              <span className={styles.verb}>{isPositive(me) ? "from" : "to"}</span>
+              <span className={styles.persons}>{persons}</span>
+            </div>
           </div>
         </div>
       </Card>);
@@ -71,4 +77,4 @@ DebtSummaryItem.propTypes = {
   }).isRequired
 };
 
-export default DebtSummaryItem
+export default DebtSummaryItem;

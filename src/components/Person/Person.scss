@@ -1,0 +1,53 @@
+// visual css:
+
+$nameMargin: 0.8rem;
+
+.Person {
+
+  .left {
+    .name {
+      margin-left: $nameMargin;
+    }
+  }
+
+  .right {
+    .name {
+      margin-right: $nameMargin;
+    }
+  }
+}
+
+// layout only css:
+
+.Person {
+
+  display: inline-block;
+
+  .left, .right {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .left {
+    .name {
+      order: 1;
+    }
+
+    .avatar {
+      order: 0
+    }
+  }
+
+  .right {
+    .name {
+      order: 0;
+    }
+
+    .avatar {
+      order: 1
+    }
+  }
+}

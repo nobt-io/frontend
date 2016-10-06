@@ -20,10 +20,12 @@
     "__BASENAME__" : false
   },
   "rules": {
-    "semi" : [2, "never"],
-    "max-len": [2, 120, 2],
+    "semi" : [ 2, "always"],
+    "max-len": [2, 150, 2],
     "generator-star-spacing": 0,
     "babel/generator-star-spacing": 1,
-    "jsx-quotes": [2, "prefer-single"]
+    "jsx-quotes": [ 1, "prefer-double"],
+    "quotes": [ 1, "double" ],
+    "comma-dangle": 0
   }
 }

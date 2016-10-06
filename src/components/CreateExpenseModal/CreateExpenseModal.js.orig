@@ -2,8 +2,13 @@ import React from 'react'
 import styles from './CreateExpenseModal.scss'
 import { FullScreenModal } from "components/Modal";
 import Header from "components/Header";
-import {Avatar} from "components/Avatar";
+<<<<<<< HEAD
+import Avatar from "components/Avatar";
 import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList } from "components/AmountSplitPersonList";
+=======
+import {Avatar} from "components/Avatar";
+import { AmountEqualSplitPersonList } from "components/AmountSplitPersonList";
+>>>>>>> eb3fa41599652b4f6b84d68b59ebde273b32b75f
 import CurrencyInput from "components/CurrencyInput";
 import Input from "react-toolbox/lib/input";
 import PersonSelectorModal from "components/PersonSelectorModal";

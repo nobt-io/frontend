@@ -144,7 +144,7 @@ const initialState = {
   expenseSortProperty: 'Date',
 
   createExpenseViewInfo: {
-    show: true,
+    show: false,
     subject: "",
     creationDate: new Date(),
     paidByPerson: "",
