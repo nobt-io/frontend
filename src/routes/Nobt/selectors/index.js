@@ -110,7 +110,7 @@ export const getCreateExpenseSelection = createSelector([getCreateExpenseViewInf
 
   var personFactory = new SelectedPersonFactory(strategy);
   var mappedPersons = personFactory.createPersons(selectedPersons, amount);
-  var sumOfPersonAmounts = mappedPersons.reduce((sum, person) => sum + person.value, 0);
+  var sumOfPersonAmounts = mappedPersons.reduce((sum, person) => sum + person.amount, 0);
 
   return {
     selectedAmount: sumOfPersonAmounts,

@@ -2,14 +2,17 @@ import React from 'react'
 import styles from './CreateExpenseModal.scss'
 import { FullScreenModal } from "components/Modal";
 import Header from "components/Header";
-import {Avatar} from "components/Avatar";
-import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList } from "components/AmountSplitPersonList";
+import { Avatar } from "components/Avatar";
+import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList, AmountPercentageSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
 import Input from "react-toolbox/lib/input";
 import PersonSelectorModal from "components/PersonSelectorModal";
 import DatePickerModal from "components/DatePickerModal";
 import ListSelectModal from "components/ListSelectModal";
 import SplitStrategyNames from "const/SplitStrategyNames";
+import _debug from "debug";
+
+const logger = _debug("createExpense");
 
 export const CreateExpenseModal = React.createClass({
 
@@ -62,30 +65,32 @@ export const CreateExpenseModal = React.createClass({
         ? "Today" : "on " + this.formatDate(new Date(creationDate));
 
     var expenseIsValid =
-      subject.length > 0
-      && amount > 0
-      && amount == selectedAmount;
+      subject.length > 0 &&
+      amount > 0 &&
+      amount === selectedAmount;
+
+    logger("selectedAmount", selectedAmount);
+    logger("selectedPersons", selectedPersons);
 
     var splitByLabel = {
-      [SplitStrategyNames.EQUAL]: <span>split<br/><b>equally</b></span>,
-      [SplitStrategyNames.UNEQUAL]: <span>split<br/><b>unequally</b></span>,
-      [SplitStrategyNames.PERCENTAGE]: <span>split by<br/><b>percentage</b></span>
+      [SplitStrategyNames.EQUAL]: <span>split<br /><b>equally</b></span>,
+      [SplitStrategyNames.UNEQUAL]: <span>split<br /><b>unequally</b></span>,
+      [SplitStrategyNames.PERCENTAGE]: <span>split by<br /><b>percentage</b></span>
     }[ splitStrategy ];
 
     var amountSplitPersonList = {
       [SplitStrategyNames.EQUAL]: (<AmountEqualSplitPersonList persons={persons}
                                                                selectedPersons={selectedPersons}
-                                                               amount={amount}
-                                                               selectedAmount={selectedAmount}
                                                                addOrUpdateSelectedPerson={(p) => addOrUpdateSelectedPerson(p)}
                                                                removeSelectedPerson={(name) => removeSelectedPerson(name)} />),
-      [SplitStrategyNames.PERCENTAGE]: (<div>WIP</div>),
+      [SplitStrategyNames.PERCENTAGE]: (<AmountPercentageSplitPersonList persons={persons}
+                                                                      selectedPersons={selectedPersons}
+                                                                      addOrUpdateSelectedPerson={(p) => addOrUpdateSelectedPerson(p)}
+                                                                      totalAmount={amount} selectedAmount={selectedAmount} />),
       [SplitStrategyNames.UNEQUAL]: (<AmountUnequalSplitPersonList persons={persons}
-                                                               selectedPersons={selectedPersons}
-                                                               amount={amount}
-                                                               selectedAmount={selectedAmount}
-                                                               addOrUpdateSelectedPerson={(p) => addOrUpdateSelectedPerson(p)}
-                                                               removeSelectedPerson={(name) => removeSelectedPerson(name)} />),
+                                                                   selectedPersons={selectedPersons}
+                                                                   addOrUpdateSelectedPerson={(p) => addOrUpdateSelectedPerson(p)}
+                                                                   totalAmount={amount} selectedAmount={selectedAmount} />),
     }[ splitStrategy ];
 
     return (
@@ -116,16 +121,16 @@ export const CreateExpenseModal = React.createClass({
             onClick: () => onCreateExpense(),
             title: "Create expense"
           }}
-          leftButton={{icon: "arrow_back", onClick: () => onClose(), title: "Back"}}/>
+          leftButton={{icon: "arrow_back", onClick: () => onClose(), title: "Back"}} />
         <div className={styles.headInput}>
           <div>
             <Input placeholder="What was bought?" value={subject} className={styles.subjectInput}
-                   onChange={(subject) => this.setExpenseState({subject})}/>
+                   onChange={(subject) => this.setExpenseState({subject})} />
           </div>
           <div>
               <span onClick={() => this.refreshState({personModalIsActive: true})}
                     className={styles.personPicker}>by {paidByPerson}
-                <Avatar size={20} fontSize={11} name={paidByPerson}/>
+                <Avatar size={20} fontSize={11} name={paidByPerson} />
               </span>
             <span onClick={() => this.refreshState({dateModalIsActive: true})}
                   className={styles.datePicker}>{dateString}</span>
@@ -136,7 +141,7 @@ export const CreateExpenseModal = React.createClass({
                   className={styles.spit}>{splitByLabel}</span>
           <span className={styles.currencySymbold}>€</span>
           <CurrencyInput onChange={(amount) => this.setExpenseState({amount})} value={amount}
-                         className={styles.amountInput}/>
+                         className={styles.amountInput} />
         </div>
         <div className={styles.splitContainer}>
           {amountSplitPersonList}

@@ -1,4 +1,7 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
+import _debug from "debug";
+
+const log = _debug("SelectedPersonFactory");
 
 export default class SelectedPersonFactory {
 
@@ -16,13 +19,17 @@ export default class SelectedPersonFactory {
 
   splitEqually(selectedPersons, amount) {
 
+    log("splitting Equally");
+
     if(selectedPersons .length == 0) return [];
 
     const share = Math.round(amount / selectedPersons.length * 100) / 100;
     const roundingError = amount - share * selectedPersons.length;
 
     const mappedPersons = selectedPersons.map(s => ({name: s.name, amount: share, value: 1}));
-    mappedPersons[ 0 ].value += roundingError;
+    mappedPersons[ 0 ].amount += roundingError;
+
+    log(mappedPersons);
 
     return mappedPersons;
   }

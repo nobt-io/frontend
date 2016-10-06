@@ -32,7 +32,7 @@ export const CurrencyInput = React.createClass({
         ? this.props.value : this.state.inputValue;
 
     displayValue = displayValue || ""; //avoid NaN
-    
+
     return (<Input {...this.props} placeholder="0.00" value={displayValue} onChange={this.valueChanged}/>)
   }
 });

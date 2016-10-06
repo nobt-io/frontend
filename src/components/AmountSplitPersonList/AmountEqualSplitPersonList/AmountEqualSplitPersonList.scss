@@ -1,0 +1,16 @@
+.container {
+  padding-top: 5px;
+
+  display: flex;
+  flex-direction: row;
+
+  .checkbox{
+    order: 1;
+    margin-left: 1rem;
+  }
+
+  .amount {
+    order: 0;
+    color: $color-accent;
+  }
+}
