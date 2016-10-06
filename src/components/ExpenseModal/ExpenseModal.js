@@ -1,7 +1,7 @@
 import React from "react";
 import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import Amount from "components/Amount"
 import {FormattedDate} from "react-intl";
 

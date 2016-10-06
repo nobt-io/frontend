@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./PersonSelectorModal.scss";
 import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
 import { LowerScreenModal } from "components/Modal";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import SingleInputInlineForm from "components/SingleInputInlineForm"
 import FontIcon from 'react-toolbox/lib/font_icon';
 

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './CreateExpenseModal.scss'
 import { FullScreenModal } from "components/Modal";
 import Header from "components/Header";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import { AmountEqualSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
 import Input from "react-toolbox/lib/input";

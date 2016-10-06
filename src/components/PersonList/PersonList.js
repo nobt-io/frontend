@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./PersonList.scss";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import { Button } from "react-toolbox/lib/button";
 
 export const PersonList = (props) => {

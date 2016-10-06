@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./DebtSummaryItem.scss";
-import Avatar from "components/Avatar";
+import {Avatar} from "components/Avatar";
 import Amount from "components/Amount"
 
 import DebtSummaryDetailModel from "components/DebtSummaryDetailModel";

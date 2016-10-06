@@ -1,0 +1,34 @@
+.Person {
+
+  display: inline-block;
+
+  .left,.right {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .left {
+    .name {
+      margin-left: 5px;
+      order: 1;
+    }
+
+    .avatar {
+      order: 0
+    }
+  }
+
+  .right {
+    .name {
+      margin-right: 5px;
+      order: 0;
+    }
+
+    .avatar {
+      order: 1
+    }
+  }
+}

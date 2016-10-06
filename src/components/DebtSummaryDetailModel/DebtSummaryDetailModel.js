@@ -1,74 +1,47 @@
 import React from "react";
 import { LowerScreenModal } from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
-import Avatar from "components/Avatar";
 import Amount from "components/Amount";
+import { Person, AvatarPositions, AvatarSize } from "components/Person";
+import { FormattedMessage } from "react-intl";
 import styles from "./DebtSummaryDetailModel.scss";
 
+// TODO rename this
 export const DebtSummaryDetailModel = (props) => {
-
 
   const onClose = props.onClose || (() => { });
   const active = props.active || false;
-  const transaction = props.debtSummary;
 
-  const me = transaction.me;
-  const persons = transaction.persons;
+  const debtSummary = props.debtSummary;
+  const persons = debtSummary.persons;
+	const me = debtSummary.me;
 
-  const isSinglePerson = persons.length == 1;
-
-  if (isSinglePerson) {
-    const firstPerson = !me.isPositive ? me.name : persons[ 0 ].name;
-    const secondPerson = me.isPositive ? me.name : persons[ 0 ].name;
-
-    return (
-      <LowerScreenModal active={active} onClose={onClose}>
-        <div className={styles.singleLine}>
-          <div>
-            <span className={styles.avatar}><Avatar name={firstPerson} size={30}/></span>
-            <span className={styles.name}>{firstPerson}</span>
-            <div style={{clear: "both"}}></div>
-          </div>
-          <div className={styles.total}>
-            <span className={styles.name}>
-              <span>owes</span>
-              <Amount value={me.amount}/>
-              <span>to</span>
-            </span>
-          </div>
-          <div>
-            <div style={{clear: "both"}}></div>
-            <span className={styles.name}>{secondPerson}</span>
-            <span className={styles.avatar}><Avatar name={secondPerson} size={30}/></span>
-            <div style={{clear: "both"}}></div>
-          </div>
+  return (
+    <LowerScreenModal active={active} onClose={onClose}>
+      <div>
+        <div>
+          <Person name={me.name} avatarPosition={AvatarPositions.LEFT} avatarSize={AvatarSize.BIG}/>
         </div>
-      </LowerScreenModal>
-    );
-  }
-  else {
-    const keyword = me.isPositive ? "get" : "owe";
-    const directionKeyword = me.isPositive ? "from" : "to";
-    return (
-      <LowerScreenModal active={active} onClose={onClose}>
-        <div className={styles.header}>
-          <span className={styles.avatar}><Avatar name={me.name} size={40}/></span>
-          <span className={styles.name}>{me.name}</span>
-          <div style={{clear: "both"}}></div>
-        </div>
-        <div className={styles.me}>
-          <span>you </span>
-          <span className={styles.amountText}>
-            <span>{keyword} </span>
-            <Amount value={me.amount}/>
-            <span> {directionKeyword}&nbsp;{persons.length} persons</span>
-          </span>
-        </div>
-        <PersonMoneyList persons={persons} showKeyword={true} />
-      </LowerScreenModal>);
-  }
-
-
+        <span className={styles.messageContainer}>
+          <FormattedMessage
+            id="debtSummary.detail.model.debtStatement"
+            defaultMessage={ `{verb} {amount} {preposition} {debtorCount, plural,
+                                                           one { {singleDebtee} }
+                                                           other { {debtorCount} persons }
+                                                         }`}
+            values={{
+              verb: me.amount > 0 ? 'gets' : 'owes',
+              preposition: me.amount > 0 ? 'from': 'to',
+              amount: <Amount value={me.amount} spanClass={styles.amountInTextLine} />,
+              debtorCount: persons.length,
+              singleDebtee: <Person name={persons[0].name} avatarPosition={AvatarPositions.RIGHT} avatarSize={AvatarSize.SMALL}/>
+            }}
+          />
+        </span>
+        {persons.length > 1 && <PersonMoneyList persons={persons} showKeyword={true}/>}
+      </div>
+    </LowerScreenModal>
+  );
 };
 
 DebtSummaryDetailModel.propTypes = {
