@@ -2,7 +2,7 @@ import React from "react";
 import { LowerScreenModal } from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Amount from "components/Amount";
-import { Person, AvatarPositions, AvatarSize } from "components/Person";
+import { Person, AvatarPosition, AvatarSize } from "components/Person";
 import { FormattedMessage } from "react-intl";
 import styles from "./DebtSummaryDetailModal.scss";
 
@@ -19,7 +19,7 @@ export const DebtSummaryDetailModal = (props) => {
     <LowerScreenModal active={active} onClose={onClose}>
       <div>
         <div className={styles.meContainer}>
-          <Person name={me.name} avatarPosition={AvatarPositions.LEFT} avatarSize={AvatarSize.BIG} />
+          <Person name={me.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} />
         </div>
         <span className={styles.messageContainer}>
           <FormattedMessage
@@ -33,7 +33,7 @@ export const DebtSummaryDetailModal = (props) => {
               preposition: me.amount > 0 ? 'from' : 'to',
               amount: <Amount value={me.amount} spanClass={styles.amountInTextLine} />,
               debtorCount: persons.length,
-              singleDebtee: <Person name={persons[ 0 ].name} avatarPosition={AvatarPositions.RIGHT}
+              singleDebtee: <Person name={persons[ 0 ].name} avatarPosition={AvatarPosition.RIGHT}
                                     avatarSize={AvatarSize.SMALL} />
             }}
           />

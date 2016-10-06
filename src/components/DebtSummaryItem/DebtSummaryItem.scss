@@ -1,86 +1,91 @@
+// visual css:
+
+$avatarMargin: .5rem;
+
 .container {
-  position: relative;
-  height: 85px;
+  padding: 1rem;
 
-  .avatar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 80px;
-    background-color: white;
-    z-index: 1;
-
-    padding: 20px 15px;
-
-    .icon {
-      float: right;
-      padding-top: 2px;
-      margin-right: -5px;
-      margin-top: -18px;
-    }
-  }
-  .meContainer {
-    position: absolute;
-    left: 80px;
-    top: 0;
-    bottom: 0;
-    font-size: 18px;
-    z-index: 1;
-
-    .me {
-      background-color: white;
-      float: left;
-      display: inline-block;
-      padding: 30px 0;
-
-    }
-    .transparent {
-      float: left;
-      display: inline-block;
-      width: 80px;
-      height: 85px;
-
-      background: -moz-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* FF3.6-15 */
-      background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* Chrome10-25,Safari5.1-6 */
-      background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff', GradientType=1); /* IE6-9 */
-    }
-  }
-
-  .amountInfo {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 15px;
-    z-index: 0;
-
-    .amount {
-      .total {
-        float: right;
-        margin-left: 5px;
-        font-size: 20px;
+  .debtSummaryContainer {
+    .amountContainer {
+      .amount {
         font-weight: bold;
-      }
-      .keyword {
-        padding-top: 5px;
-        float: right;
+        margin-left: $avatarMargin;
       }
     }
+  }
 
+  .personsContainer {
     .persons {
-      padding-top: 5px;
-      white-space: nowrap;
-      text-align: right;
+      .avatar:not(:first-child) {
+        margin-left: $avatarMargin / 2;
+      }
 
-      .personAvatar {
-        display: inline-block;
-        margin-left: 5px;
+      .avatar:first-child {
+        margin-left: $avatarMargin;
+      }
+    }
+  }
+
+  .amountContainer,.personsContainer {
+    margin: .15rem 0;
+  }
+}
+
+// layout only css:
+
+.meContainer {
+  position: relative;
+
+  .meAvatarIcon {
+    position: absolute;
+    top: 28px;
+    left: 28px;
+  }
+}
+
+.container {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .meContainer {
+    order: 0;
+  }
+
+  .debtSummaryContainer {
+    order: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    .amountContainer {
+      order: 0;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+    }
+
+    .personsContainer {
+      order: 1;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+
+      .verb {
+        order: 0;
+      }
+
+      .persons {
+        order: 1;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
       }
     }
   }
 }
-
-
 

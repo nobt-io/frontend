@@ -1,5 +1,5 @@
-import {Person, AvatarPositions, AvatarSize} from './Person';
+import {Person, AvatarPosition, AvatarSize} from './Person';
 
 exports.Person = Person;
 exports.AvatarSize = AvatarSize;
-exports.AvatarPositions = AvatarPositions;
+exports.AvatarPosition = AvatarPosition;

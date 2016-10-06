@@ -1,8 +1,29 @@
+// visual css:
+
+$nameMargin: 0.8rem;
+
+.Person {
+
+  .left {
+    .name {
+      margin-left: $nameMargin;
+    }
+  }
+
+  .right {
+    .name {
+      margin-right: $nameMargin;
+    }
+  }
+}
+
+// layout only css:
+
 .Person {
 
   display: inline-block;
 
-  .left,.right {
+  .left, .right {
 
     display: flex;
     flex-direction: row;
@@ -12,7 +33,6 @@
 
   .left {
     .name {
-      margin-left: 5px;
       order: 1;
     }
 
@@ -23,7 +43,6 @@
 
   .right {
     .name {
-      margin-right: 5px;
       order: 0;
     }
 
