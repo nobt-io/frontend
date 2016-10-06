@@ -4,8 +4,8 @@ import styles from './PersonListItem.scss'
 import {Avatar} from 'components/Avatar'
 
 export const PersonListItem = (props) => (
-  <div {...props} className={styles.row}>
-    <span className={styles.splitter}>{props.children}</span>
+  <div className={styles.row}>
+    <span className={styles.splitter}><span {...props}>{props.children}</span></span>
     <span className={styles.avatarContainer}><Avatar name={props.name} size={30}/></span>
     <span className={styles.name}>{props.name}</span>
   </div>

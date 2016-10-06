@@ -1,8 +1,8 @@
 import { createSelector } from "reselect";
-import _debug from "debug";
 import PersonDebtSummaryFactory from "./PersonDebtSummaryFactory";
 import SplitStrategyNames from "const/SplitStrategyNames"
 import SelectedPersonFactory from "./SelectedPersonFactory";
+import _debug from "debug";
 
 const getNobt = (state) => state.Nobt.currentNobt;
 const getActiveTab = (state) => state.Nobt.activeTab;
@@ -90,32 +90,37 @@ export const getTotal = createSelector([ getExpenses ], (expenses) => {
   return nobtTotal;
 });
 
-export const getCreateExpenseState = createSelector([getCreateExpenseViewInfo], (createExpense) => {
+export const getCreateExpenseMetaData = createSelector([getCreateExpenseViewInfo], (createExpense) => {
+
+  const metaDataIsValid =
+    (createExpense.subject || "").length !== 0 &&
+    (createExpense.amount || 0) > 0;
+
   return {
     active: createExpense.show,
     subject: createExpense.subject,
     amount: createExpense.amount,
     paidByPerson: createExpense.paidByPerson,
     creationDate: createExpense.creationDate,
-    splitStrategy: createExpense.splitStrategy
+    splitStrategy: createExpense.splitStrategy,
+    metaDataIsValid: metaDataIsValid
   };
 });
 
-export const getCreateExpenseSelection = createSelector([getCreateExpenseViewInfo], (createExpense) => {
+export const getNewExpensePersonData = createSelector([getCreateExpenseViewInfo], (createExpense) => {
 
   var strategy = createExpense.splitStrategy;
 
-  var selectedPersons = createExpense.selectedPersons[strategy];
+  var persons = createExpense.involvedPersons[strategy];
   var amount = createExpense.amount;
 
   var personFactory = new SelectedPersonFactory(strategy);
-  var mappedPersons = personFactory.createPersons(selectedPersons, amount);
-  var sumOfPersonAmounts = mappedPersons.reduce((sum, person) => sum + person.value, 0);
+  var expensePersonData = personFactory.getInvolvedPersonData(persons, amount);
 
-  return {
-    selectedAmount: sumOfPersonAmounts,
-    selectedPersons: mappedPersons
-  };
+  _debug('selectors:getNewExpensePersonData')(expensePersonData);
+
+  return expensePersonData;
+
 });
 
 const sumExpense = (expense) => expense.shares.map(share => share.value).reduce((sum, amount) => sum + amount);

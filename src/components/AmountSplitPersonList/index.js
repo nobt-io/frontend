@@ -1,5 +1,7 @@
-import AmountEqualSplitPersonList from './AmountEqualSplitPersonList'
-import AmountUnequalSplitPersonList from "./AmountUnequalSplitPersonList";
+import AmountEqualSplitPersonList from "./AmountEqualSplitPersonList/AmountEqualSplitPersonList";
+import AmountUnequalSplitPersonList from "./AmountUnequalSplitPersonList/AmountUnequalSplitPersonList";
+import AmountPercentageSplitPersonList from "./AmountPercentageSplitPersonList/AmountPercentageSplitPersonList";
 
 exports.AmountEqualSplitPersonList = AmountEqualSplitPersonList;
 exports.AmountUnequalSplitPersonList = AmountUnequalSplitPersonList;
+exports.AmountPercentageSplitPersonList = AmountPercentageSplitPersonList;

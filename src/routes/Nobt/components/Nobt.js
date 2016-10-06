@@ -60,19 +60,19 @@ export const Nobt = React.createClass({
       <div className={styles.nobt}>
         <Header rightButton={{
           icon: "add_box",
-          onClick: this.props.openCreateExpenseModal,
+          onClick: this.props.openNewExpenseOverlay,
           title: "Add expense",
           show: true
         }}/>
-        {this.props.createExpenseState.active &&
-        <CreateExpenseModal state={this.props.createExpenseState}
-                            selection={this.props.createExpenseSelection}
-                            updateState={this.props.createExpenseUpdateEditState}
-                            addOrUpdateSelectedPerson={this.props.createExpenseAddOrUpdateSelectedPerson}
-                            removeSelectedPerson={this.props.createExpenseRemoveSelectedPerson}
-                            persons={this.props.members}
-                            onClose={this.props.closeCreateExpenseModal}
-                            onCreateExpense={this.props.createExpense}/>
+        {this.props.newExpenseMetaData.active &&
+        <CreateExpenseModal metaData={this.props.newExpenseMetaData}
+                            personData={this.props.newExpensePersonData}
+                            setMetaData={this.props.setNewExpenseMetaData}
+                            setPersonValue={this.props.setNewExpensePersonValue}
+                            nobtMembers={this.props.members}
+                            onClose={() => this.props.closeNewExpenseOverlay()}
+                            createExpense={this.props.createExpense}
+                            reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
         }
         <NobtSummary nobtName={this.props.name} totalAmount={this.props.total}
                      memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty}/>
@@ -122,4 +122,4 @@ Nobt.childContextTypes = {
   currency: React.PropTypes.string
 };
 
-export default Nobt
+export default Nobt;
