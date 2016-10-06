@@ -1,7 +1,8 @@
+import React from "react";
 import Avatar from "./Avatar";
 
 export const BigAvatar = (props) => (
-  <Avatar name={props.name} size={45} />
+  <Avatar name={props.name} size={45} fontSize={25}/>
 );
 
 export const SmallAvatar = (props) => (
@@ -9,5 +10,5 @@ export const SmallAvatar = (props) => (
 );
 
 exports.Avatar = Avatar;
-exports.BigAvatar = Avatar;
-exports.SmallAvatar = Avatar;
+exports.BigAvatar = BigAvatar;
+exports.SmallAvatar = SmallAvatar;

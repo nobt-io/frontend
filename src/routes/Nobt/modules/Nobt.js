@@ -91,7 +91,7 @@ const initialState = {
   expenseSortProperty: 'Date',
 
   createExpenseViewInfo: {
-    show: true, state: {
+    show: false, state: {
       subject: "",
       creationDate: new Date(),
       selectedPersons: [],

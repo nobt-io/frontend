@@ -18,7 +18,7 @@ export const DebtSummaryDetailModal = (props) => {
   return (
     <LowerScreenModal active={active} onClose={onClose}>
       <div>
-        <div>
+        <div className={styles.meContainer}>
           <Person name={me.name} avatarPosition={AvatarPositions.LEFT} avatarSize={AvatarSize.BIG} />
         </div>
         <span className={styles.messageContainer}>
