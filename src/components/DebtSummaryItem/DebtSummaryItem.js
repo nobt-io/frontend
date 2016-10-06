@@ -1,12 +1,15 @@
 import React from "react";
-import styles from "./TransactionItem.scss";
+import styles from "./DebtSummaryItem.scss";
 import Avatar from "components/Avatar";
-import TransactionModal from "components/TransactionModal";
+import Amount from "components/Amount"
+
+import DebtSummaryDetailModel from "components/DebtSummaryDetailModel";
 import Card from "components/Card";
 import FontIcon from "react-toolbox/lib/font_icon";
 
+const isPositive = (personAmount) => personAmount.amount > 0;
 
-export const TransactionItem = React.createClass({
+export const DebtSummaryItem = React.createClass({
 
   onModalClose: function () {
     this.setState({modalIsActive: false});
@@ -19,20 +22,21 @@ export const TransactionItem = React.createClass({
   render: function () {
 
     const {modalIsActive} = this.state || {modalIsActive: false};
-    const {transaction} = this.props;
+    const {summary} = this.props;
 
-    const me = transaction.me;
-    const persons =
-      transaction.persons.map(p => (
+    const me = summary.me;
+
+    const persons = summary.persons.map(p => (
         <span key={p.name} className={styles.personAvatar}><Avatar name={p.name} size={20} fontSize={11}/></span>));
 
-    const meKeyword = me.isPositive ? "gets" : "owes";
-    const personsKeyword = me.isPositive ? "from" : "to";
-    const icon = me.isPositive ? "add_circle" : "remove_circle";
+    const meKeyword = isPositive(me) ? "gets" : "owes";
+    const personsKeyword = isPositive(me) ? "from" : "to";
+    const icon = isPositive(me) ? "add_circle" : "remove_circle";
 
     return (
       <Card>
-        <TransactionModal active={modalIsActive} onClose={this.onModalClose} transaction={transaction}/>
+        <DebtSummaryDetailModel active={modalIsActive} onClose={this.onModalClose} debtSummary={summary}/>
+
         <div onClick={this.onModalOpen} className={styles.container}>
           <div className={styles.avatar}>
             <Avatar name={me.name} size={45}/>
@@ -40,11 +44,11 @@ export const TransactionItem = React.createClass({
           </div>
           <div className={styles.meContainer}>
             <span className={styles.me}>{me.name}</span>
-            <span className={styles.transparent}></span>
+            <span className={styles.transparent} />
           </div>
           <div className={styles.amountInfo}>
             <div className={styles.amount}>
-              <span className={styles.total}>{me.amount}</span>
+              <Amount value={me.amount} spanClass={styles.total}/>
               <span className={styles.keyword}>{meKeyword}</span>
               <div style={{clear: "both"}}></div>
             </div>
@@ -55,8 +59,16 @@ export const TransactionItem = React.createClass({
   },
 });
 
-TransactionItem.propTypes = {
-  transaction: React.PropTypes.object.isRequired
+var personAmountPropType = React.PropTypes.shape({
+  name: React.PropTypes.string.isRequired,
+  amount: React.PropTypes.number.isRequired
+}).isRequired;
+
+DebtSummaryItem.propTypes = {
+  summary: React.PropTypes.shape({
+    me: personAmountPropType,
+    persons: React.PropTypes.arrayOf(personAmountPropType),
+  }).isRequired
 };
 
-export default TransactionItem
+export default DebtSummaryItem

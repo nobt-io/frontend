@@ -13,9 +13,9 @@ export const PersonSelectorModal = (props) => {
     props.onClose();
   };
 
-  var persons = props.persons.map(p => (
-    <ListItem onClick={() => onItemClick(p)} itemContent={
-      <div className={styles.listItem}><Avatar size={30} name={p}/><span>{p}</span></div>
+  var persons = props.names.map(name => (
+    <ListItem key={name} onClick={() => onItemClick(name)} itemContent={
+      <div className={styles.listItem}><Avatar size={30} name={name}/><span>{name}</span></div>
     }/>));
 
   return (
@@ -31,7 +31,8 @@ export const PersonSelectorModal = (props) => {
             <ListDivider/>
             <div className={styles.addPanel}>
               <FontIcon  className={styles.addIcon} value='person_add'/>
-              <SingleInputInlineForm buttonIcon="add_circle_outline" placeholder="Anyone else?"
+              <SingleInputInlineForm buttonIcon="add_circle_outline"
+                                     placeholder="Someone else?"
                                      onSubmit={(p) => onItemClick(p)}/>
             </div>
           </div>
@@ -46,7 +47,7 @@ PersonSelectorModal.propTypes = {
   onFilterChange: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   title: React.PropTypes.string.isRequired,
-  persons: React.PropTypes.array.isRequired,
+  names: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   canSelectAll: React.PropTypes.bool,
   canInsertPerson: React.PropTypes.bool
 };

@@ -81,6 +81,25 @@ const initialState = {
     expenses: [],
   },
 
+<<<<<<< HEAD
+export const initialState = {
+  name: '',
+  total: '',
+  members: [],
+  tabIndex: 0,
+  transactions: [],
+  expenses: [],
+  expensesFiltered: [],
+  expensesViewInfo: {filter: "", sort: "Date"},
+  createExpenseViewInfo: {show: true, state: {
+    subject: "",
+    creationDate: new Date(),
+    selectedPersons: [],
+    paidByPerson: "",
+    amount: 0,
+    splitStrategy: "UNEQUAL"
+  }}
+=======
   activeTab: 'transactions',
   expenseFilter: '',
   expenseSortProperty: 'Date',
@@ -91,9 +110,10 @@ const initialState = {
       creationDate: new Date(),
       selectedPersons: [],
       paidByPerson: "",
-    amount: 0,
-    splitStrategy: "UNEQUAL"
+      amount: 0
+    }
   }
+>>>>>>> a67c1d94448357d2af77dc5c320e92f4fcdb8c8a
 };
 
 export default function nobtReducer(state = initialState, action) {

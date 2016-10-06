@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Nobt.scss";
 import Header from "components/Header";
 import NobtSummary from "components/NobtSummary";
-import TransactionList from "components/TransactionList";
+import DebtSummaryList from "components/DebtSummaryList";
 import ExpenseList from "components/ExpenseList";
 import ExpenseFilter from "components/ExpenseFilter";
 import CreateExpenseModal from "components/CreateExpenseModal";
@@ -28,6 +28,12 @@ export const Nobt = React.createClass({
     }
   },
 
+  getChildContext() {
+    return {
+      currency: this.props.currency
+    };
+  },
+
   navigate(path) {
     this.props.history.push(path);
   },
@@ -44,7 +50,7 @@ export const Nobt = React.createClass({
       1: 'expenses'
     };
 
-    var hashRoute = indexHashMapping[index] || 'transactions';
+    var hashRoute = indexHashMapping[ index ] || 'transactions';
 
     this.navigate(`/nobt/${this.props.params.id}#${hashRoute}`);
   },
@@ -52,35 +58,42 @@ export const Nobt = React.createClass({
   render: function () {
     return (
       <div className={styles.nobt}>
-        <Header rightButton={{icon:"add_box", onClick: this.props.openCreateExpenseModal, title: "Add expense", show: true}}/>
+        <Header rightButton={{
+          icon: "add_box",
+          onClick: this.props.openCreateExpenseModal,
+          title: "Add expense",
+          show: true
+        }}/>
         {this.props.showCreateExpenseModal &&
-          <CreateExpenseModal editState={this.props.createExpenseEditState}
+        <CreateExpenseModal editState={this.props.createExpenseEditState}
                             updateState={this.props.updateCreateExpenseEditState}
                             active={this.props.showCreateExpenseModal}
                             persons={this.props.members}
                             onClose={this.props.closeCreateExpenseModal}
                             onCreateExpense={this.props.createExpense}/>
         }
-        <NobtSummary
-          nobtName={this.props.name} nobtIsEmpty={this.props.nobtIsEmpty}
-          totalAmount={this.props.total} memberCount={this.props.members.length}/>
+        <NobtSummary nobtName={this.props.name} totalAmount={this.props.total}
+                     memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty}/>
         <div>
           <Tabs
             theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}
-            index={this.props.tabIndex}
+            index={this.props.activeTabIndex}
             onChange={this.onTabChange} fixed>
             <Tab label="Transactions">
-              <TransactionList transactions={this.props.transactions}/>
+              <DebtSummaryList debtSummaries={this.props.debtSummaries}/>
             </Tab>
             <Tab label="Expenses">
               <ExpenseFilter
-                persons={this.props.members}
-                onFilterChange={(filter) => this.props.changeExpenseViewInfo(filter, this.props.expensesViewInfo.sort)}
-                onSortChange={(sort) => this.props.changeExpenseViewInfo(this.props.expensesViewInfo.filter, sort)}
-                onReset={(sort) => this.props.changeExpenseViewInfo("", "Date")}
-                currentFilter={this.props.expensesViewInfo.filter}
-                currentSort={this.props.expensesViewInfo.sort}/>
-              <ExpenseList expenses={this.props.expensesFiltered}/>
+                personNames={this.props.members}
+                onFilterChange={(filter) => this.props.updateExpensesFilter(filter)}
+                onSortChange={(sort) => this.props.updateExpenseSortProperty(sort)}
+                onReset={() => {
+                  this.props.updateExpensesFilter("");
+                  this.props.updateExpenseSortProperty("Date");
+                }}
+                currentFilter={this.props.expenseFilter}
+                currentSort={this.props.expenseSortProperty}/>
+              <ExpenseList expenses={this.props.expenses}/>
             </Tab>
           </Tabs>
         </div>
@@ -89,17 +102,24 @@ export const Nobt = React.createClass({
   }
 });
 
+// NOTE: No PropTypes defined because this is a root component
+
 Nobt.defaultProps = {
   name: "",
-  nobtIsEmpty: true,
-  total: "",
+  total: 0,
   members: [],
+  expenses: [],
+  expenseFilter: '',
+  expenseSortProperty: 'Date',
+  debtSummaries: [],
+  activeTabIndex: 0,
+
+  nobtIsEmpty: true,
   showCreateExpenseModal: true,
-  tabIndex: 0,
-  expensesFiltered: [],
-  transactions: [],
-  changeExpenseViewInfo: () => {},
-  expensesViewInfo: { sort: "Date", filter: "" },
+};
+
+Nobt.childContextTypes = {
+  currency: React.PropTypes.string
 };
 
 export default Nobt

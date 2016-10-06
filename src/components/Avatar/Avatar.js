@@ -29,6 +29,7 @@ const getColor = (name) => {
 };
 
 export const Avatar = (props) => {
+
   const initials = getInitials(props.name);
   const nameColor = getColor(props.name);
 

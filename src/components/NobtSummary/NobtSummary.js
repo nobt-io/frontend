@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./NobtSummary.scss";
+import Amount from "components/Amount"
 
 export const NobtSummary = (props) => {
 
-   var nobtDetails = (props.nobtIsEmpty)
+   var nobtDetails = (props.isNobtEmpty)
     ? ""
-    : (<div className={styles.nobtSummary}>{props.totalAmount} | {props.memberCount} Members </div>);
+    : (<div className={styles.nobtSummary}>{<Amount value={props.totalAmount}/>} | {props.memberCount} Members </div>);
 
   return (
     <div className={styles.container}>
@@ -17,9 +18,9 @@ export const NobtSummary = (props) => {
 
 NobtSummary.propTypes = {
   nobtName: React.PropTypes.string.isRequired,
-  totalAmount: React.PropTypes.string.isRequired,
+  totalAmount: React.PropTypes.number.isRequired,
   memberCount: React.PropTypes.number.isRequired,
-  nobtIsEmpty: React.PropTypes.bool.isRequired
+  isNobtEmpty: React.PropTypes.bool.isRequired
 };
 
 export default NobtSummary

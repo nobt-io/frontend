@@ -2,15 +2,16 @@ import React from "react";
 import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Avatar from "components/Avatar";
-import styles from "./TransactionModal.scss";
+import Amount from "components/Amount"
+import styles from "./DebtSummaryDetailModel.scss";
 
-export const TransactionModal = (props) => {
+export const DebtSummaryDetailModel = (props) => {
 
 
   const onClose = props.onClose || (() => {
     });
   const active = props.active || false;
-  const transaction = props.transaction;
+  const transaction = props.debtSummary;
 
   const me = transaction.me;
   const persons = transaction.persons;
@@ -30,7 +31,11 @@ export const TransactionModal = (props) => {
             <div style={{clear: "both"}}></div>
           </div>
           <div className={styles.total}>
-            <span className={styles.name}><b>owes {me.amount} to</b></span>
+            <span className={styles.name}>
+              <span>owes</span>
+              <Amount value={me.amount}/>
+              <span>to</span>
+            </span>
           </div>
           <div>
             <div style={{clear: "both"}}></div>
@@ -53,7 +58,12 @@ export const TransactionModal = (props) => {
           <div style={{clear: "both"}}></div>
         </div>
         <div className={styles.me}>
-          you <b>{keyword} {me.amount}</b> {directionKeyword}&nbsp;<b>{persons.length} persons</b>
+          <span>you </span>
+          <span className={styles.amountText}>
+            <span>{keyword} </span>
+            <Amount value={me.amount}/>
+            <span> {directionKeyword}&nbsp;{persons.length} persons</span>
+          </span>
         </div>
         <PersonMoneyList persons={persons} showKeyword={true}></PersonMoneyList>
       </LowerScreenModal>);
@@ -62,10 +72,10 @@ export const TransactionModal = (props) => {
 
 };
 
-TransactionModal.propTypes = {
+DebtSummaryDetailModel.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
-  transaction: React.PropTypes.object.isRequired,
+  debtSummary: React.PropTypes.object.isRequired,
 };
 
-export default TransactionModal
+export default DebtSummaryDetailModel

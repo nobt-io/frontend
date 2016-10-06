@@ -1,28 +1,39 @@
 import { connect } from "react-redux";
 import { nobtActionFactory } from "../modules/Nobt";
 import Nobt from "../components/Nobt";
+import { getName, getCurrency, getMembers, getExpenses, getDebtSummaries, getTotal, getFilteredExpenses, getActiveTabIndex, getExpensesFilter, getExpensesSortProperty } from '../selectors'
 
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),
   changeTab: (tabName) => nobtActionFactory.changeTab(tabName),
   closeCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(false),
   openCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(true),
+
   createExpense: (expense) => nobtActionFactory.createExpense(expense),
+
   updateCreateExpenseEditState: (state) => nobtActionFactory.updateCreateExpenseEditState(state),
-  changeExpenseViewInfo: (filter, sort) => nobtActionFactory.changeExpenseViewInfo(filter, sort),
+
+  updateExpensesFilter: (filter) => nobtActionFactory.updateExpensesFilter(filter),
+  updateExpenseSortProperty: (property) => nobtActionFactory.updateExpenseSortProperty(property),
 };
 
-const mapStateToProps = (state) => ({
-  name: state.Nobt.name,
-  total: state.Nobt.total,
-  members: state.Nobt.members,
-  tabIndex: state.Nobt.tabIndex,
-  transactions: state.Nobt.transactions,
-  expensesViewInfo: state.Nobt.expensesViewInfo,
-  expensesFiltered: state.Nobt.expensesFiltered,
-  nobtIsEmpty: (state.Nobt.transactions || []).length == 0,
-  createExpenseEditState: state.Nobt.createExpenseViewInfo.state,
-  showCreateExpenseModal: state.Nobt.createExpenseViewInfo.show
-});
+const mapStateToProps = (state) => {
+  return {
+    name: getName(state),
+    currency: getCurrency(state),
+    total: getTotal(state),
+    members: getMembers(state),
+    debtSummaries: getDebtSummaries(state),
+    expenses: getFilteredExpenses(state),
+    expenseFilter: getExpensesFilter(state),
+    expenseSortProperty: getExpensesSortProperty(state),
+
+    activeTabIndex: getActiveTabIndex(state),
+    isNobtEmpty: getExpenses(state).length === 0,
+
+    createExpenseEditState: state.Nobt.createExpenseViewInfo.state,
+    showCreateExpenseModal: state.Nobt.createExpenseViewInfo.show
+  }
+};
 
 export default connect(mapStateToProps, mapActionCreators)(Nobt)

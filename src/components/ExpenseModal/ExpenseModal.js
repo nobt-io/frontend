@@ -2,6 +2,8 @@ import React from "react";
 import {LowerScreenModal} from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Avatar from "components/Avatar";
+import Amount from "components/Amount"
+
 import styles from "./ExpenseModal.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
 
@@ -13,7 +15,7 @@ export const ExpenseModal = (props) => {
 
   const name = expense.name;
   const debtee = expense.debtee;
-  const persons = expense.debtors.map(s => ({amount: s.amount, name: s.name, isPositive: s.isPositive}));
+  const persons = expense.debtors;
 
   return (
     <LowerScreenModal header={name} active={active} onClose={onClose}>
@@ -21,7 +23,7 @@ export const ExpenseModal = (props) => {
       <div className={styles.debtee}>
         <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>
         <span className={styles.name}>{debtee.name} <b>paid</b></span>
-        <span className={styles.total}>{debtee.amount}</span>
+        <Amount value={debtee.amount} spanClass={styles.total} />
         <div style={{clear: "both"}}></div>
       </div>
       <div className={styles.added}>
