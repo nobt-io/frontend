@@ -26,7 +26,7 @@ const actionHandlers = {
     const nameToAdd = action.payload.name;
     const existingNames = state.personNames;
 
-    if (existingNames.find(name => nameToAdd) !== undefined) {
+    if (existingNames.find(name => name === nameToAdd) !== undefined) {
       _debug(actionNames.ADD_PERSON)(`Person with name ${nameToAdd} already exists.`);
       return state;
     }
