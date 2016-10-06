@@ -1,7 +1,7 @@
 import React from 'react'
 import Checkbox from 'react-toolbox/lib/checkbox';
 
-import PropTypes from "./PropTypes";
+import PropTypes from "./PropTypeDefinition";
 import PersonListItem from "./PersonListItem"
 import TopInfo from "./TopInfo"
 

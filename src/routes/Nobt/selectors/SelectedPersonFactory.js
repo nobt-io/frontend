@@ -1,4 +1,4 @@
-import SplitStrategyNames from "const/SplitStrategyNames";
+import SplitStrategyNames from "../../../const/SplitStrategyNames";
 
 export default class SelectedPersonFactory {
 
