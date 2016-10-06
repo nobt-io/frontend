@@ -32,7 +32,7 @@ export const PersonSelectorModal = (props) => {
             <div className={styles.addPanel}>
               <FontIcon  className={styles.addIcon} value='person_add'/>
               <SingleInputInlineForm buttonIcon="add_circle_outline"
-                                     placeholder="Anyone else?"
+                                     placeholder="Someone else?"
                                      onSubmit={(p) => onItemClick(p)}/>
             </div>
           </div>
