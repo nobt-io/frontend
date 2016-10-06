@@ -12,21 +12,21 @@ import {
   getActiveTabIndex,
   getExpensesFilter,
   getExpensesSortProperty,
-  getCreateExpenseState,
-  getCreateExpenseSelection
+  getCreateExpenseMetaData,
+  getNewExpensePersonData
 } from '../selectors'
 
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),
   changeTab: (tabName) => nobtActionFactory.changeTab(tabName),
 
-  //CreateExpense
-  closeCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibility(false),
-  openCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibility(true),
+  //newExpense
   createExpense: (expense) => nobtActionFactory.createExpense(expense),
-  createExpenseUpdateEditState: (state) => nobtActionFactory.createExpenseUpdateEditState(state),
-  createExpenseAddOrUpdateSelectedPerson: (person) => nobtActionFactory.createExpenseAddOrUpdateSelectedPerson(person),
-  createExpenseRemoveSelectedPerson: (name) => nobtActionFactory.createExpenseRemoveSelectedPerson(name),
+
+  closeNewExpenseOverlay: () => nobtActionFactory.setNewExpenseOverlayVisibility(false),
+  openNewExpenseOverlay: () => nobtActionFactory.setNewExpenseOverlayVisibility(true),
+  setNewExpenseMetaData: (metaInfo) => nobtActionFactory.setNewExpenseMetaData(metaInfo),
+  setNewExpensePersonValue: (name, value) => nobtActionFactory.setNewExpensePersonValue(name, value),
 
   updateExpensesFilter: (filter) => nobtActionFactory.updateExpensesFilter(filter),
   updateExpenseSortProperty: (property) => nobtActionFactory.updateExpenseSortProperty(property),
@@ -46,9 +46,9 @@ const mapStateToProps = (state) => {
     activeTabIndex: getActiveTabIndex(state),
     isNobtEmpty: getExpenses(state).length === 0,
 
-    createExpenseState: getCreateExpenseState(state),
-    createExpenseSelection: getCreateExpenseSelection(state)
-  }
+    newExpenseMetaData: getCreateExpenseMetaData(state),
+    newExpensePersonData: getNewExpensePersonData(state)
+  };
 };
 
 export default connect(mapStateToProps, mapActionCreators)(Nobt)

@@ -5,22 +5,18 @@ import styles from './AmountEqualSplitPersonList.scss';
 import Amount from 'components/Amount';
 import PersonListItem from "../Common/PersonListItem";
 import TopInfo from "../Common/TopInfo";
+import CommonPropTypes from '../Common/CommonPropTypes'
 
 export const AmountEqualSplitPersonList = (props) => {
 
-  const {persons, selectedPersons, addOrUpdateSelectedPerson, removeSelectedPerson} = props;
+  const {nobtMembers, involvedPersons, setPersonValue, involvedPersonsAreValid} = props;
 
-  const onSelectionChanged = (state, name) => {
-    if (state)
-      addOrUpdateSelectedPerson({name: name, value: 1});
-    else
-      removeSelectedPerson(name);
-  };
+  const onSelectionChanged = (state, name) => setPersonValue(name, state ? 1 : 0);
 
-  const personItems = persons.map(p => {
+  const personItems = nobtMembers.map(p => {
 
-    var selectedAmount = selectedPersons.filter(sp => sp.name == p).map(sp => sp.amount )[0] || 0;
-    var isSelectedPerson = selectedPersons.find(sp => sp.name == p);
+    var selectedAmount = involvedPersons.filter(sp => sp.name === p).map(sp => sp.amount )[0] || 0;
+    var isSelectedPerson = (involvedPersons.find(sp => sp.name === p) || {value: 0}).value == 1;
 
     return (
     <PersonListItem className={styles.container} key={p} name={p}>
@@ -31,20 +27,13 @@ export const AmountEqualSplitPersonList = (props) => {
 
   return (
     <div>
-      { selectedPersons.length == 0 && <TopInfo>please select at least <b>one</b> person</TopInfo>}
+      { !involvedPersonsAreValid && <TopInfo>Please select at least <b>one</b> person.</TopInfo>}
       { personItems }
     </div>);
 };
 
 AmountEqualSplitPersonList.propTypes = {
-  selectedPersons: React.PropTypes.arrayOf(React.PropTypes.shape({
-    name: React.PropTypes.string.isRequired,
-    value: React.PropTypes.number.isRequired,
-    amount: React.PropTypes.number.isRequired,
-  })),
-  persons: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  removeSelectedPerson: React.PropTypes.func.isRequired,
-  addOrUpdateSelectedPerson: React.PropTypes.func.isRequired
+  ...CommonPropTypes
 };
 
 export default AmountEqualSplitPersonList
