@@ -24,7 +24,7 @@ export const AmountEqualSplitPersonList = (props) => {
 
   return (
     <div>
-      { <TopInfo>please select at least <b>one</b> person</TopInfo>}
+      { selectedPersons.length == 0 && <TopInfo>please select at least <b>one</b> person</TopInfo>}
       { personItems }
     </div>);
 };
