@@ -48,7 +48,7 @@ export const DebtSummaryItem = React.createClass({
           </div>
           <div className={styles.amountInfo}>
             <div className={styles.amount}>
-              <Amount value={me.amount} theme={ {span: styles.total} }/>
+              <Amount value={me.amount} spanClass={styles.total}/>
               <span className={styles.keyword}>{meKeyword}</span>
               <div style={{clear: "both"}}></div>
             </div>

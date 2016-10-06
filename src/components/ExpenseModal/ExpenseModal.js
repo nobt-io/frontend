@@ -23,7 +23,7 @@ export const ExpenseModal = (props) => {
       <div className={styles.debtee}>
         <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>
         <span className={styles.name}>{debtee.name} <b>paid</b></span>
-        <Amount value={debtee.amount} theme={ {span: styles.total} } />
+        <Amount value={debtee.amount} spanClass={styles.total} />
         <div style={{clear: "both"}}></div>
       </div>
       <div className={styles.added}>

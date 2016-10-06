@@ -11,7 +11,7 @@ const getPersonMoneyListItem = (person, showKeyword) => (
     <div className={styles.nameCell}>{person.name}</div>
     <div className={styles.amountCell}>
       <span style={{display: (showKeyword) ? "inline" : "none"}}>{getAmountKeyWord(!(person.amount > 0))}</span>
-      <Amount value={person.amount} theme={ {span: styles.amount} } />
+      <Amount value={person.amount} spanClass={styles.amount} />
     </div>
     <div style={{clear: "both"}}></div>
   </div>
