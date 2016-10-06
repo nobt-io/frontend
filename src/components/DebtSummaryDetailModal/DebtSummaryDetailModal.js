@@ -4,23 +4,22 @@ import PersonMoneyList from "components/PersonMoneyList";
 import Amount from "components/Amount";
 import { Person, AvatarPositions, AvatarSize } from "components/Person";
 import { FormattedMessage } from "react-intl";
-import styles from "./DebtSummaryDetailModel.scss";
+import styles from "./DebtSummaryDetailModal.scss";
 
-// TODO rename this
-export const DebtSummaryDetailModel = (props) => {
+export const DebtSummaryDetailModal = (props) => {
 
   const onClose = props.onClose || (() => { });
   const active = props.active || false;
 
   const debtSummary = props.debtSummary;
   const persons = debtSummary.persons;
-	const me = debtSummary.me;
+  const me = debtSummary.me;
 
   return (
     <LowerScreenModal active={active} onClose={onClose}>
       <div>
         <div>
-          <Person name={me.name} avatarPosition={AvatarPositions.LEFT} avatarSize={AvatarSize.BIG}/>
+          <Person name={me.name} avatarPosition={AvatarPositions.LEFT} avatarSize={AvatarSize.BIG} />
         </div>
         <span className={styles.messageContainer}>
           <FormattedMessage
@@ -31,23 +30,24 @@ export const DebtSummaryDetailModel = (props) => {
                                                          }`}
             values={{
               verb: me.amount > 0 ? 'gets' : 'owes',
-              preposition: me.amount > 0 ? 'from': 'to',
+              preposition: me.amount > 0 ? 'from' : 'to',
               amount: <Amount value={me.amount} spanClass={styles.amountInTextLine} />,
               debtorCount: persons.length,
-              singleDebtee: <Person name={persons[0].name} avatarPosition={AvatarPositions.RIGHT} avatarSize={AvatarSize.SMALL}/>
+              singleDebtee: <Person name={persons[ 0 ].name} avatarPosition={AvatarPositions.RIGHT}
+                                    avatarSize={AvatarSize.SMALL} />
             }}
           />
         </span>
-        {persons.length > 1 && <PersonMoneyList persons={persons} showKeyword={true}/>}
+        {persons.length > 1 && <PersonMoneyList persons={persons} showKeyword={true} />}
       </div>
     </LowerScreenModal>
   );
 };
 
-DebtSummaryDetailModel.propTypes = {
+DebtSummaryDetailModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   debtSummary: React.PropTypes.object.isRequired,
 };
 
-export default DebtSummaryDetailModel
+export default DebtSummaryDetailModal
