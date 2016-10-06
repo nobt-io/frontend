@@ -1,6 +1,7 @@
 .overlay {
   padding: 0 !important;
   background-color: rgba(0, 0, 0, 0.5) !important;
+  z-index: 200 !important;
 }
 
 .header {
