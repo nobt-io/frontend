@@ -5,6 +5,7 @@ import { useRouterHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
 import AppContainer from "./containers/AppContainer";
+import {IntlProvider} from "react-intl";
 
 // ========================================================
 // Browser History Setup
@@ -44,14 +45,16 @@ let render = () => {
   const routes = require('./routes/index').default(store)
 
   ReactDOM.render(
-    <AppContainer
-      store={store}
-      history={history}
-      routes={routes}
-    />,
+    <IntlProvider locale={navigator.language}>
+      <AppContainer
+        store={store}
+        history={history}
+        routes={routes}
+      />
+    </IntlProvider>,
     MOUNT_NODE
   )
-}
+};
 
 // This code is excluded from production bundle
 if (__DEV__) {
