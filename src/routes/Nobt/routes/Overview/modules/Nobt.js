@@ -134,7 +134,8 @@ export const initialState = {
     creationDate: new Date(),
     selectedPersons: [],
     paidByPerson: "",
-    amount: 0
+    amount: 0,
+    splitStrategy: "UNEQUAL"
   }}
 };
 

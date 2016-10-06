@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ExpenseFilter.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
 import PersonSelectorModal from "components/PersonSelectorModal";
-import SortByModal from "components/SortByModal";
+import ListSelectModal from "components/ListSelectModal";
 import Avatar from "components/Avatar";
 
 export const ExpenseFilter = React.createClass({
@@ -43,7 +43,10 @@ export const ExpenseFilter = React.createClass({
           title={"Filter expenses by"}
           active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
           persons={persons} canSelectAll={true}/>
-        <SortByModal active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}/>
+        <ListSelectModal
+          active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}
+          title={"Sort by"} list={[{name: "Date", icon: "access_time"}, {name: "Amount", icon: "timeline"}]}
+        />
         <div>
           <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}
                 className={styles.filterIcon}><FontIcon value='clear'/></span>

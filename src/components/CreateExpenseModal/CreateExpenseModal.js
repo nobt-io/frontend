@@ -3,10 +3,18 @@ import styles from './CreateExpenseModal.scss'
 import { FullScreenModal } from "components/Modal";
 import Header from "components/Header";
 import Avatar from "components/Avatar";
+import { AmountEqualSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
 import Input from "react-toolbox/lib/input";
 import PersonSelectorModal from "components/PersonSelectorModal";
 import DatePickerModal from "components/DatePickerModal";
+import ListSelectModal from "components/ListSelectModal";
+
+const splitStrategyNames = {
+  EQUAL: 'EQUAL',
+  UNEQUAL: 'UNEQUAL',
+  PERCENTAGE: 'PERCENTAGE'
+};
 
 export const CreateExpenseModal = React.createClass({
 
@@ -28,32 +36,20 @@ export const CreateExpenseModal = React.createClass({
       return dd + "." + mm + "." + yyyy;
     },
 
-    refreshState: function (udpate) {
-      this.props.updateState({...this.props.editState, ...udpate});
+    refreshStore: function (objectToUpdate) {
+      this.props.updateState({...this.props.editState, ...objectToUpdate});
     },
 
-    onPersonModalOpen: function () {
-      this.setState({...this.state, personModalIsActive: true});
-    },
-
-    onPersonModalClose: function () {
-      this.setState({...this.state, personModalIsActive: false});
-    },
-
-    onDateModalOpen: function () {
-      this.setState({...this.state, dateModalIsActive: true});
-    },
-
-    onDateModalClose: function () {
-      this.setState({...this.state, dateModalIsActive: false});
+    refreshState: function (objectToUpdate) {
+      this.setState({...this.state, ...objectToUpdate});
     },
 
     render: function () {
 
-      const {personModalIsActive, dateModalIsActive} =
-        this.state || {personModalIsActive: false, dateModalIsActive: false};
+      const {personModalIsActive, dateModalIsActive, shareModalIsActive} =
+      this.state || {personModalIsActive: false, dateModalIsActive: false, shareModalIsActive: false};
 
-      const {creationDate, amount, selectedPersons, paidByPerson, subject} = this.props.editState;
+      const {creationDate, amount, selectedPersons, paidByPerson, subject, splitStrategy} = this.props.editState;
       const {onClose, onCreateExpense, active, persons} = this.props;
 
       const dateString =
@@ -62,16 +58,31 @@ export const CreateExpenseModal = React.createClass({
 
       var expenseIsValid = subject.length > 0 && amount > 0;
 
+      var splitByLabel = {
+        [splitStrategyNames.EQUAL]: <span>split<br/><b>equally</b></span>,
+        [splitStrategyNames.UNEQUAL]: <span>split<br/><b>unequally</b></span>,
+        [splitStrategyNames.PERCENTAGE]: <span>split by<br/><b>percentage</b></span>
+      }[splitStrategy];
+
       return (
         <FullScreenModal active={active} onClose={onClose}>
           <PersonSelectorModal
             title={"Who paid?"} canInsertPerson={true} persons={persons}
-            active={personModalIsActive} onClose={this.onPersonModalClose}
-            onFilterChange={(paidByPerson) => this.refreshState({paidByPerson})}
+            active={personModalIsActive} onClose={() => this.refreshState({personModalIsActive: false})}
+            onFilterChange={(paidByPerson) => this.refreshStore({paidByPerson})}
           />
           <DatePickerModal
-            title={"When?"} active={dateModalIsActive} onClose={this.onDateModalClose}
-            onDateChange={(creationDate) => this.refreshState({creationDate})}
+            title={"When?"} active={dateModalIsActive} onClose={() => this.refreshState({dateModalIsActive: false})}
+            onDateChange={(creationDate) => this.refreshStore({creationDate})}
+          />
+          <ListSelectModal
+            active={shareModalIsActive} onSortChange={(splitStrategy) => this.refreshStore({splitStrategy})}
+            title={"Split by"} onClose={() => this.refreshState({shareModalIsActive: false})}
+            list={[
+              {name: splitStrategyNames.EQUAL, icon: "view_module", displayName: "split equally"},
+              {name: splitStrategyNames.UNEQUAL, icon: "view_quilt", displayName: "split unequally"},
+              {name: splitStrategyNames.PERCENTAGE, icon: "poll", displayName: "split by percentage"}
+            ]}
           />
           <Header
             showNobtHeader={false}
@@ -84,19 +95,30 @@ export const CreateExpenseModal = React.createClass({
           <div className={styles.headInput}>
             <div>
               <Input placeholder="What was bought?" value={subject} className={styles.subjectInput}
-                     onChange={(subject) => this.refreshState({subject: subject})}/>
+                     onChange={(subject) => this.refreshStore({subject})}/>
             </div>
             <div>
-              <span onClick={() => this.onPersonModalOpen()} className={styles.personPicker}>by {paidByPerson}
-                <Avatar size={20} fontSize={11} name={paidByPerson} />
+              <span onClick={() => this.refreshState({personModalIsActive: true})}
+                    className={styles.personPicker}>by {paidByPerson}
+                <Avatar size={20} fontSize={11} name={paidByPerson}/>
               </span>
-              <span onClick={() => this.onDateModalOpen()} className={styles.datePicker}>{dateString}</span>
+              <span onClick={() => this.refreshState({dateModalIsActive: true})}
+                    className={styles.datePicker}>{dateString}</span>
             </div>
           </div>
           <div className={styles.amountContainer}>
-            <span className={styles.spit}>split<br/><b>unequally</b></span>
+            <span onClick={() => this.refreshState({shareModalIsActive: true})}
+                  className={styles.spit}>{splitByLabel}</span>
             <span className={styles.currencySymbold}>€</span>
-            <CurrencyInput onChange={(amount) => this.refreshState({amount: amount})} className={styles.amountInput}/>
+            <CurrencyInput onChange={(amount) => this.refreshStore({amount})} className={styles.amountInput}/>
+          </div>
+          <div className={styles.splitContainer}>
+            <AmountEqualSplitPersonList
+              persons={persons}
+              selectedPersons={selectedPersons}
+              amount={amount}
+              onSelectedPersonsChanged={(selectedPersons) => this.refreshStore({selectedPersons})}
+            />
           </div>
         </FullScreenModal>
       );
@@ -116,6 +138,7 @@ CreateExpenseModal.propTypes = {
     creationDate: React.PropTypes.instanceOf(Date).isRequired,
     selectedPersons: React.PropTypes.array.isRequired,
     paidByPerson: React.PropTypes.string.isRequired,
+    splitStrategy: React.PropTypes.oneOf([splitStrategyNames.PERCENTAGE, splitStrategyNames.UNEQUAL, splitStrategyNames.EQUAL])
   })
 };
 
