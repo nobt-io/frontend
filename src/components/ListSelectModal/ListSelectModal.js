@@ -11,7 +11,7 @@ export const ListSelectModal = (props) => {
   };
 
   const listItems = props.list.map(item => (
-    <ListItem onClick={() => onItemClick(item.name)} caption={item.displayName|| item.name } leftIcon={item.icon}/>
+    <ListItem key={item.name} onClick={() => onItemClick(item.name)} caption={item.displayName|| item.name } leftIcon={item.icon}/>
   ));
 
   return (

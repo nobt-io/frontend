@@ -1,17 +1,32 @@
 import { connect } from "react-redux";
 import { nobtActionFactory } from "../modules/Nobt";
 import Nobt from "../components/Nobt";
-import { getName, getCurrency, getMembers, getExpenses, getDebtSummaries, getTotal, getFilteredExpenses, getActiveTabIndex, getExpensesFilter, getExpensesSortProperty } from '../selectors'
+import {
+  getName,
+  getCurrency,
+  getMembers,
+  getExpenses,
+  getDebtSummaries,
+  getTotal,
+  getFilteredExpenses,
+  getActiveTabIndex,
+  getExpensesFilter,
+  getExpensesSortProperty,
+  getCreateExpenseState,
+  getCreateExpenseSelection
+} from '../selectors'
 
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),
   changeTab: (tabName) => nobtActionFactory.changeTab(tabName),
-  closeCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(false),
-  openCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibilty(true),
 
+  //CreateExpense
+  closeCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibility(false),
+  openCreateExpenseModal: () => nobtActionFactory.setCreateExpenseModalVisibility(true),
   createExpense: (expense) => nobtActionFactory.createExpense(expense),
-
-  updateCreateExpenseEditState: (state) => nobtActionFactory.updateCreateExpenseEditState(state),
+  createExpenseUpdateEditState: (state) => nobtActionFactory.createExpenseUpdateEditState(state),
+  createExpenseAddOrUpdateSelectedPerson: (person) => nobtActionFactory.createExpenseAddOrUpdateSelectedPerson(person),
+  createExpenseRemoveSelectedPerson: (name) => nobtActionFactory.createExpenseRemoveSelectedPerson(name),
 
   updateExpensesFilter: (filter) => nobtActionFactory.updateExpensesFilter(filter),
   updateExpenseSortProperty: (property) => nobtActionFactory.updateExpenseSortProperty(property),
@@ -31,8 +46,8 @@ const mapStateToProps = (state) => {
     activeTabIndex: getActiveTabIndex(state),
     isNobtEmpty: getExpenses(state).length === 0,
 
-    createExpenseEditState: state.Nobt.createExpenseViewInfo.state,
-    showCreateExpenseModal: state.Nobt.createExpenseViewInfo.show
+    createExpenseState: getCreateExpenseState(state),
+    createExpenseSelection: getCreateExpenseSelection(state)
   }
 };
 

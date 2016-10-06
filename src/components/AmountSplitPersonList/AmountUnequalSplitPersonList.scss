@@ -1,0 +1,19 @@
+.row {
+  padding: 7px 15px;
+}
+
+.row:first-of-type{
+  padding-top: 15px;
+}
+
+.splitter{
+  float: right;
+}
+
+.name{
+  margin-left: 10px;
+}
+
+.avatarContainer{
+  div{display: inline-block}
+}

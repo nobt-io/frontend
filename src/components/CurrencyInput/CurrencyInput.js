@@ -6,10 +6,10 @@ import CurrencyInputValidator from './CurrencyInputValidator';
 export const CurrencyInput = React.createClass({
 
   getInitialState() {
-    return { inputValue: "" }
+    return {inputValue: "", value: 0}
   },
 
-  valueChanged: function(newValue, valueChangedCb){
+  valueChanged: function (newValue) {
 
     const previousValue = this.state.inputValue;
     if (CurrencyInputValidator.amountsAreEqual(previousValue, newValue)) {
@@ -17,22 +17,27 @@ export const CurrencyInput = React.createClass({
     }
 
     if (CurrencyInputValidator.validateInput(newValue)) {
-      this.setState({inputValue: newValue});
       const intValue = Number(newValue.replace(',', '.'));
+      this.setState({value: intValue, inputValue: newValue});
       this.props.onChange(intValue);
     } else {
-      this.setState({inputValue: previousValue});
+      this.setState({...this.state, inputValue: previousValue});
     }
   },
 
   render: function () {
-    return (
-      <Input {...this.props} placeholder="0.00" value={this.state.inputValue} onChange={this.valueChanged}/>)
+
+    const displayValue =
+      (this.state.value == 0 && this.props.value != 0) //if value is not loaded from prop, load it
+        ? this.props.value : this.state.inputValue;
+
+    return (<Input {...this.props} placeholder="0.00" value={displayValue} onChange={this.valueChanged}/>)
   }
 });
 
 CurrencyInput.propTypes = {
-  onChange: React.PropTypes.func.isRequired
+  onChange: React.PropTypes.func.isRequired,
+  value: React.PropTypes.number.isRequired
 };
 
 export default CurrencyInput

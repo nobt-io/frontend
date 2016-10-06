@@ -1,35 +1,32 @@
 import React from 'react'
 import Checkbox from 'react-toolbox/lib/checkbox';
 
-import PropTypes from "./PropTypes";
+import PropTypes from "./PropTypeDefinition";
 import PersonListItem from "./PersonListItem"
+import TopInfo from "./TopInfo"
 
 export const AmountEqualSplitPersonList = (props) => {
 
-  var isSelectedPerson = (name) => props.selectedPersons.filter(s => s.name == name).length == 1;
+  const {persons, selectedPersons, addOrUpdateSelectedPerson, removeSelectedPerson} = props;
 
-  var personSelectionChanged = (checkboxState, person) => {
-
-    var selectedPersons = props.selectedPersons.slice(0);
-
-    if(checkboxState) {
-      selectedPersons.push({name: person, amount: 0});
-    }else{
-      selectedPersons = selectedPersons.filter(s => s.name !== person);
-    }
-
-    props.onSelectedPersonsChanged(selectedPersons);
+  const onSelectionChanged = (state, name) => {
+    if (state)
+      addOrUpdateSelectedPerson({name: name, value: 1});
+    else
+      removeSelectedPerson(name);
   };
 
-  var personItems = props.persons.map(p => {
-    return (
-      <PersonListItem name={p}>
-        <Checkbox checked={isSelectedPerson(p)} onChange={(state) => personSelectionChanged(state, p)}/>
-      </PersonListItem>
-    )
+  const personItems = persons.map(p => {return (
+    <PersonListItem key={p} name={p}>
+      <Checkbox checked={selectedPersons.filter(sp => sp.name == p).length > 0} onChange={(state) => onSelectionChanged(state, p)}/>
+    </PersonListItem>)
   });
 
-  return (<div>{personItems}</div>);
+  return (
+    <div>
+      { <TopInfo>please select at least <b>one</b> person</TopInfo>}
+      { personItems }
+    </div>);
 };
 
 AmountEqualSplitPersonList.propTypes = PropTypes;
