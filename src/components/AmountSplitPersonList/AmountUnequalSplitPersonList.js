@@ -1,40 +1,32 @@
 import React from 'react'
-import Checkbox from 'react-toolbox/lib/checkbox';
+import CurrencyInput from 'components/CurrencyInput';
+import styles from './AmountUnequalSplitPersonList.scss'
 
-import PropTypes from "./PropTypes";
+import PropTypes from "./PropTypeDefinition";
 import PersonListItem from "./PersonListItem"
 import TopInfo from "./TopInfo"
 
 export const AmountEqualSplitPersonList = (props) => {
 
-  var noPersonSelected = props.selectedPersons.length == 0;
+  const {persons, selectedPersons, addOrUpdateSelectedPerson, removeSelectedPerson} = props;
 
-  var isSelectedPerson = (name) => props.selectedPersons.filter(s => s.name == name).length == 1;
-
-  var personSelectionChanged = (checkboxState, person) => {
-
-    var selectedPersons = props.selectedPersons.slice(0);
-
-    if(checkboxState) {
-      selectedPersons.push({name: person, amount: 0});
-    }else{
-      selectedPersons = selectedPersons.filter(s => s.name !== person);
-    }
-
-    props.onSelectedPersonsChanged(selectedPersons);
+  const onInputChange = (person, value) => {
+    addOrUpdateSelectedPerson({name: person, value: value});
   };
 
-  var personItems = props.persons.map(p => {
+  const personItems = persons.map(p => {
+
+    const value = (selectedPersons.filter(s => s.name === p)[0] || {amount: 0}).amount;
+
     return (
       <PersonListItem key={p} name={p}>
-        <Checkbox checked={isSelectedPerson(p)} onChange={(state) => personSelectionChanged(state, p)}/>
-      </PersonListItem>
-    )
+        <CurrencyInput className={styles.input} onChange={v => onInputChange(p, v)} value={value}/>
+      </PersonListItem>)
   });
 
   return (
     <div>
-      { noPersonSelected && <TopInfo>please select at least <b>one</b> person</TopInfo>}
+      { selectedPersons.length == 0 && <TopInfo>please select at least <b>one</b> person</TopInfo>}
       { personItems }
     </div>);
 };
@@ -42,3 +34,5 @@ export const AmountEqualSplitPersonList = (props) => {
 AmountEqualSplitPersonList.propTypes = PropTypes;
 
 export default AmountEqualSplitPersonList
+
+

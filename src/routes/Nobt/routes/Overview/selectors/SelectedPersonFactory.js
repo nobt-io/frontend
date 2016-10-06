@@ -9,6 +9,7 @@ export default class SelectedPersonFactory {
   createPersons(selectedPersons, amount) {
 
     if(this.splitNameStrategyName == SplitStrategyNames.EQUAL) return this.splitEqually(selectedPersons, amount);
+    if(this.splitNameStrategyName == SplitStrategyNames.UNEQUAL) return SelectedPersonFactory.splitUnequally(selectedPersons, amount);
 
     return [];
   }
@@ -24,5 +25,12 @@ export default class SelectedPersonFactory {
     mappedPersons[ 0 ].value += roundingError;
 
     return mappedPersons;
+  }
+
+  static splitUnequally(selectedPersons, amount) {
+
+    if(selectedPersons .length == 0) return [];
+
+    return selectedPersons.map(s => ({name: s.name, amount: s.value, value: s.value}));
   }
 }

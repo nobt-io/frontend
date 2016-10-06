@@ -27,10 +27,12 @@ export const CurrencyInput = React.createClass({
 
   render: function () {
 
-    const displayValue =
-      (this.state.value == 0 && this.props.value != 0) //if value is not loaded from prop, load it
+    var displayValue =
+      (this.state.value != this.props.value) //if state does not hold current value, update it
         ? this.props.value : this.state.inputValue;
 
+    displayValue = displayValue || ""; //avoid NaN
+    
     return (<Input {...this.props} placeholder="0.00" value={displayValue} onChange={this.valueChanged}/>)
   }
 });

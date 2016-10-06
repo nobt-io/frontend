@@ -3,7 +3,7 @@ import styles from './CreateExpenseModal.scss'
 import { FullScreenModal } from "components/Modal";
 import Header from "components/Header";
 import Avatar from "components/Avatar";
-import { AmountEqualSplitPersonList } from "components/AmountSplitPersonList";
+import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
 import Input from "react-toolbox/lib/input";
 import PersonSelectorModal from "components/PersonSelectorModal";
@@ -80,7 +80,7 @@ export const CreateExpenseModal = React.createClass({
                                                                addOrUpdateSelectedPerson={(p) => addOrUpdateSelectedPerson(p)}
                                                                removeSelectedPerson={(name) => removeSelectedPerson(name)} />),
       [SplitStrategyNames.PERCENTAGE]: (<div>WIP</div>),
-      [SplitStrategyNames.EQUAL]: (<AmountEqualSplitPersonList persons={persons}
+      [SplitStrategyNames.UNEQUAL]: (<AmountUnequalSplitPersonList persons={persons}
                                                                selectedPersons={selectedPersons}
                                                                amount={amount}
                                                                selectedAmount={selectedAmount}
