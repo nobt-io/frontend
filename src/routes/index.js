@@ -1,6 +1,6 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from "../layouts/CoreLayout/CoreLayout";
-import CreateRoute from "./Create";
+import NewNobtRoute from "./NewNobt";
 import NobtRoute from "./Nobt";
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -10,7 +10,7 @@ export const createRoutes = (store) => ({
   path: '/',
   component: CoreLayout,
   childRoutes: [
-    CreateRoute(store),
+    NewNobtRoute(store),
     NobtRoute(store)
   ]
 })

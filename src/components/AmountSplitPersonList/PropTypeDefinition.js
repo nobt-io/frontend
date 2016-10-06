@@ -6,7 +6,7 @@ export default {
     value: React.PropTypes.number.isRequired,
     amount: React.PropTypes.number.isRequired,
   })),
-  persons: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  personNames: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   removeSelectedPerson: React.PropTypes.func.isRequired,
   addOrUpdateSelectedPerson: React.PropTypes.func.isRequired
 }

@@ -24,7 +24,7 @@ export const AmountEqualSplitPersonList = (props) => {
     props.onSelectedPersonsChanged(selectedPersons);
   };
 
-  var personItems = props.persons.map(p => {
+  var personItems = props.personNames.map(p => {
     return (
       <PersonListItem key={p} name={p}>
         <Checkbox checked={isSelectedPerson(p)} onChange={(state) => personSelectionChanged(state, p)}/>

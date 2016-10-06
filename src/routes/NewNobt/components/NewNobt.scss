@@ -1,0 +1,52 @@
+// visual css:
+
+.NewNobt {
+
+  .metaInformationContainer {
+
+    background-color: $color-primary-light;
+
+    .currencyPickerContainer input, .nobtNameInput {
+        background-color: $color-primary;
+        border-radius: .5rem;
+        padding: .8rem;
+        color: $color-accent-dark;
+    }
+
+    .currencyPickerContainer {
+      input {
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+
+// layout css
+
+.NewNobt {
+
+  .metaInformationContainer {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .currencyPickerContainer {
+      width: 30%;
+
+      .currencies {
+        padding: 0;
+      }
+    }
+
+    .nobtNameContainer {
+      width: 60%;
+    }
+
+    .currencyPickerContainer, .nobtNameContainer {
+      margin: auto;
+    }
+  }
+}

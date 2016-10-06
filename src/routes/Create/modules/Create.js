@@ -34,7 +34,7 @@ export const actionCreator = {
       var nobtToCreate = {
         nobtName: createState.nobtName,
         currency: "EUR",
-        explicitParticipants: createState.persons
+        explicitParticipants: createState.personNames
       };
 
       return createNobt(nobtToCreate);
@@ -44,12 +44,12 @@ export const actionCreator = {
 
 export const actionHandlers = {
   [actionNames.ADD_PERSON]: (state, action) => {
-    var persons = [action.payload.name, ...state.persons];
-    return {...state, persons};
+    var persons = [action.payload.name, ...state.personNames];
+    return {...state, personNames};
   },
   [actionNames.REMOVE_PERSON]: (state, action) => {
-    var persons = state.persons.filter(person => person !== action.payload.name);
-    return {...state, persons};
+    var persons = state.personNames.filter(person => person !== action.payload.name);
+    return {...state, personNames};
   },
   [actionNames.SET_NOBTNAME]: (state, action) => {
     var nobtName = action.payload.name;

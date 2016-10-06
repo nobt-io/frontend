@@ -29,7 +29,7 @@ export const DebtSummaryItem = React.createClass({
     const {summary} = this.props;
 
     const me = summary.me;
-    const persons = summary.persons.map(p => (<span key={p.name} className={styles.avatar}><SmallAvatar name={p.name} /></span>));
+    const persons = summary.personNames.map(p => (<span key={p.name} className={styles.avatar}><SmallAvatar name={p.name} /></span>));
     const icon = isPositive(me) ? "add_circle" : "remove_circle";
 
     return (
@@ -57,7 +57,7 @@ export const DebtSummaryItem = React.createClass({
             <div className={styles.personsContainer}>
 
               <span className={styles.verb}>{isPositive(me) ? "from" : "to"}</span>
-              <span className={styles.persons}>{persons}</span>
+              <span className={styles.personNames}>{persons}</span>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ var personAmountPropType = React.PropTypes.shape({
 DebtSummaryItem.propTypes = {
   summary: React.PropTypes.shape({
     me: personAmountPropType,
-    persons: React.PropTypes.arrayOf(personAmountPropType),
+    personNames: React.PropTypes.arrayOf(personAmountPropType),
   }).isRequired
 };
 
