@@ -42,11 +42,16 @@ export const ExpenseFilter = React.createClass({
         <PersonSelectorModal
           title={"Filter expenses by"}
           active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
-          names={personNames} canSelectAll={true}/>
+<<<<<<< HEAD
+          persons={persons} canSelectAll={true}/>
         <ListSelectModal
           active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}
           title={"Sort by"} list={[{name: "Date", icon: "access_time"}, {name: "Amount", icon: "timeline"}]}
         />
+=======
+          names={personNames} canSelectAll={true}/>
+        <SortByModal active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}/>
+>>>>>>> a67c1d94448357d2af77dc5c320e92f4fcdb8c8a
         <div>
           <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}
                 className={styles.filterIcon}><FontIcon value='clear'/></span>
