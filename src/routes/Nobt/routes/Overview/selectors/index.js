@@ -1,11 +1,15 @@
 import { createSelector } from "reselect";
 import _debug from "debug";
 import PersonDebtSummaryFactory from "./PersonDebtSummaryFactory";
+import SplitStrategyNames from "const/SplitStrategyNames"
+import SelectedPersonFactory from "./SelectedPersonFactory";
 
 const getNobt = (state) => state.Nobt.currentNobt;
 const getActiveTab = (state) => state.Nobt.activeTab;
 export const getExpensesFilter = (state) => state.Nobt.expenseFilter;
 export const getExpensesSortProperty = (state) => state.Nobt.expenseSortProperty;
+export const getCreateExpenseViewInfo = (state) => state.Nobt.createExpenseViewInfo;
+
 
 export const getName = createSelector([ getNobt ], (nobt) => nobt.name);
 export const getMembers = createSelector([ getNobt ], (nobt) => nobt.participatingPersons);
@@ -85,4 +89,32 @@ export const getTotal = createSelector([ getExpenses ], (expenses) => {
   return nobtTotal;
 });
 
-const sumExpense = (expense) => expense.shares.map(share => share.amount).reduce((sum, amount) => sum + amount);
+export const getCreateExpenseState = createSelector([getCreateExpenseViewInfo], (createExpense) => {
+  return {
+    active: createExpense.show,
+    subject: createExpense.subject,
+    amount: createExpense.amount,
+    paidByPerson: createExpense.paidByPerson,
+    creationDate: createExpense.creationDate,
+    splitStrategy: createExpense.splitStrategy
+  };
+});
+
+export const getCreateExpenseSelection = createSelector([getCreateExpenseViewInfo], (createExpense) => {
+
+  var strategy = createExpense.splitStrategy;
+
+  var selectedPersons = createExpense.selectedPersons[strategy];
+  var amount = createExpense.amount;
+
+  var personFactory = new SelectedPersonFactory(strategy);
+  var mappedPersons = personFactory.createPersons(selectedPersons, amount);
+  var sumOfPersonAmounts = mappedPersons.reduce((sum, person) => sum + person.value, 0);
+
+  return {
+    selectedAmount: sumOfPersonAmounts,
+    selectedPersons: mappedPersons
+  };
+});
+
+const sumExpense = (expense) => expense.shares.map(share => share.value).reduce((sum, amount) => sum + amount);

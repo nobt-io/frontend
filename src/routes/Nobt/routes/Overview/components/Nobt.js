@@ -64,10 +64,12 @@ export const Nobt = React.createClass({
           title: "Add expense",
           show: true
         }}/>
-        {this.props.showCreateExpenseModal &&
-        <CreateExpenseModal editState={this.props.createExpenseEditState}
-                            updateState={this.props.updateCreateExpenseEditState}
-                            active={this.props.showCreateExpenseModal}
+        {this.props.createExpenseState.active &&
+        <CreateExpenseModal state={this.props.createExpenseState}
+                            selection={this.props.createExpenseSelection}
+                            updateState={this.props.createExpenseUpdateEditState}
+                            addOrUpdateSelectedPerson={this.props.createExpenseAddOrUpdateSelectedPerson}
+                            removeSelectedPerson={this.props.createExpenseRemoveSelectedPerson}
                             persons={this.props.members}
                             onClose={this.props.closeCreateExpenseModal}
                             onCreateExpense={this.props.createExpense}/>
@@ -113,9 +115,7 @@ Nobt.defaultProps = {
   expenseSortProperty: 'Date',
   debtSummaries: [],
   activeTabIndex: 0,
-
-  nobtIsEmpty: true,
-  showCreateExpenseModal: true,
+  nobtIsEmpty: true
 };
 
 Nobt.childContextTypes = {
