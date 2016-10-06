@@ -65,7 +65,7 @@ export const CreateExpenseModal = React.createClass({
       return (
         <FullScreenModal active={active} onClose={onClose}>
           <PersonSelectorModal
-            title={"Who paid?"} canInsertPerson={true} persons={persons}
+            title={"Who paid?"} canInsertPerson={true} names={persons}
             active={personModalIsActive} onClose={this.onPersonModalClose}
             onFilterChange={(paidByPerson) => this.refreshState({paidByPerson})}
           />

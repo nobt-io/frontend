@@ -39,7 +39,12 @@ export const nobtActionFactory = {
 };
 
 const actionHandlers = {
-  [actionNames.SET_NOBT]: (state, action) => ({...state, currentNobt: action.payload.nobt}),
+  [actionNames.SET_NOBT]: (state, action) => {
+
+    state.createExpenseViewInfo.state.paidByPerson = action.payload.nobt.participatingPersons[0];
+
+    return ({...state, currentNobt: action.payload.nobt, createExpenseViewInfo: state.createExpenseViewInfo});
+  },
   [actionNames.CHANGE_TAB]: (state, action) => ({...state, activeTab: action.payload.tabName}),
   [actionNames.UPDATE_EXPENSES_FILTER]: (state, action) => ({...state, expenseFilter: action.payload.filter}),
   [actionNames.UPDATE_EXPENSES_SORT_PROPERTY]: (state, action) => ({

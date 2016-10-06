@@ -1,15 +1,14 @@
 import React from "react";
-import {LowerScreenModal} from "components/Modal";
+import { LowerScreenModal } from "components/Modal";
 import PersonMoneyList from "components/PersonMoneyList";
 import Avatar from "components/Avatar";
-import Amount from "components/Amount"
+import Amount from "components/Amount";
 import styles from "./DebtSummaryDetailModel.scss";
 
 export const DebtSummaryDetailModel = (props) => {
 
 
-  const onClose = props.onClose || (() => {
-    });
+  const onClose = props.onClose || (() => { });
   const active = props.active || false;
   const transaction = props.debtSummary;
 
@@ -19,8 +18,8 @@ export const DebtSummaryDetailModel = (props) => {
   const isSinglePerson = persons.length == 1;
 
   if (isSinglePerson) {
-    const firstPerson = !me.isPositive ? me.name : persons[0].name;
-    const secondPerson = me.isPositive ? me.name : persons[0].name;
+    const firstPerson = !me.isPositive ? me.name : persons[ 0 ].name;
+    const secondPerson = me.isPositive ? me.name : persons[ 0 ].name;
 
     return (
       <LowerScreenModal active={active} onClose={onClose}>
@@ -65,7 +64,7 @@ export const DebtSummaryDetailModel = (props) => {
             <span> {directionKeyword}&nbsp;{persons.length} persons</span>
           </span>
         </div>
-        <PersonMoneyList persons={persons} showKeyword={true}></PersonMoneyList>
+        <PersonMoneyList persons={persons} showKeyword={true} />
       </LowerScreenModal>);
   }
 
