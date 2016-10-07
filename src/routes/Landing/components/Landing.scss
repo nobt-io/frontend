@@ -1,0 +1,69 @@
+.landing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url("http://shaneweng.com/landing-page-theme/img/intro-bg.jpg") center center;
+
+  .flexContainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    .title {
+      font-size: 7rem;
+      color: white;
+    }
+
+    .slogan {
+      color: white;
+      font: 400 2.5em/125% 'Handlee', Helvetica, Sans-serif;
+    }
+
+    .createNobtContainer {
+      margin-top: 3rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background-color: rgba(0, 0, 0, .65);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .inputContainer{
+        .inputBar, .inputCounter { display: none; }
+        .inputElement, .inputWrapper { padding: 0; }
+        .inputElement {
+          text-align: center;
+          color: white;
+          display: block;
+          padding: 0;
+          margin: 0 3rem 0 0;
+        }
+      }
+
+      .buttonContainer {
+        .button{ background-color: $color-primary; }
+      }
+    }
+
+    .addressContainer{
+      color: white;
+      margin-top: 1rem;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .icon{ margin-right: 0.5rem; margin-top: 5px;}
+      .url { }
+    }
+  }
+}
+
