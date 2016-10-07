@@ -13,13 +13,13 @@ export const Header = (props) => (
       {
         (props.leftButton) &&
         (<div className={styles.leftContainer}>
-          <Button className={styles.button} icon={props.leftButton.icon} onClick={props.leftButton.onClick}>{props.leftButton.title}</Button>
+          <Button className={styles.button} icon={props.leftButton.icon} disabled={!props.leftButton.active()} onClick={props.leftButton.onClick}>{props.leftButton.title}</Button>
         </div>)
       }
       {
         (props.rightButton) &&
         (<div className={styles.rightContainer}>
-          <Button className={styles.button} icon={props.rightButton.icon} onClick={props.rightButton.onClick}>{props.rightButton.title}</Button>
+          <Button className={styles.button} icon={props.rightButton.icon} disabled={!props.rightButton.active()} onClick={props.rightButton.onClick}>{props.rightButton.title}</Button>
         </div>)
       }
     </AppBar>
@@ -28,11 +28,13 @@ export const Header = (props) => (
 
 Header.propTypes = {
   leftButton: React.PropTypes.shape({
+    active: React.PropTypes.func.isRequired,
     title: React.PropTypes.string.isRequired,
     icon: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func.isRequired,
   }),
   rightButton: React.PropTypes.shape({
+    active: React.PropTypes.func.isRequired,
     title: React.PropTypes.string.isRequired,
     icon: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func.isRequired,

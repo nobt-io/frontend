@@ -1,4 +1,5 @@
 import _debug from "debug";
+import { createNobt } from "api/api";
 
 export const actionNames = {
   CURRENCY_SELECTION_CHANGED: 'NewNobt.CURRENCY_SELECTION_CHANGED',
@@ -12,6 +13,20 @@ export const actionFactory = {
   nobtNameChanged: (newName) => ({type: actionNames.NOBT_NAME_CHANGED, payload: {newName}}),
   addPerson: (name) => ({type: actionNames.ADD_PERSON, payload: {name}}),
   removePerson: (name) => ({type: actionNames.REMOVE_PERSON, payload: {name}}),
+  createNobt: () => {
+    return (dispatch, getState) => {
+
+      var state = getState().NewNobt;
+
+      var nobtToCreate = {
+        nobtName: state.chosenName,
+        currency: state.selectedCurrency,
+        explicitParticipants: state.personNames
+      };
+
+      return createNobt(nobtToCreate);
+    };
+  }
 };
 
 const actionHandlers = {

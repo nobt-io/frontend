@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "react-toolbox/lib/button";
 import { Input } from "react-toolbox/lib/input";
 import Header from "components/Header";
 import CurrencyPicker from "components/CurrencyPicker";
@@ -17,16 +16,29 @@ const NewNobt = React.createClass({
     }
   },
 
+  createNobt: function () {
+    this.props.createNobt().then((response) => {
+      this.props.history.push(`/${response.data.id}`);
+    }, () => {
+      //Todo: show error!
+    });
+  },
+
   render: function () {
     return (
       <div className={styles.NewNobt}>
-        <Header showButton={true}>
-          <Button className={styles.button} icon="check_box">Create Nobt</Button>
-        </Header>
+        <Header showButton={true} rightButton={
+          {
+            icon: "",
+            title: "Create nobt",
+            onClick: this.createNobt,
+            active: () => this.props.isStateValidForCreation
+          }
+        } />
 
         <div className={styles.metaInformationContainer}>
           <Input
-            theme={ { input: styles.nobtNameContainer, inputElement: styles.nobtNameInput } }
+            theme={ {input: styles.nobtNameContainer, inputElement: styles.nobtNameInput} }
             type="text"
             maxLength={30}
             value={this.props.chosenName}
@@ -44,16 +56,16 @@ const NewNobt = React.createClass({
           />
         </div>
 
-        <div className={styles.addPersonContainer}>
+        <section>
           <SingleInputInlineForm buttonIcon="add_circle_outline"
                                  isButtonDisabled={this.props.isEvilTwin}
                                  placeholder="Who is in?"
-                                 onSubmit={this.props.addPerson}/>
-        </div>
-
-        <div className={styles.personListContainer}>
-          <PersonList persons={this.props.personNames} onPersonRemove={this.props.removePerson}/>
-        </div>
+                                 onSubmit={this.props.addPerson} />
+          <PersonList
+            persons={this.props.personNames}
+            onPersonRemove={this.props.removePerson}
+          />
+        </section>
       </div>
     );
   }

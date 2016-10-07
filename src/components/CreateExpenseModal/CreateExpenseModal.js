@@ -119,7 +119,8 @@ export const CreateExpenseModal = React.createClass({
         />
         <Header
           showNobtHeader={false}
-          rightButton={!expenseIsValid ? null : {
+          rightButton={{
+            active: () => expenseIsValid,
             icon: "check_box",
             onClick: () => this.createExpense(),
             title: "Create expense"

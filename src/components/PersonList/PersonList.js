@@ -1,18 +1,21 @@
 import React from "react";
 import styles from "./PersonList.scss";
-import {Avatar} from "components/Avatar";
+import { Person, AvatarPosition, AvatarSize } from "components/Person";
 import { Button } from "react-toolbox/lib/button";
 
 export const PersonList = (props) => {
 
   const displayRemoveButton = props.hasDeleteButton ? "none" : "inline";
 
-  const persons = props.persons.map((person) => (
-    <div className={styles.PersonItem} key={person}>
-      <Avatar size={40} name={person}/>
-      <span className={styles.PersonName}>{person}</span>
-      <Button style={{display: displayRemoveButton}} className={styles.RemoveButton} icon='clear'
-              onClick={() => props.onPersonRemove(person)} floating/>
+  const persons = props.persons.map((name) => (
+    <div className={styles.person} key={name}>
+      <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} name={name} />
+      <Button style={{display: displayRemoveButton}}
+              className={styles.RemoveButton}
+              icon='clear'
+              onClick={() => props.onPersonRemove(name)}
+              floating
+      />
     </div>
   ));
 

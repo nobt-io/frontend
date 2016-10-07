@@ -52,7 +52,7 @@ export const Nobt = React.createClass({
 
     var hashRoute = indexHashMapping[ index ] || 'transactions';
 
-    this.navigate(`/nobt/${this.props.params.id}#${hashRoute}`);
+    this.navigate(`/${this.props.params.id}#${hashRoute}`);
   },
 
   render: function () {
@@ -62,7 +62,7 @@ export const Nobt = React.createClass({
           icon: "add_box",
           onClick: this.props.openNewExpenseOverlay,
           title: "Add expense",
-          show: true
+          active: () => true
         }}/>
         {this.props.newExpenseMetaData.active &&
         <CreateExpenseModal metaData={this.props.newExpenseMetaData}
