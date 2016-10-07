@@ -8,6 +8,5 @@ export default {
   })),
   nobtMembers: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   setPersonValue: React.PropTypes.func.isRequired,
-  involvedPersonsAreValid: React.PropTypes.bool.isRequired,
-  involvedPersonsCalculationInfo: React.PropTypes.number.isRequired
+  involvedPersonsAreValid: React.PropTypes.bool.isRequired
 };

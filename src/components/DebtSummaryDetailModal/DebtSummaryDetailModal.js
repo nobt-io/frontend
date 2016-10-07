@@ -12,7 +12,7 @@ export const DebtSummaryDetailModal = (props) => {
   const active = props.active || false;
 
   const debtSummary = props.debtSummary;
-  const persons = debtSummary.personNames;
+  const persons = debtSummary.persons;
   const me = debtSummary.me;
 
   return (

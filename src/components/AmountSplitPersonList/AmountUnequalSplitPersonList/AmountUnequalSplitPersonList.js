@@ -40,7 +40,6 @@ export const AmountUnequalSplitPersonList = (props) => {
 AmountUnequalSplitPersonList.propTypes = {
   ...CommonPropTypes,
   involvedPersonsCalculationInfo: React.PropTypes.shape({
-    currentAmount: React.PropTypes.number.isRequired,
     remainingAmount: React.PropTypes.number.isRequired,
   })
 };

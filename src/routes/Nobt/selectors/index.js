@@ -54,8 +54,6 @@ export const getFilteredExpenses = createSelector([ getExpenses, getExpensesFilt
   var matchDebtors = (expense) => expense.shares.map( s => s.debtor ).filter(matchName).length > 0;
 
   const filteredAndSortedExpenses = expenses
-    .filter(e => (matchDebtee(e) || matchDebtors(e)))
-    .sort(sortFunctions[ sort ] || NO_SORT)
     .map(e => {
 
       const debteeName = e.debtee;
@@ -74,7 +72,9 @@ export const getFilteredExpenses = createSelector([ getExpenses, getExpensesFilt
         },
         debtors: debtors
       };
-    });
+    })
+    .filter(e => (matchDebtee(e) || matchDebtors(e)))
+    .sort(sortFunctions[ sort ] || NO_SORT);
 
   _debug('selectors:getFilteredExpenses')(filteredAndSortedExpenses);
 
@@ -123,4 +123,4 @@ export const getNewExpensePersonData = createSelector([getCreateExpenseViewInfo]
 
 });
 
-const sumExpense = (expense) => expense.shares.map(share => share.value).reduce((sum, amount) => sum + amount);
+const sumExpense = (expense) => expense.shares.map(share => share.amount).reduce((sum, amount) => sum + amount);
