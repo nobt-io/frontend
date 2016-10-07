@@ -2,8 +2,6 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
-
-# THANKS
-
-    <name>
+    David Leitner -- Developer -- @duffleit
+    Thomas Eizinger -- Developer -- @oetzn
+    Matthias Kreuzriegler -- Developer -- @Mkreuzriegler
