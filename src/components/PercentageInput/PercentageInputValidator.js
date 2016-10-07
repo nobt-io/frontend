@@ -9,11 +9,9 @@ const PercentageInputValidator = {
     const percentageIsOverHundred = (n) => n > 100;
 
     if (percentageIsNoValidNumber(percentage)) {
-      console.log("overHundere")
       return false;
     }
     if (percentageIsOverHundred(percentage)) {
-      console.log("overHundere")
       return false;
     }
 

@@ -88,7 +88,6 @@ const actionHandlers = {
     return {...state, newNobt, newBillViewInfo: {...state.newBillViewInfo, ...action.payload.metaData}};
   },
   [actionNames.SET_NEW_BILL_PERSON_VALUE]: (state, action) => {
-    console.log(action.payload);
     var personName = action.payload.name;
     var personValue = action.payload.value;
     var currentStrategy = state.newBillViewInfo.splitStrategy;

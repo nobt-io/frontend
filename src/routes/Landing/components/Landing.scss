@@ -1,0 +1,173 @@
+.landing {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: url("https://static.pexels.com/photos/24529/pexels-photo.jpg") no-repeat center center;
+  background-size: cover;
+
+  .backgroundShadow{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.31);
+  }
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    .title {
+      font-size: 7rem;
+      color: $color-primary-dark;
+    }
+
+    .slogan {
+      color: $color-primary-dark;
+      font: 400 2em 'Handlee', Helvetica, Sans-serif;
+    }
+
+    .createNobtContainer {
+      margin-top: 3rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background-color: rgba(0, 0, 0, .65);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .inputContainer {
+        padding: 1rem 0;
+        border-bottom: 1px solid white;
+        margin-bottom: 1rem;
+
+        .inputBar, .inputCounter {
+          display: none;
+        }
+        .inputElement, .inputWrapper {
+          padding: 0;
+        }
+        .inputElement {
+          text-align: center;
+          color: white;
+          display: block;
+          padding: 0;
+          margin: 0 3rem 0 0;
+        }
+      }
+
+      .buttonContainer {
+        .button {
+          background-color: $color-primary;
+        }
+      }
+    }
+
+    .addressContainer {
+      color: $color-primary-dark;
+      margin-top: 1rem;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .icon {
+        margin-right: 0.5rem;
+        margin-top: 5px;
+      }
+      .url {
+        a, a:hover, a:active, a:visited{color: $color-primary-dark; text-decoration: none}
+      }
+    }
+  }
+
+  .phoneContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    background: no-repeat top center;
+  }
+}
+
+@media (min-width: 500px) and (min-height: 700px) {
+  .landing .phoneContainer {
+    height: 380px;
+  }
+  .landing .container{
+    bottom: 400px;
+  }
+}
+
+@media (min-width: 400px)  and (min-height: 600px) {
+  .landing .phoneContainer {
+    height: 300px;
+  }
+  .landing .container {
+    bottom: 300px;
+  }
+  .landing .container .createNobtContainer {
+    flex-direction: row;
+  }
+  .landing .container .slogan {
+    font-size: 2.3em;
+  }
+  .landing .container .createNobtContainer .inputContainer{
+    padding: 0;
+    border-bottom: 0 solid white;
+    margin-bottom: 0;
+  }
+}
+.footerContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background-color: #1e2125;
+  border-top: 1px solid white;
+  font-size: 1.5rem;
+
+  .helpFooter, .loveFooter {
+    color: white;
+    text-align: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .helpFooter {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+
+    a, a:hover, a:active, a:visited{color: white; text-decoration: none}
+
+    .helpIcon {
+      margin: 5px 5px 0;
+    }
+  }
+  .loveFooter {
+    font-size: 1.3rem;
+
+    .loveIcon {
+      color: #DB504A;
+      font-size: 1rem;
+      margin: 3px 3px 0;
+
+      span{font-size: 1.8rem}
+    }
+  }
+}
+
