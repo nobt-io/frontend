@@ -52,6 +52,7 @@ export const CreateExpenseModal = React.createClass({
 
       this.props.createExpense(expenseToCreate).then((response) => {
         this.props.reloadNobt();
+        this.props.onClose();
       }, () => {
         //Todo: show error!
       });
@@ -127,12 +128,12 @@ export const CreateExpenseModal = React.createClass({
           <Header
             showNobtHeader={false}
             rightButton={{
-              active: () => expenseIsValid,
+              active: expenseIsValid,
               icon: "check_box",
               onClick: () => this.createExpense(),
               title: "Create expense"
             }}
-            leftButton={{icon: "arrow_back", onClick: () => this.props.onClose(), title: "Back"}}
+            leftButton={{icon: "arrow_back", onClick: () => this.props.onClose(), title: "Back", active: true}}
           />
           <div className={styles.headInput}>
             <div>

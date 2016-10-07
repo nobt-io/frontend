@@ -32,7 +32,7 @@ const NewNobt = React.createClass({
             icon: "",
             title: "Create nobt",
             onClick: this.createNobt,
-            active: () => this.props.isStateValidForCreation
+            active: this.props.isStateValidForCreation
           }
         } />
 
@@ -82,6 +82,7 @@ NewNobt.propTypes = {
   removePerson: React.PropTypes.func.isRequired,
   isEvilTwin: React.PropTypes.func.isRequired,
   addPerson: React.PropTypes.func.isRequired,
+  isStateValidForCreation: React.PropTypes.bool.isRequired
 };
 
 NewNobt.defaultProps = {

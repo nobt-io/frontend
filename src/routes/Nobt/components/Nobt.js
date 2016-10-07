@@ -61,8 +61,8 @@ export const Nobt = React.createClass({
         <Header rightButton={{
           icon: "add_box",
           onClick: this.props.openNewExpenseOverlay,
-          title: "Add expense",
-          active: () => true
+          title: "Add a bill",
+          active: true
         }}/>
         {this.props.newExpenseMetaData.active &&
         <CreateExpenseModal metaData={this.props.newExpenseMetaData}
@@ -84,7 +84,7 @@ export const Nobt = React.createClass({
             <Tab label="Transactions">
               <DebtSummaryList debtSummaries={this.props.debtSummaries}/>
             </Tab>
-            <Tab label="Expenses">
+            <Tab label="Bills">
               <ExpenseFilter
                 personNames={this.props.members}
                 onFilterChange={(filter) => this.props.updateExpensesFilter(filter)}
