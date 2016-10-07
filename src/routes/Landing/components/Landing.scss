@@ -4,24 +4,28 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: url("http://shaneweng.com/landing-page-theme/img/intro-bg.jpg") center center;
+  background: url("https://static.pexels.com/photos/24529/pexels-photo.jpg") no-repeat center center;
+  background-size: cover;
 
-  .flexContainer {
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 380px;
+    right: 0;
     display: flex;
-    width: 100%;
-    height: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    
+
     .title {
       font-size: 7rem;
-      color: white;
+      color: $color-primary-dark;
     }
 
     .slogan {
-      color: white;
+      color: $color-primary-dark;
       font: 400 2.5em/125% 'Handlee', Helvetica, Sans-serif;
     }
 
@@ -35,9 +39,13 @@
       justify-content: center;
       align-items: center;
 
-      .inputContainer{
-        .inputBar, .inputCounter { display: none; }
-        .inputElement, .inputWrapper { padding: 0; }
+      .inputContainer {
+        .inputBar, .inputCounter {
+          display: none;
+        }
+        .inputElement, .inputWrapper {
+          padding: 0;
+        }
         .inputElement {
           text-align: center;
           color: white;
@@ -48,12 +56,14 @@
       }
 
       .buttonContainer {
-        .button{ background-color: $color-primary; }
+        .button {
+          background-color: $color-primary;
+        }
       }
     }
 
-    .addressContainer{
-      color: white;
+    .addressContainer {
+      color: $color-primary-dark;
       margin-top: 1rem;
 
       display: flex;
@@ -61,8 +71,66 @@
       justify-content: center;
       align-items: center;
 
-      .icon{ margin-right: 0.5rem; margin-top: 5px;}
-      .url { }
+      .icon {
+        margin-right: 0.5rem;
+        margin-top: 5px;
+      }
+      .url {
+        a, a:hover, a:active, a:visited{color: $color-primary-dark; text-decoration: none}
+      }
+    }
+  }
+
+  .phoneContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 400px;
+    background-position: top center;
+    background-repeat: no-repeat;
+  }
+}
+
+.footerContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background-color: #1e2125;
+  border-top: 1px solid white;
+  font-size: 1.5rem;
+
+  .helpFooter, .loveFooter {
+    color: white;
+    text-align: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .helpFooter {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+
+    a, a:hover, a:active, a:visited{color: white; text-decoration: none}
+
+    .helpIcon {
+      margin: 5px 5px 0;
+    }
+  }
+  .loveFooter {
+    font-size: 1.3rem;
+
+    .loveIcon {
+      color: ##DB504A;
+      font-size: 1rem;
+      margin: 3px 3px 0;
+
+      span{font-size: 1.8rem}
     }
   }
 }
