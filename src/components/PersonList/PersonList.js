@@ -7,7 +7,7 @@ export const PersonList = (props) => {
 
   const displayRemoveButton = props.hasDeleteButton ? "none" : "inline";
 
-  const persons = props.persons.map((name) => (
+  const persons = props.names.map((name) => (
     <div className={styles.person} key={name}>
       <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} name={name} />
       <Button style={{display: displayRemoveButton}}
@@ -25,13 +25,13 @@ export const PersonList = (props) => {
 };
 
 PersonList.propTypes = {
-  persons: React.PropTypes.array.isRequired,
+  names: React.PropTypes.array.isRequired,
   onPersonRemove: React.PropTypes.func,
   hasDeleteButton: React.PropTypes.bool
 };
 
 PersonList.defaultProps = {
-  persons: [],
+  names: [],
   onPersonRemove: () => { },
   hasDeleteButton: false,
 };

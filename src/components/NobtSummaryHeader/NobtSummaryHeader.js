@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./NobtSummary.scss";
+import styles from "./NobtSummaryHeader.scss";
 import Amount from "components/Amount"
 
-export const NobtSummary = (props) => {
+export const NobtSummaryHeader = (props) => {
 
    var nobtDetails = (props.isNobtEmpty)
     ? ""
@@ -16,11 +16,11 @@ export const NobtSummary = (props) => {
   );
 };
 
-NobtSummary.propTypes = {
+NobtSummaryHeader.propTypes = {
   nobtName: React.PropTypes.string.isRequired,
   totalAmount: React.PropTypes.number.isRequired,
   memberCount: React.PropTypes.number.isRequired,
   isNobtEmpty: React.PropTypes.bool.isRequired
 };
 
-export default NobtSummary
+export default NobtSummaryHeader

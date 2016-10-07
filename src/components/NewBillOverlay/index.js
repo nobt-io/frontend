@@ -1,3 +1,3 @@
-import CreateBillModal from './NewBillOverlay'
+import NewBillOverlay from './NewBillOverlay'
 
-export default CreateBillModal
+export default NewBillOverlay

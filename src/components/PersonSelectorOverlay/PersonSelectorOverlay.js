@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./PersonSelectorModal.scss";
+import styles from "./PersonSelectorOverlay.scss";
 import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
-import { LowerScreenModal } from "components/Modal";
+import { LowerScreenOverlay } from "components/Overlay";
 import {Avatar} from "components/Avatar";
 import SingleInputInlineForm from "components/SingleInputInlineForm"
 import FontIcon from 'react-toolbox/lib/font_icon';
 
-export const PersonSelectorModal = (props) => {
+export const PersonSelectorOverlay = (props) => {
 
   const onItemClick = (name) => {
     props.onFilterChange(name);
@@ -19,7 +19,7 @@ export const PersonSelectorModal = (props) => {
     }/>));
 
   return (
-    <LowerScreenModal header={props.title} active={props.active} onClose={props.onClose}>
+    <LowerScreenOverlay header={props.title} active={props.active} onClose={props.onClose}>
       <div className={styles.listWrapper}>
         <List selectable ripple>
           <div style={{display: props.canSelectAll ? "block" : "none"}}>
@@ -38,11 +38,11 @@ export const PersonSelectorModal = (props) => {
           </div>
         </List>
       </div>
-    </LowerScreenModal>
+    </LowerScreenOverlay>
   );
 };
 
-PersonSelectorModal.propTypes = {
+PersonSelectorOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   onFilterChange: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
@@ -52,9 +52,9 @@ PersonSelectorModal.propTypes = {
   canInsertPerson: React.PropTypes.bool
 };
 
-PersonSelectorModal.defaultProps = {
+PersonSelectorOverlay.defaultProps = {
   canSelectAll: false,
   canInsertPerson: false,
 }
 
-export default PersonSelectorModal
+export default PersonSelectorOverlay

@@ -62,7 +62,7 @@ const NewNobt = React.createClass({
                                  placeholder="Who is in?"
                                  onSubmit={this.props.addPerson} />
           <PersonList
-            persons={this.props.personNames}
+            names={this.props.personNames}
             onPersonRemove={this.props.removePerson}
           />
         </section>

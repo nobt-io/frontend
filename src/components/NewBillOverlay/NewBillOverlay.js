@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from './NewBillOverlay.scss'
-import { FullScreenModal } from "components/Modal";
+import { FullScreenOverlay } from "components/Overlay";
 import Header from "components/Header";
 import { Avatar } from "components/Avatar";
 import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList, AmountPercentageSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
 import Input from "react-toolbox/lib/input";
-import PersonSelectorModal from "components/PersonSelectorModal";
-import DatePickerModal from "components/DatePickerModal";
-import ListSelectModal from "components/ListSelectModal";
+import PersonSelectorOverlay from "components/PersonSelectorOverlay";
+import DatePickerOverlay from "components/DatePickerOverlay";
+import ListSelectOverlay from "components/ListSelectOverlay";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import {FormattedDate} from "react-intl";
 
@@ -87,18 +87,18 @@ export const NewBillOverlay = React.createClass({
       }
 
       return (
-        <FullScreenModal active={active} onClose={() => this.props.onClose()}>
-          <PersonSelectorModal
+        <FullScreenOverlay active={active} onClose={() => this.props.onClose()}>
+          <PersonSelectorOverlay
             title={"Who paid?"} canInsertPerson={true} names={nobtMembers}
             active={personModalIsActive || false} onClose={() => this.setModalState({personModalIsActive: false})}
             onFilterChange={(paidByPerson) => this.setMetaData({paidByPerson})}
           />
-          <DatePickerModal
+          <DatePickerOverlay
             title={"When?"} active={dateModalIsActive || false}
             onClose={() => this.setModalState({dateModalIsActive: false})}
             onDateChange={(creationDate) => this.setMetaData({creationDate})}
           />
-          <ListSelectModal
+          <ListSelectOverlay
             active={shareModalIsActive || false} onSortChange={(splitStrategy) => this.setMetaData({splitStrategy})}
             title={"Split by"} onClose={() => this.setModalState({shareModalIsActive: false})}
             list={[
@@ -150,7 +150,7 @@ export const NewBillOverlay = React.createClass({
           <div className={styles.splitContainer}>
             {amountSplitPersonList}
           </div>
-        </FullScreenModal>
+        </FullScreenOverlay>
 
       );
     }

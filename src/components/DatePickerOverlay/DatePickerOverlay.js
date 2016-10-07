@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./DatePickerModal.scss";
-import { LowerScreenModal } from "components/Modal";
+import styles from "./DatePickerOverlay.scss";
+import { LowerScreenOverlay } from "components/Overlay";
 import DatePicker from 'react-toolbox/lib/date_picker';
 
-export const DatePickerModal = (props) => {
+export const DatePickerOverlay = (props) => {
 
   const onYesterdayDateClick = (date) => {
     var yesterday = new Date();
@@ -17,18 +17,18 @@ export const DatePickerModal = (props) => {
   };
 
   return (
-    <LowerScreenModal header={props.title} active={props.active} onClose={props.onClose}>
+    <LowerScreenOverlay header={props.title} active={props.active} onClose={props.onClose}>
       <div className={styles.container}>
         <span onClick={() => onDateClick(new Date())} className={styles.button}>Today</span>
         <span onClick={() => onYesterdayDateClick()} className={styles.button}>Yesterday</span>
         <DatePicker theme={{input: styles.datePicker}} label='Other Date?' onChange={(d) => onDateClick(d)}/>
         <div style={{clear: "both"}}></div>
       </div>
-    </LowerScreenModal>
+    </LowerScreenOverlay>
   );
 };
 
-DatePickerModal.propTypes = {
+DatePickerOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   onDateChange: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
@@ -36,4 +36,4 @@ DatePickerModal.propTypes = {
 };
 
 
-export default DatePickerModal
+export default DatePickerOverlay

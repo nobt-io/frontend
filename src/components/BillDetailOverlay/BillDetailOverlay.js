@@ -1,5 +1,5 @@
 import React from "react";
-import {LowerScreenModal} from "components/Modal";
+import { LowerScreenOverlay } from "components/Overlay";
 import PersonMoneyList from "components/PersonMoneyList";
 import {Avatar} from "components/Avatar";
 import Amount from "components/Amount"
@@ -8,7 +8,7 @@ import {FormattedDate} from "react-intl";
 import styles from "./BillDetailOverlay.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
 
-export const BillModal = (props) => {
+export const BillDetailOverlay = (props) => {
 
   const onClose = props.onClose || (() => { });
   const active = props.active || false;
@@ -19,7 +19,7 @@ export const BillModal = (props) => {
   const persons = bill.debtors;
 
   return (
-    <LowerScreenModal header={name} active={active} onClose={onClose}>
+    <LowerScreenOverlay header={name} active={active} onClose={onClose}>
       <PersonMoneyList persons={persons} showKeyword={false}/>
       <div className={styles.debtee}>
         <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>
@@ -40,14 +40,14 @@ export const BillModal = (props) => {
         </span>
         <div style={{clear: "both"}}></div>
       </div>
-    </LowerScreenModal>);
+    </LowerScreenOverlay>);
 
 };
 
-BillModal.propTypes = {
+BillDetailOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   bill: React.PropTypes.object.isRequired,
 };
 
-export default BillModal
+export default BillDetailOverlay

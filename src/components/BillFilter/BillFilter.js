@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./BillFilter.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
-import PersonSelectorModal from "components/PersonSelectorModal";
-import ListSelectModal from "components/ListSelectModal";
+import PersonSelectorOverlay from "components/PersonSelectorOverlay";
+import ListSelectOverlay from "components/ListSelectOverlay";
 import {Avatar} from "components/Avatar";
 
 export const BillFilter = React.createClass({
@@ -39,11 +39,11 @@ export const BillFilter = React.createClass({
 
     return (
       <div className={styles.container}>
-        <PersonSelectorModal
+        <PersonSelectorOverlay
           title={"Filter bills by"}
           active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
           names={personNames} canSelectAll={true}/>
-        <ListSelectModal
+        <ListSelectOverlay
           active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}
           title={"Sort by"} list={[{name: "Date", icon: "access_time"}, {name: "Amount", icon: "timeline"}]}
         />

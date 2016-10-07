@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Nobt.scss";
 import Header from "components/Header";
-import NobtSummary from "components/NobtSummary";
+import NobtSummaryHeader from "components/NobtSummaryHeader";
 import DebtSummaryList from "components/DebtSummaryList";
 import BillList from "components/BillList";
 import BillFilter from "components/BillFilter";
@@ -74,8 +74,8 @@ export const Nobt = React.createClass({
                         addBill={this.props.addBill}
                         reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
         }
-        <NobtSummary nobtName={this.props.name} totalAmount={this.props.total}
-                     memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty}/>
+        <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
+                           memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty}/>
         <div>
           <Tabs
             theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}

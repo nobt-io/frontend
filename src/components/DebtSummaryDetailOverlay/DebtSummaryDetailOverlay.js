@@ -1,22 +1,22 @@
 import React from "react";
-import { LowerScreenModal } from "components/Modal";
+import { LowerScreenOverlay } from "components/Overlay";
 import PersonMoneyList from "components/PersonMoneyList";
 import Amount from "components/Amount";
 import { Person, AvatarPosition, AvatarSize } from "components/Person";
 import { FormattedMessage } from "react-intl";
-import styles from "./DebtSummaryDetailModal.scss";
+import styles from "./DebtSummaryDetailOverlay.scss";
 
-export const DebtSummaryDetailModal = (props) => {
+export const DebtSummaryDetailOverlay = (props) => {
 
   const onClose = props.onClose || (() => { });
   const active = props.active || false;
 
   const debtSummary = props.debtSummary;
-  const persons = debtSummary.persons;
+  const persons = debtSummary.names;
   const me = debtSummary.me;
 
   return (
-    <LowerScreenModal active={active} onClose={onClose}>
+    <LowerScreenOverlay active={active} onClose={onClose}>
       <div>
         <div className={styles.meContainer}>
           <Person name={me.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} />
@@ -40,14 +40,14 @@ export const DebtSummaryDetailModal = (props) => {
         </span>
         {persons.length > 1 && <PersonMoneyList persons={persons} showKeyword={true} />}
       </div>
-    </LowerScreenModal>
+    </LowerScreenOverlay>
   );
 };
 
-DebtSummaryDetailModal.propTypes = {
+DebtSummaryDetailOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   debtSummary: React.PropTypes.object.isRequired,
 };
 
-export default DebtSummaryDetailModal
+export default DebtSummaryDetailOverlay

@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./FullScreen.scss";
+import styles from "./FullScreenOverlay.scss";
 import Modal from "react-responsive-modal";
 
-const FullScreenModal = (props) => {
+const FullScreenOverlay = (props) => {
 
   return (
     <Modal overlayClassName={styles.overlay} modalClassName={styles.modal} open={props.active} onClose={props.onClose}
@@ -14,14 +14,14 @@ const FullScreenModal = (props) => {
   );
 };
 
-FullScreenModal.propTypes = {
+FullScreenOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool,
 };
 
-FullScreenModal.defaultProps = {
+FullScreenOverlay.defaultProps = {
   active: false,
   header: ''
 };
 
-export default FullScreenModal ;
+export default FullScreenOverlay ;

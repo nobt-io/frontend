@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./LowerScreen.scss";
+import styles from "./LowerScreenOverlay.scss";
 import Modal from "react-responsive-modal";
 
-const LowerScreenModal = (props) => {
+const LowerScreenOverlay = (props) => {
 
   const headerIsEmpty = props.header == '';
 
@@ -16,15 +16,15 @@ const LowerScreenModal = (props) => {
   );
 };
 
-LowerScreenModal.propTypes = {
+LowerScreenOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool,
   header: React.PropTypes.string
 };
 
-LowerScreenModal.defaultProps = {
+LowerScreenOverlay.defaultProps = {
   active: false,
   header: ''
 };
 
-export default LowerScreenModal;
+export default LowerScreenOverlay;

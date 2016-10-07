@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./ListSelectModal.scss";
+import styles from "./ListSelectOverlay.scss";
 import { List, ListItem } from "react-toolbox/lib/list";
-import { LowerScreenModal } from "components/Modal";
+import { LowerScreenOverlay } from "components/Overlay";
 
-export const ListSelectModal = (props) => {
+export const ListSelectOverlay = (props) => {
 
   const onItemClick = (name) => {
     props.onSortChange(name);
@@ -15,15 +15,15 @@ export const ListSelectModal = (props) => {
   ));
 
   return (
-    <LowerScreenModal header={props.title} active={props.active} onClose={props.onClose}>
+    <LowerScreenOverlay header={props.title} active={props.active} onClose={props.onClose}>
       <div className={styles.listWrapper}>
         <List selectable ripple>{listItems}</List>
       </div>
-    </LowerScreenModal>
+    </LowerScreenOverlay>
   );
 };
 
-ListSelectModal.propTypes = {
+ListSelectOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   title: React.PropTypes.string.isRequired,
@@ -34,4 +34,4 @@ ListSelectModal.propTypes = {
   }))
 };
 
-export default ListSelectModal
+export default ListSelectOverlay

@@ -1,3 +1,3 @@
-import BillModal from "./BillDetailOverlay";
+import BillDetailOverlay from "./BillDetailOverlay";
 
-export default BillModal
+export default BillDetailOverlay

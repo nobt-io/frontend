@@ -3,7 +3,7 @@ import styles from "./DebtSummaryItem.scss";
 import { SmallAvatar } from "components/Avatar";
 import { Person, AvatarPosition, AvatarSize } from "components/Person";
 import Amount from "components/Amount";
-import DebtSummaryDetailModal from "components/DebtSummaryDetailModal";
+import DebtSummaryDetailOverlay from "components/DebtSummaryDetailOverlay";
 import Card from "components/Card";
 import FontIcon from "react-toolbox/lib/font_icon";
 
@@ -29,12 +29,12 @@ export const DebtSummaryItem = React.createClass({
     const {summary} = this.props;
 
     const me = summary.me;
-    const persons = summary.persons.map(p => (<span key={p.name} className={styles.avatar}><SmallAvatar name={p.name} /></span>));
+    const persons = summary.names.map(p => (<span key={p.name} className={styles.avatar}><SmallAvatar name={p.name} /></span>));
     const icon = isPositive(me) ? "add_circle" : "remove_circle";
 
     return (
       <Card>
-        <DebtSummaryDetailModal active={this.state.showDetailModalDialog} onClose={this.hideModalDialog} debtSummary={summary} />
+        <DebtSummaryDetailOverlay active={this.state.showDetailModalDialog} onClose={this.hideModalDialog} debtSummary={summary} />
 
         <div onClick={this.showModalDialog} className={styles.container}>
           <span className={styles.meContainer}>
@@ -57,7 +57,7 @@ export const DebtSummaryItem = React.createClass({
             <div className={styles.personsContainer}>
 
               <span className={styles.verb}>{isPositive(me) ? "from" : "to"}</span>
-              <span className={styles.persons}>{persons}</span>
+              <span className={styles.names}>{persons}</span>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ var personAmountPropType = React.PropTypes.shape({
 DebtSummaryItem.propTypes = {
   summary: React.PropTypes.shape({
     me: personAmountPropType,
-    persons: React.PropTypes.arrayOf(personAmountPropType),
+    names: React.PropTypes.arrayOf(personAmountPropType),
   }).isRequired
 };
 
