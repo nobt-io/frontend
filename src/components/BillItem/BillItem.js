@@ -4,7 +4,6 @@ import Card from "components/Card";
 import { Avatar } from "components/Avatar";
 import Amount from "components/Amount";
 import BillDetailOverlay from "components/BillDetailOverlay";
-import { FormattedDate } from "react-intl";
 
 export const BillItem = React.createClass({
 
@@ -36,7 +35,7 @@ export const BillItem = React.createClass({
             </div>
             <div style={{clear: "both"}}></div>
           </div>
-          <div className={styles.names}>
+          <div className={styles.persons}>
             <div className={styles.right}>{debtorsAvatars}</div>
             <div className={styles.left}>
               <span className={styles.avatar}><Avatar name={debtee.name} size={30} /></span>

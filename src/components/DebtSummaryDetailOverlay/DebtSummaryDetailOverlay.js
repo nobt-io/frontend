@@ -12,7 +12,7 @@ export const DebtSummaryDetailOverlay = (props) => {
   const active = props.active || false;
 
   const debtSummary = props.debtSummary;
-  const persons = debtSummary.names;
+  const persons = debtSummary.persons;
   const me = debtSummary.me;
 
   return (
