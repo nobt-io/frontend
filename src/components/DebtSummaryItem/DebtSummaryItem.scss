@@ -27,7 +27,7 @@ $avatarMargin: .5rem;
   }
 
   .amountContainer,.personsContainer {
-    margin: .15rem 0;
+    margin: .5rem 0;
   }
 }
 
@@ -48,6 +48,7 @@ $avatarMargin: .5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 
   .meContainer {
     order: 0;

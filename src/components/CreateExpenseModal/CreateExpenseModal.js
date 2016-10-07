@@ -16,145 +16,153 @@ const logger = _debug("createExpense");
 
 export const CreateExpenseModal = React.createClass({
 
-  //TODO: Replace With any library
-  formatDate: (date) => {
+    //TODO: Replace With any library
+    formatDate: (date) => {
 
-    var dd = date.getDate();
-    var mm = date.getMonth() + 1; //January is 0!
-    var yyyy = date.getFullYear();
+      var dd = date.getDate();
+      var mm = date.getMonth() + 1; //January is 0!
+      var yyyy = date.getFullYear();
 
-    if (dd < 10) {
-      dd = '0' + dd
-    }
+      if (dd < 10) {
+        dd = '0' + dd
+      }
 
-    if (mm < 10) {
-      mm = '0' + mm
-    }
+      if (mm < 10) {
+        mm = '0' + mm
+      }
 
-    return dd + "." + mm + "." + yyyy;
-  },
+      return dd + "." + mm + "." + yyyy;
+    },
 
-  setMetaData: function (metaData) { this.props.setMetaData({...this.props.metaData, ...metaData}); },
+    setMetaData: function (metaData) { this.props.setMetaData({...this.props.metaData, ...metaData}); },
 
-  setPersonValue: function (name, value) { this.props.setPersonValue(name, value); },
+    setPersonValue: function (name, value) { this.props.setPersonValue(name, value); },
 
-  setModalState: function (state) { this.setState({...this.state, ...state}); },
+    setModalState: function (state) { this.setState({...this.state, ...state}); },
 
-  createExpense: function () {
+    createExpense: function () {
 
-    var expenseToCreate = {
-      name: this.props.metaData.subject,
-      debtee: this.props.metaData.paidByPerson,
-      date: this.props.metaData.creationDate,
-      splitStrategy: this.props.metaData.splitStrategy,
-      shares: this.props.personData.involvedPersons.map(p => ({debtor: p.name, amount: p.amount}))
-    };
+      var expenseToCreate = {
+        name: this.props.metaData.subject,
+        debtee: this.props.metaData.paidByPerson,
+        date: this.props.metaData.creationDate,
+        splitStrategy: this.props.metaData.splitStrategy,
+        shares: this.props.personData.involvedPersons.map(p => ({debtor: p.name, amount: p.amount}))
+      };
 
-    this.props.createExpense(expenseToCreate).then((response) => {
-      this.props.reloadNobt();
-    }, () => {
-      //Todo: show error!
-    });
-  },
+      this.props.createExpense(expenseToCreate).then((response) => {
+        this.props.reloadNobt();
+      }, () => {
+        //Todo: show error!
+      });
+    },
 
-  render: function () {
+    render: function () {
 
-    const {personModalIsActive, dateModalIsActive, shareModalIsActive} =
-    this.state || {personModalIsActive: false, dateModalIsActive: false, shareModalIsActive: false};
+      const {personModalIsActive, dateModalIsActive, shareModalIsActive} =
+      this.state || {personModalIsActive: false, dateModalIsActive: false, shareModalIsActive: false};
 
-    const {metaDataIsValid, active, subject, creationDate, amount, paidByPerson, splitStrategy} = this.props.metaData;
-    const {involvedPersonsAreValid, involvedPersonsCalculationInfo, involvedPersons} = this.props.personData;
-    const {nobtMembers} = this.props;
+      const {metaDataIsValid, active, subject, creationDate, amount, paidByPerson, splitStrategy} = this.props.metaData;
+      const {involvedPersonsAreValid, involvedPersonsCalculationInfo, involvedPersons} = this.props.personData;
+      const {nobtMembers} = this.props;
 
-    const expenseIsValid = involvedPersonsAreValid && metaDataIsValid;
+      const expenseIsValid = involvedPersonsAreValid && metaDataIsValid;
 
-    const dateString =
-      new Date().toDateString() === new Date(creationDate).toDateString()
-        ? "Today" : "on " + this.formatDate(new Date(creationDate));
+      const dateString =
+        new Date().toDateString() === new Date(creationDate).toDateString()
+          ? "Today" : "on " + this.formatDate(new Date(creationDate));
 
-    var splitByLabel = {
-      [SplitStrategyNames.EQUAL]: <span>split<br /><b>equally</b></span>,
-      [SplitStrategyNames.UNEQUAL]: <span>split<br /><b>unequally</b></span>,
-      [SplitStrategyNames.PERCENTAGE]: <span>split by<br /><b>percentage</b></span>
-    }[ splitStrategy ];
+      var splitByLabel = {
+        [SplitStrategyNames.EQUAL]: <span>split<br /><b>equally</b></span>,
+        [SplitStrategyNames.UNEQUAL]: <span>split<br /><b>unequally</b></span>,
+        [SplitStrategyNames.PERCENTAGE]: <span>split by<br /><b>percentage</b></span>
+      }[ splitStrategy ];
 
-    var amountSplitPersonList = {
-      [SplitStrategyNames.EQUAL]: (<AmountEqualSplitPersonList nobtMembers={nobtMembers}
-                                                               involvedPersons={involvedPersons}
-                                                               involvedPersonsAreValid={involvedPersonsAreValid}
-                                                               setPersonValue={this.setPersonValue}
-                                                               involvedPersonsCalculationInfo={involvedPersonsCalculationInfo} />),
-      [SplitStrategyNames.PERCENTAGE]: (<AmountPercentageSplitPersonList nobtMembers={nobtMembers}
-                                                                         involvedPersons={involvedPersons}
-                                                                         setPersonValue={this.setPersonValue}
-                                                                         involvedPersonsAreValid={involvedPersonsAreValid}
-                                                                         involvedPersonsCalculationInfo={involvedPersonsCalculationInfo} />),
-      [SplitStrategyNames.UNEQUAL]: (<AmountUnequalSplitPersonList nobtMembers={nobtMembers}
-                                                                   involvedPersons={involvedPersons}
-                                                                   involvedPersonsAreValid={involvedPersonsAreValid}
-                                                                   setPersonValue={this.setPersonValue}
-                                                                   involvedPersonsCalculationInfo={involvedPersonsCalculationInfo} />),
-    }[ splitStrategy ];
+      var amountSplitPersonList;
 
-    return (
-      <FullScreenModal active={active} onClose={() => this.props.onClose()}>
-        <PersonSelectorModal
-          title={"Who paid?"} canInsertPerson={true} names={nobtMembers}
-          active={personModalIsActive || false} onClose={() => this.setModalState({personModalIsActive: false})}
-          onFilterChange={(paidByPerson) => this.setMetaData({paidByPerson})}
-        />
-        <DatePickerModal
-          title={"When?"} active={dateModalIsActive || false}
-          onClose={() => this.setModalState({dateModalIsActive: false})}
-          onDateChange={(creationDate) => this.setMetaData({creationDate})}
-        />
-        <ListSelectModal
-          active={shareModalIsActive || false} onSortChange={(splitStrategy) => this.setMetaData({splitStrategy})}
-          title={"Split by"} onClose={() => this.setModalState({shareModalIsActive: false})}
-          list={[
-            {name: SplitStrategyNames.EQUAL, icon: "view_module", displayName: "split equally"},
-            {name: SplitStrategyNames.UNEQUAL, icon: "view_quilt", displayName: "split unequally"},
-            {name: SplitStrategyNames.PERCENTAGE, icon: "poll", displayName: "split by percentage"}
-          ]}
-        />
-        <Header
-          showNobtHeader={false}
-          rightButton={!expenseIsValid ? null : {
-            icon: "check_box",
-            onClick: () => this.createExpense(),
-            title: "Create expense"
-          }}
-          leftButton={{icon: "arrow_back", onClick: () => this.props.onClose(), title: "Back"}}
-        />
-        <div className={styles.headInput}>
-          <div>
-            <Input placeholder="What was bought?" value={subject} className={styles.subjectInput}
-                   onChange={(subject) => this.setMetaData({subject})} />
-          </div>
-          <div>
+      switch (splitStrategy) {
+        case SplitStrategyNames.EQUAL: {
+          amountSplitPersonList =
+            <AmountEqualSplitPersonList nobtMembers={nobtMembers} involvedPersons={involvedPersons} involvedPersonsAreValid={involvedPersonsAreValid}
+                                        setPersonValue={this.setPersonValue} involvedPersonsCalculationInfo={involvedPersonsCalculationInfo} />;
+          break;
+        }
+        case SplitStrategyNames.PERCENTAGE: {
+          amountSplitPersonList =
+            <AmountPercentageSplitPersonList nobtMembers={nobtMembers} involvedPersons={involvedPersons}
+                                             involvedPersonsAreValid={involvedPersonsAreValid}
+                                             setPersonValue={this.setPersonValue} involvedPersonsCalculationInfo={involvedPersonsCalculationInfo} />;
+          break;
+        }
+        case SplitStrategyNames.UNEQUAL: {
+          amountSplitPersonList =
+            <AmountUnequalSplitPersonList nobtMembers={nobtMembers} involvedPersons={involvedPersons}
+                                          involvedPersonsAreValid={involvedPersonsAreValid}
+                                          setPersonValue={this.setPersonValue} involvedPersonsCalculationInfo={involvedPersonsCalculationInfo} />;
+          break;
+        }
+      }
+
+      return (
+        <FullScreenModal active={active} onClose={() => this.props.onClose()}>
+          <PersonSelectorModal
+            title={"Who paid?"} canInsertPerson={true} names={nobtMembers}
+            active={personModalIsActive || false} onClose={() => this.setModalState({personModalIsActive: false})}
+            onFilterChange={(paidByPerson) => this.setMetaData({paidByPerson})}
+          />
+          <DatePickerModal
+            title={"When?"} active={dateModalIsActive || false}
+            onClose={() => this.setModalState({dateModalIsActive: false})}
+            onDateChange={(creationDate) => this.setMetaData({creationDate})}
+          />
+          <ListSelectModal
+            active={shareModalIsActive || false} onSortChange={(splitStrategy) => this.setMetaData({splitStrategy})}
+            title={"Split by"} onClose={() => this.setModalState({shareModalIsActive: false})}
+            list={[
+              {name: SplitStrategyNames.EQUAL, icon: "view_module", displayName: "split equally"},
+              {name: SplitStrategyNames.UNEQUAL, icon: "view_quilt", displayName: "split unequally"},
+              {name: SplitStrategyNames.PERCENTAGE, icon: "poll", displayName: "split by percentage"}
+            ]}
+          />
+          <Header
+            showNobtHeader={false}
+            rightButton={!expenseIsValid ? null : {
+              icon: "check_box",
+              onClick: () => this.createExpense(),
+              title: "Create expense"
+            }}
+            leftButton={{icon: "arrow_back", onClick: () => this.props.onClose(), title: "Back"}}
+          />
+          <div className={styles.headInput}>
+            <div>
+              <Input placeholder="What was bought?" value={subject} className={styles.subjectInput}
+                     onChange={(subject) => this.setMetaData({subject})} />
+            </div>
+            <div>
               <span onClick={() => this.setModalState({personModalIsActive: true})}
                     className={styles.personPicker}>by {paidByPerson}
                 <Avatar size={20} fontSize={11} name={paidByPerson} />
               </span>
-            <span onClick={() => this.setModalState({dateModalIsActive: true})}
-                  className={styles.datePicker}>{dateString}</span>
+              <span onClick={() => this.setModalState({dateModalIsActive: true})}
+                    className={styles.datePicker}>{dateString}</span>
+            </div>
           </div>
-        </div>
-        <div className={styles.amountContainer}>
+          <div className={styles.amountContainer}>
             <span onClick={() => this.setModalState({shareModalIsActive: true})}
                   className={styles.spit}>{splitByLabel}</span>
-          <span className={styles.currencySymbold}>€</span>
-          <CurrencyInput onChange={(amount) => this.setMetaData({amount})} value={amount}
-                         className={styles.amountInput} />
-        </div>
-        <div className={styles.splitContainer}>
-          {amountSplitPersonList}
-        </div>
-      </FullScreenModal>
+            <span className={styles.currencySymbold}>€</span>
+            <CurrencyInput onChange={(amount) => this.setMetaData({amount})} value={amount}
+                           className={styles.amountInput} />
+          </div>
+          <div className={styles.splitContainer}>
+            {amountSplitPersonList}
+          </div>
+        </FullScreenModal>
 
-    );
-  }
-});
+      );
+    }
+  })
+  ;
 
 CreateExpenseModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,

@@ -38,7 +38,7 @@ export const ExpenseItem = React.createClass({
             </div>
             <div style={{clear: "both"}}></div>
           </div>
-          <div className={styles.personNames}>
+          <div className={styles.persons}>
             <div className={styles.right}>{debtorsAvatars}</div>
             <div className={styles.left}>
               <span className={styles.avatar}><Avatar name={debtee.name} size={30}/></span>

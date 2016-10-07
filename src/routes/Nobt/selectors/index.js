@@ -123,4 +123,4 @@ export const getNewExpensePersonData = createSelector([getCreateExpenseViewInfo]
 
 });
 
-const sumExpense = (expense) => expense.shares.map(share => share.value).reduce((sum, amount) => sum + amount);
+const sumExpense = (expense) => expense.shares.map(share => share.amount).reduce((sum, amount) => sum + amount);

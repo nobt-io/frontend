@@ -12,7 +12,7 @@ const mapActionCreators = {
 };
 
 const mapStateToProps = (state) => ({
-  personNames: state.Create.personNames,
+  persons: state.Create.personNames,
   nobtName: state.Create.nobtName,
   loading: state.Create.loading,
 });
