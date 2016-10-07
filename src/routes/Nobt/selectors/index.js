@@ -49,7 +49,7 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
   var matchName = (name) => (filter === NO_FILTER) ? true : name === filter;
 
   var matchDebtee = (bill) => matchName(bill.debtee);
-  var matchDebtors = (bill) => bill.shares.map( s => s.debtor ).filter(matchName).length > 0;
+  var matchDebtors = (bill) => bill.debtors.map( d => d.name).filter(matchName).length > 0;
 
   const filteredAndSortedBills = bills
     .map(e => {
@@ -71,7 +71,7 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
         debtors: debtors
       };
     })
-    .filter(e => (matchDebtee(e) || matchDebtors(e)))
+    .filter(bill => (matchDebtee(bill) || matchDebtors(bill)))
     .sort(sortFunctions[ sort ] || NO_SORT);
 
   _debug('selectors:getFilteredBills')(filteredAndSortedBills);
