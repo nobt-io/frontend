@@ -7,11 +7,16 @@
   background: url("https://static.pexels.com/photos/24529/pexels-photo.jpg") no-repeat center center;
   background-size: cover;
 
+  .backgroundShadow{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.31);
+  }
   .container {
     position: absolute;
     top: 0;
     left: 0;
-    bottom: 380px;
+    bottom: 0;
     right: 0;
     display: flex;
     flex-direction: column;
@@ -26,7 +31,7 @@
 
     .slogan {
       color: $color-primary-dark;
-      font: 400 2.5em/125% 'Handlee', Helvetica, Sans-serif;
+      font: 400 2em 'Handlee', Helvetica, Sans-serif;
     }
 
     .createNobtContainer {
@@ -35,11 +40,15 @@
       border-radius: 0.5rem;
       background-color: rgba(0, 0, 0, .65);
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
 
       .inputContainer {
+        padding: 1rem 0;
+        border-bottom: 1px solid white;
+        margin-bottom: 1rem;
+
         .inputBar, .inputCounter {
           display: none;
         }
@@ -86,12 +95,39 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 400px;
-    background-position: top center;
-    background-repeat: no-repeat;
+    height: 0;
+    background: no-repeat top center;
   }
 }
 
+@media (min-width: 500px) and (min-height: 700px) {
+  .landing .phoneContainer {
+    height: 380px;
+  }
+  .landing .container{
+    bottom: 400px;
+  }
+}
+
+@media (min-width: 400px)  and (min-height: 600px) {
+  .landing .phoneContainer {
+    height: 300px;
+  }
+  .landing .container {
+    bottom: 300px;
+  }
+  .landing .container .createNobtContainer {
+    flex-direction: row;
+  }
+  .landing .container .slogan {
+    font-size: 2.3em;
+  }
+  .landing .container .createNobtContainer .inputContainer{
+    padding: 0;
+    border-bottom: 0 solid white;
+    margin-bottom: 0;
+  }
+}
 .footerContainer {
   position: absolute;
   top: 100%;
@@ -126,7 +162,7 @@
     font-size: 1.3rem;
 
     .loveIcon {
-      color: ##DB504A;
+      color: #DB504A;
       font-size: 1rem;
       margin: 3px 3px 0;
 

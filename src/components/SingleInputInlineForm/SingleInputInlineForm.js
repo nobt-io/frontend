@@ -13,9 +13,9 @@ export const SingleInputInlineForm = React.createClass({
     }
   },
 
-  onKeyDown: function (event) {
-    var enterKey = '13';
-    if (event.charCode == enterKey && !this.isButtonDisabled()) {
+  onKeyPress: function (event) {
+    var enterKey = 13;
+    if (event.charCode === enterKey && !this.isButtonDisabled()) {
       this.onClick();
     }
   },
@@ -59,7 +59,7 @@ export const SingleInputInlineForm = React.createClass({
           autoComplete="off"
           type='text'
           maxLength={this.props.inputMaxLength}
-          onKeyPress={this.onKeyDown}
+          onKeyPress={this.onKeyPress}
           onChange={this.onChange}
         />
         <IconButton

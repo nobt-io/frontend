@@ -17,20 +17,26 @@ export const Landing = React.createClass({
   onCreateNobt: function(){
     this.props.history.push(`/new/${this.state.nobtName}`);
   },
-
+  onKeyPress: function (event) {
+    var enterKey = 13;
+    if (event.charCode === enterKey) {
+      this.onCreateNobt();
+    };
+  },
   render: function () {
 
     var addressVisibility = this.state.nobtName.length > 0 ? "visible" : "hidden";
 
     return <div>
       <div className={styles.landing} style={{backgroundImage: "url('" + Bg + "')"}} >
+        <div className={styles.backgroundShadow}></div>
         <div className={styles.container}>
           <div className={styles.title}>nobt.io</div>
           <div className={styles.slogan}>Split your bills with ease</div>
           <div className={styles.createNobtContainer}>
             <div className={styles.inputContainer}>
               <Input placeholder="barbecue with friends" type="text" maxLength={ 40 }
-                     value={this.state.nobtName} onChange={this.handleChange}
+                     value={this.state.nobtName} onChange={this.handleChange}  onKeyPress={this.onKeyPress}
                      theme={{input: styles.inputWrapper, bar: styles.inputBar, counter: styles.inputCounter, inputElement: styles.inputElement}} />
             </div>
             <div className={styles.buttonContainer}>
