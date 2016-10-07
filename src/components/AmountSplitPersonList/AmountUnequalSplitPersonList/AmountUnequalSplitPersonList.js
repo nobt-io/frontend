@@ -12,7 +12,6 @@ export const AmountUnequalSplitPersonList = (props) => {
 
   const {nobtMembers, involvedPersons, setPersonValue, involvedPersonsAreValid, involvedPersonsCalculationInfo} = props;
 
-  console.log(props);
   const onInputChange = (name, value) => setPersonValue(name, value);
 
   const personItems = nobtMembers.map(p => {

@@ -18,10 +18,8 @@ export const PercentageInput = React.createClass({
     if (PercentageInputValidator.validateInput(newValue)) {
       const intValue = Number(newValue);
       this.setState({value: intValue, inputValue: newValue});
-      console.log(intValue);
       this.props.onChange(intValue);
     } else {
-      console.log("error", newValue);
       this.setState({...this.state, inputValue: previousValue});
     }
   },
