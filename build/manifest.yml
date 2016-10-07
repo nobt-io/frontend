@@ -1,0 +1,7 @@
+---
+applications:
+- name: nobt-io-frontend
+  memory: 64MB
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack
+  host: nobt-io-frontend-dev
+  path: ../dist
