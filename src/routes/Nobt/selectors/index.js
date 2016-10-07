@@ -1,27 +1,25 @@
 import { createSelector } from "reselect";
 import PersonDebtSummaryFactory from "./PersonDebtSummaryFactory";
-import SplitStrategyNames from "const/SplitStrategyNames"
 import SelectedPersonFactory from "./SelectedPersonFactory";
 import _debug from "debug";
 
 const getNobt = (state) => state.Nobt.currentNobt;
 const getActiveTab = (state) => state.Nobt.activeTab;
-export const getExpensesFilter = (state) => state.Nobt.expenseFilter;
-export const getExpensesSortProperty = (state) => state.Nobt.expenseSortProperty;
-export const getCreateExpenseViewInfo = (state) => state.Nobt.createExpenseViewInfo;
-
+export const getBillFilter = (state) => state.Nobt.billFilter;
+export const getBillSortProperty = (state) => state.Nobt.billSortProperty;
+export const getNewBillViewInfo = (state) => state.Nobt.newBillViewInfo;
 
 export const getName = createSelector([ getNobt ], (nobt) => nobt.name);
 export const getMembers = createSelector([ getNobt ], (nobt) => nobt.participatingPersons);
 export const getCurrency = createSelector([ getNobt ], (nobt) => nobt.currency);
-export const getExpenses = createSelector([ getNobt ], (nobt) => nobt.expenses);
+export const getBills = createSelector([ getNobt ], (nobt) => nobt.bills);
 export const getTransactions = createSelector([ getNobt ], (nobt) => nobt.transactions);
 
 export const getActiveTabIndex = createSelector([ getActiveTab ], activeTabName => {
 
   var tabNameIndexMapping = {
     'transactions': 0,
-    'expenses': 1
+    'bills': 1
   };
 
   const newTabIndex = tabNameIndexMapping[ activeTabName ] || 0;
@@ -38,7 +36,7 @@ export const getDebtSummaries = createSelector([ getTransactions, getMembers ], 
     .filter(s => s.me.amount !== 0); // we do not want debt summaries with value 0
 });
 
-export const getFilteredExpenses = createSelector([ getExpenses, getExpensesFilter, getExpensesSortProperty ], (expenses, filter, sort) => {
+export const getFilteredBills = createSelector([ getBills, getBillFilter, getBillSortProperty ], (bills, filter, sort) => {
 
   const NO_FILTER = '';
   const NO_SORT = () => 0;
@@ -50,14 +48,14 @@ export const getFilteredExpenses = createSelector([ getExpenses, getExpensesFilt
 
   var matchName = (name) => (filter === NO_FILTER) ? true : name === filter;
 
-  var matchDebtee = (expense) => matchName(expense.debtee);
-  var matchDebtors = (expense) => expense.shares.map( s => s.debtor ).filter(matchName).length > 0;
+  var matchDebtee = (bill) => matchName(bill.debtee);
+  var matchDebtors = (bill) => bill.shares.map( s => s.debtor ).filter(matchName).length > 0;
 
-  const filteredAndSortedExpenses = expenses
+  const filteredAndSortedBills = bills
     .map(e => {
 
       const debteeName = e.debtee;
-      const sumOfShares = sumExpense(e);
+      const sumOfShares = sumBill(e);
 
       const debtors = e.shares.map(share => ({name: share.debtor, amount: share.amount}));
 
@@ -76,51 +74,51 @@ export const getFilteredExpenses = createSelector([ getExpenses, getExpensesFilt
     .filter(e => (matchDebtee(e) || matchDebtors(e)))
     .sort(sortFunctions[ sort ] || NO_SORT);
 
-  _debug('selectors:getFilteredExpenses')(filteredAndSortedExpenses);
+  _debug('selectors:getFilteredBills')(filteredAndSortedBills);
 
-  return filteredAndSortedExpenses;
+  return filteredAndSortedBills;
 
 });
 
-export const getTotal = createSelector([ getExpenses ], (expenses) => {
-	const nobtTotal = expenses.map(sumExpense).reduce((sum, current) => sum + current, 0);
+export const getTotal = createSelector([ getBills ], (bills) => {
+	const nobtTotal = bills.map(sumBill).reduce((sum, current) => sum + current, 0);
 
   _debug('selectors:getTotal')(`Nobt total: ${nobtTotal}.`);
 
   return nobtTotal;
 });
 
-export const getCreateExpenseMetaData = createSelector([getCreateExpenseViewInfo], (createExpense) => {
+export const getNewBillMetaData = createSelector([getNewBillViewInfo], (newBill) => {
 
   const metaDataIsValid =
-    (createExpense.subject || "").length !== 0 &&
-    (createExpense.amount || 0) > 0;
+    (newBill.subject || "").length !== 0 &&
+    (newBill.amount || 0) > 0;
 
   return {
-    active: createExpense.show,
-    subject: createExpense.subject,
-    amount: createExpense.amount,
-    paidByPerson: createExpense.paidByPerson,
-    creationDate: createExpense.creationDate,
-    splitStrategy: createExpense.splitStrategy,
+    active: newBill.show,
+    subject: newBill.subject,
+    amount: newBill.amount,
+    paidByPerson: newBill.paidByPerson,
+    creationDate: newBill.creationDate,
+    splitStrategy: newBill.splitStrategy,
     metaDataIsValid: metaDataIsValid
   };
 });
 
-export const getNewExpensePersonData = createSelector([getCreateExpenseViewInfo], (createExpense) => {
+export const getNewBillPersonData = createSelector([getNewBillViewInfo], (createBill) => {
 
-  var strategy = createExpense.splitStrategy;
+  var strategy = createBill.splitStrategy;
 
-  var persons = createExpense.involvedPersons[strategy];
-  var amount = createExpense.amount;
+  var persons = createBill.involvedPersons[strategy];
+  var amount = createBill.amount;
 
   var personFactory = new SelectedPersonFactory(strategy);
-  var expensePersonData = personFactory.getInvolvedPersonData(persons, amount);
+  var billPersonData = personFactory.getInvolvedPersonData(persons, amount);
 
-  _debug('selectors:getNewExpensePersonData')(expensePersonData);
+  _debug('selectors:getNewBillPersonData')(billPersonData);
 
-  return expensePersonData;
+  return billPersonData;
 
 });
 
-const sumExpense = (expense) => expense.shares.map(share => share.amount).reduce((sum, amount) => sum + amount);
+const sumBill = (bill) => bill.shares.map(share => share.amount).reduce((sum, amount) => sum + amount);

@@ -5,31 +5,27 @@ import {
   getName,
   getCurrency,
   getMembers,
-  getExpenses,
+  getBills,
   getDebtSummaries,
   getTotal,
-  getFilteredExpenses,
+  getFilteredBills,
   getActiveTabIndex,
-  getExpensesFilter,
-  getExpensesSortProperty,
-  getCreateExpenseMetaData,
-  getNewExpensePersonData
+  getBillFilter,
+  getBillSortProperty,
+  getNewBillMetaData,
+  getNewBillPersonData
 } from '../selectors'
 
 const mapActionCreators = {
   loadNobt: (id) => nobtActionFactory.loadNobt(id),
   changeTab: (tabName) => nobtActionFactory.changeTab(tabName),
-
-  //newExpense
-  createExpense: (expense) => nobtActionFactory.createExpense(expense),
-
-  closeNewExpenseOverlay: () => nobtActionFactory.setNewExpenseOverlayVisibility(false),
-  openNewExpenseOverlay: () => nobtActionFactory.setNewExpenseOverlayVisibility(true),
-  setNewExpenseMetaData: (metaInfo) => nobtActionFactory.setNewExpenseMetaData(metaInfo),
-  setNewExpensePersonValue: (name, value) => nobtActionFactory.setNewExpensePersonValue(name, value),
-
-  updateExpensesFilter: (filter) => nobtActionFactory.updateExpensesFilter(filter),
-  updateExpenseSortProperty: (property) => nobtActionFactory.updateExpenseSortProperty(property),
+  addBill: (bill) => nobtActionFactory.addBill(bill),
+  closeNewBillOverlay: () => nobtActionFactory.setNewBillOverlayVisibility(false),
+  openNewBillOverlay: () => nobtActionFactory.setNewBillOverlayVisibility(true),
+  setNewBillMetaData: (metaInfo) => nobtActionFactory.setNewBillMetaData(metaInfo),
+  setNewBillPersonValue: (name, value) => nobtActionFactory.setNewBillPersonValue(name, value),
+  updateBillFilter: (filter) => nobtActionFactory.updateBillFilter(filter),
+  updateBillSortProperty: (property) => nobtActionFactory.updateBillSortProperty(property),
 };
 
 const mapStateToProps = (state) => {
@@ -39,15 +35,15 @@ const mapStateToProps = (state) => {
     total: getTotal(state),
     members: getMembers(state),
     debtSummaries: getDebtSummaries(state),
-    expenses: getFilteredExpenses(state),
-    expenseFilter: getExpensesFilter(state),
-    expenseSortProperty: getExpensesSortProperty(state),
+    bills: getFilteredBills(state),
+    billFilter: getBillFilter(state),
+    billSortProperty: getBillSortProperty(state),
 
     activeTabIndex: getActiveTabIndex(state),
-    isNobtEmpty: getExpenses(state).length === 0,
+    isNobtEmpty: getBills(state).length === 0,
 
-    newExpenseMetaData: getCreateExpenseMetaData(state),
-    newExpensePersonData: getNewExpensePersonData(state)
+    newBillMetaData: getNewBillMetaData(state),
+    newBillPersonData: getNewBillPersonData(state)
   };
 };
 

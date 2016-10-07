@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './CreateExpenseModal.scss'
+import styles from './NewBillOverlay.scss'
 import { FullScreenModal } from "components/Modal";
 import Header from "components/Header";
 import { Avatar } from "components/Avatar";
@@ -10,29 +10,15 @@ import PersonSelectorModal from "components/PersonSelectorModal";
 import DatePickerModal from "components/DatePickerModal";
 import ListSelectModal from "components/ListSelectModal";
 import SplitStrategyNames from "const/SplitStrategyNames";
+import {FormattedDate} from "react-intl";
+
 import _debug from "debug";
 
-const logger = _debug("createExpense");
+const logger = _debug("view:components:NewBillOverlay");
 
-export const CreateExpenseModal = React.createClass({
+const isToday = (date) => new Date(date).toDateString() === new Date().toDateString();
 
-    //TODO: Replace With any library
-    formatDate: (date) => {
-
-      var dd = date.getDate();
-      var mm = date.getMonth() + 1; //January is 0!
-      var yyyy = date.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd
-      }
-
-      if (mm < 10) {
-        mm = '0' + mm
-      }
-
-      return dd + "." + mm + "." + yyyy;
-    },
+export const NewBillOverlay = React.createClass({
 
     setMetaData: function (metaData) { this.props.setMetaData({...this.props.metaData, ...metaData}); },
 
@@ -40,9 +26,9 @@ export const CreateExpenseModal = React.createClass({
 
     setModalState: function (state) { this.setState({...this.state, ...state}); },
 
-    createExpense: function () {
+    addBill: function () {
 
-      var expenseToCreate = {
+      var billToCreate = {
         name: this.props.metaData.subject,
         debtee: this.props.metaData.paidByPerson,
         date: this.props.metaData.creationDate,
@@ -50,7 +36,7 @@ export const CreateExpenseModal = React.createClass({
         shares: this.props.personData.involvedPersons.map(p => ({debtor: p.name, amount: p.amount}))
       };
 
-      this.props.createExpense(expenseToCreate).then((response) => {
+      this.props.addBill(billToCreate).then((response) => {
         this.props.reloadNobt();
         this.props.onClose();
       }, () => {
@@ -67,11 +53,7 @@ export const CreateExpenseModal = React.createClass({
       const {involvedPersonsAreValid, involvedPersonsCalculationInfo, involvedPersons} = this.props.personData;
       const {nobtMembers} = this.props;
 
-      const expenseIsValid = involvedPersonsAreValid && metaDataIsValid;
-
-      const dateString =
-        new Date().toDateString() === new Date(creationDate).toDateString()
-          ? "Today" : "on " + this.formatDate(new Date(creationDate));
+      const billIsValid = involvedPersonsAreValid && metaDataIsValid;
 
       var splitByLabel = {
         [SplitStrategyNames.EQUAL]: <span>split<br /><b>equally</b></span>,
@@ -128,10 +110,10 @@ export const CreateExpenseModal = React.createClass({
           <Header
             showNobtHeader={false}
             rightButton={{
-              active: expenseIsValid,
+              active: billIsValid,
               icon: "check_box",
-              onClick: () => this.createExpense(),
-              title: "Create expense"
+              onClick: () => this.addBill(),
+              title: "Add bill"
             }}
             leftButton={{icon: "arrow_back", onClick: () => this.props.onClose(), title: "Back", active: true}}
           />
@@ -145,8 +127,17 @@ export const CreateExpenseModal = React.createClass({
                     className={styles.personPicker}>by {paidByPerson}
                 <Avatar size={20} fontSize={11} name={paidByPerson} />
               </span>
-              <span onClick={() => this.setModalState({dateModalIsActive: true})}
-                    className={styles.datePicker}>{dateString}</span>
+
+              {isToday(creationDate) &&
+                <span onClick={() => this.setModalState({dateModalIsActive: true})}className={styles.datePicker}>Today</span>
+              }
+
+              {!isToday(creationDate) &&
+                <span onClick={() => this.setModalState({dateModalIsActive: true})}className={styles.datePicker}>
+                  <FormattedDate value={new Date(creationDate)} year='numeric' month='numeric' day='numeric' />
+                </span>
+              }
+
             </div>
           </div>
           <div className={styles.amountContainer}>
@@ -166,9 +157,9 @@ export const CreateExpenseModal = React.createClass({
   })
   ;
 
-CreateExpenseModal.propTypes = {
+NewBillOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
-  createExpense: React.PropTypes.func.isRequired,
+  addBill: React.PropTypes.func.isRequired,
   reloadNobt: React.PropTypes.func.isRequired,
   nobtMembers: React.PropTypes.array.isRequired,
   setMetaData: React.PropTypes.func,
@@ -196,4 +187,4 @@ CreateExpenseModal.propTypes = {
   })
 };
 
-export default CreateExpenseModal
+export default NewBillOverlay

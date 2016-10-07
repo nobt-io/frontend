@@ -8,6 +8,6 @@ export function createNobt(nobt) {
   return api.post("nobts", JSON.stringify(nobt), {headers: {'Content-Type': 'application/json; charset=UTF-8'}});
 }
 
-export function createExpense(identifier, expense) {
-  return api.post(`nobts/${identifier}/expenses`, JSON.stringify(expense), {headers: {'Content-Type': 'application/json; charset=UTF-8'}});
+export function createBill(identifier, bill) {
+  return api.post(`nobts/${identifier}/expenses`, JSON.stringify(bill), {headers: {'Content-Type': 'application/json; charset=UTF-8'}});
 }

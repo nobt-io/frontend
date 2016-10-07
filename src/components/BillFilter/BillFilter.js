@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./ExpenseFilter.scss";
+import styles from "./BillFilter.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
 import PersonSelectorModal from "components/PersonSelectorModal";
 import ListSelectModal from "components/ListSelectModal";
 import {Avatar} from "components/Avatar";
 
-export const ExpenseFilter = React.createClass({
+export const BillFilter = React.createClass({
 
   onFilterModalClose: function () {
     this.setState({sortModalIsActive: false, filterModalIsActive: false});
@@ -40,18 +40,13 @@ export const ExpenseFilter = React.createClass({
     return (
       <div className={styles.container}>
         <PersonSelectorModal
-          title={"Filter expenses by"}
+          title={"Filter bills by"}
           active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
-<<<<<<< HEAD
-          persons={persons} canSelectAll={true}/>
+          names={personNames} canSelectAll={true}/>
         <ListSelectModal
           active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}
           title={"Sort by"} list={[{name: "Date", icon: "access_time"}, {name: "Amount", icon: "timeline"}]}
         />
-=======
-          names={personNames} canSelectAll={true}/>
-        <SortByModal active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}/>
->>>>>>> a67c1d94448357d2af77dc5c320e92f4fcdb8c8a
         <div>
           <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}
                 className={styles.filterIcon}><FontIcon value='clear'/></span>
@@ -62,7 +57,7 @@ export const ExpenseFilter = React.createClass({
   },
 });
 
-ExpenseFilter.propTypes = {
+BillFilter.propTypes = {
   personNames: React.PropTypes.array.isRequired,
   currentFilter: React.PropTypes.string.isRequired,
   currentSort: React.PropTypes.string.isRequired,
@@ -71,4 +66,4 @@ ExpenseFilter.propTypes = {
   onReset: React.PropTypes.func.isRequired,
 };
 
-export default ExpenseFilter
+export default BillFilter

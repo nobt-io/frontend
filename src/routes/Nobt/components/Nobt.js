@@ -3,9 +3,9 @@ import styles from "./Nobt.scss";
 import Header from "components/Header";
 import NobtSummary from "components/NobtSummary";
 import DebtSummaryList from "components/DebtSummaryList";
-import ExpenseList from "components/ExpenseList";
-import ExpenseFilter from "components/ExpenseFilter";
-import CreateExpenseModal from "components/CreateExpenseModal";
+import BillList from "components/BillList";
+import BillFilter from "components/BillFilter";
+import NewBillOverlay from "components/NewBillOverlay";
 import { Tab, Tabs } from "react-toolbox";
 
 export const Nobt = React.createClass({
@@ -47,7 +47,7 @@ export const Nobt = React.createClass({
 
     var indexHashMapping = {
       0: 'transactions',
-      1: 'expenses'
+      1: 'bills'
     };
 
     var hashRoute = indexHashMapping[ index ] || 'transactions';
@@ -60,19 +60,19 @@ export const Nobt = React.createClass({
       <div className={styles.nobt}>
         <Header rightButton={{
           icon: "add_box",
-          onClick: this.props.openNewExpenseOverlay,
+          onClick: this.props.openNewBillOverlay,
           title: "Add a bill",
           active: true
         }}/>
-        {this.props.newExpenseMetaData.active &&
-        <CreateExpenseModal metaData={this.props.newExpenseMetaData}
-                            personData={this.props.newExpensePersonData}
-                            setMetaData={this.props.setNewExpenseMetaData}
-                            setPersonValue={this.props.setNewExpensePersonValue}
-                            nobtMembers={this.props.members}
-                            onClose={() => this.props.closeNewExpenseOverlay()}
-                            createExpense={this.props.createExpense}
-                            reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
+        {this.props.newBillMetaData.active &&
+        <NewBillOverlay metaData={this.props.newBillMetaData}
+                        personData={this.props.newBillPersonData}
+                        setMetaData={this.props.setNewBillMetaData}
+                        setPersonValue={this.props.setNewBillPersonValue}
+                        nobtMembers={this.props.members}
+                        onClose={() => this.props.closeNewBillOverlay()}
+                        addBill={this.props.addBill}
+                        reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
         }
         <NobtSummary nobtName={this.props.name} totalAmount={this.props.total}
                      memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty}/>
@@ -85,17 +85,17 @@ export const Nobt = React.createClass({
               <DebtSummaryList debtSummaries={this.props.debtSummaries}/>
             </Tab>
             <Tab label="Bills">
-              <ExpenseFilter
+              <BillFilter
                 personNames={this.props.members}
-                onFilterChange={(filter) => this.props.updateExpensesFilter(filter)}
-                onSortChange={(sort) => this.props.updateExpenseSortProperty(sort)}
+                onFilterChange={(filter) => this.props.updateBillFilter(filter)}
+                onSortChange={(sort) => this.props.updateBillSortProperty(sort)}
                 onReset={() => {
-                  this.props.updateExpensesFilter("");
-                  this.props.updateExpenseSortProperty("Date");
+                  this.props.updateBillFilter("");
+                  this.props.updateBillSortProperty("Date");
                 }}
-                currentFilter={this.props.expenseFilter}
-                currentSort={this.props.expenseSortProperty}/>
-              <ExpenseList expenses={this.props.expenses}/>
+                currentFilter={this.props.billFilter}
+                currentSort={this.props.billSortProperty}/>
+              <BillList bills={this.props.bills}/>
             </Tab>
           </Tabs>
         </div>
@@ -110,9 +110,9 @@ Nobt.defaultProps = {
   name: "",
   total: 0,
   members: [],
-  expenses: [],
-  expenseFilter: '',
-  expenseSortProperty: 'Date',
+  bills: [],
+  billFilter: '',
+  billSortProperty: 'Date',
   debtSummaries: [],
   activeTabIndex: 0,
   nobtIsEmpty: true

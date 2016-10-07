@@ -5,18 +5,18 @@ import {Avatar} from "components/Avatar";
 import Amount from "components/Amount"
 import {FormattedDate} from "react-intl";
 
-import styles from "./ExpenseModal.scss";
+import styles from "./BillDetailOverlay.scss";
 import FontIcon from "react-toolbox/lib/font_icon";
 
-export const ExpenseModal = (props) => {
+export const BillModal = (props) => {
 
   const onClose = props.onClose || (() => { });
   const active = props.active || false;
-  const expense = props.expense;
+  const bill = props.bill;
 
-  const name = expense.name;
-  const debtee = expense.debtee;
-  const persons = expense.debtors;
+  const name = bill.name;
+  const debtee = bill.debtee;
+  const persons = bill.debtors;
 
   return (
     <LowerScreenModal header={name} active={active} onClose={onClose}>
@@ -29,15 +29,14 @@ export const ExpenseModal = (props) => {
       </div>
       <div className={styles.added}>
         <FontIcon className={styles.serverIcon} value="cloud_done"/>
-
         <span className={styles.serverDate}>
           <span>added&nbsp;</span>
-          <FormattedDate value={new Date(expense.createdOn)} year='numeric' month='numeric' day='numeric' />
+          <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='numeric' day='numeric' />
         </span>
         <FontIcon className={styles.addedIcon} value="access_time"/>
         <span className={styles.addedDate}>
           <span>paid&nbsp;</span>
-          <FormattedDate value={new Date(expense.date)} year='numeric' month='numeric' day='numeric' />
+          <FormattedDate value={new Date(bill.date)} year='numeric' month='numeric' day='numeric' />
         </span>
         <div style={{clear: "both"}}></div>
       </div>
@@ -45,10 +44,10 @@ export const ExpenseModal = (props) => {
 
 };
 
-ExpenseModal.propTypes = {
+BillModal.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
-  expense: React.PropTypes.object.isRequired,
+  bill: React.PropTypes.object.isRequired,
 };
 
-export default ExpenseModal
+export default BillModal
