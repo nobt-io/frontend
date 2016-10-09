@@ -1,0 +1,33 @@
+stages:
+  - build
+  - deploy
+
+build_frontend:
+  image: node:4
+  cache:
+    key: "node_modules_cache_frontend"
+    paths:
+      - 'node_modules'
+  stage: build
+  before_script:
+    - npm install
+  script:
+    - npm run test
+    - npm run deploy:prod
+  artifacts:
+    when: always
+    paths:
+      - 'dist'
+      # TODO define paths for test logs
+
+deploy_on_development:
+  image: governmentpaas/cf-cli
+  stage: deploy
+  before_script:
+    - cf api https://api.run.pivotal.io
+    - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
+    - cf target -o nobt.io -s development
+  script:
+    - cf push -n nobt-io-frontend-dev
+  only:
+    - master
