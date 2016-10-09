@@ -23,6 +23,9 @@ build_frontend:
 deploy_on_development:
   image: governmentpaas/cf-cli
   stage: deploy
+  environemnt:
+    name: development
+    url: http://nobt-io-frontend-dev.cfapps.io
   before_script:
     - cf api https://api.run.pivotal.io
     - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
