@@ -23,7 +23,7 @@ build_frontend:
 deploy_on_development:
   image: governmentpaas/cf-cli
   stage: deploy
-  environemnt:
+  environment:
     name: development
     url: http://nobt-io-frontend-dev.cfapps.io
   before_script:
