@@ -3,12 +3,13 @@ import { routerMiddleware } from "react-router-redux";
 import thunk from "redux-thunk";
 import makeRootReducer from "./reducers";
 import createLogger from "redux-logger";
+import { crashReporter } from "./crashReporter";
 
 export default (initialState = {}, history) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk, routerMiddleware(history)]
+  const middleware = [crashReporter, thunk, routerMiddleware(history)]
 
   if (__DEBUG__) {
     const logger = createLogger();
