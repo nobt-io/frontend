@@ -34,3 +34,31 @@ deploy_on_development:
     - cf push -n nobt-io-frontend-dev
   only:
     - master
+
+deploy_on_beta:
+  image: governmentpaas/cf-cli
+  stage: deploy
+  environment:
+    name: beta
+    url: http://nobt-io-frontend-beta.cfapps.io
+  before_script:
+    - cf api https://api.run.pivotal.io
+    - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
+    - cf target -o nobt.io -s beta
+  script:
+    - cf push -n nobt-io-frontend-beta
+  when: manual
+
+deploy_on_production:
+  image: governmentpaas/cf-cli
+  stage: deploy
+  environment:
+    name: production
+    url: http://nobt-io-frontend.cfapps.io
+  before_script:
+    - cf api https://api.run.pivotal.io
+    - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
+    - cf target -o nobt.io -s production
+  script:
+    - cf push -n nobt-io-frontend
+  when: manual
