@@ -104,18 +104,16 @@ export const Nobt = React.createClass({
   }
 });
 
-// NOTE: No PropTypes defined because this is a root component
-
-Nobt.defaultProps = {
-  name: "",
-  total: 0,
-  members: [],
-  bills: [],
-  billFilter: '',
-  billSortProperty: 'Date',
-  debtSummaries: [],
-  activeTabIndex: 0,
-  nobtIsEmpty: true
+Nobt.propTypes = {
+  name: React.PropTypes.string.isRequired,
+  total: React.PropTypes.number.isRequired,
+  members: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  bills: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // TODO instanceOf(BillViewModel),
+  billFilter: React.PropTypes.string.isRequired,
+  billSortProperty: React.PropTypes.string.isRequired,
+  debtSummaries: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // TODO instanceOf(DebtSummaryViewModel)
+  activeTabIndex: React.PropTypes.number.isRequired,
+  nobtIsEmpty: React.PropTypes.bool.isRequired
 };
 
 Nobt.childContextTypes = {
