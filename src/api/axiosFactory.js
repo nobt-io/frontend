@@ -1,37 +1,68 @@
 import axios from "axios";
 import debug from "debug";
 
-var instance = axios.create({
-  baseURL: "http://nobt-io-dev.cfapps.io"
-});
+const apiBaseURLs = [
+  {
+    url: "http://nobt-io-dev.cfapps.io",
+	    active: (host) => {
+      return host.includes("nobt-io-frontend-dev.cfapps.io") || host.match(/review-[A-z0-9\-]*\.cfapps\.io/)
+    }
+  },
+  {
+    url: "http://nobt-io-beta.cfapps.io",
+    active: (host) => host.includes("nobt-io-frontend-beta.cfapps.io")
+  },
+  {
+    url: "http://nobt-io.cfapps.io",
+    active: (host) => host.includes("nobt-io-frontend.cfapps.io")
+  },
+  {
+    url: "http://localhost:8080",
+    active: (host) => host.includes("localhost")
+  },
+];
 
-instance.interceptors.request.use(function (config) {
+const factory = (location) => {
+  const entry = apiBaseURLs.find(e => e.active(location)) || (() => {
+    throw new Error(`No API host was configured for '${window.location.href}'.`);
+  })();
 
-  debug('api:request')(`${config.method.toUpperCase()} ${config.url}`);
+  debug("api:factory")(`Running against API-Host: ${entry.url}`);
 
-  if (config.data) {
-    debug('api:request:data')(config.data);
-  }
+  var instance = axios.create({
+    baseURL: entry.url
+  });
 
-  return config;
-}, function (error) {
+  instance.interceptors.request.use(function (config) {
 
-  debug('api:request:error')(error);
+    debug("api:request")(`${config.method.toUpperCase()} ${config.url}`);
 
-  return Promise.reject(error);
-});
+    if (config.data) {
+      debug("api:request:data")(config.data);
+    }
 
-instance.interceptors.response.use(function (response) {
+    return config;
+  }, function (error) {
 
-  debug('api:response')(response);
+    debug("api:request:error")(error);
 
-  return response;
-}, function (error) {
+    return Promise.reject(error);
+  });
 
-  debug('api:response:error')(error);
-  debug('api:response:data')(error.response.data);
+  instance.interceptors.response.use(function (response) {
 
-  return Promise.reject(error);
-});
+    debug("api:response")(response);
 
-export default instance;
+    return response;
+  }, function (error) {
+
+    debug("api:response:error")(error);
+    debug("api:response:data")(error.response.data);
+
+    return Promise.reject(error);
+  });
+
+  return instance;
+};
+
+export default factory;
