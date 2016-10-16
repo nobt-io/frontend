@@ -5,9 +5,7 @@ import { Person, AvatarPosition, AvatarSize } from "components/Person";
 import Amount from "components/Amount";
 import DebtSummaryDetailOverlay from "components/DebtSummaryDetailOverlay";
 import Card from "components/Card";
-import FontIcon from "react-toolbox/lib/font_icon";
-
-const isPositive = (personAmount) => personAmount.amount > 0;
+import { Verb, Preposition, Icon } from "./DebtDirection";
 
 export const DebtSummaryItem = React.createClass({
 
@@ -30,7 +28,6 @@ export const DebtSummaryItem = React.createClass({
 
     const me = summary.me;
     const persons = summary.persons.map(p => (<span key={p.name} className={styles.avatar}><SmallAvatar name={p.name} /></span>));
-    const icon = isPositive(me) ? "add_circle" : "remove_circle";
 
     return (
       <Card>
@@ -43,37 +40,37 @@ export const DebtSummaryItem = React.createClass({
               avatarSize={AvatarSize.BIG}
               avatarPosition={AvatarPosition.LEFT}
               name={me.name}>
-              <FontIcon className={styles.meAvatarIcon} value={icon} />
+              <Icon className={styles.meAvatarIcon} person={me} />
             </Person>
           </span>
 
           <div className={styles.debtSummaryContainer}>
 
             <div className={styles.amountContainer}>
-              <span className={styles.verb}>{isPositive(me) ? "gets" : "owes"}</span>
+              <Verb className={styles.verb} person={me} />
               <Amount spanClass={styles.amount} value={me.amount} />
             </div>
 
             <div className={styles.personsContainer}>
-
-              <span className={styles.verb}>{isPositive(me) ? "from" : "to"}</span>
+              <Preposition className={styles.preposition} person={me} />
               <span className={styles.persons}>{persons}</span>
             </div>
+
           </div>
         </div>
       </Card>);
   },
 });
 
-var personAmountPropType = React.PropTypes.shape({
+var person = React.PropTypes.shape({
   name: React.PropTypes.string.isRequired,
   amount: React.PropTypes.number.isRequired
 }).isRequired;
 
 DebtSummaryItem.propTypes = {
   summary: React.PropTypes.shape({
-    me: personAmountPropType,
-    persons: React.PropTypes.arrayOf(personAmountPropType),
+    me: person,
+    persons: React.PropTypes.arrayOf(person),
   }).isRequired
 };
 

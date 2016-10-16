@@ -4,6 +4,7 @@ import PersonMoneyList from "components/PersonMoneyList";
 import Amount from "components/Amount";
 import { Person, AvatarPosition, AvatarSize } from "components/Person";
 import { FormattedMessage } from "react-intl";
+import { Verb, Preposition } from "components/DebtSummaryItem/DebtDirection";
 import styles from "./DebtSummaryDetailOverlay.scss";
 
 export const DebtSummaryDetailOverlay = (props) => {
@@ -25,15 +26,16 @@ export const DebtSummaryDetailOverlay = (props) => {
           <FormattedMessage
             id="debtSummary.detail.model.debtStatement"
             defaultMessage={ `{verb} {amount} {preposition} {debtorCount, plural,
-                                                           one { {singleDebtee} }
+                                                           one { {singleDebtor} }
                                                            other { {debtorCount} persons }
                                                          }`}
             values={{
-              verb: me.amount > 0 ? 'gets' : 'owes',
-              preposition: me.amount > 0 ? 'from' : 'to',
+              verb: <Verb person={me} />,
               amount: <Amount value={me.amount} spanClass={styles.amountInTextLine} />,
+              preposition: <Preposition person={me} />,
               debtorCount: persons.length,
-              singleDebtee: <Person name={persons[ 0 ].name} avatarPosition={AvatarPosition.RIGHT}
+              singleDebtor: <Person name={persons[ 0 ].name}
+                                    avatarPosition={AvatarPosition.RIGHT}
                                     avatarSize={AvatarSize.SMALL} />
             }}
           />
