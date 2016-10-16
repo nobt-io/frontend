@@ -45,7 +45,7 @@ export const BillFilter = React.createClass({
           names={personNames} canSelectAll={true}/>
         <ListSelectOverlay
           active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}
-          title={"Sort by"} list={[{name: "Date", icon: "access_time"}, {name: "Amount", icon: "timeline"}]}
+          title={"Sort by"} items={[{name: "Date", icon: "access_time"}, {name: "Amount", icon: "timeline"}]}
         />
         <div>
           <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}

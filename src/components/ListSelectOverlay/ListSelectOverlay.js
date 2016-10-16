@@ -10,7 +10,7 @@ export const ListSelectOverlay = (props) => {
     props.onClose();
   };
 
-  const listItems = props.list.map(item => (
+  const listItems = props.items.map(item => (
     <ListItem key={item.name} onClick={() => onItemClick(item.name)} caption={item.displayName|| item.name } leftIcon={item.icon}/>
   ));
 
@@ -27,7 +27,7 @@ ListSelectOverlay.propTypes = {
   onClose: React.PropTypes.func.isRequired,
   active: React.PropTypes.bool.isRequired,
   title: React.PropTypes.string.isRequired,
-  list: React.PropTypes.arrayOf(React.PropTypes.shape({
+  items: React.PropTypes.arrayOf(React.PropTypes.shape({
     name: React.PropTypes.string.isRequired,
     displayName: React.PropTypes.string,
     icon: React.PropTypes.string.isRequired

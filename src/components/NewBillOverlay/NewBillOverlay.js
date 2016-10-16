@@ -101,7 +101,7 @@ export const NewBillOverlay = React.createClass({
           <ListSelectOverlay
             active={shareModalIsActive || false} onSortChange={(splitStrategy) => this.setMetaData({splitStrategy})}
             title={"Split by"} onClose={() => this.setModalState({shareModalIsActive: false})}
-            list={[
+            items={[
               {name: SplitStrategyNames.EQUAL, icon: "view_module", displayName: "split equally"},
               {name: SplitStrategyNames.UNEQUAL, icon: "view_quilt", displayName: "split unequally"},
               {name: SplitStrategyNames.PERCENTAGE, icon: "poll", displayName: "split by percentage"}
