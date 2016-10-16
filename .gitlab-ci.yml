@@ -3,22 +3,33 @@ stages:
   - deploy
 
 build_frontend:
-  image: node:4
-  cache:
-    key: "node_modules_cache_frontend"
-    paths:
-      - 'node_modules'
+  image: node:6
   stage: build
   before_script:
     - npm install
   script:
     - npm run test
-    - npm run deploy:prod
+    - npm run deploy
   artifacts:
     when: always
     paths:
       - 'dist'
       # TODO define paths for test logs
+
+deploy_review_instance:
+  image: governmentpaas/cf-cli
+  stage: deploy
+  environment:
+    name: review-apps/$CI_BUILD_REF_NAME
+    url: http://review-$CI_BUILD_REF_NAME.cfapps.io/
+  before_script:
+    - cf api https://api.run.pivotal.io
+    - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
+    - cf target -o nobt.io -s development
+  script:
+    - cf push -n review-$CI_BUILD_REF_NAME
+  except:
+    - master
 
 deploy_on_development:
   image: governmentpaas/cf-cli

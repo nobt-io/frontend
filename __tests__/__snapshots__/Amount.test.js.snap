@@ -1,0 +1,17 @@
+exports[`test should display actual value if absolute property is falsy 1`] = `
+<span
+  className="">
+  <span>
+    -30
+  </span>
+</span>
+`;
+
+exports[`test should use absolute value of amount by dafult 1`] = `
+<span
+  className="">
+  <span>
+    30
+  </span>
+</span>
+`;
