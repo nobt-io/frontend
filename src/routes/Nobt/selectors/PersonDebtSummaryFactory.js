@@ -4,13 +4,17 @@ export default class PersonDebtSummaryFactory {
     this.transactions = transactions;
   }
 
-  computeSummaryForPerson(person) {
+  /**
+   * @param {string} ownName
+   * @return {{me: {name: string, amount: number}, persons: Array}}
+   */
+  computeSummaryForPerson(ownName) {
 
     var summaries = this.transactions
       .filter(tx => {
-        return tx.debtee === person || tx.debtor === person;
+        return tx.debtee === ownName || tx.debtor === ownName;
       }).map(tx => {
-        if (tx.debtor === person) {
+        if (tx.debtor === ownName) {
           return {
             debtee: tx.debtee,
             amount: tx.amount * (-1),
@@ -20,7 +24,7 @@ export default class PersonDebtSummaryFactory {
           return tx;
         }
       }).map(tx => {
-        if (tx.debtee === person) {
+        if (tx.debtee === ownName) {
           return {name: tx.debtor, amount: tx.amount};
         } else {
           return {name: tx.debtee, amount: tx.amount};
@@ -30,7 +34,7 @@ export default class PersonDebtSummaryFactory {
     var total = summaries.reduce((sum, tx) => sum + tx.amount, 0);
 
     return {
-      me: {name: person, amount: total},
+      me: {name: ownName, amount: total},
       persons: summaries
     };
   }
