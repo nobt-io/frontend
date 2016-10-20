@@ -1,0 +1,51 @@
+@import "~react-toolbox/lib/globals";
+
+.overlay {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: row;
+  justify-content: center;
+
+  z-index: 100;
+
+  .contentSection {
+
+    display: inline-block;
+    position: relative;
+
+    @media screen and (max-width: $layout-breakpoint-sm) {
+      width: 100%;
+    }
+
+    @media screen and (min-width: $layout-breakpoint-sm) {
+      width: 80%;
+    }
+
+    .contentContainer {
+
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      display: flex;
+
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .contentHeader {
+      display: block;
+    }
+
+    .contentBody {
+      display: block;
+    }
+  }
+}
