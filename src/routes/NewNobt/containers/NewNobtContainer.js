@@ -1,14 +1,17 @@
 import { connect } from "react-redux";
-import { actionFactory } from "../modules/NewNobt";
+
 import NewNobt from "../components/NewNobt";
-import { getSelectedCurrency, getChosenName, getPersonNames, isEvilTwinFactory, isStateValid } from "../selectors";
+
+import { addPerson, removePerson, createNobt, changeNobtName, selectCurrency } from "../modules/actions"
+import AsyncActionStatus from "const/AsyncActionStatus"
+import { getSelectedCurrency, getChosenName, getPersonNames, isEvilTwinFactory, canCreateNobt, getCreationStatus, getCreatedNobtId } from "../modules/selectors";
 
 const mapActionCreators = {
-  currencySelectionChanged: (newCurrency) => actionFactory.currencySelectionChanged(newCurrency),
-  nobtNameChanged: (newName) => actionFactory.nobtNameChanged(newName),
-  addPerson: (name) => actionFactory.addPerson(name),
-  removePerson: (name) => actionFactory.removePerson(name),
-  createNobt: () => actionFactory.createNobt(),
+  addPerson,
+  removePerson,
+  changeNobtName,
+  selectCurrency,
+  createNobt
 };
 
 const mapStateToProps = (state) => ({
@@ -16,7 +19,10 @@ const mapStateToProps = (state) => ({
   chosenName: getChosenName(state),
   personNames: getPersonNames(state),
   isEvilTwin: isEvilTwinFactory(state),
-  isStateValidForCreation: isStateValid(state)
+  canCreateNobt: canCreateNobt(state),
+  creationInProgress: getCreationStatus(state) === AsyncActionStatus.IN_PROGRESS,
+  creationSuccessful: getCreationStatus(state) === AsyncActionStatus.SUCCESSFUL,
+  createdNobtId: getCreatedNobtId(state),
 });
 
 export default connect(mapStateToProps, mapActionCreators)(NewNobt);

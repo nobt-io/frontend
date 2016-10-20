@@ -12,16 +12,14 @@ const NewNobt = React.createClass({
     var nobtNameFromURL = this.props.params.nobtName;
 
     if (nobtNameFromURL !== "") {
-      this.props.nobtNameChanged(nobtNameFromURL);
+      this.props.changeNobtName(nobtNameFromURL);
     }
   },
 
-  createNobt: function () {
-    this.props.createNobt().then((response) => {
-      this.props.history.push(`/${response.data.id}`);
-    }, () => {
-      //Todo: show error!
-    });
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.creationSuccessful) {
+      this.props.history.push(`/${nextProps.createdNobtId}`);
+    }
   },
 
   render: function () {
@@ -31,8 +29,8 @@ const NewNobt = React.createClass({
           {
             icon: "",
             title: "Create nobt",
-            onClick: this.createNobt,
-            active: this.props.isStateValidForCreation
+            onClick: this.props.createNobt,
+            active: this.props.canCreateNobt
           }
         } />
 
@@ -42,12 +40,12 @@ const NewNobt = React.createClass({
             type="text"
             maxLength={30}
             value={this.props.chosenName}
-            onChange={this.props.nobtNameChanged}
+            onChange={this.props.changeNobtName}
           />
 
           <CurrencyPicker
             selectedCurrency={this.props.selectedCurrency}
-            onCurrencyChanged={this.props.currencySelectionChanged}
+            onCurrencyChanged={this.props.selectCurrency}
             dropDownTheme={ {
               values: styles.currencies,
               dropdown: styles.currencyPickerContainer,
@@ -72,17 +70,23 @@ const NewNobt = React.createClass({
 });
 
 NewNobt.propTypes = {
-  selectedCurrency: React.PropTypes.string.isRequired,
-  currencySelectionChanged: React.PropTypes.func.isRequired,
-
+  // state from selectors
   chosenName: React.PropTypes.string.isRequired,
-  nobtNameChanged: React.PropTypes.func.isRequired,
-
   personNames: React.PropTypes.arrayOf(React.PropTypes.string),
-  removePerson: React.PropTypes.func.isRequired,
+  selectedCurrency: React.PropTypes.string.isRequired,
+  canCreateNobt: React.PropTypes.bool.isRequired,
   isEvilTwin: React.PropTypes.func.isRequired,
+  creationSuccessful: React.PropTypes.bool.isRequired,
+  creationInProgress: React.PropTypes.bool.isRequired,
+  createdNobtId: React.PropTypes.string.isRequired,
+
+
+  // actions
+  selectCurrency: React.PropTypes.func.isRequired,
+  changeNobtName: React.PropTypes.func.isRequired,
   addPerson: React.PropTypes.func.isRequired,
-  isStateValidForCreation: React.PropTypes.bool.isRequired
+  removePerson: React.PropTypes.func.isRequired,
+  createNobt: React.PropTypes.func.isRequired
 };
 
 NewNobt.defaultProps = {
