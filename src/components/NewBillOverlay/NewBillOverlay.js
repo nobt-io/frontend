@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './NewBillOverlay.scss'
+import React from "react";
+import styles from "./NewBillOverlay.scss";
 import { FullScreenOverlay } from "components/Overlay";
 import Header from "components/Header";
 import { Avatar } from "components/Avatar";
@@ -10,8 +10,8 @@ import PersonSelectorOverlay from "components/PersonSelectorOverlay";
 import DatePickerOverlay from "components/DatePickerOverlay";
 import ListSelectOverlay from "components/ListSelectOverlay";
 import SplitStrategyNames from "const/SplitStrategyNames";
-import {FormattedDate} from "react-intl";
-
+import { FormattedDate } from "react-intl";
+import { Button } from "react-toolbox/lib/button";
 import _debug from "debug";
 
 const logger = _debug("view:components:NewBillOverlay");
@@ -108,14 +108,8 @@ export const NewBillOverlay = React.createClass({
             ]}
           />
           <Header
-            showNobtHeader={false}
-            rightButton={{
-              active: billIsValid,
-              icon: "check_box",
-              onClick: () => this.addBill(),
-              title: "Add bill"
-            }}
-            leftButton={{icon: "arrow_back", onClick: () => this.props.onClose(), title: "Back", active: true}}
+            left={<Button icon="arrow_back" onClick={this.props.onClose}>Back</Button>}
+            right={<Button icon="check_box" onClick={this.addBill} disabled={!billIsValid}>Add bill</Button>}
           />
           <div className={styles.headInput}>
             <div>
@@ -129,11 +123,11 @@ export const NewBillOverlay = React.createClass({
               </span>
 
               {isToday(creationDate) &&
-                <span onClick={() => this.setModalState({dateModalIsActive: true})}className={styles.datePicker}>Today</span>
+              <span onClick={() => this.setModalState({dateModalIsActive: true})} className={styles.datePicker}>Today</span>
               }
 
               {!isToday(creationDate) &&
-                <span onClick={() => this.setModalState({dateModalIsActive: true})}className={styles.datePicker}>
+              <span onClick={() => this.setModalState({dateModalIsActive: true})} className={styles.datePicker}>
                   <FormattedDate value={new Date(creationDate)} year='numeric' month='numeric' day='numeric' />
                 </span>
               }

@@ -1,34 +1,24 @@
+.headerContainer {
 
-.header {
   height: 50px;
-  z-index: 100 !important;
 
-  h1 {
-    font-size: 18px;
-    margin: 7px 0;
-  }
+  .header {
+    z-index: 100 !important;
 
-  button {
-    background-color: $color-primary-dark;
-    color: white !important;
-    border-radius: 3px;
-    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
 
-    &:disabled {
-      opacity: 0.3;
+    .leftContainer {
+      order: 0;
+      width: 50%;
+      text-align: left;
     }
-  }
 
-  display: flex;
-  justify-content: space-between;
-  margin: auto;
-
-  .leftContainer {
-    order: 0;
-  }
-
-  .rightContainer {
-    order: 1;
-    width: 50%;
+    .rightContainer {
+      order: 1;
+      width: 50%;
+      text-align: right;
+    }
   }
 }

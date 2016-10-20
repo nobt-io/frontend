@@ -1,24 +1,20 @@
 import React from "react";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Header.scss";
-import { Button } from "react-toolbox/lib/button";
 
 export const Header = (props) => (
 
-
-
-  <div className={styles.header}>
+  <div className={styles.headerContainer}>
     <AppBar className={styles.header} fixed>
-      <h1 style={{display: props.showNobtHeader ? "block" : "none"}}>nobt.io</h1>
       {
-        (props.leftButton) &&
-        (<div className={styles.leftContainer}>
-          <Button className={styles.button} icon={props.leftButton.icon} disabled={!props.leftButton.active} onClick={props.leftButton.onClick}>{props.leftButton.title}</Button>
+        (props.left) &&
+        (<div className={`${props.theme.leftContainer} ${styles.leftContainer}`}>
+          {props.left}
         </div>)
       }
       {
         (props.right) &&
-        (<div className={styles.rightContainer}>
+        (<div className={`${props.theme.rightContainer} ${styles.rightContainer}`}>
           {props.right}
         </div>)
       }
@@ -27,20 +23,21 @@ export const Header = (props) => (
 );
 
 Header.propTypes = {
-  leftButton: React.PropTypes.shape({
-    active: React.PropTypes.bool.isRequired,
-    title: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.string.isRequired,
-    onClick: React.PropTypes.func.isRequired,
-  }),
+  left: React.PropTypes.element,
   right: React.PropTypes.element,
-  showNobtHeader: React.PropTypes.bool,
+  theme: React.PropTypes.shape({
+    leftContainer: React.PropTypes.string,
+    rightContainer: React.PropTypes.string,
+  })
 };
 
 Header.defaultProps = {
-  leftButton: null,
+  left: null,
   right: null,
-  showNobtHeader: true
+  theme: {
+    leftContainer: "",
+    rightContainer: "",
+  }
 };
 
 export default Header

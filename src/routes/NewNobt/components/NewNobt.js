@@ -5,8 +5,9 @@ import CurrencyPicker from "components/CurrencyPicker";
 import styles from "./NewNobt.scss";
 import SingleInputInlineForm from "components/SingleInputInlineForm";
 import PersonList from "components/PersonList";
-import Spinner from "components/Spinner"
+import Spinner from "components/Spinner";
 import { Button } from "react-toolbox/lib/button";
+import Title from "components/Title"
 
 
 const NewNobt = React.createClass({
@@ -28,16 +29,20 @@ const NewNobt = React.createClass({
   render: function () {
     return (
       <div className={styles.NewNobt}>
-        <Header right={
-          <Spinner isLoading={this.props.creationInProgress} className={styles.createNobtButtonContainer}>
-            <Button
-              className={styles.createNobtButton}
-              disabled={!this.props.canCreateNobt}
-              onClick={this.props.createNobt}>
-              Create Nobt
-            </Button>
-          </Spinner>
-        } />
+        <Header
+          left={<Title />}
+          right={
+            <Spinner isLoading={this.props.creationInProgress}>
+              <Button
+                theme={ {button: styles.createNobtButton} }
+                disabled={!this.props.canCreateNobt}
+                onClick={this.props.createNobt}>
+                Create Nobt
+              </Button>
+            </Spinner>
+          }
+          theme={ { rightContainer: styles.createNobtButtonContainer } }
+        />
 
         <div className={ this.props.creationInProgress ? styles.disableScreen : "" }></div>
 

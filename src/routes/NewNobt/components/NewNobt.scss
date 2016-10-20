@@ -22,9 +22,7 @@
 
   .createNobtButton {
     background-color: $color-primary-dark;
-    color: white !important;
-    border-radius: 3px;
-    padding: 0;
+    color: $color-accent-dark !important;
 
     &:disabled {
       opacity: 0.3;
@@ -73,7 +71,6 @@
       margin: auto;
     }
   }
-
 
   .createNobtButtonContainer {
     margin-left: 50%;
