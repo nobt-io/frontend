@@ -108,8 +108,8 @@ export const NewBillOverlay = React.createClass({
             ]}
           />
           <Header
-            left={<Button icon="arrow_back" onClick={this.props.onClose}>Back</Button>}
-            right={<Button icon="check_box" onClick={this.addBill} disabled={!billIsValid}>Add bill</Button>}
+            left={<Button icon="arrow_back" onClick={this.props.onClose} theme={ { button: styles.headerButton } }>Back</Button>}
+            right={<Button icon="check_box" onClick={this.addBill} disabled={!billIsValid} theme={ { button: styles.headerButton} }>Add bill</Button>}
           />
           <div className={styles.headInput}>
             <div>
