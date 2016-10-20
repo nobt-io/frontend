@@ -34,11 +34,6 @@ export const Nobt = React.createClass({
     };
   },
 
-  navigate(path) {
-    this.props.history.push(path);
-  },
-
-
   handleToggle() {
     this.setState({active: !this.state.active});
   },
@@ -52,7 +47,7 @@ export const Nobt = React.createClass({
 
     var hashRoute = indexHashMapping[ index ] || 'transactions';
 
-    this.navigate(`/${this.props.params.id}#${hashRoute}`);
+    this.props.router.replace(`/${this.props.params.id}#${hashRoute}`);
   },
 
   render: function () {

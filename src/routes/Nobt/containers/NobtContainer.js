@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import Nobt from "../components/Nobt";
 
+import { withRouter } from 'react-router'
+
 import { addMember, fetchNobt } from "../modules/currentNobt/actions"
 import { getName, getCurrency, getMembers, getBills, getDebtSummaries, getTotal, getFilteredBills } from '../modules/currentNobt/selectors'
 
@@ -44,4 +46,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, mapActionCreators)(Nobt)
+export default connect(mapStateToProps, mapActionCreators)(withRouter(Nobt))
