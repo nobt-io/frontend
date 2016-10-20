@@ -21,7 +21,7 @@ const NewNobt = React.createClass({
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.creationSuccessful) {
-      this.props.history.push(`/${nextProps.createdNobtId}`);
+      this.props.router.replace(`/${nextProps.createdNobtId}`);
     }
   },
 

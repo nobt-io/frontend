@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { withRouter } from 'react-router'
 
 import NewNobt from "../components/NewNobt";
 
@@ -25,4 +26,4 @@ const mapStateToProps = (state) => ({
   createdNobtId: getCreatedNobtId(state),
 });
 
-export default connect(mapStateToProps, mapActionCreators)(NewNobt);
+export default connect(mapStateToProps, mapActionCreators)(withRouter(NewNobt));
