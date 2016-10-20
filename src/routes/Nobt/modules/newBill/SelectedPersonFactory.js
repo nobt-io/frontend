@@ -1,4 +1,4 @@
-import SplitStrategyNames from "const/SplitStrategyNames";
+import SplitStrategyNames from "../../../../const/SplitStrategyNames";
 import _debug from "debug";
 
 const log = _debug("SelectedPersonFactory");

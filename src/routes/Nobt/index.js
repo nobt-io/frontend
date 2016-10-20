@@ -10,7 +10,7 @@ export default (store) => ({
       /*  Webpack - use require callback to define
        dependencies for bundling   */
       const Nobt = require('./containers/NobtContainer').default
-      const reducer = require('./modules/Nobt').default
+      const reducer = require('./modules').default
 
       /*  Add the reducer to the store on key 'Nobt'  */
       injectReducer(store, {key: 'Nobt', reducer})

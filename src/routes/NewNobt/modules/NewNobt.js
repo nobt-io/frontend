@@ -1,5 +1,5 @@
 import _debug from "debug";
-import { createNobt } from "api/api";
+import Client from "api/api";
 
 export const actionNames = {
   CURRENCY_SELECTION_CHANGED: 'NewNobt.CURRENCY_SELECTION_CHANGED',
@@ -24,7 +24,7 @@ export const actionFactory = {
         explicitParticipants: state.personNames
       };
 
-      return createNobt(nobtToCreate);
+      return Client.createNobt(nobtToCreate);
     };
   }
 };
