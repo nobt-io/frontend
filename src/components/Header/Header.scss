@@ -1,13 +1,18 @@
 .headerContainer {
 
   height: 50px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 
   .header {
     z-index: 100 !important;
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: auto;
+    width: 100%;
 
     .leftContainer {
       order: 0;

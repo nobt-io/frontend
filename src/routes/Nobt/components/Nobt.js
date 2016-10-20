@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./Nobt.scss";
 import Header from "components/Header";
+import AppBar from "react-toolbox/lib/app_bar";
 import NobtSummaryHeader from "components/NobtSummaryHeader";
 import DebtSummaryList from "components/DebtSummaryList";
 import BillList from "components/BillList";
 import BillFilter from "components/BillFilter";
-import NewBillOverlay from "components/NewBillOverlay";
+import Overlay from "components/Overlay/Overlay";
 import { Tab, Tabs } from "react-toolbox";
 import { Button } from "react-toolbox/lib/button";
-import Title from "components/Title"
+import Title from "components/Title";
 
 export const Nobt = React.createClass({
 
@@ -36,10 +37,6 @@ export const Nobt = React.createClass({
     };
   },
 
-  handleToggle() {
-    this.setState({active: !this.state.active});
-  },
-
   onTabChange(index) {
 
     var indexHashMapping = {
@@ -55,27 +52,26 @@ export const Nobt = React.createClass({
   render: function () {
     return (
       <div className={styles.nobt}>
-        <Header
-          left={<Title />}
-          right={
-            <Button
-              theme={ {button: styles.addBillButton} }
-              icon="add_box"
-              onClick={this.props.openNewBillOverlay}>
-              Add a bill
-            </Button>
-          } />
+        <AppBar fixed>
+          <Header
+            left={<Title />}
+            right={
+              <Button
+                theme={ {button: styles.addBillButton} }
+                icon="add_box"
+                onClick={() => this._overlay.open()}>
+                Add a bill
+              </Button>
+            } />
+        </AppBar>
 
-        {this.props.newBillMetaData.active &&
-        <NewBillOverlay metaData={this.props.newBillMetaData}
-                        personData={this.props.newBillPersonData}
-                        setMetaData={this.props.addMember}
-                        setPersonValue={this.props.setNewBillPersonValue}
-                        nobtMembers={this.props.members}
-                        onClose={this.props.closeNewBillOverlay}
-                        addBill={this.props.addBill}
-                        reloadNobt={() => this.props.loadNobt(this.props.params.id)} />
-        }
+        <Overlay
+          ref={ (overlay) => this._overlay = overlay }
+          header={
+            <p>Header!</p>
+          }>
+          <div style={ {backgroundColor: "white", height: "50px"} } />
+        </Overlay>
 
         <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
                            memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />

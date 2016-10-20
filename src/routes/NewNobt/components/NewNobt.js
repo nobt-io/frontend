@@ -1,5 +1,6 @@
 import React from "react";
 import { Input } from "react-toolbox/lib/input";
+import AppBar from 'react-toolbox/lib/app_bar';
 import Header from "components/Header";
 import CurrencyPicker from "components/CurrencyPicker";
 import styles from "./NewNobt.scss";
@@ -29,20 +30,23 @@ const NewNobt = React.createClass({
   render: function () {
     return (
       <div className={styles.NewNobt}>
-        <Header
-          left={<Title />}
-          right={
-            <Spinner isLoading={this.props.creationInProgress}>
-              <Button
-                theme={ {button: styles.createNobtButton} }
-                disabled={!this.props.canCreateNobt}
-                onClick={this.props.createNobt}>
-                Create Nobt
-              </Button>
-            </Spinner>
-          }
-          theme={ { rightContainer: styles.createNobtButtonContainer } }
-        />
+        <AppBar fixed>
+          <Header
+            left={<Title />}
+            right={
+              <Spinner isLoading={this.props.creationInProgress}>
+                <Button
+                  theme={ {button: styles.createNobtButton} }
+                  disabled={!this.props.canCreateNobt}
+                  onClick={this.props.createNobt}>
+                  Create Nobt
+                </Button>
+              </Spinner>
+            }
+            theme={ { rightContainer: styles.createNobtButtonContainer } }
+          />
+        </AppBar>
+
 
         <div className={ this.props.creationInProgress ? styles.disableScreen : "" }></div>
 

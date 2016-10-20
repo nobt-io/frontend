@@ -2,7 +2,7 @@
 
 .overlay {
 
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -38,14 +38,6 @@
 
       flex-direction: column;
       justify-content: flex-end;
-    }
-
-    .contentHeader {
-      display: block;
-    }
-
-    .contentBody {
-      display: block;
     }
   }
 }

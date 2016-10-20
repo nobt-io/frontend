@@ -1,30 +1,32 @@
 import React from "react";
-import styles from "./LowerScreenOverlay.scss";
-import Modal from "react-responsive-modal";
 
-const LowerScreenOverlay = (props) => {
 
-  const headerIsEmpty = props.header == '';
+import Header from "components/Header"
+import Overlay from "./Overlay"
 
-  return (
-    <Modal overlayClassName={styles.overlay} modalClassName={styles.modal} open={props.active} onClose={props.onClose}>
-      <div className={styles.content}>
-        <div className={headerIsEmpty ? "" : styles.header}>{props.header}</div>
-        {props.children}
-      </div>
-    </Modal>
-  );
-};
+const LowerScreenOverlay = React.createClass({
+
+  onOverlayRefUpdated: function (overlayRef) {
+    this._overlay = overlayRef;
+    this.props.onOverlayRefUpdated(overlayRef);
+  },
+
+  render: function () {
+    return (
+      <Overlay ref={this.onOverlayRefUpdated}>
+        {this.props.children}
+      </Overlay>
+    );
+  }
+});
 
 LowerScreenOverlay.propTypes = {
-  onClose: React.PropTypes.func.isRequired,
-  active: React.PropTypes.bool,
-  header: React.PropTypes.string
+  onOverlayRefUpdated: React.PropTypes.func
 };
 
 LowerScreenOverlay.defaultProps = {
-  active: false,
-  header: ''
+  header: '',
+  onOverlayRefUpdated: (overlayRef) => { }
 };
 
 export default LowerScreenOverlay;

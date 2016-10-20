@@ -29,7 +29,7 @@ const Overlay = React.createClass({
 
     var isOutsideOfContent = classesOfClickedElement.indexOf(overlayClass) !== -1 || classesOfClickedElement.indexOf(sectionClass) !== -1;
 
-    if (isOutsideOfContent) {
+    if (isOutsideOfContent && this.props.closeable) {
       this.close();
     }
   },
@@ -41,15 +41,7 @@ const Overlay = React.createClass({
           <div className={styles.overlay} onClick={this.closeIfOutsideOfContent}>
             <div className={styles.contentSection}>
               <div className={styles.contentContainer}>
-
-                <div className={styles.contentHeader}>
-                  {this.props.header}
-                </div>
-
-                <div className={styles.contentBody}>
-                  {this.props.children}
-                </div>
-
+                {this.props.children}
               </div>
             </div>
           </div>
@@ -60,11 +52,13 @@ const Overlay = React.createClass({
 });
 
 Overlay.propTypes = {
-  closeable: React.PropTypes.bool
+  closeable: React.PropTypes.bool,
+  header: React.PropTypes.element
 };
 
 Overlay.defaultProps = {
-  closeable: false
+  closeable: true,
+  header: null
 };
 
 export default Overlay;

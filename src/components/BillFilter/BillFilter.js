@@ -1,8 +1,15 @@
 import React from "react";
 import styles from "./BillFilter.scss";
+
+import Header from "components/Header"
 import FontIcon from "react-toolbox/lib/font_icon";
+import {IconButton} from 'react-toolbox/lib/button';
+
 import PersonSelectorOverlay from "components/PersonSelectorOverlay";
-import ListSelectOverlay from "components/ListSelectOverlay";
+import { List, ListItem } from "react-toolbox/lib/list";
+
+import Overlay from "components/Overlay/Overlay"
+
 import {Avatar} from "components/Avatar";
 
 export const BillFilter = React.createClass({
@@ -43,16 +50,31 @@ export const BillFilter = React.createClass({
           title={"Filter bills by"}
           active={filterModalIsActive} onFilterChange={onFilterChange} onClose={this.onFilterModalClose}
           names={personNames} canSelectAll={true}/>
-        <ListSelectOverlay
-          active={sortModalIsActive} onSortChange={onSortChange} onClose={this.onSortModalClose}
-          title={"Sort by"} items={[{name: "Date", icon: "access_time"}, {name: "Amount", icon: "timeline"}]}
-        />
+
+        <Overlay ref={ (overlayRef) => this._sortPropertyPickerOverlay = overlayRef }>
+          <div className={styles.sortPropertyListContainer}>
+            <Header
+              left={<h3>Sort by</h3>}
+              right={<IconButton icon="close" onClick={() => this._sortPropertyPickerOverlay.close()} />}
+              theme={ {
+
+              } }
+            />
+            <List selectable ripple>
+              <ListItem key="Sort.ByDate" onClick={onSortChange} caption={"Date"} leftIcon="access_time"/>
+              <ListItem key="Sort.ByAmount" onClick={onSortChange} caption={"Amount"} leftIcon="timeline"/>
+            </List>
+          </div>
+        </Overlay>
+
         <div>
           <span onClick={onReset} style={{display: defaultFilter ? "none" : "inline"}}
                 className={styles.filterIcon}><FontIcon value='clear'/></span>
-          <span onClick={this.onSortModalOpen} className={styles.filter}>sort by <b>{currentSort}</b></span>
+
+          <span onClick={() => this._sortPropertyPickerOverlay.open()} className={styles.filter}>sort by <b>{currentSort}</b></span>
           <span onClick={this.onFilterModalOpen} className={styles.filter}>filter by {filter}</span>
         </div>
+
       </div>);
   },
 });
