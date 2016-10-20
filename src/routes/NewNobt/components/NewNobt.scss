@@ -20,10 +20,6 @@
     }
   }
 
-  .createNobtButtonContainer {
-    margin-left: 50%;
-  }
-
   .createNobtButton {
     background-color: $color-primary-dark;
     color: white !important;
@@ -33,6 +29,19 @@
     &:disabled {
       opacity: 0.3;
     }
+  }
+
+  .disableScreen {
+    background-color:#EFEFEF;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    top: 50px;
+    left: 0;
+    opacity: .6; /* in FireFox */
+    filter: alpha(opacity=50); /* in IE */
+    pointer-events: none;
   }
 }
 
@@ -63,5 +72,10 @@
     .currencyPickerContainer, .nobtNameContainer {
       margin: auto;
     }
+  }
+
+
+  .createNobtButtonContainer {
+    margin-left: 50%;
   }
 }

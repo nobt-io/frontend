@@ -39,6 +39,8 @@ const NewNobt = React.createClass({
           </Spinner>
         } />
 
+        <div className={ this.props.creationInProgress ? styles.disableScreen : "" }></div>
+
         <div className={styles.metaInformationContainer}>
           <Input
             theme={ {input: styles.nobtNameContainer, inputElement: styles.nobtNameInput} }

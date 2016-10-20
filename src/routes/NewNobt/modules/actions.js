@@ -55,7 +55,7 @@ export function createNobt() {
     Client.createNobt(nobtToCreate).then(
       response => {
 
-        utils.sleep(2000).then(() => dispatch(createNobtSucceeded(response)));
+        utils.sleep(200).then(() => dispatch(createNobtSucceeded(response)));
 
       },
       error => dispatch(createNobtFailed(error))
