@@ -1,32 +1,33 @@
 import Client from "api/api";
+import AsyncActionStatus from "const/AsyncActionStatus"
 
-export const FETCH_NOBT_STARTED = 'Nobt.FETCH_NOBT_STARTED';
-export const FETCH_NOBT_SUCCEEDED = 'Nobt.FETCH_NOBT_SUCCEEDED';
-export const FETCH_NOBT_FAILED = 'Nobt.FETCH_NOBT_FAILED';
+export const UPDATE_FETCH_NOBT_STATUS = 'Nobt.UPDATE_FETCH_NOBT_STATUS';
 
-function fetchNobtStarted(id) {
+function fetchNobtStarted() {
   return {
-    type: FETCH_NOBT_STARTED,
+    type: UPDATE_FETCH_NOBT_STATUS,
     payload: {
-      id
+      status: AsyncActionStatus.IN_PROGRESS
     }
   }
 }
 
 function fetchNobtSucceeded(response) {
   return {
-    type: FETCH_NOBT_SUCCEEDED,
+    type: UPDATE_FETCH_NOBT_STATUS,
     payload: {
-      nobt: response.data
+      nobt: response.data,
+      status: AsyncActionStatus.SUCCESSFUL
     }
   }
 }
 
 function fetchNobtFailed(error) {
   return {
-    type: FETCH_NOBT_FAILED,
+    type: UPDATE_FETCH_NOBT_STATUS,
     payload: {
-      error
+      error,
+      state: AsyncActionStatus.FAILED
     }
   }
 }
@@ -35,7 +36,7 @@ export function fetchNobt(id) {
 
   return (dispatch) => {
 
-    dispatch(fetchNobtStarted(id));
+    dispatch(fetchNobtStarted());
 
     Client.fetchNobt(id).then(
       response => dispatch(fetchNobtSucceeded(response)),

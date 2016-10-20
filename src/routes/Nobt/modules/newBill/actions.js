@@ -1,35 +1,37 @@
 import Client from "api/api"
 
-export const ADD_BILL_STARTED = 'Nobt.ADD_BILL_STARTED';
-export const ADD_BILL_SUCCEEDED = 'Nobt.ADD_BILL_SUCCEEDED';
-export const ADD_BILL_FAILED = 'Nobt.ADD_BILL_FAILED';
+import AsyncActionStatus from "const/AsyncActionStatus"
+
+export const UPDATE_ADD_BILL_STATUS = 'Nobt.UPDATE_ADD_BILL_STATUS';
 
 export const SET_NEW_BILL_OVERLAY_VISIBILITY = 'Nobt.SET_NEW_BILL_OVERLAY_VISIBILITY';
 export const SET_NEW_BILL_PERSON_VALUE = 'Nobt.SET_NEW_BILL_PERSON_VALUE';
 
-function addBillStarted(bill) {
+function addBillStarted() {
   return {
-    type: ADD_BILL_STARTED,
+    type: UPDATE_ADD_BILL_STATUS,
     payload: {
-      bill
+      status: AsyncActionStatus.IN_PROGRESS
     }
   }
 }
 
 function addBillSucceeded(response) {
   return {
-    type: ADD_BILL_SUCCEEDED,
+    type: UPDATE_ADD_BILL_STATUS,
     payload: {
-      nobt: response.data
+      response,
+      status: AsyncActionStatus.SUCCESSFUL
     }
   }
 }
 
 function addBillFailed(error) {
   return {
-    type: ADD_BILL_FAILED,
+    type: UPDATE_ADD_BILL_STATUS,
     payload: {
-      error
+      error,
+      status: AsyncActionStatus.FAILED
     }
   }
 }
@@ -40,7 +42,7 @@ export function addBill(nobtId, bill) {
 
   return (dispatch) => {
 
-    dispatch(addBillStarted(bill));
+    dispatch(addBillStarted());
 
     Client.createBill(nobtId, bill).then(
       response => dispatch(addBillSucceeded(response)),

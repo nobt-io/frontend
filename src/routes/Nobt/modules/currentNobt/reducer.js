@@ -1,42 +1,32 @@
-import {
-  FETCH_NOBT_STARTED,
-  FETCH_NOBT_SUCCEEDED,
-  FETCH_NOBT_FAILED,
-  ADD_MEMBER
-} from "./actions";
+import { UPDATE_FETCH_NOBT_STATUS, ADD_MEMBER } from "./actions";
+import AsyncActionStatus from "const/AsyncActionStatus";
+
+import _debug from "debug";
+
+const updateFetchNobtStatusActionPayloadHandler = {
+  [AsyncActionStatus.IN_PROGRESS]: () => {},
+  [AsyncActionStatus.SUCCESSFUL]: (payload) => ({
+    data: {
+      id: payload.nobt.id,
+      name: payload.nobt.name,
+      currency: payload.nobt.currency,
+      participatingPersons: payload.nobt.participatingPersons,
+      transactions: payload.nobt.transactions,
+      bills: payload.nobt.expenses,
+    }
+  }),
+  [AsyncActionStatus.FAILED]: () => {},
+};
 
 const handlers = {
-  [FETCH_NOBT_STARTED]: (state, action) => {
-    return {...state, isLoading: true}
-  },
+  [UPDATE_FETCH_NOBT_STATUS]: (state, action) => {
+    let newState = updateFetchNobtStatusActionPayloadHandler[ action.payload.status ](action.payload);
 
-  [FETCH_NOBT_SUCCEEDED]: (state, action) => {
-
-    /*
-     TODO this is work for a selector
-     paidByPersonIsNotSet, reset it with first person
-     if (state.newBillViewInfo.paidByPerson === "") {
-     newBillViewInfo = {...state.newBillViewInfo, paidByPerson: action.payload.nobt.participatingPersons[ 0 ]};
-     }
-     */
-
-    const response = action.payload.nobt;
-
-    var data = {
-      id: response.id,
-      name: response.name,
-      currency: response.currency,
-      participatingPersons: response.participatingPersons,
-      transactions: response.transactions,
-      bills: response.expenses,
-    };
-
-    return {data: data, isLoading: false}
-  },
-
-  [FETCH_NOBT_FAILED]: (state, action) => {
-    // only reset the loading state for now.
-    return {...state, isLoading: false}
+    return {
+      ...state,
+      ...newState,
+      fetchNobtStatus: action.payload.status
+    }
   },
 
   [ADD_MEMBER]: (state, action) => {
@@ -44,12 +34,14 @@ const handlers = {
     var currentMembers = state.data.participatingPersons;
     var memberToAdd = action.payload.name;
 
-    var memberSet = new Set(currentMembers);
-    memberSet.add(memberToAdd);
+    if (currentMembers.find(name => name === memberToAdd) !== undefined) {
+      _debug(ADD_MEMBER)(`Person with name '${memberToAdd}' already exists.`);
+      return state;
+    }
 
     var newData = {
       ...state.data,
-      participatingPersons: [ ...memberSet ]
+      participatingPersons: [ ...currentMembers, memberToAdd ]
     };
 
     return {...state, data: newData}
@@ -57,7 +49,7 @@ const handlers = {
 };
 
 const initialState = {
-  isLoading: false,
+  fetchNobtStatus: null,
   data: {
     id: "",
     name: "",
