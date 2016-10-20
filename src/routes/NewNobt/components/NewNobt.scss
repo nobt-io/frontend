@@ -19,6 +19,21 @@
       }
     }
   }
+
+  .createNobtButtonContainer {
+    margin-left: 50%;
+  }
+
+  .createNobtButton {
+    background-color: $color-primary-dark;
+    color: white !important;
+    border-radius: 3px;
+    padding: 0;
+
+    &:disabled {
+      opacity: 0.3;
+    }
+  }
 }
 
 

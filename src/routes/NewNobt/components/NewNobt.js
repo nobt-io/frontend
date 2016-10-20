@@ -5,6 +5,9 @@ import CurrencyPicker from "components/CurrencyPicker";
 import styles from "./NewNobt.scss";
 import SingleInputInlineForm from "components/SingleInputInlineForm";
 import PersonList from "components/PersonList";
+import Spinner from "components/Spinner"
+import { Button } from "react-toolbox/lib/button";
+
 
 const NewNobt = React.createClass({
 
@@ -25,13 +28,15 @@ const NewNobt = React.createClass({
   render: function () {
     return (
       <div className={styles.NewNobt}>
-        <Header showButton={true} rightButton={
-          {
-            icon: "",
-            title: "Create nobt",
-            onClick: this.props.createNobt,
-            active: this.props.canCreateNobt
-          }
+        <Header right={
+          <Spinner isLoading={this.props.creationInProgress} className={styles.createNobtButtonContainer}>
+            <Button
+              className={styles.createNobtButton}
+              disabled={!this.props.canCreateNobt}
+              onClick={this.props.createNobt}>
+              Create Nobt
+            </Button>
+          </Spinner>
         } />
 
         <div className={styles.metaInformationContainer}>

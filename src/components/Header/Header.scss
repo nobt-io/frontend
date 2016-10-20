@@ -18,13 +18,17 @@
       opacity: 0.3;
     }
   }
-  .rightContainer {
-    width: 100%;
-    text-align: right;
-  }
+
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+
   .leftContainer {
-    width: 100%;
-    text-align: left;
-    margin-left: -15px;
+    order: 0;
+  }
+
+  .rightContainer {
+    order: 1;
+    width: 50%;
   }
 }

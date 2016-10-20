@@ -17,9 +17,9 @@ export const Header = (props) => (
         </div>)
       }
       {
-        (props.rightButton) &&
+        (props.right) &&
         (<div className={styles.rightContainer}>
-          <Button className={styles.button} icon={props.rightButton.icon} disabled={!props.rightButton.active} onClick={props.rightButton.onClick}>{props.rightButton.title}</Button>
+          {props.right}
         </div>)
       }
     </AppBar>
@@ -33,18 +33,13 @@ Header.propTypes = {
     icon: React.PropTypes.string.isRequired,
     onClick: React.PropTypes.func.isRequired,
   }),
-  rightButton: React.PropTypes.shape({
-    active: React.PropTypes.bool.isRequired,
-    title: React.PropTypes.string.isRequired,
-    icon: React.PropTypes.string.isRequired,
-    onClick: React.PropTypes.func.isRequired,
-  }),
+  right: React.PropTypes.element,
   showNobtHeader: React.PropTypes.bool,
 };
 
 Header.defaultProps = {
   leftButton: null,
-  rightButton: null,
+  right: null,
   showNobtHeader: true
 };
 
