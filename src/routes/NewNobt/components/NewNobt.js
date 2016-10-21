@@ -6,8 +6,7 @@ import CurrencyPicker from "components/CurrencyPicker";
 import styles from "./NewNobt.scss";
 import SingleInputInlineForm from "components/SingleInputInlineForm";
 import PersonList from "components/PersonList";
-import Spinner from "components/Spinner";
-import { Button } from "react-toolbox/lib/button";
+import CreateNobtButton from "./CreateNobtButton"
 import Title from "components/Title"
 
 
@@ -22,33 +21,29 @@ const NewNobt = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.creationSuccessful) {
+    if (nextProps.createNobtSuccessful) {
       this.props.router.replace(`/${nextProps.createdNobtId}`);
     }
+  },
+
+  getChildContext() {
+    return {
+      createNobtInProgress: this.props.createNobtInProgress
+    };
   },
 
   render: function () {
     return (
       <div className={styles.NewNobt}>
-        <AppBar fixed>
+        <AppBar>
           <Header
             left={<Title />}
-            right={
-              <Spinner isLoading={this.props.creationInProgress}>
-                <Button
-                  theme={ {button: styles.createNobtButton} }
-                  disabled={!this.props.canCreateNobt}
-                  onClick={this.props.createNobt}>
-                  Create Nobt
-                </Button>
-              </Spinner>
-            }
-            theme={ { rightContainer: styles.createNobtButtonContainer } }
+            right={<CreateNobtButton canClick={this.props.canCreateNobt} onClick={this.props.createNobt} />}
           />
         </AppBar>
 
 
-        <div className={ this.props.creationInProgress ? styles.disableScreen : "" }></div>
+        <div className={ this.props.createNobtInProgress ? styles.disableScreen : "" }></div>
 
         <div className={styles.metaInformationContainer}>
           <Input
@@ -85,6 +80,10 @@ const NewNobt = React.createClass({
   }
 });
 
+NewNobt.childContextTypes = {
+  createNobtInProgress: React.PropTypes.bool
+};
+
 NewNobt.propTypes = {
   // state from selectors
   chosenName: React.PropTypes.string.isRequired,
@@ -92,8 +91,8 @@ NewNobt.propTypes = {
   selectedCurrency: React.PropTypes.string.isRequired,
   canCreateNobt: React.PropTypes.bool.isRequired,
   isEvilTwin: React.PropTypes.func.isRequired,
-  creationSuccessful: React.PropTypes.bool.isRequired,
-  creationInProgress: React.PropTypes.bool.isRequired,
+  createNobtSuccessful: React.PropTypes.bool.isRequired,
+  createNobtInProgress: React.PropTypes.bool.isRequired,
   createdNobtId: React.PropTypes.string.isRequired,
 
 

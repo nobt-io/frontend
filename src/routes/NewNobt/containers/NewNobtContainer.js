@@ -21,8 +21,8 @@ const mapStateToProps = (state) => ({
   personNames: getPersonNames(state),
   isEvilTwin: isEvilTwinFactory(state),
   canCreateNobt: canCreateNobt(state),
-  creationInProgress: getCreationStatus(state) === AsyncActionStatus.IN_PROGRESS,
-  creationSuccessful: getCreationStatus(state) === AsyncActionStatus.SUCCESSFUL,
+  createNobtInProgress: getCreationStatus(state) === AsyncActionStatus.IN_PROGRESS,
+  createNobtSuccessful: getCreationStatus(state) === AsyncActionStatus.SUCCESSFUL,
   createdNobtId: getCreatedNobtId(state),
 });
 

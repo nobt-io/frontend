@@ -20,14 +20,6 @@
     }
   }
 
-  .createNobtButton {
-    background-color: $color-primary-dark;
-    color: $color-accent-dark !important;
-
-    &:disabled {
-      opacity: 0.3;
-    }
-  }
 
   .disableScreen {
     background-color:#EFEFEF;
@@ -35,7 +27,7 @@
     width: 100%;
     height: 100%;
     z-index: 1000;
-    top: 50px;
+    top: 64px;
     left: 0;
     opacity: .6; /* in FireFox */
     filter: alpha(opacity=50); /* in IE */
@@ -70,9 +62,5 @@
     .currencyPickerContainer, .nobtNameContainer {
       margin: auto;
     }
-  }
-
-  .createNobtButtonContainer {
-    margin-left: 50%;
   }
 }

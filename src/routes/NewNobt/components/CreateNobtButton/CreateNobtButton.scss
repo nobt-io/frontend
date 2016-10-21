@@ -1,0 +1,21 @@
+$buttonWidth: 120px;
+
+.createNobtButton {
+  background-color: $color-primary-dark;
+  color: $color-accent-dark !important;
+
+  &:disabled {
+    opacity: 0.3;
+  }
+
+  width: $buttonWidth;
+}
+
+.spinnerContainer {
+  width: $buttonWidth;
+}
+
+.createNobtButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
