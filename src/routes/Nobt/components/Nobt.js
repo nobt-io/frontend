@@ -52,7 +52,7 @@ export const Nobt = React.createClass({
   render: function () {
     return (
       <div className={styles.nobt}>
-        <AppBar fixed>
+        <AppBar>
           <Header
             left={<Title />}
             right={
