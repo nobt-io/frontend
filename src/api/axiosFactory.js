@@ -57,7 +57,10 @@ const factory = (location) => {
   }, function (error) {
 
     debug("api:response:error")(error);
-    debug("api:response:data")(error.response.data);
+
+    if (error.response) {
+      debug("api:response:data")(error.response.data);
+    }
 
     return Promise.reject(error);
   });
