@@ -33,7 +33,7 @@ function createNobtFailed(error) {
     type: UPDATE_CREATE_NOBT_STATUS,
     payload: {
       error,
-      state: AsyncActionStatus.FAILED
+      status: AsyncActionStatus.FAILED
     }
   }
 }
