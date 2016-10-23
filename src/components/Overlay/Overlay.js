@@ -1,23 +1,38 @@
 import React from "react";
+
+import Visibility from "const/Visibility"
+
 import styles from "./Overlay.scss";
 
 const Overlay = React.createClass({
 
+  componentWillMount(){
+    this.setState({
+      visibility: this.props.visibility
+    })
+  },
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      visibility: nextProps.visibility
+    })
+  },
+
   getInitialState: function () {
     return {
-      open: false
+      visibility: Visibility.HIDDEN
     }
   },
 
   open: function () {
     this.setState({
-      open: true
+      visibility: Visibility.VISIBLE
     })
   },
 
   close: function () {
     this.setState({
-      open: false
+      visibility: Visibility.HIDDEN
     });
   },
 
@@ -35,9 +50,12 @@ const Overlay = React.createClass({
   },
 
   render: function () {
+
+    let shouldBeVisible = this.state.visibility === Visibility.VISIBLE;
+
     return (
       <div>
-        {this.state.open && (
+        {shouldBeVisible && (
           <div className={styles.overlay} onClick={this.closeIfOutsideOfContent}>
             <div className={styles.contentSection}>
               <div className={styles.contentContainer}>
@@ -52,13 +70,16 @@ const Overlay = React.createClass({
 });
 
 Overlay.propTypes = {
+  /**
+   * @type {bool} Indicates whether the overlay can be closed by clicking outside of the content.
+   */
   closeable: React.PropTypes.bool,
-  header: React.PropTypes.element
+  visibility: React.PropTypes.oneOf([Visibility.HIDDEN, Visibility.VISIBLE]).isRequired
 };
 
 Overlay.defaultProps = {
   closeable: true,
-  header: null
+  visibility: Visibility.HIDDEN
 };
 
 export default Overlay;
