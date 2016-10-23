@@ -4,82 +4,40 @@ import Visibility from "const/Visibility"
 
 import styles from "./Overlay.scss";
 
-const Overlay = React.createClass({
+const handleOnOverlayClick = (clickEvent, props) => {
+  const classesOfClickedElement = clickEvent.target.className.split(' ');
 
-  componentWillMount(){
-    this.setState({
-      visibility: this.props.visibility
-    })
-  },
+  var overlayClass = styles.overlay;
+  var sectionClass = styles.contentSection;
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      visibility: nextProps.visibility
-    })
-  },
+  var isOutsideOfContent = classesOfClickedElement.indexOf(overlayClass) !== -1 || classesOfClickedElement.indexOf(sectionClass) !== -1;
 
-  getInitialState: function () {
-    return {
-      visibility: Visibility.HIDDEN
-    }
-  },
-
-  open: function () {
-    this.setState({
-      visibility: Visibility.VISIBLE
-    })
-  },
-
-  close: function () {
-    this.setState({
-      visibility: Visibility.HIDDEN
-    });
-  },
-
-  closeIfOutsideOfContent(e) {
-    const classesOfClickedElement = e.target.className.split(' ');
-
-    var overlayClass = styles.overlay;
-    var sectionClass = styles.contentSection;
-
-    var isOutsideOfContent = classesOfClickedElement.indexOf(overlayClass) !== -1 || classesOfClickedElement.indexOf(sectionClass) !== -1;
-
-    if (isOutsideOfContent && this.props.closeable) {
-      this.close();
-    }
-  },
-
-  render: function () {
-
-    let shouldBeVisible = this.state.visibility === Visibility.VISIBLE;
-
-    return (
-      <div>
-        {shouldBeVisible && (
-          <div className={styles.overlay} onClick={this.closeIfOutsideOfContent}>
-            <div className={styles.contentSection}>
-              <div className={styles.contentContainer}>
-                {this.props.children}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    )
+  if (isOutsideOfContent) {
+    props.onClickOutside();
   }
-});
+};
+
+const Overlay = (props) => (
+  <div>
+    {props.visibility === Visibility.VISIBLE && (
+      <div className={styles.overlay} onClick={(event) => handleOnOverlayClick(event, props)}>
+        <div className={styles.contentSection}>
+          <div className={styles.contentContainer}>
+            {props.children}
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+);
 
 Overlay.propTypes = {
-  /**
-   * @type {bool} Indicates whether the overlay can be closed by clicking outside of the content.
-   */
-  closeable: React.PropTypes.bool,
-  visibility: React.PropTypes.oneOf([Visibility.HIDDEN, Visibility.VISIBLE]).isRequired
+  visibility: React.PropTypes.oneOf([Visibility.HIDDEN, Visibility.VISIBLE]).isRequired,
+  onClickOutside: React.PropTypes.func,
 };
 
 Overlay.defaultProps = {
-  closeable: true,
-  visibility: Visibility.HIDDEN
+  onClickOutside: () => { }
 };
 
 export default Overlay;
