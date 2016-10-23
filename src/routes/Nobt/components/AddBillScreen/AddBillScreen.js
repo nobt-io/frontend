@@ -3,8 +3,6 @@ import Input from "react-toolbox/lib/input";
 import { Button } from "react-toolbox/lib/button";
 import { FormattedDate } from "react-intl";
 import AppBar from "react-toolbox/lib/app_bar";
-import {ListDivider} from "react-toolbox/lib/list"
-import FontIcon from 'react-toolbox/lib/font_icon';
 
 
 import _debug from "debug";
@@ -21,8 +19,6 @@ import PersonPicker from "components/PersonPicker";
 import SingleInputInlineForm from "components/SingleInputInlineForm"
 import QuickDatePicker from "components/QuickDatePicker";
 import CloseButton from "components/CloseButton"
-
-import PersonSelectorOverlay from "components/PersonSelectorOverlay";
 
 import ListSelectOverlay from "components/ListSelectOverlay";
 import Overlay from "components/Overlay/Overlay"
@@ -59,13 +55,11 @@ export const NewBillOverlay = React.createClass({
       this.props.addBill(billToCreate);
     },
 
-    setDatePickerOverlayVisibility(visibility) {
-      this.setState({ datePickerOverlayVisibility: visibility })
-    },
+    closeDatePickerOverlay() { this.setState({ datePickerOverlayVisibility: Visibility.HIDDEN }) },
+    openDatePickerOverlay() { this.setState({ datePickerOverlayVisibility: Visibility.VISIBLE }) },
 
-    setDebteeSelectorOverlayVisibility(visibility) {
-      this.setState({ debteeSelectorOverlayVisibility: visibility })
-    },
+    closeDebteeSelectorOverlay() { this.setState({ debteeSelectorOverlayVisibility: Visibility.HIDDEN }) },
+    openDebteeSelectorOverlay() { this.setState({ debteeSelectorOverlayVisibility: Visibility.VISIBLE }) },
 
     getInitialState() {
       return {
@@ -118,26 +112,26 @@ export const NewBillOverlay = React.createClass({
 
       return (
         <div>
-          <Overlay visibility={this.state.debteeSelectorOverlayVisibility}>
+          <Overlay visibility={this.state.debteeSelectorOverlayVisibility} onClickOutside={this.closeDebteeSelectorOverlay}>
             <Header
               left={<h1>Who paid?</h1>}
-              right={<CloseButton onClick={ () => this.setDebteeSelectorOverlayVisibility(Visibility.HIDDEN) }/>}
+              right={<CloseButton onClick={this.closeDebteeSelectorOverlay}/>}
             />
             <PersonPicker names={nobtMembers} onPersonPicked={ (name) => {
               // this.setMetaData({name});
-              this.setDebteeSelectorOverlayVisibility(Visibility.HIDDEN)
+              this.closeDebteeSelectorOverlay()
             }}/>
             <SingleInputInlineForm buttonIcon="person_add" placeholder="Someone else?" onSubmit={(p) => onItemClick(p)}/>
           </Overlay>
 
-          <Overlay visibility={this.state.datePickerOverlayVisibility}>
+          <Overlay visibility={this.state.datePickerOverlayVisibility} onClickOutside={this.closeDatePickerOverlay}>
             <Header
               left={<h1>When?</h1>}
-              right={<CloseButton onClick={ () => this.setDatePickerOverlayVisibility(Visibility.HIDDEN) }/>}
+              right={<CloseButton onClick={ this.closeDatePickerOverlay }/>}
             />
             <QuickDatePicker onDatePicked={(date) => {
               // this.setMetaData({date});
-              this.setDatePickerOverlayVisibility(Visibility.HIDDEN)
+              this.closeDatePickerOverlay()
             }}/>
           </Overlay>
 
@@ -162,17 +156,17 @@ export const NewBillOverlay = React.createClass({
                      onChange={(subject) => this.setMetaData({subject})} />
             </div>
             <div>
-              <span onClick={() => this.setDebteeSelectorOverlayVisibility(Visibility.VISIBLE)}
+              <span onClick={this.openDebteeSelectorOverlay}
                     className={styles.personPicker}>by {paidByPerson}
                 <Avatar size={20} fontSize={11} name={paidByPerson} />
               </span>
 
               {isToday(creationDate) &&
-              <span onClick={() => this.setDatePickerOverlayVisibility(Visibility.VISIBLE)} className={styles.datePicker}>Today</span>
+              <span onClick={this.openDatePickerOverlay} className={styles.datePicker}>Today</span>
               }
 
               {!isToday(creationDate) &&
-              <span onClick={() => this.setDatePickerOverlayVisibility(Visibility.VISIBLE)} className={styles.datePicker}>
+              <span onClick={this.openDatePickerOverlay} className={styles.datePicker}>
                   <FormattedDate value={new Date(creationDate)} year='numeric' month='numeric' day='numeric' />
                 </span>
               }
