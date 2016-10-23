@@ -1,49 +1,107 @@
 import React from "react";
+import {FormattedDate} from "react-intl";
+import FontIcon from "react-toolbox/lib/font_icon"
+import {ListDivider} from "react-toolbox/lib/list"
+
 import styles from "./BillItem.scss";
 import Card from "components/Card";
-import { Avatar } from "components/Avatar";
+import { AvatarList, AvatarSize } from "components/Avatar";
+
+import Header from "components/Header";
+import CloseButton from "components/CloseButton"
+
 import Amount from "components/Amount";
-import BillDetailOverlay from "components/BillDetailOverlay";
+import PersonMoneyList from "components/PersonMoneyList"
+import Overlay from "components/Overlay/Overlay"
+import { Person, AvatarPosition } from "components/Person"
+
+import Visibility from "const/Visibility"
 
 export const BillItem = React.createClass({
 
-  onModalClose: function () {
-    this.setState({modalIsActive: false});
+  getInitialState() {
+    return {
+      billDetailOverlayVisibility: Visibility.HIDDEN
+    }
   },
 
-  onModalOpen: function () {
-    this.setState({modalIsActive: true});
-  },
+  openBillDetailOverlay() { this.setState({ billDetailOverlayVisibility: Visibility.VISIBLE }) },
+  closeBillDetailOverlay() { this.setState({ billDetailOverlayVisibility: Visibility.HIDDEN }) },
 
   render: function () {
 
-    const {modalIsActive} = this.state || {modalIsActive: false};
     const {bill} = this.props;
-
     const debtee = bill.debtee;
-    const debtorsAvatars = bill.debtors.map(debtor => (
-      <span key={debtor.name} className={styles.avatar}><Avatar name={debtor.name} size={20} fontSize={11} /></span>));
 
     return (
       <Card>
-        <BillDetailOverlay active={modalIsActive} onClose={this.onModalClose} bill={bill} />
-        <div onClick={this.onModalOpen} className={styles.container}>
-          <div className={styles.title}>
-            <div className={styles.description}>
-              <Amount value={debtee.amount} spanClass={styles.amount} />
-              <span className={styles.name}>{bill.name}</span>
+
+        <Overlay visibility={this.state.billDetailOverlayVisibility} onClickOutside={this.closeBillDetailOverlay}>
+          <div className={styles.billDetailOverlay}>
+
+            <Header
+              left={<h3>{bill.name}</h3>}
+              right={<CloseButton onClick={this.closeBillDetailOverlay} />}
+            />
+
+            <ListDivider />
+
+            <PersonMoneyList persons={bill.debtors}/>
+
+            <div className={styles.debteeContainer}>
+
+              <Person name={debtee.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM}/>
+              <span>&nbsp;paid&nbsp;</span>
+              <Amount value={debtee.amount} />
+
             </div>
-            <div style={{clear: "both"}}></div>
-          </div>
-          <div className={styles.persons}>
-            <div className={styles.right}>{debtorsAvatars}</div>
-            <div className={styles.left}>
-              <span className={styles.avatar}><Avatar name={debtee.name} size={30} /></span>
-              <span className={styles.name}><b>{debtee.name}</b> paid</span>
-              <span className={styles.transition} />
+
+
+            <div className={styles.billDetailMetaDataContainer}>
+
+              <div className={styles.addedOnTimestamp}>
+
+                <FontIcon value="cloud_done"/>
+                <span>&nbsp;created&nbsp;on&nbsp;</span>
+                <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='numeric' day='numeric' />
+
+              </div>
+
+              <div className={styles.paidOnTimestamp}>
+
+                <FontIcon value="access_time"/>
+                <span>&nbsp;paid&nbsp;on&nbsp;</span>
+                <FormattedDate value={new Date(bill.date)} year='numeric' month='numeric' day='numeric' />
+
+              </div>
+
             </div>
           </div>
+        </Overlay>
+
+
+        <div onClick={this.openBillDetailOverlay} className={styles.billContainer}>
+
+          <div className={styles.billMetaDataContainer}>
+            <div className={styles.nameContainer}>
+              <span>{bill.name}</span>
+            </div>
+            <div className={styles.amountContainer}>
+              <Amount value={debtee.amount}/>
+            </div>
+          </div>
+
+          <div className={styles.billPersonInformationContainer}>
+            <div className={styles.debtee}>
+              <Person name={debtee.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG}/>
+            </div>
+            <div className={styles.debtors}>
+              <AvatarList names={bill.debtors.map(debtor => debtor.name)} size={AvatarSize.MEDIUM}/>
+            </div>
+          </div>
+
         </div>
+
       </Card>
     );
   },

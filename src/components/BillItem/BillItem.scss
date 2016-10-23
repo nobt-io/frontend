@@ -1,73 +1,83 @@
-$avatarSize: 25px;
+// visual
 
-.container {
-  padding: 15px;
 
-  .title {
-    margin-bottom: 5px;
+$containerMargin: 1rem;
 
-    .description {
-      float: left;
-      white-space: nowrap;
+.billContainer {
 
-      .name {
-        margin: 4px 7px;
-        float: left;
-      }
-
-      .amount {
-        font-size: 20px;
-        float: left;
-        font-weight: bold;
-      }
-    }
+  .billMetaDataContainer {
+    margin: $containerMargin;
+    margin-bottom: $containerMargin / 2;
   }
 
-  .persons {
-    position: relative;
-    padding: 5px 0 10px 0;
+  .billPersonInformationContainer {
+    margin: $containerMargin;
+    margin-top: $containerMargin / 2;
+  }
 
-    .right {
-      text-align: right;
-      margin-top: 5px;
-      white-space: nowrap;
+  .nameContainer {
+    margin: 0 .5rem;
+    font-size: larger;
+  }
 
-      .avatar {
-        margin-left: 5px;
-        display: inline-block;
-      }
-    }
+  .amountContainer {
+    font-weight: bold;
+    font-size: large;
+  }
+}
 
-    .left {
-      position: absolute;
-      top: 5px;
+.billDetailOverlay {
+  .debteeContainer {
+    margin: 1.5rem 0;
+    padding: .7rem;
+    color: white;
+    background-color: $color-primary;
+  }
+}
 
-      .avatar {
-        background-color: white;
-        float: left;
 
-        div {
-          display: inline-block;
-        }
-      }
+// layout
 
-      .name {
-        background-color: white;
-        float: left;
-        padding: 5px;
-      }
+.billContainer {
+  display: flex;
+  flex-direction: column;
 
-      .transition {
-        float: left;
-        width: 80px;
-        height: 30px;
-        display: inline-block;
+  .billMetaDataContainer, .billPersonInformationContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-        background: -moz-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#00ffffff', GradientType=1); /* IE6-9 */
-      }
+  .billPersonInformationContainer {
+
+    .debtors {
+      display: flex;
+      flex-direction: row;
     }
   }
+}
+
+.billDetailMetaDataContainer {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .addedOnTimestamp, .paidOnTimestamp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50%;
+  }
+
+  .paidOnTimestamp {
+    justify-content: flex-end;
+  }
+}
+
+.debteeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
