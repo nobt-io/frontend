@@ -40,7 +40,7 @@ export const BillItem = React.createClass({
           <div className={styles.billDetailOverlay}>
 
             <Header
-              left={<h3>{bill.name}</h3>}
+              left={<h3>{`Shares for ${bill.name}`}</h3>}
               right={<CloseButton onClick={this.closeBillDetailOverlay} />}
             />
 
@@ -50,8 +50,7 @@ export const BillItem = React.createClass({
 
             <div className={styles.debteeContainer}>
 
-              <Person name={debtee.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM}/>
-              <span>&nbsp;paid&nbsp;</span>
+              <span>{debtee.name}&nbsp;paid&nbsp;</span>
               <Amount value={debtee.amount} />
 
             </div>

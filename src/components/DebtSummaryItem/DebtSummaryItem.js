@@ -1,39 +1,77 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
+import { ListDivider } from "react-toolbox/lib/list"
+
 import styles from "./DebtSummaryItem.scss";
-import { SmallAvatar } from "components/Avatar";
-import { Person, AvatarPosition, AvatarSize } from "components/Person";
+import Header from "components/Header";
+import CloseButton from "components/CloseButton";
+import PersonMoneyList from "components/PersonMoneyList";
+import { AvatarList, AvatarSize } from "components/Avatar";
+import { Person, AvatarPosition } from "components/Person";
 import Amount from "components/Amount";
-import DebtSummaryDetailOverlay from "components/DebtSummaryDetailOverlay";
 import Card from "components/Card";
 import { Verb, Preposition, Icon } from "./DebtDirection";
+import Visibility from "const/Visibility";
+import Overlay from "components/Overlay/Overlay";
 
 export const DebtSummaryItem = React.createClass({
 
-  hideModalDialog: function () {
-    this.setState({showDetailModalDialog: false});
+  closeDebtSummaryDetailOverlay() {
+    this.setState({detailOverlayVisibility: Visibility.HIDDEN});
   },
 
-  showModalDialog: function () {
-    this.setState({showDetailModalDialog: true});
+  openDebtSummaryDetailOverlay() {
+    this.setState({detailOverlayVisibility: Visibility.VISIBLE});
   },
 
-  getInitialState: function () {
+  getInitialState() {
     return {
-      showDetailModalDialog: false
+      detailOverlayVisibility: Visibility.HIDDEN
     };
   },
 
-  render: function () {
+  render() {
     const {summary} = this.props;
 
     const me = summary.me;
-    const persons = summary.persons.map(p => (<span key={p.name} className={styles.avatar}><SmallAvatar name={p.name} /></span>));
 
     return (
       <Card>
-        <DebtSummaryDetailOverlay active={this.state.showDetailModalDialog} onClose={this.hideModalDialog} debtSummary={summary} />
+        <Overlay visibility={this.state.detailOverlayVisibility} onClickOutside={this.closeDebtSummaryDetailOverlay}>
+          <div className={styles.balanceDetailOverlay}>
+            <Header
+              left={<h3>Balance</h3>}
+              right={<CloseButton onClick={this.closeDebtSummaryDetailOverlay} />}
+            />
 
-        <div onClick={this.showModalDialog} className={styles.container}>
+            <div className={styles.messageContainer}>
+              <FormattedMessage
+                id="debtSummary.detail.model.debtStatement"
+                defaultMessage={ `{debtor} {verb} {amount} {preposition} {debtorCount, plural,
+                                                           one { {singleDebtor}. }
+                                                           other { {debtorCount} persons. }
+                                                         }`}
+                values={{
+                  debtor: me.name,
+                  verb: <Verb person={me} />,
+                  amount: <Amount value={me.amount} spanClass={styles.amountInTextLine} />,
+                  preposition: <Preposition person={me} />,
+                  debtorCount: summary.persons.length,
+                  singleDebtor: summary.persons[ 0 ].name
+                }}
+              />
+            </div>
+
+
+            <ListDivider />
+
+            <div>
+              {summary.persons.length > 1 && <PersonMoneyList persons={summary.persons} showKeyword={true} />}
+            </div>
+          </div>
+        </Overlay>
+
+        <div onClick={this.openDebtSummaryDetailOverlay} className={styles.container}>
           <span className={styles.meContainer}>
             <Person
               avatarClass={styles.meAvatar}
@@ -53,7 +91,9 @@ export const DebtSummaryItem = React.createClass({
 
             <div className={styles.personsContainer}>
               <Preposition className={styles.preposition} person={me} />
-              <span className={styles.persons}>{persons}</span>
+              <span className={styles.persons}>
+                <AvatarList names={summary.persons.map(p => p.name)} size={AvatarSize.SMALL} />
+              </span>
             </div>
 
           </div>

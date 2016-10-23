@@ -1,3 +1,30 @@
+// overlay:
+
+
+// visual:
+.balanceDetailOverlay {
+  .messageContainer {
+    background-color: $color-primary;
+    color: white;
+
+    padding: 1.5rem 0;
+    border-radius: .3rem;
+
+    .amountInTextLine {
+      font-weight: bold;
+    }
+  }
+}
+
+// layout:
+
+.balanceDetailOverlay {
+  .messageContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 // visual css:
 
 $avatarMargin: .5rem;
@@ -9,18 +36,6 @@ $avatarMargin: .5rem;
     .amountContainer {
       .amount {
         font-weight: bold;
-        margin-left: $avatarMargin;
-      }
-    }
-  }
-
-  .personsContainer {
-    .persons {
-      .avatar:not(:first-child) {
-        margin-left: $avatarMargin / 2;
-      }
-
-      .avatar:first-child {
         margin-left: $avatarMargin;
       }
     }
@@ -74,18 +89,6 @@ $avatarMargin: .5rem;
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-
-      .preposition {
-        order: 0;
-      }
-
-      .persons {
-        order: 1;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
     }
   }
 }
