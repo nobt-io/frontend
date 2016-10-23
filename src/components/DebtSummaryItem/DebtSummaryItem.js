@@ -12,7 +12,7 @@ import Amount from "components/Amount";
 import Card from "components/Card";
 import { Verb, Preposition, Icon } from "./DebtDirection";
 import Visibility from "const/Visibility";
-import Overlay from "components/Overlay/Overlay";
+import Overlay from "components/Overlay";
 
 export const DebtSummaryItem = React.createClass({
 

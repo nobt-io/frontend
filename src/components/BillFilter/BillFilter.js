@@ -10,7 +10,7 @@ import PersonPicker from "components/PersonPicker"
 
 import { List, ListItem } from "react-toolbox/lib/list";
 
-import Overlay from "components/Overlay/Overlay"
+import Overlay from "components/Overlay"
 import { Avatar } from "components/Avatar";
 
 import Visibility from "const/Visibility"

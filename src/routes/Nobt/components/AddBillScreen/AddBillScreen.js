@@ -20,7 +20,7 @@ import SingleInputInlineForm from "components/SingleInputInlineForm"
 import QuickDatePicker from "components/QuickDatePicker";
 import CloseButton from "components/CloseButton"
 
-import Overlay from "components/Overlay/Overlay"
+import Overlay from "components/Overlay"
 
 import SplitStrategyNames from "const/SplitStrategyNames";
 import Visibility from "const/Visibility"
@@ -77,9 +77,6 @@ export const NewBillOverlay = React.createClass({
     },
 
     render: function () {
-
-      const {personModalIsActive, dateModalIsActive, shareModalIsActive} =
-      this.state || {personModalIsActive: false, dateModalIsActive: false, shareModalIsActive: false};
 
       const {metaDataIsValid, active, subject, creationDate, amount, paidByPerson, splitStrategy} = this.props.metaData;
       const {involvedPersonsAreValid, involvedPersonsCalculationInfo, involvedPersons} = this.props.personData;

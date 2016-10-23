@@ -1,3 +1,4 @@
-import LowerScreenOverlay from "./LowerScreenOverlay";
-exports.LowerScreenOverlay = LowerScreenOverlay;
+import Overlay from "./Overlay";
+
+export default Overlay
 

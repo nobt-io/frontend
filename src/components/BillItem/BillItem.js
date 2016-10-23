@@ -12,7 +12,7 @@ import CloseButton from "components/CloseButton"
 
 import Amount from "components/Amount";
 import PersonMoneyList from "components/PersonMoneyList"
-import Overlay from "components/Overlay/Overlay"
+import Overlay from "components/Overlay"
 import { Person, AvatarPosition } from "components/Person"
 
 import Visibility from "const/Visibility"
