@@ -31,7 +31,6 @@ PersonList.propTypes = {
 };
 
 PersonList.defaultProps = {
-  names: [],
   onPersonRemove: () => { },
   hasDeleteButton: false,
 };
