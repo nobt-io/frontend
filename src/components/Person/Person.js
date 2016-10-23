@@ -37,7 +37,7 @@ export const Person = (props) => {
 
 Person.propTypes = {
   avatarClass: React.PropTypes.string,
-  avatarSize: React.PropTypes.oneOf([ AvatarSize.BIG, AvatarSize.SMALL ]).isRequired,
+  avatarSize: React.PropTypes.oneOf([ AvatarSize.BIG, AvatarSize.MEDIUM, AvatarSize.SMALL ]).isRequired,
   avatarPosition: React.PropTypes.oneOf([ AvatarPosition.RIGHT, AvatarPosition.LEFT ]).isRequired,
   name: React.PropTypes.string.isRequired,
 };
