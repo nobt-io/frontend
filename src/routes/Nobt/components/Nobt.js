@@ -13,6 +13,8 @@ import BillList from "components/BillList";
 import BillFilter from "components/BillFilter";
 import NewBillOverlay from "./AddBillScreen"
 
+import Visibility from "const/Visibility"
+
 export const Nobt = React.createClass({
 
   componentWillMount(){
@@ -30,6 +32,12 @@ export const Nobt = React.createClass({
 
     if (currentTabIdentifier !== nextTabIdentifier) {
       this.props.changeTab(nextTabIdentifier);
+    }
+  },
+
+  getInitialState() {
+    return {
+      addBillScreenVisibility: Visibility.HIDDEN
     }
   },
 
@@ -51,21 +59,27 @@ export const Nobt = React.createClass({
     this.props.router.replace(`/${this.props.params.id}#${hashRoute}`);
   },
 
+  setAddBillScreenVisibility(visibility) {
+    this.setState({
+      addBillScreenVisibility: visibility
+    })
+  },
+
   render: function () {
     return (
       <div className={styles.nobt}>
-        {this.props.newBillMetaData.active &&
+        {this.state.addBillScreenVisibility === Visibility.VISIBLE &&
           <NewBillOverlay metaData={this.props.newBillMetaData}
                           personData={this.props.newBillPersonData}
                           setMetaData={this.props.setNewBillMetaData}
                           setPersonValue={this.props.setNewBillPersonValue}
                           nobtMembers={this.props.members}
-                          onClose={() => this.props.closeNewBillOverlay()}
+                          onClose={() => this.setAddBillScreenVisibility(Visibility.HIDDEN)}
                           addBill={this.props.addBill}
                           reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
         }
 
-        {!this.props.newBillMetaData.active && (
+        {this.state.addBillScreenVisibility === Visibility.HIDDEN && (
           <div>
             <AppBar>
               <Header
@@ -74,7 +88,7 @@ export const Nobt = React.createClass({
                   <Button
                     theme={ {button: styles.addBillButton} }
                     icon="add_box"
-                    onClick={() => this.props.openNewBillOverlay()}>
+                    onClick={() => this.setAddBillScreenVisibility(Visibility.VISIBLE)}>
                     Add a bill
                   </Button>
                 } />
