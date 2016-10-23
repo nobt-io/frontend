@@ -1,5 +1,5 @@
 import React from 'react'
-import {List} from "react-toolbox/lib/list"
+import {List, ListItem} from "react-toolbox/lib/list"
 
 import { Person, AvatarSize, AvatarPosition } from "components/Person"
 
@@ -9,12 +9,13 @@ export const PersonPicker = (props) => (
   <List selectable ripple>
     {
       props.names.map((name) => (
-        <Person
-          name={name}
-          onClick={props.onPersonPicked}
-          avatarSize={AvatarSize.SMALL}
-          avatarPosition={AvatarPosition.LEFT}
-        />
+        <ListItem onClick={() => props.onPersonPicked(name)}>
+          <Person
+            name={name}
+            avatarSize={AvatarSize.SMALL}
+            avatarPosition={AvatarPosition.LEFT}
+          />
+        </ListItem>
       ))
     }
   </List>

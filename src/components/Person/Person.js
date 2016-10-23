@@ -25,7 +25,7 @@ export const Person = (props) => {
   const avatarStyle = cx("avatar", props.avatarClass);
 
   return (
-    <span className={styles.Person} onClick={ () => props.onClick(props.name) }>
+    <span className={styles.Person}>
       {
         props.avatarPosition === AvatarPosition.LEFT &&
         <span className={styles.left}>
@@ -50,12 +50,10 @@ Person.propTypes = {
   avatarSize: React.PropTypes.oneOf([ AvatarSize.BIG, AvatarSize.SMALL ]).isRequired,
   avatarPosition: React.PropTypes.oneOf([ AvatarPosition.RIGHT, AvatarPosition.LEFT ]).isRequired,
   name: React.PropTypes.string.isRequired,
-  onClick: React.PropTypes.func,
 };
 
 Person.defaultProps = {
-  avatarClass: "",
-  onClick: (name) => {}
+  avatarClass: ""
 };
 
 export default Person;
