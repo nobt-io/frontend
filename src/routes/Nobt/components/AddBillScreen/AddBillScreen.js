@@ -13,17 +13,25 @@ import Header from "components/Header";
 import { Avatar } from "components/Avatar";
 import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList, AmountPercentageSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
+
+import QuickDatePicker from "components/QuickDatePicker";
+import CloseButton from "components/CloseButton"
+
 import PersonSelectorOverlay from "components/PersonSelectorOverlay";
-import DatePickerOverlay from "components/DatePickerOverlay";
+
 import ListSelectOverlay from "components/ListSelectOverlay";
+import Overlay from "components/Overlay/Overlay"
 
-import SplitStrategyNames from "../../../../const/SplitStrategyNames";
-
+import SplitStrategyNames from "const/SplitStrategyNames";
+import Visibility from "const/Visibility"
 
 
 const logger = _debug("view:components:AddBillScreen");
 
 const isToday = (date) => new Date(date).toDateString() === new Date().toDateString();
+
+
+// TODO disable screen while bill is creating
 
 export const NewBillOverlay = React.createClass({
 
@@ -43,12 +51,22 @@ export const NewBillOverlay = React.createClass({
         shares: this.props.personData.involvedPersons.map(p => ({debtor: p.name, amount: p.amount}))
       };
 
-      this.props.addBill(billToCreate).then((response) => {
-        this.props.reloadNobt();
-        this.props.onClose();
-      }, () => {
-        //Todo: show error!
-      });
+      this.props.addBill(billToCreate);
+    },
+
+    setDatePickerOverlayVisibility(visibility) {
+      this.setState({ datePickerOverlayVisibility: visibility })
+    },
+
+    setDebteeSelectorOverlayVisibility(visibility) {
+      this.setState({ debteeSelectorOverlayVisibility: visibility })
+    },
+
+    getInitialState() {
+      return {
+        datePickerOverlayVisibility: Visibility.HIDDEN,
+        debteeSelectorOverlayVisibility: Visibility.HIDDEN
+      };
     },
 
     render: function () {
@@ -100,11 +118,18 @@ export const NewBillOverlay = React.createClass({
             active={personModalIsActive || false} onClose={() => this.setModalState({personModalIsActive: false})}
             onFilterChange={(paidByPerson) => this.setMetaData({paidByPerson})}
           />
-          <DatePickerOverlay
-            title={"When?"} active={dateModalIsActive || false}
-            onClose={() => this.setModalState({dateModalIsActive: false})}
-            onDateChange={(creationDate) => this.setMetaData({creationDate})}
-          />
+
+          <Overlay visibility={this.state.datePickerOverlayVisibility}>
+            <Header
+              left={<h1>When?</h1>}
+              right={<CloseButton onClick={ () => this.setDatePickerOverlayVisibility(Visibility.HIDDEN) }/>}
+            />
+            <QuickDatePicker onDatePicked={(date) => {
+              // this.setMetaData({date});
+              this.setDatePickerOverlayVisibility(Visibility.HIDDEN)
+            }}/>
+          </Overlay>
+
           <ListSelectOverlay
             active={shareModalIsActive || false} onSortChange={(splitStrategy) => this.setMetaData({splitStrategy})}
             title={"Split by"} onClose={() => this.setModalState({shareModalIsActive: false})}
@@ -132,11 +157,11 @@ export const NewBillOverlay = React.createClass({
               </span>
 
               {isToday(creationDate) &&
-              <span onClick={() => this.setModalState({dateModalIsActive: true})} className={styles.datePicker}>Today</span>
+              <span onClick={() => this.setDatePickerOverlayVisibility(Visibility.VISIBLE)} className={styles.datePicker}>Today</span>
               }
 
               {!isToday(creationDate) &&
-              <span onClick={() => this.setModalState({dateModalIsActive: true})} className={styles.datePicker}>
+              <span onClick={() => this.setDatePickerOverlayVisibility(Visibility.VISIBLE)} className={styles.datePicker}>
                   <FormattedDate value={new Date(creationDate)} year='numeric' month='numeric' day='numeric' />
                 </span>
               }
@@ -147,8 +172,7 @@ export const NewBillOverlay = React.createClass({
             <span onClick={() => this.setModalState({shareModalIsActive: true})}
                   className={styles.spit}>{splitByLabel}</span>
             <span className={styles.currencySymbold}>€</span>
-            <CurrencyInput onChange={(amount) => this.setMetaData({amount})} value={amount}
-                           className={styles.amountInput} />
+            <CurrencyInput onChange={(amount) => this.setMetaData({amount})} value={amount} className={styles.amountInput} />
           </div>
           <div className={styles.splitContainer}>
             {amountSplitPersonList}
@@ -160,6 +184,7 @@ export const NewBillOverlay = React.createClass({
   ;
 
 NewBillOverlay.propTypes = {
+  // TODO rename to onBack
   onClose: React.PropTypes.func.isRequired,
   addBill: React.PropTypes.func.isRequired,
   reloadNobt: React.PropTypes.func.isRequired,

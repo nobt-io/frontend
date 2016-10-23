@@ -18,10 +18,6 @@ const mapActionCreators = {
   changeTab,
   addBill,
 
-  // TODO this should be internal state of the overlay
-  closeNewBillOverlay: () => setNewBillOverlayVisibility(false),
-  openNewBillOverlay: () => setNewBillOverlayVisibility(true),
-
   setNewBillPersonValue,
   updateBillFilter,
   updateBillSortProperty,
