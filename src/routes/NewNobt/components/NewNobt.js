@@ -1,13 +1,13 @@
 import React from "react";
+import AppBar from "react-toolbox/lib/app_bar";
 import { Input } from "react-toolbox/lib/input";
-import AppBar from 'react-toolbox/lib/app_bar';
+import Title from "components/Title";
 import Header from "components/Header";
-import CurrencyPicker from "components/CurrencyPicker";
-import styles from "./NewNobt.scss";
-import SingleInputInlineForm from "components/SingleInputInlineForm";
 import PersonList from "components/PersonList";
-import CreateNobtButton from "./CreateNobtButton"
-import Title from "components/Title"
+import CurrencyPicker from "components/CurrencyPicker";
+import SingleInputInlineForm from "components/SingleInputInlineForm";
+import styles from "./NewNobt.scss";
+import CreateNobtButton from "./CreateNobtButton";
 
 
 const NewNobt = React.createClass({
@@ -42,8 +42,7 @@ const NewNobt = React.createClass({
           />
         </AppBar>
 
-
-        <div className={ this.props.createNobtInProgress ? styles.disableScreen : "" }></div>
+        { this.props.createNobtInProgress && <div className={styles.disableScreen}></div> }
 
         <div className={styles.metaInformationContainer}>
           <Input
@@ -66,10 +65,11 @@ const NewNobt = React.createClass({
         </div>
 
         <section>
-          <SingleInputInlineForm buttonIcon="add_circle_outline"
-                                 isButtonDisabled={this.props.isEvilTwin}
-                                 placeholder="Who is in?"
-                                 onSubmit={this.props.addPerson} />
+          <SingleInputInlineForm
+            buttonIcon="person_add"
+            isButtonDisabled={this.props.isEvilTwin}
+            placeholder="Who is in?"
+            onSubmit={this.props.addPerson} />
           <PersonList
             names={this.props.personNames}
             onPersonRemove={this.props.removePerson}
