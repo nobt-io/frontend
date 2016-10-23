@@ -1,25 +1,15 @@
 import React from "react";
 import styles from "./Person.scss";
 import classnames from "classnames";
-import { BigAvatar, MediumAvatar } from "components/Avatar";
+import { avatarFactory, AvatarSize } from "components/Avatar";
 
 export const AvatarPosition = {
   LEFT: "LEFT",
   RIGHT: "RIGHT"
 };
 
-export const AvatarSize = {
-  BIG: "BIG",
-  SMALL: "SMALL"
-};
-
-const avatarFactory = {
-  "BIG": (name) => (<BigAvatar name={name} />),
-  "SMALL": (name) => <MediumAvatar name={name} />
-};
-
 export const Person = (props) => {
-  const avatar = avatarFactory[ props.avatarSize ](props.name);
+  const avatar = avatarFactory(props.name, props.avatarSize);
 
   const cx = classnames.bind(styles);
   const avatarStyle = cx("avatar", props.avatarClass);

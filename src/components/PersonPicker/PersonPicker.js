@@ -1,7 +1,8 @@
 import React from 'react'
 import {List, ListItem} from "react-toolbox/lib/list"
 
-import { Person, AvatarSize, AvatarPosition } from "components/Person"
+import { AvatarSize } from "components/Avatar"
+import { Person, AvatarPosition } from "components/Person"
 
 import styles from './PersonPicker.scss'
 
