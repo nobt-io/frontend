@@ -3,7 +3,7 @@ import Input from "react-toolbox/lib/input";
 import { Button } from "react-toolbox/lib/button";
 import { FormattedDate } from "react-intl";
 import AppBar from "react-toolbox/lib/app_bar";
-
+import {List, ListItem} from "react-toolbox/lib/list"
 
 import _debug from "debug";
 
@@ -20,7 +20,6 @@ import SingleInputInlineForm from "components/SingleInputInlineForm"
 import QuickDatePicker from "components/QuickDatePicker";
 import CloseButton from "components/CloseButton"
 
-import ListSelectOverlay from "components/ListSelectOverlay";
 import Overlay from "components/Overlay/Overlay"
 
 import SplitStrategyNames from "const/SplitStrategyNames";
@@ -61,11 +60,20 @@ export const NewBillOverlay = React.createClass({
     closeDebteeSelectorOverlay() { this.setState({ debteeSelectorOverlayVisibility: Visibility.HIDDEN }) },
     openDebteeSelectorOverlay() { this.setState({ debteeSelectorOverlayVisibility: Visibility.VISIBLE }) },
 
+    closeSplitStrategySelectorOverlay() { this.setState({ splitStrategySelectorOverlayVisibility: Visibility.HIDDEN }) },
+    openSplitStrategySelectorOverlay() { this.setState({ splitStrategySelectorOverlayVisibility: Visibility.VISIBLE }) },
+
     getInitialState() {
       return {
         datePickerOverlayVisibility: Visibility.HIDDEN,
-        debteeSelectorOverlayVisibility: Visibility.HIDDEN
+        debteeSelectorOverlayVisibility: Visibility.HIDDEN,
+        splitStrategySelectorOverlayVisibility: Visibility.HIDDEN
       };
+    },
+
+    handleOnSplitStrategySelected(event) {
+      console.log(event)
+      this.closeSplitStrategySelectorOverlay()
     },
 
     render: function () {
@@ -135,15 +143,18 @@ export const NewBillOverlay = React.createClass({
             }}/>
           </Overlay>
 
-          <ListSelectOverlay
-            active={shareModalIsActive || false} onSortChange={(splitStrategy) => this.setMetaData({splitStrategy})}
-            title={"Split by"} onClose={() => this.setModalState({shareModalIsActive: false})}
-            items={[
-              {name: SplitStrategyNames.EQUAL, icon: "view_module", displayName: "split equally"},
-              {name: SplitStrategyNames.UNEQUAL, icon: "view_quilt", displayName: "split unequally"},
-              {name: SplitStrategyNames.PERCENTAGE, icon: "poll", displayName: "split by percentage"}
-            ]}
-          />
+          <Overlay visibility={this.state.splitStrategySelectorOverlayVisibility} onClickOutside={this.closeSplitStrategySelectorOverlay}>
+            <Header
+              left={<h3>Split by</h3>}
+              right={<CloseButton onClick={this.closeSplitStrategySelectorOverlay} />}
+            />
+            <List selectable ripple>
+              <ListItem key="EQUAL" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.EQUAL)} caption="split equally" leftIcon="view_module" />
+              <ListItem key="UNEQUAL" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.UNEQUAL)} caption="split unequally" leftIcon="view_quilt" />
+              <ListItem key="PERCENTAGE" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.PERCENTAGE)} caption="split by percentage" leftIcon="poll" />
+            </List>
+          </Overlay>
+
           <AppBar>
             <Header
               left={<Button icon="arrow_back" onClick={this.props.onClose} theme={ { button: styles.headerButton } }>Back</Button>}
@@ -174,8 +185,10 @@ export const NewBillOverlay = React.createClass({
             </div>
           </div>
           <div className={styles.amountContainer}>
-            <span onClick={() => this.setModalState({shareModalIsActive: true})}
-                  className={styles.spit}>{splitByLabel}</span>
+
+            <span onClick={this.openSplitStrategySelectorOverlay} className={styles.spit}>{splitByLabel}</span>
+
+
             <span className={styles.currencySymbold}>€</span>
             <CurrencyInput onChange={(amount) => this.setMetaData({amount})} value={amount} className={styles.amountInput} />
           </div>
