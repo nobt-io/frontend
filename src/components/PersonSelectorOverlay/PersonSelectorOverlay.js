@@ -27,15 +27,18 @@ export const PersonSelectorOverlay = (props) => {
             <ListDivider/>
           </div>
           {persons}
-          <div style={{display: props.canInsertPerson ? "block" : "none"}}>
-            <ListDivider/>
-            <div className={styles.addPanel}>
-              <FontIcon  className={styles.addIcon} value='person_add'/>
-              <SingleInputInlineForm buttonIcon="add_circle_outline"
-                                     placeholder="Someone else?"
-                                     onSubmit={(p) => onItemClick(p)}/>
+
+          {props.canInsertPerson && (
+            <div>
+              <ListDivider/>
+              <div className={styles.addPanel}>
+                <FontIcon  className={styles.addIcon} value='person_add'/>
+                <SingleInputInlineForm buttonIcon="add_circle_outline"
+                                       placeholder="Someone else?"
+                                       onSubmit={(p) => onItemClick(p)}/>
+              </div>
             </div>
-          </div>
+          )}
         </List>
       </div>
     </LowerScreenOverlay>
