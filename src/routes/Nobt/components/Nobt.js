@@ -1,15 +1,17 @@
 import React from "react";
-import styles from "./Nobt.scss";
-import Header from "components/Header";
-import AppBar from "react-toolbox/lib/app_bar";
-import NobtSummaryHeader from "components/NobtSummaryHeader";
-import DebtSummaryList from "components/DebtSummaryList";
-import BillList from "components/BillList";
-import BillFilter from "components/BillFilter";
-import Overlay from "components/Overlay/Overlay";
 import { Tab, Tabs } from "react-toolbox";
 import { Button } from "react-toolbox/lib/button";
+import AppBar from "react-toolbox/lib/app_bar";
+
+import styles from "./Nobt.scss";
+
 import Title from "components/Title";
+import Header from "components/Header";
+import DebtSummaryList from "components/DebtSummaryList";
+import NobtSummaryHeader from "components/NobtSummaryHeader";
+import BillList from "components/BillList";
+import BillFilter from "components/BillFilter";
+import NewBillOverlay from "./AddBillScreen"
 
 export const Nobt = React.createClass({
 
@@ -52,52 +54,59 @@ export const Nobt = React.createClass({
   render: function () {
     return (
       <div className={styles.nobt}>
-        <AppBar>
-          <Header
-            left={<Title />}
-            right={
-              <Button
-                theme={ {button: styles.addBillButton} }
-                icon="add_box"
-                onClick={() => this._overlay.open()}>
-                Add a bill
-              </Button>
-            } />
-        </AppBar>
+        {this.props.newBillMetaData.active &&
+          <NewBillOverlay metaData={this.props.newBillMetaData}
+                          personData={this.props.newBillPersonData}
+                          setMetaData={this.props.setNewBillMetaData}
+                          setPersonValue={this.props.setNewBillPersonValue}
+                          nobtMembers={this.props.members}
+                          onClose={() => this.props.closeNewBillOverlay()}
+                          addBill={this.props.addBill}
+                          reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
+        }
 
-        <Overlay
-          ref={ (overlay) => this._overlay = overlay }
-          header={
-            <p>Header!</p>
-          }>
-          <div style={ {backgroundColor: "white", height: "50px"} } />
-        </Overlay>
+        {!this.props.newBillMetaData.active && (
+          <div>
+            <AppBar>
+              <Header
+                left={<Title />}
+                right={
+                  <Button
+                    theme={ {button: styles.addBillButton} }
+                    icon="add_box"
+                    onClick={() => this.props.openNewBillOverlay()}>
+                    Add a bill
+                  </Button>
+                } />
+            </AppBar>
 
-        <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
-                           memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
-        <div>
-          <Tabs
-            theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}
-            index={this.props.activeTabIndex}
-            onChange={this.onTabChange} fixed>
-            <Tab label="Transactions">
-              <DebtSummaryList debtSummaries={this.props.debtSummaries} />
-            </Tab>
-            <Tab label="Bills">
-              <BillFilter
-                personNames={this.props.members}
-                onFilterChange={(filter) => this.props.updateBillFilter(filter)}
-                onSortChange={(sort) => this.props.updateBillSortProperty(sort)}
-                onReset={() => {
-                  this.props.updateBillFilter("");
-                  this.props.updateBillSortProperty("Date");
-                }}
-                currentFilter={this.props.billFilter}
-                currentSort={this.props.billSortProperty} />
-              <BillList bills={this.props.bills} />
-            </Tab>
-          </Tabs>
-        </div>
+            <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
+                               memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
+            <div>
+              <Tabs
+                theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}
+                index={this.props.activeTabIndex}
+                onChange={this.onTabChange} fixed>
+                <Tab label="Transactions">
+                  <DebtSummaryList debtSummaries={this.props.debtSummaries} />
+                </Tab>
+                <Tab label="Bills">
+                  <BillFilter
+                    personNames={this.props.members}
+                    onFilterChange={(filter) => this.props.updateBillFilter(filter)}
+                    onSortChange={(sort) => this.props.updateBillSortProperty(sort)}
+                    onReset={() => {
+                      this.props.updateBillFilter("");
+                      this.props.updateBillSortProperty("Date");
+                    }}
+                    currentFilter={this.props.billFilter}
+                    currentSort={this.props.billSortProperty} />
+                  <BillList bills={this.props.bills} />
+                </Tab>
+              </Tabs>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

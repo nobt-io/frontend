@@ -1,20 +1,27 @@
 import React from "react";
-import styles from "./NewBillOverlay.scss";
-import { FullScreenOverlay } from "components/Overlay";
+import Input from "react-toolbox/lib/input";
+import { Button } from "react-toolbox/lib/button";
+import { FormattedDate } from "react-intl";
+import AppBar from "react-toolbox/lib/app_bar";
+
+
+import _debug from "debug";
+
+import styles from "./AddBillScreen.scss";
+
 import Header from "components/Header";
 import { Avatar } from "components/Avatar";
 import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList, AmountPercentageSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
-import Input from "react-toolbox/lib/input";
 import PersonSelectorOverlay from "components/PersonSelectorOverlay";
 import DatePickerOverlay from "components/DatePickerOverlay";
 import ListSelectOverlay from "components/ListSelectOverlay";
-import SplitStrategyNames from "const/SplitStrategyNames";
-import { FormattedDate } from "react-intl";
-import { Button } from "react-toolbox/lib/button";
-import _debug from "debug";
 
-const logger = _debug("view:components:NewBillOverlay");
+import SplitStrategyNames from "../../../../const/SplitStrategyNames";
+
+
+
+const logger = _debug("view:components:AddBillScreen");
 
 const isToday = (date) => new Date(date).toDateString() === new Date().toDateString();
 
@@ -87,7 +94,7 @@ export const NewBillOverlay = React.createClass({
       }
 
       return (
-        <FullScreenOverlay active={active} onClose={() => this.props.onClose()}>
+        <div>
           <PersonSelectorOverlay
             title={"Who paid?"} canInsertPerson={true} names={nobtMembers}
             active={personModalIsActive || false} onClose={() => this.setModalState({personModalIsActive: false})}
@@ -107,10 +114,12 @@ export const NewBillOverlay = React.createClass({
               {name: SplitStrategyNames.PERCENTAGE, icon: "poll", displayName: "split by percentage"}
             ]}
           />
-          <Header
-            left={<Button icon="arrow_back" onClick={this.props.onClose} theme={ { button: styles.headerButton } }>Back</Button>}
-            right={<Button icon="check_box" onClick={this.addBill} disabled={!billIsValid} theme={ { button: styles.headerButton} }>Add bill</Button>}
-          />
+          <AppBar>
+            <Header
+              left={<Button icon="arrow_back" onClick={this.props.onClose} theme={ { button: styles.headerButton } }>Back</Button>}
+              right={<Button icon="check_box" onClick={this.addBill} disabled={!billIsValid} theme={ { button: styles.headerButton} }>Add bill</Button>}
+            />
+          </AppBar>
           <div className={styles.headInput}>
             <div>
               <Input placeholder="What was bought?" value={subject} className={styles.subjectInput}
@@ -144,8 +153,7 @@ export const NewBillOverlay = React.createClass({
           <div className={styles.splitContainer}>
             {amountSplitPersonList}
           </div>
-        </FullScreenOverlay>
-
+        </div>
       );
     }
   })
