@@ -3,6 +3,8 @@ import Input from "react-toolbox/lib/input";
 import { Button } from "react-toolbox/lib/button";
 import { FormattedDate } from "react-intl";
 import AppBar from "react-toolbox/lib/app_bar";
+import {ListDivider} from "react-toolbox/lib/list"
+import FontIcon from 'react-toolbox/lib/font_icon';
 
 
 import _debug from "debug";
@@ -14,6 +16,9 @@ import { Avatar } from "components/Avatar";
 import { AmountEqualSplitPersonList, AmountUnequalSplitPersonList, AmountPercentageSplitPersonList } from "components/AmountSplitPersonList";
 import CurrencyInput from "components/CurrencyInput";
 
+import PersonPicker from "components/PersonPicker";
+
+import SingleInputInlineForm from "components/SingleInputInlineForm"
 import QuickDatePicker from "components/QuickDatePicker";
 import CloseButton from "components/CloseButton"
 
@@ -113,11 +118,17 @@ export const NewBillOverlay = React.createClass({
 
       return (
         <div>
-          <PersonSelectorOverlay
-            title={"Who paid?"} canInsertPerson={true} names={nobtMembers}
-            active={personModalIsActive || false} onClose={() => this.setModalState({personModalIsActive: false})}
-            onFilterChange={(paidByPerson) => this.setMetaData({paidByPerson})}
-          />
+          <Overlay visibility={this.state.debteeSelectorOverlayVisibility}>
+            <Header
+              left={<h1>Who paid?</h1>}
+              right={<CloseButton onClick={ () => this.setDebteeSelectorOverlayVisibility(Visibility.HIDDEN) }/>}
+            />
+            <PersonPicker names={nobtMembers} onPersonPicked={ (name) => {
+              // this.setMetaData({name});
+              this.setDebteeSelectorOverlayVisibility(Visibility.HIDDEN)
+            }}/>
+            <SingleInputInlineForm buttonIcon="person_add" placeholder="Someone else?" onSubmit={(p) => onItemClick(p)}/>
+          </Overlay>
 
           <Overlay visibility={this.state.datePickerOverlayVisibility}>
             <Header
@@ -151,7 +162,7 @@ export const NewBillOverlay = React.createClass({
                      onChange={(subject) => this.setMetaData({subject})} />
             </div>
             <div>
-              <span onClick={() => this.setModalState({personModalIsActive: true})}
+              <span onClick={() => this.setDebteeSelectorOverlayVisibility(Visibility.VISIBLE)}
                     className={styles.personPicker}>by {paidByPerson}
                 <Avatar size={20} fontSize={11} name={paidByPerson} />
               </span>
@@ -186,6 +197,7 @@ export const NewBillOverlay = React.createClass({
 NewBillOverlay.propTypes = {
   // TODO rename to onBack
   onClose: React.PropTypes.func.isRequired,
+
   addBill: React.PropTypes.func.isRequired,
   reloadNobt: React.PropTypes.func.isRequired,
   nobtMembers: React.PropTypes.array.isRequired,
