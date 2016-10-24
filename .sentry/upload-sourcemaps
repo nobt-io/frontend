@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+curl $SENTRY_HOOK_URL \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"version": "'$CI_BUILD_REF'"}'
+
+for f in dist/*.{js,css,map}
+do
+  echo "\nUploading ${f}."
+
+  FILE_NAME=$(basename $f)
+
+  curl https://sentry.io/api/0/projects/nobtio/frontend/releases/$CI_BUILD_REF/files/ \
+    -X POST \
+    -H "Authorization: Bearer $SENTRY_AUTH_TOKEN" \
+    -F file=@"${f}" \
+    -F name="~/${FILE_NAME}"
+done
