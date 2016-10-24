@@ -27,7 +27,7 @@ deploy_review_instance:
     - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
     - cf target -o nobt.io -s development
   script:
-    - cf push -n review-$CI_BUILD_REF_NAME
+    - .cf/push review-$CI_BUILD_REF_NAME -n review-$CI_BUILD_REF_NAME
   except:
     - master
 
@@ -42,7 +42,7 @@ deploy_on_development:
     - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
     - cf target -o nobt.io -s development
   script:
-    - cf push -n nobt-io-frontend-dev
+    - .cf/push nobt-io-frontend -n nobt-io-frontend-dev
   only:
     - master
 
@@ -57,7 +57,7 @@ deploy_on_beta:
     - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
     - cf target -o nobt.io -s beta
   script:
-    - cf push -n nobt-io-frontend-beta
+    - .cf/push nobt-io-frontend -n nobt-io-frontend-beta
   when: manual
 
 deploy_on_production:
@@ -71,5 +71,5 @@ deploy_on_production:
     - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
     - cf target -o nobt.io -s production
   script:
-    - cf push -n nobt-io-frontend
+    - .cf/push nobt-io-frontend -n nobt-io-frontend
   when: manual
