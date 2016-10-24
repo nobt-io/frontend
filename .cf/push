@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+cf push -m 64MB -b https://github.com/cloudfoundry/staticfile-buildpack -p dist "$@"
