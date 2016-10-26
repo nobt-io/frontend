@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./PersonList.scss";
-import { Person, AvatarPosition, AvatarSize } from "components/Person";
+import { Person, AvatarPosition } from "components/Person";
+import { AvatarSize } from "components/Avatar"
 import { Button } from "react-toolbox/lib/button";
 
 export const PersonList = (props) => {
