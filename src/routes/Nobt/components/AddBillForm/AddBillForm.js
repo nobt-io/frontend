@@ -1,6 +1,6 @@
 import React from 'react'
 import AppBar from "react-toolbox/lib/app_bar";
-import Button from "react-toolbox/lib/button";
+import {Button, IconButton} from "react-toolbox/lib/button";
 import Input from "react-toolbox/lib/input";
 import FontIcon from "react-toolbox/lib/font_icon";
 
@@ -46,7 +46,7 @@ export const AddBillForm = React.createClass({
       <div>
         <AppBar>
           <Header
-            left={<Button icon="close" onClick={this.props.onCancel} theme={{ button: styles.cancelButton }}>Cancel</Button>}
+            left={<IconButton icon="close" onClick={this.props.onCancel} theme={{ icon: styles.cancelButton }} />}
             right={<Button icon="done" onClick={this.props.onSubmit} theme={{ button: styles.addBillButton }}>Save</Button>}
           />
         </AppBar>
@@ -71,7 +71,7 @@ export const AddBillForm = React.createClass({
           <DebteePicker
             value={this.state.debtee}
             className={`${styles.formElement} ${styles.debteePicker}`}
-            names={["Thomas", "Lukas", "Philipp"]}
+            names={["Thomas", "Lukas", "Philipp Maierhofer"]}
             onDebteePicked={ this.handleOnDebteeChanged }
           />
 

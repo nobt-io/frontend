@@ -46,10 +46,16 @@
       font-family: inherit;
     }
 
-    max-width: 40%;
+    margin-right: 2%;
+
+    flex: 0 1 auto;
   }
 
   .debteePicker {
+    margin-left: 2%;
+
+    flex: 1 0 auto;
+    max-width: 60%;
   }
 }
 

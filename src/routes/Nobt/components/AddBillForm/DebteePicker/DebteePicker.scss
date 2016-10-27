@@ -3,6 +3,8 @@
   flex-direction: row;
   align-items: center;
 
+  overflow: hidden;
+
   .debteeContainer {
 
     overflow: hidden;
@@ -10,12 +12,13 @@
 
     .label {
       font-variant: small-caps;
+      white-space: nowrap;
     }
 
     .debtee {
       font-weight: bold;
-      overflow: hidden;
       white-space: nowrap;
+      overflow: hidden;
       text-overflow: ellipsis;
     }
   }

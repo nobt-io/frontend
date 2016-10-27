@@ -32,8 +32,8 @@ const DebteePicker = React.createClass({
 
   render() {
     return (
-      <div>
-        <div className={`${this.props.className} ${styles.DebteePicker}`} onClick={this.openOverlay}>
+      <div className={this.props.className}>
+        <div className={styles.DebteePicker} onClick={this.openOverlay}>
           <div className={styles.avatar}>
             <Avatar name={this.props.value} size={AvatarSize.BIG}/>
           </div>
