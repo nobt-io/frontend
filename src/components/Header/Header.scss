@@ -15,13 +15,13 @@
 
     .leftContainer {
       order: 0;
-      width: 50%;
+      flex: 1 1 auto;
       text-align: left;
     }
 
     .rightContainer {
       order: 1;
-      width: 50%;
+      flex: 1 1 auto;
       text-align: right;
     }
   }
