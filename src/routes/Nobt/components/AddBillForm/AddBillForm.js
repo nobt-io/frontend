@@ -14,7 +14,7 @@ export const AddBillForm = React.createClass({
 
   getInitialState() {
     return {
-      payer: null,
+      debtee: "?",
       description: "",
       amount: null
     }
@@ -28,14 +28,26 @@ export const AddBillForm = React.createClass({
     this.setState({ amount: newAmount});
   },
 
+  handleOnDebteeChanged(newDebtee) {
+    this.setState({ debtee: newDebtee});
+  },
+
+  handleOnSubmit() {
+    var billToAdd = {
+
+    };
+
+    this.props.onSubmit(billToAdd);
+  },
+
   render() {
 
     return (
       <div>
         <AppBar>
           <Header
-            left={<Button icon="close" theme={{ button: styles.cancelButton }}>Cancel</Button>}
-            right={<Button icon="done" theme={{ button: styles.addBillButton }}>Save</Button>}
+            left={<Button icon="close" onClick={this.props.onCancel} theme={{ button: styles.cancelButton }}>Cancel</Button>}
+            right={<Button icon="done" onClick={this.props.onSubmit} theme={{ button: styles.addBillButton }}>Save</Button>}
           />
         </AppBar>
 
@@ -45,7 +57,6 @@ export const AddBillForm = React.createClass({
             <Input placeholder="What was bought?" value={this.state.description} onChange={this.handleOnDescriptionChanged} />
           </div>
         </div>
-
 
         <div className={styles.row}>
 
@@ -57,13 +68,18 @@ export const AddBillForm = React.createClass({
             <CurrencyInput onChange={this.handleOnAmountChanged} value={this.state.amount} />
           </div>
 
-          <DebteePicker className={`${styles.formElement} ${styles.debteePicker}`} name="Alexander Maierhofer"/>
+          <DebteePicker
+            value={this.state.debtee}
+            className={`${styles.formElement} ${styles.debteePicker}`}
+            names={["Thomas", "Lukas", "Philipp"]}
+            onDebteePicked={ this.handleOnDebteeChanged }
+          />
 
         </div>
 
         <div className={styles.billSplitInfoContainer}>
 
-          <span>Split into</span>
+          <span>Split bill into</span>
 
           <span className={styles.billSplitInfoMessage}>equal</span>
 
@@ -76,3 +92,8 @@ export const AddBillForm = React.createClass({
 });
 
 export default AddBillForm
+
+AddBillForm.propTypes = {
+  onCancel: React.PropTypes.func.isRequired,
+  onSubmit: React.PropTypes.func.isRequired,
+};
