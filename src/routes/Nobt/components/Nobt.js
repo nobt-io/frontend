@@ -11,7 +11,7 @@ import DebtSummaryList from "components/DebtSummaryList";
 import NobtSummaryHeader from "components/NobtSummaryHeader";
 import BillList from "components/BillList";
 import BillFilter from "components/BillFilter";
-import NewBillOverlay from "./AddBillScreen"
+import AddBillForm from "./AddBillForm"
 
 import Visibility from "const/Visibility"
 
@@ -37,7 +37,7 @@ export const Nobt = React.createClass({
 
   getInitialState() {
     return {
-      addBillScreenVisibility: Visibility.HIDDEN
+      addBillScreenVisibility: Visibility.VISIBLE
     }
   },
 
@@ -69,14 +69,7 @@ export const Nobt = React.createClass({
     return (
       <div className={styles.nobt}>
         {this.state.addBillScreenVisibility === Visibility.VISIBLE &&
-          <NewBillOverlay metaData={this.props.newBillMetaData}
-                          personData={this.props.newBillPersonData}
-                          setMetaData={this.props.setNewBillMetaData}
-                          setPersonValue={this.props.setNewBillPersonValue}
-                          nobtMembers={this.props.members}
-                          onClose={() => this.setAddBillScreenVisibility(Visibility.HIDDEN)}
-                          addBill={this.props.addBill}
-                          reloadNobt={() => this.props.loadNobt(this.props.params.id)}/>
+          <AddBillForm/>
         }
 
         {this.state.addBillScreenVisibility === Visibility.HIDDEN && (

@@ -1,0 +1,77 @@
+.cancelButton, .addBillButton {
+  color: white !important;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// disable padding of all input boxes
+[data-react-toolbox="input"] {
+  padding: 0;
+  width: 100%;
+}
+
+.row {
+
+  margin: 1.8rem 0;
+
+  .formElement {
+    padding: 1rem;
+    background-color: $color-button-grey;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .icon {
+      margin-right: 1rem;
+      text-align: center;
+    }
+
+    box-shadow: 0 .2px 0 0 black;
+  }
+
+  .descriptionInputContainer {
+    width: 100%;
+  }
+
+  .amountInputContainer {
+
+    .currencySymbol {
+      width: 24px;
+      font-family: inherit;
+    }
+
+    max-width: 40%;
+  }
+
+  .debteePicker {
+    max-width: 66%;
+  }
+}
+
+.billSplitInfoContainer {
+
+  padding: 2rem;
+  background-color: $color-primary;
+
+  color: white;
+
+  > span {
+    padding: 1rem;
+  }
+
+  .billSplitInfoMessage {
+
+    font-weight:bold;
+
+    background-color: $color-primary-light;
+    border-radius: .5rem;
+
+  }
+
+}
