@@ -10,7 +10,7 @@ export const PersonPicker = (props) => (
   <List selectable ripple>
     {
       props.names.map((name) => (
-        <ListItem onClick={() => props.onPersonPicked(name)}>
+        <ListItem onClick={() => props.onPersonPicked(name)} key={name}>
           <Person
             name={name}
             avatarSize={AvatarSize.SMALL}
