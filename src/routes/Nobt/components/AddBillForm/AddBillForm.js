@@ -1,13 +1,22 @@
 import React from 'react'
 import AppBar from "react-toolbox/lib/app_bar";
-import {Button, IconButton} from "react-toolbox/lib/button";
+import { Button, IconButton } from "react-toolbox/lib/button";
 import Input from "react-toolbox/lib/input";
 import FontIcon from "react-toolbox/lib/font_icon";
+import { List, ListItem } from "react-toolbox/lib/list"
+import Dropdown from 'react-toolbox/lib/dropdown';
+import { Card, CardTitle } from 'react-toolbox/lib/card';
 
 import Header from "components/Header";
 import CurrencyInput from "components/CurrencyInput";
-import DebteePicker from "./DebteePicker"
+import Overlay from "components/Overlay"
+import CloseButton from "components/CloseButton"
+import { AmountEqualSplitPersonList } from "components/AmountSplitPersonList"
 
+import Visibility from "const/Visibility"
+import SplitStrategyNames from "const/SplitStrategyNames"
+
+import DebteePicker from "./DebteePicker"
 import styles from './AddBillForm.scss'
 
 export const AddBillForm = React.createClass({
@@ -16,26 +25,35 @@ export const AddBillForm = React.createClass({
     return {
       debtee: "?",
       description: "",
-      amount: null
+      amount: null,
+      splitStrategy: SplitStrategyNames.EQUAL,
+      splitStrategySelectorOverlayVisibility: Visibility.HIDDEN
     }
   },
 
   handleOnDescriptionChanged(newDescription) {
-    this.setState({ description: newDescription});
+    this.setState({description: newDescription});
   },
 
   handleOnAmountChanged(newAmount) {
-    this.setState({ amount: newAmount});
+    this.setState({amount: newAmount});
   },
 
   handleOnDebteeChanged(newDebtee) {
-    this.setState({ debtee: newDebtee});
+    this.setState({debtee: newDebtee});
   },
 
-  handleOnSubmit() {
-    var billToAdd = {
+  handleSplitStrategyChanged(newSplitStrategy) {
+    this.setState({splitStrategy: newSplitStrategy});
+  },
 
-    };
+
+  closeSplitStrategySelectorOverlay() { this.setState({splitStrategySelectorOverlayVisibility: Visibility.HIDDEN}) },
+  openSplitStrategySelectorOverlay() { this.setState({splitStrategySelectorOverlayVisibility: Visibility.VISIBLE}) },
+
+
+  handleOnSubmit() {
+    var billToAdd = {};
 
     this.props.onSubmit(billToAdd);
   },
@@ -43,53 +61,93 @@ export const AddBillForm = React.createClass({
   render() {
 
     return (
-      <div>
+      <div className={styles.form}>
         <AppBar>
           <Header
-            left={<IconButton icon="close" onClick={this.props.onCancel} theme={{ icon: styles.cancelButton }} />}
-            right={<Button icon="done" onClick={this.props.onSubmit} theme={{ button: styles.addBillButton }}>Save</Button>}
+            left={<IconButton icon="close" onClick={this.props.onCancel} theme={{icon: styles.cancelButton}} />}
+            right={<Button icon="done" onClick={this.props.onSubmit} theme={{button: styles.addBillButton}}>Save</Button>}
           />
         </AppBar>
 
-        <div className={styles.row}>
-          <div className={`${styles.formElement} ${styles.descriptionInputContainer}`}>
-            <FontIcon className={styles.icon} value="description" />
-            <Input placeholder="What was bought?" value={this.state.description} onChange={this.handleOnDescriptionChanged} />
-          </div>
-        </div>
+        <h3 className={styles.heading}>Add a new bill</h3>
 
-        <div className={styles.row}>
+        <div className={styles.billMetaInfoContainer}>
 
-          <div className={`${styles.amountInputContainer} ${styles.formElement}`}>
-            <div className={styles.iconContainer}>
-              <FontIcon className={styles.currencySymbol} children="€" />
+          <Card className={styles.billMetaInfoInputContainer} theme={{card: styles.billMetaInfoCard}}>
+            <div className={styles.row}>
+              <div className={`${styles.formElement} ${styles.descriptionInputContainer}`}>
+                <FontIcon className={styles.icon} value="description" />
+                <Input placeholder="What was bought?" value={this.state.description} onChange={this.handleOnDescriptionChanged} />
+              </div>
             </div>
 
-            <CurrencyInput onChange={this.handleOnAmountChanged} value={this.state.amount} />
-          </div>
+            <div className={styles.row}>
 
-          <DebteePicker
-            value={this.state.debtee}
-            className={`${styles.formElement} ${styles.debteePicker}`}
-            names={["Thomas", "Lukas", "Philipp Maierhofer"]}
-            onDebteePicked={ this.handleOnDebteeChanged }
-          />
+              <div className={`${styles.amountInputContainer} ${styles.formElement}`}>
+                <div className={styles.iconContainer}>
+                  <FontIcon className={`${styles.currencySymbol} ${styles.icon}`} children="€" />
+                </div>
 
+                <CurrencyInput onChange={this.handleOnAmountChanged} value={this.state.amount} />
+              </div>
+
+              <DebteePicker
+                value={this.state.debtee}
+                className={`${styles.formElement} ${styles.debteePicker}`}
+                names={[ "Thomas", "Lukas", "Philipp Maierhofer" ]}
+                onDebteePicked={ this.handleOnDebteeChanged }
+              />
+
+            </div>
+          </Card>
         </div>
 
         <div className={styles.billSplitInfoContainer}>
 
-          <span>Split bill into</span>
+          <Header
+            theme={{
+              header: styles.billSplitHeader
+            }}
+            left={
+              <div className={styles.whoIsInContainer}>
+                <FontIcon value="group" />
+                <h4>&nbsp;Who's in?</h4>
+              </div>
+            }
+            right={<IconButton icon="settings" neutral={false} onClick={this.openSplitStrategySelectorOverlay}/>}
+          />
 
-          <span className={styles.billSplitInfoMessage}>equal</span>
+          <Overlay visibility={this.state.splitStrategySelectorOverlayVisibility}>
+            <Header
+              left={<h3>Split bill into</h3>}
+              right={<CloseButton onClick={this.closeSplitStrategySelectorOverlay} />}
+            />
+            <List selectable ripple>
+              <ListItem key="EQUAL" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.EQUAL)} caption="equal shares"
+                        leftIcon="view_module" />
+              <ListItem key="UNEQUAL" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.UNEQUAL)} caption="custom shares"
+                        leftIcon="view_quilt" />
+              <ListItem key="PERCENTAGE" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
+                        leftIcon="poll" />
+            </List>
+          </Overlay>
 
-          <span>shares.</span>
 
+          <Card theme={{card: styles.splitPersonListCard}}>
+            <AmountEqualSplitPersonList nobtMembers={[ "Thomas", "Martin", "Lukas" ]} involvedPersons={[]} involvedPersonsAreValid={true} />
+          </Card>
         </div>
+
       </div>
     )
   }
 });
+
+const splitStrategies = [
+  {value: SplitStrategyNames.EQUAL, label: 'equal'},
+  {value: SplitStrategyNames.UNEQUAL, label: 'custom'},
+  {value: SplitStrategyNames.PERCENTAGE, label: 'percental'}
+];
 
 export default AddBillForm
 

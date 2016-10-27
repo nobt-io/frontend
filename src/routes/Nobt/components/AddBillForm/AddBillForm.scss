@@ -1,5 +1,20 @@
+.billMetaInfoContainer {
+  background-color: $color-button-grey;
+}
+
 .cancelButton, .addBillButton {
   color: white !important;
+}
+
+.billMetaInfoInputContainer {
+  background-color: white;
+  padding: 1rem;
+}
+
+.heading {
+  text-align: center;
+  font-variant: small-caps;
+  margin: 1.5rem 0;
 }
 
 .row {
@@ -17,11 +32,9 @@
 
 .row {
 
-  margin: 1.8rem 0;
-
   .formElement {
-    padding: 1rem;
-    background-color: $color-button-grey;
+
+    padding: .5rem;
 
     display: flex;
     flex-direction: row;
@@ -31,8 +44,6 @@
       margin-right: 1rem;
       text-align: center;
     }
-
-    box-shadow: 0 .2px 0 0 black;
   }
 
   .descriptionInputContainer {
@@ -64,19 +75,15 @@
   padding: 2rem;
   background-color: $color-primary;
 
-  color: white;
-
-  > span {
-    padding: 1rem;
+  .billSplitHeader {
+    color: white !important;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
   }
 
-  .billSplitInfoMessage {
-
-    font-weight:bold;
-
-    background-color: $color-primary-light;
-    border-radius: .5rem;
-
+  .whoIsInContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
-
 }
