@@ -78,12 +78,16 @@
   .billSplitHeader {
     color: white !important;
     margin-bottom: 1rem;
-    margin-left: 1rem;
   }
 
   .whoIsInContainer {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+
+    // somehow we cant select via .material-icons ...
+    > [data-react-toolbox="font-icon"] {
+      padding: 1px 6px;
+    }
   }
 }
