@@ -27,7 +27,7 @@ function fetchNobtFailed(error) {
     type: UPDATE_FETCH_NOBT_STATUS,
     payload: {
       error,
-      state: AsyncActionStatus.FAILED
+      status: AsyncActionStatus.FAILED
     }
   }
 }
