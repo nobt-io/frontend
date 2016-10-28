@@ -1,0 +1,34 @@
+.ShareListItem {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 1.5rem;
+
+  .personContainer {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .amount {
+    color: lighten($color-accent, 10);
+  }
+
+  .controlContainer {
+
+    // fix start:  https://github.com/react-toolbox/react-toolbox/issues/250
+    input {
+      display: none;
+    }
+    // fix end
+
+    margin-left: 1rem;
+
+    label {
+      margin: 0;
+    }
+  }
+}

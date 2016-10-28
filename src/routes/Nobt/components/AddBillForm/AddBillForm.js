@@ -3,6 +3,7 @@ import AppBar from "react-toolbox/lib/app_bar";
 import { Button, IconButton } from "react-toolbox/lib/button";
 import Input from "react-toolbox/lib/input";
 import FontIcon from "react-toolbox/lib/font_icon";
+import Checkbox from "react-toolbox/lib/checkbox";
 import { List, ListItem } from "react-toolbox/lib/list"
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { Card, CardTitle } from 'react-toolbox/lib/card';
@@ -18,6 +19,7 @@ import SplitStrategyNames from "const/SplitStrategyNames"
 
 import DebteePicker from "./DebteePicker"
 import styles from './AddBillForm.scss'
+import ShareListItem from "./ShareListItem"
 
 export const AddBillForm = React.createClass({
 
@@ -117,7 +119,7 @@ export const AddBillForm = React.createClass({
             right={<IconButton icon="settings" neutral={false} onClick={this.openSplitStrategySelectorOverlay}/>}
           />
 
-          <Overlay visibility={this.state.splitStrategySelectorOverlayVisibility}>
+          <Overlay visibility={this.state.splitStrategySelectorOverlayVisibility} onClickOutside={this.closeSplitStrategySelectorOverlay}>
             <Header
               left={<h3>Split bill into</h3>}
               right={<CloseButton onClick={this.closeSplitStrategySelectorOverlay} />}
@@ -132,22 +134,20 @@ export const AddBillForm = React.createClass({
             </List>
           </Overlay>
 
-
           <Card theme={{card: styles.splitPersonListCard}}>
-            <AmountEqualSplitPersonList nobtMembers={[ "Thomas", "Martin", "Lukas" ]} involvedPersons={[]} involvedPersonsAreValid={true} />
+            <div>
+              <ShareListItem name={"Thomas"} amount={30} control={<Checkbox checked/>}/>
+              <ShareListItem name={"Philipp"} amount={40} control={<Checkbox />}/>
+              <ShareListItem name={"Martin"} amount={20} control={<Checkbox />}/>
+            </div>
           </Card>
+
         </div>
 
       </div>
     )
   }
 });
-
-const splitStrategies = [
-  {value: SplitStrategyNames.EQUAL, label: 'equal'},
-  {value: SplitStrategyNames.UNEQUAL, label: 'custom'},
-  {value: SplitStrategyNames.PERCENTAGE, label: 'percental'}
-];
 
 export default AddBillForm
 
