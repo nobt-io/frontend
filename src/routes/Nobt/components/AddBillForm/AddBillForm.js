@@ -1,10 +1,10 @@
 import React from "react";
-import AppBar from "react-toolbox/lib/app_bar";
-import { Button, IconButton } from "react-toolbox/lib/button";
 import Input from "react-toolbox/lib/input";
+import { Card } from "react-toolbox/lib/card";
+import AppBar from "react-toolbox/lib/app_bar";
 import FontIcon from "react-toolbox/lib/font_icon";
 import { List, ListItem } from "react-toolbox/lib/list";
-import { Card } from "react-toolbox/lib/card";
+import { Button, IconButton } from "react-toolbox/lib/button";
 import Header from "components/Header";
 import CurrencyInput from "components/CurrencyInput";
 import Overlay from "components/Overlay";
@@ -22,56 +22,10 @@ export const AddBillForm = React.createClass({
    * - Use selectors to compose needed functionality and create needed data-structure.
    * - Re-implement "error"-message as soon as the user fails to split the bill properly.
    */
-  getInitialState() {
-    return {
-      debtee: "?",
-      description: "",
-      amount: null,
-      splitStrategy: SplitStrategyNames.PERCENTAGE,
-      splitStrategySelectorOverlayVisibility: Visibility.HIDDEN,
-      shares: [
-        {
-          name: "Thomas",
-          amount: 30,
-          value: 10
-        },
-        {
-          name: "Philipp",
-          amount: 30,
-          value: 20
-        },
-        {
-          name: "Georg",
-          amount: null,
-          value: 0
-        }
-      ],
-      onShareValueUpdated: (name, value) => {
-        console.log(`Updating value of ${name} to ${value}.`);
-      }
-    }
-  },
-
-  handleOnDescriptionChanged(newDescription) {
-    this.setState({description: newDescription});
-  },
-
-  handleOnAmountChanged(newAmount) {
-    this.setState({amount: newAmount});
-  },
-
-  handleOnDebteeChanged(newDebtee) {
-    this.setState({debtee: newDebtee});
-  },
-
-  handleSplitStrategyChanged(newSplitStrategy) {
-    this.setState({splitStrategy: newSplitStrategy});
-  },
-
+  getInitialState() { return {splitStrategySelectorOverlayVisibility: Visibility.HIDDEN} },
 
   closeSplitStrategySelectorOverlay() { this.setState({splitStrategySelectorOverlayVisibility: Visibility.HIDDEN}) },
   openSplitStrategySelectorOverlay() { this.setState({splitStrategySelectorOverlayVisibility: Visibility.VISIBLE}) },
-
 
   handleOnSubmit() {
     var billToAdd = {};
@@ -98,7 +52,7 @@ export const AddBillForm = React.createClass({
             <div className={styles.row}>
               <div className={`${styles.formElement} ${styles.descriptionInputContainer}`}>
                 <FontIcon className={styles.icon} value="description" />
-                <Input placeholder="What was bought?" value={this.state.description} onChange={this.handleOnDescriptionChanged} />
+                <Input placeholder="What was bought?" value={this.props.description} onChange={this.handleOnDescriptionChanged} />
               </div>
             </div>
 
@@ -109,14 +63,14 @@ export const AddBillForm = React.createClass({
                   <FontIcon className={`${styles.currencySymbol} ${styles.icon}`} children="€" />
                 </div>
 
-                <CurrencyInput onChange={this.handleOnAmountChanged} value={this.state.amount} />
+                <CurrencyInput onChange={this.props.onAmountChange} value={this.props.amount} />
               </div>
 
               <DebteePicker
-                value={this.state.debtee}
+                value={this.props.debtee}
                 className={`${styles.formElement} ${styles.debteePicker}`}
-                names={[ "Thomas", "Lukas", "Philipp Maierhofer" ]}
-                onDebteePicked={ this.handleOnDebteeChanged }
+                names={this.props.members}
+                onDebteePicked={ this.props.onDebteeChange }
               />
 
             </div>
@@ -144,33 +98,33 @@ export const AddBillForm = React.createClass({
               right={<CloseButton onClick={this.closeSplitStrategySelectorOverlay} />}
             />
             <List selectable ripple>
-              <ListItem key="EQUAL" onClick={() => this.handleSplitStrategyChanged(SplitStrategyNames.EQUAL)} caption="equal shares"
+              <ListItem key="EQUAL" onClick={() => this.props.onSplitStrategyChange(SplitStrategyNames.EQUAL)} caption="equal shares"
                         leftIcon="view_module" />
-              <ListItem key="UNEQUAL" onClick={() => this.handleSplitStrategyChanged(SplitStrategyNames.UNEQUAL)} caption="custom shares"
+              <ListItem key="UNEQUAL" onClick={() => this.props.onSplitStrategyChange(SplitStrategyNames.UNEQUAL)} caption="custom shares"
                         leftIcon="view_quilt" />
-              <ListItem key="PERCENTAGE" onClick={() => this.handleSplitStrategyChanged(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
+              <ListItem key="PERCENTAGE" onClick={() => this.props.onSplitStrategyChange(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
                         leftIcon="poll" />
             </List>
           </Overlay>
 
           <Card theme={{card: styles.splitPersonListCard}}>
-            {this.state.splitStrategy === SplitStrategyNames.EQUAL && (
-              <ShareList shares={this.state.shares} renderShareListItem={(share) => (
-                <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.state.onShareValueUpdated} />
+            {this.props.splitStrategy === SplitStrategyNames.EQUAL && (
+              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
+                <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.props.onShareValueChange} />
               )}
               />
             )}
 
-            {this.state.splitStrategy === SplitStrategyNames.UNEQUAL && (
-              <ShareList shares={this.state.shares} renderShareListItem={(share) => (
-                <CustomShareListItem key={share.name} share={share} onAmountChange={this.state.onShareValueUpdated} />
+            {this.props.splitStrategy === SplitStrategyNames.UNEQUAL && (
+              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
+                <CustomShareListItem key={share.name} share={share} onAmountChange={this.props.onShareValueChange} />
               )}
               />
             )}
 
-            {this.state.splitStrategy === SplitStrategyNames.PERCENTAGE && (
-              <ShareList shares={this.state.shares} renderShareListItem={(share) => (
-                <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.state.onShareValueUpdated} />
+            {this.props.splitStrategy === SplitStrategyNames.PERCENTAGE && (
+              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
+                <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.props.onShareValueChange} />
               )}
               />
             )}
@@ -182,9 +136,27 @@ export const AddBillForm = React.createClass({
   }
 });
 
-export default AddBillForm
+export default AddBillForm;
+
 
 AddBillForm.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
   onSubmit: React.PropTypes.func.isRequired,
+  onDescriptionChange: React.PropTypes.func.isRequired,
+  onAmountChange: React.PropTypes.func.isRequired,
+  onDebteeChange: React.PropTypes.func.isRequired,
+  onSplitStrategyChange: React.PropTypes.func.isRequired,
+  onShareValueChange: React.PropTypes.func.isRequired,
+  description: React.PropTypes.string.isRequired,
+  debtee: React.PropTypes.string.isRequired,
+  splitStrategy: React.PropTypes.string.isRequired,
+  amount: React.PropTypes.number.isRequired,
+  members: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  shares: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      name: React.PropTypes.string.isRequired,
+      amount: React.PropTypes.number,
+      value: React.PropTypes.any.isRequired,
+    })
+  )
 };

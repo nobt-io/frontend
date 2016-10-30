@@ -1,9 +1,6 @@
 import React from "react";
 import Checkbox from "react-toolbox/lib/checkbox";
-
-import styles from "./EqualShareListItem.scss"
-
-import { ShareListItemPropTypes } from "../ShareListPropTypes";
+import styles from "./EqualShareListItem.scss";
 import ShareListItem from "../ShareListItem";
 
 const EqualShareListItem = (props) => {
@@ -28,6 +25,10 @@ const EqualShareListItem = (props) => {
 export default EqualShareListItem
 
 EqualShareListItem.propTypes = {
-  share: ShareListItemPropTypes,
+  share: React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+    amount: React.PropTypes.number,
+    value: React.PropTypes.bool.isRequired,
+  }),
   onCheckboxChange: React.PropTypes.func.isRequired
 };
