@@ -17,6 +17,11 @@ import { ShareList, EqualShareListItem, CustomShareListItem, PercentalShareListI
 
 export const AddBillForm = React.createClass({
 
+  /* TODO:
+   * - Implement state in a wrapper component similar to NobtContainer.
+   * - Use selectors to compose needed functionality and create needed data-structure.
+   * - Re-implement "error"-message as soon as the user fails to split the bill properly.
+   */
   getInitialState() {
     return {
       debtee: "?",
