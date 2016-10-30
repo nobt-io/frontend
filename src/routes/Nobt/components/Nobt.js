@@ -69,7 +69,7 @@ export const Nobt = React.createClass({
     return (
       <div className={styles.nobt}>
         {this.state.addBillScreenVisibility === Visibility.VISIBLE &&
-          <AddBillForm/>
+          <AddBillForm onCancel={ () => {} } onSubmit={ () => {} }/>
         }
 
         {this.state.addBillScreenVisibility === Visibility.HIDDEN && (
