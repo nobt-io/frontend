@@ -29,44 +29,39 @@ const getShareSelector = createSelector([ getSplitStrategy ], splitStrategy => {
 
 const getEqualShares = createSelector([ getAmount, getPersonValues, getAllMembers ], (amount, personValues, members) => {
 
-  const logger = _debug("getEqualShares");
   const noShare = (name) => { return {name: name, amount: null, value: false} };
 
   var involvedMembers = personValues.filter(pv => pv.value === true).map(pv => pv.name);
-  logger(`Involved members: ${involvedMembers}`);
-
-  const isInvolved = (name) => involvedMembers.indexOf(name) !== -1;
 
   if (involvedMembers.length === 0) {
     return members.map(noShare);
   }
 
-  const share = amount / involvedMembers.length;
-  // const roundingError = amount - share * involvedMembers.length;
-
+  const share = Math.round(amount / involvedMembers.length * 100) / 100;
   const regularShare = (name) => { return {name: name, amount: share, value: true} };
 
-  var shares = members.map(name => {
-    if (isInvolved(name)) {
-      return regularShare(name);
-    } else {
-      return noShare(name);
-    }
-  });
+  const isInvolved = (name) => involvedMembers.indexOf(name) !== -1;
+  const mapFn = (name) => isInvolved(name) ? regularShare(name) : noShare(name);
 
-  logger(`Shares: ${shares}`);
+
+  var shares = members.map(mapFn);
+
+  const roundingError = amount - share * involvedMembers.length;
+  shares.find(share => share.value === true).amount += roundingError;
 
   return shares;
 });
-
 
 const getCustomShares = null;
 const getPercentualShares = null;
 
 
 export const getShares = createSelector([ getShareSelector, getState ], (shareSelector, state) => {
+
   var shares = shareSelector(state);
-  return shares.sort((first, second) => {
-    return first.name > second.name
-  });
+  return shares.sort(byName);
 });
+
+const byName = (first, second) => {
+  return first.name > second.name
+};
