@@ -36,6 +36,10 @@ export const AddBillForm = React.createClass({
     this.closeSplitStrategySelectorOverlay();
   },
 
+  handleOnEqualSplitStrategySelected() { this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL); },
+  handleOnCustomSplitStrategySelected() { this.handleOnSplitStrategyChanged(SplitStrategyNames.UNEQUAL); },
+  handleOnPercentalSplitStrategySelected() { this.handleOnSplitStrategyChanged(SplitStrategyNames.PERCENTAGE); },
+
   render() {
 
     return (
@@ -101,12 +105,9 @@ export const AddBillForm = React.createClass({
               right={<CloseButton onClick={this.closeSplitStrategySelectorOverlay} />}
             />
             <List selectable ripple>
-              <ListItem key="EQUAL" onClick={() => this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL)} caption="equal shares"
-                        leftIcon="view_module" />
-              <ListItem key="UNEQUAL" onClick={() => this.handleOnSplitStrategyChanged(SplitStrategyNames.UNEQUAL)} caption="custom shares"
-                        leftIcon="view_quilt" />
-              <ListItem key="PERCENTAGE" onClick={() => this.handleOnSplitStrategyChanged(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
-                        leftIcon="poll" />
+              <ListItem key="EQUAL" onClick={this.handleOnEqualSplitStrategySelected} caption="equal shares" leftIcon="view_module" />
+              <ListItem key="UNEQUAL" onClick={this.handleOnCustomSplitStrategySelected} caption="custom shares" leftIcon="view_quilt" />
+              <ListItem key="PERCENTAGE" onClick={this.handleOnPercentalSplitStrategySelected} caption="percental shares" leftIcon="poll" />
             </List>
           </Overlay>
 
