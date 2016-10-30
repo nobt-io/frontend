@@ -37,7 +37,7 @@ export const Nobt = React.createClass({
 
   getInitialState() {
     return {
-      addBillScreenVisibility: Visibility.VISIBLE
+      addBillFormVisibility: Visibility.VISIBLE
     }
   },
 
@@ -59,20 +59,20 @@ export const Nobt = React.createClass({
     this.props.router.replace(`/${this.props.params.id}#${hashRoute}`);
   },
 
-  setAddBillScreenVisibility(visibility) {
+  setAddBillFormVisibility(visibility) {
     this.setState({
-      addBillScreenVisibility: visibility
+      addBillFormVisibility: visibility
     })
   },
 
   render: function () {
     return (
       <div className={styles.nobt}>
-        {this.state.addBillScreenVisibility === Visibility.VISIBLE &&
+        {this.state.addBillFormVisibility === Visibility.VISIBLE &&
           <AddBillForm onCancel={ () => {} } onSubmit={ () => {} }/>
         }
 
-        {this.state.addBillScreenVisibility === Visibility.HIDDEN && (
+        {this.state.addBillFormVisibility === Visibility.HIDDEN && (
           <div>
             <AppBar>
               <Header
@@ -81,7 +81,7 @@ export const Nobt = React.createClass({
                   <Button
                     theme={ {button: styles.addBillButton} }
                     icon="add_box"
-                    onClick={() => this.setAddBillScreenVisibility(Visibility.VISIBLE)}>
+                    onClick={() => this.setAddBillFormVisibility(Visibility.VISIBLE)}>
                     Add a bill
                   </Button>
                 } />
