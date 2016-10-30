@@ -65,6 +65,14 @@ export const Nobt = React.createClass({
     })
   },
 
+  handleOnBillSubmit(bill) {
+
+  },
+
+  handleOnAddBillCanceled() {
+    this.setAddBillFormVisibility(Visibility.HIDDEN);
+  },
+
   render: function () {
     return (
       <div className={styles.nobt}>
