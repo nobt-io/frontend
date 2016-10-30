@@ -2,18 +2,15 @@ import React from "react";
 import { Tab, Tabs } from "react-toolbox";
 import { Button } from "react-toolbox/lib/button";
 import AppBar from "react-toolbox/lib/app_bar";
-
 import styles from "./Nobt.scss";
-
 import Title from "components/Title";
 import Header from "components/Header";
 import DebtSummaryList from "components/DebtSummaryList";
 import NobtSummaryHeader from "components/NobtSummaryHeader";
 import BillList from "components/BillList";
 import BillFilter from "components/BillFilter";
-
-import Visibility from "const/Visibility"
 import AddBillFormContainer from "./AddBillForm";
+import Visibility from "const/Visibility";
 
 export const Nobt = React.createClass({
 
@@ -37,7 +34,7 @@ export const Nobt = React.createClass({
 
   getInitialState() {
     return {
-      addBillFormVisibility: Visibility.VISIBLE
+      addBillFormVisibility: Visibility.HIDDEN
     }
   },
 
