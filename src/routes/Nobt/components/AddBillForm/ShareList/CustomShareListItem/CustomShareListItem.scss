@@ -1,0 +1,10 @@
+.customShareInputContainer {
+  flex-basis: 20%;
+
+  [data-react-toolbox="input"] {
+    input {
+      text-align: center;
+      padding: 0;
+    }
+  }
+}

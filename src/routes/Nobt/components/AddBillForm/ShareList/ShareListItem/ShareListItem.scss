@@ -19,16 +19,10 @@
 
   .controlContainer {
 
-    // fix start:  https://github.com/react-toolbox/react-toolbox/issues/250
-    input {
-      display: none;
+    &.customShareControl {
+      flex-basis: 20%;
+      text-align: center;
     }
-    // fix end
 
-    margin-left: 1rem;
-
-    label {
-      margin: 0;
-    }
   }
 }

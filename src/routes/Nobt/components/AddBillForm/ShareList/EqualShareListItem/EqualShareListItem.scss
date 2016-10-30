@@ -1,0 +1,15 @@
+.equalShareCheckboxContainer {
+  // fix start:  https://github.com/react-toolbox/react-toolbox/issues/250
+  [data-react-toolbox="checkbox"] {
+    input {
+      // display: none;
+    }
+  }
+  // fix end
+
+  label {
+    margin: 0;
+  }
+
+  margin-left: 1rem;
+}

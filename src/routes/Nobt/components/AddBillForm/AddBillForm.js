@@ -1,25 +1,19 @@
-import React from 'react'
+import React from "react";
 import AppBar from "react-toolbox/lib/app_bar";
 import { Button, IconButton } from "react-toolbox/lib/button";
 import Input from "react-toolbox/lib/input";
 import FontIcon from "react-toolbox/lib/font_icon";
-import Checkbox from "react-toolbox/lib/checkbox";
-import { List, ListItem } from "react-toolbox/lib/list"
-import Dropdown from 'react-toolbox/lib/dropdown';
-import { Card, CardTitle } from 'react-toolbox/lib/card';
-
+import { List, ListItem } from "react-toolbox/lib/list";
+import { Card } from "react-toolbox/lib/card";
 import Header from "components/Header";
 import CurrencyInput from "components/CurrencyInput";
-import Overlay from "components/Overlay"
-import CloseButton from "components/CloseButton"
-import { AmountEqualSplitPersonList } from "components/AmountSplitPersonList"
-
-import Visibility from "const/Visibility"
-import SplitStrategyNames from "const/SplitStrategyNames"
-
-import DebteePicker from "./DebteePicker"
-import styles from './AddBillForm.scss'
-import ShareListItem from "./ShareListItem"
+import Overlay from "components/Overlay";
+import CloseButton from "components/CloseButton";
+import Visibility from "const/Visibility";
+import SplitStrategyNames from "const/SplitStrategyNames";
+import DebteePicker from "./DebteePicker";
+import styles from "./AddBillForm.scss";
+import { ShareList, EqualShareListItem, CustomShareListItem, PercentalShareListItem } from "./ShareList";
 
 export const AddBillForm = React.createClass({
 
@@ -28,8 +22,28 @@ export const AddBillForm = React.createClass({
       debtee: "?",
       description: "",
       amount: null,
-      splitStrategy: SplitStrategyNames.EQUAL,
-      splitStrategySelectorOverlayVisibility: Visibility.HIDDEN
+      splitStrategy: SplitStrategyNames.PERCENTAGE,
+      splitStrategySelectorOverlayVisibility: Visibility.HIDDEN,
+      shares: [
+        {
+          name: "Thomas",
+          amount: 30,
+          value: 10
+        },
+        {
+          name: "Philipp",
+          amount: 30,
+          value: 20
+        },
+        {
+          name: "Georg",
+          amount: null,
+          value: 0
+        }
+      ],
+      onShareValueUpdated: (name, value) => {
+        console.log(`Updating value of ${name} to ${value}.`);
+      }
     }
   },
 
@@ -116,7 +130,7 @@ export const AddBillForm = React.createClass({
                 <h4>&nbsp;Who's in?</h4>
               </div>
             }
-            right={<IconButton icon="settings" neutral={false} onClick={this.openSplitStrategySelectorOverlay}/>}
+            right={<IconButton icon="settings" neutral={false} onClick={this.openSplitStrategySelectorOverlay} />}
           />
 
           <Overlay visibility={this.state.splitStrategySelectorOverlayVisibility} onClickOutside={this.closeSplitStrategySelectorOverlay}>
@@ -125,25 +139,39 @@ export const AddBillForm = React.createClass({
               right={<CloseButton onClick={this.closeSplitStrategySelectorOverlay} />}
             />
             <List selectable ripple>
-              <ListItem key="EQUAL" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.EQUAL)} caption="equal shares"
+              <ListItem key="EQUAL" onClick={() => this.handleSplitStrategyChanged(SplitStrategyNames.EQUAL)} caption="equal shares"
                         leftIcon="view_module" />
-              <ListItem key="UNEQUAL" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.UNEQUAL)} caption="custom shares"
+              <ListItem key="UNEQUAL" onClick={() => this.handleSplitStrategyChanged(SplitStrategyNames.UNEQUAL)} caption="custom shares"
                         leftIcon="view_quilt" />
-              <ListItem key="PERCENTAGE" onClick={() => this.handleOnSplitStrategySelected(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
+              <ListItem key="PERCENTAGE" onClick={() => this.handleSplitStrategyChanged(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
                         leftIcon="poll" />
             </List>
           </Overlay>
 
           <Card theme={{card: styles.splitPersonListCard}}>
-            <div>
-              <ShareListItem name={"Thomas"} amount={30} control={<Checkbox checked/>}/>
-              <ShareListItem name={"Philipp"} amount={40} control={<Checkbox />}/>
-              <ShareListItem name={"Martin"} amount={20} control={<Checkbox />}/>
-            </div>
+            {this.state.splitStrategy === SplitStrategyNames.EQUAL && (
+              <ShareList shares={this.state.shares} renderShareListItem={(share) => (
+                <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.state.onShareValueUpdated} />
+              )}
+              />
+            )}
+
+            {this.state.splitStrategy === SplitStrategyNames.UNEQUAL && (
+              <ShareList shares={this.state.shares} renderShareListItem={(share) => (
+                <CustomShareListItem key={share.name} share={share} onAmountChange={this.state.onShareValueUpdated} />
+              )}
+              />
+            )}
+
+            {this.state.splitStrategy === SplitStrategyNames.PERCENTAGE && (
+              <ShareList shares={this.state.shares} renderShareListItem={(share) => (
+                <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.state.onShareValueUpdated} />
+              )}
+              />
+            )}
           </Card>
 
         </div>
-
       </div>
     )
   }
