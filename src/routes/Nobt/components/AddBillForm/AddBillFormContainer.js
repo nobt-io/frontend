@@ -1,5 +1,4 @@
 import React from "react";
-import _debug from "debug";
 import AddBillForm from "./AddBillForm";
 import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares } from "./selectors";
 import SplitStrategyNames from "const/SplitStrategyNames";
@@ -17,11 +16,12 @@ export class AddBillFormContainer extends React.Component {
     };
 
     this.handleOnShareValueChanged = this.handleOnShareValueChanged.bind(this);
+    this.handleOnSplitStrategyChanged = this.handleOnSplitStrategyChanged.bind(this);
   }
 
   componentWillReceiveProps(props) {
     this.setState({
-      personValues: AddBillFormContainer.getInitialPersonValues(props.members)
+      personValues: AddBillFormContainer.defaultPersonValuesFor(SplitStrategyNames.EQUAL, props.members)
     })
   }
 
@@ -32,8 +32,15 @@ export class AddBillFormContainer extends React.Component {
     var newEntry = {name, value};
 
     this.setState({
-      personValues: [...others, newEntry]
+      personValues: [ ...others, newEntry ]
     })
+  }
+
+  handleOnSplitStrategyChanged(splitStrategy) {
+    this.setState({
+      personValues: AddBillFormContainer.defaultPersonValuesFor(splitStrategy, this.props.members),
+      splitStrategy: splitStrategy
+    });
   }
 
   render() {
@@ -50,22 +57,21 @@ export class AddBillFormContainer extends React.Component {
         onAmountChange={ (amount) => { this.setState({amount: amount}) } }
         onDebteeChange={ (debtee) => { this.setState({debtee: debtee}) } }
         onShareValueChange={ this.handleOnShareValueChanged }
-        onSplitStrategyChange={ (splitStrategy) => { this.setState({splitStrategy: splitStrategy}) } }
+        onSplitStrategyChange={ this.handleOnSplitStrategyChanged }
         onDescriptionChange={ (description) => { this.setState({description: description}) } }
       />
     );
   }
 
-  static getInitialPersonValues(members) {
+  static defaultPersonValuesFor(splitStrategy, members) {
+    switch (splitStrategy) {
+      case SplitStrategyNames.EQUAL:
+        return members.map(name => { return {name: name, value: true} });
 
-    _debug("getInitialPersonValues")(members);
-
-    return members.map(name => {
-      return {
-        name: name,
-        value: true
-      }
-    });
+      case SplitStrategyNames.PERCENTAGE:
+      case SplitStrategyNames.UNEQUAL:
+        return members.map(name => { return {name: name, value: 0} });
+    }
   }
 
   static propTypes = {

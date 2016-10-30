@@ -18,8 +18,6 @@ import { ShareList, EqualShareListItem, CustomShareListItem, PercentalShareListI
 export const AddBillForm = React.createClass({
 
   /* TODO:
-   * - Implement state in a wrapper component similar to NobtContainer.
-   * - Use selectors to compose needed functionality and create needed data-structure.
    * - Re-implement "error"-message as soon as the user fails to split the bill properly.
    */
   getInitialState() { return {splitStrategySelectorOverlayVisibility: Visibility.HIDDEN} },
@@ -31,6 +29,11 @@ export const AddBillForm = React.createClass({
     var billToAdd = {};
 
     this.props.onSubmit(billToAdd);
+  },
+
+  handleOnSplitStrategyChanged(splitStrategy) {
+    this.props.onSplitStrategyChange(splitStrategy);
+    this.closeSplitStrategySelectorOverlay();
   },
 
   render() {
@@ -98,11 +101,11 @@ export const AddBillForm = React.createClass({
               right={<CloseButton onClick={this.closeSplitStrategySelectorOverlay} />}
             />
             <List selectable ripple>
-              <ListItem key="EQUAL" onClick={() => this.props.onSplitStrategyChange(SplitStrategyNames.EQUAL)} caption="equal shares"
+              <ListItem key="EQUAL" onClick={() => this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL)} caption="equal shares"
                         leftIcon="view_module" />
-              <ListItem key="UNEQUAL" onClick={() => this.props.onSplitStrategyChange(SplitStrategyNames.UNEQUAL)} caption="custom shares"
+              <ListItem key="UNEQUAL" onClick={() => this.handleOnSplitStrategyChanged(SplitStrategyNames.UNEQUAL)} caption="custom shares"
                         leftIcon="view_quilt" />
-              <ListItem key="PERCENTAGE" onClick={() => this.props.onSplitStrategyChange(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
+              <ListItem key="PERCENTAGE" onClick={() => this.handleOnSplitStrategyChanged(SplitStrategyNames.PERCENTAGE)} caption="percental shares"
                         leftIcon="poll" />
             </List>
           </Overlay>
@@ -137,7 +140,6 @@ export const AddBillForm = React.createClass({
 });
 
 export default AddBillForm;
-
 
 AddBillForm.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
