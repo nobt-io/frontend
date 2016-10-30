@@ -11,9 +11,9 @@ import DebtSummaryList from "components/DebtSummaryList";
 import NobtSummaryHeader from "components/NobtSummaryHeader";
 import BillList from "components/BillList";
 import BillFilter from "components/BillFilter";
-import AddBillForm from "./AddBillForm"
 
 import Visibility from "const/Visibility"
+import AddBillFormContainer from "./AddBillForm";
 
 export const Nobt = React.createClass({
 
@@ -68,9 +68,13 @@ export const Nobt = React.createClass({
   render: function () {
     return (
       <div className={styles.nobt}>
-        {this.state.addBillFormVisibility === Visibility.VISIBLE &&
-          <AddBillForm onCancel={ () => {} } onSubmit={ () => {} } members={this.props.members}/>
-        }
+        {this.state.addBillFormVisibility === Visibility.VISIBLE && (
+          <AddBillFormContainer
+            onCancel={ this.handleOnAddBillCanceled }
+            onSubmit={this.handleOnBillSubmit}
+            members={this.props.members}
+          />
+        )}
 
         {this.state.addBillFormVisibility === Visibility.HIDDEN && (
           <div>

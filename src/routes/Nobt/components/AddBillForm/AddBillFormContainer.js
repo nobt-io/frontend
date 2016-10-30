@@ -3,7 +3,7 @@ import AddBillForm from "./AddBillForm";
 import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares } from "./selectors";
 import SplitStrategyNames from "const/SplitStrategyNames";
 
-export class AddBillFormContainer extends React.Component {
+export default class AddBillFormContainer extends React.Component {
 
   constructor(props) {
     super(props);

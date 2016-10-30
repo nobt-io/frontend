@@ -1,3 +1,3 @@
-import { AddBillFormContainer as AddBillForm } from './AddBillFormContainer'
+import AddBillFormContainer  from './AddBillFormContainer'
 
-export default AddBillForm
+export default AddBillFormContainer
