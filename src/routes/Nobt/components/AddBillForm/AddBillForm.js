@@ -52,7 +52,7 @@ export const AddBillForm = React.createClass({
             <div className={styles.row}>
               <div className={`${styles.formElement} ${styles.descriptionInputContainer}`}>
                 <FontIcon className={styles.icon} value="description" />
-                <Input placeholder="What was bought?" value={this.props.description} onChange={this.handleOnDescriptionChanged} />
+                <Input placeholder="What was bought?" value={this.props.description} onChange={this.props.onDescriptionChange} />
               </div>
             </div>
 
