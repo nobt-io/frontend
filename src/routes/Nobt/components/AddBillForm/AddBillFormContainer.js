@@ -10,8 +10,8 @@ export default class AddBillFormContainer extends React.Component {
     this.state = {
       debtee: "?",
       description: "",
-      amount: 30,
-      splitStrategy: SplitStrategyNames.EQUAL,
+      amount: 0,
+      splitStrategy: null,
       personValues: []
     };
 
@@ -19,10 +19,8 @@ export default class AddBillFormContainer extends React.Component {
     this.handleOnSplitStrategyChanged = this.handleOnSplitStrategyChanged.bind(this);
   }
 
-  componentWillReceiveProps(props) {
-    this.setState({
-      personValues: AddBillFormContainer.defaultPersonValuesFor(SplitStrategyNames.EQUAL, props.members)
-    })
+  componentWillMount() {
+    this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL);
   }
 
   handleOnShareValueChanged(name, value) {
