@@ -27,6 +27,7 @@ export const CurrencyInput = React.createClass({
 
   render: function () {
 
+    // TODO: Duplicating information from props in state is an anti-pattern in react.
     var displayValue =
       (this.state.value !== this.props.value) //if state does not hold current value, update it
         ? this.props.value : this.state.inputValue;
