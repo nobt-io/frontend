@@ -14,11 +14,9 @@ import Visibility from "const/Visibility";
 
 export const Nobt = React.createClass({
 
-  componentWillMount(){
-    var nobtId = this.props.params.id;
+  componentWillMount() {
+    this.fetchCurrentNobt();
     var tabIdentifier = this.props.location.hash.substring(1);
-    this.props.fetchNobt(nobtId);
-
     this.props.changeTab(tabIdentifier);
   },
 
@@ -32,9 +30,14 @@ export const Nobt = React.createClass({
     }
 
     if (nextProps.addBillSuccessful) {
+      this.fetchCurrentNobt();
       this.setAddBillFormVisibility(Visibility.HIDDEN);
       this.props.acknowledgeAddBillStatus();
     }
+  },
+
+  fetchCurrentNobt() {
+    this.props.fetchNobt(this.props.params.id);
   },
 
   getInitialState() {
