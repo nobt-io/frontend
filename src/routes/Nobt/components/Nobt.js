@@ -30,6 +30,11 @@ export const Nobt = React.createClass({
     if (currentTabIdentifier !== nextTabIdentifier) {
       this.props.changeTab(nextTabIdentifier);
     }
+
+    if (nextProps.addBillSuccessful) {
+      this.setAddBillFormVisibility(Visibility.HIDDEN);
+      this.props.acknowledgeAddBillStatus();
+    }
   },
 
   getInitialState() {
@@ -40,7 +45,10 @@ export const Nobt = React.createClass({
 
   getChildContext() {
     return {
-      currency: this.props.currency
+      currency: this.props.currency,
+
+      // TODO use this context in AddBillForm to disable the screen and show a loading indicator
+      addBillInProgress: this.props.addBillInProgress,
     };
   },
 
@@ -64,6 +72,9 @@ export const Nobt = React.createClass({
 
   handleOnBillSubmit(bill) {
 
+    var nobtId = this.props.params.id;
+
+    this.props.addBill(nobtId, bill);
   },
 
   handleOnAddBillCanceled() {
@@ -137,11 +148,17 @@ Nobt.propTypes = {
   billSortProperty: React.PropTypes.string.isRequired,
   debtSummaries: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // TODO instanceOf(DebtSummaryViewModel)
   activeTabIndex: React.PropTypes.number.isRequired,
-  isNobtEmpty: React.PropTypes.bool.isRequired
+  isNobtEmpty: React.PropTypes.bool.isRequired,
+
+  addBillSuccessful: React.PropTypes.bool.isRequired,
+  addBillInProgress: React.PropTypes.bool.isRequired,
+
+  addBill: React.PropTypes.func.isRequired
 };
 
 Nobt.childContextTypes = {
-  currency: React.PropTypes.string
+  currency: React.PropTypes.string,
+  addBillInProgress: React.PropTypes.bool.isRequired,
 };
 
 export default Nobt;

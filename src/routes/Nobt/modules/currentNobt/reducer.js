@@ -1,6 +1,5 @@
-import { UPDATE_FETCH_NOBT_STATUS, ADD_MEMBER } from "./actions";
+import { UPDATE_FETCH_NOBT_STATUS, UPDATE_ADD_BILL_STATUS, ADD_MEMBER } from "./actions";
 import AsyncActionStatus from "const/AsyncActionStatus";
-
 import _debug from "debug";
 
 const updateFetchNobtStatusActionPayloadHandler = {
@@ -16,6 +15,7 @@ const updateFetchNobtStatusActionPayloadHandler = {
     }
   }),
   [AsyncActionStatus.FAILED]: () => {},
+  [null]: () => {}
 };
 
 const handlers = {
@@ -26,6 +26,12 @@ const handlers = {
       ...state,
       ...newState,
       fetchNobtStatus: action.payload.status
+    }
+  },
+  [UPDATE_ADD_BILL_STATUS]: (state, action) => {
+    return {
+      ...state,
+      addBillStatus: action.payload.status
     }
   },
 
@@ -50,6 +56,7 @@ const handlers = {
 
 const initialState = {
   fetchNobtStatus: null,
+  addBillStatus: null,
   data: {
     id: "",
     name: "",

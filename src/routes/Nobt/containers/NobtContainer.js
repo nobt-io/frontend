@@ -3,8 +3,10 @@ import Nobt from "../components/Nobt";
 
 import { withRouter } from 'react-router'
 
-import { addMember, fetchNobt, addBill } from "../modules/currentNobt/actions"
-import { getName, getCurrency, getMembers, getBills, getDebtSummaries, getTotal, getFilteredBills } from '../modules/currentNobt/selectors'
+import AsyncActionStatus from "const/AsyncActionStatus"
+
+import { addMember, fetchNobt, addBill, acknowledgeAddBillStatus } from "../modules/currentNobt/actions"
+import { getName, getCurrency, getMembers, getBills, getDebtSummaries, getTotal, getFilteredBills, getAddBillStatus } from '../modules/currentNobt/selectors'
 
 import { changeTab, updateBillFilter, updateBillSortProperty } from "../modules/viewState/actions"
 import { getActiveTabIndex, getBillFilter, getBillSortProperty } from '../modules/viewState/selectors'
@@ -14,6 +16,7 @@ const mapActionCreators = {
   addMember,
   changeTab,
   addBill,
+  acknowledgeAddBillStatus,
   updateBillFilter,
   updateBillSortProperty,
 };
@@ -30,7 +33,10 @@ const mapStateToProps = (state) => {
     billSortProperty: getBillSortProperty(state),
 
     activeTabIndex: getActiveTabIndex(state),
-    isNobtEmpty: getBills(state).length === 0
+    isNobtEmpty: getBills(state).length === 0,
+
+    addBillSuccessful: getAddBillStatus(state) === AsyncActionStatus.SUCCESSFUL,
+    addBillInProgress: getAddBillStatus(state) === AsyncActionStatus.IN_PROGRESS,
   };
 };
 

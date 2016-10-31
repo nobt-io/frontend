@@ -26,7 +26,18 @@ export const AddBillForm = React.createClass({
   openSplitStrategySelectorOverlay() { this.setState({splitStrategySelectorOverlayVisibility: Visibility.VISIBLE}) },
 
   handleOnSubmit() {
-    var billToAdd = {};
+    var billToAdd = {
+      name: this.props.description,
+      debtee: this.props.debtee,
+      splitStrategy: this.props.splitStrategy,
+      date: new Date(),
+      shares: this.props.shares.map(share => {
+        return {
+          debtor: share.name,
+          amount: share.amount
+        }
+      })
+    };
 
     this.props.onSubmit(billToAdd);
   },
@@ -47,7 +58,7 @@ export const AddBillForm = React.createClass({
         <AppBar>
           <Header
             left={<IconButton icon="close" onClick={this.props.onCancel} theme={{icon: styles.cancelButton}} />}
-            right={<Button icon="done" onClick={this.props.onSubmit} theme={{button: styles.addBillButton}}>Save</Button>}
+            right={<Button icon="done" onClick={this.handleOnSubmit} theme={{button: styles.addBillButton}}>Save</Button>}
           />
         </AppBar>
 

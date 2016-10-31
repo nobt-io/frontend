@@ -46,8 +46,6 @@ export function fetchNobt(id) {
   }
 }
 
-
-
 function addBillStarted() {
   return {
     type: UPDATE_ADD_BILL_STATUS,
@@ -86,6 +84,15 @@ export function addBill(nobtId, bill) {
       response => dispatch(addBillSucceeded(response)),
       error => dispatch(addBillFailed(error))
     )
+  }
+}
+
+export function acknowledgeAddBillStatus() {
+  return {
+    type: UPDATE_ADD_BILL_STATUS,
+    payload: {
+      status: null
+    }
   }
 }
 
