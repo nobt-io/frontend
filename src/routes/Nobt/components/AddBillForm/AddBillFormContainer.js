@@ -2,28 +2,34 @@ import React from "react";
 import AddBillForm from "./AddBillForm";
 import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares } from "./selectors";
 import SplitStrategyNames from "const/SplitStrategyNames";
+import _debug from "debug";
+
+const log = _debug("AddBillFormContainer");
 
 export default class AddBillFormContainer extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      debtee: null,
-      description: "",
-      amount: 0,
-      splitStrategy: SplitStrategyNames.EQUAL,
-      personValues: []
-    };
-
-    this.handleOnShareValueChanged = this.handleOnShareValueChanged.bind(this);
-    this.handleOnSplitStrategyChanged = this.handleOnSplitStrategyChanged.bind(this);
   }
 
-  componentDidMount() {
-    this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL);
+  componentWillReceiveProps(nextProps) {
+    // We must listen for this callback as the nobt is fetched asynchronously and therefore the props will be updated after the screen is initially rendered.
+    // This is usually not an issue, as this screen can at the moment only be opened from the overview screen, which should already hold the current nobt.
+    // But if we later plan on deep-link here, we must account for this.
+    this.setState({
+      personValues: AddBillFormContainer.defaultPersonValuesFor(this.state.splitStrategy, nextProps.members)
+    });
   }
 
-  handleOnShareValueChanged(name, value) {
+  state = {
+    debtee: null,
+    description: "",
+    amount: 0,
+    splitStrategy: SplitStrategyNames.EQUAL,
+    personValues: [],
+  };
+
+  handleOnShareValueChanged = (name, value) => {
     var personValues = this.state.personValues;
 
     var others = personValues.filter(pv => pv.name !== name);
@@ -32,36 +38,37 @@ export default class AddBillFormContainer extends React.Component {
     this.setState({
       personValues: [ ...others, newEntry ]
     })
-  }
+  };
 
-  handleOnSplitStrategyChanged(splitStrategy) {
+  handleOnSplitStrategyChanged = (splitStrategy) => {
     this.setState({
       personValues: AddBillFormContainer.defaultPersonValuesFor(splitStrategy, this.props.members),
       splitStrategy: splitStrategy
     });
-  }
+  };
 
-  render() {
-    return (
-      <AddBillForm
-        onCancel={this.props.onCancel}
-        onSubmit={this.props.onSubmit}
-        members={this.props.members}
-        amount={getAmount(this.state)}
-        description={getDescription(this.state)}
-        debtee={getDebtee(this.state)}
-        splitStrategy={getSplitStrategy(this.state)}
-        shares={getShares(this.state)}
-        onAmountChange={ (amount) => { this.setState({amount: amount}) } }
-        onDebteeChange={ (debtee) => { this.setState({debtee: debtee}) } }
-        onShareValueChange={ this.handleOnShareValueChanged }
-        onSplitStrategyChange={ this.handleOnSplitStrategyChanged }
-        onDescriptionChange={ (description) => { this.setState({description: description}) } }
-      />
-    );
-  }
+  render = () => (
+    <AddBillForm
+      onCancel={this.props.onCancel}
+      onSubmit={this.props.onSubmit}
+      members={this.props.members}
+      amount={getAmount(this.state)}
+      description={getDescription(this.state)}
+      debtee={getDebtee(this.state)}
+      splitStrategy={getSplitStrategy(this.state)}
+      shares={getShares(this.state)}
+      onAmountChange={ (amount) => { this.setState({amount: amount}) } }
+      onDebteeChange={ (debtee) => { this.setState({debtee: debtee}) } }
+      onDescriptionChange={ (description) => { this.setState({description: description}) } }
+      onShareValueChange={ this.handleOnShareValueChanged }
+      onSplitStrategyChange={ this.handleOnSplitStrategyChanged }
+    />
+  );
 
   static defaultPersonValuesFor(splitStrategy, members) {
+
+    log("defaultPersonValuesFor", splitStrategy, members);
+
     switch (splitStrategy) {
       case SplitStrategyNames.EQUAL:
         return members.map(name => { return {name: name, value: true} });
