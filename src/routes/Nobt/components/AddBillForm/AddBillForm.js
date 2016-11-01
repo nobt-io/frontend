@@ -31,12 +31,14 @@ export const AddBillForm = React.createClass({
       debtee: this.props.debtee,
       splitStrategy: this.props.splitStrategy,
       date: new Date(),
-      shares: this.props.shares.map(share => {
-        return {
-          debtor: share.name,
-          amount: share.amount
-        }
-      })
+      shares: this.props.shares
+        .filter(share => share.amount !== null)
+        .map(share => {
+          return {
+            debtor: share.name,
+            amount: share.amount
+          }
+        })
     };
 
     this.props.onSubmit(billToAdd);
@@ -162,7 +164,7 @@ AddBillForm.propTypes = {
   onSplitStrategyChange: React.PropTypes.func.isRequired,
   onShareValueChange: React.PropTypes.func.isRequired,
   description: React.PropTypes.string.isRequired,
-  debtee: React.PropTypes.string.isRequired,
+  debtee: React.PropTypes.string,
   splitStrategy: React.PropTypes.string.isRequired,
   amount: React.PropTypes.number.isRequired,
   members: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
