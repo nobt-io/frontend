@@ -8,10 +8,10 @@ export default class AddBillFormContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      debtee: "?",
+      debtee: null,
       description: "",
       amount: 0,
-      splitStrategy: null,
+      splitStrategy: SplitStrategyNames.EQUAL,
       personValues: []
     };
 
@@ -19,7 +19,7 @@ export default class AddBillFormContainer extends React.Component {
     this.handleOnSplitStrategyChanged = this.handleOnSplitStrategyChanged.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL);
   }
 
