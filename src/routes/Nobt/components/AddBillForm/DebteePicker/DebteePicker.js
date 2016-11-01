@@ -45,7 +45,12 @@ const DebteePicker = React.createClass({
 
   renderEmptyContainer() {
     return (
-      <Button raised onClick={this.openOverlay}>Who paid?</Button>
+      <Button
+        raised
+        onClick={this.openOverlay}
+        ripple={false} /* To be consistent, we remove the ripple effect from the button because the other component also does not have one. */>
+        Who paid?
+      </Button>
     )
   },
 
