@@ -1,6 +1,6 @@
 import React from "react";
 import AddBillForm from "./AddBillForm";
-import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares } from "./selectors";
+import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares, isValidBill } from "./selectors";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import _debug from "debug";
 
@@ -51,6 +51,7 @@ export default class AddBillFormContainer extends React.Component {
     <AddBillForm
       onCancel={this.props.onCancel}
       onSubmit={this.props.onSubmit}
+      canSubmit={isValidBill(this.state)}
       members={this.props.members}
       amount={getAmount(this.state)}
       description={getDescription(this.state)}

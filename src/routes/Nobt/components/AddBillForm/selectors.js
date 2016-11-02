@@ -105,6 +105,16 @@ export const getShares = createSelector([ getShareSelector, getState ], (shareSe
   return shares.sort(byName);
 });
 
+export const isValidBill = createSelector([ getShares, getAmount, getDescription, getDebtee ], (shares, amount, description, debtee) => {
+
+  var isAmountGreaterThanZero = amount > 0;
+  var isDescriptionNotEmpty = description.length > 0;
+  var isDebteeSelected = debtee !== null;
+  var hasAtLeastOneShareWithAmount = shares.filter(s => s.amount > 0).length;
+
+  return isAmountGreaterThanZero && isDescriptionNotEmpty && isDebteeSelected && hasAtLeastOneShareWithAmount;
+});
+
 
 const byName = (first, second) => {
   return first.name > second.name

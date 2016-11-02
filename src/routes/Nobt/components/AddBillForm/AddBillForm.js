@@ -13,6 +13,7 @@ import Visibility from "const/Visibility";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import DebteePicker from "./DebteePicker";
 import styles from "./AddBillForm.scss";
+import headerButtonTheme from "./HeaderButtonTheme.scss";
 import { ShareList, EqualShareListItem, CustomShareListItem, PercentalShareListItem } from "./ShareList";
 
 export const AddBillForm = React.createClass({
@@ -59,8 +60,8 @@ export const AddBillForm = React.createClass({
       <div className={styles.form}>
         <AppBar>
           <Header
-            left={<IconButton icon="close" onClick={this.props.onCancel} theme={{icon: styles.cancelButton}} />}
-            right={<Button icon="done" onClick={this.handleOnSubmit} theme={{button: styles.addBillButton}}>Save</Button>}
+            left={<IconButton icon="close" onClick={this.props.onCancel} theme={headerButtonTheme} />}
+            right={<Button icon="done" onClick={this.handleOnSubmit} theme={headerButtonTheme} disabled={!this.props.canSubmit}>Save</Button>}
           />
         </AppBar>
 
@@ -158,6 +159,7 @@ export default AddBillForm;
 AddBillForm.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
   onSubmit: React.PropTypes.func.isRequired,
+  canSubmit: React.PropTypes.bool.isRequired,
   onDescriptionChange: React.PropTypes.func.isRequired,
   onAmountChange: React.PropTypes.func.isRequired,
   onDebteeChange: React.PropTypes.func.isRequired,

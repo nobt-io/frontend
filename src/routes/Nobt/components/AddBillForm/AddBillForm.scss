@@ -2,10 +2,6 @@
   background-color: $color-button-grey;
 }
 
-.cancelButton, .addBillButton {
-  color: white !important;
-}
-
 .billMetaInfoInputContainer {
   background-color: white;
   padding: 1rem;
@@ -24,11 +20,13 @@
   justify-content: space-between;
 }
 
+
 // disable padding of all input boxes
 [data-react-toolbox="input"] {
   padding: 0;
   width: 100%;
 }
+
 
 .row {
 
