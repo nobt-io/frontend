@@ -26,7 +26,7 @@ export default class AddBillFormContainer extends React.Component {
     description: "",
     amount: 0,
     splitStrategy: SplitStrategyNames.EQUAL,
-    personValues: [],
+    personValues: AddBillFormContainer.defaultPersonValuesFor(SplitStrategyNames.EQUAL, this.props.members),
   };
 
   handleOnShareValueChanged = (name, value) => {
