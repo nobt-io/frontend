@@ -9,7 +9,7 @@ export const ShareListItem = (props) => (
     <div className={styles.personContainer}>
       <Person name={props.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM} />
     </div>
-    {props.amount != null && <Amount spanClass={styles.amount} value={props.amount} />}
+    {props.amount !== null && props.amount !== 0 && <Amount spanClass={styles.amount} value={props.amount} />}
     <div className={`${styles.controlContainer} ${props.controlClass}`}>
       {props.control}
     </div>
