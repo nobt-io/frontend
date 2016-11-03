@@ -1,89 +1,48 @@
-.billMetaInfoContainer {
-  background-color: $color-button-grey;
+.form {
+  background-color: $color-primary;
+  height: 100vh;
 }
 
-.billMetaInfoInputContainer {
+.header {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 1rem 2rem;
+
+  font-size: larger;
+}
+
+.container {
+  margin: 0.5rem  2.5rem;
+  padding: 0;
   background-color: white;
-  padding: 1rem;
+  border-radius: .5rem;
+
+  .row{
+    padding-right: 1rem;
+  }
+
+  .row.borderd{
+    border-bottom: 1px solid $color-button-grey;
+  }
 }
 
-.heading {
-  text-align: center;
-  font-variant: small-caps;
-  margin: 1.5rem 0;
+.container.shareListContainer{
+  padding: .5rem;
 }
 
-.row {
+.shareListHeader{
   display: flex;
   flex-direction: row;
-  align-items: center;
+  color: white;
+  margin: 1.5rem  2.5rem;
   justify-content: space-between;
-}
+  align-items: center;
 
-
-// disable padding of all input boxes
-[data-react-toolbox="input"] {
-  padding: 0;
-  width: 100%;
-}
-
-
-.row {
-
-  .formElement {
-
-    padding: .5rem 0;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    .icon {
-      margin-right: 1rem;
-      text-align: center;
-    }
-  }
-
-  .descriptionInputContainer {
-    width: 100%;
-  }
-
-  .amountInputContainer {
-
-    .currencySymbol {
-      width: 24px;
-      font-family: inherit;
-    }
-
-    margin-right: 2%;
-
-    flex: 1 1 auto;
-  }
-
-  .debteePicker {
-    margin-left: 2%;
-    max-width: 60%;
-  }
-}
-
-.billSplitInfoContainer {
-
-  padding: 2rem;
-  background-color: $color-primary;
-
-  .billSplitHeader {
-    color: white !important;
-    margin-bottom: 1rem;
-  }
-
-  .whoIsInContainer {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    // somehow we cant select via .material-icons ...
-    > [data-react-toolbox="font-icon"] {
-      padding: 1px 6px;
-    }
+  .title{
+    text-transform: uppercase;
+    font-size: 1.5rem;
   }
 }
