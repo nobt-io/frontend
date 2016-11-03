@@ -40,7 +40,7 @@ export const CurrencyInput = React.createClass({
 
 CurrencyInput.propTypes = {
   onChange: React.PropTypes.func.isRequired,
-  value: React.PropTypes.number.isRequired
+  value: React.PropTypes.number
 };
 
 export default CurrencyInput;
