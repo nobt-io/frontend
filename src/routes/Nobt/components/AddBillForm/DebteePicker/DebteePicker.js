@@ -10,57 +10,50 @@ import styles from "./DebteePicker.scss";
 import listItemTheme from "./ListItemTheme.scss";
 import inputTheme from "../InputTheme.scss";
 
-const DebteePicker = React.createClass({
+export default class DebteePicker extends React.Component {
 
-  getInitialState() {
-    return {
-      overlayVisibility: Visibility.HIDDEN,
-    }
-  },
+  state = {
+    overlayVisibility: Visibility.HIDDEN,
+  };
 
-  handleOnPersonPicked(person) {
+  handleOnPersonPicked = (person) => {
     this.props.onDebteePicked(person);
     this.closeOverlay();
-  },
+  };
 
-  closeOverlay() {
+  closeOverlay = () => {
     this.setState({overlayVisibility: Visibility.HIDDEN})
-  },
+  };
 
-  openOverlay() {
+  openOverlay = () => {
     this.setState({overlayVisibility: Visibility.VISIBLE})
-  },
+  };
 
-  render() {
-    return (
+  render = () => (
+    <div className={this.props.className}>
 
-      <div className={this.props.className}>
+      <Input theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.value} onFocus={this.openOverlay} />
 
-        <Input theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.value} onFocus={this.openOverlay} />
+      <Overlay visibility={this.state.overlayVisibility} onClickOutside={this.closeOverlay}>
+        <div className={styles.container}>
+          <h3>Who paid?</h3>
+          <HOList
+            selectable
+            items={this.props.names}
+            renderItem={ (name) => (
+              <ListItem rightIcon={ name === this.props.value ? "done" : "" } theme={listItemTheme} key={name} onClick={ () => this.handleOnPersonPicked(name) }>
+                <Person avatarSize={AvatarSize.BIG} avatarPosition={AvatarPosition.LEFT} name={name} />
+              </ListItem>
+            ) }
+          />
+        </div>
+      </Overlay>
+    </div>
+  )
 
-        <Overlay visibility={this.state.overlayVisibility} onClickOutside={this.closeOverlay}>
-          <div className={styles.container}>
-            <h3>Who paid?</h3>
-            <HOList
-              selectable
-              items={this.props.names}
-              renderItem={ (name) => (
-                <ListItem rightIcon={ name === this.props.value ? "done" : "" } theme={listItemTheme} key={name} onClick={ () => this.handleOnPersonPicked(name) }>
-                  <Person avatarSize={AvatarSize.BIG} avatarPosition={AvatarPosition.LEFT} name={name} />
-                </ListItem>
-              ) }
-            />
-          </div>
-        </Overlay>
-      </div>
-    );
+  static propTypes = {
+    value: React.PropTypes.string,
+    names: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+    onDebteePicked: React.PropTypes.func.isRequired
   }
-});
-
-export default DebteePicker;
-
-DebteePicker.propTypes = {
-  value: React.PropTypes.string,
-  names: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-  onDebteePicked: React.PropTypes.func.isRequired
-};
+}
