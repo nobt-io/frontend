@@ -1,0 +1,9 @@
+$border: 1px dashed black;
+
+.listItem {
+  border-bottom: $border;
+}
+
+.listItem:last-child {
+  border-bottom: none;
+}

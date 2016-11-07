@@ -1,13 +1,7 @@
 import React from "react";
 import Input from "react-toolbox/lib/input";
-import { Card } from "react-toolbox/lib/card";
-import AppBar from "react-toolbox/lib/app_bar";
-import FontIcon from "react-toolbox/lib/font_icon";
-import { List, ListItem } from "react-toolbox/lib/list";
-import { Button, IconButton } from "react-toolbox/lib/button";
-import Header from "components/Header";
-import CurrencyInput from "components/CurrencyInput";
-import Overlay from "components/Overlay";
+import { IconButton } from "react-toolbox/lib/button";
+import DebteePicker from "./DebteePicker";
 import Visibility from "const/Visibility";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import AmountInput from "./AmountInput";
@@ -69,7 +63,7 @@ export const AddBillForm = React.createClass({
             <Input theme={inputTheme} icon="description" placeholder="Description" value={this.props.description} onChange={this.props.onDescriptionChange} />
           </div>
           <div className={`${styles.row} ${styles.borderd}`}>
-            <Input theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.description} onChange={this.props.onDescriptionChange} />
+            <DebteePicker value={this.props.debtee} names={this.props.members} onDebteePicked={this.props.onDebteeChange}/>
           </div>
           <div className={styles.row }>
             <AmountInput value={this.props.amount} onChange={this.props.onAmountChange}/>
