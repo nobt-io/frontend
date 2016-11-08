@@ -1,6 +1,6 @@
 import React from "react";
 import Input from "react-toolbox/lib/input";
-import { IconButton } from "react-toolbox/lib/button";
+import { Button, IconButton } from "react-toolbox/lib/button";
 import DebteePicker from "./DebteePicker";
 import Visibility from "const/Visibility";
 import SplitStrategyNames from "const/SplitStrategyNames";
