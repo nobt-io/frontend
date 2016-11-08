@@ -29,20 +29,36 @@
   }
 }
 
-.container.shareListContainer{
-  padding: .5rem;
-}
-
-.shareListHeader{
+.shareListHeader {
   display: flex;
   flex-direction: row;
-  color: white;
-  margin: 1.5rem  2.5rem;
   justify-content: space-between;
   align-items: center;
 
-  .title{
-    text-transform: uppercase;
-    font-size: 1.5rem;
+  color: white;
+  margin: 1.5rem 2.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+
+  button {
+    color: white !important;
+    font-size: small !important;
   }
 }
+
+.container.shareListContainer{
+  padding: .5rem;
+
+  .addPerson{
+    border-top: 1px solid $color-button-grey;
+    text-align: center;
+    padding-top: .5rem;
+
+    button {
+      width: 100%;
+      font-size: small !important;
+    }
+  }
+}
+
+

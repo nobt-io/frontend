@@ -5,6 +5,7 @@ import DebteePicker from "./DebteePicker";
 import Visibility from "const/Visibility";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import AmountInput from "./AmountInput";
+import ChangeModeButton from "./ChangeModeButton";
 import styles from "./AddBillForm.scss";
 import inputTheme from "./InputTheme.scss";
 import headerButtonTheme from "./HeaderButtonTheme.scss";
@@ -77,6 +78,7 @@ export const AddBillForm = React.createClass({
 
         <div className={styles.shareListHeader}>
           <div className={styles.title}>who's in?</div>
+          <ChangeModeButton/>
         </div>
 
         <div className={`${styles.container} ${styles.shareListContainer}`}>
@@ -98,7 +100,11 @@ export const AddBillForm = React.createClass({
             )}
             />
           )}
+          <div className={styles.addPerson}>
+            <Button icon='person_add' label='someone else' flat/>
+          </div>
         </div>
+
       </div>
     )
   }
