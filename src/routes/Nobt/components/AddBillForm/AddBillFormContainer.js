@@ -6,6 +6,17 @@ import _debug from "debug";
 
 const log = _debug("AddBillFormContainer");
 
+const splitStrategyDefaultValueFactory = (strategy) => {
+  switch (strategy) {
+    case SplitStrategyNames.EQUAL:
+      return true;
+
+    case SplitStrategyNames.PERCENTAGE:
+    case SplitStrategyNames.UNEQUAL:
+      return 0;
+  }
+};
+
 export default class AddBillFormContainer extends React.Component {
 
   constructor(props) {
@@ -17,6 +28,7 @@ export default class AddBillFormContainer extends React.Component {
     // This is usually not an issue, as this screen can at the moment only be opened from the overview screen, which should already hold the current nobt.
     // But if we later plan on deep-link here, we must account for this.
     this.setState({
+      members: nextProps.members,
       personValues: AddBillFormContainer.defaultPersonValuesFor(this.state.splitStrategy, nextProps.members)
     });
   }
@@ -26,6 +38,7 @@ export default class AddBillFormContainer extends React.Component {
     description: "",
     amount: 0,
     splitStrategy: SplitStrategyNames.EQUAL,
+    members: this.props.members,
     personValues: AddBillFormContainer.defaultPersonValuesFor(SplitStrategyNames.EQUAL, this.props.members),
   };
 
@@ -42,8 +55,15 @@ export default class AddBillFormContainer extends React.Component {
 
   handleOnSplitStrategyChanged = (splitStrategy) => {
     this.setState({
-      personValues: AddBillFormContainer.defaultPersonValuesFor(splitStrategy, this.props.members),
+      personValues: AddBillFormContainer.defaultPersonValuesFor(splitStrategy, this.state.members),
       splitStrategy: splitStrategy
+    });
+  };
+
+  handleOnNewMember = (member) => {
+    this.setState({
+      members: [ ...this.state.members, member ],
+      personValues: [ ...this.state.personValues, {name: member, value: splitStrategyDefaultValueFactory(this.state.splitStrategy)} ]
     });
   };
 
@@ -52,15 +72,16 @@ export default class AddBillFormContainer extends React.Component {
       onCancel={this.props.onCancel}
       onSubmit={this.props.onSubmit}
       canSubmit={isValidBill(this.state)}
-      members={this.props.members}
+      members={this.state.members}
       amount={getAmount(this.state)}
       description={getDescription(this.state)}
       debtee={getDebtee(this.state)}
       splitStrategy={getSplitStrategy(this.state)}
       shares={getShares(this.state)}
-      onAmountChange={ (amount) => { this.setState({amount: amount}) } }
-      onDebteeChange={ (debtee) => { this.setState({debtee: debtee}) } }
-      onDescriptionChange={ (description) => { this.setState({description: description}) } }
+      onAmountChange={ amount => this.setState({amount: amount}) }
+      onDebteeChange={ debtee => this.setState({debtee: debtee})}
+      onNewMember={this.handleOnNewMember }
+      onDescriptionChange={ description => this.setState({description: description}) }
       onShareValueChange={ this.handleOnShareValueChanged }
       onSplitStrategyChange={ this.handleOnSplitStrategyChanged }
     />
@@ -70,14 +91,7 @@ export default class AddBillFormContainer extends React.Component {
 
     log("defaultPersonValuesFor", splitStrategy, members);
 
-    switch (splitStrategy) {
-      case SplitStrategyNames.EQUAL:
-        return members.map(name => { return {name: name, value: true} });
-
-      case SplitStrategyNames.PERCENTAGE:
-      case SplitStrategyNames.UNEQUAL:
-        return members.map(name => { return {name: name, value: 0} });
-    }
+    return members.map(name => { return {name: name, value: splitStrategyDefaultValueFactory(splitStrategy)} })
   }
 
   static propTypes = {

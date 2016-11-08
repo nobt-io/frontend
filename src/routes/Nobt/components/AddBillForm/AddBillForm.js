@@ -63,7 +63,12 @@ export const AddBillForm = React.createClass({
             <Input theme={inputTheme} icon="description" placeholder="Description" value={this.props.description} onChange={this.props.onDescriptionChange} />
           </div>
           <div className={`${styles.row} ${styles.borderd}`}>
-            <DebteePicker value={this.props.debtee} names={this.props.members} onDebteePicked={this.props.onDebteeChange}/>
+            <DebteePicker
+              value={this.props.debtee}
+              names={this.props.members}
+              onDebteePicked={this.props.onDebteeChange}
+              onNewMember={this.props.onNewMember}
+            />
           </div>
           <div className={styles.row }>
             <AmountInput value={this.props.amount} onChange={this.props.onAmountChange}/>
@@ -108,6 +113,7 @@ AddBillForm.propTypes = {
   onDescriptionChange: React.PropTypes.func.isRequired,
   onAmountChange: React.PropTypes.func.isRequired,
   onDebteeChange: React.PropTypes.func.isRequired,
+  onNewMember: React.PropTypes.func.isRequired,
   onSplitStrategyChange: React.PropTypes.func.isRequired,
   onShareValueChange: React.PropTypes.func.isRequired,
   description: React.PropTypes.string.isRequired,
