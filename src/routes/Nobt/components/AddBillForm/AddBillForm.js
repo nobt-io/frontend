@@ -10,6 +10,7 @@ import styles from "./AddBillForm.scss";
 import inputTheme from "./InputTheme.scss";
 import headerButtonTheme from "./HeaderButtonTheme.scss";
 import { ShareList, EqualShareListItem, CustomShareListItem, PercentalShareListItem } from "./ShareList";
+import AddMember from "./AddMember";
 
 export const AddBillForm = React.createClass({
 
@@ -100,9 +101,7 @@ export const AddBillForm = React.createClass({
             )}
             />
           )}
-          <div className={styles.addPerson}>
-            <Button icon='person_add' label='someone else' flat/>
-          </div>
+          <AddMember members={this.props.members} onNewMember={this.props.onNewMember}/>
         </div>
 
       </div>

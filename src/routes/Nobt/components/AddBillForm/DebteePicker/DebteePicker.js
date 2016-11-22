@@ -2,7 +2,9 @@ import React from "react";
 import HOList from "containers/HOList";
 import Input from "react-toolbox/lib/input";
 import { ListItem, ListSubHeader, ListDivider } from "react-toolbox/lib/list";
+import {Button} from 'react-toolbox/lib/button';
 import Overlay from "components/Overlay";
+import AddMember from "../AddMember";
 import { Person, AvatarPosition } from "components/Person";
 import { AvatarSize } from "components/Avatar";
 import Visibility from "const/Visibility";
@@ -22,66 +24,42 @@ export default class DebteePicker extends React.Component {
 
   render = () => (
     <div className={this.props.className}>
+      <Input readonly theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.value || ""} onFocus={this.openOverlay}>
+        <div onClick={this.openOverlay} className={styles.overlayToAvoidKeyboardPopingUp}></div>
+      </Input>
 
-      <Input theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.value || ""} onFocus={this.openOverlay} />
-
-      <Overlay visibility={this.state.overlayVisibility} onClickOutside={this.closeOverlay}>
+      <Overlay visibility={this.state.overlayVisibility} onClickOutside={this.closeOverlay} className={styles.overlay}>
         <div className={styles.container}>
           <h3>Who paid?</h3>
-          <Input placeholder="Enter a name" value={this.state.query} onChange={this.handleOnQueryChanged} />
           <HOList
+            className={styles.list}
             selectable
             items={this.props.names}
             renderItem={ (name) => (
-              <ListItem rightIcon={ name === this.props.value ? "done" : "" }
+              <ListItem rightIcon={ name === this.props.value ? "check_circle" : "radio_button_unchecked" }
                         theme={listItemTheme}
                         key={name}
                         onClick={ () => this.handleOnPersonPicked(name) }>
-                <Person avatarSize={AvatarSize.BIG} avatarPosition={AvatarPosition.LEFT} name={name} />
+                <Person avatarSize={AvatarSize.MEDIUM} avatarPosition={AvatarPosition.LEFT} name={name} />
               </ListItem>
-            ) }
-            shouldRenderItem={ this.nameMatchesQuery }>
-            {
-              this.hasQuery() && !this.queryHasPerfectMatch() &&
-              (
-                <span>
-                  <ListSubHeader caption="Add new member" />
-                  <ListItem rightIcon="person_add" theme={listItemTheme} key={this.state.query} onClick={ this.handleOnNewMemberClicked }>
-                    <Person avatarSize={AvatarSize.BIG} avatarPosition={AvatarPosition.LEFT} name={this.state.query} />
-                  </ListItem>
-                </span>
-              )
-            }
+            )}>
           </HOList>
+          <AddMember members={this.props.names} onNewMember={this.handleOnNewMember}/>
         </div>
       </Overlay>
     </div>
   );
 
-  nameMatchesQuery = (name) => {
-    var result = name.indexOf(this.state.query);
-
-    log(`nameMatchesQuery: ${name} => ${result}`);
-
-    return result != -1
+  handleOnNewMember = (person) => {
+    this.props.onNewMember(person);
+    this.props.onDebteePicked(person);
+    this.closeOverlay();
   };
-
-  queryHasPerfectMatch = () => this.props.names.indexOf(this.state.query) != -1;
-  hasQuery = () => this.state.query.length > 0;
 
   handleOnPersonPicked = (person) => {
     this.props.onDebteePicked(person);
     this.closeOverlay();
   };
-
-  handleOnNewMemberClicked = () => {
-    var newMember = this.state.query.trim();
-    this.props.onNewMember(newMember);
-    this.handleOnPersonPicked(newMember);
-  };
-
-  handleOnQueryChanged = (value) => this.setState({query: value});
-
   closeOverlay = () => this.setState({overlayVisibility: Visibility.HIDDEN, query: ""});
   openOverlay = () => this.setState({overlayVisibility: Visibility.VISIBLE});
 

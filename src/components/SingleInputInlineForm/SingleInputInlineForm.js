@@ -61,6 +61,7 @@ export const SingleInputInlineForm = React.createClass({
           maxLength={this.props.inputMaxLength}
           onKeyPress={this.onKeyPress}
           onChange={this.onChange}
+          icon={this.props.inputIcon}
         />
         <IconButton
           theme={buttonTheme}
@@ -91,6 +92,7 @@ SingleInputInlineForm.propTypes = {
   inputTheme: React.PropTypes.object,
   buttonTheme: React.PropTypes.object,
   buttonIcon: React.PropTypes.string,
+  inputIcon: React.PropTypes.string,
   onSubmit: React.PropTypes.func,
   isButtonDisabled: React.PropTypes.func
 };
