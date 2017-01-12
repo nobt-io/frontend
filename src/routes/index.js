@@ -1,21 +1,30 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from "../layouts/CoreLayout/CoreLayout";
+
 import Landing from "./Landing";
-import NewNobtRoute from "./NewNobt";
-import NobtRoute from "./Nobt";
+import { injectReducer } from "../store/reducers";
+
+import Nobt from "./App/routes/Nobt";
+import NewNobt from "./App/routes/NewNobt";
+import reducer from "./App/reducers";
 
 /*  Note: Instead of using JSX, we recommend using react-router
  PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => ({
-  path: '/',
-  component: CoreLayout,
-  indexRoute: Landing,
-  childRoutes: [
-    NewNobtRoute(store),
-    NobtRoute(store)
-  ]
-})
+export const createRoutes = (store) => {
+
+  injectReducer(store, {key: 'App', reducer});
+
+  return {
+    path: '/',
+    component: CoreLayout,
+    indexRoute: Landing,
+    childRoutes: [
+      Nobt,
+      NewNobt
+    ]
+  }
+}
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
