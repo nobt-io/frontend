@@ -17,24 +17,6 @@ export const Nobt = React.createClass({
 
   componentWillMount() {
     this.fetchCurrentNobt();
-    let tabIdentifier = this.props.location.hash.substring(1);
-    this.props.changeTab(tabIdentifier);
-  },
-
-  componentWillReceiveProps(nextProps) {
-/*
-    let currentTabIdentifier = this.props.location.hash.substring(1);
-    let nextTabIdentifier = nextProps.location.hash.substring(1);
-
-    if (currentTabIdentifier !== nextTabIdentifier) {
-      this.props.changeTab(nextTabIdentifier);
-    }
-*/
-    if (nextProps.addBillSuccessful) {
-      this.fetchCurrentNobt();
-      this.setAddBillFormVisibility(Visibility.HIDDEN);
-      this.props.acknowledgeAddBillStatus();
-    }
   },
 
   fetchCurrentNobt() {
@@ -51,18 +33,6 @@ export const Nobt = React.createClass({
     return {
       currency: this.props.currency
     };
-  },
-
-  onTabChange(index) {
-
-    let indexHashMapping = {
-      0: 'transactions',
-      1: 'bills'
-    };
-
-    let hashRoute = indexHashMapping[ index ] || 'transactions';
-
-    this.props.router.replace(`/${this.props.params.id}#${hashRoute}`);
   },
 
   setAddBillFormVisibility(visibility) {
@@ -111,30 +81,20 @@ export const Nobt = React.createClass({
             <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
                                memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
             <div>
-              <Tabs
-                theme={{pointer: styles.pointer, tabs: styles.tabs, tab: styles.tab}}
-                index={this.props.activeTabIndex}
-                onChange={this.onTabChange} fixed>
-                <Tab label="Transactions">
-                  <DebtSummaryList debtSummaries={this.props.debtSummaries} />
-                </Tab>
-                <Tab label="Bills">
-                  <BillFilter
-                    personNames={this.props.members}
-                    onFilterChange={(filter) => this.props.updateBillFilter(filter)}
-                    onSortChange={(sort) => this.props.updateBillSortProperty(sort)}
-                    onReset={() => {
-                      this.props.updateBillFilter("");
-                      this.props.updateBillSortProperty("Date");
-                    }}
-                    currentFilter={this.props.billFilter}
-                    currentSort={this.props.billSortProperty} />
+              <BillFilter
+                personNames={this.props.members}
+                onFilterChange={(filter) => this.props.updateBillFilter(filter)}
+                onSortChange={(sort) => this.props.updateBillSortProperty(sort)}
+                onReset={() => {
+                  this.props.updateBillFilter("");
+                  this.props.updateBillSortProperty("Date");
+                }}
+                currentFilter={this.props.billFilter}
+                currentSort={this.props.billSortProperty} />
 
-                  <HOList items={this.props.bills} renderItem={ (bill) => (
-                    <BillItem key={bill.id} bill={bill} location={this.props.location} />
-                  ) }/>
-                </Tab>
-              </Tabs>
+              <HOList items={this.props.bills} renderItem={ (bill) => (
+                <BillItem key={bill.id} bill={bill} location={this.props.location} />
+              ) }/>
             </div>
           </div>
         )}
