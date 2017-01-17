@@ -7,28 +7,29 @@ import Title from "components/Title";
 import Header from "components/Header";
 import DebtSummaryList from "components/DebtSummaryList";
 import NobtSummaryHeader from "components/NobtSummaryHeader";
-import BillList from "components/BillList";
 import BillFilter from "components/BillFilter";
 import AddBillFormContainer from "./AddBillForm";
 import Visibility from "../../../../../const/Visibility";
+import HOList from "containers/HOList"
+import BillItem from "components/BillItem"
 
 export const Nobt = React.createClass({
 
   componentWillMount() {
     this.fetchCurrentNobt();
-    var tabIdentifier = this.props.location.hash.substring(1);
+    let tabIdentifier = this.props.location.hash.substring(1);
     this.props.changeTab(tabIdentifier);
   },
 
   componentWillReceiveProps(nextProps) {
-
-    var currentTabIdentifier = this.props.location.hash.substring(1);
-    var nextTabIdentifier = nextProps.location.hash.substring(1);
+/*
+    let currentTabIdentifier = this.props.location.hash.substring(1);
+    let nextTabIdentifier = nextProps.location.hash.substring(1);
 
     if (currentTabIdentifier !== nextTabIdentifier) {
       this.props.changeTab(nextTabIdentifier);
     }
-
+*/
     if (nextProps.addBillSuccessful) {
       this.fetchCurrentNobt();
       this.setAddBillFormVisibility(Visibility.HIDDEN);
@@ -48,21 +49,18 @@ export const Nobt = React.createClass({
 
   getChildContext() {
     return {
-      currency: this.props.currency,
-
-      // TODO use this context in AddBillForm to disable the screen and show a loading indicator
-      addBillInProgress: this.props.addBillInProgress,
+      currency: this.props.currency
     };
   },
 
   onTabChange(index) {
 
-    var indexHashMapping = {
+    let indexHashMapping = {
       0: 'transactions',
       1: 'bills'
     };
 
-    var hashRoute = indexHashMapping[ index ] || 'transactions';
+    let hashRoute = indexHashMapping[ index ] || 'transactions';
 
     this.props.router.replace(`/${this.props.params.id}#${hashRoute}`);
   },
@@ -75,7 +73,7 @@ export const Nobt = React.createClass({
 
   handleOnBillSubmit(bill) {
 
-    var nobtId = this.props.params.id;
+    let nobtId = this.props.params.id;
 
     this.props.addBill(nobtId, bill);
   },
@@ -131,7 +129,10 @@ export const Nobt = React.createClass({
                     }}
                     currentFilter={this.props.billFilter}
                     currentSort={this.props.billSortProperty} />
-                  <BillList bills={this.props.bills} />
+
+                  <HOList items={this.props.bills} renderItem={ (bill) => (
+                    <BillItem key={bill.id} bill={bill} location={this.props.location} />
+                  ) }/>
                 </Tab>
               </Tabs>
             </div>
@@ -160,8 +161,7 @@ Nobt.propTypes = {
 };
 
 Nobt.childContextTypes = {
-  currency: React.PropTypes.string,
-  addBillInProgress: React.PropTypes.bool.isRequired,
+  currency: React.PropTypes.string
 };
 
 export default Nobt;

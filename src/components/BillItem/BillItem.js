@@ -1,34 +1,33 @@
 import React from "react";
-import {FormattedDate} from "react-intl";
-import FontIcon from "react-toolbox/lib/font_icon"
-import {ListDivider} from "react-toolbox/lib/list"
-
+import { FormattedDate } from "react-intl";
+import FontIcon from "react-toolbox/lib/font_icon";
+import { ListDivider } from "react-toolbox/lib/list";
 import styles from "./BillItem.scss";
 import Card from "components/Card";
 import { AvatarList, AvatarSize } from "components/Avatar";
-
 import Header from "components/Header";
-import CloseButton from "components/CloseButton"
-
+import CloseButton from "components/CloseButton";
 import Amount from "components/Amount";
-import PersonMoneyList from "components/PersonMoneyList"
-import Overlay from "components/Overlay"
-import { Person, AvatarPosition } from "components/Person"
+import PersonMoneyList from "components/PersonMoneyList";
+import Overlay from "components/Overlay";
+import { Person, AvatarPosition } from "components/Person";
+import OverlayVisibilityTracker from "../Overlay/OverlayVisibilityTracker";
+import { connect } from "react-redux";
+import { push, goBack } from 'react-router-redux'
 
-import Visibility from "const/Visibility"
+class BillItem extends React.Component {
 
-export const BillItem = React.createClass({
+  constructor(props, context) {
+    super(props, context);
+    this._overlay = new OverlayVisibilityTracker(`/${props.bill.id}`, (path) => props.dispatch(push(path)), () => props.dispatch(goBack()));
+    this._overlay.updateLocation(props.location);
+  }
 
-  getInitialState() {
-    return {
-      billDetailOverlayVisibility: Visibility.HIDDEN
-    }
-  },
+  componentWillReceiveProps(nextProps) {
+    this._overlay.updateLocation(nextProps.location)
+  }
 
-  openBillDetailOverlay() { this.setState({ billDetailOverlayVisibility: Visibility.VISIBLE }) },
-  closeBillDetailOverlay() { this.setState({ billDetailOverlayVisibility: Visibility.HIDDEN }) },
-
-  render: function () {
+  render = () => {
 
     const {bill} = this.props;
     const debtee = bill.debtee;
@@ -36,12 +35,12 @@ export const BillItem = React.createClass({
     return (
       <Card>
 
-        <Overlay visibility={this.state.billDetailOverlayVisibility} onClickOutside={this.closeBillDetailOverlay}>
+        <Overlay visibility={this._overlay.visibility} onClickOutside={this._overlay.hide}>
           <div className={styles.billDetailOverlay}>
 
             <Header
               left={<h3>{`Shares for ${bill.name}`}</h3>}
-              right={<CloseButton onClick={this.closeBillDetailOverlay} />}
+              right={<CloseButton onClick={this._overlay.hide} />}
             />
 
             <ListDivider />
@@ -78,8 +77,7 @@ export const BillItem = React.createClass({
           </div>
         </Overlay>
 
-
-        <div onClick={this.openBillDetailOverlay} className={styles.billContainer}>
+        <div onClick={ this._overlay.show } className={styles.billContainer}>
 
           <div className={styles.billMetaDataContainer}>
             <div className={styles.nameContainer}>
@@ -103,11 +101,17 @@ export const BillItem = React.createClass({
 
       </Card>
     );
-  },
-});
+  }
+};
 
 BillItem.propTypes = {
   bill: React.PropTypes.object.isRequired
-}
+};
 
-export default BillItem
+let mapDispatchToProps = (dispatch) => {
+  return {
+    dispatch
+  }
+};
+
+export default connect(() => ({}), mapDispatchToProps)(BillItem)
