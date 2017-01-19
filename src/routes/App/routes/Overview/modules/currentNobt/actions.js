@@ -1,8 +1,9 @@
-import Client from "../../../../../../api/api";
-import AsyncActionStatus from "../../../../../../const/AsyncActionStatus"
+import Client from "api/api";
+import AsyncActionStatus from "const/AsyncActionStatus"
 
 export const UPDATE_FETCH_NOBT_STATUS = 'Nobt.UPDATE_FETCH_NOBT_STATUS';
 export const UPDATE_ADD_BILL_STATUS = 'Nobt.UPDATE_ADD_BILL_STATUS';
+export const INVALIDATE_NOBT = 'Nobt.INVALIDATE';
 
 function fetchNobtStarted() {
   return {
@@ -43,6 +44,12 @@ export function fetchNobt(id) {
       response => dispatch(fetchNobtSucceeded(response)),
       error => dispatch(fetchNobtFailed(error))
     )
+  }
+}
+
+export function invalidateNobt() {
+  return {
+    type: INVALIDATE_NOBT
   }
 }
 

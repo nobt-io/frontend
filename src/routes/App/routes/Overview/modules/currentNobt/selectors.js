@@ -12,6 +12,7 @@ export const getCurrency = createSelector([ getCurrentNobt ], (nobt) => nobt.cur
 export const getBills = createSelector([ getCurrentNobt ], (nobt) => nobt.bills);
 export const getTransactions = createSelector([ getCurrentNobt ], (nobt) => nobt.transactions);
 export const getAddBillStatus = (state) => state.App.currentNobt.addBillStatus;
+export const isNobtDataUpToDate = (state) => state.App.currentNobt.nobtFetchTimestamp !== null;
 
 export const getDebtSummaries = createSelector([ getTransactions, getMembers ], (transactions, members) => {
   var factory = new PersonDebtSummaryFactory(transactions);

@@ -1,19 +1,22 @@
-import { UPDATE_FETCH_NOBT_STATUS, UPDATE_ADD_BILL_STATUS, ADD_MEMBER } from "./actions";
+import { UPDATE_FETCH_NOBT_STATUS, UPDATE_ADD_BILL_STATUS, ADD_MEMBER, INVALIDATE_NOBT } from "./actions";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import _debug from "debug";
 
 const updateFetchNobtStatusActionPayloadHandler = {
   [AsyncActionStatus.IN_PROGRESS]: () => {},
-  [AsyncActionStatus.SUCCESSFUL]: (payload) => ({
-    data: {
-      id: payload.nobt.id,
-      name: payload.nobt.name,
-      currency: payload.nobt.currency,
-      participatingPersons: payload.nobt.participatingPersons,
-      transactions: payload.nobt.transactions,
-      bills: payload.nobt.expenses,
+  [AsyncActionStatus.SUCCESSFUL]: (payload) => (
+    {
+      nobtFetchTimestamp: Date.now(),
+      data: {
+        id: payload.nobt.id,
+        name: payload.nobt.name,
+        currency: payload.nobt.currency,
+        participatingPersons: payload.nobt.participatingPersons,
+        transactions: payload.nobt.transactions,
+        bills: payload.nobt.expenses,
+      }
     }
-  }),
+  ),
   [AsyncActionStatus.FAILED]: () => {},
   [null]: () => {}
 };
@@ -28,6 +31,7 @@ const handlers = {
       fetchNobtStatus: action.payload.status
     }
   },
+
   [UPDATE_ADD_BILL_STATUS]: (state, action) => {
     return {
       ...state,
@@ -52,11 +56,20 @@ const handlers = {
 
     return {...state, data: newData}
   },
+
+  [INVALIDATE_NOBT]: (state, action) => {
+
+    return {
+      ...state,
+      nobtFetchTimestamp: null
+    }
+  },
 };
 
 const initialState = {
   fetchNobtStatus: null,
   addBillStatus: null,
+  nobtFetchTimestamp: null,
   data: {
     id: "",
     name: "",
