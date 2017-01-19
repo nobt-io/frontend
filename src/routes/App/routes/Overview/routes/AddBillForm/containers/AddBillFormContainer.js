@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { getMembers } from "../../../modules/currentNobt/selectors";
 
 import { replace } from 'react-router-redux'
+import Locations from "../../../modules/navigation/Locations";
 
 const log = _debug("AddBillFormContainer");
 
@@ -24,8 +25,6 @@ const splitStrategyDefaultValueFactory = (strategy) => {
 class AddBillFormContainer extends React.Component {
 
   constructor(props) {
-
-
     super(props);
   }
 
@@ -114,11 +113,10 @@ export default connect(state => {
   };
 }, (dispatch, props) => {
 
-  let path = props.location.pathname;
-  let nobtBasePath = path.slice(0, path.length - 3);
+  let pathToNobtOverview = Locations.fromReduxLocation(props.location).removeParts(1).path;
 
   return {
-    onCancel: () => dispatch(replace(nobtBasePath)),
+    onCancel: () => dispatch(replace(pathToNobtOverview)),
     onSubmit: () => {}
   }
 })(AddBillFormContainer)
