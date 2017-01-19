@@ -4,7 +4,7 @@ import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
 import Title from "components/Title";
 import Header from "components/Header";
-import NobtSummaryHeader from "components/NobtSummaryHeader";
+import NobtSummaryHeader from "./NobtSummaryHeader";
 import BillFilter from "components/BillFilter";
 import HOList from "containers/HOList";
 import BillItem from "components/BillItem";

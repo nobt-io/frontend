@@ -4,7 +4,7 @@ import CoreLayout from "../layouts/CoreLayout/CoreLayout";
 import Landing from "./Landing";
 import { injectReducer } from "../store/reducers";
 
-import Overview from "./App/routes/Overview";
+import Nobt from "./App/routes/Nobt";
 import NewNobt from "./NewNobt";
 import reducer from "./App/reducers";
 
@@ -20,7 +20,7 @@ export const createRoutes = (store) => {
     component: CoreLayout,
     indexRoute: Landing,
     childRoutes: [
-      Overview,
+      Nobt,
       NewNobt
     ]
   }

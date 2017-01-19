@@ -1,4 +1,4 @@
-import Locations from "../src/routes/App/routes/Overview/modules/navigation/Locations";
+import Locations from "../src/routes/App/routes/Nobt/modules/navigation/Locations";
 
 test('should remove parts', () => {
 
