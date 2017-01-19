@@ -1,5 +1,4 @@
 import React from "react";
-import { Tab, Tabs } from "react-toolbox";
 import { Button } from "react-toolbox/lib/button";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
