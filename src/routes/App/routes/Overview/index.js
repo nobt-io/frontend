@@ -1,7 +1,7 @@
 import NobtContainer from "./containers/NobtContainer";
 import AddBillFormContainer from "./routes/AddBillForm"
 import CoreLayout from "layouts/CoreLayout/CoreLayout";
-import withNobtLoader from "layouts/NobtLoader"
+import withNobtLoader from "components/hoc/withNobtLoader";
 
 export default {
   path: ':id',
