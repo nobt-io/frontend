@@ -113,10 +113,11 @@ export default connect(state => {
   };
 }, (dispatch, props) => {
 
-  let pathToNobtOverview = Locations.fromReduxLocation(props.location).removeParts(1).path;
-
   return {
-    onCancel: () => dispatch(replace(pathToNobtOverview)),
+    onCancel: () => {
+      let pathToNobtOverview = Locations.fromReduxLocation(props.location).removeParts(1).path;
+      dispatch(replace(pathToNobtOverview))
+    },
     onSubmit: () => {}
   }
 })(AddBillFormContainer)
