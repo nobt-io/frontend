@@ -1,8 +1,12 @@
 import React from "react";
-import AddBillForm from "./AddBillForm";
-import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares, isValidBill } from "./selectors";
-import SplitStrategyNames from "../../../../../../const/SplitStrategyNames";
+import AddBillForm from "./../components/AddBillForm";
+import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares, isValidBill } from "./../modules/selectors";
+import SplitStrategyNames from "const/SplitStrategyNames";
 import _debug from "debug";
+import { connect } from "react-redux";
+import { getMembers } from "../../../modules/currentNobt/selectors";
+
+import { replace } from 'react-router-redux'
 
 const log = _debug("AddBillFormContainer");
 
@@ -17,9 +21,11 @@ const splitStrategyDefaultValueFactory = (strategy) => {
   }
 };
 
-export default class AddBillFormContainer extends React.Component {
+class AddBillFormContainer extends React.Component {
 
   constructor(props) {
+
+
     super(props);
   }
 
@@ -40,6 +46,7 @@ export default class AddBillFormContainer extends React.Component {
     splitStrategy: SplitStrategyNames.EQUAL,
     members: this.props.members,
     personValues: AddBillFormContainer.defaultPersonValuesFor(SplitStrategyNames.EQUAL, this.props.members),
+
   };
 
   handleOnShareValueChanged = (name, value) => {
@@ -100,3 +107,18 @@ export default class AddBillFormContainer extends React.Component {
     onSubmit: React.PropTypes.func.isRequired,
   }
 }
+
+export default connect(state => {
+  return {
+    members: getMembers(state)
+  };
+}, (dispatch, props) => {
+
+  let path = props.location.pathname;
+  let nobtBasePath = path.slice(0, path.length - 3);
+
+  return {
+    onCancel: () => dispatch(replace(nobtBasePath)),
+    onSubmit: () => {}
+  }
+})(AddBillFormContainer)

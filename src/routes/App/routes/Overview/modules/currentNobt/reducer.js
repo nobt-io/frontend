@@ -1,5 +1,5 @@
 import { UPDATE_FETCH_NOBT_STATUS, UPDATE_ADD_BILL_STATUS, ADD_MEMBER } from "./actions";
-import AsyncActionStatus from "../../../../../../const/AsyncActionStatus";
+import AsyncActionStatus from "const/AsyncActionStatus";
 import _debug from "debug";
 
 const updateFetchNobtStatusActionPayloadHandler = {
@@ -37,15 +37,15 @@ const handlers = {
 
   [ADD_MEMBER]: (state, action) => {
 
-    var currentMembers = state.data.participatingPersons;
-    var memberToAdd = action.payload.name;
+    let currentMembers = state.data.participatingPersons;
+    let memberToAdd = action.payload.name;
 
     if (currentMembers.find(name => name === memberToAdd) !== undefined) {
       _debug(ADD_MEMBER)(`Person with name '${memberToAdd}' already exists.`);
       return state;
     }
 
-    var newData = {
+    let newData = {
       ...state.data,
       participatingPersons: [ ...currentMembers, memberToAdd ]
     };

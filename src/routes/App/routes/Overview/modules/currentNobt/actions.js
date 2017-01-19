@@ -87,15 +87,6 @@ export function addBill(nobtId, bill) {
   }
 }
 
-export function acknowledgeAddBillStatus() {
-  return {
-    type: UPDATE_ADD_BILL_STATUS,
-    payload: {
-      status: null
-    }
-  }
-}
-
 export const ADD_MEMBER = 'Nobt.ADD_MEMBER';
 
 export function addMember(name) {

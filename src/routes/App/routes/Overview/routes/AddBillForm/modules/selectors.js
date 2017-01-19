@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import SplitStrategyNames from "../../../../../../const/SplitStrategyNames";
+import SplitStrategyNames from "../../../../../../../const/SplitStrategyNames";
 
 export const getAmount = (state) => state.amount;
 export const getDebtee = (state) => state.debtee;

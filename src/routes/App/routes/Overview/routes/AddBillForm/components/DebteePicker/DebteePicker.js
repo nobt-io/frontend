@@ -7,7 +7,7 @@ import Overlay from "components/Overlay";
 import AddMember from "../AddMember";
 import { Person, AvatarPosition } from "components/Person";
 import { AvatarSize } from "components/Avatar";
-import Visibility from "../../../../../../../const/Visibility";
+import Visibility from "const/Visibility";
 import styles from "./DebteePicker.scss";
 import listItemTheme from "./ListItemTheme.scss";
 import inputTheme from "../InputTheme.scss";

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 import NewNobt from "../components/NewNobt";
 
 import { addPerson, removePerson, createNobt, changeNobtName, selectCurrency } from "../modules/actions"
-import AsyncActionStatus from "../../../../../const/AsyncActionStatus"
+import AsyncActionStatus from "const/AsyncActionStatus"
 import { getSelectedCurrency, getChosenName, getPersonNames, isEvilTwinFactory, canCreateNobt, getCreationStatus, getCreatedNobtId } from "../modules/selectors";
 
 const mapActionCreators = {
