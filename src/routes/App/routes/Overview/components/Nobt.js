@@ -14,12 +14,7 @@ export default class Nobt extends React.Component {
 
   constructor(props) {
     super(props)
-    this.fetchCurrentNobt();
   }
-
-  fetchCurrentNobt = () => {
-    this.props.fetchNobt(this.props.params.id);
-  };
 
   getChildContext = () => {
     return {
