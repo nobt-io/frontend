@@ -5,6 +5,17 @@ const log = _debug("AddBillForm:reducer");
 
 export const addBillFormReducer = (state = initialState, action) => {
 
+  let addNewMember = function (stateCopy, member) {
+
+    stateCopy.members = [ ...stateCopy.members, member ]
+    stateCopy.personValues = [ ...stateCopy.personValues, {
+      name: member,
+      value: splitStrategyDefaultValueFactory(stateCopy.splitStrategy)
+    } ];
+
+    return stateCopy
+  };
+
   switch (action.type) {
 
     case "NewMemberAdded": {
@@ -15,10 +26,7 @@ export const addBillFormReducer = (state = initialState, action) => {
         return state;
       }
 
-      return {
-        ...state,
-        members: [ ...state.members, newMember ]
-      }
+      return addNewMember({...state}, newMember)
     }
 
     case "NewDebteeSelected": {
@@ -35,11 +43,7 @@ export const addBillFormReducer = (state = initialState, action) => {
       let stateCopy = {...state};
 
       if (isNewMember) {
-        stateCopy.members = [...stateCopy.members, debtee]
-        stateCopy.personValues = [ ...stateCopy.personValues, {
-          name: debtee,
-          value: splitStrategyDefaultValueFactory(stateCopy.splitStrategy)
-        } ]
+        stateCopy = addNewMember(stateCopy, debtee);
       }
 
       stateCopy.debtee = debtee;
