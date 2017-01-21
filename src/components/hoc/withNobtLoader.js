@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchNobt } from "../../routes/App/routes/Nobt/modules/currentNobt/actions";
-import { isNobtDataUpToDate } from "../../routes/App/routes/Nobt/modules/currentNobt/selectors";
+import { fetchNobt } from "../../routes/App/Nobt/modules/currentNobt/actions";
+import { shouldFetchNobt } from "../../routes/App/Nobt/modules/currentNobt/selectors";
 import debug from "debug";
 
 export default function withNobtLoader(WrappedComponent) {
@@ -18,11 +18,11 @@ export default function withNobtLoader(WrappedComponent) {
     }
 
     fetchNobt(props) {
-      let nobtId = props.params.id;
+      let nobtId = props.params.nobtId;
 
-      if (!this.props.isNobtDataUpToDate) {
+      if (this.props.shouldFetchNobt) {
 
-        debug("NobtLoader")("Nobt-Data was invalidated. Refreshing.");
+        debug("NobtLoader")("Fetching nobt.");
 
         this.props.fetchNobt(nobtId);
       }
@@ -35,7 +35,7 @@ export default function withNobtLoader(WrappedComponent) {
 
   return connect(
     (state) => ({
-      isNobtDataUpToDate: isNobtDataUpToDate(state)
+      shouldFetchNobt: shouldFetchNobt(state)
     }),
     (dispatch, props) => ({
       fetchNobt: (id) => dispatch(fetchNobt(id))

@@ -4,7 +4,7 @@ import CoreLayout from "../layouts/CoreLayout/CoreLayout";
 import Landing from "./Landing";
 import { injectReducer } from "../store/reducers";
 
-import Nobt from "./App/routes/Nobt";
+import App from "./App";
 import NewNobt from "./NewNobt";
 import reducer from "./App/reducers";
 
@@ -20,11 +20,11 @@ export const createRoutes = (store) => {
     component: CoreLayout,
     indexRoute: Landing,
     childRoutes: [
-      Nobt,
+      App,
       NewNobt
     ]
   }
-}
+};
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
