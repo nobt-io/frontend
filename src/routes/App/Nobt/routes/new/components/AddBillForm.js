@@ -13,18 +13,19 @@ import AddMember from "./AddMember";
 import { Link } from "react-router";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 
+/*
+TODO:
+ * - Re-implement "error"-message as soon as the user fails to split the bill properly.
+ * - Clear addBillForm section in store in componentWillMount
+ */
 export default class AddBillForm extends React.Component {
 
   constructor(props) {
     super(props)
   }
 
-  /* TODO:
-   * - Re-implement "error"-message as soon as the user fails to split the bill properly.
-   */
-
   handleOnSubmit = () => {
-    var billToAdd = {
+    let billToAdd = {
       name: this.props.description,
       debtee: this.props.debtee,
       splitStrategy: this.props.splitStrategy,
@@ -70,7 +71,7 @@ export default class AddBillForm extends React.Component {
             <div className={`${styles.row} ${styles.borderd}`}>
 
               <Link to={LocationBuilder.fromWindow().push("selectDebtee").path}>
-                <Input /* TODO: Using input is just a hack for the moment, remove later */
+                <Input /* TODO: Using input is just a hack for the moment, remove later and style accordingly */
                   readOnly theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.debtee || ""}>
                   <div className={styles.overlayToAvoidKeyboardPopingUp}></div>
                 </Input>
