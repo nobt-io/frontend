@@ -1,10 +1,12 @@
-import React from 'react'
-import styles from './AddMember.scss'
+import React from "react";
+import styles from "./AddMember.scss";
 import addButtonTheme from "./AddButtonTheme.scss";
 import inputTheme from "../InputTheme.scss";
 import SingleInputInlineForm from "components/SingleInputInlineForm";
+import { connect } from "react-redux";
+import { getMembers } from "../../../../modules/currentNobt/selectors";
 
-export default class AddMember extends React.Component {
+class AddMember extends React.Component {
 
   render = () => (
     <div className={styles.inputContainer}>
@@ -20,17 +22,22 @@ export default class AddMember extends React.Component {
   );
 
   isNewMemberInvalid = (name) => {
-    var newMember = name.trim();
+    let newMember = name.trim();
     return this.props.members.indexOf(newMember) >= 0 || newMember.length == 0;
   };
 
   handleOnNewMember = (name) => {
-    var newMember = name.trim();
+    let newMember = name.trim();
     this.props.onNewMember(newMember);
   };
 
   static propTypes = {
-    members: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
     onNewMember: React.PropTypes.func.isRequired
-  };
+  }
 }
+
+export default connect(
+  (state) => ({
+    members: getMembers(state)
+  })
+)(AddMember)

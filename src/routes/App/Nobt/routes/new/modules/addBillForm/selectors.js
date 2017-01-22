@@ -1,14 +1,42 @@
 import { createSelector } from "reselect";
-import SplitStrategyNames from "const/SplitStrategyNames";
+import SplitStrategyNames from "../../../../../../../const/SplitStrategyNames";
+import { getMembers } from "../../../../modules/currentNobt/selectors";
 
-export const getAmount = (state) => state.amount;
-export const getDebtee = (state) => state.debtee;
-export const getDescription = (state) => state.description;
-export const getSplitStrategy = (state) => state.splitStrategy;
-export const getPersonValues = (state) => state.personValues;
-export const getAllMembers = (state) => state.personValues.map(pv => pv.name);
+const getAddBillFormSlice = (state) => state.App.addBillForm;
 
-const getState = (state) => state;
+export const getAmount = createSelector([ getAddBillFormSlice ], (state) => state.amount);
+export const getDebtee = createSelector([ getAddBillFormSlice ], (state) => state.debtee);
+export const getDescription = createSelector([ getAddBillFormSlice ], (state) => state.description);
+export const getSplitStrategy = createSelector([ getAddBillFormSlice ], (state) => {
+  return state.splitStrategy
+});
+
+export const getBillMembers = createSelector([ getAddBillFormSlice ], (state) => {
+  return state.personValues.map(pv => pv.name)
+});
+
+export const getAllMembers = createSelector([ getBillMembers, getMembers, getDebtee ], (billMembers, nobtMembers, debtee) => {
+  return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter( name => name !== null )
+});
+
+const getDefaultValues = createSelector([ getAddBillFormSlice ], (state) => state.defaultValues);
+const getDefaultValueForSplitStrategy = createSelector([ getSplitStrategy, getDefaultValues ], (splitStrategy, defaultValues) => defaultValues[ splitStrategy ]);
+
+export const getPersonValues = createSelector([
+  getAddBillFormSlice,
+  getDefaultValueForSplitStrategy,
+  getAllMembers,
+  getBillMembers
+], (state, defaultValue, members, billMembers) => {
+
+  let hasExplicitPersonValue = name => billMembers.indexOf(name) !== -1;
+  let createPersonValue = name => ({name: name, value: defaultValue});
+
+  let defaultPersonValues = members.filter(name => !hasExplicitPersonValue(name)).map(createPersonValue);
+  let existingPersonValues = state.personValues;
+
+  return [...defaultPersonValues, ...existingPersonValues]
+});
 
 /**
  * Internal selector used to determine the "strategy" on how to split the bill. Listens on the splitStrategy property and therefore
@@ -35,7 +63,7 @@ const getEqualShares = createSelector([ getAmount, getPersonValues, getAllMember
 
   const noShare = (name) => { return {name: name, amount: null, value: false} };
 
-  var involvedMembers = personValues.filter(pv => pv.value === true).map(pv => pv.name);
+  let involvedMembers = personValues.filter(pv => pv.value === true).map(pv => pv.name);
 
   if (involvedMembers.length === 0) {
     return members.map(noShare);
@@ -47,10 +75,11 @@ const getEqualShares = createSelector([ getAmount, getPersonValues, getAllMember
   const isInvolved = (name) => involvedMembers.indexOf(name) !== -1;
   const mapFn = (name) => isInvolved(name) ? regularShare(name) : noShare(name);
 
-  var shares = members.map(mapFn);
+  let shares = members.map(mapFn);
 
   const roundingError = amount - share * involvedMembers.length;
   shares.find(share => share.value === true).amount += roundingError;
+
 
   return shares;
 });
@@ -99,7 +128,7 @@ const getPercentualShares = createSelector([ getAmount, getPersonValues, getAllM
 });
 
 
-export const getShares = createSelector([ getShareSelector, getState ], (shareSelector, state) => {
+export const getShares = createSelector([ getShareSelector, (state) => state ], (shareSelector, state) => {
 
   var shares = shareSelector(state);
   return shares.sort(byName);

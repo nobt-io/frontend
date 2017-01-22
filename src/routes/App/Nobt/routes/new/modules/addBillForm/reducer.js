@@ -1,17 +1,19 @@
-import SplitStrategyNames from "const/SplitStrategyNames";
+import SplitStrategyNames from "../../../../../../../const/SplitStrategyNames";
 import _debug from "debug";
 
-const log = _debug("AddBillForm:reducer");
+const log = _debug("reducers:addBillForm");
 
 export const addBillFormReducer = (state = initialState, action) => {
 
   let addNewMember = function (stateCopy, member) {
 
-    stateCopy.members = [ ...stateCopy.members, member ]
-    stateCopy.personValues = [ ...stateCopy.personValues, {
-      name: member,
-      value: splitStrategyDefaultValueFactory(stateCopy.splitStrategy)
-    } ];
+    stateCopy.personValues = [
+      ...stateCopy.personValues,
+      {
+        name: member,
+        value: stateCopy.defaultValues[ stateCopy.splitStrategy ]
+      }
+    ];
 
     return stateCopy
   };
@@ -71,27 +73,6 @@ export const addBillFormReducer = (state = initialState, action) => {
       }
     }
 
-    case "NewMembersProvided": {
-
-      let initialHydration = state.members.length === 0;
-
-      // if this is not the initial hydration of the store with data, we don't want to override person values
-      if (!initialHydration) {
-
-        log("Skipping action because store is already hydrated.")
-
-        return state
-      }
-
-      let newMembers = action.payload.members;
-
-      return {
-        ...state,
-        members: newMembers,
-        personValues: defaultPersonValuesFor(state.splitStrategy, newMembers)
-      }
-    }
-
     case "AmountChanged": {
 
 
@@ -112,20 +93,19 @@ export const addBillFormReducer = (state = initialState, action) => {
   return state;
 };
 
-function defaultPersonValuesFor(splitStrategy, members) {
-
-  log("defaultPersonValuesFor", splitStrategy, members);
-
-  return members.map(name => { return {name: name, value: splitStrategyDefaultValueFactory(splitStrategy)} })
-}
-
-const splitStrategyDefaultValueFactory = (strategy) => {
-  switch (strategy) {
-    case SplitStrategyNames.EQUAL:
-      return true;
-
-    case SplitStrategyNames.PERCENTAGE:
-    case SplitStrategyNames.UNEQUAL:
-      return 0;
+/**
+ *
+ */
+const initialState = {
+  addBillStatus: null,
+  debtee: null,
+  description: "",
+  amount: 0,
+  splitStrategy: SplitStrategyNames.EQUAL,
+  personValues: [],
+  defaultValues: {
+    EQUAL: true,
+    PERCENTAGE: 0,
+    UNEQUAL: 0
   }
 };

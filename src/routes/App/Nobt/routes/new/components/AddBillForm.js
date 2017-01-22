@@ -13,18 +13,17 @@ import AddMember from "./AddMember";
 import { Link } from "react-router";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 
-export const AddBillForm = React.createClass({
+export default class AddBillForm extends React.Component {
+
+  constructor(props) {
+    super(props)
+  }
 
   /* TODO:
    * - Re-implement "error"-message as soon as the user fails to split the bill properly.
    */
-  getInitialState() { return {splitStrategySelectorOverlayVisibility: Visibility.HIDDEN} },
 
-  closeSplitStrategySelectorOverlay() { this.setState({splitStrategySelectorOverlayVisibility: Visibility.HIDDEN}) },
-  openSplitStrategySelectorOverlay() { this.setState({splitStrategySelectorOverlayVisibility: Visibility.VISIBLE}) },
-
-
-  handleOnSubmit() {
+  handleOnSubmit = () => {
     var billToAdd = {
       name: this.props.description,
       debtee: this.props.debtee,
@@ -40,103 +39,96 @@ export const AddBillForm = React.createClass({
         })
     };
 
-    this.props.onSubmit(billToAdd);
-  },
+    this.props.onSubmit(this.props.nobtId, billToAdd);
+  };
 
-  handleOnSplitStrategyChanged(splitStrategy) {
-    this.props.onSplitStrategyChange(splitStrategy);
+  handleOnSplitStrategyChanged = (splitStrategy) => {
+    this.props.onSplitStrategyChanged(splitStrategy);
     this.closeSplitStrategySelectorOverlay();
-  },
+  };
 
-  handleOnEqualSplitStrategySelected() { this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL); },
-  handleOnCustomSplitStrategySelected() { this.handleOnSplitStrategyChanged(SplitStrategyNames.UNEQUAL); },
-  handleOnPercentalSplitStrategySelected() { this.handleOnSplitStrategyChanged(SplitStrategyNames.PERCENTAGE); },
+  handleOnEqualSplitStrategySelected = () => { this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL); }
+  handleOnCustomSplitStrategySelected = () => { this.handleOnSplitStrategyChanged(SplitStrategyNames.UNEQUAL); }
+  handleOnPercentalSplitStrategySelected = () => { this.handleOnSplitStrategyChanged(SplitStrategyNames.PERCENTAGE); }
 
-  render() {
+  render = () => {
 
     return (
-      <div className={styles.form}>
-        <div className={styles.header}>
-          <IconButton icon="close" onClick={this.props.onCancel} theme={headerButtonTheme} />
-          <span>ADD A BILL</span>
-          <IconButton icon="done" onClick={this.handleOnSubmit} theme={headerButtonTheme} />
-        </div>
-
-        <div className={styles.container}>
-          <div className={`${styles.row} ${styles.borderd}`}>
-            <Input theme={inputTheme} icon="description" placeholder="Description" value={this.props.description}
-                   onChange={this.props.onDescriptionChange} />
+      <div>
+        <div className={styles.form}>
+          <div className={styles.header}>
+            <IconButton icon="close" onClick={this.props.onCancel} theme={headerButtonTheme} />
+            <span>ADD A BILL</span>
+            <IconButton icon="done" onClick={this.handleOnSubmit} theme={headerButtonTheme} />
           </div>
-          <div className={`${styles.row} ${styles.borderd}`}>
 
-            <Link to={{
-              pathname: LocationBuilder.fromWindow().push("selectDebtee").path,
-              state: {
-                debtee: this.props.debtee,
-                names: this.props.members
-              }
-            }}>
-              <Input /* TODO: Using input is just a hack for the moment, remove later */
-                readOnly theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.debtee || ""}>
-                <div className={styles.overlayToAvoidKeyboardPopingUp}></div>
-              </Input>
-            </Link>
+          <div className={styles.container}>
+            <div className={`${styles.row} ${styles.borderd}`}>
+              <Input theme={inputTheme} icon="description" placeholder="Description" value={this.props.description}
+                     onChange={ this.props.onDescriptionChanged }/>
+            </div>
+            <div className={`${styles.row} ${styles.borderd}`}>
 
+              <Link to={LocationBuilder.fromWindow().push("selectDebtee").path}>
+                <Input /* TODO: Using input is just a hack for the moment, remove later */
+                  readOnly theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.debtee || ""}>
+                  <div className={styles.overlayToAvoidKeyboardPopingUp}></div>
+                </Input>
+              </Link>
+
+            </div>
+            <div className={styles.row }>
+              <AmountInput value={this.props.amount} onChange={this.props.onAmountChanged} />
+            </div>
           </div>
-          <div className={styles.row }>
-            <AmountInput value={this.props.amount} onChange={this.props.onAmountChange} />
+
+          <div className={styles.shareListHeader}>
+            <div className={styles.title}>who's in?</div>
+            <ChangeModeButton />
           </div>
+
+          <div className={`${styles.container} ${styles.shareListContainer}`}>
+            {this.props.splitStrategy === SplitStrategyNames.EQUAL && (
+              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
+                <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.props.onShareValueChanged} />
+              )}
+              />
+            )}
+            {this.props.splitStrategy === SplitStrategyNames.UNEQUAL && (
+              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
+                <CustomShareListItem key={share.name} share={share} onAmountChange={this.props.onShareValueChanged} />
+              )}
+              />
+            )}
+            {this.props.splitStrategy === SplitStrategyNames.PERCENTAGE && (
+              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
+                <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.props.onShareValueChanged} />
+              )}
+              />
+            )}
+            <AddMember onNewMember={this.props.onNewMember}/>
+          </div>
+
         </div>
 
-        <div className={styles.shareListHeader}>
-          <div className={styles.title}>who's in?</div>
-          <ChangeModeButton />
-        </div>
-
-        <div className={`${styles.container} ${styles.shareListContainer}`}>
-          {this.props.splitStrategy === SplitStrategyNames.EQUAL && (
-            <ShareList shares={this.props.shares} renderShareListItem={(share) => (
-              <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.props.onShareValueChange} />
-            )}
-            />
-          )}
-          {this.props.splitStrategy === SplitStrategyNames.UNEQUAL && (
-            <ShareList shares={this.props.shares} renderShareListItem={(share) => (
-              <CustomShareListItem key={share.name} share={share} onAmountChange={this.props.onShareValueChange} />
-            )}
-            />
-          )}
-          {this.props.splitStrategy === SplitStrategyNames.PERCENTAGE && (
-            <ShareList shares={this.props.shares} renderShareListItem={(share) => (
-              <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.props.onShareValueChange} />
-            )}
-            />
-          )}
-          <AddMember members={this.props.members} onNewMember={this.props.onNewMember} />
-        </div>
-
+        {this.props.children}
       </div>
     )
   }
-});
-
-export default AddBillForm;
+};
 
 AddBillForm.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
   onSubmit: React.PropTypes.func.isRequired,
   canSubmit: React.PropTypes.bool.isRequired,
-  onDescriptionChange: React.PropTypes.func.isRequired,
-  onAmountChange: React.PropTypes.func.isRequired,
-  onDebteeChange: React.PropTypes.func.isRequired,
-  onNewMember: React.PropTypes.func.isRequired,
-  onSplitStrategyChange: React.PropTypes.func.isRequired,
-  onShareValueChange: React.PropTypes.func.isRequired,
+  onDescriptionChanged: React.PropTypes.func.isRequired,
+  onAmountChanged: React.PropTypes.func.isRequired,
+  onSplitStrategyChanged: React.PropTypes.func.isRequired,
+  onShareValueChanged: React.PropTypes.func.isRequired,
   description: React.PropTypes.string.isRequired,
   debtee: React.PropTypes.string,
   splitStrategy: React.PropTypes.string.isRequired,
   amount: React.PropTypes.number.isRequired,
-  members: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
   shares: React.PropTypes.arrayOf(
     React.PropTypes.shape({
       name: React.PropTypes.string.isRequired,

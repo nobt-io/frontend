@@ -20,8 +20,8 @@ export const createRoutes = (store) => {
     component: CoreLayout,
     indexRoute: Landing,
     childRoutes: [
-      App,
-      NewNobt
+      NewNobt,
+      App
     ]
   }
 };

@@ -20,6 +20,10 @@ const apiBaseURLs = [
     url: "http://localhost:8080",
     active: (host) => host.includes("localhost")
   },
+  {
+    url: "http://192.168.188.23:8080",
+    active: (host) => host.startsWith("192")
+  },
 ];
 
 const factory = (location) => {

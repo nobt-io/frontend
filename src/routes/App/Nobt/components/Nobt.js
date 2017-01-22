@@ -9,6 +9,7 @@ import LocationBuilder from "../modules/navigation/LocationBuilder";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { Link } from "react-router";
 import HOList from "containers/HOList";
+import BillItem from "./BillItem";
 
 export default class Nobt extends React.Component {
 
@@ -48,6 +49,7 @@ export default class Nobt extends React.Component {
               this.props.updateBillFilter("");
               this.props.updateBillSortProperty("Date");
             }}
+            // TODO: Style filter and sort links
             // style={{display: defaultFilter ? "none" : "inline"}}
             // className={styles.filterIcon}
           >

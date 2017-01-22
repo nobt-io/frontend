@@ -9,14 +9,14 @@ import listItemTheme from "./ListItemTheme.scss";
 import _debug from "debug";
 import AddMember from "../../../../components/AddMember/AddMember";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
+import { connect } from "react-redux";
+import { getDebtee, getAllMembers } from "../../../../modules/addBillForm/selectors";
 
 const log = _debug("DebteePicker");
 
-export default class DebteePickerOverlay extends React.Component {
+class DebteePickerOverlay extends React.Component {
 
   render = () => {
-
-    let { names, debtee } = this.props.location.state;
 
     return (
       <div className={this.props.className}>
@@ -27,9 +27,9 @@ export default class DebteePickerOverlay extends React.Component {
             <HOList
               className={styles.list}
               selectable
-              items={names}
+              items={this.props.members}
               renderItem={ (name) => (
-                <ListItem rightIcon={ name === debtee ? "check_circle" : "radio_button_unchecked" }
+                <ListItem rightIcon={ name === this.props.debtee ? "check_circle" : "radio_button_unchecked" }
                           theme={listItemTheme}
                           key={name}
                           onClick={ () => this.handleOnPersonPicked(name) }>
@@ -37,28 +37,27 @@ export default class DebteePickerOverlay extends React.Component {
                 </ListItem>
               )}>
             </HOList>
-            <AddMember members={names} onNewMember={this.handleOnNewMember}/>
+            <AddMember onNewMember={this.handleOnPersonPicked}/>
           </div>
         </Overlay>
       </div>
     )
   };
 
-  handleOnNewMember = (person) => {
-    let path = LocationBuilder.fromWindow().pop().path;
-
-    this.props.replace({
-      pathname: path,
-      state: { debtee: person, isNewMember: true }
-    });
-  };
-
   handleOnPersonPicked = (person) => {
     let path = LocationBuilder.fromWindow().pop().path;
 
-    this.props.replace({
-      pathname: path,
-      state: { debtee: person, isNewMember: false }
-    });
+    this.props.onPersonPicked(person)
+    this.props.replace(path);
   };
 }
+
+export default connect(
+  (state) => ({
+    members: getAllMembers(state),
+    debtee: getDebtee(state)
+  }),
+  (dispatch) => ({
+    onPersonPicked: (debtee) => dispatch({type: "NewDebteeSelected", payload: {debtee}}),
+  })
+)(DebteePickerOverlay)

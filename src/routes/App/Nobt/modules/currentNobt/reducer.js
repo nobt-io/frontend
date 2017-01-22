@@ -32,13 +32,6 @@ const handlers = {
     }
   },
 
-  [UPDATE_ADD_BILL_STATUS]: (state, action) => {
-    return {
-      ...state,
-      addBillStatus: action.payload.status
-    }
-  },
-
   [ADD_MEMBER]: (state, action) => {
 
     let currentMembers = state.data.participatingPersons;
@@ -68,7 +61,6 @@ const handlers = {
 
 const initialState = {
   fetchNobtStatus: null,
-  addBillStatus: null,
   nobtFetchTimestamp: null,
   data: {
     id: "",

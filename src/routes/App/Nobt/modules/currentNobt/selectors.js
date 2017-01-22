@@ -4,12 +4,9 @@ import PersonDebtSummaryFactory from "./PersonDebtSummaryFactory";
 import { getBillFilter, getBillSortProperty } from "../viewState/selectors";
 import AsyncActionStatus from "const/AsyncActionStatus";
 
-const getCurrentNobt = (state) => state.App.currentNobt.data;
+export const getCurrentNobt = (state) => state.App.currentNobt.data;
 const getNobtFetchTimestamp = (state) => state.App.currentNobt.nobtFetchTimestamp;
 const getFetchNobtStatus = (state) => state.App.currentNobt.fetchNobtStatus;
-
-
-export const getAddBillStatus = (state) => state.App.currentNobt.addBillStatus;
 
 export const getName = createSelector([ getCurrentNobt ], (nobt) => nobt.name);
 export const getMembers = createSelector([ getCurrentNobt ], (nobt) => nobt.participatingPersons);
