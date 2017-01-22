@@ -21,7 +21,7 @@ export const shouldFetchNobt = createSelector( [isNobtDataOutdated, getFetchNobt
 });
 
 export const getDebtSummaries = createSelector([ getTransactions, getMembers ], (transactions, members) => {
-  var factory = new PersonDebtSummaryFactory(transactions);
+  const factory = new PersonDebtSummaryFactory(transactions);
   return members
     .map(m => factory.computeSummaryForPerson(m))
     .filter(s => s.me.amount !== 0); // we do not want debt summaries with value 0
@@ -45,7 +45,7 @@ const deNormalizeBill = (e) => {
     },
     debtors: debtors
   };
-}
+};
 
 export const getFilteredBills = createSelector([ getBills, getBillFilter, getBillSortProperty ], (bills, filter, sort) => {
 
@@ -57,10 +57,10 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
     "Date": (e1, e2) => new Date(e2.date).getTime() - new Date(e1.date).getTime()
   };
 
-  var matchName = (name) => (filter === NO_FILTER) ? true : name === filter;
+  let matchName = (name) => (filter === NO_FILTER) ? true : name === filter;
 
-  var matchDebtee = (bill) => matchName(bill.debtee);
-  var matchDebtors = (bill) => bill.debtors.map(d => d.name).filter(matchName).length > 0;
+  let matchDebtee = (bill) => matchName(bill.debtee);
+  let matchDebtors = (bill) => bill.debtors.map(d => d.name).filter(matchName).length > 0;
 
   const filteredAndSortedBills = bills
     .map(deNormalizeBill)
@@ -76,7 +76,10 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
 const getBillId = (state, props) => props.params.billId;
 
 export const makeGetBill = () => createSelector( [getBills, getBillId], (bills, billId) => {
-  return bills.map(deNormalizeBill).find( bill => bill.id == billId );
+  return bills
+    .filter( bill => bill.id == billId )
+    .map(deNormalizeBill)
+    .find(() => true); // equal to .first() :)
 });
 
 export const getTotal = createSelector([ getBills ], (bills) => {
