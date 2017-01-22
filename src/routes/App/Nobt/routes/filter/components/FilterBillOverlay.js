@@ -13,10 +13,9 @@ import { AvatarSize } from "components/Avatar";
 import { getBillFilter } from "../../../modules/viewState/selectors";
 import listItemTheme from "./ListItemTheme.scss";
 
-
 const FilterBillOverlay = (props) => (
 
-  <Dialog active={true}>
+  <Dialog active={true} onOverlayClick={props.goBack}>
     <Header
       left={<h3>Filter bills by</h3>}
       right={<CloseButton onClick={props.goBack} />}
