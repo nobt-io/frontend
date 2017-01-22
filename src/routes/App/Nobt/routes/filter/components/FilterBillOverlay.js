@@ -1,38 +1,52 @@
-import React from "react"
-
+import React from "react";
 import { connect } from "react-redux";
-import Visibility from "../../../../../../const/Visibility";
-import withNavigation from "../../../../../../components/hoc/withNavigation";
-import Header from "components/Header";
-import { IconButton } from "react-toolbox/lib/button";
-import { List, ListItem } from "react-toolbox/lib/list";
-import Overlay from "components/Overlay";
-import { updateBillSortProperty } from "../../../modules/viewState/actions";
+import withNavigation from "components/hoc/withNavigation";
+import { updateBillFilter } from "../../../modules/viewState/actions";
+import { Dialog } from "react-toolbox/lib/dialog";
+import Header from "components/Header/Header";
+import CloseButton from "components/CloseButton";
+import { getMembers } from "../../../modules/currentNobt/selectors";
+import HOList from "containers/HOList";
+import { ListItem } from "react-toolbox/lib/list";
+import { Person, AvatarPosition } from "components/Person";
+import { AvatarSize } from "components/Avatar";
+import { getBillFilter } from "../../../modules/viewState/selectors";
+import listItemTheme from "./ListItemTheme.scss";
 
 
-const SortBillOverlay = (props) => (
-  /*
-  <Overlay visibility={this.state.personFilterOverlayVisibility} onClickOutside={this.closePersonFilterOverlay}>
+const FilterBillOverlay = (props) => (
+
+  <Dialog active={true}>
     <Header
       left={<h3>Filter bills by</h3>}
-      right={<CloseButton onClick={this.closePersonFilterOverlay}/>}
+      right={<CloseButton onClick={props.goBack} />}
     />
-    <PersonPicker names={personNames} onPersonPicked={ (name) => {
-      // this.setMetaData({name});
-      this.closePersonFilterOverlay()
-    }}/>
-  </Overlay>
-  */
-  <div>
-    <h1>Filter here</h1>
-  </div>
+    <HOList
+      selectable
+      items={props.members}
+      renderItem={ (name) => (
+        <ListItem rightIcon={ name === props.currentFilter ? "check_circle" : "radio_button_unchecked" }
+                  theme={listItemTheme}
+                  key={name}
+                  onClick={ () => {
+                    props.updateBillFilter(name)
+                    props.goBack()
+                  } }>
+          <Person avatarSize={AvatarSize.MEDIUM} avatarPosition={AvatarPosition.LEFT} name={name} />
+        </ListItem>
+      )}>
+    </HOList>
+  </Dialog>
 );
 
 export default withNavigation(
   connect(
-    (state) => ({}),
+    (state) => ({
+      currentFilter: getBillFilter(state),
+      members: getMembers(state)
+    }),
     (dispatch) => ({
-      updateBillSortProperty: (property) => dispatch(updateBillSortProperty(property)),
+      updateBillFilter: (property) => dispatch(updateBillFilter(property)),
     })
-  )(SortBillOverlay)
+  )(FilterBillOverlay)
 )

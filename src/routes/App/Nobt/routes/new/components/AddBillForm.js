@@ -29,7 +29,7 @@ export default class AddBillForm extends React.Component {
       name: this.props.description,
       debtee: this.props.debtee,
       splitStrategy: this.props.splitStrategy,
-      date: new Date(),
+      date: new Date(), // TODO: Add DatePicker
       shares: this.props.shares
         .filter(share => share.amount !== null)
         .map(share => {

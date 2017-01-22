@@ -7,8 +7,8 @@ import Header from "components/Header";
 import CloseButton from "components/CloseButton";
 import Amount from "components/Amount";
 import PersonMoneyList from "components/PersonMoneyList";
-import Overlay from "components/Overlay";
 import { connect } from "react-redux";
+import { Dialog } from "react-toolbox/lib/dialog";
 
 // TODO: connect and retrieve bill from store
 class BillDetailOverlay extends React.Component {
@@ -23,7 +23,7 @@ class BillDetailOverlay extends React.Component {
     const debtee = bill.debtee;
 
     return (
-      <Overlay visibility={this._overlay.visibility} onClickOutside={this._overlay.hide}>
+      <Dialog active={true} onOverlayClick={this.props.goBack}>
         <div className={styles.billDetailOverlay}>
 
           <Header
@@ -63,7 +63,7 @@ class BillDetailOverlay extends React.Component {
 
           </div>
         </div>
-      </Overlay>
+      </Dialog>
     );
   }
 }
