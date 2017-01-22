@@ -7,7 +7,7 @@ import Header from "components/Header/Header";
 import CloseButton from "components/CloseButton";
 import { getMembers } from "../../../modules/currentNobt/selectors";
 import HOList from "containers/HOList";
-import { ListItem } from "react-toolbox/lib/list";
+import { ListItem, ListDivider } from "react-toolbox/lib/list";
 import { Person, AvatarPosition } from "components/Person";
 import { AvatarSize } from "components/Avatar";
 import { getBillFilter } from "../../../modules/viewState/selectors";
@@ -34,6 +34,16 @@ const FilterBillOverlay = (props) => (
           <Person avatarSize={AvatarSize.MEDIUM} avatarPosition={AvatarPosition.LEFT} name={name} />
         </ListItem>
       )}>
+      <ListDivider />
+      <ListItem rightIcon={ "" === props.currentFilter ? "check_circle" : "radio_button_unchecked"  }
+                theme={listItemTheme}
+                key={"None"}
+                onClick={ () => {
+                  props.updateBillFilter("")
+                  props.goBack()
+                } }>
+        <p className={listItemTheme.clear}>None</p>
+      </ListItem>
     </HOList>
   </Dialog>
 );
