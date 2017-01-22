@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./BillItem.scss";
-import Card from "components/Card";
 import { AvatarList, AvatarSize } from "components/Avatar";
 import Amount from "components/Amount";
 import { Person, AvatarPosition } from "components/Person";
@@ -21,31 +20,27 @@ class BillItem extends React.Component {
     const debtee = bill.debtee;
 
     return (
-      <Card>
+      <div onClick={ () => LocationBuilder.fromWindow().push(bill.id).apply(this.props.push) } className={styles.billContainer}>
 
-        <div onClick={ () => LocationBuilder.fromWindow().push(bill.id).apply(this.props.push) } className={styles.billContainer}>
-
-          <div className={styles.billMetaDataContainer}>
-            <div className={styles.nameContainer}>
-              <span>{bill.name}</span>
-            </div>
-            <div className={styles.amountContainer}>
-              <Amount value={debtee.amount} />
-            </div>
+        <div className={styles.billMetaDataContainer}>
+          <div className={styles.nameContainer}>
+            <span>{bill.name}</span>
           </div>
-
-          <div className={styles.billPersonInformationContainer}>
-            <div className={styles.debtee}>
-              <Person name={debtee.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} />
-            </div>
-            <div className={styles.debtors}>
-              <AvatarList names={bill.debtors.map(debtor => debtor.name)} size={AvatarSize.MEDIUM} />
-            </div>
+          <div className={styles.amountContainer}>
+            <Amount value={debtee.amount} />
           </div>
-
         </div>
 
-      </Card>
+        <div className={styles.billPersonInformationContainer}>
+          <div className={styles.debtee}>
+            <Person name={debtee.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} />
+          </div>
+          <div className={styles.debtors}>
+            <AvatarList names={bill.debtors.map(debtor => debtor.name)} size={AvatarSize.MEDIUM} />
+          </div>
+        </div>
+
+      </div>
     );
   }
 }

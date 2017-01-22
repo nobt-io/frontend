@@ -5,6 +5,9 @@ $containerMargin: 1rem;
 
 .billContainer {
 
+  background-color: white;
+  border-radius: 1rem;
+
   .billMetaDataContainer {
     margin: $containerMargin;
     margin-bottom: $containerMargin / 2;

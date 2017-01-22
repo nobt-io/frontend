@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "react-toolbox/lib/button";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
+import BillListTheme from "./BillListTheme.scss"
 import Title from "components/Title";
 import Header from "components/Header";
 import NobtSummaryHeader from "./NobtSummaryHeader";
@@ -73,9 +74,14 @@ export default class Nobt extends React.Component {
               </div>
 
 
-              <HOList items={this.props.bills} renderItem={ (bill) => (
-                <BillItem key={bill.id} bill={bill} />
-              ) } />
+              <HOList
+                theme={BillListTheme}
+                items={this.props.bills}
+                renderItem={ (bill) => (
+                  <div key={bill.id} className={BillListTheme.item}>
+                    <BillItem bill={bill} />
+                  </div>
+                ) } />
 
               {this.props.children}
             </div>
