@@ -1,5 +1,6 @@
 import Client from "../../../../../api/api";
 import AsyncActionStatus from "../../../../../const/AsyncActionStatus"
+import * as utils from "../../../../../utils/sleep";
 
 export const UPDATE_FETCH_NOBT_STATUS = 'Nobt.UPDATE_FETCH_NOBT_STATUS';
 export const INVALIDATE_NOBT = 'Nobt.INVALIDATE';
@@ -39,10 +40,12 @@ export function fetchNobt(id) {
 
     dispatch(fetchNobtStarted());
 
-    Client.fetchNobt(id).then(
-      response => dispatch(fetchNobtSucceeded(response)),
-      error => dispatch(fetchNobtFailed(error))
-    )
+    utils.sleep(1000).then(() => {
+      Client.fetchNobt(id).then(
+        response => dispatch(fetchNobtSucceeded(response)),
+        error => dispatch(fetchNobtFailed(error))
+      )
+    })
   }
 }
 

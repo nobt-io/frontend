@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Nobt from "../components/Nobt";
-import { addMember, fetchNobt } from "../modules/currentNobt/actions";
-import { getName, getCurrency, getMembers, getBills, getTotal, getFilteredBills } from "../modules/currentNobt/selectors";
+import { addMember, invalidateNobt } from "../modules/currentNobt/actions";
+import { getName, getCurrency, getMembers, getBills, getTotal, getFilteredBills, getFetchNobtStatus } from "../modules/currentNobt/selectors";
 import { updateBillFilter, updateBillSortProperty } from "../modules/viewState/actions";
 import { getBillFilter, getBillSortProperty } from "../modules/viewState/selectors";
 
@@ -15,15 +15,16 @@ const mapStateToProps = (state) => {
     billFilter: getBillFilter(state),
     billSortProperty: getBillSortProperty(state),
     isNobtEmpty: getBills(state).length === 0,
+    fetchStatus: getFetchNobtStatus(state)
   };
 };
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    fetchNobt: (id) => dispatch(fetchNobt(id)),
     addMember: (name) => dispatch(addMember(name)),
     updateBillFilter: (memberName) => dispatch(updateBillFilter(memberName)),
-    updateBillSortProperty: (property) => dispatch(updateBillSortProperty(property))
+    updateBillSortProperty: (property) => dispatch(updateBillSortProperty(property)),
+    invalidateNobtData: () => dispatch(invalidateNobt())
   }
 };
 

@@ -10,7 +10,6 @@ import PersonMoneyList from "components/PersonMoneyList";
 import { connect } from "react-redux";
 import { Dialog } from "react-toolbox/lib/dialog";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
-import { ProgressBar } from "react-toolbox/lib/progress_bar";
 
 // TODO: connect and retrieve bill from store
 class BillDetailOverlay extends React.Component {
@@ -21,50 +20,44 @@ class BillDetailOverlay extends React.Component {
     return (
       <Dialog active={true} onOverlayClick={this.props.goBack}>
 
-        { !bill && (
-          <ProgressBar type='circular' mode='indeterminate' multicolor />
-        ) }
+        <div className={styles.billDetailOverlay}>
 
-        { bill && (
-          <div className={styles.billDetailOverlay}>
+          <Header
+            left={<h3>{`Shares for ${bill.name}`}</h3>}
+            right={<CloseButton onClick={this.props.goBack} />}
+          />
 
-            <Header
-              left={<h3>{`Shares for ${bill.name}`}</h3>}
-              right={<CloseButton onClick={this.props.goBack} />}
-            />
+          <ListDivider />
 
-            <ListDivider />
+          <PersonMoneyList persons={bill.debtors} />
 
-            <PersonMoneyList persons={bill.debtors} />
+          <div className={styles.debteeContainer}>
 
-            <div className={styles.debteeContainer}>
+            <span>{bill.debtee.name}&nbsp;paid&nbsp;</span>
+            <Amount value={bill.debtee.amount} />
 
-              <span>{bill.debtee.name}&nbsp;paid&nbsp;</span>
-              <Amount value={bill.debtee.amount} />
-
-            </div>
-
-            <div className={styles.billDetailMetaDataContainer}>
-
-              <div className={styles.addedOnTimestamp}>
-
-                <FontIcon value="cloud_done" />
-                <span>&nbsp;created&nbsp;on&nbsp;</span>
-                <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='numeric' day='numeric' />
-
-              </div>
-
-              <div className={styles.paidOnTimestamp}>
-
-                <FontIcon value="access_time" />
-                <span>&nbsp;paid&nbsp;on&nbsp;</span>
-                <FormattedDate value={new Date(bill.date)} year='numeric' month='numeric' day='numeric' />
-
-              </div>
-
-            </div>
           </div>
-        )}
+
+          <div className={styles.billDetailMetaDataContainer}>
+
+            <div className={styles.addedOnTimestamp}>
+
+              <FontIcon value="cloud_done" />
+              <span>&nbsp;created&nbsp;on&nbsp;</span>
+              <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='numeric' day='numeric' />
+
+            </div>
+
+            <div className={styles.paidOnTimestamp}>
+
+              <FontIcon value="access_time" />
+              <span>&nbsp;paid&nbsp;on&nbsp;</span>
+              <FormattedDate value={new Date(bill.date)} year='numeric' month='numeric' day='numeric' />
+
+            </div>
+
+          </div>
+        </div>
       </Dialog>
     );
   }

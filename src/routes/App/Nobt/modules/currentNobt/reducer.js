@@ -6,7 +6,6 @@ const updateFetchNobtStatusActionPayloadHandler = {
   [AsyncActionStatus.IN_PROGRESS]: () => {},
   [AsyncActionStatus.SUCCESSFUL]: (payload) => (
     {
-      nobtFetchTimestamp: Date.now(),
       data: {
         id: payload.nobt.id,
         name: payload.nobt.name,
@@ -28,6 +27,7 @@ const handlers = {
     return {
       ...state,
       ...newState,
+      nobtFetchTimestamp: Date.now(),
       fetchNobtStatus: action.payload.status
     }
   },

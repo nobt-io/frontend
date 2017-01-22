@@ -10,12 +10,11 @@ import { FontIcon } from "react-toolbox/lib/font_icon";
 import { Link } from "react-router";
 import HOList from "containers/HOList";
 import BillItem from "./BillItem";
+import AsyncActionStatus from "../../../../const/AsyncActionStatus";
+import { ProgressBar } from "react-toolbox/lib/progress_bar";
+import { Snackbar } from "react-toolbox/lib/snackbar";
 
 export default class Nobt extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
 
   getChildContext = () => {
     return {
@@ -26,24 +25,36 @@ export default class Nobt extends React.Component {
   render = () => {
     return (
       <div className={styles.nobt}>
-        <div>
-          <AppBar>
-            <Header
-              left={<Title />}
-              right={
-                <Link to={LocationBuilder.fromWindow().push("newBill").path}>
-                  <Button theme={ {button: styles.addBillButton} } icon="add_box">
-                    Add a bill
-                  </Button>
-                </Link>
-              } />
-          </AppBar>
+        <AppBar>
+          <Header
+            left={<Title />}
+            right={
+              <Link to={LocationBuilder.fromWindow().push("newBill").path}>
+                <Button theme={ {button: styles.addBillButton} } icon="add_box">
+                  Add a bill
+                </Button>
+              </Link>
+            } />
+        </AppBar>
 
-          <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
-                             memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
+        {
+          this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
+            <div className={styles.loader}>
+              <div className={styles.separator}></div>
+              <div className={styles.progressBar}>
+                <ProgressBar type='circular' mode='indeterminate' multicolor />
+              </div>
+            </div>
+          )
+        }
 
+        {
+          this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
+            <div>
+              <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
+                                 memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
 
-          <div>
+              <div>
           <span
             onClick={() => {
               this.props.updateBillFilter("");
@@ -56,21 +67,31 @@ export default class Nobt extends React.Component {
             <FontIcon value='clear' />
           </span>
 
-            <Link to={LocationBuilder.fromWindow().push("changeSort").path}>{"Sort"}</Link>
-            <Link to={LocationBuilder.fromWindow().push("changeFilter").path}>{"Filter"}</Link>
+                <Link to={LocationBuilder.fromWindow().push("changeSort").path}>{"Sort"}</Link>
+                <Link to={LocationBuilder.fromWindow().push("changeFilter").path}>{"Filter"}</Link>
 
-          </div>
+              </div>
 
-          <HOList items={this.props.bills} renderItem={ (bill) => (
-            <BillItem key={bill.id} bill={bill} />
-          ) } />
 
-          {this.props.children}
+              <HOList items={this.props.bills} renderItem={ (bill) => (
+                <BillItem key={bill.id} bill={bill} />
+              ) } />
 
-        </div>
+              {this.props.children}
+            </div>
+          )
+        }
+
+        <Snackbar
+          action='Retry?'
+          active={this.props.fetchStatus === AsyncActionStatus.FAILED}
+          label='Failed to fetch nobt.'
+          type='warning'
+          onClick={this.props.invalidateNobtData}  // TODO: Make this work. NobtLoader somehow doesn't react on that.
+        />
       </div>
     );
-  }
+  };
 
   static propTypes = {
     name: React.PropTypes.string.isRequired,
@@ -80,6 +101,7 @@ export default class Nobt extends React.Component {
     billFilter: React.PropTypes.string.isRequired,
     billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
+    fetchStatus: React.PropTypes.string.isRequired
   };
 
   static childContextTypes = {

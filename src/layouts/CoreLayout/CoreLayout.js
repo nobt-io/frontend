@@ -3,7 +3,7 @@ import classes from "./CoreLayout.scss";
 import "../../styles/core.scss";
 
 export const CoreLayout = ({children}) => (
-  <div className='container' style={{padding: 0}}>
+  <div className={classes.container} >
     <div className={classes.mainContainer}>
       {children}
     </div>

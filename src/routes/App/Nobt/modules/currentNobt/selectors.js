@@ -6,7 +6,7 @@ import AsyncActionStatus from "const/AsyncActionStatus";
 
 export const getCurrentNobt = (state) => state.App.currentNobt.data;
 const getNobtFetchTimestamp = (state) => state.App.currentNobt.nobtFetchTimestamp;
-const getFetchNobtStatus = (state) => state.App.currentNobt.fetchNobtStatus;
+export const getFetchNobtStatus = (state) => state.App.currentNobt.fetchNobtStatus;
 
 export const getName = createSelector([ getCurrentNobt ], (nobt) => nobt.name);
 export const getMembers = createSelector([ getCurrentNobt ], (nobt) => nobt.participatingPersons);
