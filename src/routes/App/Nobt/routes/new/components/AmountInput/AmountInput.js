@@ -11,7 +11,7 @@ export const AmountInput = (props) => (
       <span>EUR</span>
     </div>
     <div className={styles.MoneyInput}>
-      <CurrencyInput theme={InputTheme} value={props.value || 0} onChange={props.onChange}/>
+      <CurrencyInput theme={InputTheme} type="number" value={props.value || 0} onChange={props.onChange}/>
     </div>
   </div>
 );
