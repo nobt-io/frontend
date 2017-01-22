@@ -62,7 +62,7 @@ export default class Nobt extends React.Component {
           </div>
 
           <HOList items={this.props.bills} renderItem={ (bill) => (
-            <BillItem key={bill.id} bill={bill} location={this.props.location} />
+            <BillItem key={bill.id} bill={bill} />
           ) } />
 
           {this.props.children}
@@ -80,7 +80,6 @@ export default class Nobt extends React.Component {
     billFilter: React.PropTypes.string.isRequired,
     billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
-    navigateAddNewBill: React.PropTypes.func.isRequired
   };
 
   static childContextTypes = {

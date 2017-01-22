@@ -5,6 +5,8 @@ import { AvatarList, AvatarSize } from "components/Avatar";
 import Amount from "components/Amount";
 import { Person, AvatarPosition } from "components/Person";
 import { connect } from "react-redux";
+import withNavigation from "components/hoc/withNavigation";
+import LocationBuilder from "../../modules/navigation/LocationBuilder";
 
 // TODO: Embed link that opens detail page
 class BillItem extends React.Component {
@@ -21,7 +23,7 @@ class BillItem extends React.Component {
     return (
       <Card>
 
-        <div onClick={ () => {} } className={styles.billContainer}>
+        <div onClick={ () => LocationBuilder.fromWindow().push(bill.id).apply(this.props.push) } className={styles.billContainer}>
 
           <div className={styles.billMetaDataContainer}>
             <div className={styles.nameContainer}>
@@ -52,10 +54,7 @@ BillItem.propTypes = {
   bill: React.PropTypes.object.isRequired
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch
-  }
-};
-
-export default connect(() => ({}), mapDispatchToProps)(BillItem)
+export default connect(
+  (state) => ({}),
+  (dispatch) => ({})
+)(withNavigation(BillItem))

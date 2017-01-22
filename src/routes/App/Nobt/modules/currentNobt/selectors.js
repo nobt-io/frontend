@@ -27,6 +27,26 @@ export const getDebtSummaries = createSelector([ getTransactions, getMembers ], 
     .filter(s => s.me.amount !== 0); // we do not want debt summaries with value 0
 });
 
+const deNormalizeBill = (e) => {
+
+  const debteeName = e.debtee;
+  const sumOfShares = sumBill(e);
+
+  const debtors = e.shares.map(share => ({name: share.debtor, amount: share.amount}));
+
+  return {
+    id: e.id,
+    name: e.name,
+    date: e.date,
+    createdOn: e.createdOn,
+    debtee: {
+      name: debteeName,
+      amount: sumOfShares
+    },
+    debtors: debtors
+  };
+}
+
 export const getFilteredBills = createSelector([ getBills, getBillFilter, getBillSortProperty ], (bills, filter, sort) => {
 
   const NO_FILTER = '';
@@ -43,25 +63,7 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
   var matchDebtors = (bill) => bill.debtors.map(d => d.name).filter(matchName).length > 0;
 
   const filteredAndSortedBills = bills
-    .map(e => {
-
-      const debteeName = e.debtee;
-      const sumOfShares = sumBill(e);
-
-      const debtors = e.shares.map(share => ({name: share.debtor, amount: share.amount}));
-
-      return {
-        id: e.id,
-        name: e.name,
-        date: e.date,
-        createdOn: e.createdOn,
-        debtee: {
-          name: debteeName,
-          amount: sumOfShares
-        },
-        debtors: debtors
-      };
-    })
+    .map(deNormalizeBill)
     .filter(bill => (matchDebtee(bill) || matchDebtors(bill)))
     .sort(sortFunctions[ sort ] || NO_SORT);
 
@@ -69,6 +71,12 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
 
   return filteredAndSortedBills;
 
+});
+
+const getBillId = (state, props) => props.params.billId;
+
+export const makeGetBill = () => createSelector( [getBills, getBillId], (bills, billId) => {
+  return bills.map(deNormalizeBill).find( bill => bill.id == billId );
 });
 
 export const getTotal = createSelector([ getBills ], (bills) => {

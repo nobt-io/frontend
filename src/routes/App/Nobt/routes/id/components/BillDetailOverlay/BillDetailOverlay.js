@@ -9,60 +9,62 @@ import Amount from "components/Amount";
 import PersonMoneyList from "components/PersonMoneyList";
 import { connect } from "react-redux";
 import { Dialog } from "react-toolbox/lib/dialog";
+import { makeGetBill } from "../../../../modules/currentNobt/selectors";
+import { ProgressBar } from "react-toolbox/lib/progress_bar";
 
 // TODO: connect and retrieve bill from store
 class BillDetailOverlay extends React.Component {
 
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render = () => {
 
     const {bill} = this.props;
-    const debtee = bill.debtee;
-
     return (
       <Dialog active={true} onOverlayClick={this.props.goBack}>
-        <div className={styles.billDetailOverlay}>
 
-          <Header
-            left={<h3>{`Shares for ${bill.name}`}</h3>}
-            right={<CloseButton onClick={this._overlay.hide} />}
-          />
+        { !bill && (
+          <ProgressBar type='circular' mode='indeterminate' multicolor />
+        ) }
 
-          <ListDivider />
+        { bill && (
+          <div className={styles.billDetailOverlay}>
 
-          <PersonMoneyList persons={bill.debtors} />
+            <Header
+              left={<h3>{`Shares for ${bill.name}`}</h3>}
+              right={<CloseButton onClick={this.props.goBack} />}
+            />
 
-          <div className={styles.debteeContainer}>
+            <ListDivider />
 
-            <span>{debtee.name}&nbsp;paid&nbsp;</span>
-            <Amount value={debtee.amount} />
+            <PersonMoneyList persons={bill.debtors} />
 
-          </div>
+            <div className={styles.debteeContainer}>
 
-
-          <div className={styles.billDetailMetaDataContainer}>
-
-            <div className={styles.addedOnTimestamp}>
-
-              <FontIcon value="cloud_done" />
-              <span>&nbsp;created&nbsp;on&nbsp;</span>
-              <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='numeric' day='numeric' />
+              <span>{bill.debtee.name}&nbsp;paid&nbsp;</span>
+              <Amount value={bill.debtee.amount} />
 
             </div>
 
-            <div className={styles.paidOnTimestamp}>
+            <div className={styles.billDetailMetaDataContainer}>
 
-              <FontIcon value="access_time" />
-              <span>&nbsp;paid&nbsp;on&nbsp;</span>
-              <FormattedDate value={new Date(bill.date)} year='numeric' month='numeric' day='numeric' />
+              <div className={styles.addedOnTimestamp}>
+
+                <FontIcon value="cloud_done" />
+                <span>&nbsp;created&nbsp;on&nbsp;</span>
+                <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='numeric' day='numeric' />
+
+              </div>
+
+              <div className={styles.paidOnTimestamp}>
+
+                <FontIcon value="access_time" />
+                <span>&nbsp;paid&nbsp;on&nbsp;</span>
+                <FormattedDate value={new Date(bill.date)} year='numeric' month='numeric' day='numeric' />
+
+              </div>
 
             </div>
-
           </div>
-        </div>
+        )}
       </Dialog>
     );
   }
@@ -72,10 +74,17 @@ BillDetailOverlay.propTypes = {
   bill: React.PropTypes.object.isRequired
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch
+const makeMapStateToProps = () => {
+  const getBill = makeGetBill();
+
+  return (state, props) => {
+    return {
+      bill: getBill(state, props)
+    }
   }
 };
 
-export default connect(() => ({}), mapDispatchToProps)(BillDetailOverlay)
+export default connect(
+  makeMapStateToProps,
+  (dispatch) => ({})
+)(BillDetailOverlay)
