@@ -4,14 +4,14 @@ import Amount from "components/Amount"
 
 export const NobtSummaryHeader = (props) => {
 
-   var nobtDetails = (props.isNobtEmpty)
-    ? ""
-    : (<div className={styles.nobtSummary}>{<Amount value={props.totalAmount}/>} | {props.memberCount} Members </div>);
-
   return (
     <div className={styles.container}>
       <h1 className={styles.nobtName}>{props.nobtName}</h1>
-      {nobtDetails}
+
+      {!props.isNobtEmpty && (
+        <div className={styles.nobtSummary}>{<Amount value={props.totalAmount}/>} | {props.memberCount} Members </div>
+      )}
+
     </div>
   );
 };

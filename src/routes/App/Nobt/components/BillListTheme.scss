@@ -1,7 +1,25 @@
+$padding: 1.5rem;
+
 .list {
-  padding: 1.5rem !important;
+  padding: 0 $padding !important;
 }
 
 .item:not(:last-child) {
-  padding-bottom: 1.5rem;
+  padding-bottom: $padding;
+}
+
+.menu {
+
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: $padding ($padding + 0.5rem) 0;
+}
+
+.title {
+
 }

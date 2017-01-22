@@ -2,18 +2,18 @@ import React from "react";
 import { Button } from "react-toolbox/lib/button";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
-import BillListTheme from "./BillListTheme.scss"
+import BillListTheme from "./BillListTheme.scss";
 import Title from "components/Title";
 import Header from "components/Header";
 import NobtSummaryHeader from "./NobtSummaryHeader";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
-import { FontIcon } from "react-toolbox/lib/font_icon";
 import { Link } from "react-router";
 import HOList from "containers/HOList";
 import BillItem from "./BillItem";
 import AsyncActionStatus from "../../../../const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
+import { IconMenu, MenuItem, MenuDivider, Menu } from 'react-toolbox/lib/menu';
 
 export default class Nobt extends React.Component {
 
@@ -55,24 +55,26 @@ export default class Nobt extends React.Component {
               <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
                                  memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
 
-              <div>
-          <span
-            onClick={() => {
-              this.props.updateBillFilter("");
-              this.props.updateBillSortProperty("Date");
-            }}
-            // TODO: Style filter and sort links
-            // style={{display: defaultFilter ? "none" : "inline"}}
-            // className={styles.filterIcon}
-          >
-            <FontIcon value='clear' />
-          </span>
+              <div className={BillListTheme.header}>
 
-                <Link to={LocationBuilder.fromWindow().push("changeSort").path}>{"Sort"}</Link>
-                <Link to={LocationBuilder.fromWindow().push("changeFilter").path}>{"Filter"}</Link>
+                <div className={BillListTheme.title}>
+                  <h4>Your bills:</h4>
+                </div>
 
+                <IconMenu className={BillListTheme.menu}>
+                  <MenuItem
+                    caption="Sort bills"
+                    icon="sort"
+                    onClick={ () => LocationBuilder.fromWindow().push("changeSort").apply(this.props.push) }
+                  />
+
+                  <MenuItem
+                    caption="Filter bills"
+                    icon="filter_list"
+                    onClick={ () => LocationBuilder.fromWindow().push("changeFilter").apply(this.props.push) }
+                  />
+                </IconMenu>
               </div>
-
 
               <HOList
                 theme={BillListTheme}

@@ -4,6 +4,7 @@ import { addMember, invalidateNobt } from "../modules/currentNobt/actions";
 import { getName, getCurrency, getMembers, getBills, getTotal, getFilteredBills, getFetchNobtStatus } from "../modules/currentNobt/selectors";
 import { updateBillFilter, updateBillSortProperty } from "../modules/viewState/actions";
 import { getBillFilter, getBillSortProperty } from "../modules/viewState/selectors";
+import withNavigation from "components/hoc/withNavigation";
 
 const mapStateToProps = (state) => {
   return {
@@ -28,4 +29,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nobt)
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(Nobt))
