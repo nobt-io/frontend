@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import withNavigation from "components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 
-// TODO: Embed link that opens detail page
 class BillItem extends React.Component {
 
   constructor(props, context) {

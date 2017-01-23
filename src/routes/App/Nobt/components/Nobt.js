@@ -13,13 +13,13 @@ import BillItem from "./BillItem";
 import AsyncActionStatus from "../../../../const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
-import { IconMenu, MenuItem, MenuDivider, Menu } from 'react-toolbox/lib/menu';
+import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 
 export default class Nobt extends React.Component {
 
   getChildContext = () => {
     return {
-      currency: this.props.currency
+      currency: this.props.currency // TODO FIXME: doesn't work
     };
   };
 

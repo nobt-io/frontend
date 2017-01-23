@@ -11,7 +11,6 @@ import { connect } from "react-redux";
 import { Dialog } from "react-toolbox/lib/dialog";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 
-// TODO: connect and retrieve bill from store
 class BillDetailOverlay extends React.Component {
 
   render = () => {
