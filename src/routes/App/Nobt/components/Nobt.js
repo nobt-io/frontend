@@ -14,6 +14,7 @@ import AsyncActionStatus from "../../../../const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
+import ReactPullToRefresh from "react-pull-to-refresh"
 
 export default class Nobt extends React.Component {
 
@@ -43,9 +44,12 @@ export default class Nobt extends React.Component {
           )
         }
 
+
         {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
-            <div>
+
+            <ReactPullToRefresh onRefresh={this.props.invalidateNobtData}>
+
               <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
                                  memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
 
@@ -80,7 +84,8 @@ export default class Nobt extends React.Component {
                 ) } />
 
               {this.props.children}
-            </div>
+
+            </ReactPullToRefresh>
           )
         }
 

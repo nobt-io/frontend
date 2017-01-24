@@ -10,21 +10,21 @@ export default function withNobtLoader(WrappedComponent) {
 
     constructor(props) {
       super(props);
-      this.fetchNobt(props);
+      NobtLoader.fetchNobtIfNecessary(props);
     }
 
     componentWillReceiveProps(nextProps) {
-      this.fetchNobt(nextProps)
+      NobtLoader.fetchNobtIfNecessary(nextProps)
     }
 
-    fetchNobt(props) {
-      let nobtId = props.params.nobtId;
+    static fetchNobtIfNecessary(props) {
+      let nobtId = props.routeParams.nobtId;
 
-      if (this.props.shouldFetchNobt) {
+      if (props.shouldFetchNobt) {
 
         debug("NobtLoader")("Fetching nobt.");
 
-        this.props.fetchNobt(nobtId);
+        props.fetchNobt(nobtId);
       }
     }
 

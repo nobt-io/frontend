@@ -13,9 +13,8 @@ export const getMembers = createSelector([ getCurrentNobt ], (nobt) => nobt.part
 export const getCurrency = createSelector([ getCurrentNobt ], (nobt) => nobt.currency);
 export const getBills = createSelector([ getCurrentNobt ], (nobt) => nobt.bills);
 export const getTransactions = createSelector([ getCurrentNobt ], (nobt) => nobt.transactions);
-export const isNobtDataOutdated = createSelector([ getNobtFetchTimestamp ], (timestamp) => timestamp === null);
 
-// TODO: Optimize this.
+export const isNobtDataOutdated = createSelector([ getNobtFetchTimestamp ], (timestamp) => timestamp === null);
 export const shouldFetchNobt = createSelector( [isNobtDataOutdated, getFetchNobtStatus], (isOutdated, status) => {
   return isOutdated && status !== AsyncActionStatus.IN_PROGRESS;
 });
