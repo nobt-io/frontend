@@ -17,12 +17,6 @@ import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 
 export default class Nobt extends React.Component {
 
-  getChildContext = () => {
-    return {
-      currency: this.props.currency // TODO FIXME: doesn't work
-    };
-  };
-
   render = () => {
     return (
       <div className={styles.nobt}>
@@ -110,9 +104,5 @@ export default class Nobt extends React.Component {
     billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
     fetchStatus: React.PropTypes.string.isRequired
-  };
-
-  static childContextTypes = {
-    currency: React.PropTypes.string
   };
 };
