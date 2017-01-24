@@ -23,6 +23,7 @@ export default connect((state, ownProps) => {
     onShareValueChanged: (name, value) => dispatch({type: "ShareValueChanged", payload: {name, value}}),
     onSplitStrategyChanged: (splitStrategy) => dispatch({type: "SplitStrategyChanged", payload: {strategy: splitStrategy}}),
     onAmountChanged: (amount) => dispatch({type: "AmountChanged", payload: {amount}}),
-    onDescriptionChanged: (description) => dispatch({type: "DescriptionChanged", payload: {description}})
+    onDescriptionChanged: (description) => dispatch({type: "DescriptionChanged", payload: {description}}),
+    clearAddBillForm: () => dispatch({type: "ClearAddBillForm"})
   }
 })(AddBillForm)

@@ -16,12 +16,12 @@ import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 /*
 TODO:
  * - Re-implement "error"-message as soon as the user fails to split the bill properly.
- * - Clear addBillForm section in store in componentWillMount
  */
 export default class AddBillForm extends React.Component {
 
   constructor(props) {
     super(props)
+    props.clearAddBillForm()
   }
 
   handleOnSubmit = () => {

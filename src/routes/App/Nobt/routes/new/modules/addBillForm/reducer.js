@@ -88,6 +88,10 @@ export const addBillFormReducer = (state = initialState, action) => {
         description: action.payload.description
       }
     }
+
+    case "ClearAddBillForm": {
+      return initialState;
+    }
   }
 
   return state;
