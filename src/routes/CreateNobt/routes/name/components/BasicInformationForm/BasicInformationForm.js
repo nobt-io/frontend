@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Input } from "react-toolbox/lib/input";
-import { Button } from "react-toolbox/lib/button";
+import Button from "components/Button";
 import { Dropdown } from "react-toolbox/lib/dropdown";
 import styles from "./BasicInformationForm.scss";
 import NobtNameInputTheme from "./NobtNameInputTheme.scss";
@@ -40,7 +40,6 @@ class BasicInformationForm extends React.Component {
           />
         </div>
 
-
         <div className={styles.formLine}>
           <label>Choose currency</label>
           <Dropdown
@@ -64,6 +63,7 @@ class BasicInformationForm extends React.Component {
             primary
             theme={ContinueButtonTheme}
             disabled={ !this.props.nobtName }
+            rightIcon
             icon="arrow_forward"
             onClick={ () => LocationBuilder.fromWindow().pop().push("members").apply(this.props.push) }
           />

@@ -11,7 +11,7 @@ export default (store) => ({
         let previousStepIncomplete = !getNobtName(store.getState());
 
         if (previousStepIncomplete) {
-          LocationBuilder.fromWindow().pop().push("name").apply(replace)
+          // LocationBuilder.fromWindow().pop().push("name").apply(replace)
         }
       }
     }
