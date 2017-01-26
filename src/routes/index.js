@@ -1,6 +1,6 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from "../layouts/CoreLayout/CoreLayout";
-import LandingRoute from "./Landing";
+import LandingRouteFactory from "./Landing";
 import AppRouteFactory from "./App";
 
 /*  Note: Instead of using JSX, we recommend using react-router
@@ -9,7 +9,7 @@ import AppRouteFactory from "./App";
 export default (store) => ({
   path: '/',
   component: CoreLayout,
-  indexRoute: LandingRoute,
+  indexRoute: LandingRouteFactory(store),
   childRoutes: [
     AppRouteFactory(store)
   ]

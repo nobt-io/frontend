@@ -1,6 +1,13 @@
-import Landing from './components/Landing'
+import LandingPage from './components/LandingPage'
+import reducer from "./modules/reducer"
+import { injectReducer } from "../../store/reducers";
 
 // Sync route definition
-export default {
-  component : Landing
+export default (store) => {
+
+  injectReducer(store, {key: 'newNobtForm', reducer});
+
+  return {
+    component : LandingPage
+  }
 }

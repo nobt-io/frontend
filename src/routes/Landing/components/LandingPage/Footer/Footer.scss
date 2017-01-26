@@ -1,0 +1,42 @@
+.footerContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background-color: #1e2125;
+  border-top: 1px solid white;
+  font-size: 1.5rem;
+
+  .helpFooter, .loveFooter {
+    color: white;
+    text-align: center;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .helpFooter {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+
+    a, a:hover, a:active, a:visited{color: white; text-decoration: none}
+
+    .helpIcon {
+      margin: 5px 5px 0;
+    }
+  }
+  .loveFooter {
+    font-size: 1.3rem;
+
+    .loveIcon {
+      color: #DB504A;
+      font-size: 1rem;
+      margin: 3px 3px 0;
+
+      span{font-size: 1.8rem}
+    }
+  }
+}
