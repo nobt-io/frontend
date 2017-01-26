@@ -17,8 +17,12 @@
   text-align: center;
 
   p {
-    color: lighten(black, 70);
+    color: $color-button-grey-dark;
   }
+}
+
+.introductionTextContainer {
+  color: $color-button-grey-dark;
 }
 
 .memberList {

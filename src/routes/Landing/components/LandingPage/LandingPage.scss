@@ -12,18 +12,20 @@
 
   width: 100vw;
   height: 100vh;
+
+  text-align: center;
 }
 
 .title {
-
-  text-align: center;
   font-size: 7rem;
   color: $color-primary-dark;
 }
 
 .slogan {
-  text-align: center;
-
   color: $color-primary-dark;
   font: 400 2em 'Handlee', Helvetica, Sans-serif;
+}
+
+.buttonContainer {
+  margin-top: 4rem;
 }

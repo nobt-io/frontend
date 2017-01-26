@@ -1,10 +1,9 @@
 import React from "react";
-import styles from "./LandingPage.scss"
-import NewNobtForm from "./NewNobtForm";
+import styles from "./LandingPage.scss";
 import Footer from "./Footer";
-import BackgroundImage from './assets/bg.jpg'
-import { Link } from "react-router";
+import BackgroundImage from "./assets/bg.jpg";
 import LocationBuilder from "../../../App/modules/navigation/LocationBuilder";
+import Button from "components/Button";
 
 export default class LandingPage extends React.Component {
 
@@ -19,11 +18,16 @@ export default class LandingPage extends React.Component {
         <div className={styles.title}>nobt.io</div>
         <div className={styles.slogan}>Split your bills with ease</div>
 
-        <Link to={LocationBuilder.fromWindow().push("create").path}>
-          Create Nobt
-        </Link>
-      </div>
+        <div className={styles.buttonContainer}>
+          <Button
+            label="Create a Nobt"
+            onClick={() => LocationBuilder.fromWindow().push("create").apply(this.props.push)}
+            raised
+            primary
+          />
+        </div>
 
+      </div>
 
       <Footer />
     </div>
