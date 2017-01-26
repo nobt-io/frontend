@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./LandingPage.scss";
-import Footer from "./Footer";
 import BackgroundImage from "./assets/bg.jpg";
 import LocationBuilder from "../../../App/modules/navigation/LocationBuilder";
 import Button from "components/Button";
@@ -28,8 +27,6 @@ export default class LandingPage extends React.Component {
         </div>
 
       </div>
-
-      <Footer />
     </div>
   )
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import SingleInputInlineForm from "components/SingleInputInlineForm";
 import styles from "./AddMembersForm.scss";
-import PersonListTheme from "./PersonListTheme.scss"
+import PersonListTheme from "./PersonListTheme.scss";
 import HOList from "containers/HOList";
 import { Button, IconButton } from "react-toolbox/lib/button";
 import { Person, AvatarPosition } from "components/Person";
@@ -17,7 +17,6 @@ class AddMembersForm extends React.Component {
 
   render = () => (
     <div>
-
       <h1>Add participants</h1>
 
       <div className={styles.introductionTextContainer}>

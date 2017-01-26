@@ -6,7 +6,6 @@ import styles from "./BasicInformationForm.scss";
 import NobtNameInputTheme from "./NobtNameInputTheme.scss";
 import NobtCurrencyDropdownTheme from "./NobtCurrencyDropdownTheme.scss";
 import ContinueButtonTheme from "./ContinueButtonTheme.scss";
-
 import { connect } from "react-redux";
 import { getNobtName, getCurrency } from "../../../../modules/selectors";
 import { changeNobtName, selectCurrency } from "../../../../modules/actions";
@@ -22,10 +21,10 @@ class BasicInformationForm extends React.Component {
   render = () => (
     <div className={styles.formContainer}>
 
-      <h1 className={styles.title}>Create Nobt</h1>
+      <h1 className={styles.title}>Create</h1>
 
       <div className={styles.introductionTextContainer}>
-        <p>Nobts are used for any occasion where you want to split bills among a group of people.</p>
+        <p>Nobts are used for any occasion where you want to split bills among a group of people. </p>
       </div>
 
       <div className={styles.form}>
