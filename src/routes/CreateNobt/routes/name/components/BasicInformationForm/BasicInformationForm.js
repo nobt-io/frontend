@@ -8,8 +8,8 @@ import NobtCurrencyDropdownTheme from "./NobtCurrencyDropdownTheme.scss";
 import ContinueButtonTheme from "./ContinueButtonTheme.scss";
 
 import { connect } from "react-redux";
-import { getNobtName, getCurrency } from "../../modules/selectors";
-import { changeNobtName, selectCurrency } from "../../modules/actions";
+import { getNobtName, getCurrency } from "../../../../modules/selectors";
+import { changeNobtName, selectCurrency } from "../../../../modules/actions";
 
 const currencies = [
   {value: 'EUR', label: '\u20ac - Euro'},

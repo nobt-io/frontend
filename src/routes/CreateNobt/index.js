@@ -1,6 +1,8 @@
 import reducer from "./modules/reducer";
 import { injectReducer } from "../../store/reducers";
-import BasicInformationForm from "./components/BasicInformationForm";
+import WizardContainer from "./containers/WizardContainer";
+import NameRoute from "./routes/name";
+import LocationBuilder from "../App/modules/navigation/LocationBuilder";
 
 export default (store) => {
 
@@ -8,11 +10,12 @@ export default (store) => {
 
   return {
     path: 'create',
-    component: BasicInformationForm,
+    component: WizardContainer,
     indexRoute: {
-      component: null
+      onEnter: (nextState, replace) => LocationBuilder.fromWindow().push("name").apply(replace)
     },
     childRoutes: [
+      NameRoute
     ]
   }
 }
