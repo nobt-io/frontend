@@ -22,7 +22,7 @@ export const getCreatedNobtId = createSelector([getNewNobtSlice], (state) => sta
 
 export const isNameValid = createSelector([ getNobtName ], name => name !== undefined && name.length > 0);
 export const arePersonNamesValid = createSelector([ getPersonNames ], names => names !== undefined && names.length > 0);
-export const  canCreateNobt = createSelector([ isNameValid, arePersonNamesValid ], (isNameValid, arePersonsValid) => isNameValid && arePersonsValid);
+export const canCreateNobt = createSelector([ isNameValid, arePersonNamesValid ], (isNameValid, arePersonsValid) => isNameValid && arePersonsValid);
 
 // different from the other selectors, as it returns a function and not an object
 export const isEvilTwinFactory = createSelector([ getPersonNames ], names => {

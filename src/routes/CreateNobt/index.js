@@ -2,7 +2,7 @@ import reducer from "./modules/reducer";
 import { injectReducer } from "../../store/reducers";
 import WizardContainer from "./containers/WizardContainer";
 import NameRoute from "./routes/name";
-import MembersRoute from "./routes/members";
+import MembersRouteFactory from "./routes/members";
 import LocationBuilder from "../App/modules/navigation/LocationBuilder";
 
 export default (store) => {
@@ -17,7 +17,7 @@ export default (store) => {
     },
     childRoutes: [
       NameRoute,
-      MembersRoute
+      MembersRouteFactory(store)
     ]
   }
 }
