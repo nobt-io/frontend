@@ -1,5 +1,5 @@
 import { ADD_PERSON, REMOVE_PERSON, SELECT_CURRENCY, CHANGE_NOBT_NAME, UPDATE_CREATE_NOBT_STATUS } from "./actions"
-import AsyncActionStatus from "const/AsyncActionStatus"
+import AsyncActionStatus from "../../../const/AsyncActionStatus"
 
 const handlers = {
 

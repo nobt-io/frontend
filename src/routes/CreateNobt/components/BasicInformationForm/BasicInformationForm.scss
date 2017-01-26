@@ -1,0 +1,34 @@
+.formContainer {
+
+  max-width: 480px;
+  margin: 0 auto;
+
+  padding: 2rem;
+
+  background-color: white;
+  min-height: 100vh;
+}
+
+.continueButtonContainer {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.form {
+  margin: 3rem 0;
+}
+
+.introductionTextContainer {
+  font-size: larger;
+}
+
+.formLine {
+  .description {
+    margin-top: -1rem;
+    font-size: small;
+  }
+}
+
+.introductionTextContainer, .description {
+  color: darken($color-button-grey, 30)
+}

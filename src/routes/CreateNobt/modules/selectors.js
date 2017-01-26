@@ -11,9 +11,9 @@ import { createSelector } from "reselect";
 //   }, ...args);
 // }
 
-const getNewNobtSlice = (state) => state.newNobtForm;
+const getNewNobtSlice = (state) => state.createNobtForm;
 
-export const getSelectedCurrency = createSelector([getNewNobtSlice], (state) => state.selectedCurrency);
+export const getCurrency = createSelector([getNewNobtSlice], (state) => state.selectedCurrency);
 export const getNobtName = createSelector([getNewNobtSlice], (state) => state.chosenName);
 export const getPersonNames = createSelector([getNewNobtSlice], (state) => state.personNames);
 
@@ -28,4 +28,3 @@ export const  canCreateNobt = createSelector([ isNameValid, arePersonNamesValid 
 export const isEvilTwinFactory = createSelector([ getPersonNames ], names => {
   return (candidate) => names.indexOf(candidate) > -1;
 });
-

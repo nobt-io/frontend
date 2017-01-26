@@ -1,5 +1,5 @@
-import Client from "api/api";
-import AsyncActionStatus from "const/AsyncActionStatus"
+import Client from "../../../api/api";
+import AsyncActionStatus from "../../../const/AsyncActionStatus"
 import utils from "utils"
 
 export const UPDATE_CREATE_NOBT_STATUS = 'NewNobt.UPDATE_CREATE_NOBT_STATUS';
