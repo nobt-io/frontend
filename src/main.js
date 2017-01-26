@@ -12,6 +12,7 @@ import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
 import AppContainer from "./containers/AppContainer";
 import {IntlProvider} from "react-intl";
+import routeFactory from "routes";
 
 // ========================================================
 // Browser History Setup
@@ -48,7 +49,8 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const routes = require('./routes/index').default(store)
+
+  let routes = routeFactory(store);
 
   ReactDOM.render(
     <IntlProvider locale={navigator.language}>

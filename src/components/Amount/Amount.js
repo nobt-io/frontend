@@ -1,7 +1,7 @@
 import React from "react";
 import {FormattedNumber} from "react-intl";
 import { connect } from "react-redux";
-import { getCurrency } from "../../routes/App/Nobt/modules/currentNobt/selectors";
+import { getCurrency } from "../../routes/App/modules/currentNobt/selectors";
 
 const value = (props) => (props.absolute) ? Math.abs(props.value): props.value;
 

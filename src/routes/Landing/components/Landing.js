@@ -33,6 +33,8 @@ export const Landing = React.createClass({
         <div className={styles.container}>
           <div className={styles.title}>nobt.io</div>
           <div className={styles.slogan}>Split your bills with ease</div>
+
+
           <div className={styles.createNobtContainer}>
             <div className={styles.inputContainer}>
               <Input placeholder="barbecue with friends" type="text" maxLength={ 40 }
@@ -43,10 +45,14 @@ export const Landing = React.createClass({
               <Button theme={{button: styles.button}} icon='check' label='create nobt' onClick={this.onCreateNobt} accent raised />
             </div>
           </div>
+
+
           <div style={{visibility: addressVisibility}}  className={styles.addressContainer}>
             <div className={styles.icon}><FontIcon value='link' /></div>
             <div className={styles.url}><a href={"http://nobt.io/new/"+this.state.nobtName}>nobt.io/new/<b>{this.state.nobtName}</b></a></div>
           </div>
+
+
         </div>
         <div style={{backgroundImage: "url('" + Phones + "')"}} className={styles.phoneContainer}>
         </div>

@@ -9,14 +9,14 @@ function createSelector(loggerName, ...args) {
 
   }, ...args);
 }
+const getNewNobtSlice = (state) => state.newNobtForm;
 
-export const getSelectedCurrency = (state) => state.NewNobt.selectedCurrency;
-export const getChosenName = (state) => state.NewNobt.chosenName;
-export const getPersonNames = (state) => state.NewNobt.personNames;
+export const getSelectedCurrency = createSelector([getNewNobtSlice], (state) => state.selectedCurrency);
+export const getChosenName = createSelector([getNewNobtSlice], (state) => state.chosenName);
+export const getPersonNames = createSelector([getNewNobtSlice], (state) => state.personNames);
 
-export const getCreationStatus = (state) => state.NewNobt.createNobtStatus;
-export const getCreatedNobtId = (state) => state.NewNobt.createdNobtId;
-
+export const getCreationStatus = createSelector([getNewNobtSlice], (state) => state.createNobtStatus);
+export const getCreatedNobtId = createSelector([getNewNobtSlice], (state) => state.createdNobtId);
 
 export const isNameValid = createSelector("isNameValid", [ getChosenName ], name => name !== undefined && name.length > 0);
 export const arePersonNamesValid = createSelector("arePersonNamesValid", [ getPersonNames ], names => names !== undefined && names.length > 0);

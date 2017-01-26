@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchNobt } from "../../routes/App/Nobt/modules/currentNobt/actions";
-import { shouldFetchNobt } from "../../routes/App/Nobt/modules/currentNobt/selectors";
+import { fetchNobt } from "../../routes/App/modules/currentNobt/actions";
+import { shouldFetchNobt } from "../../routes/App/modules/currentNobt/selectors";
 import debug from "debug";
 
 export default function withNobtLoader(WrappedComponent) {
