@@ -1,6 +1,7 @@
 import Client from "../../../api/api";
-import AsyncActionStatus from "../../../const/AsyncActionStatus"
-import utils from "utils"
+import AsyncActionStatus from "../../../const/AsyncActionStatus";
+import utils from "utils";
+import { getNobtName, getCurrency, getPersonNames } from "./selectors";
 
 export const UPDATE_CREATE_NOBT_STATUS = 'NewNobt.UPDATE_CREATE_NOBT_STATUS';
 
@@ -44,12 +45,10 @@ export function createNobt() {
 
     dispatch(createNobtStarted());
 
-    var state = getState().NewNobt;
-
-    var nobtToCreate = {
-      nobtName: state.chosenName,
-      currency: state.selectedCurrency,
-      explicitParticipants: state.personNames
+    let nobtToCreate = {
+      nobtName: getNobtName(getState()),
+      currency: getCurrency(getState()),
+      explicitParticipants: getPersonNames(getState())
     };
 
     Client.createNobt(nobtToCreate).then(

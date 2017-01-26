@@ -8,7 +8,7 @@ import { Button, IconButton } from "react-toolbox/lib/button";
 import { Person, AvatarPosition } from "components/Person";
 import { AvatarSize } from "components/Avatar";
 import { getPersonNames } from "../../../../modules/selectors";
-import { addPerson, removePerson } from "../../../../modules/actions";
+import { addPerson, removePerson, createNobt } from "../../../../modules/actions";
 import CreateNobtButtonTheme from "./CreateNobtButtonTheme.scss";
 import AddButtonTheme from "./AddButtonTheme.scss";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
@@ -51,7 +51,6 @@ class AddMembersForm extends React.Component {
                 />
               </div>
             )} />
-
         </div>
 
         <div className={styles.createNobtButtonContainer}>
@@ -62,10 +61,9 @@ class AddMembersForm extends React.Component {
             theme={CreateNobtButtonTheme}
             disabled={ this.props.personNames.length == 0 }
             icon="done"
-            onClick={ () => {} }
+            onClick={ this.props.createNobt }
           />
         </div>
-
 
         <div className={styles.note}>
           <p>Don't mind about forgetting someone, <br/> you can add further people later.</p>
@@ -75,7 +73,6 @@ class AddMembersForm extends React.Component {
 
     </div>
   )
-
 }
 
 export default connect(
@@ -85,5 +82,6 @@ export default connect(
   {
     addPerson,
     removePerson,
+    createNobt
   }
 )(AddMembersForm)
