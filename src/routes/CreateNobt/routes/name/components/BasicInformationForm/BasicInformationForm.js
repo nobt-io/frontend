@@ -10,6 +10,7 @@ import ContinueButtonTheme from "./ContinueButtonTheme.scss";
 import { connect } from "react-redux";
 import { getNobtName, getCurrency } from "../../../../modules/selectors";
 import { changeNobtName, selectCurrency } from "../../../../modules/actions";
+import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
 
 const currencies = [
   {value: 'EUR', label: '\u20ac - Euro'},
@@ -64,6 +65,7 @@ class BasicInformationForm extends React.Component {
             theme={ContinueButtonTheme}
             disabled={ !this.props.nobtName }
             icon="arrow_forward"
+            onClick={ () => LocationBuilder.fromWindow().pop().push("members").apply(this.props.push) }
           />
         </div>
 
