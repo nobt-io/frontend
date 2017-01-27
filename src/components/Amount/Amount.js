@@ -1,11 +1,13 @@
 import React from "react";
 import {FormattedNumber} from "react-intl";
+import { connect } from "react-redux";
+import { getCurrency } from "../../routes/App/modules/currentNobt/selectors";
 
 const value = (props) => (props.absolute) ? Math.abs(props.value): props.value;
 
-export const Amount = (props, context) => (
+const Amount = (props) => (
   <span className={props.spanClass}>
-    <FormattedNumber value={value(props)} currency={context.currency} style="currency"/>
+    <FormattedNumber value={value(props)} currency={props.currency} style="currency"/>
   </span>
 );
 
@@ -20,8 +22,9 @@ Amount.propTypes = {
   absolute: React.PropTypes.bool
 };
 
-Amount.contextTypes = {
-  currency: React.PropTypes.string.isRequired
-};
-
-export default Amount
+export default connect(
+  (state) => ({
+    currency: getCurrency(state)
+  }),
+  () => ({})
+)(Amount)

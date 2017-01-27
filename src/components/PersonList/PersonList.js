@@ -10,7 +10,7 @@ export const PersonList = (props) => {
 
   const persons = props.names.map((name) => (
     <div className={styles.person} key={name}>
-      <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} name={name} />
+      <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.SMALL} name={name} />
       <Button style={{display: displayRemoveButton}}
               className={styles.RemoveButton}
               icon='clear'

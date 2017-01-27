@@ -12,6 +12,7 @@ import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
 import AppContainer from "./containers/AppContainer";
 import {IntlProvider} from "react-intl";
+import routeFactory from "routes";
 
 // ========================================================
 // Browser History Setup
@@ -48,7 +49,8 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const routes = require('./routes/index').default(store)
+
+  let routes = routeFactory(store);
 
   ReactDOM.render(
     <IntlProvider locale={navigator.language}>
@@ -65,23 +67,26 @@ let render = () => {
 // This code is excluded from production bundle
 if (__DEV__) {
   if (module.hot) {
-    // Development render functions
-    const renderApp = render
-    const renderError = (error) => {
-      const RedBox = require('redbox-react').default
 
-      ReactDOM.render(<RedBox error={error}/>, MOUNT_NODE)
-    }
+    /*
+     // Development render functions
+     const renderApp = render
+     const renderError = (error) => {
+     const RedBox = require('redbox-react').default
 
-    // Wrap render in try/catch
-    render = () => {
-      try {
-        renderApp()
-      } catch (error) {
-        renderError(error)
-      }
-    }
+     ReactDOM.render(<RedBox error={error}/>, MOUNT_NODE)
+     }
 
+     // Wrap render in try/catch
+     render = () => {
+     try {
+     renderApp()
+     } catch (error) {
+     renderError(error)
+     }
+     }
+
+     */
     // Setup hot module replacement
     module.hot.accept('./routes/index', () => {
       setTimeout(() => {

@@ -62,12 +62,14 @@ export const SingleInputInlineForm = React.createClass({
           onKeyPress={this.onKeyPress}
           onChange={this.onChange}
           icon={this.props.inputIcon}
+          {...this.props.inputProps}
         />
         <IconButton
           theme={buttonTheme}
           icon={this.props.buttonIcon}
           onClick={this.onClick}
           disabled={this.isButtonDisabled()}
+          {...this.props.buttonProps}
         />
       </div>
     )
@@ -94,7 +96,11 @@ SingleInputInlineForm.propTypes = {
   buttonIcon: React.PropTypes.string,
   inputIcon: React.PropTypes.string,
   onSubmit: React.PropTypes.func,
-  isButtonDisabled: React.PropTypes.func
+  isButtonDisabled: React.PropTypes.func,
+
+  // TODO: replace all the props with single inputProps and buttonProps object
+  inputProps: React.PropTypes.object,
+  buttonProps: React.PropTypes.object
 };
 
 export default SingleInputInlineForm

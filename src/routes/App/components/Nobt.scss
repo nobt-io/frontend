@@ -1,0 +1,31 @@
+.nobt {
+  background-color: $color-accent-light;
+  height: 100%
+}
+
+.addBillButton {
+  color: $color-accent-dark !important;
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .separator {
+    flex-grow: 1;
+  }
+
+  .progressBar {
+    flex-grow: 3;
+  }
+}
+
+.billList {
+  padding: 1.5rem;
+}
+
+

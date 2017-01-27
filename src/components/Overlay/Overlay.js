@@ -18,21 +18,16 @@ const handleOnOverlayClick = (clickEvent, props) => {
 };
 
 const Overlay = (props) => (
-  <div>
-    {props.visibility === Visibility.VISIBLE && (
-      <div className={styles.overlay} onClick={(event) => handleOnOverlayClick(event, props)}>
-        <div className={styles.contentSection}>
-          <div className={styles.contentContainer}>
-            {props.children}
-          </div>
-        </div>
+  <div className={styles.overlay} onClick={(event) => handleOnOverlayClick(event, props)}>
+    <div className={styles.contentSection}>
+      <div className={styles.contentContainer}>
+        {props.children}
       </div>
-    )}
+    </div>
   </div>
 );
 
 Overlay.propTypes = {
-  visibility: React.PropTypes.oneOf([Visibility.HIDDEN, Visibility.VISIBLE]).isRequired,
   onClickOutside: React.PropTypes.func,
 };
 
