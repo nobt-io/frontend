@@ -1,0 +1,29 @@
+.DoneScreen {
+}
+
+.linkSection {
+
+  padding-top: 2rem;
+
+  .nobtLinkContainer {
+    background-color: $color-button-grey;
+    border-radius: .2rem;
+    padding: 1rem;
+
+    a, a:visited, a:hover, a:focus, a:active, a:link {
+      font-size: large;
+      color: $color-primary;
+      text-decoration: none;
+    }
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.copyButtonContainer {
+  text-align: center;
+  margin-top: 2rem;
+}

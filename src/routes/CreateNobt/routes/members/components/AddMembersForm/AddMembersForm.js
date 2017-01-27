@@ -7,11 +7,14 @@ import HOList from "containers/HOList";
 import { Button, IconButton } from "react-toolbox/lib/button";
 import { Person, AvatarPosition } from "components/Person";
 import { AvatarSize } from "components/Avatar";
-import { getPersonNames } from "../../../../modules/selectors";
+import { getPersonNames, getCreationStatus } from "../../../../modules/selectors";
 import { addPerson, removePerson, createNobt } from "../../../../modules/actions";
 import CreateNobtButtonTheme from "./CreateNobtButtonTheme.scss";
 import AddButtonTheme from "./AddButtonTheme.scss";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
+import { Snackbar } from "react-toolbox/lib/snackbar";
+import AsyncActionStatus from "const/AsyncActionStatus";
+import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
 
 class AddMembersForm extends React.Component {
 
@@ -71,6 +74,17 @@ class AddMembersForm extends React.Component {
 
       </div>
 
+      {
+        this.props.creationStatus === AsyncActionStatus.SUCCESSFUL && LocationBuilder.fromWindow().pop().push("done").apply(this.props.push)
+      }
+
+      <Snackbar
+        action='Retry?'
+        active={this.props.creationStatus === AsyncActionStatus.FAILED}
+        label='Failed to create nobt.'
+        type='warning'
+        onClick={this.props.createNobt}
+      />
     </div>
   )
 }
@@ -78,6 +92,7 @@ class AddMembersForm extends React.Component {
 export default connect(
   (state) => ({
     personNames: getPersonNames(state),
+    creationStatus: getCreationStatus(state)
   }),
   {
     addPerson,

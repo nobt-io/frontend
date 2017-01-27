@@ -1,10 +1,10 @@
 import AddMembersForm from "./components/AddMembersForm";
 import { getNobtName } from "../../modules/selectors";
-import LocationBuilder from "../../../App/modules/navigation/LocationBuilder";
+import withNavigation from "components/hoc/withNavigation";
 
 export default (store) => ({
     path: "members",
-    component: AddMembersForm,
+    component: withNavigation(AddMembersForm),
     indexRoute: {
       onEnter: (nextState, replace) => {
 

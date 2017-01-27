@@ -14,8 +14,9 @@ if (!String.prototype.endsWith) {
 
 export default class LocationBuilder {
 
-  constructor(path) {
-    this._path = path
+  constructor(path, origin) {
+    this._path = path;
+    this._origin = origin;
   }
 
   /**
@@ -23,14 +24,14 @@ export default class LocationBuilder {
    * @returns {LocationBuilder}
    */
   static fromReduxLocation(location) {
-    return new LocationBuilder(location.pathname);
+    return new LocationBuilder(location.pathname, location.origin);
   }
 
   /**
    * @returns {LocationBuilder}
    */
   static fromWindow() {
-    return new LocationBuilder(window.location.pathname)
+    return new LocationBuilder(window.location.pathname, location.origin)
   }
 
   /**
@@ -85,5 +86,9 @@ export default class LocationBuilder {
 
   get path() {
     return this._path;
+  }
+
+  get absolutePath() {
+    return this._origin + this.path
   }
 }

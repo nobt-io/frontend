@@ -14,7 +14,7 @@ import AsyncActionStatus from "const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
-import ReactPullToRefresh from "react-pull-to-refresh"
+import ReactPullToRefresh from "react-pull-to-refresh";
 
 export default class Nobt extends React.Component {
 
@@ -94,7 +94,7 @@ export default class Nobt extends React.Component {
           active={this.props.fetchStatus === AsyncActionStatus.FAILED}
           label='Failed to fetch nobt.'
           type='warning'
-          onClick={this.props.invalidateNobtData}  // TODO: Make this work. NobtLoader somehow doesn't react on that.
+          onClick={this.props.invalidateNobtData}
         />
       </div>
     );

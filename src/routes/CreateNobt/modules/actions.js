@@ -2,6 +2,7 @@ import Client from "../../../api/api";
 import AsyncActionStatus from "../../../const/AsyncActionStatus";
 import utils from "utils";
 import { getNobtName, getCurrency, getPersonNames } from "./selectors";
+import { fetchNobtSucceeded } from "../../App/modules/currentNobt/actions";
 
 export const UPDATE_CREATE_NOBT_STATUS = 'NewNobt.UPDATE_CREATE_NOBT_STATUS';
 
@@ -54,7 +55,10 @@ export function createNobt() {
     Client.createNobt(nobtToCreate).then(
       response => {
 
-        utils.sleep(200).then(() => dispatch(createNobtSucceeded(response)));
+        utils.sleep(200).then(() => {
+          dispatch(createNobtSucceeded(response))
+          dispatch(fetchNobtSucceeded(response))
+        });
 
       },
       error => dispatch(createNobtFailed(error))
