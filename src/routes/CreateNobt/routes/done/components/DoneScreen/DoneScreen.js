@@ -13,7 +13,7 @@ class DoneScreen extends React.Component {
 
   state = {
     snackbarVisible: false
-  }
+  };
 
   absoluteLinkToNobt = () => LocationBuilder.fromWindow().pop().pop().push(this.props.nobtId).absolutePath;
   relativeLinkToNobt = () => LocationBuilder.fromWindow().pop().pop().push(this.props.nobtId).path;
