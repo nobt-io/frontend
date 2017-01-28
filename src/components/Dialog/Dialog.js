@@ -3,13 +3,15 @@ import DialogTheme from "./DialogTheme.scss";
 import { Dialog as RTDialog } from "react-toolbox/lib/dialog";
 import merge from "styles/merge";
 
-export const Dialog = (props) => (
-  <RTDialog
-    active={true}
-    onOverlayClick={this.props.goBack}
-    {...props}
-    theme={merge(DialogTheme, props.theme)}
-  />
-);
+export default class Dialog extends React.Component {
 
-export default Dialog
+  render = () => (
+    <RTDialog
+      active={true}
+      onOverlayClick={this.props.goBack}
+      {...this.props}
+      theme={merge(DialogTheme, this.props.theme)}
+    />
+  )
+
+}
