@@ -11,6 +11,7 @@ import LocationBuilder from "../../../../../../modules/navigation/LocationBuilde
 import { connect } from "react-redux";
 import { getDebtee, getAllMembers } from "../../../../modules/addBillForm/selectors";
 import Dialog from "components/Dialog";
+import DialogTheme from "components/Dialog/DialogTheme.scss";
 
 const log = _debug("DebteePicker");
 
@@ -23,7 +24,7 @@ class DebteePickerOverlay extends React.Component {
 
         <Dialog>
           <div className={styles.container}>
-            <h3>Who paid?</h3>
+            <h3 className={DialogTheme.header}>Who paid?</h3>
             <HOList
               className={styles.list}
               selectable

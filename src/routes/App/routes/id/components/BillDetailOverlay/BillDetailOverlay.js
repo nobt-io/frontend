@@ -1,14 +1,12 @@
 import React from "react";
 import { FormattedDate } from "react-intl";
 import FontIcon from "react-toolbox/lib/font_icon";
-import { ListDivider } from "react-toolbox/lib/list";
 import styles from "./BillDetailOverlay.scss";
-import Header from "components/Header";
-import CloseButton from "components/CloseButton";
 import Amount from "components/Amount";
 import PersonMoneyList from "components/PersonMoneyList";
 import { connect } from "react-redux";
 import Dialog from "components/Dialog";
+import DialogTheme from "components/Dialog/DialogTheme.scss";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 
 class BillDetailOverlay extends React.Component {
@@ -21,12 +19,8 @@ class BillDetailOverlay extends React.Component {
 
         <div className={styles.billDetailOverlay}>
 
-          <Header
-            left={<h3>{`Shares for ${bill.name}`}</h3>}
-            right={<CloseButton onClick={this.props.goBack} />}
-          />
-
-          <ListDivider />
+          <h3 className={DialogTheme.header}>{`Shares`}</h3>
+          <h4>{bill.name}</h4>
 
           <PersonMoneyList persons={bill.debtors} />
 

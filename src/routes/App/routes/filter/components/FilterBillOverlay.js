@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import withNavigation from "../../../../../components/hoc/withNavigation";
 import { updateBillFilter } from "../../../modules/viewState/actions";
 import Dialog from "components/Dialog";
-import Header from "../../../../../components/Header/Header";
-import CloseButton from "components/CloseButton";
 import { getMembers } from "../../../modules/currentNobt/selectors";
 import HOList from "containers/HOList";
 import { ListItem, ListDivider } from "react-toolbox/lib/list";
@@ -12,14 +10,12 @@ import { Person, AvatarPosition } from "components/Person";
 import { AvatarSize } from "components/Avatar";
 import { getBillFilter } from "../../../modules/viewState/selectors";
 import listItemTheme from "./ListItemTheme.scss";
+import DialogTheme from "components/Dialog/DialogTheme.scss";
 
 const FilterBillOverlay = (props) => (
 
   <Dialog>
-    <Header
-      left={<h3>Filter bills by</h3>}
-      right={<CloseButton onClick={props.goBack} />}
-    />
+    <h3 className={DialogTheme.header}>Filter bills</h3>
     <HOList
       selectable
       items={props.members}

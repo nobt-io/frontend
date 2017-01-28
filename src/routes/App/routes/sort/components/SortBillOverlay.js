@@ -1,23 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
 import withNavigation from "components/hoc/withNavigation";
-import Header from "components/Header";
-import { IconButton } from "react-toolbox/lib/button";
 import { ListItem } from "react-toolbox/lib/list";
 import { updateBillSortProperty } from "../../../modules/viewState/actions";
 import Dialog from "components/Dialog";
 import { getBillSortProperty } from "../../../modules/viewState/selectors";
 import HOList from "containers/HOList/HOList";
 import listItemTheme from "./ListItemTheme.scss";
+import DialogTheme from "components/Dialog/DialogTheme.scss";
 
 
 const SortBillOverlay = (props) => (
 
   <Dialog>
-    <Header
-      left={<h3>Sort by</h3>}
-      right={<IconButton icon="close" onClick={props.goBack} />}
-    />
+    <h3 className={DialogTheme.header}>Sort bills</h3>
 
     <HOList
       selectable

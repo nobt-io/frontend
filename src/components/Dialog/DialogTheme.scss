@@ -5,3 +5,11 @@
   }
 
 }
+
+.header {
+  color: $color-primary;
+  padding: 2rem;
+  margin: 0;
+  text-transform: uppercase;
+  border-bottom: 2px solid $color-primary;
+}
