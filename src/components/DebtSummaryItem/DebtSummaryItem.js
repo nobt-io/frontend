@@ -1,7 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { ListDivider } from "react-toolbox/lib/list"
-
+import { ListDivider } from "react-toolbox/lib/list";
 import styles from "./DebtSummaryItem.scss";
 import Header from "components/Header";
 import CloseButton from "components/CloseButton";
