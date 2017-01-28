@@ -27,7 +27,7 @@ class DoneScreen extends React.Component {
       <div className={styles.linkSection}>
         <label>Link to your nobt:</label>
         <div className={styles.nobtLinkContainer}>
-          <Link to={this.absoluteLinkToNobt()}>{`nobt.io${this.relativeLinkToNobt()}`}</Link>
+          <Link to={this.relativeLinkToNobt()}>{`nobt.io${this.relativeLinkToNobt()}`}</Link>
           <div>
             <CopyToClipboard text={this.absoluteLinkToNobt()} onCopy={ () => this.setState({snackbarVisible: true}) }>
               <IconButton icon="content_copy" />
