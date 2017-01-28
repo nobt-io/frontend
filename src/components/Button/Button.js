@@ -1,5 +1,5 @@
-import React from 'react'
-import styles from './Button.scss'
+import React from "react";
+import styles from "./Button.scss";
 import { Button as RTButton } from "react-toolbox/lib/button";
 
 const Button = (props) => {
@@ -10,9 +10,16 @@ const Button = (props) => {
     givenTheme.icon = styles.rightIcon;
   }
 
+  let otherProps = {...props};
+  delete otherProps.rightIcon;
+
   return (
-    <RTButton {...props} theme={givenTheme} />
+    <RTButton {...otherProps} theme={givenTheme} />
   )
+};
+
+Button.propTypes = {
+  rightIcon: React.PropTypes.bool
 };
 
 export default Button
