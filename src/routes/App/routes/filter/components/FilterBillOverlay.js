@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import withNavigation from "../../../../../components/hoc/withNavigation";
 import { updateBillFilter } from "../../../modules/viewState/actions";
-import { Dialog } from "react-toolbox/lib/dialog";
+import Dialog from "components/Dialog";
 import Header from "../../../../../components/Header/Header";
 import CloseButton from "components/CloseButton";
 import { getMembers } from "../../../modules/currentNobt/selectors";
@@ -15,7 +15,7 @@ import listItemTheme from "./ListItemTheme.scss";
 
 const FilterBillOverlay = (props) => (
 
-  <Dialog active={true} onOverlayClick={props.goBack}>
+  <Dialog>
     <Header
       left={<h3>Filter bills by</h3>}
       right={<CloseButton onClick={props.goBack} />}

@@ -10,7 +10,7 @@ import AddMember from "../../../../components/AddMember/AddMember";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
 import { connect } from "react-redux";
 import { getDebtee, getAllMembers } from "../../../../modules/addBillForm/selectors";
-import { Dialog } from "react-toolbox/lib/dialog";
+import Dialog from "components/Dialog";
 
 const log = _debug("DebteePicker");
 
@@ -21,7 +21,7 @@ class DebteePickerOverlay extends React.Component {
     return (
       <div className={this.props.className}>
 
-        <Dialog active={true} onOverlayClick={this.props.goBack}>
+        <Dialog>
           <div className={styles.container}>
             <h3>Who paid?</h3>
             <HOList

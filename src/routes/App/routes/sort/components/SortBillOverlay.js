@@ -5,7 +5,7 @@ import Header from "components/Header";
 import { IconButton } from "react-toolbox/lib/button";
 import { ListItem } from "react-toolbox/lib/list";
 import { updateBillSortProperty } from "../../../modules/viewState/actions";
-import { Dialog } from "react-toolbox/lib/dialog";
+import Dialog from "components/Dialog";
 import { getBillSortProperty } from "../../../modules/viewState/selectors";
 import HOList from "containers/HOList/HOList";
 import listItemTheme from "./ListItemTheme.scss";
@@ -13,7 +13,7 @@ import listItemTheme from "./ListItemTheme.scss";
 
 const SortBillOverlay = (props) => (
 
-  <Dialog active={true} onOverlayClick={props.goBack}>
+  <Dialog>
     <Header
       left={<h3>Sort by</h3>}
       right={<IconButton icon="close" onClick={props.goBack} />}

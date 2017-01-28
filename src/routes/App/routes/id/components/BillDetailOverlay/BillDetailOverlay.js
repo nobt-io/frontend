@@ -8,7 +8,7 @@ import CloseButton from "components/CloseButton";
 import Amount from "components/Amount";
 import PersonMoneyList from "components/PersonMoneyList";
 import { connect } from "react-redux";
-import { Dialog } from "react-toolbox/lib/dialog";
+import Dialog from "components/Dialog";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 
 class BillDetailOverlay extends React.Component {
@@ -17,7 +17,7 @@ class BillDetailOverlay extends React.Component {
 
     const {bill} = this.props;
     return (
-      <Dialog active={true} onOverlayClick={this.props.goBack}>
+      <Dialog>
 
         <div className={styles.billDetailOverlay}>
 
