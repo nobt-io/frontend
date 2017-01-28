@@ -1,13 +1,10 @@
 import React from "react";
-import { Button } from "react-toolbox/lib/button";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
 import BillListTheme from "./BillListTheme.scss";
 import Title from "components/Title";
-import Header from "components/Header";
 import NobtSummaryHeader from "./NobtSummaryHeader";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
-import { Link } from "react-router";
 import HOList from "containers/HOList";
 import BillItem from "./BillItem";
 import AsyncActionStatus from "const/AsyncActionStatus";
@@ -15,22 +12,21 @@ import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import ReactPullToRefresh from "react-pull-to-refresh";
+import { Link } from "react-router";
+import { Button } from "react-toolbox/lib/button";
 
 export default class Nobt extends React.Component {
 
   render = () => {
     return (
       <div className={styles.nobt}>
-        <AppBar>
-          <Header
-            left={<Title />}
-            right={
-              <Link to={LocationBuilder.fromWindow().push("newBill").path}>
-                <Button theme={ {button: styles.addBillButton} } icon="add_box">
-                  Add a bill
-                </Button>
-              </Link>
-            } />
+        <AppBar className={styles.header}>
+          <Title />
+          <Link to={LocationBuilder.fromWindow().push("newBill").path}>
+            <Button theme={ {button: styles.addBillButton} } icon="add_box">
+              Add a bill
+            </Button>
+          </Link>
         </AppBar>
 
         {
@@ -43,7 +39,6 @@ export default class Nobt extends React.Component {
             </div>
           )
         }
-
 
         {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
