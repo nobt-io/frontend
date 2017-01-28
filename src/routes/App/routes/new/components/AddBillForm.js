@@ -3,7 +3,6 @@ import Input from "react-toolbox/lib/input";
 import { IconButton } from "react-toolbox/lib/button";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import AmountInput from "./AmountInput";
-import ChangeModeButton from "./ChangeModeButton";
 import styles from "./AddBillForm.scss";
 import inputTheme from "./InputTheme.scss";
 import headerButtonTheme from "./HeaderButtonTheme.scss";
@@ -84,7 +83,6 @@ export default class AddBillForm extends React.Component {
 
           <div className={styles.shareListHeader}>
             <div className={styles.title}>who's in?</div>
-            <ChangeModeButton />
           </div>
 
           <div className={`${styles.container} ${styles.shareListContainer}`}>
