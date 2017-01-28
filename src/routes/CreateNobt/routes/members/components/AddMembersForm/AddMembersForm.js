@@ -31,7 +31,7 @@ class AddMembersForm extends React.Component {
         <div className={styles.memberList}>
 
           <SingleInputInlineForm
-            containerClass={styles.addMemberInputInlineForm}
+            className={styles.addMemberInputInlineForm}
             onSubmit={this.props.addPerson}
             inputProps={{
               icon: "person",

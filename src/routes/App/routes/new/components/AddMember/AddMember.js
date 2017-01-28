@@ -11,13 +11,17 @@ class AddMember extends React.Component {
   render = () => (
     <div className={styles.inputContainer}>
       <SingleInputInlineForm
-        buttonIcon="check_circle"
-        inputTheme={inputTheme}
-        buttonTheme={addButtonTheme}
-        inputIcon="person_add"
+        buttonProps={{
+          icon: "check_circle",
+          theme: addButtonTheme
+        }}
+        inputProps={{
+          theme: inputTheme,
+          icon: "person_add",
+          placeholder: "Someone else?"
+        }}
         isButtonDisabled={this.isNewMemberInvalid}
-        onSubmit={this.handleOnNewMember}
-        placeholder="Someone else?" />
+        onSubmit={this.handleOnNewMember}/>
     </div>
   );
 
