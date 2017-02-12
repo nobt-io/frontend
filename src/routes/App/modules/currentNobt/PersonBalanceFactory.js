@@ -1,4 +1,4 @@
-export default class PersonDebtSummaryFactory {
+export default class PersonBalanceFactory {
 
   constructor(transactions) {
     this.transactions = transactions;
@@ -8,9 +8,9 @@ export default class PersonDebtSummaryFactory {
    * @param {string} ownName
    * @return {{me: {name: string, amount: number}, persons: Array}}
    */
-  computeSummaryForPerson(ownName) {
+  computeBalanceForPerson(ownName) {
 
-    var summaries = this.transactions
+    let summaries = this.transactions
       .filter(tx => {
         return tx.debtee === ownName || tx.debtor === ownName;
       }).map(tx => {
@@ -31,7 +31,7 @@ export default class PersonDebtSummaryFactory {
         }
       });
 
-    var total = summaries.reduce((sum, tx) => sum + tx.amount, 0);
+    let total = summaries.reduce((sum, tx) => sum + tx.amount, 0);
 
     return {
       me: {name: ownName, amount: total},

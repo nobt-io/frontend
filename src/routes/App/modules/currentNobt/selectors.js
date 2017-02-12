@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import _debug from "debug";
-import PersonDebtSummaryFactory from "./PersonDebtSummaryFactory";
+import PersonBalanceFactory from "./PersonBalanceFactory";
 import { getBillFilter, getBillSortProperty } from "../viewState/selectors";
 import AsyncActionStatus from "../../../../const/AsyncActionStatus";
 
@@ -19,11 +19,11 @@ export const shouldFetchNobt = createSelector( [isNobtDataOutdated, getFetchNobt
   return isOutdated && status !== AsyncActionStatus.IN_PROGRESS;
 });
 
-export const getDebtSummaries = createSelector([ getTransactions, getMembers ], (transactions, members) => {
-  const factory = new PersonDebtSummaryFactory(transactions);
+export const getBalances = createSelector([ getTransactions, getMembers ], (transactions, members) => {
+  const factory = new PersonBalanceFactory(transactions);
   return members
-    .map(m => factory.computeSummaryForPerson(m))
-    .filter(s => s.me.amount !== 0); // we do not want debt summaries with value 0
+    .map(m => factory.computeBalanceForPerson(m))
+    .filter(s => s.me.amount !== 0); // we do not want balances with value 0
 });
 
 const deNormalizeBill = (e) => {

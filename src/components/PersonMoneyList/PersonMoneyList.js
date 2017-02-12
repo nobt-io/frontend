@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PersonMoneyList.scss";
-import {Avatar} from "components/Avatar";
-import Amount from "components/Amount"
+import { Avatar } from "components/Avatar";
+import Amount from "components/Amount";
 
 const getAmountKeyWord = (isPositive) => isPositive ? "gets" : "owes";
 
@@ -17,6 +17,7 @@ const getPersonMoneyListItem = (person, showKeyword) => (
   </div>
 );
 
+// TODO: Refactor this bad boy!
 export const PersonMoneyList = (props) => {
 
   const showKeyword = props.showKeyword;

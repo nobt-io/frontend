@@ -12,17 +12,28 @@ import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import ReactPullToRefresh from "react-pull-to-refresh";
 import AddBillFAB from "./AddBillFAB";
 import AppBarTheme from "./AppBarTheme.scss";
+import NobtItButtonTheme from "./NobtItButtonTheme.scss";
+import { Button } from "react-toolbox/lib/button/index";
+import HeadRoom from "react-headroom";
 
 export default class Nobt extends React.Component {
 
   render = () => {
     return (
       <div className={styles.nobt}>
-        <AppBar
-          scrollHide={true}
-          theme={AppBarTheme}
-          title={this.props.name}
-        />
+        <HeadRoom>
+          <AppBar
+            theme={AppBarTheme}
+            title={this.props.name}
+          />
+          <Button
+            label="$$$ Nobt it $$$"
+            primary
+            raised
+            onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
+            theme={NobtItButtonTheme}
+          />
+        </HeadRoom>
 
         {
           this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
@@ -43,7 +54,7 @@ export default class Nobt extends React.Component {
               <div className={BillListTheme.header}>
 
                 <div className={BillListTheme.title}>
-                  <h4>Activities:</h4>
+                  <h4>Bills:</h4>
                 </div>
 
                 <IconMenu className={BillListTheme.menu}>
