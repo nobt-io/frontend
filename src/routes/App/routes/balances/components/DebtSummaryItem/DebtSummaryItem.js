@@ -1,17 +1,11 @@
 import React from "react";
-import { FormattedMessage } from "react-intl";
-import { ListDivider } from "react-toolbox/lib/list";
 import styles from "./DebtSummaryItem.scss";
-import Header from "components/Header";
-import CloseButton from "components/CloseButton";
-import PersonMoneyList from "components/PersonMoneyList";
 import { AvatarList, AvatarSize } from "components/Avatar";
 import { Person, AvatarPosition } from "components/Person";
 import Amount from "components/Amount";
 import Card from "components/Card";
-import { Verb, Preposition, Icon } from "./DebtDirection";
-import Visibility from "const/Visibility";
-import Overlay from "components/Overlay";
+import { Verb, Preposition, Icon } from "../BalanceOverview/DebtDirection";
+import Visibility from "../../../../../../const/Visibility";
 
 export const DebtSummaryItem = React.createClass({
 
@@ -29,28 +23,23 @@ export const DebtSummaryItem = React.createClass({
     };
   },
 
-  render() {
-    const {summary} = this.props;
+  /**
+   *
+   <Dialog onClickOutside={this.closeDebtSummaryDetailOverlay}>
+   <div className={styles.balanceDetailOverlay}>
+   <Header
+   left={<h3>Balance</h3>}
+   right={<CloseButton onClick={this.closeDebtSummaryDetailOverlay} />}
+   />
 
-    const me = summary.me;
-
-    return (
-      <Card>
-        <Overlay visibility={this.state.detailOverlayVisibility} onClickOutside={this.closeDebtSummaryDetailOverlay}>
-          <div className={styles.balanceDetailOverlay}>
-            <Header
-              left={<h3>Balance</h3>}
-              right={<CloseButton onClick={this.closeDebtSummaryDetailOverlay} />}
-            />
-
-            <div className={styles.messageContainer}>
-              <FormattedMessage
-                id="debtSummary.detail.model.debtStatement"
-                defaultMessage={ `{debtor} {verb} {amount} {preposition} {debtorCount, plural,
+   <div className={styles.messageContainer}>
+   <FormattedMessage
+   id="debtSummary.detail.model.debtStatement"
+   defaultMessage={ `{debtor} {verb} {amount} {preposition} {debtorCount, plural,
                                                            one { {singleDebtor}. }
                                                            other { {debtorCount} persons. }
                                                          }`}
-                values={{
+   values={{
                   debtor: me.name,
                   verb: <Verb person={me} />,
                   amount: <Amount value={me.amount} spanClass={styles.amountInTextLine} />,
@@ -58,17 +47,26 @@ export const DebtSummaryItem = React.createClass({
                   debtorCount: summary.persons.length,
                   singleDebtor: summary.persons[ 0 ].name
                 }}
-              />
-            </div>
+   />
+   </div>
 
 
-            <ListDivider />
+   <ListDivider />
 
-            <div>
-              {summary.persons.length > 1 && <PersonMoneyList persons={summary.persons} showKeyword={true} />}
-            </div>
-          </div>
-        </Overlay>
+   <div>
+   {summary.persons.length > 1 && <PersonMoneyList persons={summary.persons} showKeyword={true} />}
+   </div>
+   </div>
+   </Dialog>
+   */
+
+  render() {
+    const {summary} = this.props;
+
+    const me = summary.me;
+
+    return (
+      <Card>
 
         <div onClick={this.openDebtSummaryDetailOverlay} className={styles.container}>
           <span className={styles.meContainer}>

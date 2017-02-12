@@ -14,6 +14,7 @@ class BillDetailOverlay extends React.Component {
   render = () => {
 
     const {bill} = this.props;
+
     return (
       <Dialog>
 

@@ -1,0 +1,26 @@
+.balanceContainer {
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: larger;
+
+  margin: 1rem;
+  padding: 1rem;
+
+  background-color: white;
+  border-radius: .2rem;
+
+  .debtor {
+    flex-grow: 1;
+  }
+
+  .sign {
+    display: flex;
+    align-items: center;
+  }
+
+  .amount {
+    margin-left: 1rem;
+  }
+}

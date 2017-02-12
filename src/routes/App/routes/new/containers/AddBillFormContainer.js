@@ -18,7 +18,10 @@ export default connect((state, ownProps) => {
 }, (dispatch, props) => {
   return {
     onCancel: () => props.replace(LocationBuilder.fromWindow().pop(1).path),
-    onSubmit: (id, bill) => dispatch(addBill(id, bill)),
+    onSubmit: (id, bill) => {
+      dispatch(addBill(id, bill));
+      props.replace(LocationBuilder.fromWindow().pop(1).path);
+    },
     onNewMember: (member) => dispatch({type: "NewMemberAdded", payload: {member: member}}),
     onShareValueChanged: (name, value) => dispatch({type: "ShareValueChanged", payload: {name, value}}),
     onSplitStrategyChanged: (splitStrategy) => dispatch({type: "SplitStrategyChanged", payload: {strategy: splitStrategy}}),
