@@ -2,8 +2,6 @@ import React from "react";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
 import BillListTheme from "./BillListTheme.scss";
-import Title from "components/Title";
-import NobtSummaryHeader from "./NobtSummaryHeader";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
 import HOList from "containers/HOList";
 import BillItem from "./BillItem";
@@ -12,22 +10,19 @@ import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import ReactPullToRefresh from "react-pull-to-refresh";
-import { Link } from "react-router";
-import { Button } from "react-toolbox/lib/button";
+import AddBillFAB from "./AddBillFAB";
 
 export default class Nobt extends React.Component {
 
   render = () => {
     return (
       <div className={styles.nobt}>
-        <AppBar className={styles.header}>
-          <Title />
-          <Link to={LocationBuilder.fromWindow().push("newBill").path}>
-            <Button theme={ {button: styles.addBillButton} } icon="add_box">
-              Add a bill
-            </Button>
-          </Link>
-        </AppBar>
+        <div className={styles.header}>
+          <AppBar
+            scrollHide={true}
+            title={this.props.name}
+          />
+        </div>
 
         {
           this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
@@ -44,9 +39,6 @@ export default class Nobt extends React.Component {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
 
             <ReactPullToRefresh onRefresh={this.props.invalidateNobtData}>
-
-              <NobtSummaryHeader nobtName={this.props.name} totalAmount={this.props.total}
-                                 memberCount={this.props.members.length} isNobtEmpty={this.props.isNobtEmpty} />
 
               <div className={BillListTheme.header}>
 
@@ -83,6 +75,8 @@ export default class Nobt extends React.Component {
             </ReactPullToRefresh>
           )
         }
+
+        <AddBillFAB />
 
         <Snackbar
           action='Retry?'

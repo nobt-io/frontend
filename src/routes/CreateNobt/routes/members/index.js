@@ -1,6 +1,7 @@
 import AddMembersForm from "./components/AddMembersForm";
 import { getNobtName } from "../../modules/selectors";
 import withNavigation from "components/hoc/withNavigation";
+import LocationBuilder from "../../../App/modules/navigation/LocationBuilder";
 
 export default (store) => ({
     path: "members",
