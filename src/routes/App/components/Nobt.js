@@ -11,18 +11,18 @@ import { Snackbar } from "react-toolbox/lib/snackbar";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import ReactPullToRefresh from "react-pull-to-refresh";
 import AddBillFAB from "./AddBillFAB";
+import AppBarTheme from "./AppBarTheme.scss";
 
 export default class Nobt extends React.Component {
 
   render = () => {
     return (
       <div className={styles.nobt}>
-        <div className={styles.header}>
-          <AppBar
-            scrollHide={true}
-            title={this.props.name}
-          />
-        </div>
+        <AppBar
+          scrollHide={true}
+          theme={AppBarTheme}
+          title={this.props.name}
+        />
 
         {
           this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
@@ -43,7 +43,7 @@ export default class Nobt extends React.Component {
               <div className={BillListTheme.header}>
 
                 <div className={BillListTheme.title}>
-                  <h4>Your bills:</h4>
+                  <h4>Activities:</h4>
                 </div>
 
                 <IconMenu className={BillListTheme.menu}>

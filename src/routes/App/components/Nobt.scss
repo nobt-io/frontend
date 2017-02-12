@@ -27,21 +27,3 @@
 .billList {
   padding: 1.5rem;
 }
-
-.header {
-  color: white;
-
-  .innerHeader{
-    background-color: $color-primary-dark;
-
-    padding: 2rem;
-    text-align: center;
-
-    h1 {
-      margin-top: 1rem;
-      font-size: larger;
-      text-transform: uppercase;
-    }
-
-  }
-}
