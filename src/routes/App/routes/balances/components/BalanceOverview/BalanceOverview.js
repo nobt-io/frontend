@@ -55,6 +55,7 @@ class BalanceOverview extends React.Component {
         </HeadRoom>
 
         <HOList
+          className={styles.balanceList}
           items={this.props.balances}
           renderItem={ (balance) => (
 
