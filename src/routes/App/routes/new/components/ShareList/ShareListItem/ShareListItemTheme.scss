@@ -1,0 +1,23 @@
+@import "src/styles/personListItem";
+
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  flex-grow: 1;
+
+  overflow: hidden;
+
+  .personName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    padding-right: 1rem;
+  }
+}
+
+.listItem {
+  margin: 2rem;
+
+  align-items: center;
+}

@@ -6,13 +6,15 @@ import AmountInput from "./AmountInput";
 import styles from "./AddBillForm.scss";
 import inputTheme from "./InputTheme.scss";
 import headerButtonTheme from "./HeaderButtonTheme.scss";
-import { ShareList, EqualShareListItem, CustomShareListItem, PercentalShareListItem } from "./ShareList";
+import { EqualShareListItem, CustomShareListItem, PercentalShareListItem } from "./ShareList";
+import HOList from "containers/HOList";
 import AddMember from "./AddMember";
 import { Link } from "react-router";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
+import ShareListTheme from "./ShareList/ShareListTheme.scss";
 
 /*
-TODO:
+ TODO:
  * - Re-implement "error"-message as soon as the user fails to split the bill properly.
  */
 export default class AddBillForm extends React.Component {
@@ -64,7 +66,7 @@ export default class AddBillForm extends React.Component {
           <div className={styles.container}>
             <div className={`${styles.row} ${styles.borderd}`}>
               <Input theme={inputTheme} icon="description" placeholder="Description" value={this.props.description}
-                     onChange={ this.props.onDescriptionChanged }/>
+                     onChange={ this.props.onDescriptionChanged } />
             </div>
             <div className={`${styles.row} ${styles.borderd}`}>
 
@@ -86,25 +88,23 @@ export default class AddBillForm extends React.Component {
           </div>
 
           <div className={`${styles.container} ${styles.shareListContainer}`}>
-            {this.props.splitStrategy === SplitStrategyNames.EQUAL && (
-              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
-                <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.props.onShareValueChanged} />
-              )}
-              />
-            )}
-            {this.props.splitStrategy === SplitStrategyNames.UNEQUAL && (
-              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
-                <CustomShareListItem key={share.name} share={share} onAmountChange={this.props.onShareValueChanged} />
-              )}
-              />
-            )}
-            {this.props.splitStrategy === SplitStrategyNames.PERCENTAGE && (
-              <ShareList shares={this.props.shares} renderShareListItem={(share) => (
-                <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.props.onShareValueChanged} />
-              )}
-              />
-            )}
-            <AddMember onNewMember={this.props.onNewMember}/>
+            <HOList
+              theme={ShareListTheme}
+              items={this.props.shares}
+              renderItem={ share => {
+                switch(this.props.splitStrategy) {
+                  case SplitStrategyNames.EQUAL:
+                    return <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.props.onShareValueChanged} />;
+
+                  case SplitStrategyNames.UNEQUAL:
+                    return <CustomShareListItem key={share.name} share={share} onAmountChange={this.props.onShareValueChanged} />;
+
+                  case SplitStrategyNames.PERCENTAGE:
+                    return <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.props.onShareValueChanged} />;
+                }
+              } }
+            />
+            <AddMember onNewMember={this.props.onNewMember} />
           </div>
 
         </div>

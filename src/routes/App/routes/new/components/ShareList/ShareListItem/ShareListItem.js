@@ -1,21 +1,24 @@
 import React from "react";
-import styles from "./ShareListItem.scss";
 import AmountTheme from "./AmountTheme.scss";
-import { AvatarSize } from "components/Avatar";
-import { Person, AvatarPosition } from "components/Person";
+import { Avatar } from "components/Avatar";
 import Amount from "components/Amount";
+import { ListItem } from "react-toolbox/lib/list";
+import ShareListItemTheme from "./ShareListItemTheme.scss";
 
 export const ShareListItem = (props) => (
-  <div className={styles.ShareListItem}>
-    <div className={styles.personContainer}>
-      <Person name={props.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM} />
-    </div>
-    {props.amount !== null && props.amount !== 0 && <Amount theme={AmountTheme} value={props.amount} />}
-    <div className={`${styles.controlContainer} ${props.controlClass}`}>
-      {props.control}
-    </div>
-  </div>
-);
+    <ListItem
+      ripple={false}
+      theme={ShareListItemTheme}
+      leftIcon={<Avatar name={props.name} medium />}
+      itemContent={
+        <div className={ShareListItemTheme.content}>
+          <span className={ShareListItemTheme.personName}>{props.name}</span>
+          {props.amount !== null && props.amount !== 0 && <Amount theme={AmountTheme} value={props.amount} />}
+        </div>
+      }
+      rightActions={[ props.control ]}
+    />)
+  ;
 
 export default ShareListItem
 
