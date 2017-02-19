@@ -1,0 +1,21 @@
+.itemAction {
+  > [data-react-toolbox=font-icon] {
+    font-size: initial;
+  }
+}
+
+.item {
+  align-items: center;
+}
+
+.itemText {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemContentRoot {
+  min-width: 0; // https://css-tricks.com/flexbox-truncated-text/
+  height: auto !important;
+  margin: .5rem 0;
+}

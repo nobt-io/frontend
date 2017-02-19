@@ -1,37 +1,30 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getBalances } from "../../../../modules/currentNobt/selectors";
-import Amount from "../../../../../../components/Amount";
 import AppBarTheme from "./AppBarTheme.scss";
 import AppBar from "react-toolbox/lib/app_bar";
 import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
-import { HOList } from "../../../../../../containers/HOList/HOList";
-import styles from "./BalanceOverview.scss";
+import { Card, CardTitle, CardText } from "react-toolbox/lib/card";
+import { Avatar, AvatarSize } from "components/Avatar";
+import { ListItem } from "react-toolbox/lib/list";
+import Amount from "components/Amount/Amount";
+import { HOList } from "containers/HOList/HOList";
+import { IconButton } from "react-toolbox/lib/button";
+import BalanceCardTheme from "./BalanceCard/CardTheme.scss";
+import BalanceCardTitleTheme from "./BalanceCard/CardTitleTheme.scss";
+import ShareListItemTheme from "./BalanceCard/ShareListItemTheme.scss";
+import CardTextTheme from "./BalanceCard/CardTextTheme.scss";
+import ShareListTheme from "./BalanceCard/ShareListTheme.scss";
+import AmountTheme from "./BalanceCard/AmountTheme.scss";
+import BalanceCardListTheme from "./BalanceCardListTheme.scss";
+import { Verb, Preposition } from "./DebtDirection";
 
 class BalanceOverview extends React.Component {
 
   state = {
     activeTab: 0
-  };
-
-  handleSwipe = ({direction}) => {
-
-    const LEFT = 2;
-    const RIGHT = 4;
-
-    let newTabIndex = this.state.activeTab;
-
-    if (direction == RIGHT && this.state.activeTab > 0) {
-      newTabIndex -= 1;
-    }
-
-    if (direction == LEFT && (this.state.activeTab < (this.props.balances.length - 1) )) {
-      newTabIndex += 1;
-    }
-
-    this.setState({activeTab: newTabIndex});
   };
 
   render = () => {
@@ -42,47 +35,49 @@ class BalanceOverview extends React.Component {
           <AppBar
             theme={AppBarTheme}
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
-            leftIcon={
-              <FontIcon
-                value="keyboard_arrow_left"
-              />
-            }
-            rightIcon={
-              <FontIcon />
-            }
+            leftIcon={<FontIcon value="keyboard_arrow_left" />}
+            rightIcon={<FontIcon />}
             title="Balances"
           />
         </HeadRoom>
 
         <HOList
-          className={styles.balanceList}
+          theme={BalanceCardListTheme}
           items={this.props.balances}
           renderItem={ (balance) => (
-
-            <div className={styles.balanceContainer} key={balance.me.name}>
-              <div className={styles.debtor}>{balance.me.name}</div>
-
-              <div className={styles.sign}>
-
-                {balance.me.amount > 0 &&
-                  <FontIcon value="add"/>
-                }
-
-                {balance.me.amount < 0 &&
-                  <FontIcon value="remove"/>
-                }
-
-              </div>
-
-              <div className={styles.amount}><Amount value={balance.me.amount}/></div>
-            </div>
+            <Card theme={BalanceCardTheme} key={balance.me.name}>
+              <CardTitle
+                theme={BalanceCardTitleTheme}
+                title={balance.me.name}
+                subtitle={<span><Verb person={balance.me} />&nbsp;<Preposition person={balance.me}/></span>}
+              />
+              <CardText theme={CardTextTheme}>
+                <HOList
+                  theme={ShareListTheme}
+                  items={balance.persons}
+                  renderItem={ person => (
+                    <ListItem
+                      theme={ShareListItemTheme}
+                      ripple={false}
+                      leftIcon={<Avatar name={person.name} size={AvatarSize.MEDIUM}/>}
+                      key={person.name}
+                      caption={person.name}
+                      legend={<Amount theme={AmountTheme} value={person.amount} absolute={false}/>}
+                      rightActions={ balance.me.amount < 0 && [
+                        // TODO Implement instant settle up
+                        <IconButton icon="payment" disabled/>
+                      ]}
+                    />
+                  ) }
+                />
+              </CardText>
+            </Card>
           ) }
         />
       </div>
     )
   }
 }
-
 
 export default connect(
   (state) => ({
