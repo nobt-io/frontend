@@ -15,9 +15,9 @@ const Amount = (props) => (
 Amount.defaultProps = {
   absolute: true,
   theme: {
-    root: undefined,
-    positive: undefined,
-    negative: undefined
+    root: "",
+    positive: "",
+    negative: ""
   }
 };
 

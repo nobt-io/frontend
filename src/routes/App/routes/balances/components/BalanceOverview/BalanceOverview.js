@@ -14,9 +14,9 @@ import { HOList } from "containers/HOList/HOList";
 import { IconButton } from "react-toolbox/lib/button";
 import BalanceCardTheme from "./BalanceCard/CardTheme.scss";
 import BalanceCardTitleTheme from "./BalanceCard/CardTitleTheme.scss";
-import ShareListItemTheme from "./BalanceCard/ShareListItemTheme.scss";
+import TransactionListItemTheme from "./BalanceCard/TransactionListItemTheme.scss";
 import CardTextTheme from "./BalanceCard/CardTextTheme.scss";
-import ShareListTheme from "./BalanceCard/ShareListTheme.scss";
+import TransactionListTheme from "./BalanceCard/TransactionListTheme.scss";
 import AmountTheme from "./BalanceCard/AmountTheme.scss";
 import BalanceCardListTheme from "./BalanceCardListTheme.scss";
 import { Verb, Preposition } from "./DebtDirection";
@@ -53,11 +53,11 @@ class BalanceOverview extends React.Component {
               />
               <CardText theme={CardTextTheme}>
                 <HOList
-                  theme={ShareListTheme}
+                  theme={TransactionListTheme}
                   items={balance.persons}
                   renderItem={ person => (
                     <ListItem
-                      theme={ShareListItemTheme}
+                      theme={TransactionListItemTheme}
                       ripple={false}
                       leftIcon={<Avatar name={person.name} size={AvatarSize.MEDIUM}/>}
                       key={person.name}

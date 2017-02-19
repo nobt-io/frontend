@@ -1,0 +1,6 @@
+@import "src/styles/personListItem";
+
+// Using the "legend" property of the ListItem applies a fixed height on the itemContentRoot.
+.itemContentRoot {
+  height: auto !important;
+}
