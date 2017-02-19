@@ -33,7 +33,7 @@ class BillItem extends React.Component {
               defaultMessage="{amount} &#8226; {timestamp}"
               values={{
                 amount: <Amount value={bill.debtee.amount} />,
-                timestamp: <FormattedRelative value={new Date(bill.date)}/>
+                timestamp: <FormattedRelative value={new Date(bill.createdOn)} updateInterval={30000} initialNow={new Date(Date.now())}/>
               }} />}>
           </CardTitle>
           <CardText theme={BillCardTextTheme}>
