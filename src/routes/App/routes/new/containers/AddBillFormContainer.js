@@ -4,6 +4,7 @@ import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares, isVa
 import { connect } from "react-redux";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import { addBill } from "../modules/addBillForm/actions";
+import { invalidateNobt } from "../../../modules/currentNobt/actions";
 
 export default connect((state, ownProps) => {
   return {
@@ -21,6 +22,7 @@ export default connect((state, ownProps) => {
     onSubmit: (id, bill) => {
       dispatch(addBill(id, bill));
       props.replace(LocationBuilder.fromWindow().pop(1).path);
+      dispatch(invalidateNobt());
     },
     onNewMember: (member) => dispatch({type: "NewMemberAdded", payload: {member: member}}),
     onShareValueChanged: (name, value) => dispatch({type: "ShareValueChanged", payload: {name, value}}),
