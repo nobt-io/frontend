@@ -1,13 +1,1 @@
-$border: 1px dashed black;
-
-.listItem {
-  margin: 1rem 0;
-}
-
-.listItem:first-child {
-  margin-top: 0;
-}
-
-.clear {
-  text-align: center;
-}
+@import "src/styles/personListItem";
