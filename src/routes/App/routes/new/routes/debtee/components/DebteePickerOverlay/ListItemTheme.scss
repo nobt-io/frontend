@@ -1,9 +1,5 @@
-$border: 1px dashed black;
+@import "src/styles/personListItem";
 
 .listItem {
-  margin: 1rem 0;
-}
-
-.listItem:first-child {
-  margin-top: 0;
+  margin: 2rem .5rem;
 }

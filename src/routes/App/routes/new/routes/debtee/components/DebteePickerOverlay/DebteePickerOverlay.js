@@ -1,10 +1,10 @@
 import React from "react";
 import HOList from "containers/HOList";
 import { ListItem } from "react-toolbox/lib/list";
-import { Person, AvatarPosition } from "components/Person";
-import { AvatarSize } from "components/Avatar";
+import { Avatar } from "components/Avatar";
 import styles from "./DebteePickerOverlay.scss";
 import listItemTheme from "./ListItemTheme.scss";
+import DebteeListTheme from "./DebteeListTheme.scss";
 import _debug from "debug";
 import AddMember from "../../../../components/AddMember/AddMember";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
@@ -26,19 +26,21 @@ class DebteePickerOverlay extends React.Component {
           <div className={styles.container}>
             <h3 className={DialogTheme.header}>Who paid?</h3>
             <HOList
-              className={styles.list}
+              theme={DebteeListTheme}
               selectable
               items={this.props.members}
               renderItem={ (name) => (
-                <ListItem rightIcon={ name === this.props.debtee ? "check_circle" : "radio_button_unchecked" }
-                          theme={listItemTheme}
-                          key={name}
-                          onClick={ () => this.handleOnPersonPicked(name) }>
-                  <Person avatarSize={AvatarSize.MEDIUM} avatarPosition={AvatarPosition.LEFT} name={name} />
+                <ListItem
+                  theme={listItemTheme}
+                  key={name}
+                  leftIcon={<Avatar name={name} medium/>}
+                  rightIcon={ name === this.props.debtee ? "check_circle" : "radio_button_unchecked" }
+                  caption={name}
+                  onClick={ () => this.handleOnPersonPicked(name) }>
                 </ListItem>
               )}>
             </HOList>
-            <AddMember onNewMember={this.handleOnPersonPicked}/>
+            <AddMember onNewMember={this.handleOnPersonPicked} />
           </div>
         </Dialog>
       </div>

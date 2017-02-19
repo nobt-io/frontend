@@ -1,6 +1,5 @@
 import React from "react";
 import Checkbox from "react-toolbox/lib/checkbox";
-import styles from "./EqualShareListItem.scss";
 import ShareListItem from "../ShareListItem";
 import CheckboxTheme from "./CheckboxTheme.scss";
 
@@ -18,9 +17,17 @@ const EqualShareListItem = (props) => {
       control={<Checkbox
         theme={CheckboxTheme}
         checked={value}
-        onChange={handleOnCheckboxChanged}
+        onChange={ handleOnCheckboxChanged }
       />}
-      controlClass={styles.equalShareCheckboxContainer}
+      listItemProps={{
+        ripple: false
+        /*
+         TODO:
+         It would be nice to make the whole ListItem clickable (which could be indictated through the ripple effect.
+         For some obscure reason, the click is registered twice as soon as there is a click-handler on the checkbox AND on the ListItem.
+         ATM, this is not so important but could be investigated later ...
+         */
+      }}
     />
   )
 };

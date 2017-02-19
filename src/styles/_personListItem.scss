@@ -21,7 +21,7 @@
 
 // Apply some margin to the listItem instead;
 .listItem {
-  margin: 1rem 0;
+  margin: 2rem 0.5rem;
 }
 
 // Prevent name from overflowing.
@@ -34,3 +34,4 @@
     text-overflow: ellipsis;
   }
 }
+
