@@ -2,10 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import withNavigation from "../../../../components/hoc/withNavigation";
 import { Card, CardTitle, CardText } from "react-toolbox/lib/card";
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedRelative } from "react-intl";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import BillCardTitleTheme from "./BillCardTitleTheme.scss";
 import OverflowMenuTheme from "./OverflowMenuTheme.scss";
+import BillCardTextTheme from "./BillCardTextTheme.scss";
 import styles from "./BillItem.scss";
 import Amount from "components/Amount";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
@@ -29,21 +30,21 @@ class BillItem extends React.Component {
             title={bill.name}
             subtitle={<FormattedMessage
               id="BillItem.subtitle"
-              defaultMessage="{amount} paid by {debtee}"
+              defaultMessage="{amount} &#8226; {timestamp}"
               values={{
                 amount: <Amount value={bill.debtee.amount} />,
-                debtee: bill.debtee.name
+                timestamp: <FormattedRelative value={new Date(bill.date)}/>
               }} />}>
           </CardTitle>
-          <CardText>
+          <CardText theme={BillCardTextTheme}>
             <FormattedMessage
               id="BillItem.involvedPeople"
               defaultMessage="{numberOfPeople, plural,
-    =1 {{first}}
-    =2 {{first} and {second}}
-    =3 {{first}, {second} and {third}}
-    other {{first}, {second} and {remaining} others}
-}."
+                  =1 {{first}}
+                  =2 {{first} and {second}}
+                  =3 {{first}, {second} and {third}}
+                  other {{first}, {second} and {remaining} others}
+              }."
               values={{
                 numberOfPeople: bill.debtors.length,
                 first: bill.debtors[ 0 ].name,
@@ -55,7 +56,7 @@ class BillItem extends React.Component {
         </Card>
 
         <IconMenu theme={OverflowMenuTheme}>
-          <MenuItem icon="delete" caption="Delete bill" disabled/>
+          <MenuItem icon="delete" caption="Delete bill" disabled />
         </IconMenu>
       </div>
     );
