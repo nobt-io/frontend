@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ShareListItem.scss";
+import AmountTheme from "./AmountTheme.scss";
 import { AvatarSize } from "components/Avatar";
 import { Person, AvatarPosition } from "components/Person";
 import Amount from "components/Amount";
@@ -9,7 +10,7 @@ export const ShareListItem = (props) => (
     <div className={styles.personContainer}>
       <Person name={props.name} avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM} />
     </div>
-    {props.amount !== null && props.amount !== 0 && <Amount spanClass={styles.amount} value={props.amount} />}
+    {props.amount !== null && props.amount !== 0 && <Amount theme={AmountTheme} value={props.amount} />}
     <div className={`${styles.controlContainer} ${props.controlClass}`}>
       {props.control}
     </div>

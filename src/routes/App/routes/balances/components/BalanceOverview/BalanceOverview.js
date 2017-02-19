@@ -63,9 +63,9 @@ class BalanceOverview extends React.Component {
                       key={person.name}
                       caption={person.name}
                       legend={<Amount theme={AmountTheme} value={person.amount} absolute={false}/>}
-                      rightActions={ balance.me.amount < 0 && [
+                      rightActions={[
                         // TODO Implement instant settle up
-                        <IconButton icon="payment" disabled/>
+                        balance.me.amount < 0 && (<IconButton icon="payment" disabled/>)
                       ]}
                     />
                   ) }

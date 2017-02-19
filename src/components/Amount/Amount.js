@@ -1,25 +1,34 @@
 import React from "react";
-import {FormattedNumber} from "react-intl";
+import { FormattedNumber } from "react-intl";
 import { connect } from "react-redux";
 import { getCurrency } from "../../routes/App/modules/currentNobt/selectors";
 
-const value = (props) => (props.absolute) ? Math.abs(props.value): props.value;
+const valueViewModel = (props) => (props.absolute) ? Math.abs(props.value): props.value;
+const computeValueClass = (props) => (props.value > 0) ? props.theme.positive : props.theme.negative
 
 const Amount = (props) => (
-  <span className={props.spanClass}>
-    <FormattedNumber value={value(props)} currency={props.currency} style="currency"/>
+  <span className={props.theme.root + " " + computeValueClass(props)}>
+    <FormattedNumber value={valueViewModel(props)} currency={props.currency} style="currency"/>
   </span>
 );
 
 Amount.defaultProps = {
-  spanClass: '',
-  absolute: true
+  absolute: true,
+  theme: {
+    root: undefined,
+    positive: undefined,
+    negative: undefined
+  }
 };
 
 Amount.propTypes = {
   value: React.PropTypes.number.isRequired,
-  spanClass: React.PropTypes.string,
-  absolute: React.PropTypes.bool
+  absolute: React.PropTypes.bool,
+  theme: React.PropTypes.shape({
+    root: React.PropTypes.string,
+    positive: React.PropTypes.string,
+    negative: React.PropTypes.string
+  })
 };
 
 export default connect(

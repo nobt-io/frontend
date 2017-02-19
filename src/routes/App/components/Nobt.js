@@ -27,7 +27,7 @@ export default class Nobt extends React.Component {
             title={this.props.name}
           />
           <Button
-            label="$$$ Nobt it $$$"
+            label="Nobt it!"
             primary
             raised
             onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
