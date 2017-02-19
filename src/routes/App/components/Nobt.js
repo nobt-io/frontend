@@ -26,13 +26,16 @@ export default class Nobt extends React.Component {
             theme={AppBarTheme}
             title={this.props.name}
           />
-          <Button
-            label="Nobt it!"
-            primary
-            raised
-            onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
-            theme={NobtItButtonTheme}
-          />
+          {
+            this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL &&
+            <Button
+              label="Nobt it!"
+              primary
+              raised
+              onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
+              theme={NobtItButtonTheme}
+            />
+          }
         </HeadRoom>
 
         {
@@ -87,7 +90,7 @@ export default class Nobt extends React.Component {
           )
         }
 
-        <AddBillFAB />
+        {this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && <AddBillFAB />}
 
         <Snackbar
           action='Retry?'
