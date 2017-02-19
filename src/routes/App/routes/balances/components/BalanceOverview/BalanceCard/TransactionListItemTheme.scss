@@ -4,3 +4,11 @@
 .itemContentRoot {
   height: auto !important;
 }
+
+.listItem:first-of-type {
+  margin-top: 1rem;
+}
+
+.listItem:last-of-type {
+  margin-bottom: 1rem;
+}
