@@ -22,15 +22,25 @@ deploy_review_instance:
   stage: deploy
   environment:
     name: review-apps/$CI_BUILD_REF_NAME
-    url: http://review-$CI_BUILD_REF_NAME.cfapps.io/
+    url: http://review-$CI_ENVIRONMENT_SLUG.cfapps.io/
+    on_stop: delete_review_instance
   before_script:
-    - cf api https://api.run.pivotal.io
-    - cf auth $CF_BUILD_USER $CF_BUILD_USER_PASSWORD
-    - cf target -o nobt.io -s development
+    - .cf/login development
   script:
-    - .cf/push review-$CI_BUILD_REF_NAME -n review-$CI_BUILD_REF_NAME
+    - .cf/push review-$CI_BUILD_REF_NAME -n review-$CI_ENVIRONMENT_SLUG
   except:
     - master
+
+delete_review_instance:
+  stage: deploy
+  before_script:
+    - .cf/login development
+  script:
+    - cf delete review-$CI_BUILD_REF_NAME
+  when: manual
+  environment:
+    name: review-apps/$CI_BUILD_REF_NAME
+    action: stop
 
 deploy_on_development:
   image: governmentpaas/cf-cli
