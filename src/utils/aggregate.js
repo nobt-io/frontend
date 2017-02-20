@@ -21,9 +21,9 @@ if (!Array.prototype.aggregate) {
 
               if (!existingValue) {
                 target[ nextKey ] = valueToAdd;
+              } else {
+                target[ nextKey ] = callback(existingValue, valueToAdd);
               }
-
-              target[ nextKey ] = callback(existingValue, valueToAdd);
 
               return target;
 

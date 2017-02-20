@@ -1,3 +1,6 @@
+//noinspection ES6UnusedImports
+import * as _ from "utils/aggregate";
+
 test('should merge styles', () => {
 
   let theme = {
