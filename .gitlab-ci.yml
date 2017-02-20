@@ -32,11 +32,12 @@ deploy_review_instance:
     - master
 
 delete_review_instance:
+  image: governmentpaas/cf-cli
   stage: deploy
   before_script:
     - .cf/login development
   script:
-    - cf delete review-$CI_BUILD_REF_NAME
+    - cf delete review-$CI_BUILD_REF_NAME -r -f
   when: manual
   environment:
     name: review-apps/$CI_BUILD_REF_NAME
