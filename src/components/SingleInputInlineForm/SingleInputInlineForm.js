@@ -2,97 +2,76 @@ import React from "react";
 import Input from "react-toolbox/lib/input";
 import { IconButton } from "react-toolbox/lib/button";
 import styles from "./SingleInputInlineForm.scss";
+import ButtonTheme from "./ButtonTheme.scss";
+import InputTheme from "./InputTheme.scss";
 import _debug from "debug";
+import merge from "styles/merge";
 import classnames from "classnames";
 
-export const SingleInputInlineForm = React.createClass({
+export default class SingleInputInlineForm extends React.Component {
 
-  getInitialState() {
-    return {
-      value: ""
-    }
-  },
+  state = {
+    value: ""
+  };
 
-  onKeyPress: function (event) {
-    var enterKey = 13;
+  handleOnInputKeyPress = (event) => {
+    let enterKey = 13;
     if (event.charCode === enterKey && !this.isButtonDisabled()) {
-      this.onClick();
+      this.handleOnButtonClick();
     }
-  },
+  };
 
-  onChange: function (value) {
-    this.setState({
-      value: value
-    });
-  },
+  handleOnInputChange = (value) => this.setState({ value: value });
 
-  onClick: function () {
-    var value = this.state.value;
+  handleOnButtonClick = () => {
+    let value = this.state.value;
 
     _debug('SingleInputInlineForm:onSubmit')(value);
     this.props.onSubmit(value);
-    this.onChange("");
-  },
+    this.handleOnInputChange("");
+  };
 
-  isButtonDisabled: function () {
-    var value = this.state.value;
+
+
+  isButtonDisabled = () => {
+    let value = this.state.value;
 
     return value === "" || this.props.isButtonDisabled(value);
-  },
+  };
 
-  render: function () {
+  render = () => (
+    <div className={classnames(this.props.className, styles.SingleInputInlineForm)}>
+      <Input
+        value={this.state.value}
+        autoComplete="off"
+        type='text'
+        onKeyPress={this.handleOnInputKeyPress}
+        onChange={this.handleOnInputChange}
+        {...this.props.inputProps}
+        theme={merge(InputTheme, this.props.inputProps.theme)}
+      />
+      <IconButton
+        onClick={this.handleOnButtonClick}
+        disabled={this.isButtonDisabled()}
+        {...this.props.buttonProps}
+        theme={merge(ButtonTheme, this.props.buttonProps.theme)}
+      />
+    </div>
+  )
 
-    var inputTheme = Object.assign({}, this.props.inputTheme, {
-      input: classnames(this.props.inputTheme.input, styles.input)
-    });
+  static defaultProps = {
+    className: '',
+    onSubmit: (value) => { },
+    isButtonDisabled: (name) => false
+  };
 
-    var buttonTheme = Object.assign({}, this.props.buttonTheme, {
-      toggle: classnames(this.props.buttonTheme.toggle, styles.button)
-    });
+  static propTypes = {
+    className: React.PropTypes.string,
 
-    return (
-      <div className={classnames(this.props.containerClass, styles.SingleInputInlineForm)}>
-        <Input
-          value={this.state.value}
-          theme={inputTheme}
-          placeholder={this.props.placeholder}
-          autoComplete="off"
-          type='text'
-          maxLength={this.props.inputMaxLength}
-          onKeyPress={this.onKeyPress}
-          onChange={this.onChange}
-        />
-        <IconButton
-          theme={buttonTheme}
-          icon={this.props.buttonIcon}
-          onClick={this.onClick}
-          disabled={this.isButtonDisabled()}
-        />
-      </div>
-    )
-  }
-});
-SingleInputInlineForm.defaultProps = {
-  inputMaxLength: 40,
-  placeholder: '',
-  containerClass: '',
-  inputTheme: {},
-  buttonTheme: {},
-  buttonIcon: '',
-  onSubmit: (value) => {
-  },
-  isButtonDisabled: (name) => false
-};
+    onSubmit: React.PropTypes.func,
+    isButtonDisabled: React.PropTypes.func,
 
-SingleInputInlineForm.propTypes = {
-  inputMaxLength: React.PropTypes.number,
-  placeholder: React.PropTypes.string,
-  containerClass: React.PropTypes.string,
-  inputTheme: React.PropTypes.object,
-  buttonTheme: React.PropTypes.object,
-  buttonIcon: React.PropTypes.string,
-  onSubmit: React.PropTypes.func,
-  isButtonDisabled: React.PropTypes.func
-};
-
-export default SingleInputInlineForm
+    inputProps: React.PropTypes.object,
+    buttonProps: React.PropTypes.object
+  };
+}

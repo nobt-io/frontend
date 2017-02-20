@@ -1,0 +1,24 @@
+.ShareListItem {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.6rem;
+
+  .personContainer {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+
+  .controlContainer {
+
+    &.customShareControl {
+      flex-basis: 20%;
+      text-align: center;
+    }
+
+  }
+}

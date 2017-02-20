@@ -1,0 +1,7 @@
+.button, .icon {
+  color: white !important;
+
+  &[disabled] {
+    opacity: .5;
+  }
+}

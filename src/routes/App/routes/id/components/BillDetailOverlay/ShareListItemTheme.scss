@@ -1,0 +1,18 @@
+@import "src/styles/personListItem";
+
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  // Our parent is a flex box too!
+  flex-grow: 1;
+
+  overflow: hidden;
+
+  > span:nth-child(1) {
+    padding-right: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

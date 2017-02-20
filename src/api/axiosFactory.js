@@ -20,6 +20,10 @@ const apiBaseURLs = [
     url: "http://localhost:8080",
     active: (host) => host.includes("localhost")
   },
+  {
+    url: "http://192.168.188.23:8080",
+    active: (host) => host.startsWith("192")
+  },
 ];
 
 const factory = (location) => {
@@ -57,7 +61,10 @@ const factory = (location) => {
   }, function (error) {
 
     debug("api:response:error")(error);
-    debug("api:response:data")(error.response.data);
+
+    if (error.response) {
+      debug("api:response:data")(error.response.data);
+    }
 
     return Promise.reject(error);
   });

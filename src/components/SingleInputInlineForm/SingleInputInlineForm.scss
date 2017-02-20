@@ -1,17 +1,8 @@
 .SingleInputInlineForm {
 
-  position: relative;
   height: 6rem;
-
-  .input {
-    padding: 0;
-    left: 0;
-    width: 100%;
-    position: absolute;
-  }
-
-  .button {
-    right: 0;
-    position: absolute;
-  }
+  display: flex;
+  flex-direction: row;
+  align-content: stretch;
+  align-items: center;
 }

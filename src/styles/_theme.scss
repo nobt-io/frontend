@@ -1,4 +1,5 @@
 @import "~react-toolbox/lib/colors";
+@import "~react-toolbox/components/_globals";
 
 $color-primary: #2D978D;
 $color-primary-dark: rgba(53, 53, 53, 50);
@@ -9,4 +10,8 @@ $color-accent-dark: white;
 $color-accent-light: #F3F3F3;
 $color-button-grey: #e8e8e8;
 
+$color-button-grey-dark: darken($color-button-grey, 30);
+
 $fancy-font: Raleway, sans-serif;
+
+$container-border-radius: .2rem;

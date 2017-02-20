@@ -1,0 +1,14 @@
+.list {
+  padding: 0 !important;
+  margin: 0 !important;
+
+  display: block;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem;
+}

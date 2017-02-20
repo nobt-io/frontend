@@ -62,3 +62,9 @@ fabric.properties
 # modules.xml
 # .idea/misc.xml
 # *.ipr
+
+### Markdown plugin ###
+
+.idea/markdown-navigator
+.idea/markdown-navigator.xml
+.idea/markdown-exported-files.xml

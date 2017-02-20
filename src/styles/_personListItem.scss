@@ -1,0 +1,37 @@
+// Using our avatar in the listItem avatar field causes the font-size to be overridden and therefore needs to be reset.
+.itemAction {
+  > [data-react-toolbox=font-icon] {
+    // If we don't explicitly select the avatar, all icons in the listItem are affected.
+    > [data-app-element=avatar] {
+      font-size: initial;
+    }
+  }
+}
+
+// Remove the margin from the avatar.
+.itemAction {
+  margin: 0;
+}
+
+// Remove the min-height and padding.
+.item {
+  padding: 0;
+  min-height: 0;
+}
+
+// Apply some margin to the listItem instead;
+.listItem {
+  margin: 2rem 0.5rem;
+}
+
+// Prevent name from overflowing.
+.itemContentRoot {
+  min-width: 0; // https://css-tricks.com/flexbox-truncated-text/
+
+  .itemText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+

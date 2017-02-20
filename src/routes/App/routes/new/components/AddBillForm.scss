@@ -1,0 +1,72 @@
+.form {
+  background-color: $color-primary;
+  min-height: 100vh;
+  padding-bottom: 2.5rem;
+}
+
+.header {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  padding: 1rem 2rem;
+
+  font-size: larger;
+}
+
+.container {
+  overflow: hidden;
+  margin: 0.5rem  2.5rem;
+  padding: 0;
+  background-color: white;
+  border-radius: $container-border-radius;
+
+  .row{
+    padding-right: 1rem;
+  }
+
+  .row.borderd{
+    border-bottom: 1px solid $color-button-grey;
+  }
+}
+
+.shareListHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  color: white;
+  margin: 1.5rem 2.5rem;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+
+  button {
+    color: white !important;
+    font-size: small !important;
+  }
+}
+
+.container.shareListContainer{
+
+  .addPerson{
+    border-top: 1px solid $color-button-grey;
+    text-align: center;
+    padding-top: .5rem;
+
+    button {
+      width: 100%;
+      font-size: small !important;
+    }
+  }
+}
+
+.overlayToAvoidKeyboardPopingUp{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+

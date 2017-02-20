@@ -1,0 +1,15 @@
+$avatarMargin: .5rem;
+
+.avatarList {
+
+  display: flex;
+  flex-direction: row;
+
+  div {
+    margin: 0 $avatarMargin;
+  }
+
+  div:last-child {
+    margin-right: 0;
+  }
+}

@@ -1,31 +1,36 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import Amount from "components/Amount";
-import CurrencyContext from "../__mocks__/currencyContext";
+import { Provider } from "react-redux";
+import createMockStore from "../__mocks__/mockStore";
 
+test('should use absolute value of amount by default', () => {
 
-test('should use absolute value of amount by dafult', () => {
+  let mockStore = createMockStore();
 
-  var cmp = renderer.create(
-    <CurrencyContext currency="EUR">
+  let cmp = renderer.create(
+    <Provider store={mockStore}>
       <Amount value={-30} />
-    </CurrencyContext>
+    </Provider>
   );
 
-  var tree = cmp.toJSON();
+  let tree = cmp.toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 test('should display actual value if absolute property is falsy', () => {
 
-  var cmp = renderer.create(
-    <CurrencyContext currency="EUR">
-      <Amount value={-30} absolute={false} />
-    </CurrencyContext>
+  let mockStore = createMockStore();
+
+  let cmp = renderer.create(
+
+    <Provider store={mockStore}>
+      <Amount value={-30} absolute={false}/>
+    </Provider>
   );
 
-  var tree = cmp.toJSON();
+  let tree = cmp.toJSON();
 
   expect(tree).toMatchSnapshot();
 });

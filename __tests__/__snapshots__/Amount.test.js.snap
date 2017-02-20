@@ -2,16 +2,16 @@ exports[`test should display actual value if absolute property is falsy 1`] = `
 <span
   className="">
   <span>
-    -30
+    -30 EUR
   </span>
 </span>
 `;
 
-exports[`test should use absolute value of amount by dafult 1`] = `
+exports[`test should use absolute value of amount by default 1`] = `
 <span
   className="">
   <span>
-    30
+    30 EUR
   </span>
 </span>
 `;

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./PersonList.scss";
-import { Person, AvatarPosition, AvatarSize } from "components/Person";
+import { Person, AvatarPosition } from "components/Person";
+import { AvatarSize } from "components/Avatar"
 import { Button } from "react-toolbox/lib/button";
 
 export const PersonList = (props) => {
@@ -9,7 +10,7 @@ export const PersonList = (props) => {
 
   const persons = props.names.map((name) => (
     <div className={styles.person} key={name}>
-      <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.BIG} name={name} />
+      <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.SMALL} name={name} />
       <Button style={{display: displayRemoveButton}}
               className={styles.RemoveButton}
               icon='clear'
@@ -31,7 +32,6 @@ PersonList.propTypes = {
 };
 
 PersonList.defaultProps = {
-  names: [],
   onPersonRemove: () => { },
   hasDeleteButton: false,
 };
