@@ -17,6 +17,8 @@ class BillItem extends React.Component {
     super(props, context);
   }
 
+  getDebtorName = (index) => (this.props.bill.debtors[index] || {}).name;
+
   render = () => {
 
     const {bill} = this.props;
@@ -47,9 +49,9 @@ class BillItem extends React.Component {
               }."
               values={{
                 numberOfPeople: bill.debtors.length,
-                first: bill.debtors[ 0 ].name,
-                second: bill.debtors[ 1 ].name,
-                third: bill.debtors[ 2 ].name,
+                first: this.getDebtorName(0),
+                second: this.getDebtorName(1),
+                third: this.getDebtorName(2),
                 remaining: bill.debtors.length - 2
               }} />
           </CardText>
