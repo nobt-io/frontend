@@ -8,6 +8,7 @@ import BillItem from "./BillItem";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
+import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import ReactPullToRefresh from "react-pull-to-refresh";
 import AddBillFAB from "./AddBillFAB";
@@ -15,6 +16,8 @@ import AppBarTheme from "./AppBarTheme.scss";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
 import HeadRoom from "react-headroom";
+import Amount from "../../../components/Amount/Amount";
+
 
 export default class Nobt extends React.Component {
 
@@ -24,17 +27,29 @@ export default class Nobt extends React.Component {
         <HeadRoom>
           <AppBar
             theme={AppBarTheme}
-            title={this.props.name}
-          />
+            title="nobt.io"
+            />
+
           {
             this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL &&
-            <Button
-              label="Nobt it!"
-              primary
-              raised
-              onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
-              theme={NobtItButtonTheme}
-            />
+              <div className={styles.overviewContainer}>
+                <div className={styles.nobtTitle}>{this.props.name}</div>
+                <div className={styles.nobtMetadata}>
+                  <ul>
+                    <li><div><FontIcon value="payment"/><Amount value={35}/></div></li>
+                    <li><div><FontIcon value="supervisor_account"/>10</div></li>
+                  </ul>
+                </div>
+                <Button
+                  icon="whatshot"
+                  label="Crunch Nobt"
+                  primary
+                  raised
+                  onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
+                  theme={NobtItButtonTheme}
+                />
+              </div>
+
           }
         </HeadRoom>
 
@@ -55,7 +70,6 @@ export default class Nobt extends React.Component {
             <ReactPullToRefresh onRefresh={this.props.invalidateNobtData}>
 
               <div className={BillListTheme.header}>
-
                 <div className={BillListTheme.title}>
                   <h4>Bills:</h4>
                 </div>
@@ -111,6 +125,7 @@ export default class Nobt extends React.Component {
     billFilter: React.PropTypes.string.isRequired,
     billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
-    fetchStatus: React.PropTypes.string.isRequired
+    fetchStatus: React.PropTypes.string.isRequired,
+    createdOn: React.PropTypes.string.isRequired
   };
 };

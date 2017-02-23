@@ -13,6 +13,7 @@ const updateFetchNobtStatusActionPayloadHandler = {
         participatingPersons: payload.nobt.participatingPersons,
         transactions: payload.nobt.transactions,
         bills: payload.nobt.expenses,
+        createdOn: payload.nobt.createdOn
       }
     }
   ),

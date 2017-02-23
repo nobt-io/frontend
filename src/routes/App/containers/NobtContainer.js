@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Nobt from "../components/Nobt";
 import { addMember, invalidateNobt } from "../modules/currentNobt/actions";
-import { getName, getCurrency, getMembers, getBills, getTotal, getFilteredBills, getFetchNobtStatus } from "../modules/currentNobt/selectors";
+import { getName, getCurrency, getMembers, getBills, getTotal, getFilteredBills, getFetchNobtStatus, getCreatedOn } from "../modules/currentNobt/selectors";
 import { updateBillFilter, updateBillSortProperty } from "../modules/viewState/actions";
 import { getBillFilter, getBillSortProperty } from "../modules/viewState/selectors";
 import withNavigation from "../../../components/hoc/withNavigation";
@@ -16,7 +16,8 @@ const mapStateToProps = (state) => {
     billFilter: getBillFilter(state),
     billSortProperty: getBillSortProperty(state),
     isNobtEmpty: getBills(state).length === 0,
-    fetchStatus: getFetchNobtStatus(state)
+    fetchStatus: getFetchNobtStatus(state),
+    createdOn: getCreatedOn(state)
   };
 };
 
