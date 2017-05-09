@@ -1,7 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - "6"
+  - '6'
+
+env:
+  global:
+  - ENCRYPTION_LABEL: "b1262a2766a6"
+  - COMMIT_AUTHOR_EMAIL: "bot@nobt.io"
 
 cache:
   directories:
@@ -11,11 +16,10 @@ install:
   - npm install
 
 script:
-  - npm run lint
+#  - npm run lint
   - npm run test
-  - NODE_ENV=development npm run deploy
-  - NODE_ENV=staging npm run deploy
-  - NODE_ENV=production npm run deploy
+  - npm run deploy
 
 after_success:
-  - npm run codecov
+  - ".sentry/upload-sourcemaps"
+  - ".github/deploy-to-gh-pages"
