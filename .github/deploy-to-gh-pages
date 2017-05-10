@@ -29,22 +29,24 @@ git clone -b gh-pages $REPO $GH_PAGES_DIR
 rm -rf $GH_PAGES_DIR/**/* || exit 0
 
 # Copy over new build-artifacts
-cp $TARGET_DIR/* $GH_PAGES_DIR
+cp $TARGET_DIR/* $GH_PAGES_DIR/
 
 # Now let's go have some fun with the cloned repo
 cd $GH_PAGES_DIR
 git config user.name "Travis CI"
 git config user.email "$COMMIT_AUTHOR_EMAIL"
 
+# Stage all the files
+git add -A .
+
 # If there are no changes to the compiled out (e.g. this is a README update) then just bail.
-if git diff --quiet; then
+if git diff --cached --quiet; then
     echo "No changes to the output on this push; exiting."
     exit 0
 fi
 
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
-git add -A .
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc

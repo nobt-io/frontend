@@ -3,7 +3,7 @@
 curl $SENTRY_HOOK_URL \
   -X POST \
   -H 'Content-Type: application/json' \
-  -d '{"version": "'$CI_BUILD_REF'"}'
+  -d '{"version": "'$TRAVIS_COMMIT'"}'
 
 for f in dist/*.{js,css,map}
 do
@@ -11,7 +11,7 @@ do
 
   FILE_NAME=$(basename $f)
 
-  curl https://sentry.io/api/0/projects/nobtio/frontend/releases/$CI_BUILD_REF/files/ \
+  curl https://sentry.io/api/0/projects/nobtio/frontend/releases/$TRAVIS_COMMIT/files/ \
     -X POST \
     -H "Authorization: Bearer $SENTRY_AUTH_TOKEN" \
     -F file=@"${f}" \
