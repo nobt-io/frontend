@@ -7,8 +7,6 @@ curl $SENTRY_HOOK_URL \
 
 for f in dist/*.{js,css,map}
 do
-  echo "\rUploading ${f}."
-
   FILE_NAME=$(basename $f)
 
   curl https://sentry.io/api/0/projects/nobtio/frontend/releases/$TRAVIS_COMMIT/files/ \
