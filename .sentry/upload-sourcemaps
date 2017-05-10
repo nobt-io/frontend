@@ -7,7 +7,7 @@ curl $SENTRY_HOOK_URL \
 
 for f in dist/*.{js,css,map}
 do
-  echo "\nUploading ${f}."
+  echo "\rUploading ${f}."
 
   FILE_NAME=$(basename $f)
 

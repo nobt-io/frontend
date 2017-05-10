@@ -5,7 +5,7 @@ node_js:
 
 env:
   global:
-  - ENCRYPTION_LABEL: "b1262a2766a6"
+  - ENCRYPTION_LABEL: "56053b49e338"
   - COMMIT_AUTHOR_EMAIL: "bot@nobt.io"
 
 cache:
