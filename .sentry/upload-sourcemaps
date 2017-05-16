@@ -6,11 +6,11 @@ curl https://sentry.io/api/0/organizations/nobtio/releases/ \
   -H "Authorization: Bearer ${SENTRY_AUTH_TOKEN}" \
   -d '
     {
-      "version": "test",
+      "version": "'${TRAVIS_COMMIT}'",
       "refs": [
         {
           "repository": "nobt-io/frontend",
-          "commit": "test"
+          "commit": "'${TRAVIS_COMMIT}'"
         }
       ],
       "projects": [
