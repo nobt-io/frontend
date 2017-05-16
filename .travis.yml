@@ -3,23 +3,31 @@ language: node_js
 node_js:
   - '6'
 
-env:
-  global:
-  - ENCRYPTION_LABEL: "56053b49e338"
-  - COMMIT_AUTHOR_EMAIL: "bot@nobt.io"
-
 cache:
   directories:
-    - node_modules
+  - node_modules
 
 install:
-  - npm install
+- npm install
 
 script:
-#  - npm run lint
-  - npm run test
-  - npm run deploy
+- npm run test
+- npm run deploy
 
-after_success:
-  - ".sentry/upload-sourcemaps"
-  - ".github/deploy-to-gh-pages"
+deploy:
+  - provider: s3
+    access_key_id: AKIAI7H524PMKN4DGK3A
+    secret_access_key:
+      secure: SL6W2eG1S8XFxSVS5Ps6M6mj9Rf0q4yn5dRj3cwiiUoff7K2gz8GUPh4p8NMbvl0wMebKtjRY9CMrDSANh1fTak9s8pF/lDXFhyZlU267f0U1TEXoKnym34HV9OIYD/OYIGXKuY0ZRhxHWwagVog0hkM29pbAfMb9RaF7wtIK6wVix4zTMMg1r+jblPvC3IILRHXXzbHbE4TFWlide7MEg2CWhPUj9t6H7eB7Plzhm5kcK7sOlVkJTW2W5fLni+0nLc0S1xZcZDbU6nLoQzaVjx98XGzwbBjDcMKV0ZgTm5qMTDNIrZo/l4e822zQzllnLLbIX30SbVY7MYW0Qrvim0n9OhojBbU9O+AVcE6p3sY2Kjihq9RDxLtXVeKZyz0wtM9uSu9oZ8hH1hlaJ6DF73qQr4ZeVvOaQgZ76GYdVaXjsTq99IjKmNKOhGQT+ZBP5Ezm0W/kRJw/ljHtA9BaKfQM+IFSlV61qgp2ckrBJI67cDy5z6eVYI/Wq+mMUD5CstTuTjO+SgWE/qcRVD9TO5em73aebmQJ623sIcAHA5RAKehYnM/uCYVuHKRb0e8vOp210fakRNH/zxDD1QEYizjlTlC1yvI+ZAR9atjXrUagmB0MCesCW5X5dycowO6v1erAJSTFXyRKTsTx4EyEactUvJSaFyao0exQ3Ddr90=
+    bucket: nobt-io-frontend-prod
+    local-dir: dist
+    acl: public_read
+    region: eu-central-1
+    on:
+      branch: master
+      repo: nobt-io/frontend
+  - provider: script
+    script: .sentry/upload-sourcemaps
+    on:
+      branch: master
+      repo: nobt-io/frontend
