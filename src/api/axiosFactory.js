@@ -3,26 +3,14 @@ import debug from "debug";
 
 const apiBaseURLs = [
   {
-    url: "http://nobt-io-dev.cfapps.io",
+    url: "http://nobt-io-api-prod.eu-central-1.elasticbeanstalk.com",
 	    active: (host) => {
-      return host.includes("nobt-io-frontend-dev.cfapps.io") || host.match(/review-[A-z0-9\-]*\.cfapps\.io/)
+      return host === "nobt-io-frontend-prod.s3-website.eu-central-1.amazonaws.com"
     }
-  },
-  {
-    url: "http://nobt-io-beta.cfapps.io",
-    active: (host) => host.includes("nobt-io-frontend-beta.cfapps.io")
-  },
-  {
-    url: "http://nobt-io.cfapps.io",
-    active: (host) => host.includes("nobt-io-frontend.cfapps.io")
   },
   {
     url: "http://localhost:8080",
     active: (host) => host.includes("localhost")
-  },
-  {
-    url: "http://192.168.188.23:8080",
-    active: (host) => host.startsWith("192")
   },
 ];
 
