@@ -3,7 +3,16 @@
 curl $SENTRY_HOOK_URL \
   -X POST \
   -H 'Content-Type: application/json' \
-  -d '{"version": "'$TRAVIS_COMMIT'"}'
+  -d '
+    {
+      "version": "'$TRAVIS_COMMIT'",
+      "refs": [{
+          "repository":"nobt-io/frontend",
+          "commit":"'$TRAVIS_COMMIT'",
+      }],
+      "projects":["frontend"]
+    }
+  '
 
 for f in dist/*.{js,css,map}
 do
