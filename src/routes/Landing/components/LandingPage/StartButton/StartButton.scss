@@ -20,10 +20,12 @@ a {
   text-transform: uppercase;
   transition: background 500ms ease;
 
-  &:hover{
-
+  &:hover, &:focus, &:visited, &:link{
     color: #fff;
     text-decoration: none;
+  }
+
+  &:hover, &:focus{
     background-color: $color-primary;
     border-color: $color-primary;
   }
