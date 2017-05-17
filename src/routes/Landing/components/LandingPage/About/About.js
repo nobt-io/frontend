@@ -11,7 +11,7 @@ import StartButton from "../StartButton";
 export default class About extends React.Component {
 
   render = () => (
-    <section className={styles.About}>
+    <section className={styles.About} id={this.props.id}>
       <Grid>
         <Row>
           <Col md={8} mdOffset={2}>

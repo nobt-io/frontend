@@ -1,5 +1,6 @@
 .header {
   height: 100%;
+  padding: 0px !important;
 
   overflow-y: hidden;
   background-size: cover;
@@ -8,7 +9,7 @@
 
   .content {
     text-align: center;
-    padding: 150px 0 50px;
+    padding: 80px 0 50px;
     position: relative;
 
     & > div {
@@ -85,4 +86,64 @@
     }
   }
 
+  $transWhite: rgba(white, 0.7);
+
+  .affix {
+    z-index: 1000;
+    padding: 10px 0;
+    width: 100%;
+
+    position: fixed !important;
+    top: 0 !important;
+
+
+    &.affixScroll {
+      background-color: $color-primary-dark;
+
+      .logo h1, .navbar ul li a {
+        color: white;
+      }
+
+    }
+
+    .logo {
+      h1 {
+        margin-top: 10px;
+        color: $transWhite;
+      }
+    }
+    .navbar {
+      text-align: right;
+      display: none;
+
+      @media (min-width: 768px) {
+        display: block;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+
+        li {
+          display: inline-block;
+
+          a {
+            display: block;
+            color: $transWhite;
+            text-align: center;
+            padding: 10px;
+            margin: 0 5px;
+            text-decoration: none;
+
+            i {
+              margin-right: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
+

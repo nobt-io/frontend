@@ -7,7 +7,7 @@ import Grid from "react-bootstrap/lib/Grid";
 export default class Features extends React.Component {
 
   render = () => (
-    <section className={styles.features}>
+    <section className={styles.features} id={this.props.id}>
       <Grid>
         <Row>
           <Col sm={4}>

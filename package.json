@@ -84,6 +84,7 @@
     "react-responsive-modal": "^1.2.3",
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.0",
+    "react-scrollspy": "^3.1.1",
     "react-toolbox": "^1.1.2",
     "reduce-reducers": "^0.1.2",
     "redux": "^3.0.0",

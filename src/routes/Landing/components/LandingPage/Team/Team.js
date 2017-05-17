@@ -72,7 +72,7 @@ export default class Team extends React.Component {
   };
 
   render = () => (
-    <section className={styles.Team}>
+    <section className={styles.Team} id={this.props.id}>
       <Grid>
         <Row>
           <Col md={8} mdOffset={2}>
