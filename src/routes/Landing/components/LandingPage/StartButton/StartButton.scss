@@ -7,7 +7,7 @@ a.activeButton{
   background-color: $color-primary;
 }
 
-a {
+a.activeButton, a.button {
   border-radius: 25px;
   color: white;
   display: inline-block;
