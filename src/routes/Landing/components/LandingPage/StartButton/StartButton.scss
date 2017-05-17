@@ -1,0 +1,22 @@
+a.button {
+  border: 1px solid white;
+  border-radius: 25px;
+  color: white;
+  display: inline-block;
+  font-size: 11px;
+  padding: 15px 45px;
+  text-align: center;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: background 500ms ease;
+
+  &:hover{
+
+    color: #fff;
+    text-decoration: none;
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+}
