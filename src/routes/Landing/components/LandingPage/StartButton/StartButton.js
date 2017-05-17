@@ -1,11 +1,19 @@
 import React from "react";
 import styles from "./StartButton.scss";
 
-export default class StartButton extends React.Component {
+const StartButton = (props) => {
 
-  render = () => (
-    <a className={styles.button}>
+  let className = (props.active) ? styles.activeButton : styles.button;
+
+  return (
+    <a className={className} href="#">
       Start splitting your bills
     </a>
   )
-}
+};
+
+StartButton.propTypes = {
+  active: React.PropTypes.bool
+};
+
+export default StartButton

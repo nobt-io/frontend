@@ -1,0 +1,42 @@
+.About {
+  text-align: center;
+
+  p {
+    padding: 20px 0;
+  }
+
+  .Steps {
+    display: none;
+    margin-top: 70px;
+    text-align: center;
+
+    .Counter {
+      font-size: 20px;
+      color: $color-primary;
+
+      span {
+        border-radius: 50%;
+        border: 1px solid $color-primary;
+        width: 40px;
+        height: 40px;
+        line-height: 37px;
+        display: block;
+        margin: 0 auto 10px;
+      }
+    }
+
+    h4 {
+      margin: 20px 0;
+    }
+    img {
+      width: 80%;
+      border-radius: 10px;
+      margin: auto;
+      border: 3px solid $grey;
+    }
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+}
