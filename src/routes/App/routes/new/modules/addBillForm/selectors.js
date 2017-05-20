@@ -7,6 +7,7 @@ const getAddBillFormSlice = (state) => state.App.addBillForm;
 export const getAmount = createSelector([ getAddBillFormSlice ], (state) => state.amount);
 export const getDebtee = createSelector([ getAddBillFormSlice ], (state) => state.debtee);
 export const getDescription = createSelector([ getAddBillFormSlice ], (state) => state.description);
+export const getAddBillStatus = createSelector([getAddBillFormSlice], state => state.addBillStatus);
 export const getSplitStrategy = createSelector([ getAddBillFormSlice ], (state) => {
   return state.splitStrategy
 });
