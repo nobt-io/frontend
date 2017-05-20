@@ -67,7 +67,7 @@ export default class Nobt extends React.Component {
         {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
 
-            <ReactPullToRefresh onRefresh={this.props.invalidateNobtData}>
+            <div>
 
               <div className={BillListTheme.header}>
                 <div className={BillListTheme.title}>
@@ -100,7 +100,7 @@ export default class Nobt extends React.Component {
 
               {this.props.children}
 
-            </ReactPullToRefresh>
+            </div>
           )
         }
 
