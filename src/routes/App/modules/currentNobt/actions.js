@@ -14,13 +14,24 @@ function fetchNobtStarted() {
   }
 }
 
-export function fetchNobtSucceeded(response) {
-  return {
-    type: UPDATE_FETCH_NOBT_STATUS,
-    payload: {
-      nobt: response.data,
-      status: AsyncActionStatus.SUCCESSFUL
-    }
+export function fetchNobtSucceeded(nobt) {
+  return (dispatch) => {
+
+    dispatch({
+      type: UPDATE_FETCH_NOBT_STATUS,
+      payload: {
+        nobt,
+        status: AsyncActionStatus.SUCCESSFUL
+      }
+    });
+
+    dispatch(updateHtmlTitle(nobt.name));
+  }
+}
+
+export function updateHtmlTitle(nobtName) {
+  return () => {
+    document.title = nobtName
   }
 }
 
@@ -34,12 +45,6 @@ function fetchNobtFailed(error) {
   }
 }
 
-export function setHtmlTitle(response) {
-  return () => {
-    document.title = response.data.name
-  }
-}
-
 export function fetchNobt(id) {
 
   return (dispatch) => {
@@ -48,10 +53,7 @@ export function fetchNobt(id) {
 
     utils.sleep(1000).then(() => {
       Client.fetchNobt(id).then(
-        response => {
-          dispatch(fetchNobtSucceeded(response));
-          dispatch(setHtmlTitle(response));
-        },
+        response => dispatch(fetchNobtSucceeded(response.data)),
         error => dispatch(fetchNobtFailed(error))
       )
     })
