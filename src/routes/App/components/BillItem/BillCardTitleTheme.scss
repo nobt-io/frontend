@@ -1,3 +1,11 @@
 .cardTitle {
   padding-top: 1rem !important;
 }
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@import "BillCardTitleTheme.shame";
