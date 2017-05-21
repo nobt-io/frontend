@@ -34,6 +34,12 @@ function fetchNobtFailed(error) {
   }
 }
 
+export function setHtmlTitle(response) {
+  return () => {
+    document.title = response.data.name
+  }
+}
+
 export function fetchNobt(id) {
 
   return (dispatch) => {
@@ -42,7 +48,10 @@ export function fetchNobt(id) {
 
     utils.sleep(1000).then(() => {
       Client.fetchNobt(id).then(
-        response => dispatch(fetchNobtSucceeded(response)),
+        response => {
+          dispatch(fetchNobtSucceeded(response));
+          dispatch(setHtmlTitle(response));
+        },
         error => dispatch(fetchNobtFailed(error))
       )
     })
