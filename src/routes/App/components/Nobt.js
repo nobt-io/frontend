@@ -36,8 +36,8 @@ export default class Nobt extends React.Component {
                 <div className={styles.nobtTitle}>{this.props.name}</div>
                 <div className={styles.nobtMetadata}>
                   <ul>
-                    <li><div><FontIcon value="payment"/><Amount value={35}/></div></li>
-                    <li><div><FontIcon value="group"/>10</div></li>
+                    <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
+                    <li><div><FontIcon value="supervisor_account"/>{this.props.members.length}</div></li>
                   </ul>
                 </div>
                 <Button
