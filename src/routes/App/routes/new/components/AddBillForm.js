@@ -12,6 +12,8 @@ import AddMember from "./AddMember";
 import { Link } from "react-router";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import ShareListTheme from "./ShareList/ShareListTheme.scss";
+import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
+import { Snackbar } from "react-toolbox";
 
 /*
  TODO:
@@ -43,14 +45,14 @@ export default class AddBillForm extends React.Component {
     this.props.onSubmit(this.props.nobtId, billToAdd);
   };
 
-  handleOnSplitStrategyChanged = (splitStrategy) => {
-    this.props.onSplitStrategyChanged(splitStrategy);
-    this.closeSplitStrategySelectorOverlay();
-  };
+  componentWillReceiveProps(nextProps) {
+    let newStatus = nextProps.addBillStatus;
 
-  handleOnEqualSplitStrategySelected = () => { this.handleOnSplitStrategyChanged(SplitStrategyNames.EQUAL); }
-  handleOnCustomSplitStrategySelected = () => { this.handleOnSplitStrategyChanged(SplitStrategyNames.UNEQUAL); }
-  handleOnPercentalSplitStrategySelected = () => { this.handleOnSplitStrategyChanged(SplitStrategyNames.PERCENTAGE); }
+    if (newStatus === AsyncActionStatus.SUCCESSFUL) {
+      this.props.replace(LocationBuilder.fromWindow().pop(1).path);
+      this.props.invalidateNobt()
+    }
+  }
 
   render = () => {
 
@@ -73,7 +75,7 @@ export default class AddBillForm extends React.Component {
               <Link to={LocationBuilder.fromWindow().push("selectDebtee").path}>
                 <Input /* TODO: Using input is just a hack for the moment, remove later and style accordingly */
                   readOnly theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.debtee || ""}>
-                  <div className={styles.overlayToAvoidKeyboardPopingUp}></div>
+                  <div className={styles.overlayToAvoidKeyboardPopingUp}/>
                 </Input>
               </Link>
 
@@ -110,6 +112,14 @@ export default class AddBillForm extends React.Component {
         </div>
 
         {this.props.children}
+
+        <Snackbar
+          action='Retry?'
+          active={this.props.addBillStatus === AsyncActionStatus.FAILED}
+          label='Failed to add bill.'
+          type='warning'
+          onClick={this.handleOnSubmit}
+        />
       </div>
     )
   }

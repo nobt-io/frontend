@@ -1,5 +1,6 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
 import _debug from "debug";
+import { UPDATE_ADD_BILL_STATUS } from "./actions";
 
 const log = _debug("reducers:addBillForm");
 
@@ -92,14 +93,18 @@ export const addBillFormReducer = (state = initialState, action) => {
     case "ClearAddBillForm": {
       return initialState;
     }
+
+    case UPDATE_ADD_BILL_STATUS: {
+      return {
+        ...state,
+        addBillStatus: action.payload.status
+      }
+    }
   }
 
   return state;
 };
 
-/**
- *
- */
 const initialState = {
   addBillStatus: null,
   debtee: null,

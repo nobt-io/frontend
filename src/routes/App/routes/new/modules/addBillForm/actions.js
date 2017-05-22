@@ -33,13 +33,15 @@ function addBillFailed(error) {
 
 export function addBill(nobtId, bill) {
 
-  return (dispatch) => {
+  return async (dispatch) => {
 
     dispatch(addBillStarted());
 
-    Client.createBill(nobtId, bill).then(
-      response => dispatch(addBillSucceeded(response)),
-      error => dispatch(addBillFailed(error))
-    )
+    try {
+      const response = await Client.createBill(nobtId, bill);
+      dispatch(addBillSucceeded(response))
+    } catch (error) {
+      dispatch(addBillFailed(error))
+    }
   }
 }
