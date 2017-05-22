@@ -1,6 +1,8 @@
 @import "~react-toolbox/lib/colors";
 @import "~react-toolbox/components/_globals";
 
+//colors
+
 $color-primary: #2D978D;
 $color-primary-dark: rgba(53, 53, 53, 50);
 $color-primary-light: #34ACA1;
@@ -12,9 +14,15 @@ $color-button-grey: #e8e8e8;
 
 $color-button-grey-dark: darken($color-button-grey, 30);
 
+//fonts
+
 $fancy-font: Raleway, sans-serif;
 
+//misc
+
 $container-border-radius: .2rem;
+
+//bootstrap 3 media queries
 
 $xs-min: "only screen and (min-width:none)";
 $xs-max: "only screen and (max-width:520px)";
