@@ -1,4 +1,11 @@
-.DoneScreen {
+.topContainer{
+  text-align: center;
+  margin: 4rem 0 3rem;
+
+  .checkContainer>i{
+    color: $color-primary;
+    font-size: 8rem;
+  }
 }
 
 .linkSection {

@@ -20,10 +20,11 @@ class DoneScreen extends React.Component {
 
   render = () => (
     <div>
-      <h1>Congratulations</h1>
-
-      <p>Your nobt was created successfully. </p>
-
+      <div className={styles.topContainer}>
+        <div className={styles.checkContainer}><i className="fa fa-check-circle" /></div>
+        <h1>Congratulations</h1>
+        <p>Your nobt was created successfully.</p>
+      </div>
       <div className={styles.linkSection}>
         <label>Link to your nobt:</label>
         <div className={styles.nobtLinkContainer}>
