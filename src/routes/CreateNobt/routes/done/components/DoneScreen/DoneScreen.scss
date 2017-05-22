@@ -28,6 +28,13 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  .note {
+    margin-top: 2rem;
+    font-size: smaller;
+    text-align: center;
+    color: $color-button-grey-dark;
+  }
 }
 
 .copyButtonContainer {

@@ -52,7 +52,7 @@ class DoneScreen extends React.Component {
             </IconMenu>
           </div>
         </div>
-
+        <p className={styles.note}>Share this link with anyone you want to split bills with.</p>
       </div>
 
       <Snackbar
