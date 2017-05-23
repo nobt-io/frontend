@@ -10,7 +10,6 @@ import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
-import ReactPullToRefresh from "react-pull-to-refresh";
 import AddBillFAB from "./AddBillFAB";
 import AppBarTheme from "./AppBarTheme.scss";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
