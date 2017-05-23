@@ -40,6 +40,7 @@ export default class Nobt extends React.Component {
                     <li><div><FontIcon value="supervisor_account"/>{this.props.members.length}</div></li>
                   </ul>
                 </div>
+              {(!this.props.isEmpty) && (
                 <Button
                   icon="whatshot"
                   label="Crunch Nobt"
@@ -47,8 +48,8 @@ export default class Nobt extends React.Component {
                   raised
                   onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
                   theme={NobtItButtonTheme}
-                />
-              </div>
+                />)}
+            </div>
 
           }
         </HeadRoom>
