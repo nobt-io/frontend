@@ -13,7 +13,7 @@ export default class Footer extends React.Component {
       <Grid>
         <Row>
           <Col md={6}>
-            <Logo />
+            <Logo isLink/>
           </Col>
           <Col md={6}>
             <div className={styles.links}>

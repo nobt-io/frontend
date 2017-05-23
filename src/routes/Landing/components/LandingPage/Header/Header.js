@@ -22,7 +22,7 @@ export default class Header extends React.Component {
             <Row>
               <Col sm={6}>
                 <div className={styles.logo}>
-                  <Logo />
+                  <Logo isLink/>
                 </div>
               </Col>
               <Col sm={6}>
