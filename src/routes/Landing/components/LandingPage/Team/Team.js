@@ -6,20 +6,20 @@ import Grid from "react-bootstrap/lib/Grid";
 
 export default class Team extends React.Component {
 
-  setPosition = (position) => {
-    let el = document.getElementById("team-img");
-    el.innerHTML = "Position: " + position;
+  setPosition = (pictureElement, position) => {
+    pictureElement.innerHTML = "Position: " + position;
   };
 
   getDocumentOffsets = (element) => {
 
-    let x=0, y=0;
-    for (   ;
+    let x = 0, y = 0;
+    for (;
       element != null;
       x += element.offsetLeft, y += element.offsetTop, element = element.offsetParent
-    ){}
+    ) {
+    }
 
-    return {x : x, y: y};
+    return {x: x, y: y};
   };
 
   handleMouseMove = (cursorX, cursorY, pictureElement) => {
@@ -39,35 +39,53 @@ export default class Team extends React.Component {
     let xAfterImage = cursorX > elementX + elementWidth;
 
     if (yAboveImage) {
-      if (xBeforeImage) this.setPosition("1");
-      if (xOnImage) this.setPosition("2");
-      if (xAfterImage) this.setPosition("3");
+      if (xBeforeImage) {
+        this.setPosition(pictureElement, "1");
+      }
+      if (xOnImage) {
+        this.setPosition(pictureElement, "2");
+      }
+      if (xAfterImage) {
+        this.setPosition(pictureElement, "3");
+      }
     }
     if (yOnImage) {
-      if (xBeforeImage) this.setPosition("4");
-      if (xAfterImage) this.setPosition("6");
-
+      if (xBeforeImage) {
+        this.setPosition(pictureElement, "4");
+      }
       if (xOnImage) {
-        let oneThird = elementWidth / 3;
-
-        if (cursorX < elementX + oneThird) this.setPosition("team-1");
-        else if (cursorX < elementX + 2 * oneThird) this.setPosition("team-2");
-        else this.setPosition("team-3");
+        this.setPosition(pictureElement, "5");
+      }
+      if (xAfterImage) {
+        this.setPosition(pictureElement, "6");
       }
     }
     if (yUnderImage) {
-      if (xBeforeImage) this.setPosition("7");
-      if (xOnImage) this.setPosition("8");
-      if (xAfterImage) this.setPosition("9");
+      if (xBeforeImage) {
+        this.setPosition(pictureElement, "7");
+      }
+      if (xOnImage) {
+        this.setPosition(pictureElement, "8");
+      }
+      if (xAfterImage) {
+        this.setPosition(pictureElement, "9");
+      }
     }
   };
 
-  componentDidMount = () =>  {
-    let element = document.getElementById("team-img");
-    document.onmousemove = (e) => {
+
+  componentDidMount = () => {
+    let teamMember1 = document.getElementById("team-member1");
+    let teamMember2 = document.getElementById("team-member2");
+    let teamMember3 = document.getElementById("team-member3");
+
+    document.onmousemove = (event) => {
       let cursorX = event.pageX;
       let cursorY = event.pageY;
-      this.handleMouseMove(cursorX, cursorY, element)
+
+      this.handleMouseMove(cursorX, cursorY, teamMember1);
+      this.handleMouseMove(cursorX, cursorY, teamMember2);
+      this.handleMouseMove(cursorX, cursorY, teamMember3);
     };
   };
 
@@ -80,7 +98,11 @@ export default class Team extends React.Component {
             <p className={styles.CoffeeInfo}>Crafted with <i className="fa fa-coffee"></i> in Vienna.</p>
             <p>What started as a hackathon by three motivated developers soon turned out to be an actually helpful companion in our daily life.
               Nobt.io is our effort to share this idea with all of you. We hope you enjoy it as much as we do.</p>
-            <div id="team-img" className={styles.teamImage}>Test</div>
+            <div className={styles.teamImages}>
+              <div id="team-member1">Test</div>
+              <div id="team-member2">Test</div>
+              <div id="team-member3">Test</div>
+            </div>
           </Col>
         </Row>
       </Grid>

@@ -5,10 +5,14 @@
     margin: 30px 0;
   }
 
-  .teamImage{
-    height: 200px;
-    background-color: green;
-
-    margin-top: 40px;
+  .teamImages{
+    margin-top: 20px;
+    >div{
+      height: 200px;
+      width: 200px;
+      display: inline-block;
+      background-color: green;
+      margin: 20px;
+    }
   }
 }
