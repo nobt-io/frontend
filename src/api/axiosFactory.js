@@ -3,9 +3,9 @@ import debug from "debug";
 
 const apiBaseURLs = [
   {
-    url: "http://nobt-io-api-prod.eu-central-1.elasticbeanstalk.com",
+    url: "http://api.nobt.io",
 	    active: (host) => {
-      return host === "nobt-io-frontend-prod.s3-website.eu-central-1.amazonaws.com"
+      return host === "nobt.io"
     }
   },
   {
