@@ -5,6 +5,7 @@ import BillListTheme from "./BillListTheme.scss";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
 import HOList from "containers/HOList";
 import BillItem from "./BillItem";
+import EmptyData from "./EmptyData";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
@@ -67,40 +68,43 @@ export default class Nobt extends React.Component {
         {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
 
-            <div>
+            this.props.isEmpty
+              ? ( <EmptyData/> )
+              : (
+                <div>
+                  <div className={BillListTheme.header}>
+                    <div className={BillListTheme.title}>
+                      <h4>Bills:</h4>
+                    </div>
 
-              <div className={BillListTheme.header}>
-                <div className={BillListTheme.title}>
-                  <h4>Bills:</h4>
-                </div>
+                    <IconMenu className={BillListTheme.menu}>
+                      <MenuItem
+                        caption="Sort bills"
+                        icon="sort"
+                        onClick={ () => LocationBuilder.fromWindow().push("changeSort").apply(this.props.push) }
+                      />
 
-                <IconMenu className={BillListTheme.menu}>
-                  <MenuItem
-                    caption="Sort bills"
-                    icon="sort"
-                    onClick={ () => LocationBuilder.fromWindow().push("changeSort").apply(this.props.push) }
-                  />
-
-                  <MenuItem
-                    caption="Filter bills"
-                    icon="filter_list"
-                    onClick={ () => LocationBuilder.fromWindow().push("changeFilter").apply(this.props.push) }
-                  />
-                </IconMenu>
-              </div>
-
-              <HOList
-                theme={BillListTheme}
-                items={this.props.bills}
-                renderItem={ (bill) => (
-                  <div key={bill.id} className={BillListTheme.item}>
-                    <BillItem bill={bill} />
+                      <MenuItem
+                        caption="Filter bills"
+                        icon="filter_list"
+                        onClick={ () => LocationBuilder.fromWindow().push("changeFilter").apply(this.props.push) }
+                      />
+                    </IconMenu>
                   </div>
-                ) } />
 
-              {this.props.children}
+                  <HOList
+                    theme={BillListTheme}
+                    items={this.props.bills}
+                    renderItem={ (bill) => (
+                      <div key={bill.id} className={BillListTheme.item}>
+                        <BillItem bill={bill} />
+                      </div>
+                    ) } />
 
-            </div>
+                  {this.props.children}
+
+                </div>
+              )
           )
         }
 
