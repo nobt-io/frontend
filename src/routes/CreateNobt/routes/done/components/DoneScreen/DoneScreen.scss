@@ -1,4 +1,11 @@
-.DoneScreen {
+.topContainer{
+  text-align: center;
+  margin: 4rem 0 3rem;
+
+  .checkContainer>i{
+    color: $color-primary;
+    font-size: 8rem;
+  }
 }
 
 .linkSection {
@@ -20,6 +27,13 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .note {
+    margin-top: 2rem;
+    font-size: smaller;
+    text-align: center;
+    color: $color-button-grey-dark;
   }
 }
 
