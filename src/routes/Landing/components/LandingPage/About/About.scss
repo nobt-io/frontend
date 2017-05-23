@@ -1,8 +1,14 @@
 .About {
   text-align: center;
 
-  p {
+  .description {
     padding: 20px 0;
+    max-width: 500px;
+    margin: auto;
+  }
+
+  .examples{
+    padding: 5px 0 30px;
   }
 
   .Steps {

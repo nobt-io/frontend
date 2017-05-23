@@ -82,6 +82,7 @@
     "react-pull-to-refresh": "latest",
     "react-redux": "^5.0.0",
     "react-responsive-modal": "^1.2.3",
+    "react-rotating-text": "^1.2.0",
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.0",
     "react-scrollspy": "^3.1.1",

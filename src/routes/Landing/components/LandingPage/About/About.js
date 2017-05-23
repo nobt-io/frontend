@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "./About.scss";
+
 import Grid from "react-bootstrap/lib/Grid";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
+
+import RotatingText from "react-rotating-text"
+
 import StepOneImage from "./step1.png";
 import StepTwoImage from "./step2.png";
 import StepThreeImage from "./step3.png";
@@ -16,11 +20,10 @@ export default class About extends React.Component {
         <Row>
           <Col md={8} mdOffset={2}>
 
-            <h2>You will <i className="fa fa-heart-o" style={{"color": "#d50000"}}></i> nobt.</h2>
+            <h2>You will <i className="fa fa-heart-o" style={{"color": "#d50000"}}></i> nobt.io</h2>
 
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-              Lorem ipsum dolor sit amet.</p>
+            <p className={styles.description}>Nobt.io is a free service that helps you solve the tedious task of splitting several bills among your friends with ease.</p>
+            <p className={styles.examples}>Try it for your <b><RotatingText cursor={false} deletingInterval ={25} items={['next journey.', 'grill party.', 'shared flat.', 'holiday with friends.', 'after work beer.']}/></b></p>
 
             <StartButton active />
 
