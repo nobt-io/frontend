@@ -78,7 +78,8 @@ export default class Team extends React.Component {
           <Col md={8} mdOffset={2}>
             <h2>The team behind nobt.</h2>
             <p className={styles.CoffeeInfo}>Crafted with <i className="fa fa-coffee"></i> in Vienna.</p>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. </p>
+            <p>What started as a hackathon by three motivated developers soon turned out to be an actually helpful companion in our daily life.
+              Nobt.io is our effort to share this idea with all of you. We hope you enjoy it as much as we do.</p>
             <div id="team-img" className={styles.teamImage}>Test</div>
           </Col>
         </Row>
