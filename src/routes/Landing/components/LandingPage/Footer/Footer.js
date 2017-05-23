@@ -19,7 +19,7 @@ export default class Footer extends React.Component {
             <div className={styles.links}>
               <ul>
                 <li><a href="mailto:hello@nobt.io" target="_blank"><i className="fa fa-comment-o"></i> Contact Us</a></li>
-                <li><a href="https://twitter.com/nobt-io"><i className="fa fa-twitter"></i> Twitter</a></li>
+                <li><a href="https://twitter.com/nobtio"><i className="fa fa-twitter"></i> Twitter</a></li>
                 <li><a href="https://github.com/nobt-io"><i className="fa fa-github"></i> Github</a></li>
               </ul>
             </div>
