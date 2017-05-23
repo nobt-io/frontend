@@ -18,9 +18,14 @@
     padding: 1rem;
 
     a, a:visited, a:hover, a:focus, a:active, a:link {
-      font-size: large;
+      font-size: medium;
       color: $color-primary;
       text-decoration: none;
+
+      @media #{$sm-min}  {
+        font-size: large;
+      }
+
     }
 
     display: flex;
