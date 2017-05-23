@@ -126,6 +126,7 @@ export default class Nobt extends React.Component {
     billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
     fetchStatus: React.PropTypes.string.isRequired,
-    createdOn: React.PropTypes.string.isRequired
+    createdOn: React.PropTypes.string.isRequired,
+    isEmpty: React.PropTypes.bool.isRequired
   };
 };
