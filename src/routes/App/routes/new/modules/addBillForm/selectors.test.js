@@ -1,8 +1,8 @@
 import { isExistingMemberFactory } from "./selectors";
+import { isTransientMemberFactory } from "./selectors";
 
-it("should check for existing members", () => {
-
-  const isExistingMember = isExistingMemberFactory({
+let mockState = function () {
+  return {
     App: {
       addBillForm: {
         personValues: [
@@ -22,13 +22,30 @@ it("should check for existing members", () => {
         }
       }
     }
-  });
+  };
+};
 
-  expect(isExistingMember("Felix")).toBeTruthy()
-  expect(isExistingMember("Matthias")).toBeTruthy()
-  expect(isExistingMember("Thomas")).toBeTruthy()
-  expect(isExistingMember("David")).toBeTruthy()
+it("should check for existing members", () => {
 
-  expect(isExistingMember("Martin")).toBeFalsy()
+  const isExistingMember = isExistingMemberFactory(mockState());
+
+  expect(isExistingMember("Felix")).toBeTruthy();
+  expect(isExistingMember("Matthias")).toBeTruthy();
+  expect(isExistingMember("Thomas")).toBeTruthy();
+  expect(isExistingMember("David")).toBeTruthy();
+
+  expect(isExistingMember("Martin")).toBeFalsy();
+
+});
+
+it("should check for transient members", () => {
+
+  const isExistingMember = isTransientMemberFactory(mockState());
+
+  expect(isExistingMember("Felix")).toBeTruthy();
+
+  expect(isExistingMember("Matthias")).toBeFalsy();
+  expect(isExistingMember("Thomas")).toBeFalsy();
+  expect(isExistingMember("David")).toBeFalsy();
 
 });

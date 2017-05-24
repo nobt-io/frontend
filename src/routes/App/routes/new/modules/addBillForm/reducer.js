@@ -1,23 +1,36 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
 import _debug from "debug";
 import { UPDATE_ADD_BILL_STATUS } from "./actions";
+import { isTransientMemberFactory } from "./selectors";
 
 const log = _debug("reducers:addBillForm");
 
 export const addBillFormReducer = (state = initialState, action) => {
 
-  let addNewMember = function (stateCopy, member) {
+  function createPersonValue(member) {
+    return {
+      name: member,
+      value: state.defaultValues[ state.splitStrategy ]
+    }
+  }
 
-    stateCopy.personValues = [
-      ...stateCopy.personValues,
-      {
-        name: member,
-        value: stateCopy.defaultValues[ stateCopy.splitStrategy ]
+  function isTransientMember(candidate) {
+    /*
+     * Construct a pseudo version of the global state.
+     *
+     * Necessary for the selector because they, in contrast to reducers, always expect the global state.
+     * This reducer on the other hand only operates on its local state.
+     */
+    let pseudoGlobalState = {
+      App: {
+        addBillForm: state
       }
-    ];
+    };
 
-    return stateCopy
-  };
+    let isTransientMemberFn = isTransientMemberFactory(pseudoGlobalState);
+
+    return isTransientMemberFn(candidate);
+  }
 
   switch (action.type) {
 
@@ -29,29 +42,39 @@ export const addBillFormReducer = (state = initialState, action) => {
         return state;
       }
 
-      return addNewMember({...state}, newMember)
+      return {
+        ...state,
+        personValues: [
+          ...state.personValues,
+          createPersonValue(newMember)
+        ]
+      };
     }
 
     case "NewDebteeSelected": {
-      let {debtee, isNewMember} = action.payload;
+      let {debtee} = action.payload;
 
-      if (!debtee && !isNewMember) {
+      if (!debtee || debtee === state.debtee) {
         return state;
       }
 
-      if (debtee === state.debtee) {
-        return state;
+      if (isTransientMember(debtee)) {
+        // Member is already in the current bill, just update the debtee.
+        return {
+          ...state,
+          debtee: debtee
+        };
       }
 
-      let stateCopy = {...state};
-
-      if (isNewMember) {
-        stateCopy = addNewMember(stateCopy, debtee);
-      }
-
-      stateCopy.debtee = debtee;
-
-      return stateCopy
+      // Member is not yet in the current bill. Explicitly add them and return the new state.
+      return {
+        ...state,
+        debtee: debtee,
+        personValues: [
+          ...state.personValues,
+          createPersonValue(debtee)
+        ]
+      };
     }
 
     case "SplitStrategyChanged": {
