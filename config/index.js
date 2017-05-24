@@ -79,7 +79,7 @@ config.globals = {
   'process.env'  : {
     'NODE_ENV' : JSON.stringify(config.env)
   },
-  'COMMIT_HASH'  : JSON.stringify(process.env.CI_BUILD_REF),
+  'COMMIT_HASH'  : JSON.stringify(process.env.TRAVIS_COMMIT || ''),
   'NODE_ENV'     : config.env,
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
