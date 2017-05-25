@@ -37,15 +37,3 @@ it("should check for existing members", () => {
   expect(isExistingMember("Martin")).toBeFalsy();
 
 });
-
-it("should check for transient members", () => {
-
-  const isExistingMember = isTransientMemberFactory(mockState());
-
-  expect(isExistingMember("Felix")).toBeTruthy();
-
-  expect(isExistingMember("Matthias")).toBeFalsy();
-  expect(isExistingMember("Thomas")).toBeFalsy();
-  expect(isExistingMember("David")).toBeFalsy();
-
-});

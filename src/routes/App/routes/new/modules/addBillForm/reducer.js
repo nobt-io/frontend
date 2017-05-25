@@ -1,9 +1,5 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
-import _debug from "debug";
 import { UPDATE_ADD_BILL_STATUS } from "./actions";
-import { isTransientMemberFactory } from "./selectors";
-
-const log = _debug("reducers:addBillForm");
 
 export const addBillFormReducer = (state = initialState, action) => {
 
@@ -14,22 +10,11 @@ export const addBillFormReducer = (state = initialState, action) => {
     }
   }
 
+  /**
+   * Checks whether a given candidate person is already explicitly added to the current bill. (i.e. a PersonValue is set)
+   */
   function isTransientMember(candidate) {
-    /*
-     * Construct a pseudo version of the global state.
-     *
-     * Necessary for the selector because they, in contrast to reducers, always expect the global state.
-     * This reducer on the other hand only operates on its local state.
-     */
-    let pseudoGlobalState = {
-      App: {
-        addBillForm: state
-      }
-    };
-
-    let isTransientMemberFn = isTransientMemberFactory(pseudoGlobalState);
-
-    return isTransientMemberFn(candidate);
+    return state.personValues.map(pv => pv.name).indexOf(candidate) >= 0;
   }
 
   switch (action.type) {
@@ -52,6 +37,7 @@ export const addBillFormReducer = (state = initialState, action) => {
     }
 
     case "NewDebteeSelected": {
+
       let {debtee} = action.payload;
 
       let debteeNotSet = !debtee;
@@ -65,14 +51,14 @@ export const addBillFormReducer = (state = initialState, action) => {
         // Member is already in the current bill, just update the debtee.
         return {
           ...state,
-          debtee: debtee
+          debtee
         };
       }
 
       // Member is not yet in the current bill. Explicitly add them and return the new state.
       return {
         ...state,
-        debtee: debtee,
+        debtee,
         personValues: [
           ...state.personValues,
           createPersonValue(debtee)

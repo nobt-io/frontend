@@ -16,16 +16,6 @@ export const getBillMembers = createSelector([ getAddBillFormSlice ], (state) =>
   return state.personValues.map(pv => pv.name)
 });
 
-/**
- * Checks whether a member is transient (i.e. added on the fly in the "AddBillForm") and not yet persisted in the nobt.
- *
- * A member is transient if listed as a bill member.
- * However, not every bill member is transient, but every transient member must be a bill member.
- */
-export const isTransientMemberFactory = createSelector([ getBillMembers ], billMembers => {
-  return (candidate) => billMembers.indexOf(candidate) >= 0;
-});
-
 export const getAllMembers = createSelector([ getBillMembers, getMembers, getDebtee ], (billMembers, nobtMembers, debtee) => {
   return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter( name => name !== null )
 });
