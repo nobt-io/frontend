@@ -1,3 +1,5 @@
+const env = require('require-env');
+
 // Here is where you can define configuration overrides based on the execution environment.
 // Supply a key to the default export matching the NODE_ENV that you wish to target, and
 // the base configuration will apply your overrides before exporting itself.
@@ -30,6 +32,12 @@ export default {
       chunks: true,
       chunkModules: true,
       colors: true
+    },
+    globals: {
+      ...config.globals,
+      // env.require fails if the env variables are not defined. => Breaks the build if production environment is not correctly defined
+      COMMIT_HASH: `${env.require("TRAVIS_COMMIT")}`,
+      SENTRY_DSN: `${env.require("SENTRY_DSN")}`
     }
   })
 }

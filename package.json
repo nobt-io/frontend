@@ -131,6 +131,7 @@
     "react-test-renderer": "^15.3.2",
     "redbox-react": "^1.2.10",
     "redux-mock-store": "^1.2.1",
+    "require-env": "^0.1.0",
     "rimraf": "^2.5.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.6.0"
