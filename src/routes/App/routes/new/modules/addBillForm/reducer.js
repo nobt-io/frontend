@@ -54,7 +54,10 @@ export const addBillFormReducer = (state = initialState, action) => {
     case "NewDebteeSelected": {
       let {debtee} = action.payload;
 
-      if (!debtee || debtee === state.debtee) {
+      let debteeNotSet = !debtee;
+      let debteeNotChanged = debtee === state.debtee;
+
+      if (debteeNotSet || debteeNotChanged) {
         return state;
       }
 
