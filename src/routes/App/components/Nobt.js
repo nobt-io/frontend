@@ -40,7 +40,7 @@ export default class Nobt extends React.Component {
                     <li><div><FontIcon value="supervisor_account"/>{this.props.members.length}</div></li>
                   </ul>
                 </div>
-              {(!this.props.isEmpty) && (
+              {(!this.props.isNobtEmpty) && (
                 <Button
                   icon="whatshot"
                   label="Crunch Nobt"
@@ -68,7 +68,7 @@ export default class Nobt extends React.Component {
         {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
 
-            this.props.isEmpty
+            this.props.isNobtEmpty
               ? ( <EmptyData/> )
               : (
                 <div>
@@ -131,6 +131,6 @@ export default class Nobt extends React.Component {
     isNobtEmpty: React.PropTypes.bool.isRequired,
     fetchStatus: React.PropTypes.string.isRequired,
     createdOn: React.PropTypes.string.isRequired,
-    isEmpty: React.PropTypes.bool.isRequired
+    isNobtEmpty: React.PropTypes.bool.isRequired
   };
 };
