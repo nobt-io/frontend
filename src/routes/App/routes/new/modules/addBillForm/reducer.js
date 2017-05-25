@@ -38,7 +38,7 @@ export const addBillFormReducer = (state = initialState, action) => {
 
       let newMember = action.payload.member;
 
-      if (!newMember || newMember === action.payload) {
+      if (!newMember) {
         return state;
       }
 
