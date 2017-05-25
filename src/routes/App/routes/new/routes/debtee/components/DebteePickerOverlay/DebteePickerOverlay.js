@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { getDebtee, getAllMembers } from "../../../../modules/addBillForm/selectors";
 import Dialog from "components/Dialog";
 import DialogTheme from "components/Dialog/DialogTheme.scss";
+import { newDebteeSelected } from "../../../../modules/addBillForm/actions";
 
 const log = _debug("DebteePicker");
 
@@ -61,6 +62,6 @@ export default connect(
     debtee: getDebtee(state)
   }),
   (dispatch) => ({
-    onPersonPicked: (debtee) => dispatch({type: "NewDebteeSelected", payload: {debtee}}),
+    onPersonPicked: (debtee) => dispatch(newDebteeSelected(debtee)),
   })
 )(DebteePickerOverlay)

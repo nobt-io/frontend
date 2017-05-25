@@ -1,5 +1,5 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
-import { UPDATE_ADD_BILL_STATUS } from "./actions";
+import { NEW_DEBTEE_SELECTED, UPDATE_ADD_BILL_STATUS } from "./actions";
 
 export const addBillFormReducer = (state = initialState, action) => {
 
@@ -36,7 +36,7 @@ export const addBillFormReducer = (state = initialState, action) => {
       };
     }
 
-    case "NewDebteeSelected": {
+    case NEW_DEBTEE_SELECTED: {
 
       let {debtee} = action.payload;
 

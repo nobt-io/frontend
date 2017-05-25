@@ -1,4 +1,5 @@
 import { addBillFormReducer, initialState } from "./reducer";
+import { newDebteeSelected } from "./actions";
 
 it("should add new debtee if not yet present in the current bill", () => {
 
@@ -11,10 +12,9 @@ it("should add new debtee if not yet present in the current bill", () => {
     ]
   };
 
-  let newState = addBillFormReducer(previousState, {
-    type: "NewDebteeSelected",
-    payload: {debtee: "Max"}
-  });
+
+  let newState = addBillFormReducer(previousState, newDebteeSelected("Max"));
+
 
   expect(newState).toEqual(expectedState)
 });
@@ -38,10 +38,9 @@ it("should only set new debtee if member is already present in the current bill"
     ]
   };
 
-  let newState = addBillFormReducer(previousState, {
-    type: "NewDebteeSelected",
-    payload: {debtee: "Max"}
-  });
+
+  let newState = addBillFormReducer(previousState, newDebteeSelected("Max"));
+
 
   expect(newState).toEqual(expectedState)
 });
