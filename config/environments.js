@@ -36,7 +36,7 @@ export default {
     globals: {
       ...config.globals,
       // env.require fails if the env variables are not defined. => Breaks the build if production environment is not correctly defined
-      COMMIT_HASH: `${env.require("TRAVIS_COMMIT")}`,
+      COMMIT_HASH: `${env.require("COMMIT_HASH")}`,
       SENTRY_DSN: `${env.require("SENTRY_DSN")}`
     }
   })
