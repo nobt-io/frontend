@@ -115,7 +115,7 @@ export const addBillFormReducer = (state = initialState, action) => {
   return state;
 };
 
-const initialState = {
+export const initialState = {
   addBillStatus: null,
   debtee: null,
   description: "",
