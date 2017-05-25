@@ -3,6 +3,7 @@ import AsyncActionStatus from "../../../../../../const/AsyncActionStatus";
 
 export const UPDATE_ADD_BILL_STATUS = 'UPDATE_ADD_BILL_STATUS';
 export const NEW_DEBTEE_SELECTED = 'NEW_DEBTEE_SELECTED';
+export const NEW_MEMBER_ADDED = 'NEW_MEMBER_ADDED';
 
 function addBillStarted() {
   return {
@@ -37,6 +38,15 @@ export function newDebteeSelected(member) {
     type: NEW_DEBTEE_SELECTED,
     payload: {
       debtee: member
+    }
+  }
+}
+
+export function newMemberAdded(member) {
+  return {
+    type: NEW_MEMBER_ADDED,
+    payload: {
+      member
     }
   }
 }

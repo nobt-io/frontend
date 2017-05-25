@@ -1,5 +1,5 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
-import { NEW_DEBTEE_SELECTED, UPDATE_ADD_BILL_STATUS } from "./actions";
+import { NEW_DEBTEE_SELECTED, NEW_MEMBER_ADDED, UPDATE_ADD_BILL_STATUS } from "./actions";
 
 export const addBillFormReducer = (state = initialState, action) => {
 
@@ -19,11 +19,12 @@ export const addBillFormReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
-    case "NewMemberAdded": {
+    case NEW_MEMBER_ADDED: {
 
-      let newMember = action.payload.member;
+      let {member} = action.payload;
+      let memberNotSet = !member;
 
-      if (!newMember) {
+      if (memberNotSet) {
         return state;
       }
 
@@ -31,7 +32,7 @@ export const addBillFormReducer = (state = initialState, action) => {
         ...state,
         personValues: [
           ...state.personValues,
-          createPersonValue(newMember)
+          createPersonValue(member)
         ]
       };
     }

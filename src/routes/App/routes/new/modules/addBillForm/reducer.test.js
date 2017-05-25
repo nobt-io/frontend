@@ -1,46 +1,70 @@
 import { addBillFormReducer, initialState } from "./reducer";
-import { newDebteeSelected } from "./actions";
+import { NEW_DEBTEE_SELECTED, NEW_MEMBER_ADDED, newDebteeSelected, newMemberAdded } from "./actions";
 
-it("should add new debtee if not yet present in the current bill", () => {
+describe(`Action ${NEW_DEBTEE_SELECTED}`, () => {
 
-  let previousState = initialState;
-  let expectedState = {
-    ...initialState,
-    debtee: "Max",
-    personValues: [
-      {name: "Max", value: true}
-    ]
-  };
+  it("should add new debtee if not yet present in the current bill", () => {
+
+    let previousState = initialState;
+    let expectedState = {
+      ...initialState,
+      debtee: "Max",
+      personValues: [
+        {name: "Max", value: true}
+      ]
+    };
 
 
-  let newState = addBillFormReducer(previousState, newDebteeSelected("Max"));
+    let newState = addBillFormReducer(previousState, newDebteeSelected("Max"));
 
 
-  expect(newState).toEqual(expectedState)
+    expect(newState).toEqual(expectedState)
+  });
+
+  it("should only set new debtee if member is already present in the current bill", () => {
+
+    let previousState = {
+      ...initialState,
+      personValues: [
+        {name: "Max", value: true},
+        {name: "Peter", value: true},
+      ]
+    };
+
+    let expectedState = {
+      ...initialState,
+      debtee: "Max",
+      personValues: [
+        {name: "Max", value: true},
+        {name: "Peter", value: true},
+      ]
+    };
+
+
+    let newState = addBillFormReducer(previousState, newDebteeSelected("Max"));
+
+
+    expect(newState).toEqual(expectedState)
+  });
 });
 
-it("should only set new debtee if member is already present in the current bill", () => {
+describe(`Action ${NEW_MEMBER_ADDED}`, () => {
 
-  let previousState = {
-    ...initialState,
-    personValues: [
-      {name: "Max", value: true},
-      {name: "Peter", value: true},
-    ]
-  };
+  it('should add new member if not yet present in the current bill', () => {
 
-  let expectedState = {
-    ...initialState,
-    debtee: "Max",
-    personValues: [
-      {name: "Max", value: true},
-      {name: "Peter", value: true},
-    ]
-  };
+    let previousState = initialState;
+    let expectedState = {
+      ...initialState,
+      personValues: [
+        {name: "Max", value: true}
+      ]
+    };
 
 
-  let newState = addBillFormReducer(previousState, newDebteeSelected("Max"));
+    let newState = addBillFormReducer(previousState, newMemberAdded("Max"));
 
 
-  expect(newState).toEqual(expectedState)
+    expect(newState).toEqual(expectedState)
+  })
+
 });
