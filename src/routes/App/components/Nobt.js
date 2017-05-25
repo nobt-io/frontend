@@ -5,7 +5,7 @@ import BillListTheme from "./BillListTheme.scss";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
 import HOList from "containers/HOList";
 import BillItem from "./BillItem";
-import EmptyData from "./EmptyData";
+import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
@@ -69,7 +69,7 @@ export default class Nobt extends React.Component {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
 
             this.props.isNobtEmpty
-              ? ( <EmptyData/> )
+              ? ( <EmptyNobtPlaceholder/> )
               : (
                 <div>
                   <div className={BillListTheme.header}>

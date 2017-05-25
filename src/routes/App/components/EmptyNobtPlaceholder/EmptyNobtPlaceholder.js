@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./EmptyData.scss";
+import styles from "./EmptyNobtPlaceholder.scss";
 import withNavigation from "components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import SafeBox from "./safebox.png";
 
-export const EmptyData = (props) => {
+export const EmptyNobtPlaceholder = (props) => {
   return (
     <div className={styles.container}>
       <div style={{backgroundImage: "url('" + SafeBox + "')"}} className={styles.icon}></div>
@@ -14,4 +14,4 @@ export const EmptyData = (props) => {
   );
 };
 
-export default withNavigation(EmptyData)
+export default withNavigation(EmptyNobtPlaceholder)
