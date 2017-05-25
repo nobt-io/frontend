@@ -101,8 +101,6 @@ export const addBillFormReducer = (state = initialState, action) => {
     }
 
     case "AmountChanged": {
-
-
       return {
         ...state,
         amount: action.payload.amount
