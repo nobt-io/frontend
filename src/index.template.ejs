@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>nobt.io</title>
@@ -13,6 +13,14 @@
   <link href="http://fonts.googleapis.com/css?family=Handlee|Pacifico" rel="stylesheet" type="text/css" />
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
 
+  <script type="application/javascript">
+    Raven.config('<% 'SENTRY_DSN' %>', {
+      release: '<% 'COMMIT_HASH' %>',
+      whitelistUrls: [
+      	/"nobt\.io"/
+      ]
+    }).install();
+  </script>
 </head>
 <body>
 <div id="root" style="min-height: 100%"></div>

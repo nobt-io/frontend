@@ -6,4 +6,10 @@ describe("API-Factory", () => {
 
     expect(instance.defaults.baseURL).toBe("http://localhost:8080");
   });
+
+  it("should resolve API-Host for nobt.io", () => {
+    var instance = factory("nobt.io");
+
+    expect(instance.defaults.baseURL).toBe("http://api.nobt.io");
+  });
 });
