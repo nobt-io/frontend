@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Source files" pattern="file[frontend-react-toolkit]:src//*||file[frontend-react-toolkit]:__tests__//*||file[frontend-react-toolkit]:__mocks__//*" />
+</component>

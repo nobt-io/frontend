@@ -145,6 +145,9 @@ export const isValidBill = createSelector([ getShares, getAmount, getDescription
   return isAmountGreaterThanZero && isDescriptionNotEmpty && isDebteeSelected && hasAtLeastOneShareWithAmount;
 });
 
+export const isExistingMemberFactory = createSelector( [ getAllMembers ], members => {
+  return (candidate) => members.indexOf(candidate) >= 0;
+});
 
 const byName = (first, second) => {
   return first.name > second.name
