@@ -94,4 +94,14 @@ if (__DEV__) {
 // ========================================================
 // Go!
 // ========================================================
+
 render()
+
+const actualErrorHandler = window.onerror;
+
+let onErrorDecorator = (msg, url, lineNo, columnNo, error) => {
+  Raven.showReportDialog();
+  actualErrorHandler(msg, url, lineNo, columnNo, error)
+};
+
+window.onerror = onErrorDecorator;
