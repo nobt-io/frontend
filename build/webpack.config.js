@@ -222,7 +222,10 @@ debug(`Importing theme.scss at ${themeFile}`);
 // ------------------------------------
 webpackConfig.sassLoader = {
   data: `@import '${themeFile}';`,
-  includePaths: paths.client('styles')
+  includePaths: [
+    paths.client('styles'),
+    "src"
+  ]
 };
 
 webpackConfig.postcss = [
