@@ -1,15 +1,7 @@
-$padding: 1.5rem;
-
-.list {
-  padding: 0 $padding !important;
-}
+@import "styles/list";
 
 .item:not(:last-child) {
   padding-bottom: $padding;
-}
-
-.menu {
-
 }
 
 .header {
@@ -18,8 +10,4 @@ $padding: 1.5rem;
   justify-content: space-between;
 
   padding: $padding ($padding + 0.5rem) 0;
-}
-
-.title {
-
 }
