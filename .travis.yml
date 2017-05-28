@@ -10,16 +10,12 @@ install:
 script:
 - npm run test
 - npm run deploy
+before_deploy: pip install --user awscli
 deploy:
-  - provider: s3
+  - provider: script
     skip_cleanup: true
+    script: ~/.local/bin/aws s3 sync dist s3://nobt.io --region=eu-central-1 --delete --acl=public-read
     access_key_id: AKIAIF35EA6NPCKM7MXA
-    secret_access_key:
-      secure: 0DX4fiC66IaFgKwBT4sMg4k0oRXs6Z7gjaktHGUJDIJTbIwIOZymV5OLAtxChWf1uoRfpcQYiE+kjdwIiohdqS41QRQrmipfUzTgaHTuERsDzgqc2/2Ltc/h8Ah+pr17x/q3qWoQHES3V671S0RCL0MIKwHDpazjAHCWfnVOcoyrRV+LWfXro7emJmvES6XkyFouAEgcFaLeYBkqKokwv2LdDaM7mY0/x1kYQJ/9e7gCAlWrjFzTqjYHhtMCLAOsw48laUUce2u66/E3h7yOOj1vb5J14C9nyhttNr1W9Ggd5j7e2mF8xZIKptfBMu+gGTG4Yf1sSpuXuLIt2xzYk68fhoKnCg+PE7gaoi/cg5HbqTLyFrzaBUHXKlQby/RmMeUlRLi/XglnhSdDfAiuY0qIzs6CRasTNnPAlJkZ1y/Y+yHoSIxmvKeKU1x1deU/Lc0DKMTUMzK+CPU0aZ8vSCcnoTZYNy1rVq69sBEl4nexDzFD2VK7noIjd1KcrhjwzWcvLbAWHi/TLmJmSQDwq0wOby5ZdhHqVTy0XqkI8xng28QBS/iFDk49FdpnukTTNncZludnzLi6X6Q6v/j8MHlMl86s/YX1SVKcdP3Ul3e3LVo6wArs0OsCkQtmFnb2ysvYPX4CE3cjEO3mSrOX5qTkuSAmkL65kJRndK2yYso=
-    bucket: nobt-io-frontend-prod
-    local-dir: dist
-    acl: public_read
-    region: eu-central-1
     on:
       branch: master
       repo: nobt-io/frontend

@@ -2,6 +2,8 @@
   background-color: $color-primary;
   min-height: 100vh;
   padding-bottom: 2.5rem;
+  margin: auto;
+  max-width: $appWidth;
 }
 
 .header {

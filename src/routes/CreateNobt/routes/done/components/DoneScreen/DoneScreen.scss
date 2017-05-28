@@ -1,4 +1,11 @@
-.DoneScreen {
+.topContainer{
+  text-align: center;
+  margin: 4rem 0 3rem;
+
+  .checkContainer>i{
+    color: $color-primary;
+    font-size: 8rem;
+  }
 }
 
 .linkSection {
@@ -11,15 +18,27 @@
     padding: 1rem;
 
     a, a:visited, a:hover, a:focus, a:active, a:link {
-      font-size: large;
+      font-size: medium;
       color: $color-primary;
       text-decoration: none;
+
+      @media #{$sm-min}  {
+        font-size: large;
+      }
+
     }
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .note {
+    margin-top: 2rem;
+    font-size: smaller;
+    text-align: center;
+    color: $color-button-grey-dark;
   }
 }
 

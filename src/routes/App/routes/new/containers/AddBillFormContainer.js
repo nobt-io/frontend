@@ -1,6 +1,6 @@
 import React from "react";
 import AddBillForm from "../components/AddBillForm";
-import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares, isValidBill } from "../modules/addBillForm/selectors";
+import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares, isValidBill, getAddBillStatus } from "../modules/addBillForm/selectors";
 import { connect } from "react-redux";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import { addBill } from "../modules/addBillForm/actions";
@@ -8,6 +8,7 @@ import { invalidateNobt } from "../../../modules/currentNobt/actions";
 
 export default connect((state, ownProps) => {
   return {
+    addBillStatus: getAddBillStatus(state),
     canSubmit: isValidBill(state),
     amount: getAmount(state),
     description: getDescription(state),
@@ -19,16 +20,13 @@ export default connect((state, ownProps) => {
 }, (dispatch, props) => {
   return {
     onCancel: () => props.replace(LocationBuilder.fromWindow().pop(1).path),
-    onSubmit: (id, bill) => {
-      dispatch(addBill(id, bill));
-      props.replace(LocationBuilder.fromWindow().pop(1).path);
-      dispatch(invalidateNobt());
-    },
+    onSubmit: (id, bill) => dispatch(addBill(id, bill)),
     onNewMember: (member) => dispatch({type: "NewMemberAdded", payload: {member: member}}),
     onShareValueChanged: (name, value) => dispatch({type: "ShareValueChanged", payload: {name, value}}),
     onSplitStrategyChanged: (splitStrategy) => dispatch({type: "SplitStrategyChanged", payload: {strategy: splitStrategy}}),
     onAmountChanged: (amount) => dispatch({type: "AmountChanged", payload: {amount}}),
     onDescriptionChanged: (description) => dispatch({type: "DescriptionChanged", payload: {description}}),
-    clearAddBillForm: () => dispatch({type: "ClearAddBillForm"})
+    clearAddBillForm: () => dispatch({type: "ClearAddBillForm"}),
+    invalidateNobt: () => dispatch(invalidateNobt())
   }
 })(AddBillForm)
