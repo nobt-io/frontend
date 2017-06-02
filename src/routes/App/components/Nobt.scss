@@ -5,6 +5,14 @@
   max-width: $appWidth;
 }
 
+.cardListHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: $unit ($unit + 0.5rem) 0;
+}
+
 .addBillButton {
   color: $color-accent-dark !important;
 }
@@ -59,8 +67,4 @@
   .progressBar {
     flex-grow: 3;
   }
-}
-
-.billList {
-  padding: 1.5rem;
 }
