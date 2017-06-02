@@ -43,7 +43,9 @@ class BillDetailOverlay extends React.Component {
             <ListSubHeader caption={"Paid by"} />
             <ListItem
               ripple={false}
-              leftIcon={<Avatar name={debtee.name} medium />}
+              leftActions={[
+                <Avatar name={debtee.name} medium />
+              ]}
               key={debtee.name}
               caption={debtee.name}
               rightActions={[
