@@ -1,3 +1,5 @@
+@import "~react-toolbox/lib/list/config";
+
 .nobt {
   margin: auto;
   background-color: white;
@@ -6,11 +8,14 @@
 }
 
 .cardListHeader {
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
-  padding: $unit ($unit + 0.5rem) 0;
+  padding-top: $list-vertical-padding;
+  padding-right: $list-horizontal-padding;
+  padding-left: $list-horizontal-padding;
 }
 
 .addBillButton {

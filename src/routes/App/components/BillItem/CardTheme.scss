@@ -1,5 +1,7 @@
+@import "~react-toolbox/lib/list/config";
+
 .card {
-  margin: 1.5 * $unit;
+  margin: $list-horizontal-padding;
+  margin-top: 0;
   width: auto;
 }
-
