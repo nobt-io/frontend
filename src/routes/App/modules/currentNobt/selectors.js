@@ -102,6 +102,12 @@ export const makeGetPaidBills = () => createSelector( [getBills, getBalanceOwner
     .map(deNormalizeBill)
 } );
 
+export const makeGetRelatedBills = () => createSelector( [getBills, getBalanceOwner], (bills, balanceOwner) => {
+  return bills
+    .filter( bill => bill.shares.map(share => share.debtor).indexOf(balanceOwner) !== -1 )
+    .map(deNormalizeBill)
+} );
+
 export const getTotal = createSelector([ getBills ], (bills) => {
   const nobtTotal = bills.map(sumBill).reduce((sum, current) => sum + current, 0);
 

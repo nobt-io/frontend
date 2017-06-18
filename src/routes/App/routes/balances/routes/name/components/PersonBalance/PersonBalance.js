@@ -5,7 +5,14 @@ import HOList from "../../../../../../../../containers/HOList";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
 import { Avatar } from "../../../../../../../../components/Avatar/index";
 import { connect } from "react-redux";
-import { getFetchNobtStatus, getSumOfPaidBills, makeGetBalance, makeGetPaidBills } from "../../../../../../modules/currentNobt/selectors";
+import {
+  getBills,
+  getFetchNobtStatus,
+  getSumOfPaidBills,
+  makeGetBalance,
+  makeGetPaidBills,
+  makeGetRelatedBills
+} from "../../../../../../modules/currentNobt/selectors";
 import AmountTheme from "./AmountTheme.scss";
 import AppBarTheme from "./AppBarTheme.scss";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
@@ -39,7 +46,7 @@ class PersonBalance extends React.Component {
 
 
           <Card>
-            <CardTitle title="Summary" theme={InfoMessageCardTitleTheme}/>
+            <CardTitle title="Summary" theme={InfoMessageCardTitleTheme} />
             <CardText theme={InfoMessageCardTextTheme}>
               <List theme={InfoMessageListTheme}>
                 <ListItem
@@ -47,9 +54,10 @@ class PersonBalance extends React.Component {
                   leftIcon="info_outline"
                   itemContent={(<FormattedMessage
                       id="PersonBalance.paidBillsSummary"
-                      defaultMessage="{name} paid {numberOfBills, plural,
-                =0 {0 bills}
-                other {{numberOfBills} bills ({totalAmount})}}."
+                      defaultMessage="{name} {numberOfBills, plural,
+                                            =0 {did not pay any bills}
+                                            =1 {paid 1 bill ({totalAmount})}
+                                            other {paid {numberOfBills} bills ({totalAmount})}}."
                       values={{
                         name: this.props.balance.me.name,
                         numberOfBills: this.props.paidBills.length,
@@ -58,14 +66,35 @@ class PersonBalance extends React.Component {
                     />
                   )}
                 />
+
+                <ListItem
+                  ripple={false}
+                  leftIcon="info_outline"
+                  itemContent={
+                    <FormattedMessage
+                      id="PersonBalance.paidBillsSummary"
+                      defaultMessage={
+                        this.props.bills.length !== this.props.relatedBills.length ?
+                          "{name} participates in {numberOfBills} of {allBills} bills." :
+                          "{name} participates in all {allBills} bills."
+                      }
+                      values={{
+                        name: this.props.balance.me.name,
+                        allBills: this.props.bills.length,
+                        numberOfBills: this.props.relatedBills.length
+                      }}
+                    />
+                  }
+                />
+
                 <ListItem
                   ripple={false}
                   leftIcon="info_outline"
                   itemContent={(<FormattedMessage
                       id="PersonBalance.summary"
                       defaultMessage="{name} {verb} {amount} {preposition} {numberOfOtherPeople} {numberOfOtherPeople, plural,
-                 =1 {person}
-                 other {persons}}."
+                                                                                                =1 {person}
+                                                                                                other {persons}}."
                       values={{
                         name: this.props.balance.me.name,
                         verb: this.props.balance.me.amount > 0 ? "gets" : "owes",
@@ -110,6 +139,7 @@ class PersonBalance extends React.Component {
 const makeMapStateToProps = () => {
   const getBalance = makeGetBalance();
   const getPaidBills = makeGetPaidBills();
+  const getRelatedBills = makeGetRelatedBills();
 
   return (state, props) => {
     let paidBills = getPaidBills(state, props);
@@ -118,6 +148,8 @@ const makeMapStateToProps = () => {
       balance: getBalance(state, props),
       sumOfPaidBills: getSumOfPaidBills(paidBills),
       paidBills: paidBills,
+      bills: getBills(state),
+      relatedBills: getRelatedBills(state, props),
       fetchStatus: getFetchNobtStatus(state),
     }
   }
