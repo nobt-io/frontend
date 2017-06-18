@@ -45,7 +45,7 @@ class BalanceOverview extends React.Component {
               caption={balance.me.name}
               legend={<Amount theme={AmountTheme} value={balance.me.amount} absolute={false} />}
               rightActions={[
-                (<IconButton icon="keyboard_arrow_right" onClick={() => LocationBuilder.fromWindow().push(balance.me.name).apply(this.props.replace)}/>),
+                (<IconButton icon="keyboard_arrow_right" onClick={() => LocationBuilder.fromWindow().push(balance.me.name).apply(this.props.push)}/>),
               ]}
             />
           )}
