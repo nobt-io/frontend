@@ -42,7 +42,7 @@ export default class Nobt extends React.Component {
                 </div>
                 <Button
                   icon="whatshot"
-                  label="Crunch Nobt"
+                  label="Show balances"
                   primary
                   raised
                   onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
