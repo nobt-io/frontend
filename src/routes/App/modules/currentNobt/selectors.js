@@ -91,6 +91,17 @@ export const makeGetBalance = () => createSelector( [getBalances, getBalanceOwne
     .find(first)
 } );
 
+export const getSumOfPaidBills = (paidBills) => {
+  console.log(paidBills)
+  return paidBills.reduce( (amount, bill) => amount += bill.debtee.amount, 0 )
+};
+
+export const makeGetPaidBills = () => createSelector( [getBills, getBalanceOwner], (bills, balanceOwner) => {
+  return bills
+    .filter( bill => bill.debtee === balanceOwner )
+    .map(deNormalizeBill)
+} );
+
 export const getTotal = createSelector([ getBills ], (bills) => {
   const nobtTotal = bills.map(sumBill).reduce((sum, current) => sum + current, 0);
 
