@@ -110,7 +110,11 @@ class PersonBalance extends React.Component {
           </Card>
 
           <Card>
-            <CardTitle theme={InfoMessageCardTitleTheme}>Transactions</CardTitle>
+            <CardTitle
+              theme={InfoMessageCardTitleTheme}
+              title="Transactions"
+              // subtitle="The following transactions need to be carried out in order to settle all debts."
+            />
             <CardText theme={InfoMessageCardTextTheme}>
               <HOList
                 items={this.props.balance.persons}
