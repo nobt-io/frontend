@@ -23,8 +23,7 @@ export const shouldFetchNobt = createSelector( [isNobtDataOutdated, getFetchNobt
 export const getBalances = createSelector([ getTransactions, getMembers ], (transactions, members) => {
   const factory = new PersonBalanceFactory(transactions);
   return members
-    .map(m => factory.computeBalanceForPerson(m))
-    .filter(s => s.me.amount !== 0); // we do not want balances with value 0
+    .map(m => factory.computeBalanceForPerson(m));
 });
 
 const deNormalizeBill = (e) => {
@@ -73,14 +72,24 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
 
 });
 
+let first = () => true;
+
 const getBillId = (state, props) => props.params.billId;
 
 export const makeGetBill = () => createSelector( [getBills, getBillId], (bills, billId) => {
   return bills
-    .filter( bill => bill.id == billId )
+    .filter( bill => bill.id === billId )
     .map(deNormalizeBill)
-    .find(() => true); // equal to .first() :)
+    .find(first);
 });
+
+const getBalanceOwner = (state, props) => props.params.name;
+
+export const makeGetBalance = () => createSelector( [getBalances, getBalanceOwner], (balances, balanceOwner) => {
+  return balances
+    .filter( balance => balance.me.name === balanceOwner )
+    .find(first)
+} );
 
 export const getTotal = createSelector([ getBills ], (bills) => {
   const nobtTotal = bills.map(sumBill).reduce((sum, current) => sum + current, 0);

@@ -5,9 +5,9 @@ import DetailRoute from "./routes/id";
 import SortOverlayRoute from "./routes/sort";
 import FilterOverlayRoute from "./routes/filter";
 import BalancesRoute from "./routes/balances";
-import CoreLayout from "../../layouts/CoreLayout/CoreLayout";
 import reducer from "./modules/reducers";
 import { injectReducer } from "../../store/reducers";
+import EmptyLayout from "../../layouts/EmptyLayout";
 
 export default (store) => {
 
@@ -15,7 +15,7 @@ export default (store) => {
 
   return {
     path: ':nobtId',
-    component: withNobtLoader(CoreLayout),
+    component: withNobtLoader(EmptyLayout),
     indexRoute: {
       component: NobtContainer
     },
