@@ -2,7 +2,7 @@
 @import "~react-toolbox/lib/globals";
 
 .title {
-  @include typo-headline();
+  @include typo-headline(); // Reuse styling from react-toolbox for consistency reasons
 
   padding: $unit 1.6 * $unit 0;
 }
