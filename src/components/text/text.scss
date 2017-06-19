@@ -1,0 +1,14 @@
+@import "~react-toolbox/lib/mixins";
+@import "~react-toolbox/lib/globals";
+
+.title {
+  @include typo-headline();
+
+  padding: $unit 1.6 * $unit 0;
+}
+
+.subTitle {
+  color: $color-text-secondary;
+
+  padding: 0 1.6 * $unit 0;
+}
