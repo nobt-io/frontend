@@ -37,11 +37,11 @@ export default class Nobt extends React.Component {
                 <div className={styles.nobtMetadata}>
                   <ul>
                     <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
-                    <li><div><FontIcon value="supervisor_account"/>{this.props.members.length}</div></li>
+                    <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
                   </ul>
                 </div>
                 <Button
-                  icon="whatshot"
+                  icon="account_balance"
                   label="Show balances"
                   primary
                   raised
