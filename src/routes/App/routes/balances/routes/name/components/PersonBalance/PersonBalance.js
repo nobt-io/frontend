@@ -48,25 +48,25 @@ class PersonBalance extends React.Component {
               <ListItem
                 ripple={false}
                 leftIcon="info_outline"
-                itemContent={(<FormattedMessage
-                    id="PersonBalance.paidBillsSummary"
-                    defaultMessage="{name} {numberOfBills, plural,
+                caption={<FormattedMessage
+                  id="PersonBalance.paidBillsSummary"
+                  defaultMessage="{name} {numberOfBills, plural,
                                             =0 {did not pay any bills}
                                             =1 {paid 1 bill ({totalAmount})}
                                             other {paid {numberOfBills} bills ({totalAmount})}}."
-                    values={{
-                      name: this.props.balance.me.name,
-                      numberOfBills: this.props.paidBills.length,
-                      totalAmount: <Amount value={this.props.sumOfPaidBills} absolute={true} />
-                    }}
-                  />
-                )}
+                  values={{
+                    name: this.props.balance.me.name,
+                    numberOfBills: this.props.paidBills.length,
+                    totalAmount: <Amount value={this.props.sumOfPaidBills} absolute={true} />
+                  }}
+                />
+                }
               />
 
               <ListItem
                 ripple={false}
                 leftIcon="info_outline"
-                itemContent={
+                caption={
                   <FormattedMessage
                     id="PersonBalance.paidBillsSummary"
                     defaultMessage={
