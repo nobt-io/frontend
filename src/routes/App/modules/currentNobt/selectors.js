@@ -74,7 +74,7 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
 
 let first = () => true;
 
-const getBillId = (state, props) => props.params.billId;
+const getBillId = (state, props) => parseInt(props.params.billId);
 
 export const makeGetBill = () => createSelector( [getBills, getBillId], (bills, billId) => {
   return bills
