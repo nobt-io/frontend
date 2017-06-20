@@ -93,7 +93,7 @@ export default class Team extends React.Component {
             <p>What started as a hackathon by three motivated developers soon turned out to be an actually helpful companion in our daily life.
               Nobt.io is our effort to share this idea with all of you. We hope you enjoy it as much as we do.</p>
             <div className={styles.teamImages}>
-              <div className={styles.imageFrame} id="team-member1" style={{backgroundImage: "url('creators/thomas.png')"}}>
+              <div className={styles.imageFrame} id="team-member1" style={{backgroundImage: "url('contributors/thomas.png')"}}>
                 <div className={styles.imageDetailsWrapper}>
                   <div className={styles.imageDetails}>
                     <div>
@@ -107,7 +107,7 @@ export default class Team extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={styles.imageFrame} id="team-member2" style={{backgroundImage: "url('creators/thomas.png')"}}>
+              <div className={styles.imageFrame} id="team-member2" style={{backgroundImage: "url('contributors/thomas.png')"}}>
                 <div className={styles.imageDetailsWrapper}>
                   <div className={styles.imageDetails}>
                     <div>
@@ -121,7 +121,7 @@ export default class Team extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={styles.imageFrame} id="team-member3" style={{backgroundImage: "url('creators/thomas.png')"}}>
+              <div className={styles.imageFrame} id="team-member3" style={{backgroundImage: "url('contributors/thomas.png')"}}>
                 <div className={styles.imageDetailsWrapper}>
                   <div className={styles.imageDetails}>
                     <div>
