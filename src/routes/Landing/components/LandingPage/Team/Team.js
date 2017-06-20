@@ -6,8 +6,10 @@ import Grid from "react-bootstrap/lib/Grid";
 
 export default class Team extends React.Component {
 
-  setPosition = (pictureElement, position) => {
-    pictureElement.innerHTML = "Position: " + position;
+
+  setImage = (pictureElement, position) => {
+    const imageHeight = 200;
+    pictureElement.style.backgroundPosition = `0px -${position*imageHeight}px`;
   };
 
   getDocumentOffsets = (element) => {
@@ -22,55 +24,36 @@ export default class Team extends React.Component {
     return {x: x, y: y};
   };
 
-  handleMouseMove = (cursorX, cursorY, pictureElement) => {
+  setImageAccordingToMouse = (cursorX, cursorY, pictureElement, neighborElements) => {
+
     let offsets = this.getDocumentOffsets(pictureElement);
-
-    let elementX = offsets.x;
+    let elementX = offsets.x ;
     let elementY = offsets.y;
-    let elementHeight = pictureElement.offsetHeight;
-    let elementWidth = pictureElement.offsetWidth;
 
+    let height = pictureElement.offsetHeight;
+    let width = pictureElement.offsetWidth;
 
-    let yAboveImage = cursorY < elementY;
-    let yOnImage = cursorY > elementY && cursorY < elementY + elementHeight;
-    let yUnderImage = cursorY > elementY + elementHeight;
-    let xBeforeImage = cursorX < elementX;
-    let xOnImage = cursorX > elementX && cursorX < elementX + elementWidth;
-    let xAfterImage = cursorX > elementX + elementWidth;
+    let elementCenterX = elementX + width /2 ;
+    let elementCenterY = elementY + height /2 ;
 
-    if (yAboveImage) {
-      if (xBeforeImage) {
-        this.setPosition(pictureElement, "1");
-      }
-      if (xOnImage) {
-        this.setPosition(pictureElement, "2");
-      }
-      if (xAfterImage) {
-        this.setPosition(pictureElement, "3");
-      }
+    let yOnImage = cursorY > elementY && cursorY < elementY + height;
+    let xOnImage = cursorX > elementX && cursorX < elementX + width;
+    let onImage = yOnImage && xOnImage;
+
+    if(onImage){
+      this.setImage(pictureElement, 0);
+      //neighborElements.forEach(e => this.setImage(e, "funky"));
+      return
     }
-    if (yOnImage) {
-      if (xBeforeImage) {
-        this.setPosition(pictureElement, "4");
-      }
-      if (xOnImage) {
-        this.setPosition(pictureElement, "5");
-      }
-      if (xAfterImage) {
-        this.setPosition(pictureElement, "6");
-      }
-    }
-    if (yUnderImage) {
-      if (xBeforeImage) {
-        this.setPosition(pictureElement, "7");
-      }
-      if (xOnImage) {
-        this.setPosition(pictureElement, "8");
-      }
-      if (xAfterImage) {
-        this.setPosition(pictureElement, "9");
-      }
-    }
+
+    let angleDeg = Math.atan2(cursorY - elementCenterY, cursorX - elementCenterX) * 180 / Math.PI;
+    let withoutNegatives = angleDeg < 0 ? angleDeg + 360 : angleDeg;
+    let corrected = (withoutNegatives + 15) % 360;
+
+    let quotient = Math.floor(corrected/30);
+    let imageDirection = quotient + 1;
+
+    this.setImage(pictureElement, imageDirection);
   };
 
 
@@ -83,9 +66,9 @@ export default class Team extends React.Component {
       let cursorX = event.pageX;
       let cursorY = event.pageY;
 
-      this.handleMouseMove(cursorX, cursorY, teamMember1);
-      this.handleMouseMove(cursorX, cursorY, teamMember2);
-      this.handleMouseMove(cursorX, cursorY, teamMember3);
+      this.setImageAccordingToMouse(cursorX, cursorY, teamMember1, [teamMember2, teamMember3]);
+      this.setImageAccordingToMouse(cursorX, cursorY, teamMember2, [teamMember1, teamMember3]);
+      this.setImageAccordingToMouse(cursorX, cursorY, teamMember3, [teamMember1, teamMember2]);
     };
   };
 
