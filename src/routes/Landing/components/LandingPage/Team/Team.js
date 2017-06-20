@@ -82,9 +82,9 @@ export default class Team extends React.Component {
             <p>What started as a hackathon by three motivated developers soon turned out to be an actually helpful companion in our daily life.
               Nobt.io is our effort to share this idea with all of you. We hope you enjoy it as much as we do.</p>
             <div className={styles.teamImages}>
-              <div id="team-member1">Test</div>
-              <div id="team-member2">Test</div>
-              <div id="team-member3">Test</div>
+              <div id="team-member1"></div>
+              <div id="team-member2"></div>
+              <div id="team-member3"></div>
             </div>
           </Col>
         </Row>
