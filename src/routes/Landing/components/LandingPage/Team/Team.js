@@ -99,9 +99,10 @@ export default class Team extends React.Component {
                     <div>
                       <h3>Thomas</h3>
                       <ul>
-                        <li><a href="https://github.com"><i className="fa fa-github" /></a></li>
-                        <li><a href="https://github.com"><i className="fa fa-xing-square" /></a></li>
-                        <li><a href="https://github.com"><i className="fa fa-linkedin-square" /></a></li>
+                        <li><a href="https://github.com/thomaseizinger" target="_blank"><i className="fa fa-github" /></a></li>
+                        <li><a href="https://www.xing.com/profile/Thomas_Eizinger" target="_blank"><i className="fa fa-xing-square" /></a></li>
+                        <li><a href="https://www.linkedin.com/in/thomas-eizinger-b45a37144/" target="_blank"><i className="fa fa-linkedin-square" /></a></li>
+                        <li><a href="http://eizinger.io" target="_blank"><i className="fa fa-home" /></a></li>
                       </ul>
                     </div>
                   </div>
@@ -113,9 +114,10 @@ export default class Team extends React.Component {
                     <div>
                       <h3>David</h3>
                       <ul>
-                        <li><a href="https://github.com"><i className="fa fa-github" /></a></li>
-                        <li><a href="https://github.com"><i className="fa fa-xing-square" /></a></li>
-                        <li><a href="https://github.com"><i className="fa fa-linkedin-square" /></a></li>
+                        <li><a href="https://github.com/duffleit" target="_blank"><i className="fa fa-github" /></a></li>
+                        <li><a href="https://www.xing.com/profile/David_Leitner4" target="_blank"><i className="fa fa-xing-square" /></a></li>
+                        <li><a href="https://www.linkedin.com/in/david-leitner-7768a3136/" target="_blank"><i className="fa fa-linkedin-square" /></a></li>
+                        <li><a href="http://leitner.io" target="_blank"><i className="fa fa-home" /></a></li>
                       </ul>
                     </div>
                   </div>
@@ -127,9 +129,10 @@ export default class Team extends React.Component {
                     <div>
                       <h3>Matthias</h3>
                       <ul>
-                        <li><a href="https://github.com"><i className="fa fa-github" /></a></li>
-                        <li><a href="https://github.com"><i className="fa fa-xing-square" /></a></li>
-                        <li><a href="https://github.com"><i className="fa fa-linkedin-square" /></a></li>
+                        <li><a href="https://github.com/KreMat" target="_blank"><i className="fa fa-github" /></a></li>
+                        <li><a href="https://www.xing.com/profile/Matthias_Kreuzriegler" target="_blank"><i className="fa fa-xing-square" /></a></li>
+                        <li><a href="https://www.linkedin.com/in/mkreuzriegler/" target="_blank"><i className="fa fa-linkedin-square" /></a></li>
+                        <li><a href="http://kreuzriegler.at" target="_blank"><i className="fa fa-home" /></a></li>
                       </ul>
                     </div>
                   </div>
