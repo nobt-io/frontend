@@ -1,9 +1,7 @@
 import React from "react";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
-import BillListTheme from "./BillListTheme.scss";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
-import HOList from "containers/HOList";
 import BillItem from "./BillItem";
 import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
 import AsyncActionStatus from "const/AsyncActionStatus";
@@ -37,7 +35,7 @@ export default class Nobt extends React.Component {
                 <div className={styles.nobtMetadata}>
                   <ul>
                     <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
-                    <li><div><FontIcon value="supervisor_account"/>{this.props.members.length}</div></li>
+                    <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
                   </ul>
                 </div>
               {(!this.props.isNobtEmpty) && (
@@ -57,7 +55,7 @@ export default class Nobt extends React.Component {
         {
           this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
             <div className={styles.loader}>
-              <div className={styles.separator}></div>
+              <div className={styles.separator}/>
               <div className={styles.progressBar}>
                 <ProgressBar type='circular' mode='indeterminate' multicolor />
               </div>
@@ -72,12 +70,12 @@ export default class Nobt extends React.Component {
               ? ( <EmptyNobtPlaceholder/> )
               : (
                 <div>
-                  <div className={BillListTheme.header}>
-                    <div className={BillListTheme.title}>
+                  <div className={styles.cardListHeader}>
+                    <div>
                       <h4>Bills:</h4>
                     </div>
 
-                    <IconMenu className={BillListTheme.menu}>
+                    <IconMenu>
                       <MenuItem
                         caption="Sort bills"
                         icon="sort"
@@ -92,16 +90,13 @@ export default class Nobt extends React.Component {
                     </IconMenu>
                   </div>
 
-                  <HOList
-                    theme={BillListTheme}
-                    items={this.props.bills}
-                    renderItem={ (bill) => (
-                      <div key={bill.id} className={BillListTheme.item}>
-                        <BillItem bill={bill} />
-                      </div>
-                    ) } />
+                  {
+                    this.props.bills.map( bill => <BillItem bill={bill} />)
+                  }
 
-                  {this.props.children}
+                  {
+                    this.props.children
+                  }
 
                 </div>
               )
@@ -130,7 +125,6 @@ export default class Nobt extends React.Component {
     billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
     fetchStatus: React.PropTypes.string.isRequired,
-    createdOn: React.PropTypes.string.isRequired,
-    isNobtEmpty: React.PropTypes.bool.isRequired
+    createdOn: React.PropTypes.string.isRequired
   };
 };
