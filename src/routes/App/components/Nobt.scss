@@ -1,8 +1,21 @@
+@import "~react-toolbox/lib/list/config";
+
 .nobt {
   margin: auto;
   background-color: white;
   min-height: 100vh;
   max-width: $appWidth;
+}
+
+.cardListHeader {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding-top: $list-vertical-padding;
+  padding-right: $list-horizontal-padding;
+  padding-left: $list-horizontal-padding;
 }
 
 .addBillButton {
@@ -59,8 +72,4 @@
   .progressBar {
     flex-grow: 3;
   }
-}
-
-.billList {
-  padding: 1.5rem;
 }
