@@ -108,7 +108,7 @@ export default class Team extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={styles.imageFrame} id="team-member2" style={{backgroundImage: "url('contributors/thomas.png')"}}>
+              <div className={styles.imageFrame} id="team-member2" style={{backgroundImage: "url('contributors/david.png')"}}>
                 <div className={styles.imageDetailsWrapper}>
                   <div className={styles.imageDetails}>
                     <div>
@@ -123,7 +123,7 @@ export default class Team extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className={styles.imageFrame} id="team-member3" style={{backgroundImage: "url('contributors/thomas.png')"}}>
+              <div className={styles.imageFrame} id="team-member3" style={{backgroundImage: "url('contributors/matthias.png')"}}>
                 <div className={styles.imageDetailsWrapper}>
                   <div className={styles.imageDetails}>
                     <div>
