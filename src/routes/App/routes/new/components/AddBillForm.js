@@ -6,12 +6,11 @@ import AmountInput from "./AmountInput";
 import styles from "./AddBillForm.scss";
 import inputTheme from "./InputTheme.scss";
 import headerButtonTheme from "./HeaderButtonTheme.scss";
-import { EqualShareListItem, CustomShareListItem, PercentalShareListItem } from "./ShareList";
+import { CustomShareListItem, EqualShareListItem, PercentalShareListItem } from "./ShareList";
 import HOList from "containers/HOList";
 import AddMember from "./AddMember";
 import { Link } from "react-router";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
-import ShareListTheme from "./ShareList/ShareListTheme.scss";
 import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
 import { Snackbar } from "react-toolbox";
 
@@ -91,7 +90,6 @@ export default class AddBillForm extends React.Component {
 
           <div className={`${styles.container} ${styles.shareListContainer}`}>
             <HOList
-              theme={ShareListTheme}
               items={this.props.shares}
               renderItem={ share => {
                 switch(this.props.splitStrategy) {
