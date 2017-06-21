@@ -6,8 +6,6 @@ import { updateBillSortProperty } from "../../../modules/viewState/actions";
 import Dialog from "components/Dialog";
 import { getBillSortProperty } from "../../../modules/viewState/selectors";
 import HOList from "containers/HOList/HOList";
-import listItemTheme from "./ListItemTheme.scss";
-import listTheme from "./ListTheme.scss";
 import DialogTheme from "components/Dialog/DialogTheme.scss";
 
 
@@ -17,7 +15,6 @@ const SortBillOverlay = (props) => (
     <h3 className={DialogTheme.header}>Sort bills</h3>
 
     <HOList
-      theme={listTheme}
       selectable
       items={ [
         {name: "Date", icon: "access_time"},
@@ -26,7 +23,6 @@ const SortBillOverlay = (props) => (
       renderItem={ (config) => (
         <ListItem
           rightIcon={ config.name === props.currentSort ? "check_circle" : "radio_button_unchecked" }
-          theme={listItemTheme}
           key={config.name}
           caption={config.name}
           leftIcon={config.icon}

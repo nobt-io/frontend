@@ -6,13 +6,9 @@ import Dialog from "components/Dialog";
 import DialogTheme from "components/Dialog/DialogTheme.scss";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 import HOList from "containers/HOList";
-import { ListItem, ListDivider, ListSubHeader } from "react-toolbox/lib/list";
+import { ListDivider, ListItem, ListSubHeader } from "react-toolbox/lib/list";
 import { Avatar } from "components/Avatar";
-import ShareListItemTheme from "./ShareListItemTheme.scss";
-import ShareListTheme from "./ShareListTheme.scss";
 import TotalBillAmountTheme from "./TotalBillAmountTheme.scss";
-import DebteeListSubHeaderTheme from "./DebteeListSubHeaderTheme.scss";
-
 
 class BillDetailOverlay extends React.Component {
 
@@ -29,35 +25,32 @@ class BillDetailOverlay extends React.Component {
           <h3 className={DialogTheme.header}>{bill.name}</h3>
 
           <HOList
-            theme={ShareListTheme}
             items={bill.debtors}
             renderItem={ debtor => (
               <ListItem
-                theme={ShareListItemTheme}
                 ripple={false}
-                leftIcon={<Avatar name={debtor.name} medium />}
+                leftActions={[
+                  <Avatar name={debtor.name} medium />
+                ]}
                 key={debtor.name}
-                itemContent={
-                  <div className={ShareListItemTheme.content}>
-                    <span>{debtor.name}</span>
-                    <Amount value={debtor.amount}/>
-                  </div>
-                }
+                caption={debtor.name}
+                rightActions={[
+                  <Amount value={debtor.amount}/>
+                ]}
               />
             ) }>
             <ListDivider />
-            <ListSubHeader caption={"Paid by"} theme={DebteeListSubHeaderTheme}/>
+            <ListSubHeader caption={"Paid by"} />
             <ListItem
-              theme={ShareListItemTheme}
               ripple={false}
-              leftIcon={<Avatar name={debtee.name} medium />}
+              leftActions={[
+                <Avatar name={debtee.name} medium />
+              ]}
               key={debtee.name}
-              itemContent={
-                <div className={ShareListItemTheme.content}>
-                  <span>{debtee.name}</span>
-                  <Amount theme={TotalBillAmountTheme} value={debtee.amount}/>
-                </div>
-              }
+              caption={debtee.name}
+              rightActions={[
+                <Amount theme={TotalBillAmountTheme} value={debtee.amount}/>
+              ]}
             />
           </HOList>
         </div>
