@@ -4,7 +4,7 @@ import addButtonTheme from "./AddButtonTheme.scss";
 import inputTheme from "../InputTheme.scss";
 import SingleInputInlineForm from "components/SingleInputInlineForm";
 import { connect } from "react-redux";
-import { getMembers } from "../../../../modules/currentNobt/selectors";
+import { isExistingMemberFactory } from "../../modules/addBillForm/selectors";
 
 class AddMember extends React.Component {
 
@@ -27,7 +27,7 @@ class AddMember extends React.Component {
 
   isNewMemberInvalid = (name) => {
     let newMember = name.trim();
-    return this.props.members.indexOf(newMember) >= 0 || newMember.length == 0;
+    return this.props.isExistingMember(newMember) || newMember.length === 0;
   };
 
   handleOnNewMember = (name) => {
@@ -42,6 +42,6 @@ class AddMember extends React.Component {
 
 export default connect(
   (state) => ({
-    members: getMembers(state)
+    isExistingMember: isExistingMemberFactory(state)
   })
 )(AddMember)

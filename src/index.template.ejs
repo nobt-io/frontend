@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>nobt.io</title>
@@ -9,10 +9,19 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
   <link href="http://fonts.googleapis.com/css?family=Handlee|Pacifico" rel="stylesheet" type="text/css" />
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
 
+  <script type="application/javascript">
+    Raven.config('<% 'SENTRY_DSN' %>', {
+      release: '<% 'COMMIT_HASH' %>',
+      whitelistUrls: [
+      	/"nobt\.io"/
+      ]
+    }).install();
+  </script>
 </head>
 <body>
 <div id="root" style="min-height: 100%"></div>

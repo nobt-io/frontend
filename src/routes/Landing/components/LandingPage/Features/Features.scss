@@ -1,0 +1,24 @@
+.features {
+  text-align: center;
+  background: $color-primary;
+  color: white;
+
+  .feature {
+    h3 {
+      color: white;
+    }
+
+    .icon i {
+      font-size: 40px;
+      color: darken($color-primary, 20%);
+    }
+    p {
+      margin-bottom: 60px;
+      font-size: 16px;
+
+      @media (min-width: 768px) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

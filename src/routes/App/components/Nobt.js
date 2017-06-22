@@ -1,16 +1,14 @@
 import React from "react";
 import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
-import BillListTheme from "./BillListTheme.scss";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
-import HOList from "containers/HOList";
 import BillItem from "./BillItem";
+import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { ProgressBar } from "react-toolbox/lib/progress_bar";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
-import ReactPullToRefresh from "react-pull-to-refresh";
 import AddBillFAB from "./AddBillFAB";
 import AppBarTheme from "./AppBarTheme.scss";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
@@ -40,6 +38,7 @@ export default class Nobt extends React.Component {
                     <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
                   </ul>
                 </div>
+              {(!this.props.isNobtEmpty) && (
                 <Button
                   icon="account_balance"
                   label="Show balances"
@@ -47,8 +46,8 @@ export default class Nobt extends React.Component {
                   raised
                   onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
                   theme={NobtItButtonTheme}
-                />
-              </div>
+                />)}
+            </div>
 
           }
         </HeadRoom>
@@ -56,7 +55,7 @@ export default class Nobt extends React.Component {
         {
           this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
             <div className={styles.loader}>
-              <div className={styles.separator}></div>
+              <div className={styles.separator}/>
               <div className={styles.progressBar}>
                 <ProgressBar type='circular' mode='indeterminate' multicolor />
               </div>
@@ -67,40 +66,40 @@ export default class Nobt extends React.Component {
         {
           this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
 
-            <div>
+            this.props.isNobtEmpty
+              ? ( <EmptyNobtPlaceholder/> )
+              : (
+                <div>
+                  <div className={styles.cardListHeader}>
+                    <div>
+                      <h4>Bills:</h4>
+                    </div>
 
-              <div className={BillListTheme.header}>
-                <div className={BillListTheme.title}>
-                  <h4>Bills:</h4>
-                </div>
+                    <IconMenu>
+                      <MenuItem
+                        caption="Sort bills"
+                        icon="sort"
+                        onClick={ () => LocationBuilder.fromWindow().push("changeSort").apply(this.props.push) }
+                      />
 
-                <IconMenu className={BillListTheme.menu}>
-                  <MenuItem
-                    caption="Sort bills"
-                    icon="sort"
-                    onClick={ () => LocationBuilder.fromWindow().push("changeSort").apply(this.props.push) }
-                  />
-
-                  <MenuItem
-                    caption="Filter bills"
-                    icon="filter_list"
-                    onClick={ () => LocationBuilder.fromWindow().push("changeFilter").apply(this.props.push) }
-                  />
-                </IconMenu>
-              </div>
-
-              <HOList
-                theme={BillListTheme}
-                items={this.props.bills}
-                renderItem={ (bill) => (
-                  <div key={bill.id} className={BillListTheme.item}>
-                    <BillItem bill={bill} />
+                      <MenuItem
+                        caption="Filter bills"
+                        icon="filter_list"
+                        onClick={ () => LocationBuilder.fromWindow().push("changeFilter").apply(this.props.push) }
+                      />
+                    </IconMenu>
                   </div>
-                ) } />
 
-              {this.props.children}
+                  {
+                    this.props.bills.map( bill => <BillItem bill={bill} />)
+                  }
 
-            </div>
+                  {
+                    this.props.children
+                  }
+
+                </div>
+              )
           )
         }
 

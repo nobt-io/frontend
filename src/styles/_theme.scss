@@ -12,11 +12,14 @@ $color-accent-dark: white;
 $color-accent-light: #F3F3F3;
 $color-button-grey: #e8e8e8;
 
+$grey: #eee;
+
 $color-button-grey-dark: darken($color-button-grey, 30);
 
 //fonts
 
 $fancy-font: Raleway, sans-serif;
+$handwritten-font: Courgette, cursive;
 
 // overrides
 $list-vertical-padding: 0;
@@ -26,6 +29,7 @@ $list-item-icon-size: initial;
 //misc
 
 $container-border-radius: .2rem;
+$appWidth: 480px;
 
 //bootstrap 3 media queries
 
