@@ -1,31 +1,12 @@
-.landingPage {
-  background: no-repeat center center;
-  background-size: cover;
-}
+.container {
+  height: 100%;
+  font-family: $fancy-font;
 
-.contentContainer {
-  background-color: rgba(255, 255, 255, 0.31);
+  p {
+    font-size: 17px;
+  }
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  width: 100vw;
-  height: 100vh;
-
-  text-align: center;
-}
-
-.title {
-  font-size: 7rem;
-  color: $color-primary-dark;
-}
-
-.slogan {
-  color: $color-primary-dark;
-  font: 400 2em 'Handlee', Helvetica, Sans-serif;
-}
-
-.buttonContainer {
-  margin-top: 4rem;
+  section {
+    padding: 100px 0 !important;
+  }
 }
