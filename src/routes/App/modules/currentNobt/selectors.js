@@ -3,6 +3,8 @@ import _debug from "debug";
 import PersonBalanceFactory from "./PersonBalanceFactory";
 import { getBillFilter, getBillSortProperty } from "../viewState/selectors";
 import AsyncActionStatus from "../../../../const/AsyncActionStatus";
+import { pathVariable as balanceDetailPathVariable } from "../../routes/balances/routes/name";
+import { pathVariable as billDetailPathVariable } from "../../routes/id/index";
 
 export const getCurrentNobt = (state) => state.App.currentNobt.data;
 const getNobtFetchTimestamp = (state) => state.App.currentNobt.nobtFetchTimestamp;
@@ -75,7 +77,7 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
 
 let first = () => true;
 
-const getBillId = (state, props) => parseInt(props.params.billId);
+const getBillId = (state, props) => parseInt(props.params[billDetailPathVariable]);
 
 export const makeGetBill = () => createSelector( [getBills, getBillId], (bills, billId) => {
   return bills
@@ -84,7 +86,7 @@ export const makeGetBill = () => createSelector( [getBills, getBillId], (bills, 
     .find(first);
 });
 
-const getBalanceOwner = (state, props) => props.params.name;
+const getBalanceOwner = (state, props) => props.params[balanceDetailPathVariable];
 
 export const makeGetBalance = () => createSelector( [getBalances, getBalanceOwner], (balances, balanceOwner) => {
   return balances
