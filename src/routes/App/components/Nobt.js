@@ -40,7 +40,6 @@ export default class Nobt extends React.Component {
                 </div>
               {(!this.props.isNobtEmpty) && (
                 <Button
-                  icon="list"
                   label="Show balances"
                   primary
                   raised
