@@ -1,57 +1,70 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
-import _debug from "debug";
-import { UPDATE_ADD_BILL_STATUS } from "./actions";
-
-const log = _debug("reducers:addBillForm");
+import { NEW_DEBTEE_SELECTED, NEW_MEMBER_ADDED, UPDATE_ADD_BILL_STATUS } from "./actions";
 
 export const addBillFormReducer = (state = initialState, action) => {
 
-  let addNewMember = function (stateCopy, member) {
+  function createPersonValue(member) {
+    return {
+      name: member,
+      value: state.defaultValues[ state.splitStrategy ]
+    }
+  }
 
-    stateCopy.personValues = [
-      ...stateCopy.personValues,
-      {
-        name: member,
-        value: stateCopy.defaultValues[ stateCopy.splitStrategy ]
-      }
-    ];
-
-    return stateCopy
-  };
+  /**
+   * Checks whether a given candidate person is already explicitly added to the current bill. (i.e. a PersonValue is set)
+   */
+  function isTransientMember(candidate) {
+    return state.personValues.map(pv => pv.name).indexOf(candidate) >= 0;
+  }
 
   switch (action.type) {
 
-    case "NewMemberAdded": {
+    case NEW_MEMBER_ADDED: {
 
-      let newMember = action.payload.member;
+      let {member} = action.payload;
+      let memberNotSet = !member;
 
-      if (!newMember || newMember === action.payload) {
+      if (memberNotSet) {
         return state;
       }
 
-      return addNewMember({...state}, newMember)
+      return {
+        ...state,
+        personValues: [
+          ...state.personValues,
+          createPersonValue(member)
+        ]
+      };
     }
 
-    case "NewDebteeSelected": {
-      let {debtee, isNewMember} = action.payload;
+    case NEW_DEBTEE_SELECTED: {
 
-      if (!debtee && !isNewMember) {
+      let {debtee} = action.payload;
+
+      let debteeNotSet = !debtee;
+      let debteeNotChanged = debtee === state.debtee;
+
+      if (debteeNotSet || debteeNotChanged) {
         return state;
       }
 
-      if (debtee === state.debtee) {
-        return state;
+      if (isTransientMember(debtee)) {
+        // Member is already in the current bill, just update the debtee.
+        return {
+          ...state,
+          debtee
+        };
       }
 
-      let stateCopy = {...state};
-
-      if (isNewMember) {
-        stateCopy = addNewMember(stateCopy, debtee);
-      }
-
-      stateCopy.debtee = debtee;
-
-      return stateCopy
+      // Member is not yet in the current bill. Explicitly add them and return the new state.
+      return {
+        ...state,
+        debtee,
+        personValues: [
+          ...state.personValues,
+          createPersonValue(debtee)
+        ]
+      };
     }
 
     case "SplitStrategyChanged": {
@@ -75,8 +88,6 @@ export const addBillFormReducer = (state = initialState, action) => {
     }
 
     case "AmountChanged": {
-
-
       return {
         ...state,
         amount: action.payload.amount
@@ -105,7 +116,7 @@ export const addBillFormReducer = (state = initialState, action) => {
   return state;
 };
 
-const initialState = {
+export const initialState = {
   addBillStatus: null,
   debtee: null,
   description: "",

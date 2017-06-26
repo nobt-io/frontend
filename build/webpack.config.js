@@ -50,7 +50,7 @@ webpackConfig.output = {
 webpackConfig.plugins = [
   new webpack.DefinePlugin(config.globals),
   new HtmlWebpackPlugin({
-    template: paths.client('index.html'),
+    template: 'src/index.template.ejs',
     hash: false,
     favicon: paths.client('static/favicon.ico'),
     filename: 'index.html',
@@ -135,6 +135,13 @@ webpackConfig.module.loaders = [{
   test: /\.json$/,
   loader: 'json'
 }];
+
+
+// EJS-Template engine
+webpackConfig.module.loaders.push({
+  test: /\.ejs$/,
+  loader: "ejs-loader"
+});
 
 // ------------------------------------
 // Style Loaders

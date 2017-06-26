@@ -1,9 +1,3 @@
-if (!__DEBUG__) {
-  Raven.config("https://bbc41d462f564d7e8f061eaf89c41e20@sentry.io/104728", {
-    release: COMMIT_HASH
-  }).install();
-}
-
 import React from "react";
 import ReactDOM from "react-dom";
 import createBrowserHistory from "history/lib/createBrowserHistory";
@@ -79,4 +73,14 @@ if (__DEV__) {
 // ========================================================
 // Go!
 // ========================================================
+
 render()
+
+const actualErrorHandler = window.onerror;
+
+let onErrorDecorator = (msg, url, lineNo, columnNo, error) => {
+  Raven.showReportDialog();
+  actualErrorHandler(msg, url, lineNo, columnNo, error)
+};
+
+window.onerror = onErrorDecorator;

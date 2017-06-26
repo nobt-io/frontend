@@ -28,7 +28,7 @@ class BalanceOverview extends React.Component {
           <AppBar
             theme={AppBarTheme}
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
-            leftIcon={<FontIcon value="keyboard_arrow_left" />}
+            leftIcon={<FontIcon value="chevron_left" />}
             rightIcon={<FontIcon />}
             title="Balances"
           />
@@ -49,7 +49,7 @@ class BalanceOverview extends React.Component {
                 caption={balance.me.name}
                 legend={<Amount theme={AmountTheme} value={balance.me.amount} absolute={false} />}
                 rightActions={[
-                  (<IconButton icon="keyboard_arrow_right"/>),
+                  (<IconButton icon="chevron_right"/>),
                 ]}
                 onClick={() => LocationBuilder.fromWindow().push(balance.me.name).apply(this.props.push)}
               />

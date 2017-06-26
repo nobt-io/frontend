@@ -1,15 +1,19 @@
-exports[`test should display actual value if absolute property is falsy 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should display actual value if absolute property is falsy 1`] = `
 <span
-  className="">
+  className=""
+>
   <span>
     -30 EUR
   </span>
 </span>
 `;
 
-exports[`test should use absolute value of amount by default 1`] = `
+exports[`should use absolute value of amount by default 1`] = `
 <span
-  className="">
+  className=""
+>
   <span>
     30 EUR
   </span>

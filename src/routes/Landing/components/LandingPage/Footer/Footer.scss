@@ -1,42 +1,41 @@
-.footerContainer {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  background-color: #1e2125;
-  border-top: 1px solid white;
-  font-size: 1.5rem;
+.footer {
+  background: $grey;
+  padding: 30px;
+  text-align: center;
 
-  .helpFooter, .loveFooter {
-    color: white;
-    text-align: center;
+  .links {
+    margin-top: 20px;
+    font-size: 12px;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
 
-  .helpFooter {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+      li {
+        display: inline-block;
 
-    a, a:hover, a:active, a:visited{color: white; text-decoration: none}
+        a {
+          margin: 10px;
 
-    .helpIcon {
-      margin: 5px 5px 0;
+          i {
+            margin-right: 2px;
+          }
+          &:hover, &:focus, &:visited, &:link {
+            color: inherit;
+            text-decoration: none;
+          }
+        }
+      }
     }
   }
-  .loveFooter {
-    font-size: 1.3rem;
 
-    .loveIcon {
-      color: #DB504A;
-      font-size: 1rem;
-      margin: 3px 3px 0;
+  @media (min-width: 768px) {
+    text-align: left;
 
-      span{font-size: 1.8rem}
+    .links{
+      text-align: right;
+      margin-top: 0;
     }
   }
 }

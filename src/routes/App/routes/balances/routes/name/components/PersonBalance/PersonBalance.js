@@ -35,7 +35,7 @@ class PersonBalance extends React.Component {
             <AppBar
               theme={AppBarTheme}
               onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
-              leftIcon={<FontIcon value="keyboard_arrow_left" />}
+              leftIcon={<FontIcon value="chevron_left" />}
               rightIcon={<FontIcon />}
               title={`${this.props.balance.me.name}`}
             />
