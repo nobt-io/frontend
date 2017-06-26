@@ -92,7 +92,6 @@ export const makeGetBalance = () => createSelector( [getBalances, getBalanceOwne
 } );
 
 export const getSumOfPaidBills = (paidBills) => {
-  console.log(paidBills)
   return paidBills.reduce( (amount, bill) => amount += bill.debtee.amount, 0 )
 };
 
