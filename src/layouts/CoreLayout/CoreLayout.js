@@ -4,9 +4,7 @@ import "../../styles/core.scss";
 
 export const CoreLayout = ({children}) => (
   <div className={classes.container} >
-    <div className={classes.mainContainer}>
-      {children}
-    </div>
+    {children}
   </div>
 )
 

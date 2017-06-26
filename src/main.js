@@ -4,8 +4,7 @@ import createBrowserHistory from "history/lib/createBrowserHistory";
 import { useRouterHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
-import AppContainer from "./containers/AppContainer";
-import {IntlProvider} from "react-intl";
+import { IntlProvider } from "react-intl";
 import routeFactory from "routes";
 
 // ========================================================
@@ -26,7 +25,9 @@ const initialState = window.___INITIAL_STATE__
 const store = createStore(initialState, browserHistory)
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
-})
+});
+
+let routes = routeFactory(store);
 
 // ========================================================
 // Developer Tools Setup
@@ -44,50 +45,28 @@ const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
 
-  let routes = routeFactory(store);
 
-  ReactDOM.render(
-    <IntlProvider locale={navigator.language}>
-      <AppContainer
-        store={store}
-        history={history}
-        routes={routes}
-      />
-    </IntlProvider>,
-    MOUNT_NODE
-  )
-};
+  require.ensure([], (require) => {
+
+    const AppContainer = require("./containers/AppContainer").default
+
+    ReactDOM.render(
+      <IntlProvider locale={navigator.language}>
+        <AppContainer
+          store={store}
+          history={history}
+          routes={routes}
+        />
+      </IntlProvider>,
+      MOUNT_NODE
+    )
+  });
+}
 
 // This code is excluded from production bundle
 if (__DEV__) {
   if (module.hot) {
-
-    /*
-     // Development render functions
-     const renderApp = render
-     const renderError = (error) => {
-     const RedBox = require('redbox-react').default
-
-     ReactDOM.render(<RedBox error={error}/>, MOUNT_NODE)
-     }
-
-     // Wrap render in try/catch
-     render = () => {
-     try {
-     renderApp()
-     } catch (error) {
-     renderError(error)
-     }
-     }
-
-     */
-    // Setup hot module replacement
-    module.hot.accept('./routes/index', () => {
-      setTimeout(() => {
-        ReactDOM.unmountComponentAtNode(MOUNT_NODE)
-        render()
-      })
-    })
+    module.hot.accept()
   }
 }
 

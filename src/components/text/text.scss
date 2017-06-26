@@ -1,0 +1,21 @@
+@import "~react-toolbox/lib/mixins";
+@import "~react-toolbox/lib/globals";
+
+@mixin headingStyle() {
+  margin: 0;
+  margin-top: 1 * $unit;
+  margin-bottom: 0.5 * $unit;
+}
+
+.title {
+  @include typo-headline(); // Reuse styling from react-toolbox for consistency reasons
+  @include headingStyle();
+
+  padding: $unit 1.6 * $unit 0;
+}
+
+.subTitle {
+  color: $color-text-secondary;
+
+  padding: 0 1.6 * $unit 0;
+}

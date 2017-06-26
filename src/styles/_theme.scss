@@ -21,6 +21,11 @@ $color-button-grey-dark: darken($color-button-grey, 30);
 $fancy-font: Raleway, sans-serif;
 $handwritten-font: Courgette, cursive;
 
+// overrides
+$list-vertical-padding: 0;
+$list-item-right-icon-margin: 0;
+$list-item-icon-size: initial;
+
 //misc
 
 $container-border-radius: .2rem;

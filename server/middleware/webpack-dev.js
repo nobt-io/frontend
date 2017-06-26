@@ -16,7 +16,12 @@ export default function (compiler, publicPath) {
     quiet: config.compiler_quiet,
     noInfo: config.compiler_quiet,
     lazy: false,
-    stats: config.compiler_stats
+    stats: config.compiler_stats,
+
+    // Without the CORS header, HMR does not work
+    headers: {
+      "Access-Control-Allow-Origin": "*"
+    }
   })
 
   return async function koaWebpackDevMiddleware (ctx, next) {

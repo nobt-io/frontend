@@ -40,15 +40,13 @@ export default class Nobt extends React.Component {
                 </div>
               {(!this.props.isNobtEmpty) && (
                 <Button
-                  icon="whatshot"
-                  label="Crunch Nobt"
+                  label="Show balances"
                   primary
                   raised
                   onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
                   theme={NobtItButtonTheme}
                 />)}
             </div>
-
           }
         </HeadRoom>
 

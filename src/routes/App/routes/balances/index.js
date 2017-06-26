@@ -1,7 +1,12 @@
-import BalanceOverview from "./components/BalanceOverview";
-import withNavigation from "../../../../components/hoc/withNavigation";
+import IndexRoute from "./routes/index"
+import NameRoute from "./routes/name";
+import EmptyLayout from "../../../../layouts/EmptyLayout";
 
 export default {
   path: "balances",
-  component: withNavigation(BalanceOverview),
+  component: EmptyLayout,
+  indexRoute: IndexRoute,
+  childRoutes: [
+    NameRoute
+  ]
 }

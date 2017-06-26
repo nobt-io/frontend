@@ -3,6 +3,8 @@ import _debug from "debug";
 import PersonBalanceFactory from "./PersonBalanceFactory";
 import { getBillFilter, getBillSortProperty } from "../viewState/selectors";
 import AsyncActionStatus from "../../../../const/AsyncActionStatus";
+import { pathVariable as balanceDetailPathVariable } from "../../routes/balances/routes/name";
+import { pathVariable as billDetailPathVariable } from "../../routes/id/index";
 
 export const getCurrentNobt = (state) => state.App.currentNobt.data;
 const getNobtFetchTimestamp = (state) => state.App.currentNobt.nobtFetchTimestamp;
@@ -24,8 +26,7 @@ export const shouldFetchNobt = createSelector( [isNobtDataOutdated, getFetchNobt
 export const getBalances = createSelector([ getTransactions, getMembers ], (transactions, members) => {
   const factory = new PersonBalanceFactory(transactions);
   return members
-    .map(m => factory.computeBalanceForPerson(m))
-    .filter(s => s.me.amount !== 0); // we do not want balances with value 0
+    .map(m => factory.computeBalanceForPerson(m));
 });
 
 const deNormalizeBill = (e) => {
@@ -74,14 +75,40 @@ export const getFilteredBills = createSelector([ getBills, getBillFilter, getBil
 
 });
 
-const getBillId = (state, props) => props.params.billId;
+let first = () => true;
+
+const getBillId = (state, props) => parseInt(props.params[billDetailPathVariable]);
 
 export const makeGetBill = () => createSelector( [getBills, getBillId], (bills, billId) => {
   return bills
-    .filter( bill => bill.id == billId )
+    .filter( bill => bill.id === billId )
     .map(deNormalizeBill)
-    .find(() => true); // equal to .first() :)
+    .find(first);
 });
+
+const getBalanceOwner = (state, props) => props.params[balanceDetailPathVariable];
+
+export const makeGetBalance = () => createSelector( [getBalances, getBalanceOwner], (balances, balanceOwner) => {
+  return balances
+    .filter( balance => balance.me.name === balanceOwner )
+    .find(first)
+} );
+
+export const getSumOfPaidBills = (paidBills) => {
+  return paidBills.reduce( (amount, bill) => amount += bill.debtee.amount, 0 )
+};
+
+export const makeGetPaidBills = () => createSelector( [getBills, getBalanceOwner], (bills, balanceOwner) => {
+  return bills
+    .filter( bill => bill.debtee === balanceOwner )
+    .map(deNormalizeBill)
+} );
+
+export const makeGetRelatedBills = () => createSelector( [getBills, getBalanceOwner], (bills, balanceOwner) => {
+  return bills
+    .filter( bill => bill.shares.map(share => share.debtor).indexOf(balanceOwner) !== -1 )
+    .map(deNormalizeBill)
+} );
 
 export const getTotal = createSelector([ getBills ], (bills) => {
   const nobtTotal = bills.map(sumBill).reduce((sum, current) => sum + current, 0);
