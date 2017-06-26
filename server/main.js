@@ -27,13 +27,9 @@ app.use(convert(historyApiFallback({
 
   // We have a problem with our development server with routes that contain a dot, like ("localhost:3000/XYZ/balances/Thomas E.")
   // This means we have to disable the "dot-rule" (dot-rule prevents requests with dots from being rewritten), however with the dot-rule disabled
-  // requests to static files are now also rewritten. We therefore add static rewrite rules that, well, don't rewrite :)
+  // requests to static files are now also rewritten. We therefore specify which requests are re-written based on the Accept header.
   disableDotRule: true,
-  rewrites: [
-    { from: /\/.*\.json/, to: (context) => context.match[0]},
-    { from: /\/.*\.js/, to: (context) => context.match[0]},
-    { from: /\/.*\.css/, to: (context) => context.match[0]},
-  ]
+  htmlAcceptHeaders: ['text/html']
 })))
 
 // ------------------------------------
