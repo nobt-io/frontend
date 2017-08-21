@@ -9,10 +9,12 @@ import headerButtonTheme from "./HeaderButtonTheme.scss";
 import { CustomShareListItem, EqualShareListItem, PercentalShareListItem } from "./ShareList";
 import HOList from "containers/HOList";
 import AddMember from "./AddMember";
+import AddBillProgressBarTheme from "./AddBillProgressBarTheme.scss"
 import { Link } from "react-router";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
 import { Snackbar } from "react-toolbox";
+import { ProgressBar } from "react-toolbox/lib/progress_bar/index";
 
 /*
  TODO:
@@ -55,13 +57,18 @@ export default class AddBillForm extends React.Component {
 
   render = () => {
 
+    let addBillInProgress = this.props.addBillStatus === AsyncActionStatus.IN_PROGRESS;
+
     return (
       <div>
         <div className={styles.form}>
-          <div className={styles.header}>
-            <IconButton icon="close" onClick={this.props.onCancel} theme={headerButtonTheme} />
-            <span>ADD A BILL</span>
-            <IconButton icon="done" onClick={this.handleOnSubmit} theme={headerButtonTheme} />
+          <div className={styles.headerContainer}>
+            <div className={styles.header}>
+              <IconButton icon="close" onClick={this.props.onCancel} theme={headerButtonTheme} disabled={addBillInProgress} />
+              <span>ADD A BILL</span>
+              <IconButton icon="done" onClick={this.handleOnSubmit} theme={headerButtonTheme} disabled={addBillInProgress} />
+            </div>
+            { addBillInProgress && <ProgressBar theme={AddBillProgressBarTheme} mode="indeterminate"/> }
           </div>
 
           <div className={styles.container}>
