@@ -40,8 +40,13 @@ Adding these elements to bills requires a lot more space on the UI compared to n
 - Remember visited nobts: Should allow the user to re-visit a nobt if they loose the link and visit nobt.io, or my.nobt.io for example
 - "Choose yourself": Users should be able to select themselves out of the list of persons in the nobt.
 
+Both of these features require some kind of local storage to be used on the device. As soon as we implement the first kind of these features, we should keep in mind that we have to pay attention to the format we use for storing that information. The moment we persist information to a customer's device, we don't know when the user will access the nobt the next time. Therefore, breaking changes in the format in which we store data are either to be avoided, or we have to think of some kind of migration path from the old to the new format. A general advice would therefore be to very carefully think about the data format we use in storing information on the client and design it in a way that is highly extensible.
+
 ## Progressive Web App
 
 1. Cache shell
 2. Offline readonly access (Service Worker caches nobt response)
 3. Offline write access (Service worker needs to simulate API response)
+4. Notifications about changes to the nobt
+
+Overall, a real advantage for the user is only gained as soon as we reach stage 2 (offline read access). However, in terms of incremental delivery, we can ship stage 1 independently.
