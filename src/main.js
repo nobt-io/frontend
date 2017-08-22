@@ -5,7 +5,7 @@ import { useRouterHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
 import { IntlProvider } from "react-intl";
-import routeFactory from "routes";
+import routeFactory from "./routes";
 
 // ========================================================
 // Browser History Setup
