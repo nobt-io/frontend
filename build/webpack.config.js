@@ -129,9 +129,8 @@ let webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-  ]
+    })
+  ],
 }
 
 if (__DEV__) {
@@ -144,8 +143,9 @@ if (__DEV__) {
     })
   )
 } else if (__PROD__) {
-  debug('Enable plugins for production (OccurenceOrder & UglifyJS).');
+  debug('Enable plugins for production.');
   webpackConfig.plugins.push(
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -153,6 +153,9 @@ if (__DEV__) {
         dead_code: true,
         warnings: false
       }
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "commons"
     })
   )
 }
