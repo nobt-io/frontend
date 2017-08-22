@@ -5,6 +5,7 @@ import _debug from 'debug'
 import scssLoaderConfiguration from "./scssLoaderConfiguration"
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import BundleAnalyzerPlugin  from 'webpack-bundle-analyzer/lib/BundleAnalyzerPlugin'
 
 const debug = _debug('app:webpack:config');
 const {__DEV__, __PROD__, __TEST__} = config.globals;
@@ -23,6 +24,7 @@ let webpackConfig = {
   target: "web",
   output: {
     filename: `[name].[${config.compiler_hash_type}].js`,
+    chunkFilename: "[name].bundle.js",
     path: paths.dist(),
     publicPath: config.compiler_public_path
   },
@@ -127,7 +129,8 @@ let webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
   ]
 }
 
@@ -135,13 +138,15 @@ if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).');
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false
+    })
   )
 } else if (__PROD__) {
-  debug('Enable plugins for production (OccurenceOrder, Dedupe & UglifyJS).');
+  debug('Enable plugins for production (OccurenceOrder & UglifyJS).');
   webpackConfig.plugins.push(
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,

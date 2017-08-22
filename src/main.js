@@ -44,12 +44,7 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-
-
-  require.ensure([], (require) => {
-
-    const AppContainer = require("./containers/AppContainer").default
-
+  import("./containers/AppContainer").then(AppContainer => (
     ReactDOM.render(
       <IntlProvider locale={navigator.language}>
         <AppContainer
@@ -60,7 +55,7 @@ let render = () => {
       </IntlProvider>,
       MOUNT_NODE
     )
-  });
+  ))
 }
 
 // This code is excluded from production bundle
