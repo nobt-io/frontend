@@ -19,6 +19,7 @@ curl https://sentry.io/api/0/organizations/nobtio/releases/ \
     }
   '
 
+# Match only the none-gzipped version until sentry supports uploading gzipped content
 for f in dist/*.{js,css,map}
 do
   FILE_NAME=$(basename $f)

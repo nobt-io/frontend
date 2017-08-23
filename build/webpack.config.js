@@ -160,8 +160,7 @@ if (__DEV__) {
       }
     }),
     new CompressionWebpackPlugin({
-      // Using just [path] overrides the original file, i.e. we are left with just the gzip compressed one.
-      asset: "[path]",
+      asset: "[path].gz",
       algorithm: "gzip",
       test: /\.(js|css|html)$/,
       threshold: 10240,
