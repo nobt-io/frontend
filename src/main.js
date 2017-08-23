@@ -44,18 +44,23 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  import(/* webpackChunkName: "main" */ "./containers/AppContainer").then(AppContainer => (
-    ReactDOM.render(
-      <IntlProvider locale={navigator.language}>
-        <AppContainer
-          store={store}
-          history={history}
-          routes={routes}
-        />
-      </IntlProvider>,
-      MOUNT_NODE
+  import(/* webpackChunkName: "main" */ "./containers/AppContainer").then(module => {
+
+    let AppContainer = module.default;
+
+    return (
+      ReactDOM.render(
+        <IntlProvider locale={navigator.language}>
+          <AppContainer
+            store={store}
+            history={history}
+            routes={routes}
+          />
+        </IntlProvider>,
+        MOUNT_NODE
+      )
     )
-  ))
+  })
 }
 
 // This code is excluded from production bundle
