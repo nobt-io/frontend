@@ -160,9 +160,9 @@ if (__DEV__) {
       }
     }),
     new CompressionWebpackPlugin({
-      asset: "[path].gz",
+      asset: "gzipped/[path]",
       algorithm: "gzip",
-      test: /\.(js|css|html)$/,
+      test: /\.(js|css|html|map)$/,
       threshold: 10240,
       minRatio: 0.8
     })

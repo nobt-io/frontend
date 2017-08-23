@@ -10,13 +10,15 @@ install:
 script:
 - npm run compile
 - npm run test
-before_deploy: 
+before_deploy:
 - pip install --user awscli
 - npm run deploy
 deploy:
   - provider: script
     skip_cleanup: true
-    script: ~/.local/bin/aws s3 sync dist s3://nobt.io --region=eu-central-1 --delete --acl=public-read
+    script:
+      - ~/.local/bin/aws s3 sync dist s3://nobt.io --region=eu-central-1 --acl=public-read --delete --exclude="gzipped/*" --exclude="*.js" --exclude="*.css"
+      - ~/.local/bin/aws s3 sync dist/gzipped s3://nobt.io --region=eu-central-1 --acl=public-read --content-encoding=gzip
     access_key_id: AKIAIF35EA6NPCKM7MXA
     on:
       branch: master
