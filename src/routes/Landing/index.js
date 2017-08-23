@@ -1,12 +1,9 @@
 import withNavigation from "../../components/hoc/withNavigation";
+import LandingPage from "./components/LandingPage"
 
 // Sync route definition
 export default (store) => {
   return {
-    getComponent() {
-      return import(/* webpackChunkName: "LandingPage" */ "./components/LandingPage").then(LandingPage => {
-        return withNavigation(LandingPage)
-      })
-    }
+    component: withNavigation(LandingPage)
   }
 }

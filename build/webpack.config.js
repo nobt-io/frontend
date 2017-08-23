@@ -5,7 +5,9 @@ import _debug from 'debug'
 import scssLoaderConfiguration from "./scssLoaderConfiguration"
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import BundleAnalyzerPlugin  from 'webpack-bundle-analyzer/lib/BundleAnalyzerPlugin'
+import ExtractTextPlugin from "extract-text-webpack-plugin"
+import CompressionWebpackPlugin from "compression-webpack-plugin"
+import BundleAnalyzerPlugin from 'webpack-bundle-analyzer/lib/BundleAnalyzerPlugin'
 
 const debug = _debug('app:webpack:config');
 const {__DEV__, __PROD__, __TEST__} = config.globals;
@@ -18,7 +20,7 @@ let webpackConfig = {
       paths.client("."),
       "node_modules"
     ],
-    extensions: ['.js', '.jsx', '.json']
+    extensions: [ '.js', '.jsx', '.json' ]
   },
   devtool: config.compiler_devtool,
   target: "web",
@@ -112,6 +114,7 @@ let webpackConfig = {
         test: /\.(png|jpg)$/,
         loader: 'url-loader',
         options: {
+          name: `[name].[hash].[ext]`,
           limit: 8192
         }
       }
@@ -139,12 +142,14 @@ if (__DEV__) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new BundleAnalyzerPlugin({
-      openAnalyzer: false
+      openAnalyzer: false,
+      defaultSizes: "gzip"
     })
   )
 } else if (__PROD__) {
   debug('Enable plugins for production.');
   webpackConfig.plugins.push(
+    new ExtractTextPlugin(`styles.[${config.compiler_hash_type}].css`),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
@@ -154,8 +159,12 @@ if (__DEV__) {
         warnings: false
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: "commons"
+    new CompressionWebpackPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.(js|css|html)$/,
+      threshold: 10240,
+      minRatio: 0.8
     })
   )
 }

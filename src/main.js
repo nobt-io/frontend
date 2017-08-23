@@ -44,7 +44,7 @@ if (__DEBUG__) {
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  import("./containers/AppContainer").then(AppContainer => (
+  import(/* webpackChunkName: "main" */ "./containers/AppContainer").then(AppContainer => (
     ReactDOM.render(
       <IntlProvider locale={navigator.language}>
         <AppContainer
