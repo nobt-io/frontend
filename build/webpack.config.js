@@ -132,7 +132,10 @@ let webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new ExtractTextPlugin(`styles.[contenthash].css`, {
+      disable: __DEV__
+    }),
   ],
 }
 
@@ -149,7 +152,6 @@ if (__DEV__) {
 } else if (__PROD__) {
   debug('Enable plugins for production.');
   webpackConfig.plugins.push(
-    new ExtractTextPlugin(`styles.[contenthash].css`),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
