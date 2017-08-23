@@ -145,7 +145,7 @@ if (__DEV__) {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new BundleAnalyzerPlugin({
-      openAnalyzer: false,
+      analyzerMode: "disabled", // Switch to server to enable analysis
       defaultSizes: "gzip"
     })
   )
