@@ -149,7 +149,7 @@ if (__DEV__) {
 } else if (__PROD__) {
   debug('Enable plugins for production.');
   webpackConfig.plugins.push(
-    new ExtractTextPlugin(`styles.[${config.compiler_hash_type}].css`),
+    new ExtractTextPlugin(`styles.[contenthash].css`),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
