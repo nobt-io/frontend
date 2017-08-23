@@ -157,7 +157,8 @@ if (__DEV__) {
         unused: true,
         dead_code: true,
         warnings: false
-      }
+      },
+      sourceMap: config.compiler_devtool !== false
     }),
     new CompressionWebpackPlugin({
       asset: "gzipped/[path]",
