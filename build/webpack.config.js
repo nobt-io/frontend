@@ -2,7 +2,7 @@ import config from '../config'
 import webpack from 'webpack'
 import _debug from 'debug'
 
-import scssLoaderConfiguration from "./scssLoaderConfiguration"
+import stylesLoaderConfiguration from "./stylesLoaderConfiguration"
 
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtractTextPlugin from "extract-text-webpack-plugin"
@@ -51,7 +51,7 @@ let webpackConfig = {
         test: /\.ejs$/,
         loader: "ejs-loader"
       },
-      scssLoaderConfiguration,
+      stylesLoaderConfiguration,
       {
         test: /\.woff(\?.*)?$/,
         loader: 'url-loader',
@@ -134,7 +134,7 @@ let webpackConfig = {
       }
     }),
     new ExtractTextPlugin(`styles.[contenthash].css`, {
-      disable: __DEV__
+      disable: __DEV__ // Disabled in DEV environment which results in css being bundled in the JS file. This aids hot-module-replacement.
     }),
   ],
 }
@@ -160,8 +160,10 @@ if (__DEV__) {
         dead_code: true,
         warnings: false
       },
+      // If we don't enable sourceMaps in the UglifyJS plugin, we don't get any even though babel is configured to create them.
       sourceMap: config.compiler_devtool !== false
     }),
+    // See readme.md for documentation about gzip compression
     new CompressionWebpackPlugin({
       asset: "gzipped/[path]",
       algorithm: "gzip",

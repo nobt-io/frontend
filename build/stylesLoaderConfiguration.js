@@ -32,13 +32,14 @@ export default {
           sourceMap: true,
           modules: true,
           importLoaders: 1,
-          localIdentName: "[name]__[local]___[hash:base64:5]"
+          localIdentName: "[name]__[local]___[hash:base64:5]" // This is the pattern the css classes will have after being processed.
         }
       },
       {
         loader: "postcss-loader",
         options: {
           // https://github.com/postcss/postcss-loader#plugins
+          // postcss allows several plugins to be applied, we just use cssnano
           plugins: [
             cssnano({
               autoprefixer: {
