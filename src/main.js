@@ -5,7 +5,8 @@ import { useRouterHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
 import { IntlProvider } from "react-intl";
-import routeFactory from "routes";
+import routeFactory from "./routes";
+import AppContainer from "./containers/AppContainer"
 
 // ========================================================
 // Browser History Setup
@@ -43,38 +44,32 @@ if (__DEBUG__) {
 // ========================================================
 const MOUNT_NODE = document.getElementById('root')
 
-let render = () => {
-
-
-  require.ensure([], (require) => {
-
-    const AppContainer = require("./containers/AppContainer").default
-
-    ReactDOM.render(
-      <IntlProvider locale={navigator.language}>
-        <AppContainer
-          store={store}
-          history={history}
-          routes={routes}
-        />
-      </IntlProvider>,
-      MOUNT_NODE
-    )
-  });
-}
-
-// This code is excluded from production bundle
-if (__DEV__) {
-  if (module.hot) {
-    module.hot.accept()
-  }
-}
-
 // ========================================================
 // Go!
 // ========================================================
 
-render()
+// With this setup, HMR works but throws away local state, still it is better than nothing because you don't have to manually refresh the browser window.
+const render = (AppContainer) => ReactDOM.render(
+  <IntlProvider locale={navigator.language}>
+    <AppContainer
+      key={Math.random()}
+      store={store}
+      history={history}
+      routes={routes}
+    />
+  </IntlProvider>,
+  MOUNT_NODE
+);
+
+render(AppContainer);
+
+if (module.hot) {
+  module.hot.accept(() => {
+      let NextAppContainer = require("./containers/AppContainer").default;
+      render(NextAppContainer)
+    }
+  )
+}
 
 const actualErrorHandler = window.onerror;
 

@@ -10,13 +10,18 @@ install:
 script:
 - npm run compile
 - npm run test
-before_deploy: 
+before_deploy:
 - pip install --user awscli
 - npm run deploy
 deploy:
   - provider: script
     skip_cleanup: true
-    script: ~/.local/bin/aws s3 sync dist s3://nobt.io --region=eu-central-1 --delete --acl=public-read
+    script:
+      # First, upload all none js/css files from the dist folder to the S3 bucket. --delete deletes all files that are not present locally (everything else)
+      - ~/.local/bin/aws s3 sync dist s3://nobt.io --region=eu-central-1 --acl=public-read --delete --exclude="gzipped/*" --exclude="*.js" --exclude="*.css" --exclude="*.map"
+
+      # Second, upload all js/css files from the gzipped-folder to the S3 bucket and set their content-encoding to "gzip" so the correct headers are set when they are served to the client.
+      - ~/.local/bin/aws s3 sync dist/gzipped s3://nobt.io --region=eu-central-1 --acl=public-read  --exclude="*.map" --content-encoding=gzip
     access_key_id: AKIAIF35EA6NPCKM7MXA
     on:
       branch: master
