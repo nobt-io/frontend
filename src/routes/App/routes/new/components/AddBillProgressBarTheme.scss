@@ -1,4 +1,19 @@
-.linear {
-  display: block !important;
-  margin-bottom: 1 * $unit;
+@import "~react-toolbox/lib/button/config";
+
+.circular {
+  width: $button-height;
+  height: $button-height;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  width: $button-toggle-font-size;
+  height: $button-toggle-font-size;
+}
+
+.path {
+  stroke: $color-accent-dark;
 }
