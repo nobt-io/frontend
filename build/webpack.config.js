@@ -15,8 +15,8 @@ const paths = config.utils_paths;
 
 let webpackConfig = {
   entry: [
-    paths.client("main.js"),
-    'webpack-hot-middleware/client?http://localhost:3000'
+    'webpack-hot-middleware/client?http://localhost:3000',
+    paths.client("main.js")
   ],
   resolve: {
     modules: [
@@ -39,7 +39,6 @@ let webpackConfig = {
         test: /\.(js|jsx)$/,
         include: /src/,
         use: [
-          'react-hot-loader',
           {
             loader: 'babel-loader',
             options: {
