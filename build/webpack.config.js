@@ -14,7 +14,10 @@ const {__DEV__, __PROD__, __TEST__} = config.globals;
 const paths = config.utils_paths;
 
 let webpackConfig = {
-  entry: paths.client("main.js"),
+  entry: [
+    paths.client("main.js"),
+    'webpack-hot-middleware/client?http://localhost:3000'
+  ],
   resolve: {
     modules: [
       paths.client("."),
@@ -35,12 +38,17 @@ let webpackConfig = {
       {
         test: /\.(js|jsx)$/,
         include: /src/,
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-          plugins: [ 'transform-runtime' ],
-          presets: [ 'es2015', 'react', 'stage-0' ]
-        }
+        use: [
+          'react-hot-loader',
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              plugins: [ 'transform-runtime' ],
+              presets: [ 'es2015', 'react', 'stage-0' ]
+            }
+          }
+        ],
       },
       {
         test: /\.json$/,
@@ -132,10 +140,7 @@ let webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    }),
-    new ExtractTextPlugin(`styles.[contenthash].css`, {
-      disable: __DEV__ // Disabled in DEV environment which results in css being bundled in the JS file. This aids hot-module-replacement.
-    }),
+    })
   ],
 }
 
@@ -153,7 +158,7 @@ if (__DEV__) {
   debug('Enable plugins for production.');
   webpackConfig.plugins.push(
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new ExtractTextPlugin(`styles.[contenthash].css`),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
