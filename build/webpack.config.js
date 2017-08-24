@@ -15,7 +15,6 @@ const paths = config.utils_paths;
 
 let webpackConfig = {
   entry: [
-    'webpack-hot-middleware/client?http://localhost:3000', // HMR needs a dedicated entry point.
     paths.client("main.js")
   ],
   resolve: {
@@ -145,6 +144,12 @@ let webpackConfig = {
 
 if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).');
+
+  webpackConfig.entry = [
+    'webpack-hot-middleware/client?http://localhost:3000', // HMR needs a dedicated entry point.
+    ...webpackConfig.entry
+  ];
+
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
