@@ -19,6 +19,7 @@ curl https://sentry.io/api/0/organizations/nobtio/releases/ \
     }
   '
 
+# For now, we upload only the files from the dist folder because sentry cannot yet handle gzipped files.
 for f in dist/*.{js,css,map}
 do
   FILE_NAME=$(basename $f)

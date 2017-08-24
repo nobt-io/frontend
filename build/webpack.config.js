@@ -15,7 +15,7 @@ const paths = config.utils_paths;
 
 let webpackConfig = {
   entry: [
-    'webpack-hot-middleware/client?http://localhost:3000',
+    'webpack-hot-middleware/client?http://localhost:3000', // HMR needs a dedicated entry point.
     paths.client("main.js")
   ],
   resolve: {
@@ -158,6 +158,8 @@ if (__DEV__) {
   webpackConfig.plugins.push(
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin(`styles.[contenthash].css`),
+
+    // UglifyJS plugin enables webpack to perform tree-shaking
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,

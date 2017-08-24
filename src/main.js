@@ -64,7 +64,7 @@ const render = (AppContainer) => ReactDOM.render(
 render(AppContainer);
 
 if (module.hot) {
-  module.hot.accept(undefined, () => {
+  module.hot.accept(() => {
       let NextAppContainer = require("./containers/AppContainer").default;
       render(NextAppContainer)
     }
