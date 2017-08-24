@@ -15,6 +15,7 @@ import AddMemberInputTheme from "./AddMemberInputTheme.scss";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
+import CreateNobtProgressBar from "../../components/CreateNobtProgressBar"
 
 class AddMembersForm extends React.Component {
 
@@ -57,15 +58,23 @@ class AddMembersForm extends React.Component {
         </div>
 
         <div className={styles.createNobtButtonContainer}>
-          <Button
-            label="Create Nobt"
-            raised
-            primary
-            theme={CreateNobtButtonTheme}
-            disabled={ this.props.personNames.length == 0 }
-            icon="done"
-            onClick={ this.props.createNobt }
-          />
+          {
+            this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && <Button
+              label="Create Nobt"
+              raised
+              primary
+              theme={CreateNobtButtonTheme}
+              disabled={this.props.personNames.length == 0}
+              icon="done"
+              onClick={this.props.createNobt}
+            />
+
+          }
+
+          {
+            this.props.creationStatus === AsyncActionStatus.IN_PROGRESS &&
+            <CreateNobtProgressBar />
+          }
         </div>
 
         <div className={styles.note}>
