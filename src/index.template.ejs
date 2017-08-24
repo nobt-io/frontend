@@ -16,8 +16,8 @@
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
 
   <script type="application/javascript">
-    Raven.config('<% 'SENTRY_DSN' %>', {
-      release: '<% 'COMMIT_HASH' %>',
+    Raven.config('<%= SENTRY_DSN %>', {
+      release: '<%= COMMIT_HASH %>',
       whitelistUrls: [
       	/"nobt\.io"/
       ]
