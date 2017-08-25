@@ -19,7 +19,7 @@
     Raven.config('<%= SENTRY_DSN %>', {
       release: '<%= COMMIT_HASH %>',
       whitelistUrls: [
-      	/"nobt\.io"/
+      	/nobt\.io/
       ]
     }).install();
   </script>
