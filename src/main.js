@@ -70,12 +70,3 @@ if (module.hot) {
     }
   )
 }
-
-const actualErrorHandler = window.onerror;
-
-let onErrorDecorator = (msg, url, lineNo, columnNo, error) => {
-  Raven.showReportDialog();
-  actualErrorHandler(msg, url, lineNo, columnNo, error)
-};
-
-window.onerror = onErrorDecorator;
