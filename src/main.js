@@ -8,12 +8,13 @@ import { IntlProvider } from "react-intl";
 import routeFactory from "./routes";
 import AppContainer from "./containers/AppContainer"
 
-// ========================================================
+function bootstrapApp() {
+  // ========================================================
 // Browser History Setup
 // ========================================================
-const browserHistory = useRouterHistory(createBrowserHistory)({
-  basename: __BASENAME__
-})
+  const browserHistory = useRouterHistory(createBrowserHistory)({
+    basename: __BASENAME__
+  })
 
 // ========================================================
 // Store and History Instantiation
@@ -22,51 +23,59 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // react-router-redux reducer under the routerKey "router" in src/routes/index.js,
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
-const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState, browserHistory)
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.router
-});
+  const initialState = window.___INITIAL_STATE__
+  const store = createStore(initialState, browserHistory)
+  const history = syncHistoryWithStore(browserHistory, store, {
+    selectLocationState: (state) => state.router
+  });
 
-let routes = routeFactory(store);
+  let routes = routeFactory(store);
 
 // ========================================================
 // Developer Tools Setup
 // ========================================================
-if (__DEBUG__) {
-  if (window.devToolsExtension) {
-    window.devToolsExtension.open()
+  if (__DEBUG__) {
+    if (window.devToolsExtension) {
+      window.devToolsExtension.open()
+    }
   }
-}
 
 // ========================================================
 // Render Setup
 // ========================================================
-const MOUNT_NODE = document.getElementById('root')
+  const MOUNT_NODE = document.getElementById('root')
 
 // ========================================================
 // Go!
 // ========================================================
 
 // With this setup, HMR works but throws away local state, still it is better than nothing because you don't have to manually refresh the browser window.
-const render = (AppContainer) => ReactDOM.render(
-  <IntlProvider locale={navigator.language}>
-    <AppContainer
-      key={Math.random()}
-      store={store}
-      history={history}
-      routes={routes}
-    />
-  </IntlProvider>,
-  MOUNT_NODE
-);
+  const render = (AppContainer) => ReactDOM.render(
+    <IntlProvider locale={navigator.language}>
+      <AppContainer
+        key={Math.random()}
+        store={store}
+        history={history}
+        routes={routes}
+      />
+    </IntlProvider>,
+    MOUNT_NODE
+  );
 
-render(AppContainer);
+  render(AppContainer);
 
-if (module.hot) {
-  module.hot.accept(() => {
-      let NextAppContainer = require("./containers/AppContainer").default;
-      render(NextAppContainer)
-    }
-  )
+  if (module.hot) {
+    module.hot.accept(() => {
+        let NextAppContainer = require("./containers/AppContainer").default;
+        render(NextAppContainer)
+      }
+    )
+  }
+}
+
+try {
+  bootstrapApp()
+} catch (e) {
+  Raven.captureException(e);
+  Raven.showReportDialog();
 }
