@@ -5,9 +5,15 @@ export const crashReporter = store => next => action => {
   }
 
   try {
+
+    const {type, ...payload} = {...action};
+
     Raven.captureBreadcrumb({
       category: "redux",
-      message: action.type
+      message: type,
+      data: {
+        ...payload
+      }
     });
 
     return next(action); // dispatch
@@ -19,5 +25,5 @@ export const crashReporter = store => next => action => {
       }
     });
     throw err; // re-throw error
-  };
+  }
 };
