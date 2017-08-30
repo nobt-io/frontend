@@ -22,15 +22,6 @@
       	/nobt\.io/
       ]
     }).install();
-
-    const actualErrorHandler = window.onerror;
-
-    let onErrorDecorator = function(msg, url, lineNo, columnNo, error) {
-      actualErrorHandler(msg, url, lineNo, columnNo, error)
-      Raven.showReportDialog();
-    };
-
-    window.onerror = onErrorDecorator;
   </script>
 </head>
 <body>
