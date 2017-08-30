@@ -1,3 +1,5 @@
+import AsyncActionStatus from "../const/AsyncActionStatus";
+
 export const crashReporter = store => next => action => {
 
   if (!Raven || !Raven.isSetup()) {
@@ -6,15 +8,19 @@ export const crashReporter = store => next => action => {
 
   try {
 
-    const {type, ...payload} = {...action};
+    const {type, ...other} = {...action};
 
     Raven.captureBreadcrumb({
       category: "redux",
       message: type,
       data: {
-        ...payload
+        ...other
       }
     });
+
+    if (other.payload && other.payload.status === AsyncActionStatus.FAILED) {
+      Raven.captureMessage("Failed async action")
+    }
 
     return next(action); // dispatch
   } catch (err) {
