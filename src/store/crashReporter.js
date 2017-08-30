@@ -18,12 +18,15 @@ export const crashReporter = store => next => action => {
 
     return next(action); // dispatch
   } catch (err) {
+
     Raven.captureException(err, { // send to crash reporting tool
       extra: {
         action,
         state: store.getState() // dump application state
       }
     });
+    Raven.showReportDialog();
+
     throw err; // re-throw error
   }
 };
