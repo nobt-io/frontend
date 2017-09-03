@@ -25,7 +25,7 @@ All of this is only needed because sentry cannot yet handle gzipped files. As so
 
 ### Source Maps
 
-Generation of source maps is enabled for both, JS and CSS. However, the configuration for the production environment is set to "hidden-source-maps" which means that no link to the source maps is embedded in the minified file. We also do not upload the source maps to Amazon S3. We just upload them to sentry.io which gives us nice stacktraces in error reports.
+Generation of source maps is enabled for both, JS and CSS. However, we do not upload the source maps to Amazon S3. We just upload them to sentry.io which gives us nice stacktraces in error reports.
 
 ### Travis configuration
 
