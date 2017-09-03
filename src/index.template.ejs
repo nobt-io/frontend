@@ -22,6 +22,11 @@
       	/nobt\.io/
       ]
     }).install();
+
+    // ravenSuccess is an undocumented event but this is the cleanest way to always show the report dialog, no matter where the exception was triggered.
+    document.addEventListener('ravenSuccess', function (event) {
+      Raven.showReportDialog({eventId: event.data.event_id});
+    }, false);
   </script>
 </head>
 <body>
