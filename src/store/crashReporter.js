@@ -14,10 +14,5 @@ export const crashReporter = store => next => action => {
     }
   });
 
-  Raven.context({
-    extra: {
-      action,
-      state: store.getState() // dump application state
-    }
-  }, () => next(action));
+  next(action);
 };
