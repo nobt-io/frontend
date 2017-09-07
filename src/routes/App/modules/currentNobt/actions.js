@@ -14,13 +14,13 @@ function fetchNobtStarted() {
   }
 }
 
-export function fetchNobtSucceeded(nobt) {
+export function fetchNobtSucceeded(response) {
   return (dispatch) => {
 
     dispatch({
       type: UPDATE_FETCH_NOBT_STATUS,
       payload: {
-        nobt,
+        nobt: response.data,
         status: AsyncActionStatus.SUCCESSFUL
       }
     });
@@ -53,7 +53,7 @@ export function fetchNobt(id) {
 
     utils.sleep(1000).then(() => {
       Client.fetchNobt(id).then(
-        response => dispatch(fetchNobtSucceeded(response.data)),
+        response => dispatch(fetchNobtSucceeded(response)),
         error => dispatch(fetchNobtFailed(error))
       )
     })
