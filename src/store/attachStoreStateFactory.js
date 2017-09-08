@@ -1,6 +1,6 @@
 export default function(store) {
-  return function attachStoreState(data, existingCallback = (data) => data) {
+  return function attachStoreState(data, originalCallback = (data) => data) {
     data.extra.state = store.getState();
-    return existingCallback(data);
+    return originalCallback(data);
   }
 }
