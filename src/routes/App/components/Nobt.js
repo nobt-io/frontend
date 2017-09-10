@@ -1,5 +1,4 @@
 import React from "react";
-import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
 import BillItem from "./BillItem";
@@ -14,6 +13,7 @@ import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
 import HeadRoom from "react-headroom";
 import Amount from "../../../components/Amount/Amount";
+import BrandedAppBar from "../../../components/BrandedAppBar";
 
 export default class Nobt extends React.Component {
 
@@ -21,7 +21,7 @@ export default class Nobt extends React.Component {
     return (
       <div className={styles.nobt}>
         <HeadRoom>
-          <AppBar title="nobt.io"/>
+          <BrandedAppBar />
 
           {
             this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL &&
