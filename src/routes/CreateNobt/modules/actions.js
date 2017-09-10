@@ -56,8 +56,8 @@ export function createNobt() {
       response => {
 
         utils.sleep(200).then(() => {
-          dispatch(createNobtSucceeded(response))
-          dispatch(fetchNobtSucceeded(response))
+          dispatch(createNobtSucceeded(response));
+          dispatch(fetchNobtSucceeded(response));
         });
 
       },

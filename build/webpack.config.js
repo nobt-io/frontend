@@ -15,6 +15,7 @@ const paths = config.utils_paths;
 
 let webpackConfig = {
   entry: [
+    "babel-polyfill",
     paths.client("main.js")
   ],
   resolve: {
