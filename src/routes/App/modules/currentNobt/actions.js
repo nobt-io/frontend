@@ -17,10 +17,12 @@ function fetchNobtStarted() {
 export function fetchNobtSucceeded(response) {
   return (dispatch) => {
 
+    let nobt = response.data;
+
     dispatch({
       type: UPDATE_FETCH_NOBT_STATUS,
       payload: {
-        nobt: response.data,
+        nobt,
         status: AsyncActionStatus.SUCCESSFUL
       }
     });
