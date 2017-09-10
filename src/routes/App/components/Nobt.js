@@ -10,12 +10,10 @@ import { Snackbar } from "react-toolbox/lib/snackbar";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import AddBillFAB from "./AddBillFAB";
-import AppBarTheme from "./AppBarTheme.scss";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
 import HeadRoom from "react-headroom";
 import Amount from "../../../components/Amount/Amount";
-
 
 export default class Nobt extends React.Component {
 
@@ -23,10 +21,7 @@ export default class Nobt extends React.Component {
     return (
       <div className={styles.nobt}>
         <HeadRoom>
-          <AppBar
-            theme={AppBarTheme}
-            title="nobt.io"
-            />
+          <AppBar title="nobt.io"/>
 
           {
             this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL &&

@@ -1,30 +1,13 @@
-@import "~react-toolbox/lib/colors";
+@import "colors";
+@import "custom-component-configurations/index";
+
+// We import the globals file after our own definitions in order to overwrite them.
 @import "~react-toolbox/components/_globals";
-
-//colors
-
-$color-primary: #2D978D;
-$color-primary-dark: rgba(53, 53, 53, 50);
-$color-primary-light: #34ACA1;
-
-$color-accent: #979797;
-$color-accent-dark: white;
-$color-accent-light: #F3F3F3;
-$color-button-grey: #e8e8e8;
-
-$grey: #eee;
-
-$color-button-grey-dark: darken($color-button-grey, 30);
 
 //fonts
 
 $fancy-font: Raleway, sans-serif;
 $handwritten-font: Courgette, cursive;
-
-// overrides
-$list-vertical-padding: 0;
-$list-item-right-icon-margin: 0;
-$list-item-icon-size: initial;
 
 //misc
 

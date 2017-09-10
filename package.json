@@ -85,7 +85,8 @@
     "redux-thunk": "^2.0.0",
     "reselect": "^2.5.4",
     "reselect-change-memoize": "^1.1.0",
-    "yargs": "^6.0.0"
+    "yargs": "^6.0.0",
+    "react-css-themr": "^3.10.9"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
