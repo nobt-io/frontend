@@ -33,7 +33,7 @@ const config = {
   // Compiler Configuration
   // ----------------------------------
   compiler_css_modules     : true,
-  compiler_devtool         : 'hidden-source-map',
+  compiler_devtool         : 'source-map',
   compiler_hash_type       : 'hash',
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
@@ -79,8 +79,8 @@ config.globals = {
   'process.env'  : {
     'NODE_ENV' : JSON.stringify(config.env)
   },
-  'COMMIT_HASH'   : null,
-  'SENTRY_DSN'    : null,
+  'COMMIT_HASH'   : JSON.stringify(process.env.COMMIT_HASH),
+  'SENTRY_DSN'    : JSON.stringify(process.env.SENTRY_DSN),
   'NODE_ENV'      : config.env,
   '__DEV__'       : config.env === 'development',
   '__PROD__'      : config.env === 'production',
@@ -117,19 +117,17 @@ config.utils_paths = {
   base   : base,
   client : base.bind(null, config.dir_client),
   dist   : base.bind(null, config.dir_dist)
-}
+};
 
-// ========================================================
-// Environment Configuration
-// ========================================================
-debug(`Looking for environment overrides for NODE_ENV "${config.env}".`)
-const environments = require('./environments').default
-const overrides = environments[config.env]
-if (overrides) {
-  debug('Found overrides, applying to default configuration.')
-  Object.assign(config, overrides(config))
-} else {
-  debug('No environment overrides found, defaults will be used.')
-}
+// ------------------------------------
+// Env-specific configuration
+// ------------------------------------
+debug(`Applying environment specific configuration for ${config.env}.`);
 
-export default config
+// Note: If this fails, you are missing a config file for you environment.
+let configFactory = require(`./config.${config.env}.js`).default;
+let overrides = configFactory(config);
+
+Object.assign(config, overrides);
+
+export default config;

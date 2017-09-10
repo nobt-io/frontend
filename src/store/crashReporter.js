@@ -4,20 +4,15 @@ export const crashReporter = store => next => action => {
     return next(action);
   }
 
-  try {
-    Raven.captureBreadcrumb({
-      category: "redux",
-      message: action.type
-    });
+  const {type, ...other} = {...action};
 
-    return next(action); // dispatch
-  } catch (err) {
-    Raven.captureException(err, { // send to crash reporting tool
-      extra: {
-        action,
-        state: store.getState() // dump application state
-      }
-    });
-    throw err; // re-throw error
-  };
+  Raven.captureBreadcrumb({
+    category: "redux",
+    message: type,
+    data: {
+      ...other
+    }
+  });
+
+  next(action);
 };

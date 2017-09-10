@@ -4,6 +4,7 @@ import createBrowserHistory from "history/lib/createBrowserHistory";
 import { useRouterHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
+import attachStoreStateFactory from "./store/attachStoreStateFactory";
 import { IntlProvider } from "react-intl";
 import routeFactory from "./routes";
 import AppContainer from "./containers/AppContainer"
@@ -13,7 +14,7 @@ import AppContainer from "./containers/AppContainer"
 // ========================================================
 const browserHistory = useRouterHistory(createBrowserHistory)({
   basename: __BASENAME__
-})
+});
 
 // ========================================================
 // Store and History Instantiation
@@ -22,11 +23,15 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 // react-router-redux reducer under the routerKey "router" in src/routes/index.js,
 // so we need to provide a custom `selectLocationState` to inform
 // react-router-redux of its location.
-const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState, browserHistory)
+const initialState = window.___INITIAL_STATE__;
+const store = createStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.router
 });
+
+// Configure Raven to always attach the current state of the store to the event
+let attachStoreState = attachStoreStateFactory(store);
+Raven.setDataCallback(attachStoreState);
 
 let routes = routeFactory(store);
 
@@ -42,7 +47,7 @@ if (__DEBUG__) {
 // ========================================================
 // Render Setup
 // ========================================================
-const MOUNT_NODE = document.getElementById('root')
+const MOUNT_NODE = document.getElementById('root');
 
 // ========================================================
 // Go!
