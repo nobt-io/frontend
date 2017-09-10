@@ -158,10 +158,12 @@ if (__DEV__) {
       analyzerMode: "disabled", // Switch to server to enable analysis
       defaultSizes: "gzip"
     })
+    new webpack.NamedModulesPlugin()
   )
 } else if (__PROD__) {
   debug('Enable plugins for production.');
   webpackConfig.plugins.push(
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin(`styles.[contenthash].css`),
     new webpack.optimize.CommonsChunkPlugin({
