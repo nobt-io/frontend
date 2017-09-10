@@ -161,7 +161,7 @@ if (__DEV__) {
   webpackConfig.plugins.push(
     new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new ExtractTextPlugin(`styles.[contenthash].css`),
+    new ExtractTextPlugin(`styles.[${config.compiler_hash_type}].css`),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: Infinity
