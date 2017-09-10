@@ -34,7 +34,7 @@ const config = {
   // ----------------------------------
   compiler_css_modules     : true,
   compiler_devtool         : 'source-map',
-  compiler_hash_type       : 'hash',
+  compiler_hash_type       : 'chunkhash',
   compiler_fail_on_warning : false,
   compiler_quiet           : false,
   compiler_public_path     : '/',
@@ -43,14 +43,27 @@ const config = {
     chunkModules : false,
     colors : true
   },
-  compiler_vendor : [
+  vendor_packages : [
     'babel-polyfill',
     'history',
     'react',
+    'react-dom',
+    'react-headroom',
+    'react-bootstrap',
+    'react-intl',
     'react-redux',
     'react-router',
     'react-router-redux',
-    'redux'
+    'redux-logger',
+    'react-copy-to-clipboard',
+    'redux-thunk',
+    'react-toolbox',
+    'react-scrollspy',
+    'react-rotating-text',
+    'debug',
+    'redux',
+    'reselect',
+    'axios'
   ],
 
   // ----------------------------------
@@ -95,7 +108,7 @@ config.globals = {
 // ------------------------------------
 const pkg = require('../package.json')
 
-config.compiler_vendor = config.compiler_vendor
+config.vendor_packages = config.vendor_packages
   .filter((dep) => {
     if (pkg.dependencies[dep]) return true
 

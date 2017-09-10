@@ -14,10 +14,10 @@ const {__DEV__, __PROD__, __TEST__} = config.globals;
 const paths = config.utils_paths;
 
 let webpackConfig = {
-  entry: [
-    "babel-polyfill",
-    paths.client("main.js")
-  ],
+  entry: {
+    vendor: config.vendor_packages,
+    app: paths.client("main.js")
+  },
   resolve: {
     modules: [
       paths.client("."),
@@ -146,9 +146,9 @@ let webpackConfig = {
 if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).');
 
-  webpackConfig.entry = [
+  webpackConfig.entry.app = [
     'webpack-hot-middleware/client?http://localhost:3000', // HMR needs a dedicated entry point.
-    ...webpackConfig.entry
+    webpackConfig.entry.app
   ];
 
   webpackConfig.plugins.push(
@@ -164,6 +164,10 @@ if (__DEV__) {
   webpackConfig.plugins.push(
     new webpack.optimize.ModuleConcatenationPlugin(),
     new ExtractTextPlugin(`styles.[contenthash].css`),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    }),
 
     // UglifyJS plugin enables webpack to perform tree-shaking
     new webpack.optimize.UglifyJsPlugin({
