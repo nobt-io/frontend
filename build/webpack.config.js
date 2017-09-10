@@ -167,7 +167,12 @@ if (__DEV__) {
       minChunks: Infinity
     }),
 
-    // UglifyJS plugin enables webpack to perform tree-shaking
+    // https://webpack.js.org/guides/caching/#extracting-boilerplate
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'runtime'
+    }),
+
+  // UglifyJS plugin enables webpack to perform tree-shaking
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
@@ -181,9 +186,9 @@ if (__DEV__) {
     new CompressionWebpackPlugin({
       asset: "gzipped/[path]",
       algorithm: "gzip",
-      test: /\.(js|css|html|map)$/,
-      threshold: 10240,
-      minRatio: 0.8
+      test: /\.(js|css|map)$/,
+      minRatio: 0.8,
+      deleteOriginalAssets: false
     })
   )
 }
