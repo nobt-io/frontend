@@ -121,7 +121,7 @@ let webpackConfig = {
         test: /\.(png|jpg)$/,
         loader: 'url-loader',
         options: {
-          name: `[name].[hash].[ext]`,
+          name: `[name].[hash:4].[ext]`,
           limit: 8192
         }
       }
