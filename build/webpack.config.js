@@ -154,10 +154,6 @@ if (__DEV__) {
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: "disabled", // Switch to server to enable analysis
-      defaultSizes: "gzip"
-    })
     new webpack.NamedModulesPlugin()
   )
 } else if (__PROD__) {
@@ -191,5 +187,12 @@ if (__DEV__) {
     })
   )
 }
+
+webpackConfig.plugins.push(
+  new BundleAnalyzerPlugin({
+    analyzerMode: "disabled", // Switch to server to enable analysis
+    defaultSizes: "gzip"
+  })
+);
 
 export default webpackConfig
