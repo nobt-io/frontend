@@ -1,16 +1,20 @@
 import React from "react";
-import styles from "./BillDetailOverlay.scss";
 import Amount from "components/Amount";
+import HeadRoom from "react-headroom";
 import { connect } from "react-redux";
-import Dialog from "components/Dialog";
-import DialogTheme from "components/Dialog/DialogTheme.scss";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 import HOList from "containers/HOList";
-import { ListDivider, ListItem, ListSubHeader } from "react-toolbox/lib/list";
+import { ListItem } from "react-toolbox/lib/list";
 import { Avatar } from "components/Avatar";
-import TotalBillAmountTheme from "./TotalBillAmountTheme.scss";
+import { AppBar } from "react-toolbox/lib/app_bar/index";
+import AppBarTheme from "../../../balances/themes/AppBarTheme.scss";
+import { FontIcon } from "react-toolbox/lib/font_icon/index";
+import { SubTitle, Title } from "../../../../../../components/text/index";
+import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
+import { List } from "react-toolbox/lib/list/index";
+import TotalBillAmountTheme from "./TotalBillAmountTheme.scss"
 
-class BillDetailOverlay extends React.Component {
+class BillDetailPage extends React.Component {
 
   render = () => {
 
@@ -18,15 +22,27 @@ class BillDetailOverlay extends React.Component {
     const {debtee} = bill;
 
     return (
-      <Dialog>
 
-        <div className={styles.billDetailOverlay}>
+      <div>
 
-          <h3 className={DialogTheme.header}>{bill.name}</h3>
+        <HeadRoom>
+          <AppBar
+            theme={AppBarTheme}
+            onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
+            leftIcon={<FontIcon value="chevron_left" />}
+            rightIcon={<FontIcon />}
+            title={bill.name}
+          />
+        </HeadRoom>
 
+        <div>
+          <Title>Summary</Title>
+
+          <Title>Debtors</Title>
+          <SubTitle>These people participate in this bill.</SubTitle>
           <HOList
             items={bill.debtors}
-            renderItem={ debtor => (
+            renderItem={debtor => (
               <ListItem
                 ripple={false}
                 leftActions={[
@@ -35,12 +51,14 @@ class BillDetailOverlay extends React.Component {
                 key={debtor.name}
                 caption={debtor.name}
                 rightActions={[
-                  <Amount value={debtor.amount}/>
+                  <Amount value={debtor.amount} />
                 ]}
               />
-            ) }>
-            <ListDivider />
-            <ListSubHeader caption={"Paid by"} />
+            )} />
+
+          <Title>Debtee</Title>
+          <SubTitle>This person paid the bill.</SubTitle>
+          <List>
             <ListItem
               ripple={false}
               leftActions={[
@@ -49,17 +67,17 @@ class BillDetailOverlay extends React.Component {
               key={debtee.name}
               caption={debtee.name}
               rightActions={[
-                <Amount theme={TotalBillAmountTheme} value={debtee.amount}/>
+                <Amount theme={TotalBillAmountTheme} value={debtee.amount} />
               ]}
             />
-          </HOList>
+          </List>
         </div>
-      </Dialog>
+      </div>
     );
-  }
+  };
 }
 
-BillDetailOverlay.propTypes = {
+BillDetailPage.propTypes = {
   bill: React.PropTypes.object.isRequired
 };
 
@@ -69,11 +87,11 @@ const makeMapStateToProps = () => {
   return (state, props) => {
     return {
       bill: getBill(state, props)
-    }
-  }
+    };
+  };
 };
 
 export default connect(
   makeMapStateToProps,
   (dispatch) => ({})
-)(BillDetailOverlay)
+)(BillDetailPage);
