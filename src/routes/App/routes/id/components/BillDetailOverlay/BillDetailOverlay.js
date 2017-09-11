@@ -3,16 +3,14 @@ import Amount from "components/Amount";
 import HeadRoom from "react-headroom";
 import { connect } from "react-redux";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
-import HOList from "containers/HOList";
 import { ListItem } from "react-toolbox/lib/list";
 import { Avatar } from "components/Avatar";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
 import AppBarTheme from "../../../balances/themes/AppBarTheme.scss";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
-import { SubTitle, Title } from "../../../../../../components/text/index";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
-import { List } from "react-toolbox/lib/list/index";
-import TotalBillAmountTheme from "./TotalBillAmountTheme.scss"
+import { List, ListSubHeader } from "react-toolbox/lib/list/index";
+import { FormattedDate, FormattedMessage } from "react-intl";
 
 class BillDetailPage extends React.Component {
 
@@ -36,40 +34,65 @@ class BillDetailPage extends React.Component {
         </HeadRoom>
 
         <div>
-          <Title>Summary</Title>
 
-          <Title>Debtors</Title>
-          <SubTitle>These people participate in this bill.</SubTitle>
-          <HOList
-            items={bill.debtors}
-            renderItem={debtor => (
-              <ListItem
-                ripple={false}
-                leftActions={[
-                  <Avatar name={debtor.name} medium />
-                ]}
-                key={debtor.name}
-                caption={debtor.name}
-                rightActions={[
-                  <Amount value={debtor.amount} />
-                ]}
-              />
-            )} />
-
-          <Title>Debtee</Title>
-          <SubTitle>This person paid the bill.</SubTitle>
           <List>
+            <ListSubHeader caption="Debtee" />
+
             <ListItem
               ripple={false}
               leftActions={[
-                <Avatar name={debtee.name} medium />
+                <Avatar name={debtee.name} small />
               ]}
               key={debtee.name}
-              caption={debtee.name}
-              rightActions={[
-                <Amount theme={TotalBillAmountTheme} value={debtee.amount} />
+              caption={`${debtee.name} paid this bill.`}
+            />
+
+            <ListItem
+              ripple={false}
+              leftActions={[
+                <FontIcon value="payment" />
+              ]}
+              key="amount"
+              caption={<FormattedMessage
+                id="BillDetailPage.invoiceTotal"
+                defaultMessage="The invoice total is {invoiceTotal}."
+                values={{
+                  invoiceTotal: <Amount value={debtee.amount} />
+                }} />}
+            />
+
+            <ListItem
+              key="Date_Created"
+              ripple={false}
+              caption={<FormattedMessage
+                id="BillDetailPage.time_added_caption"
+                defaultMessage="Added on {timestamp}."
+                values={{
+                  timestamp: <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='long' day='2-digit' />
+                }} />}
+              leftActions={[
+                <FontIcon value="access_time" />
               ]}
             />
+
+          </List>
+          <List>
+            <ListSubHeader caption="Debtors" />
+
+            {
+              bill.debtors.map(debtor =>
+                <ListItem
+                  ripple={false}
+                  leftActions={[
+                    <Avatar name={debtor.name} medium />
+                  ]}
+                  key={debtor.name}
+                  caption={debtor.name}
+                  rightActions={[
+                    <Amount value={debtor.amount * (-1)} absolute={false} />
+                  ]}
+                />)
+            }
           </List>
         </div>
       </div>
