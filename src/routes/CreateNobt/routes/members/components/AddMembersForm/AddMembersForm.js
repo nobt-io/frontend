@@ -10,6 +10,7 @@ import { AvatarSize } from "components/Avatar";
 import { getPersonNames, getCreationStatus } from "../../../../modules/selectors";
 import { addPerson, removePerson, createNobt } from "../../../../modules/actions";
 import CreateNobtButtonTheme from "./CreateNobtButtonTheme.scss";
+import AddPersonButtonTheme from "./AddPersonButtonTheme.scss";
 import AddButtonTheme from "./AddButtonTheme.scss";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
 import { Snackbar } from "react-toolbox/lib/snackbar";
@@ -72,7 +73,18 @@ class AddMembersForm extends React.Component {
 
         <div className={styles.createNobtButtonContainer}>
           {
-            this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && <Button
+
+            this.state.memberToAdd !== "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && <Button
+              label={`ADD "${this.state.memberToAdd}"`}
+              raised
+              primary
+              theme={AddPersonButtonTheme}
+              icon="add"
+              onClick={this.handleOnNewMember}
+            />
+          }
+          {
+            this.state.memberToAdd === "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && <Button
               label="Create Nobt"
               raised
               primary
