@@ -21,7 +21,10 @@ export default class SingleInputInlineForm extends React.Component {
     }
   };
 
-  handleOnInputChange = (value) => this.setState({ value: value });
+  handleOnInputChange = (value) => {
+    this.setState({ value: value });
+    if(this.props.onChange) this.props.onChange(value);
+  };
 
   handleOnButtonClick = () => {
     let value = this.state.value;
@@ -69,6 +72,7 @@ export default class SingleInputInlineForm extends React.Component {
     className: React.PropTypes.string,
 
     onSubmit: React.PropTypes.func,
+    onChange: React.PropTypes.func,
     isButtonDisabled: React.PropTypes.func,
 
     inputProps: React.PropTypes.object,
