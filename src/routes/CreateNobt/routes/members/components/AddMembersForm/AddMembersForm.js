@@ -19,6 +19,17 @@ import CreateNobtProgressBar from "../../components/CreateNobtProgressBar"
 
 class AddMembersForm extends React.Component {
 
+  state = {
+    memberToAdd: ""
+  };
+
+  setMemberToAdd = (name) => this.setState({ memberToAdd: name });
+
+  handleOnNewMember = () => {
+    this.props.addPerson(this.state.memberToAdd);
+    this.setMemberToAdd("");
+  };
+
   render = () => (
     <div>
       <h1>Add participants</h1>
@@ -33,7 +44,9 @@ class AddMembersForm extends React.Component {
 
           <SingleInputInlineForm
             className={styles.addMemberInputInlineForm}
-            onSubmit={this.props.addPerson}
+            onSubmit={this.handleOnNewMember}
+            value={this.state.memberToAdd}
+            onChange={this.setMemberToAdd}
             inputProps={{
               icon: "person",
               theme: AddMemberInputTheme,

@@ -10,10 +10,6 @@ import classnames from "classnames";
 
 export default class SingleInputInlineForm extends React.Component {
 
-  state = {
-    value: ""
-  };
-
   handleOnInputKeyPress = (event) => {
     let enterKey = 13;
     if (event.charCode === enterKey && !this.isButtonDisabled()) {
@@ -21,35 +17,23 @@ export default class SingleInputInlineForm extends React.Component {
     }
   };
 
-  handleOnInputChange = (value) => {
-    this.setState({ value: value });
-    if(this.props.onChange) this.props.onChange(value);
-  };
-
   handleOnButtonClick = () => {
-    let value = this.state.value;
-
-    _debug('SingleInputInlineForm:onSubmit')(value);
-    this.props.onSubmit(value);
-    this.handleOnInputChange("");
+    this.props.onSubmit();
+    this.props.onChange("");
   };
-
-
 
   isButtonDisabled = () => {
-    let value = this.state.value;
-
-    return value === "" || this.props.isButtonDisabled(value);
+    return this.props.value === "" || this.props.isButtonDisabled();
   };
 
   render = () => (
     <div className={classnames(this.props.className, styles.SingleInputInlineForm)}>
       <Input
-        value={this.state.value}
+        value={this.props.value}
         autoComplete="off"
         type='text'
         onKeyPress={this.handleOnInputKeyPress}
-        onChange={this.handleOnInputChange}
+        onChange={this.props.onChange}
         {...this.props.inputProps}
         theme={merge(InputTheme, this.props.inputProps.theme)}
       />
@@ -71,8 +55,10 @@ export default class SingleInputInlineForm extends React.Component {
   static propTypes = {
     className: React.PropTypes.string,
 
+    value: React.PropTypes.string.isRequired,
+    onChange: React.PropTypes.func.isRequired,
+
     onSubmit: React.PropTypes.func,
-    onChange: React.PropTypes.func,
     isButtonDisabled: React.PropTypes.func,
 
     inputProps: React.PropTypes.object,
