@@ -26,6 +26,11 @@
 
   .row{
     padding-right: 1rem;
+
+    a:focus{
+      outline: none;
+      font-weight: bold;
+    }
   }
 
   .row.borderd{
