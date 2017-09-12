@@ -1,0 +1,19 @@
+.layout{
+  @media #{$sm-min}  {
+    padding: 5rem 0;
+  }
+  background-color: #fafafa;
+  min-height: 100%;
+}
+.container {
+  height: 100%;
+  background-color: white;
+
+  @media #{$sm-min}  {
+    margin: auto;
+    max-width: 768px;
+    border-radius: $container-border-radius;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  }
+}
