@@ -132,7 +132,7 @@ const getPercentualShares = createSelector([ getAmount, getPersonValues, getAllM
 export const getShares = createSelector([ getShareSelector, (state) => state ], (shareSelector, state) => {
 
   var shares = shareSelector(state);
-  return shares.sort(byName);
+  return shares.sort(personNameComparator);
 });
 
 export const isValidBill = createSelector([ getShares, getAmount, getDescription, getDebtee ], (shares, amount, description, debtee) => {
@@ -149,6 +149,6 @@ export const isExistingMemberFactory = createSelector( [ getAllMembers ], member
   return (candidate) => members.indexOf(candidate) >= 0;
 });
 
-const byName = (first, second) => {
-  return first.name > second.name
+export const personNameComparator = (first, second) => {
+  return first.name.localeCompare(second.name)
 };
