@@ -38,7 +38,6 @@ class AddBillFAB extends React.Component {
             icon='receipt'
             primary
             floating
-            mini
           />
         </div>
         <div className={classNames(styles.fabItem, {
@@ -51,7 +50,6 @@ class AddBillFAB extends React.Component {
             icon='payment'
             primary
             floating
-            mini
           />
         </div>
       </div>
