@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./AddBillFAB.scss";
-import { Button } from "react-toolbox/lib/button";
+import { Button, IconButton } from "react-toolbox/lib/button";
 import withNavigation from "components/hoc/withNavigation";
 import classNames from "classnames";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
@@ -9,7 +9,7 @@ import LocationBuilder from "../../modules/navigation/LocationBuilder";
 class AddBillFAB extends React.Component {
 
   state = {
-    expanded: false
+    expanded: true
   };
 
   toggleExpanded = () => {
@@ -21,29 +21,39 @@ class AddBillFAB extends React.Component {
   render = () => (
     <div className={styles.fab}>
 
+      <div className={classNames(styles.background, {
+        [styles.active]: this.state.expanded
+      })}/>
+
       <div className={classNames(styles.fabItems, {
         [styles.expanded]: this.state.expanded
       })}>
-        <Button
-          className={classNames(styles.fabItem, {
-            [styles.expanded]: this.state.expanded
-          })}
-          icon='add'
-          primary
-          floating
-          mini
-          onClick={ this.toggleExpanded }
-        />
-        <Button
-          className={classNames(styles.fabItem, {
-            [styles.expanded]: this.state.expanded
-          })}
-          icon='add'
-          primary
-          floating
-          mini
-          onClick={ this.toggleExpanded }
-        />
+        <div className={classNames(styles.fabItem, {
+          [styles.expanded]: this.state.expanded
+        })}>
+          <span className={styles.fabItemLabel}>
+            Add a bill
+          </span>
+          <Button
+            icon='receipt'
+            primary
+            floating
+            mini
+          />
+        </div>
+        <div className={classNames(styles.fabItem, {
+          [styles.expanded]: this.state.expanded
+        })}>
+          <div className={styles.fabItemLabel}>
+            Pay someone
+          </div>
+          <Button
+            icon='payment'
+            primary
+            floating
+            mini
+          />
+        </div>
       </div>
 
       <Button

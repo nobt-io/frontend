@@ -19,6 +19,20 @@
   flex-direction: column;
   align-items: center;
 
+  .background {
+
+    &.active {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      background-color: $color-accent-light;
+      opacity: 0.9;
+    }
+  }
+
   .fabItems {
 
     display: flex;
@@ -45,6 +59,31 @@
 
         transition-duration: 0.225s;
         transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+      }
+    }
+
+    .fabItem {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .fabItemLabel {
+        opacity: 0;
+
+        position: absolute;
+        white-space: nowrap;
+        right: 7rem;
+
+        color: $color-accent-dark;
+        background-color: $color-primary;
+        border-radius: $container-border-radius * 2;
+        padding: 0.3rem 0.6rem;
+      }
+    }
+
+    .fabItem.expanded {
+      .fabItemLabel {
+        opacity: 100;
       }
     }
   }
