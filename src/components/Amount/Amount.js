@@ -2,7 +2,7 @@ import React from "react";
 import { FormattedNumber } from "react-intl";
 import { connect } from "react-redux";
 import { getCurrency } from "../../routes/App/modules/currentNobt/selectors";
-import classnames from "classnames";
+import classnames from "classNames";
 
 const valueViewModel = (props) => (props.absolute) ? Math.abs(props.value): props.value;
 
