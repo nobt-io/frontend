@@ -9,7 +9,7 @@ In order to run the frontend locally, use `npm run dev`. It will compile the sou
 
 ## Building from source
 
-To build the production-ready version of the frontend, use `npm run deploy`. The build process requires two environment variables to be set: `COMMIT_HASH` and `SENTRY_DSN`. Both are used to configure Raven, the JavaScript library for Sentry in order to provide error reporting. The deploy command just invokes `npm run compile` with `NODE_ENV` set to `production`. This triggers a config override and makes the two configuration values mandatory. For more information see `config/index.js` and `config/environment.js`.
+To build the production-ready version of the frontend, use `npm run deploy`. The build process requires two environment variables to be set: `COMMIT_HASH` and `SENTRY_DSN`. Both are used to configure Raven, the JavaScript library for Sentry in order to provide error reporting. The deploy command just invokes `npm run compile` with `NODE_ENV` set to `production`. This triggers a config override and makes the two configuration values mandatory. For more information see the config under `config/`.
 
 ## Deployment configuration
 
@@ -25,7 +25,7 @@ All of this is only needed because sentry cannot yet handle gzipped files. As so
 
 ### Source Maps
 
-Generation of source maps is enabled for both, JS and CSS. However, the configuration for the production environment is set to "hidden-source-maps" which means that no link to the source maps is embedded in the minified file. We also do not upload the source maps to Amazon S3. We just upload them to sentry.io which gives us nice stacktraces in error reports.
+Generation of source maps is enabled for both, JS and CSS. However, we do not upload the source maps to Amazon S3. We just upload them to sentry.io which gives us nice stacktraces in error reports.
 
 ### Travis configuration
 

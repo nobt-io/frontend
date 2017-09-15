@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="google-site-verification" content="RxNEUdqyb3p6Q7WHOTY2C5hzwOFMwFUcjRFvYNFoRf0" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://cdn.ravenjs.com/3.7.0/raven.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
@@ -23,14 +23,10 @@
       ]
     }).install();
 
-    const actualErrorHandler = window.onerror;
-
-    let onErrorDecorator = function(msg, url, lineNo, columnNo, error) {
-      actualErrorHandler(msg, url, lineNo, columnNo, error)
-      Raven.showReportDialog();
-    };
-
-    window.onerror = onErrorDecorator;
+    // ravenSuccess is an undocumented event but this is the cleanest way to always show the report dialog, no matter where the exception was triggered.
+    document.addEventListener('ravenSuccess', function (event) {
+      Raven.showReportDialog({eventId: event.data.event_id});
+    }, false);
   </script>
 </head>
 <body>

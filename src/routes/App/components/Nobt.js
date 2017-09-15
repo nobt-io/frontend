@@ -4,9 +4,6 @@ import styles from "./Nobt.scss";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
 import BillItem from "./BillItem";
 import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
-import AsyncActionStatus from "const/AsyncActionStatus";
-import { ProgressBar } from "react-toolbox/lib/progress_bar";
-import { Snackbar } from "react-toolbox/lib/snackbar";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import AddBillFAB from "./AddBillFAB";
@@ -15,7 +12,6 @@ import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
 import HeadRoom from "react-headroom";
 import Amount from "../../../components/Amount/Amount";
-
 
 export default class Nobt extends React.Component {
 
@@ -28,88 +24,63 @@ export default class Nobt extends React.Component {
             title="nobt.io"
             />
 
-          {
-            this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL &&
-              <div className={styles.overviewContainer}>
-                <div className={styles.nobtTitle}>{this.props.name}</div>
-                <div className={styles.nobtMetadata}>
-                  <ul>
-                    <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
-                    <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
-                  </ul>
-                </div>
-              {(!this.props.isNobtEmpty) && (
-                <Button
-                  label="Show balances"
-                  primary
-                  raised
-                  onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
-                  theme={NobtItButtonTheme}
-                />)}
+          <div className={styles.overviewContainer}>
+            <div className={styles.nobtTitle}>{this.props.name}</div>
+            <div className={styles.nobtMetadata}>
+              <ul>
+                <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
+                <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
+              </ul>
             </div>
-          }
+            {(!this.props.isNobtEmpty) && (
+              <Button
+                label="Show balances"
+                primary
+                raised
+                onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
+                theme={NobtItButtonTheme}
+              />)}
+          </div>
         </HeadRoom>
 
         {
-          this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
-            <div className={styles.loader}>
-              <div className={styles.separator}/>
-              <div className={styles.progressBar}>
-                <ProgressBar type='circular' mode='indeterminate' multicolor />
-              </div>
-            </div>
-          )
-        }
-
-        {
-          this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
-
-            this.props.isNobtEmpty
-              ? ( <EmptyNobtPlaceholder/> )
-              : (
-                <div>
-                  <div className={styles.cardListHeader}>
-                    <div>
-                      <h4>Bills:</h4>
-                    </div>
-
-                    <IconMenu>
-                      <MenuItem
-                        caption="Sort bills"
-                        icon="sort"
-                        onClick={ () => LocationBuilder.fromWindow().push("changeSort").apply(this.props.push) }
-                      />
-
-                      <MenuItem
-                        caption="Filter bills"
-                        icon="filter_list"
-                        onClick={ () => LocationBuilder.fromWindow().push("changeFilter").apply(this.props.push) }
-                      />
-                    </IconMenu>
+          this.props.isNobtEmpty
+            ? ( <EmptyNobtPlaceholder/> )
+            : (
+              <div>
+                <div className={styles.cardListHeader}>
+                  <div>
+                    <h4>Bills:</h4>
                   </div>
 
-                  {
-                    this.props.bills.map( bill => <BillItem bill={bill} />)
-                  }
+                  <IconMenu>
+                    <MenuItem
+                      caption="Sort bills"
+                      icon="sort"
+                      onClick={ () => LocationBuilder.fromWindow().push("changeSort").apply(this.props.push) }
+                    />
 
-                  {
-                    this.props.children
-                  }
-
+                    <MenuItem
+                      caption="Filter bills"
+                      icon="filter_list"
+                      onClick={ () => LocationBuilder.fromWindow().push("changeFilter").apply(this.props.push) }
+                    />
+                  </IconMenu>
                 </div>
-              )
-          )
+
+                {
+                  this.props.bills.map( bill => <BillItem bill={bill} />)
+                }
+
+                {
+                  this.props.children
+                }
+
+              </div>
+            )
         }
 
-        {this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && <AddBillFAB />}
-
-        <Snackbar
-          action='Retry?'
-          active={this.props.fetchStatus === AsyncActionStatus.FAILED}
-          label='Failed to fetch nobt.'
-          type='warning'
-          onClick={this.props.invalidateNobtData}
-        />
+        <AddBillFAB />
       </div>
     );
   };
@@ -122,7 +93,6 @@ export default class Nobt extends React.Component {
     billFilter: React.PropTypes.string.isRequired,
     billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
-    fetchStatus: React.PropTypes.string.isRequired,
     createdOn: React.PropTypes.string.isRequired
   };
 };
