@@ -86,7 +86,7 @@
     "reselect": "^2.5.4",
     "reselect-change-memoize": "^1.1.0",
     "yargs": "^6.0.0",
-    "classNames": "latest"
+    "classNames": "^2.2.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
