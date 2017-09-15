@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./FAB.scss";
 import RTButtonTheme from "./RTButtonTheme.scss";
-import classNames from "classNames";
+import classNames from "classnames";
 import { Button, ButtonProps } from "react-toolbox/lib/button/index";
 
 const FABMenuBackground = (props, context) =>

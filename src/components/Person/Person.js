@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Person.scss";
-import classnames from "classNames";
+import classnames from "classnames";
 import { avatarFactory, AvatarSize } from "components/Avatar";
 
 export const AvatarPosition = {

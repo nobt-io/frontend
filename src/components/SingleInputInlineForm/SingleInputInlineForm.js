@@ -6,7 +6,7 @@ import ButtonTheme from "./ButtonTheme.scss";
 import InputTheme from "./InputTheme.scss";
 import _debug from "debug";
 import merge from "styles/merge";
-import classnames from "classNames";
+import classnames from "classnames";
 
 export default class SingleInputInlineForm extends React.Component {
 

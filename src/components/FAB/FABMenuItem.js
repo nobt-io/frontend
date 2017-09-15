@@ -1,5 +1,5 @@
 import * as React from "react";
-import classNames from "classNames";
+import classNames from "classnames";
 import styles from "./FABMenuItem.scss"
 import { Button } from "react-toolbox/lib/button/index";
 
