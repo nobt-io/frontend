@@ -69,7 +69,6 @@ export default function withNobtLoader(WrappedComponent) {
     (state) => ({
       shouldFetchNobt: shouldFetchNobt(state),
       fetchStatus: getFetchNobtStatus(state)
-      // fetchStatus: AsyncActionStatus.IN_PROGRESS
     }),
     (dispatch, props) => ({
       fetchNobt: (id) => dispatch(fetchNobt(id))
