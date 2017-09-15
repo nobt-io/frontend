@@ -1,34 +1,50 @@
+$fabItemMargin: 1rem;
+$maxFabItems: 5;
+
+/**
+ * This hides the corresponding item.
+ * Note that we are selecting the item that this mixin is applied to (&-selector).
+ */
+@mixin hideFabItem($n) {
+  &:nth-child(#{$n}) {
+    transform: translateY(100% * $n) + translateY($n * $fabItemMargin);
+  }
+}
+
 .fabItemContainer {
 
-  $fabItemMargin: 1rem;
-  $maxFabItems: 5;
-
-  // This hides all the fabMenuContainer-nodes behind the initial button.
-  @for $i from 0 to $maxFabItems {
-    &:nth-child(#{$i}) {
-      transform: translateY(100% * $i) + translateY($i * $fabItemMargin);
-    }
-  }
-
   margin-bottom: $fabItemMargin;
+
 
   // Duration and timing functions taken from material spec.
   // See: https://material.io/guidelines/motion/duration-easing.html#duration-easing-natural-easing-curves
   // And: https://material.io/guidelines/motion/duration-easing.html#duration-easing-common-durations
 
+  $materialSpecFadeOutTime: 0.195s;
+  $materialSpecFadeOutTimingFunction: cubic-bezier(0.4, 0.0, 1, 1);
+
+  $materialSpecFadeInTime: 0.225s;
+  $materialSpecFadeInTimingFunction: cubic-bezier(0.0, 0.0, 0.2, 1);
+
   transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
-  transition-duration: 0.195s;
+
+  // By default, all items are hidden.
+  @for $i from 0 to $maxFabItems {
+    @include hideFabItem($i)
+  }
+  transition-timing-function: $materialSpecFadeOutTimingFunction;
+  transition-duration: $materialSpecFadeOutTime;
 
   &.expanded {
     // Once they are expanded, don't transform them at all, means they will be shown to the user.
     transform: none;
 
-    transition-duration: 0.225s;
-    transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+    transition-duration: $materialSpecFadeInTime;
+    transition-timing-function: $materialSpecFadeInTimingFunction;
 
+    // If we are expanded, show the button labels!
     .fabItemLabel {
-      opacity: 100; // Only show the expanded labels.
+      opacity: 100;
     }
   }
 
@@ -51,7 +67,6 @@
     padding: 0.3rem 0.6rem;
   }
 }
-
 
 .itemButton {
   box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28); // Copied from Google Inbox
