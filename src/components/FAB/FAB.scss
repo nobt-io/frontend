@@ -1,0 +1,30 @@
+.fabContainer {
+  position: fixed;
+
+  bottom: 3rem;
+  right: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fabMenu {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.background {
+
+  &.active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: $color-accent-light;
+    opacity: 0.9;
+  }
+}

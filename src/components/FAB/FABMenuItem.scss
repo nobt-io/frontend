@@ -1,0 +1,58 @@
+.fabItemContainer {
+
+  $fabItemMargin: 1rem;
+  $maxFabItems: 5;
+
+  // This hides all the fabMenuContainer-nodes behind the initial button.
+  @for $i from 0 to $maxFabItems {
+    &:nth-child(#{$i}) {
+      transform: translateY(100% * $i) + translateY($i * $fabItemMargin);
+    }
+  }
+
+  margin-bottom: $fabItemMargin;
+
+  // Duration and timing functions taken from material spec.
+  // See: https://material.io/guidelines/motion/duration-easing.html#duration-easing-natural-easing-curves
+  // And: https://material.io/guidelines/motion/duration-easing.html#duration-easing-common-durations
+
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0.0, 1, 1);
+  transition-duration: 0.195s;
+
+  &.expanded {
+    // Once they are expanded, don't transform them at all, means they will be shown to the user.
+    transform: none;
+
+    transition-duration: 0.225s;
+    transition-timing-function: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+    .fabItemLabel {
+      opacity: 100; // Only show the expanded labels.
+    }
+  }
+
+  // The item itself consists of a label and a button, organized through a flex-box.
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  .fabItemLabel {
+    opacity: 0; // Initially, don't show the labels.
+
+    // Labels need to be positioned absolute in order to not interfere with the button's position.
+    position: absolute;
+    white-space: nowrap;
+    right: 7rem;
+
+    color: $color-accent-dark;
+    background-color: $color-primary;
+    border-radius: $container-border-radius * 2;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+
+.itemButton {
+  box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28); // Copied from Google Inbox
+}

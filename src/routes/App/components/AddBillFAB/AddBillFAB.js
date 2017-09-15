@@ -1,70 +1,43 @@
 import React from "react";
 import styles from "./AddBillFAB.scss";
-import { Button, IconButton } from "react-toolbox/lib/button";
+import { Button } from "react-toolbox/lib/button";
 import withNavigation from "components/hoc/withNavigation";
-import classNames from "classnames";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
+import FAB from "components/FAB/FAB";
+import FABMenuItem from "components/FAB/FABMenuItem";
+
 
 // TODO: Use a real FAB library here that allows to hide the button on scroll
-class AddBillFAB extends React.Component {
+const AddBillFAB = (props) => {
 
-  state = {
-    expanded: true
-  };
-
-  toggleExpanded = () => {
-    this.setState({
-      expanded: !this.state.expanded
-    })
-  }
-
-  render = () => (
-    <div className={styles.fab}>
-
-      <div className={classNames(styles.background, {
-        [styles.active]: this.state.expanded
-      })}/>
-
-      <div className={classNames(styles.fabItems, {
-        [styles.expanded]: this.state.expanded
-      })}>
-        <div className={classNames(styles.fabItem, {
-          [styles.expanded]: this.state.expanded
-        })}>
-          <span className={styles.fabItemLabel}>
-            Add a bill
-          </span>
-          <Button
-            icon='receipt'
-            primary
-            floating
-          />
-        </div>
-        <div className={classNames(styles.fabItem, {
-          [styles.expanded]: this.state.expanded
-        })}>
-          <div className={styles.fabItemLabel}>
-            Pay someone
-          </div>
-          <Button
-            icon='payment'
-            primary
-            floating
-          />
-        </div>
-      </div>
-
-      <Button
-        icon='add'
-        className={classNames(styles.button, {
-          [styles.expanded]: this.state.expanded
-        })}
-        primary
-        floating
-        onClick={ this.toggleExpanded }
-      />
-    </div>
+  return (
+    <Button
+      icon='add'
+      className={styles.button}
+      primary
+      floating
+      onClick={() => LocationBuilder.fromWindow().push("newBill").apply(props.push)}
+    />
   )
-}
+};
+
+/*
+const AddBillFAB = (props) => (
+  <FAB>
+    <FABMenuItem
+      label="Add a bill"
+      buttonProps={{
+        icon: "receipt"
+      }}
+    />
+    <FABMenuItem
+      label="Pay someone"
+      buttonProps={{
+        icon: 'payment'
+      }}
+    />
+  </FAB>
+);
+*/
 
 export default withNavigation(AddBillFAB)
