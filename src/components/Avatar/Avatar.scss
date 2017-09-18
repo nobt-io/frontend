@@ -1,7 +1,26 @@
+@mixin applySize($size) {
+  font-size: $size / 2;
+  line-height: $size;
+  width: $size;
+  height: $size;
+}
+
 .avatar {
   text-align: center;
   color: white;
   font-weight: bold;
   border-radius: 50%;
   vertical-align: middle;
+
+  &.small {
+    @include applySize(2.4rem)
+  }
+
+  &.medium {
+    @include applySize(3.0rem)
+  }
+
+  &.large {
+    @include applySize(3.6rem)
+  }
 }
