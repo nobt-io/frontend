@@ -1,5 +1,6 @@
 @import "~react-toolbox/lib/colors";
 @import "~react-toolbox/components/_globals";
+@import "animationMixins";
 
 //colors
 
@@ -15,18 +16,6 @@ $color-button-grey: #e8e8e8;
 $grey: #eee;
 
 $color-button-grey-dark: darken($color-button-grey, 30);
-
-// material animation
-
-// Duration and timing functions taken from material spec.
-// See: https://material.io/guidelines/motion/duration-easing.html#duration-easing-natural-easing-curves
-// And: https://material.io/guidelines/motion/duration-easing.html#duration-easing-common-durations
-
-$easeOutDuration: 0.195s;
-$easeOutFn: cubic-bezier(0.4, 0.0, 1, 1);
-
-$easeInDuration: 0.225s;
-$easeInFn: cubic-bezier(0.0, 0.0, 0.2, 1);
 
 //fonts
 
