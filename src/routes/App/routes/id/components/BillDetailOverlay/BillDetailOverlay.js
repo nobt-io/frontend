@@ -11,6 +11,7 @@ import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import { List, ListSubHeader } from "react-toolbox/lib/list/index";
 import { FormattedDate, FormattedMessage } from "react-intl";
+import DebtorAmountTheme from "./DebtorAmountTheme.scss";
 
 class BillDetailPage extends React.Component {
 
@@ -89,7 +90,7 @@ class BillDetailPage extends React.Component {
                   key={debtor.name}
                   caption={debtor.name}
                   rightActions={[
-                    <Amount value={debtor.amount * (-1)} absolute={false} />
+                    <Amount theme={DebtorAmountTheme} value={debtor.amount * (-1)} absolute={false} />
                   ]}
                 />)
             }
