@@ -1,11 +1,12 @@
 .button {
   // TODO: Set this globally for all floating buttons
   box-shadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28); // Copied from Google Inbox
-  
-  transition-property: transform;
-  transition-duration: 0.2s;
+
+  transition: transform $easeInDuration $easeInFn;
 
   &.expanded {
-    transform: rotate(45deg)
+    transform: rotate(45deg);
+
+    transition: transform $easeOutDuration $easeOutFn;
   }
 }

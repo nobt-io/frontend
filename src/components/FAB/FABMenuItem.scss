@@ -15,36 +15,24 @@ $maxFabItems: 5;
 
   margin-bottom: $fabItemMargin;
 
-
-  // Duration and timing functions taken from material spec.
-  // See: https://material.io/guidelines/motion/duration-easing.html#duration-easing-natural-easing-curves
-  // And: https://material.io/guidelines/motion/duration-easing.html#duration-easing-common-durations
-
-  $materialSpecFadeOutTime: 0.195s;
-  $materialSpecFadeOutTimingFunction: cubic-bezier(0.4, 0.0, 1, 1);
-
-  $materialSpecFadeInTime: 0.225s;
-  $materialSpecFadeInTimingFunction: cubic-bezier(0.0, 0.0, 0.2, 1);
-
-  transition-property: transform;
+  transition: transform $easeOutDuration $easeOutFn;
 
   // By default, all items are hidden.
   @for $i from 0 to $maxFabItems {
     @include hideFabItem($i)
   }
-  transition-timing-function: $materialSpecFadeOutTimingFunction;
-  transition-duration: $materialSpecFadeOutTime;
 
   &.expanded {
     // Once they are expanded, don't transform them at all, means they will be shown to the user.
     transform: none;
 
-    transition-duration: $materialSpecFadeInTime;
-    transition-timing-function: $materialSpecFadeInTimingFunction;
+    transition: transform $easeInDuration $easeInFn;
 
     // If we are expanded, show the button labels!
     .fabItemLabel {
       opacity: 100;
+
+      transition: opacity $easeOutDuration $easeOutFn;
     }
   }
 
@@ -65,6 +53,8 @@ $maxFabItems: 5;
     background-color: $color-primary;
     border-radius: $container-border-radius * 2;
     padding: 0.3rem 0.6rem;
+
+    transition: opacity $easeInDuration $easeInFn;
   }
 }
 
