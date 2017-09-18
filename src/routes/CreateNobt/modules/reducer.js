@@ -17,7 +17,6 @@ const handlers = {
     const existingNames = state.personNames;
 
     if (existingNames.find(name => name === nameToAdd) !== undefined) {
-      _debug(ADD_PERSON)(`Person with name '${nameToAdd}' already exists.`);
       return state;
     }
 

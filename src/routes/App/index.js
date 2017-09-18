@@ -1,4 +1,4 @@
-import withNobtLoader from "../../components/hoc/withNobtLoader";
+import withNobtLoader from "../../components/NobtLoader/withNobtLoader";
 import NobtContainer from "./containers/NobtContainer";
 import NewBillRoute from "./routes/new";
 import DetailRoute from "./routes/id";
