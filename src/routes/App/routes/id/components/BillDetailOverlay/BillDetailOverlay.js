@@ -85,7 +85,7 @@ class BillDetailPage extends React.Component {
                 <ListItem
                   ripple={false}
                   leftActions={[
-                    <Avatar name={debtor.name} medium />
+                    <Avatar name={debtor.name} small />
                   ]}
                   key={debtor.name}
                   caption={debtor.name}
