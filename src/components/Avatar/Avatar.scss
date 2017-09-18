@@ -1,9 +1,13 @@
+@import "~react-toolbox/lib/list/config";
+
 @mixin applySize($size) {
   font-size: $size / 2;
   line-height: $size;
   width: $size;
   height: $size;
 }
+
+$sizeIncrease: 0.6;
 
 .avatar {
   text-align: center;
@@ -13,14 +17,14 @@
   vertical-align: middle;
 
   &.small {
-    @include applySize(2.4rem)
+    @include applySize($list-item-icon-font-size)
   }
 
   &.medium {
-    @include applySize(3.0rem)
+    @include applySize($list-item-icon-font-size + $sizeIncrease * 1)
   }
 
   &.large {
-    @include applySize(3.6rem)
+    @include applySize($list-item-icon-font-size + $sizeIncrease * 2)
   }
 }
