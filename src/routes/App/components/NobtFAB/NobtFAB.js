@@ -1,11 +1,11 @@
 import React from "react";
 import withNavigation from "components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
-import FAB from "components/FAB/FAB";
-import Item from "components/FAB/Item";
+import { FAB, Item } from "components/FAB";
 
 const hashFragment = '#chooseMenuAction';
 
+// Instead of local state, we use the URL's hash fragment to store the state of the FAB menu. This allows the user to close the menu with the back-button :)
 const toggleState = (props) => {
   if (isExpanded(props)) {
     LocationBuilder.fromWindow().pop().apply(props.replace)
