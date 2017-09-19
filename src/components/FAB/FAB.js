@@ -63,10 +63,6 @@ export default class FAB extends React.Component {
     </div>
   );
 
-  static propTypes = {
-    fabProps: ButtonProps
-  };
-
   static childContextTypes = {
     expanded: React.PropTypes.bool
   };
