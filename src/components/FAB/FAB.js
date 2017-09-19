@@ -5,9 +5,15 @@ import classNames from "classnames";
 import { Button } from "react-toolbox/lib/button/index";
 
 const FABMenuBackground = (props, context) =>
-  <div className={classNames(styles.background, {
-    [styles.active]: context.expanded
-  })}
+  <div
+    className={classNames(styles.background, {
+      [styles.active]: context.expanded
+    })}
+    onClick={() => {
+      if (context.expanded) {
+        props.onFabClick()
+      }
+    }}
   />;
 
 FABMenuBackground.contextTypes = {
@@ -36,7 +42,7 @@ export default class FAB extends React.Component {
   render = () => (
     <div className={styles.fabContainer}>
 
-      <FABMenuBackground />
+      <FABMenuBackground onFabClick={this.props.onFabClick} />
 
       <FABMenu>
         {this.props.children}
