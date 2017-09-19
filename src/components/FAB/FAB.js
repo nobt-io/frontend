@@ -1,26 +1,38 @@
 import * as React from "react";
 import styles from "./FAB.scss";
-import RTButtonTheme from "./RTButtonTheme.scss";
+import RTButtonTheme from "./MainButtonTheme.scss";
 import classNames from "classnames";
-import { Button } from "react-toolbox/lib/button/index";
+import { Button as RTButton } from "react-toolbox/lib/button/index";
 
-const FABMenuBackground = (props, context) =>
+const Background = (props, context) =>
   <div
     className={classNames(styles.background, {
       [styles.active]: context.expanded
     })}
     onClick={() => {
       if (context.expanded) {
-        props.onFabClick()
+        props.onClick()
       }
     }}
   />;
 
-FABMenuBackground.contextTypes = {
+Background.contextTypes = {
   expanded: React.PropTypes.bool
 };
 
-const FABMenu = (props) => <div className={styles.fabMenu}>{props.children}</div>;
+const Items = (props) => <div className={styles.items}>{props.children}</div>;
+
+const Button = (props) =>
+  <RTButton
+    floating
+    theme={RTButtonTheme}
+    primary
+    className={classNames({
+      [RTButtonTheme.expanded]: props.expanded
+    })}
+    icon='add'
+    {...props.buttonProps}
+  />;
 
 export default class FAB extends React.Component {
 
@@ -30,35 +42,16 @@ export default class FAB extends React.Component {
     };
   };
 
-  getLegalButtonProps = () => {
-    let {
-      children,
-      ...legalProps
-    } = this.props;
-
-    return legalProps;
-  };
-
   render = () => (
-    <div className={styles.fabContainer}>
+    <div className={styles.container}>
 
-      <FABMenuBackground onFabClick={this.props.onFabClick} />
+      <Background onClick={this.props.buttonProps.onClick} />
 
-      <FABMenu>
+      <Items>
         {this.props.children}
-      </FABMenu>
+      </Items>
 
-      <Button
-        floating
-        theme={RTButtonTheme}
-        primary
-        className={classNames({
-          [RTButtonTheme.expanded]: this.props.expanded
-        })}
-        icon='add'
-        onClick={this.props.onFabClick}
-        {...this.getLegalButtonProps()}
-      />
+      <Button expanded={this.props.expanded} buttonProps={this.props.buttonProps} />
     </div>
   );
 

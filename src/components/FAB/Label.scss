@@ -1,0 +1,26 @@
+@import "~react-toolbox/lib/button/config";
+
+.label {
+  opacity: 0; // Initially, don't show the labels.
+  @include animateShow(opacity);
+
+  white-space: nowrap;
+  margin-right: 1rem;
+
+  color: $color-accent-dark;
+  background-color: $color-primary;
+  border-radius: $container-border-radius * 2;
+  padding: 0.3rem 0.6rem;
+
+  &.disabled {
+    color: $button-disabled-text-color;
+    background-color: $button-disabled-background-color;
+  }
+
+  &.expanded {
+    z-index: 1; // Make sure we are before the background.
+
+    opacity: 100; // If we are expanded, show the button labels!
+    @include animateHide(opacity);
+  }
+}

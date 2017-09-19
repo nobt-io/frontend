@@ -6,7 +6,7 @@ import BillItem from "./BillItem";
 import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
-import AddBillFAB from "./AddBillFAB";
+import NobtFAB from "./NobtFAB";
 import AppBarTheme from "./AppBarTheme.scss";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
@@ -80,7 +80,7 @@ export default class Nobt extends React.Component {
             )
         }
 
-        <AddBillFAB hash={this.props.location.hash}/>
+        <NobtFAB hash={this.props.location.hash}/>
       </div>
     );
   };

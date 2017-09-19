@@ -2,7 +2,7 @@ import React from "react";
 import withNavigation from "components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import FAB from "components/FAB/FAB";
-import FABMenuItem from "components/FAB/FABMenuItem";
+import Item from "components/FAB/Item";
 
 const hashFragment = '#chooseMenuAction';
 
@@ -16,16 +16,22 @@ const toggleState = (props) => {
 
 let isExpanded = props => props.hash === hashFragment;
 
-const AddBillFAB = (props) => (
-  <FAB expanded={isExpanded(props)} onFabClick={() => toggleState(props)}>
-    <FABMenuItem
+const NobtFAB = (props) => (
+  <FAB expanded={isExpanded(props)} buttonProps={{
+    onClick: () => toggleState(props)
+  }}>
+    <Item
       label="Add a bill"
       buttonProps={{
         icon: "receipt",
-        onClick: () => LocationBuilder.fromWindow().push("newBill").apply(props.push)
+        onClick: () => {
+          // We need to deactivate the menu before we proceed. Otherwise we end up with an expanded menu if the user navigates back.
+          toggleState(props);
+          LocationBuilder.fromWindow().push("newBill").apply(props.push);
+        }
       }}
     />
-    <FABMenuItem
+    <Item
       disabled
       label="Pay someone"
       buttonProps={{
@@ -35,4 +41,4 @@ const AddBillFAB = (props) => (
   </FAB>
 );
 
-export default withNavigation(AddBillFAB)
+export default withNavigation(NobtFAB)
