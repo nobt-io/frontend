@@ -1,3 +1,5 @@
+@import "~react-toolbox/lib/button/config";
+
 $fabItemMargin: 1rem;
 $maxFabItems: 5;
 
@@ -54,6 +56,11 @@ $maxFabItems: 5;
     padding: 0.3rem 0.6rem;
 
     @include animateShow(opacity);
+
+    &.disabled {
+      color: $button-disabled-text-color;
+      background-color: $button-disabled-background-color;
+    }
   }
 }
 

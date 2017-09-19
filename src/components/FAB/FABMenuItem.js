@@ -17,7 +17,8 @@ FABItemContainer.contextTypes = {
 
 const FABItemLabel = (props, context) =>
   <span className={classNames(styles.fabItemLabel, {
-    [styles.expanded]: context.expanded
+    [styles.expanded]: context.expanded,
+    [styles.disabled]: props.disabled
   })}>
     {props.label}
   </span>;
@@ -28,8 +29,9 @@ FABItemLabel.contextTypes = {
 
 const FABMenuItem = (props, context) =>
   <FABItemContainer>
-    <FABItemLabel label={props.label} />
+    <FABItemLabel label={props.label} disabled={props.disabled} />
     <Button
+      disabled={props.disabled}
       className={classNames(styles.itemButton, {
         [styles.expanded]: context.expanded
       })}
