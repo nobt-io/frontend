@@ -17,7 +17,7 @@ $maxFabItems: 5;
 
   margin-bottom: $fabItemMargin;
 
-  @include animateHide(transform);
+  @include animateShow(transform);
 
   // By default, all items are hidden.
   @for $i from 0 to $maxFabItems {
@@ -27,12 +27,12 @@ $maxFabItems: 5;
   &.expanded {
     // Once they are expanded, don't transform them at all, means they will be shown to the user.
     transform: none;
-    @include animateShow(transform);
+    @include animateHide(transform);
 
     // If we are expanded, show the button labels!
     .fabItemLabel {
       opacity: 100;
-
+      z-index: 1; // Make sure we are above the background.
       @include animateHide(opacity);
     }
   }
@@ -45,10 +45,8 @@ $maxFabItems: 5;
   .fabItemLabel {
     opacity: 0; // Initially, don't show the labels.
 
-    // Labels need to be positioned absolute in order to not interfere with the button's position.
-    position: absolute;
     white-space: nowrap;
-    right: 7rem;
+    margin-right: 1rem;
 
     color: $color-accent-dark;
     background-color: $color-primary;
