@@ -80,7 +80,7 @@ export default class Nobt extends React.Component {
             )
         }
 
-        <AddBillFAB />
+        <AddBillFAB hash={this.props.location.hash}/>
       </div>
     );
   };

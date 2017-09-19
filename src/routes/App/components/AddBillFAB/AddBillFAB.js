@@ -1,36 +1,32 @@
 import React from "react";
-import styles from "./AddBillFAB.scss";
-import { Button } from "react-toolbox/lib/button";
 import withNavigation from "components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import FAB from "components/FAB/FAB";
 import FABMenuItem from "components/FAB/FABMenuItem";
 
+const hashFragment = '#chooseMenuAction';
 
-// TODO: Use a real FAB library here that allows to hide the button on scroll
-const AddBillFAB = (props) => {
-
-  return (
-    <Button
-      icon='add'
-      className={styles.button}
-      primary
-      floating
-      onClick={() => LocationBuilder.fromWindow().push("newBill").apply(props.push)}
-    />
-  )
+const toggleState = (props) => {
+  if (isExpanded(props)) {
+    LocationBuilder.fromWindow().pop().apply(props.replace)
+  } else {
+    LocationBuilder.fromWindow().push(hashFragment).apply(props.push)
+  }
 };
 
-/*
+let isExpanded = props => props.hash === hashFragment;
+
 const AddBillFAB = (props) => (
-  <FAB>
+  <FAB expanded={isExpanded(props)} onFabClick={() => toggleState(props)}>
     <FABMenuItem
       label="Add a bill"
       buttonProps={{
-        icon: "receipt"
+        icon: "receipt",
+        onClick: () => LocationBuilder.fromWindow().push("newBill").apply(props.push)
       }}
     />
     <FABMenuItem
+      disabled
       label="Pay someone"
       buttonProps={{
         icon: 'payment'
@@ -38,6 +34,5 @@ const AddBillFAB = (props) => (
     />
   </FAB>
 );
-*/
 
 export default withNavigation(AddBillFAB)
