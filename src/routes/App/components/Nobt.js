@@ -23,25 +23,25 @@ export default class Nobt extends React.Component {
             theme={AppBarTheme}
             title="nobt.io"
             />
-
-          <div className={styles.overviewContainer}>
-            <div className={styles.nobtTitle}>{this.props.name}</div>
-            <div className={styles.nobtMetadata}>
-              <ul>
-                <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
-                <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
-              </ul>
-            </div>
-            {(!this.props.isNobtEmpty) && (
-              <Button
-                label="Show balances"
-                primary
-                raised
-                onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
-                theme={NobtItButtonTheme}
-              />)}
-          </div>
         </HeadRoom>
+
+        <div className={styles.overviewContainer}>
+          <div className={styles.nobtTitle}>{this.props.name}</div>
+          <div className={styles.nobtMetadata}>
+            <ul>
+              <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
+              <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
+            </ul>
+          </div>
+          {(!this.props.isNobtEmpty) && (
+            <Button
+              label="Show balances"
+              primary
+              raised
+              onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
+              theme={NobtItButtonTheme}
+            />)}
+        </div>
 
         {
           this.props.isNobtEmpty
