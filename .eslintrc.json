@@ -1,0 +1,26 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "babel",
+    "react",
+    "promise"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "__PROD__": false,
+    "__DEBUG__": false,
+    "__COVERAGE__": false,
+    "__BASENAME__": false,
+    "Raven": false,
+    "exports": false,
+    "module": false
+  },
+  "rules": {
+    "no-undef": "error"
+  }
+}
