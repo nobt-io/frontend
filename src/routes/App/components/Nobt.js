@@ -6,7 +6,7 @@ import BillItem from "./BillItem";
 import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
-import AddBillFAB from "./AddBillFAB";
+import NobtFAB from "./NobtFAB";
 import AppBarTheme from "./AppBarTheme.scss";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
@@ -23,25 +23,25 @@ export default class Nobt extends React.Component {
             theme={AppBarTheme}
             title="nobt.io"
             />
-
-          <div className={styles.overviewContainer}>
-            <div className={styles.nobtTitle}>{this.props.name}</div>
-            <div className={styles.nobtMetadata}>
-              <ul>
-                <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
-                <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
-              </ul>
-            </div>
-            {(!this.props.isNobtEmpty) && (
-              <Button
-                label="Show balances"
-                primary
-                raised
-                onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
-                theme={NobtItButtonTheme}
-              />)}
-          </div>
         </HeadRoom>
+
+        <div className={styles.overviewContainer}>
+          <div className={styles.nobtTitle}>{this.props.name}</div>
+          <div className={styles.nobtMetadata}>
+            <ul>
+              <li><div><FontIcon value="payment"/><Amount value={this.props.total}/></div></li>
+              <li><div><FontIcon value="group"/>{this.props.members.length}</div></li>
+            </ul>
+          </div>
+          {(!this.props.isNobtEmpty) && (
+            <Button
+              label="Show balances"
+              primary
+              raised
+              onClick={() => LocationBuilder.fromWindow().push("balances").apply(this.props.push)}
+              theme={NobtItButtonTheme}
+            />)}
+        </div>
 
         {
           this.props.isNobtEmpty
@@ -80,7 +80,7 @@ export default class Nobt extends React.Component {
             )
         }
 
-        <AddBillFAB />
+        <NobtFAB hash={this.props.location.hash}/>
       </div>
     );
   };

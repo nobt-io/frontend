@@ -1,0 +1,33 @@
+.container {
+  // Position FAB in the right bottom corner
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.items {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
+
+.background {
+
+  background-color: rgba($color-accent-light, 0);
+  @include animateShow(background-color);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &.active {
+    background-color: rgba($color-accent-light, 0.9);
+    @include animateHide(background-color);
+  }
+}

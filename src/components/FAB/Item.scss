@@ -1,0 +1,33 @@
+$fabItemMargin: 1rem;
+$maxFabItems: 5;
+
+/**
+ * This hides the corresponding item.
+ * Note that we are selecting the item that this mixin is applied to (&-selector).
+ */
+@mixin hideItem($n) {
+  &:nth-child(#{$n}) {
+    transform: translateY(100% * $n) + translateY($n * $fabItemMargin);
+  }
+}
+
+.item {
+  // The item itself consists of a label and a button, organized through a flex-box.
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  margin-bottom: $fabItemMargin;
+
+  @include animateShow(transform);
+
+  // By default, all items are hidden.
+  @for $i from 0 to $maxFabItems {
+    @include hideItem($i)
+  }
+
+  &.expanded {
+    transform: none; // Once they are expanded, don't transform them at all, means they will be shown to the user.
+    @include animateHide(transform);
+  }
+}
