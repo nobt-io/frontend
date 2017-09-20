@@ -14,26 +14,25 @@ before_deploy:
 - pip install --user awscli
 - npm run deploy
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: .aws/deploy
-    access_key_id: AKIAIF35EA6NPCKM7MXA
-    on:
-      branch: master
-      repo: nobt-io/frontend
-  - provider: script
-    skip_cleanup: true
-    script: .sentry/upload-sourcemaps
-    on:
-      branch: master
-      repo: nobt-io/frontend
+- provider: script
+  skip_cleanup: true
+  script: ".aws/deploy"
+  access_key_id: AKIAIF35EA6NPCKM7MXA
+  on:
+    branch: master
+    repo: nobt-io/frontend
+- provider: script
+  skip_cleanup: true
+  script: ".sentry/upload-sourcemaps"
+  on:
+    branch: master
+    repo: nobt-io/frontend
 notifications:
   email:
-    # Disable email notifications
     on_success: never
     on_failure: never
   slack:
-    # Enable slack notifications with default behaviour of email
-    secure: URSq5SE9Zj7Dj7MTt0elnPb8ptuaQ30Jf+Cuo1Rt54OY1SLIxGp4o9nzusAaa9obxXrRAJZydF6u3sUaj4U8EnONX6odYEY0+6GLQ07FT5Frdx620ns/2FNvcSOV1TYPHQZC8xqvddivZVDh4t2g1jVlxHnLgIPGhpiSVfZuIgX1c8DeWC8RshcLxutg8jtPRF89c9ReNB1il9/ZAgH49bnxkW1Q1vngipjvbZr+jO6dZe86/07mCln1tfLv6E+r8HyJ5W9zFG+lMuypPl+9XzDtTDu7TW9juixVMsm/JKiBwivex9fPh6S+0/z5SLUY4mVVeOp1TGj/fL+6Bv4ZzaQvZSwww/XjpeMu+qfN7vkumWhowHJwz4ZvorG9jAhGzi34m3NG9/YcAHnpU0aZopVlUMDchboantZqUuicd9tTdJcfTN3LSJK0bcpr/vvuoEQDnI7Z/qu5X5aLkNTM6c96vAIuC13TwEtjiVV1t4D9sWl8H6si38ktruLzOIKCXZ/xq+zeOdxPl2sj8v+/DMYxRrq09qC/LYUAkf6qU1nhy7dAzhQyBu/hdQPSdGLHsmBhvp0zBTgOoZ5+gJH8ycMCOhAdyPnrjYmgL6XaL0qEI0hEdnfrlXSYK6/tUqhCzU0IHL+is/WphDuWRFtbNVbMlCxZ1Dyeyx+3kxVitCA=
+    rooms:
+      - secure: Tuxfc7g/LiJSI8N6miC7/XTJjLd5q0Bq6vGGp176F7dfMelZIngZtJU2DRdmTm9Z5Y6ZZgFU2P0GtznGNIgmufzkiXrabbND8GkRfuLmtM7yBeVYNt7IvGDpk2DnQeLAyY7Gx9SBGoywq8KJJeRutyiX3A3FWYfKi3GckCA1wk/YS1buRG+SNle0Oj3/xsoAueSdD+6jiFjFEX5FdTQXWB1gKamkFhUC4hgyruVG4LyXi2GH79xm58GhsxyGo6THURGmwCrRSe4GRocxhkruBGJ3Jh+Epf8d/8OgOYcFXDi4cP9ppQemUL0Egvqh+4NFF29d/7mMB1M1zUPQ9by4D3pSD0H+zPiDSeC85XJAh8z4zFtybzeRPE0SDiQLRLeSzeX4QKe3meymcWFMYAbMrGGMmrm1K98broQ7pYIDmlETrJVmIGA3xfsqFPO0ZQi4SobsOemeAgZvJcyzS6Fuaa1JpYYlsk2GBP3fK0kUmipMsINploUH6GqrwO9a3h1TERFvmYwVidgYodR0xzdFaFpTIkxI0FMeLkoyKN0bO2njJB1plMWM+8x83g5xJuYnP90uayL5ipHNVD8bYivZNd84wTq+PAIr6yNY/NIDmVDb+CUwsnpJYF3mvKVQf5rnF37UO9YG8FErFLmOeCWIZRgUNTa5Vr+vRFdQ7qd2zBA=
     on_success: always
     on_failure: always
