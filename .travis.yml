@@ -32,7 +32,8 @@ notifications:
     on_success: never
     on_failure: never
   slack:
+    on_pull_requests: true
     rooms:
       - secure: Tuxfc7g/LiJSI8N6miC7/XTJjLd5q0Bq6vGGp176F7dfMelZIngZtJU2DRdmTm9Z5Y6ZZgFU2P0GtznGNIgmufzkiXrabbND8GkRfuLmtM7yBeVYNt7IvGDpk2DnQeLAyY7Gx9SBGoywq8KJJeRutyiX3A3FWYfKi3GckCA1wk/YS1buRG+SNle0Oj3/xsoAueSdD+6jiFjFEX5FdTQXWB1gKamkFhUC4hgyruVG4LyXi2GH79xm58GhsxyGo6THURGmwCrRSe4GRocxhkruBGJ3Jh+Epf8d/8OgOYcFXDi4cP9ppQemUL0Egvqh+4NFF29d/7mMB1M1zUPQ9by4D3pSD0H+zPiDSeC85XJAh8z4zFtybzeRPE0SDiQLRLeSzeX4QKe3meymcWFMYAbMrGGMmrm1K98broQ7pYIDmlETrJVmIGA3xfsqFPO0ZQi4SobsOemeAgZvJcyzS6Fuaa1JpYYlsk2GBP3fK0kUmipMsINploUH6GqrwO9a3h1TERFvmYwVidgYodR0xzdFaFpTIkxI0FMeLkoyKN0bO2njJB1plMWM+8x83g5xJuYnP90uayL5ipHNVD8bYivZNd84wTq+PAIr6yNY/NIDmVDb+CUwsnpJYF3mvKVQf5rnF37UO9YG8FErFLmOeCWIZRgUNTa5Vr+vRFdQ7qd2zBA=
-    on_success: change
+    on_success: always
     on_failure: always
