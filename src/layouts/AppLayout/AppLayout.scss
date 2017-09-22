@@ -2,7 +2,7 @@
   @media #{$sm-min}  {
     padding: 5rem 0;
   }
-  background-color: #fafafa;
+  background-color: $color-accent-light;
   min-height: 100%;
 }
 .container {
@@ -11,9 +11,9 @@
 
   @media #{$sm-min}  {
     margin: auto;
-    max-width: 768px;
+    max-width: $maxAppWidth;
     border-radius: $container-border-radius;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    box-shadow: $defaultShadow;
   }
 }
