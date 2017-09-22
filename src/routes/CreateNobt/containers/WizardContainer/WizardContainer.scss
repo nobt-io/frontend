@@ -6,8 +6,8 @@
 
   background-color: white;
   min-height: 100vh;
-  
-  @media #{$md-min}  {
+
+  @media #{$mq-desktop}  {
     padding-top: 10rem;
   }
 }

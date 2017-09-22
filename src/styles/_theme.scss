@@ -35,17 +35,4 @@ $maxAppWidth: 768px;
 
 //bootstrap 3 media queries
 
-$xs-min: "only screen and (min-width:none)";
-$xs-max: "only screen and (max-width:520px)";
-$xs-sm: "only screen (min-width: none) and (max-width:767px)";
-
-$sm-min: "only screen and (min-width:768px)";
-$sm-max: "only screen and (max-width:991px)";
-$sm-md: "only screen (min-width: 768px) and (max-width:991px)";
-
-$md-min: "only screen and (min-width:992px)";
-$md-max: "only screen and (max-width:1199px)";
-$md-lg: "only screen (min-width: 992px) and (max-width:1199px)";
-
-$lg-min: "only screen and (min-width:1200px)";
-$lg-max: "only screen and (max-width:none)";
+$mq-desktop: "only screen and (min-width:768px)"; //bootstrap-base mediaquery: https://stackoverflow.com/a/33493510/2167804

@@ -1,5 +1,5 @@
 .layout{
-  @media #{$sm-min}  {
+  @media #{$mq-desktop}  {
     padding: 5rem 0;
   }
   background-color: $color-accent-light;
@@ -9,7 +9,7 @@
   height: 100%;
   background-color: white;
 
-  @media #{$sm-min}  {
+  @media #{$mq-desktop}  {
     margin: auto;
     max-width: $maxAppWidth;
     border-radius: $container-border-radius;
