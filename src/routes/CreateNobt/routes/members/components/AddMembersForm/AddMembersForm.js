@@ -4,13 +4,12 @@ import SingleInputInlineForm from "components/SingleInputInlineForm";
 import styles from "./AddMembersForm.scss";
 import PersonListTheme from "./PersonListTheme.scss";
 import HOList from "containers/HOList";
-import { Button, IconButton } from "react-toolbox/lib/button";
+import { IconButton } from "react-toolbox/lib/button";
 import { Person, AvatarPosition } from "components/Person";
 import { AvatarSize } from "components/Avatar";
 import { getPersonNames, getCreationStatus } from "../../../../modules/selectors";
 import { addPerson, removePerson, createNobt } from "../../../../modules/actions";
-import CreateNobtButtonTheme from "./CreateNobtButtonTheme.scss";
-import AddPersonButtonTheme from "./AddPersonButtonTheme.scss";
+import ContinueButton from "../../../../components/ContinueButton";
 import AddButtonTheme from "./AddButtonTheme.scss";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
 import { Snackbar } from "react-toolbox/lib/snackbar";
@@ -74,26 +73,12 @@ class AddMembersForm extends React.Component {
         <div className={styles.createNobtButtonContainer}>
           {
 
-            this.state.memberToAdd !== "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && <Button
-              label={`ADD "${this.state.memberToAdd}"`}
-              raised
-              primary
-              theme={AddPersonButtonTheme}
-              icon="add"
-              onClick={this.handleOnNewMember}
-            />
+            this.state.memberToAdd !== "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS &&
+              <ContinueButton label={`Add "${this.state.memberToAdd}"`} icon="add" onClick={this.handleOnNewMember} />
           }
           {
-            this.state.memberToAdd === "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && <Button
-              label="Create Nobt"
-              raised
-              primary
-              theme={CreateNobtButtonTheme}
-              disabled={this.props.personNames.length == 0}
-              icon="done"
-              onClick={this.props.createNobt}
-            />
-
+            this.state.memberToAdd === "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS &&
+              <ContinueButton label="Create Nobt" disabled={this.props.personNames.length == 0} icon="done" onClick={this.props.createNobt} />
           }
 
           {

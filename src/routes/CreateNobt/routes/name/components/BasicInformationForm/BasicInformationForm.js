@@ -1,11 +1,10 @@
 import * as React from "react";
 import { Input } from "react-toolbox/lib/input";
-import Button from "components/Button";
+import ContinueButton from "../../../../components/ContinueButton";
 import { Dropdown } from "react-toolbox/lib/dropdown";
 import styles from "./BasicInformationForm.scss";
 import NobtNameInputTheme from "./NobtNameInputTheme.scss";
 import NobtCurrencyDropdownTheme from "./NobtCurrencyDropdownTheme.scss";
-import ContinueButtonTheme from "./ContinueButtonTheme.scss";
 import { connect } from "react-redux";
 import { getNobtName, getCurrency } from "../../../../modules/selectors";
 import { changeNobtName, selectCurrency } from "../../../../modules/actions";
@@ -56,15 +55,8 @@ class BasicInformationForm extends React.Component {
         </div>
 
         <div className={styles.continueButtonContainer}>
-          <Button
-            label="Continue"
-            raised
-            primary
-            theme={ContinueButtonTheme}
-            disabled={ !this.props.nobtName }
-            rightIcon
-            icon="arrow_forward"
-            onClick={ () => LocationBuilder.fromWindow().pop().push("members").apply(this.props.push) }
+          <ContinueButton label="Continue" disabled={ !this.props.nobtName } icon="arrow_forward"
+                          onClick={ () => LocationBuilder.fromWindow().pop().push("members").apply(this.props.push) }
           />
         </div>
 
