@@ -9,24 +9,23 @@
       toggleState = () => this.setState({expanded: !this.state.expanded})
 
       render = () => (
-      <FAB expanded={this.state.expanded} buttonProps={{
-        onClick: this.toggleState
-      }}>
-        <Item
-          label="First item"
-          buttonProps={{
-            onClick: () => console.log("First item clicked!")
-          }}
-        />
-        <Item
-          disabled
-          label="Second item"
-          buttonProps={{
-            onClick: () => console.log("Second item clicked!")
-          }}
-        />
-      </FAB>)
+        <FABMenu expanded={isExpanded(props)}>
+          <Overlay onClick={this.toggleState} />
+          <Items>
+            <Item>
+              <Label>First item</Label>
+              <Button onClick={() => console.log("First item clicked")} />
+            </Item>
+            <Item disabled>
+              <Label>Second item</Label>
+              <Button />
+            </Item>
+          </Items>
+          <MenuButton>
+            <Button icon="add" onClick={this.toggleState} />
+          </MenuButton>
+        </FABMenu>
+      )
     }
 
-Per design, the FAB works without any internal state. The `FAB`-Api consists of the `expanded` and `buttonProps` properties which can be used to control the internal behaviour.
-`Item` is designed to be nested inside the `FAB` component and allows to add entries to the FAB-menu.
+Per design, the FABMenu works without any internal state. Simply nest all the related components inside of the FABMenu in the way you want. It is important to use the `<Items>` wrapper, otherwise the compound component does not work. `<Button>` is a regular button from `react-toolbox`.
