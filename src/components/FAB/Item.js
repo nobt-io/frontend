@@ -1,12 +1,12 @@
 import * as React from "react";
 import classNames from "classnames";
-import ItemStyles from "./Item.scss"
+import styles from "./Item.scss"
 import ItemButtonTheme from "./ItemButtonTheme.scss"
 import { Button as RTButton } from "react-toolbox/lib/button/index";
 
 export default ({children, expanded, disabled}) =>
-  <div className={classNames(ItemStyles.item, {
-    [ItemStyles.expanded]: expanded
+  <div className={classNames(styles.item, {
+    [styles.expanded]: expanded
   })}>
     {
       React.Children.map(children, child => {
@@ -14,7 +14,6 @@ export default ({children, expanded, disabled}) =>
           case RTButton: {
             return React.cloneElement(child, {
               disabled,
-              theme: ItemButtonTheme,
               className: classNames({
                 [ItemButtonTheme.expanded]: expanded
               }),
