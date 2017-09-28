@@ -21,9 +21,7 @@ class BillDetailPage extends React.Component {
     const {debtee} = bill;
 
     return (
-
       <div>
-
         <HeadRoom>
           <AppBar
             theme={AppBarTheme}
@@ -33,12 +31,9 @@ class BillDetailPage extends React.Component {
             title={bill.name}
           />
         </HeadRoom>
-
         <div>
-
           <List>
             <ListSubHeader caption="Debtee" />
-
             <ListItem
               ripple={false}
               leftActions={[
