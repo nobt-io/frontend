@@ -5,10 +5,9 @@ import styles from "./AddMembersForm.scss";
 import PersonListTheme from "./PersonListTheme.scss";
 import HOList from "containers/HOList";
 import { Button, IconButton } from "react-toolbox/lib/button";
-import { Person, AvatarPosition } from "components/Person";
-import { AvatarSize } from "components/Avatar";
-import { getPersonNames, getCreationStatus } from "../../../../modules/selectors";
-import { addPerson, removePerson, createNobt } from "../../../../modules/actions";
+import { AvatarPosition, Person } from "components/Person";
+import { getCreationStatus, getPersonNames } from "../../../../modules/selectors";
+import { addPerson, createNobt, removePerson } from "../../../../modules/actions";
 import CreateNobtButtonTheme from "./CreateNobtButtonTheme.scss";
 import AddButtonTheme from "./AddButtonTheme.scss";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
@@ -50,7 +49,7 @@ class AddMembersForm extends React.Component {
             items={this.props.personNames}
             renderItem={ (name) => (
               <div className={PersonListTheme.item} key={name}>
-                <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM} name={name} />
+                <Person avatarPosition={AvatarPosition.LEFT} name={name} />
                 <IconButton icon='clear' onClick={() => this.props.removePerson(name)}
                 />
               </div>

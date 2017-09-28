@@ -1,4 +1,4 @@
-import { isExistingMemberFactory, isTransientMemberFactory, personNameComparator } from "./selectors";
+import { isExistingMemberFactory, personNameComparator } from "./selectors";
 
 let mockState = function () {
   return {
