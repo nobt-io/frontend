@@ -1,5 +1,4 @@
 import React from "react";
-import AppBar from "react-toolbox/lib/app_bar";
 import styles from "./Nobt.scss";
 import LocationBuilder from "../modules/navigation/LocationBuilder";
 import BillItem from "./BillItem";
@@ -7,11 +6,11 @@ import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import AddBillFAB from "./AddBillFAB";
-import AppBarTheme from "./AppBarTheme.scss";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
 import HeadRoom from "react-headroom";
 import Amount from "../../../components/Amount/Amount";
+import BrandedAppBar from "../../../components/BrandedAppBar";
 
 export default class Nobt extends React.Component {
 
@@ -19,10 +18,7 @@ export default class Nobt extends React.Component {
     return (
       <div className={styles.nobt}>
         <HeadRoom>
-          <AppBar
-            theme={AppBarTheme}
-            title="nobt.io"
-            />
+          <BrandedAppBar />
 
           <div className={styles.overviewContainer}>
             <div className={styles.nobtTitle}>{this.props.name}</div>

@@ -16,7 +16,7 @@ PATHS_TO_TREAT_AS_CSS_MODULES.push(
 );
 
 let cssModulesRegex = new RegExp(`(${PATHS_TO_TREAT_AS_CSS_MODULES.join('|')})`)
-let themeFile = paths.client("styles/theme.scss").replace(/\\/g, "\\\\");
+let themeFile = paths.client("styles/core.scss").replace(/\\/g, "\\\\");
 
 let loaders = [
   {
