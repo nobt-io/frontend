@@ -5,6 +5,7 @@
 export default (config) => ({
   devtool: "eval",
   compiler_public_path: `http://${config.server_host}:${config.server_port}/`,
+  compiler_hash_type: 'hash',
   proxy: {
     enabled: false,
     options: {
