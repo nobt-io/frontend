@@ -91,4 +91,4 @@ export default class Nobt extends React.Component {
     isNobtEmpty: React.PropTypes.bool.isRequired,
     createdOn: React.PropTypes.string.isRequired
   };
-};
+}

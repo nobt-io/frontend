@@ -8,6 +8,9 @@ module.exports = {
     "promise",
     "import"
   ],
+  extends: [
+    "eslint:recommended"
+  ],
   env: {
     "browser": true,
     "es6": true,
@@ -31,9 +34,10 @@ module.exports = {
     }
   },
   rules: {
-    "no-undef": "error",
-    "import/no-unresolved": "error",
-    "import/named": "error",
-    "import/default": "error"
+    "no-undef": 2,
+    "import/no-unresolved": 2,
+    "import/named": 2,
+    "import/default": 2,
+    "no-unused-vars": 0
   }
-}
+};

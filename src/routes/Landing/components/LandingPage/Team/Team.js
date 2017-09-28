@@ -27,6 +27,7 @@ export default class Team extends React.Component {
       element != null;
       x += element.offsetLeft, y += element.offsetTop, element = element.offsetParent
     ) {
+      // eslint-disable-line no-empty
     }
 
     return {x: x, y: y};
