@@ -14,10 +14,10 @@ const {__DEV__, __PROD__, __TEST__} = config.globals;
 const paths = config.utils_paths;
 
 let webpackConfig = {
-  entry: [
-    "babel-polyfill",
-    paths.client("main.js")
-  ],
+  entry: {
+    vendor: config.vendor_packages,
+    app: paths.client("main.js")
+  },
   resolve: {
     modules: [
       paths.client("."),
@@ -121,7 +121,7 @@ let webpackConfig = {
         test: /\.(png|jpg)$/,
         loader: 'url-loader',
         options: {
-          name: `[name].[hash].[ext]`,
+          name: `[name].[hash:4].[ext]`,
           limit: 8192
         }
       }
@@ -146,26 +146,33 @@ let webpackConfig = {
 if (__DEV__) {
   debug('Enable plugins for live development (HMR, NoErrors).');
 
-  webpackConfig.entry = [
+  webpackConfig.entry.app = [
     'webpack-hot-middleware/client?http://localhost:3000', // HMR needs a dedicated entry point.
-    ...webpackConfig.entry
+    webpackConfig.entry.app
   ];
 
   webpackConfig.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new BundleAnalyzerPlugin({
-      analyzerMode: "disabled", // Switch to server to enable analysis
-      defaultSizes: "gzip"
-    })
+    new webpack.NamedModulesPlugin()
   )
 } else if (__PROD__) {
   debug('Enable plugins for production.');
   webpackConfig.plugins.push(
+    new webpack.HashedModuleIdsPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new ExtractTextPlugin(`styles.[contenthash].css`),
+    new ExtractTextPlugin(`styles.[${config.compiler_hash_type}].css`),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
+    }),
 
-    // UglifyJS plugin enables webpack to perform tree-shaking
+    // https://webpack.js.org/guides/caching/#extracting-boilerplate
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'runtime'
+    }),
+
+  // UglifyJS plugin enables webpack to perform tree-shaking
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         unused: true,
@@ -179,11 +186,18 @@ if (__DEV__) {
     new CompressionWebpackPlugin({
       asset: "gzipped/[path]",
       algorithm: "gzip",
-      test: /\.(js|css|html|map)$/,
-      threshold: 10240,
-      minRatio: 0.8
+      test: /\.(js|css|map)$/,
+      minRatio: 0.8,
+      deleteOriginalAssets: false
     })
   )
 }
+
+webpackConfig.plugins.push(
+  new BundleAnalyzerPlugin({
+    analyzerMode: "disabled", // Switch to server to enable analysis
+    defaultSizes: "gzip"
+  })
+);
 
 export default webpackConfig

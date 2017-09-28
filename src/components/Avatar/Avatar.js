@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Avatar.scss";
+import classNames from "classnames"
 
 const getInitials = (name) => {
   var names = name.split(' ');
@@ -28,39 +29,21 @@ const getColor = (name) => {
   return colors[ index ];
 };
 
-const computeSize = (props) => {
-  if (props.small) {
-    return 22;
-  }
-  if (props.medium) {
-    return 30;
-  }
-  if (props.big) {
-    return 45;
-  }
-
-  return 30;
-};
-
-export const Avatar = (props) => {
+const Avatar = (props) => {
 
   const initials = getInitials(props.name);
   const nameColor = getColor(props.name);
 
-  const fontSize = props.fontSize == 0 ? 20 : props.fontSize;
-
-  const size = computeSize(props);
-
   return (
     <div
       data-app-element="avatar"
-      className={styles.avatar}
+      className={classNames(styles.avatar, {
+        [styles.small]: props.small,
+        [styles.medium]: props.medium,
+        [styles.large]: props.large,
+      })}
       style={{
-        backgroundColor: nameColor,
-        fontSize: fontSize,
-        lineHeight: size + "px",
-        width: size,
-        height: size
+        backgroundColor: nameColor
       }}>
       {initials}
     </div>

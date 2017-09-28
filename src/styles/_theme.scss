@@ -1,50 +1,22 @@
-@import "~react-toolbox/lib/colors";
-@import "~react-toolbox/components/_globals";
+@import "colors";
+@import "custom-component-configurations/index";
 @import "animationMixins";
 
-//colors
-
-$color-primary: #2D978D;
-$color-primary-dark: rgba(53, 53, 53, 50);
-$color-primary-light: #34ACA1;
-
-$color-accent: #979797;
-$color-accent-dark: white;
-$color-accent-light: #F3F3F3;
-$color-button-grey: #e8e8e8;
-
-$grey: #eee;
-
-$color-button-grey-dark: darken($color-button-grey, 30);
+// We import the globals file after our own definitions in order to overwrite them.
+@import "~react-toolbox/components/_globals";
 
 //fonts
 
 $fancy-font: Raleway, sans-serif;
 $handwritten-font: Courgette, cursive;
 
-// overrides
-$list-vertical-padding: 0;
-$list-item-right-icon-margin: 0;
-$list-item-icon-size: initial;
-
 //misc
 
 $container-border-radius: .2rem;
-$appWidth: 480px;
+$defaultShadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28); // Copied from Google Inbox
+$wizardWidth: 480px;
+$maxAppWidth: 768px;
 
 //bootstrap 3 media queries
 
-$xs-min: "only screen and (min-width:none)";
-$xs-max: "only screen and (max-width:520px)";
-$xs-sm: "only screen (min-width: none) and (max-width:767px)";
-
-$sm-min: "only screen and (min-width:768px)";
-$sm-max: "only screen and (max-width:991px)";
-$sm-md: "only screen (min-width: 768px) and (max-width:991px)";
-
-$md-min: "only screen and (min-width:992px)";
-$md-max: "only screen and (max-width:1199px)";
-$md-lg: "only screen (min-width: 992px) and (max-width:1199px)";
-
-$lg-min: "only screen and (min-width:1200px)";
-$lg-max: "only screen and (max-width:none)";
+$mq-desktop: "only screen and (min-width:768px)"; //bootstrap-base mediaquery: https://stackoverflow.com/a/33493510/2167804
