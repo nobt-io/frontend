@@ -3,7 +3,6 @@
   min-height: 100vh;
   padding-bottom: 2.5rem;
   margin: auto;
-  max-width: $appWidth;
 }
 
 .header {
@@ -26,6 +25,11 @@
 
   .row{
     padding-right: 1rem;
+
+    a:focus{
+      outline: none;
+      font-weight: bold;
+    }
   }
 
   .row.borderd{

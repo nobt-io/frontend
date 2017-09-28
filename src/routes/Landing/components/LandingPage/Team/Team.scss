@@ -68,7 +68,7 @@
   background-image: url('/contributors/matthias_single.png')
 }
 
-@media #{$md-min} {
+@media #{$mq-desktop} {
   #teamMember1 {
     background-image: url('/contributors/thomas.png')
   }
