@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Person.scss";
 import classnames from "classnames";
-import { avatarFactory, AvatarSize } from "components/Avatar";
+import { avatarFactory } from "components/Avatar";
 
 export const AvatarPosition = {
   LEFT: "LEFT",
@@ -37,7 +37,6 @@ export const Person = (props) => {
 
 Person.propTypes = {
   avatarClass: React.PropTypes.string,
-  avatarSize: React.PropTypes.oneOf([ AvatarSize.BIG, AvatarSize.MEDIUM, AvatarSize.SMALL ]).isRequired,
   avatarPosition: React.PropTypes.oneOf([ AvatarPosition.RIGHT, AvatarPosition.LEFT ]).isRequired,
   name: React.PropTypes.string.isRequired,
 };
