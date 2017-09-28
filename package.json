@@ -13,7 +13,7 @@
     "compile": "better-npm-run compile",
     "dev": "better-npm-run dev",
     "lint": "babel-node node_modules/eslint/bin/eslint src && travis-lint .travis.yml",
-    "test": "jest && lint",
+    "test": "jest",
     "deploy": "better-npm-run deploy"
   },
   "betterScripts": {
