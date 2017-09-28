@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Person.scss";
 import classnames from "classnames";
-import { avatarFactory } from "components/Avatar";
+import Avatar from "components/Avatar/index";
 
 export const AvatarPosition = {
   LEFT: "LEFT",
@@ -9,7 +9,7 @@ export const AvatarPosition = {
 };
 
 export const Person = (props) => {
-  const avatar = avatarFactory(props.name, props.avatarSize);
+  const avatar = <Avatar name={props.name} medium />;
 
   const cx = classnames.bind(styles);
   const avatarStyle = cx("avatar", props.avatarClass);
