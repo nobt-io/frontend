@@ -54,6 +54,24 @@
   }
 }
 
+.row {
+  &.moneyInputContainer {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+
+    .currencyTag {
+      padding: 2rem;
+      font-size: larger;
+      border-right: 1px solid $color-button-grey;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
 .container.shareListContainer{
 
   .addPerson{

@@ -1,6 +1,6 @@
 import React from "react";
 import ShareListItem from "../ShareListItem";
-import CurrencyInput from "components/CurrencyInput";
+import DecimalNumberInput from "components/DecimalNumberInput";
 
 import styles from "./CustomShareListItem.scss"
 
@@ -12,7 +12,7 @@ const CustomShareListItem = (props) => {
   return (
     <ShareListItem
       name={name}
-      control={<CurrencyInput
+      control={<DecimalNumberInput
         value={value}
         onChange={handleOnInputChanged}
       />}

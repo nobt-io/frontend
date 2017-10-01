@@ -2,7 +2,7 @@ import React from 'react'
 import Input from "react-toolbox/lib/input";
 import CurrencyInputValidator from './CurrencyInputValidator';
 
-export const CurrencyInput = React.createClass({
+export const DecimalNumberInput = React.createClass({
 
   getInitialState() {
     return {inputValue: "", value: 0}
@@ -36,6 +36,7 @@ export const CurrencyInput = React.createClass({
     return (<Input
       {...this.props}
       placeholder="0.00"
+      type="number"
       value={displayValue}
       step="0.01"
       lang="en-150" // Solves the "numbers with a comma are not valid decimal numbers"-problem: For more see: https://www.ctrl.blog/entry/html5-input-number-localization
@@ -44,9 +45,9 @@ export const CurrencyInput = React.createClass({
   }
 });
 
-CurrencyInput.propTypes = {
+DecimalNumberInput.propTypes = {
   onChange: React.PropTypes.func.isRequired,
   value: React.PropTypes.number
 };
 
-export default CurrencyInput;
+export default DecimalNumberInput;
