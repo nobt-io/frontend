@@ -2,9 +2,9 @@ import React from "react";
 import Input from "react-toolbox/lib/input";
 import { IconButton } from "react-toolbox/lib/button";
 import SplitStrategyNames from "const/SplitStrategyNames";
-import AmountInput from "./AmountInput";
 import styles from "./AddBillForm.scss";
-import inputTheme from "./InputTheme.scss";
+import InputTheme from "./InputTheme.scss";
+import MoneyInputTheme from "./MoneyInputTheme.scss";
 import headerButtonTheme from "./HeaderButtonTheme.scss";
 import { CustomShareListItem, EqualShareListItem, PercentalShareListItem } from "./ShareList";
 import HOList from "containers/HOList";
@@ -15,11 +15,10 @@ import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
 import { Snackbar } from "react-toolbox";
 import { ProgressBar } from "react-toolbox/lib/progress_bar/index";
+import DecimalNumberInput from "components/DecimalNumberInput";
+import classnames from "classnames";
+import merge from "../../../../../styles/merge";
 
-/*
- TODO:
- * - Re-implement "error"-message as soon as the user fails to split the bill properly.
- */
 export default class AddBillForm extends React.Component {
 
   constructor(props) {
@@ -57,7 +56,21 @@ export default class AddBillForm extends React.Component {
 
   render = () => {
 
-    let addBillInProgress = this.props.addBillStatus === AsyncActionStatus.IN_PROGRESS;
+    let {
+      addBillStatus,
+      description,
+      debtee,
+      amount,
+      shares,
+      splitStrategy,
+      areSharesValid,
+      isAmountValid,
+      isDebteeValid,
+      isNameValid
+    } = this.props;
+
+    let addBillFailed = addBillStatus === AsyncActionStatus.FAILED;
+    let addBillInProgress = addBillStatus === AsyncActionStatus.IN_PROGRESS;
 
     return (
       <div>
@@ -74,8 +87,13 @@ export default class AddBillForm extends React.Component {
 
             <div className={styles.container}>
               <div className={`${styles.row} ${styles.borderd}`}>
-                <Input theme={inputTheme} icon="description" placeholder="Description" value={this.props.description}
+                <Input theme={InputTheme}
+                       icon="description"
+                       placeholder="Name"
+                       value={description}
                        onChange={this.props.onDescriptionChanged}
+                       required={addBillFailed}
+                       error={addBillFailed && !isNameValid && "Bills must have a name."}
                 />
               </div>
               <div className={`${styles.row} ${styles.borderd}`}>
@@ -88,14 +106,30 @@ export default class AddBillForm extends React.Component {
                     }
                   }}>
                   <Input /* TODO: Using input is just a hack for the moment, remove later and style accordingly */
-                    readOnly theme={inputTheme} icon="person" placeholder="Who paid?" value={this.props.debtee || ""}>
+                    theme={InputTheme}
+                    icon="person"
+                    placeholder="Who paid?"
+                    value={debtee}
+                    required={addBillFailed}
+                    error={addBillFailed && !isDebteeValid && "Selecting a debtee is mandatory."}
+                  >
                     <div className={styles.overlayToAvoidKeyboardPopingUp} />
                   </Input>
                 </Link>
 
               </div>
-              <div className={styles.row}>
-                <AmountInput value={this.props.amount} onChange={this.props.onAmountChanged} />
+              <div className={classnames(styles.row, styles.moneyInputContainer)}>
+                <div className={styles.currencyTag}>
+                  <span>EUR</span>
+                </div>
+                <div className={styles.moneyInput}>
+                  <DecimalNumberInput
+                    required={addBillFailed}
+                    theme={merge(InputTheme, MoneyInputTheme)}
+                    value={amount}
+                    error={addBillFailed && !isAmountValid && "The bill's total is required."}
+                    onChange={this.props.onAmountChanged} />
+                </div>
               </div>
             </div>
 
@@ -105,9 +139,9 @@ export default class AddBillForm extends React.Component {
 
             <div className={`${styles.container} ${styles.shareListContainer}`}>
               <HOList
-                items={this.props.shares}
+                items={shares}
                 renderItem={share => {
-                  switch (this.props.splitStrategy) {
+                  switch (splitStrategy) {
                     case SplitStrategyNames.EQUAL:
                       return <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.props.onShareValueChanged} />;
 
@@ -119,6 +153,9 @@ export default class AddBillForm extends React.Component {
                   }
                 }}
               />
+              {
+                addBillFailed && isAmountValid && !areSharesValid && <div className={styles.sharesError}>Please select at least one share!</div>
+              }
               <AddMember onNewMember={this.props.onNewMember} />
             </div>
 
@@ -129,7 +166,7 @@ export default class AddBillForm extends React.Component {
 
         <Snackbar
           action='Retry?'
-          active={this.props.addBillStatus === AsyncActionStatus.FAILED}
+          active={addBillFailed}
           label='Failed to add bill.'
           type='warning'
           onClick={this.handleOnSubmit}
@@ -142,7 +179,6 @@ export default class AddBillForm extends React.Component {
 AddBillForm.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
   onSubmit: React.PropTypes.func.isRequired,
-  canSubmit: React.PropTypes.bool.isRequired,
   onDescriptionChanged: React.PropTypes.func.isRequired,
   onAmountChanged: React.PropTypes.func.isRequired,
   onSplitStrategyChanged: React.PropTypes.func.isRequired,
