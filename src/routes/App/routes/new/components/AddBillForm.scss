@@ -1,3 +1,5 @@
+@import "~react-toolbox/components/input/theme";
+
 .form {
   background-color: $color-primary;
   min-height: 100vh;
@@ -94,3 +96,10 @@
   bottom: 0;
 }
 
+.sharesError {
+  @extend .error; // Extends error styling from react-toolbox for inputs
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+  padding-right: 1rem;
+  text-align: right;
+}

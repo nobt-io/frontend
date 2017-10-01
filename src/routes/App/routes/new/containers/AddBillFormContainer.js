@@ -1,6 +1,17 @@
 import React from "react";
 import AddBillForm from "../components/AddBillForm";
-import { getAmount, getDebtee, getDescription, getSplitStrategy, getShares, isValidBill, getAddBillStatus } from "../modules/addBillForm/selectors";
+import {
+  areSharesValid,
+  getAddBillStatus,
+  getAmount,
+  getDebtee,
+  getDescription,
+  getShares,
+  getSplitStrategy,
+  isAmountValid,
+  isDebteeValid,
+  isNameValid
+} from "../modules/addBillForm/selectors";
 import { connect } from "react-redux";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import { addBill, newMemberAdded } from "../modules/addBillForm/actions";
@@ -9,8 +20,11 @@ import { invalidateNobt } from "../../../modules/currentNobt/actions";
 export default connect((state, ownProps) => {
   return {
     addBillStatus: getAddBillStatus(state),
-    canSubmit: isValidBill(state),
     amount: getAmount(state),
+    areSharesValid: areSharesValid(state),
+    isAmountValid: isAmountValid(state),
+    isDebteeValid: isDebteeValid(state),
+    isNameValid: isNameValid(state),
     description: getDescription(state),
     debtee: getDebtee(state),
     splitStrategy: getSplitStrategy(state),

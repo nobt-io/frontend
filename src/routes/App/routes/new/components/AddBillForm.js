@@ -19,10 +19,6 @@ import DecimalNumberInput from "components/DecimalNumberInput";
 import classnames from "classnames";
 import merge from "../../../../../styles/merge";
 
-/*
- TODO:
- * - Re-implement "error"-message as soon as the user fails to split the bill properly.
- */
 export default class AddBillForm extends React.Component {
 
   constructor(props) {
@@ -60,7 +56,18 @@ export default class AddBillForm extends React.Component {
 
   render = () => {
 
-    let { addBillStatus, description, debtee, amount } = this.props;
+    let {
+      addBillStatus,
+      description,
+      debtee,
+      amount,
+      shares,
+      splitStrategy,
+      areSharesValid,
+      isAmountValid,
+      isDebteeValid,
+      isNameValid
+    } = this.props;
 
     let addBillFailed = addBillStatus === AsyncActionStatus.FAILED;
     let addBillInProgress = addBillStatus === AsyncActionStatus.IN_PROGRESS;
@@ -86,7 +93,7 @@ export default class AddBillForm extends React.Component {
                        value={description}
                        onChange={this.props.onDescriptionChanged}
                        required={addBillFailed}
-                       error={addBillFailed && !description && "Bills must have a name."}
+                       error={addBillFailed && !isNameValid && "Bills must have a name."}
                 />
               </div>
               <div className={`${styles.row} ${styles.borderd}`}>
@@ -104,7 +111,7 @@ export default class AddBillForm extends React.Component {
                     placeholder="Who paid?"
                     value={debtee}
                     required={addBillFailed}
-                    error={addBillFailed && !debtee && "Selecting a debtee is mandatory."}
+                    error={addBillFailed && !isDebteeValid && "Selecting a debtee is mandatory."}
                   >
                     <div className={styles.overlayToAvoidKeyboardPopingUp} />
                   </Input>
@@ -120,8 +127,8 @@ export default class AddBillForm extends React.Component {
                     required={addBillFailed}
                     theme={merge(InputTheme, MoneyInputTheme)}
                     value={amount}
-                    error={addBillFailed && !amount && "The bill's total is required."}
-                    onChange={this.props.onAmountChanged}/>
+                    error={addBillFailed && !isAmountValid && "The bill's total is required."}
+                    onChange={this.props.onAmountChanged} />
                 </div>
               </div>
             </div>
@@ -132,9 +139,9 @@ export default class AddBillForm extends React.Component {
 
             <div className={`${styles.container} ${styles.shareListContainer}`}>
               <HOList
-                items={this.props.shares}
+                items={shares}
                 renderItem={share => {
-                  switch (this.props.splitStrategy) {
+                  switch (splitStrategy) {
                     case SplitStrategyNames.EQUAL:
                       return <EqualShareListItem key={share.name} share={share} onCheckboxChange={this.props.onShareValueChanged} />;
 
@@ -146,6 +153,9 @@ export default class AddBillForm extends React.Component {
                   }
                 }}
               />
+              {
+                addBillFailed && isAmountValid && !areSharesValid && <div className={styles.sharesError}>Please select at least one share!</div>
+              }
               <AddMember onNewMember={this.props.onNewMember} />
             </div>
 
@@ -156,7 +166,7 @@ export default class AddBillForm extends React.Component {
 
         <Snackbar
           action='Retry?'
-          active={this.props.addBillStatus === AsyncActionStatus.FAILED}
+          active={addBillFailed}
           label='Failed to add bill.'
           type='warning'
           onClick={this.handleOnSubmit}
@@ -169,7 +179,6 @@ export default class AddBillForm extends React.Component {
 AddBillForm.propTypes = {
   onCancel: React.PropTypes.func.isRequired,
   onSubmit: React.PropTypes.func.isRequired,
-  canSubmit: React.PropTypes.bool.isRequired,
   onDescriptionChanged: React.PropTypes.func.isRequired,
   onAmountChanged: React.PropTypes.func.isRequired,
   onSplitStrategyChanged: React.PropTypes.func.isRequired,

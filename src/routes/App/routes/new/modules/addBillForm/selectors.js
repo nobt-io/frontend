@@ -135,15 +135,10 @@ export const getShares = createSelector([ getShareSelector, (state) => state ], 
   return shares.sort(personNameComparator);
 });
 
-export const isValidBill = createSelector([ getShares, getAmount, getDescription, getDebtee ], (shares, amount, description, debtee) => {
-
-  var isAmountGreaterThanZero = amount > 0;
-  var isDescriptionNotEmpty = description.length > 0;
-  var isDebteeSelected = debtee !== null;
-  var hasAtLeastOneShareWithAmount = shares.filter(s => s.amount > 0).length;
-
-  return isAmountGreaterThanZero && isDescriptionNotEmpty && isDebteeSelected && hasAtLeastOneShareWithAmount;
-});
+export const areSharesValid = createSelector(getShares, shares => shares.filter(s => s.amount > 0).length > 0);
+export const isAmountValid = createSelector(getAmount, amount => amount > 0);
+export const isDebteeValid = createSelector(getDebtee, debtee => debtee !== null);
+export const isNameValid = createSelector(getDescription, description => description.length > 0);
 
 export const isExistingMemberFactory = createSelector( [ getAllMembers ], members => {
   return (candidate) => members.indexOf(candidate) >= 0;
