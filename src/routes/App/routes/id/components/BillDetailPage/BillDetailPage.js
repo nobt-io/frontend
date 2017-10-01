@@ -4,7 +4,7 @@ import HeadRoom from "react-headroom";
 import { connect } from "react-redux";
 import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 import { ListItem } from "react-toolbox/lib/list";
-import { Avatar } from "components/Avatar";
+import Avatar from "components/Avatar";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
 import AppBarTheme from "../../../balances/themes/AppBarTheme.scss";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";

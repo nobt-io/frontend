@@ -4,9 +4,7 @@ import debug from "debug";
 const apiBaseURLs = [
   {
     url: "http://api.nobt.io",
-	    active: (host) => {
-      return host === "nobt.io"
-    }
+    active: (host) => host === "nobt.io"
   },
   {
     url: "http://localhost:8080",

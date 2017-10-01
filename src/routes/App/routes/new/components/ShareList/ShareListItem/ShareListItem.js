@@ -1,6 +1,6 @@
 import React from "react";
 import AmountTheme from "./AmountTheme.scss";
-import { Avatar } from "components/Avatar";
+import Avatar from "components/Avatar";
 import Amount from "components/Amount";
 import { ListItem, ListItemProps } from "react-toolbox/lib/list";
 

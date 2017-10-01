@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getBalances } from "../../../../../../modules/currentNobt/selectors";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
-import { Avatar } from "components/Avatar/index";
+import Avatar from "components/Avatar/index";
 import { ListItem } from "react-toolbox/lib/list";
 import Amount from "components/Amount/Amount";
 import { HOList } from "containers/HOList/HOList";
@@ -12,7 +12,7 @@ import AppBarTheme from "../../../../themes/AppBarTheme.scss";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
 import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
-import { SubTitle, Title } from "../../../../../../../../components/text/index";
+import { SubTitle, Title } from "components/text/index";
 
 class BalanceOverview extends React.Component {
 
@@ -40,7 +40,7 @@ class BalanceOverview extends React.Component {
 
           <HOList
             items={this.props.balances}
-            renderItem={ (balance) => (
+            renderItem={(balance) => (
               <ListItem
                 leftActions={[
                   <Avatar name={balance.me.name} medium />
@@ -49,7 +49,7 @@ class BalanceOverview extends React.Component {
                 caption={balance.me.name}
                 legend={<Amount theme={AmountTheme} value={balance.me.amount} absolute={false} />}
                 rightActions={[
-                  (<IconButton icon="chevron_right"/>),
+                  (<IconButton icon="chevron_right" />),
                 ]}
                 onClick={() => LocationBuilder.fromWindow().push(balance.me.name).apply(this.props.push)}
               />

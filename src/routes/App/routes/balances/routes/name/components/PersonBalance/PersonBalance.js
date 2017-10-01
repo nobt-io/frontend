@@ -1,9 +1,9 @@
 import * as React from "react";
-import Amount from "../../../../../../../../components/Amount";
+import Amount from "components/Amount/index";
 import { List, ListItem } from "react-toolbox/lib/list";
 import HOList from "../../../../../../../../containers/HOList";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
-import { Avatar } from "../../../../../../../../components/Avatar/index";
+import Avatar from "components/Avatar/index";
 import { connect } from "react-redux";
 import {
   getBills,

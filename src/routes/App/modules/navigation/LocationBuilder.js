@@ -40,7 +40,7 @@ export default class LocationBuilder {
    */
   endsWith(string) {
     return this._path.endsWith(string)
-  };
+  }
 
   /**
    * @param part

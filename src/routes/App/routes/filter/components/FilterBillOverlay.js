@@ -5,8 +5,8 @@ import { updateBillFilter } from "../../../modules/viewState/actions";
 import Dialog from "components/Dialog";
 import { getMembers } from "../../../modules/currentNobt/selectors";
 import HOList from "containers/HOList";
-import { ListItem, ListDivider } from "react-toolbox/lib/list";
-import { Avatar } from "components/Avatar";
+import { ListDivider, ListItem } from "react-toolbox/lib/list";
+import Avatar from "components/Avatar";
 import { getBillFilter } from "../../../modules/viewState/selectors";
 import DialogTheme from "components/Dialog/DialogTheme.scss";
 
