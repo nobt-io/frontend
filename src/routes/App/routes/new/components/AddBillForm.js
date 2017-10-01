@@ -74,7 +74,7 @@ export default class AddBillForm extends React.Component {
 
             <div className={styles.container}>
               <div className={`${styles.row} ${styles.borderd}`}>
-                <Input theme={inputTheme} icon="description" placeholder="Description" value={this.props.description}
+                <Input theme={inputTheme} icon="description" placeholder="Name" value={this.props.description}
                        onChange={this.props.onDescriptionChanged}
                 />
               </div>
