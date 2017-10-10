@@ -1,11 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import styles from "./AddMembersForm.scss";
-import PersonListTheme from "./PersonListTheme.scss";
+import PersonListTheme from "./ListTheme.scss";
 import HOList from "containers/HOList";
 import { IconButton } from "react-toolbox/lib/button";
-import { AvatarPosition, Person } from "components/Person";
-import { AvatarSize } from "components/Avatar";
 import { getCreationStatus, getPersonNames, getPersonToAdd } from "../../../../modules/selectors";
 import { addCurrentNameAsPerson, createNobt, removePerson, updateNameOfPersonToAdd } from "../../../../modules/actions";
 import ContinueButton from "../../../../components/ContinueButton";
@@ -21,6 +19,9 @@ import {
   isCreateNobtButtonDisabled,
   shouldRenderAddPersonButton
 } from "../../../../modules/selectors.ui";
+import { ListItem } from "react-toolbox/lib/list/index";
+import Box from "../../../../../../components/Box/Box";
+import Avatar from "../../../../../../components/Avatar/Avatar";
 
 class AddMembersForm extends React.Component {
 
@@ -41,14 +42,16 @@ class AddMembersForm extends React.Component {
     label: addPersonButtonLabel,
     icon: 'add',
     onClick: addCurrentNameAsPerson,
-    disabled: isAddPersonButtonDisabled
+    disabled: isAddPersonButtonDisabled,
+    rightIcon: false
   });
 
   getCreateNobtButtonProps = ({createNobt, isCreateNobtButtonDisabled}) => ({
       label: "Create Nobt",
       icon: 'done',
       onClick: createNobt,
-      disabled: isCreateNobtButtonDisabled
+      disabled: isCreateNobtButtonDisabled,
+      rightIcon: false
     }
   );
 
@@ -61,40 +64,50 @@ class AddMembersForm extends React.Component {
 
   render = () => (
     <div>
-      <h1>Add participants</h1>
+      <section>
+        <h1>Add participants</h1>
 
-      <div className={styles.introductionTextContainer}>
-        <p>Add anyone you want to split bills with.</p>
-      </div>
+        <div className={styles.introductionTextContainer}>
+          <p>Add anyone you want to split bills with.</p>
+        </div>
+      </section>
 
-      <div className={styles.form}>
-
-        <div className={styles.memberList}>
-
+      <section>
+        <Box>
           <Input
             value={this.props.personToAdd}
             autoComplete="off"
             type='text'
-            icon="person"
+            icon={<Avatar name={this.props.personToAdd || "?"} medium />}
             autoFocus
             placeholder="Name"
             onChange={this.props.updateNameOfPersonToAdd}
             onKeyPress={this.handleOnKeyPress}
             theme={AddMemberInputTheme}
           />
+        </Box>
 
-          <HOList
-            theme={PersonListTheme}
-            items={this.props.personNames}
-            renderItem={(name) => (
-              <div className={PersonListTheme.item} key={name}>
-                <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM} name={name} />
-                <IconButton icon='clear' onClick={() => this.props.removePerson(name)}
-                />
-              </div>
-            )} />
-        </div>
+        {
+          this.props.personNames.length > 0 && (
+            <Box>
+              <HOList
+                theme={PersonListTheme}
+                items={this.props.personNames}
+                renderItem={(name) => (
+                  <ListItem
+                    ripple={false}
+                    key={name}
+                    leftActions={[ <Avatar name={name} medium /> ]}
+                    legend={name}
+                    rightActions={[ <IconButton icon='clear' onClick={() => this.props.removePerson(name)} /> ]}
+                  />
+                )} />
+            </Box>
+          )
+        }
+      </section>
 
+      <section>
         <div className={styles.createNobtButtonContainer}>
 
           {
@@ -110,8 +123,7 @@ class AddMembersForm extends React.Component {
         <div className={styles.note}>
           <p>Don't worry about forgetting someone, <br /> you can add further people later.</p>
         </div>
-
-      </div>
+      </section>
 
       {
         this.props.creationStatus === AsyncActionStatus.SUCCESSFUL && LocationBuilder.fromWindow().pop().push("done").apply(this.props.push)

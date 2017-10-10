@@ -1,20 +1,23 @@
-.bar{
-  display:none;
+@import "~react-toolbox/lib/list/config";
+
+.bar {
+  display: none;
 }
 
-.input{
+.input {
   padding: 1.2rem 0;
   width: 100%;
 }
 
-.inputElement{
+.inputElement {
   border: 0;
+  padding-left: $list-horizontal-padding;
 }
 
-.icon{
-  top: .7rem;
+.icon {
+  padding-left: $list-horizontal-padding;
 }
 
-.counter{
+.counter {
   display: none;
 }
