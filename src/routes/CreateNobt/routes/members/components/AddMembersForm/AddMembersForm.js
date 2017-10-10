@@ -22,6 +22,7 @@ import {
 import { ListItem } from "react-toolbox/lib/list/index";
 import Box from "../../../../../../components/Box/Box";
 import Avatar from "../../../../../../components/Avatar/Avatar";
+import { FontIcon } from "react-toolbox/lib/font_icon/index";
 
 class AddMembersForm extends React.Component {
 
@@ -78,7 +79,7 @@ class AddMembersForm extends React.Component {
             value={this.props.personToAdd}
             autoComplete="off"
             type='text'
-            icon={<Avatar name={this.props.personToAdd || "?"} medium />}
+            icon="person"
             autoFocus
             placeholder="Name"
             onChange={this.props.updateNameOfPersonToAdd}
