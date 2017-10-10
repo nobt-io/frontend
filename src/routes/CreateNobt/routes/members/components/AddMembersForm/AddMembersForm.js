@@ -1,33 +1,62 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import SingleInputInlineForm from "components/SingleInputInlineForm";
 import styles from "./AddMembersForm.scss";
 import PersonListTheme from "./PersonListTheme.scss";
 import HOList from "containers/HOList";
 import { IconButton } from "react-toolbox/lib/button";
-import { Person, AvatarPosition } from "components/Person";
+import { AvatarPosition, Person } from "components/Person";
 import { AvatarSize } from "components/Avatar";
-import { getPersonNames, getCreationStatus } from "../../../../modules/selectors";
-import { addPerson, removePerson, createNobt } from "../../../../modules/actions";
+import { getCreationStatus, getPersonNames, getPersonToAdd } from "../../../../modules/selectors";
+import { addCurrentNameAsPerson, createNobt, removePerson, updateNameOfPersonToAdd } from "../../../../modules/actions";
 import ContinueButton from "../../../../components/ContinueButton";
-import AddButtonTheme from "./AddButtonTheme.scss";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
 import CreateNobtProgressBar from "../../components/CreateNobtProgressBar"
+import { Input } from "react-toolbox/lib/input/index";
+import {
+  getAddPersonButtonLabel,
+  isAddPersonButtonDisabled,
+  isCreateNobtButtonDisabled,
+  shouldRenderAddPersonButton
+} from "../../../../modules/selectors.ui";
 
 class AddMembersForm extends React.Component {
 
-  state = {
-    memberToAdd: ""
+  renderContinueButton = () => {
+
+    let {shouldRenderAddPersonButton} = this.props;
+
+    let buttonProps = shouldRenderAddPersonButton ?
+      this.getAddPersonButtonProps(this.props) :
+      this.getCreateNobtButtonProps(this.props);
+
+    return (
+      <ContinueButton {...buttonProps} />
+    )
   };
 
-  setMemberToAdd = (name) => this.setState({ memberToAdd: name });
+  getAddPersonButtonProps = ({addPersonButtonLabel, addCurrentNameAsPerson, isAddPersonButtonDisabled}) => ({
+    label: addPersonButtonLabel,
+    icon: 'add',
+    onClick: addCurrentNameAsPerson,
+    disabled: isAddPersonButtonDisabled
+  });
 
-  handleOnNewMember = () => {
-    this.props.addPerson(this.state.memberToAdd);
-    this.setMemberToAdd("");
+  getCreateNobtButtonProps = ({createNobt, isCreateNobtButtonDisabled}) => ({
+      label: "Create Nobt",
+      icon: 'done',
+      onClick: createNobt,
+      disabled: isCreateNobtButtonDisabled
+    }
+  );
+
+  handleOnKeyPress = (event) => {
+    let enterKey = 13;
+    if (event.charCode === enterKey && !this.props.isAddPersonButtonDisabled) {
+      this.props.addCurrentNameAsPerson();
+    }
   };
 
   render = () => (
@@ -42,26 +71,22 @@ class AddMembersForm extends React.Component {
 
         <div className={styles.memberList}>
 
-          <SingleInputInlineForm
-            className={styles.addMemberInputInlineForm}
-            onSubmit={this.handleOnNewMember}
-            value={this.state.memberToAdd}
-            onChange={this.setMemberToAdd}
-            inputProps={{
-              icon: "person",
-              theme: AddMemberInputTheme,
-              placeholder: "Name"
-            }}
-            buttonProps={{
-              icon: "add_circle",
-              theme: AddButtonTheme
-            }}
+          <Input
+            value={this.props.personToAdd}
+            autoComplete="off"
+            type='text'
+            icon="person"
+            autoFocus
+            placeholder="Name"
+            onChange={this.props.updateNameOfPersonToAdd}
+            onKeyPress={this.handleOnKeyPress}
+            theme={AddMemberInputTheme}
           />
 
           <HOList
             theme={PersonListTheme}
             items={this.props.personNames}
-            renderItem={ (name) => (
+            renderItem={(name) => (
               <div className={PersonListTheme.item} key={name}>
                 <Person avatarPosition={AvatarPosition.LEFT} avatarSize={AvatarSize.MEDIUM} name={name} />
                 <IconButton icon='clear' onClick={() => this.props.removePerson(name)}
@@ -71,24 +96,19 @@ class AddMembersForm extends React.Component {
         </div>
 
         <div className={styles.createNobtButtonContainer}>
-          {
 
-            this.state.memberToAdd !== "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS &&
-              <ContinueButton label={`Add "${this.state.memberToAdd}"`} icon="add" onClick={this.handleOnNewMember} />
-          }
           {
-            this.state.memberToAdd === "" && this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS &&
-              <ContinueButton label="Create Nobt" disabled={this.props.personNames.length == 0} icon="done" onClick={this.props.createNobt} />
+            this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && this.renderContinueButton()
           }
 
           {
-            this.props.creationStatus === AsyncActionStatus.IN_PROGRESS &&
-            <CreateNobtProgressBar />
+            this.props.creationStatus === AsyncActionStatus.IN_PROGRESS && <CreateNobtProgressBar />
           }
+
         </div>
 
         <div className={styles.note}>
-          <p>Don't worry about forgetting someone, <br/> you can add further people later.</p>
+          <p>Don't worry about forgetting someone, <br /> you can add further people later.</p>
         </div>
 
       </div>
@@ -111,11 +131,18 @@ class AddMembersForm extends React.Component {
 export default connect(
   (state) => ({
     personNames: getPersonNames(state),
-    creationStatus: getCreationStatus(state)
+    creationStatus: getCreationStatus(state),
+    personToAdd: getPersonToAdd(state),
+
+    addPersonButtonLabel: getAddPersonButtonLabel(state),
+    shouldRenderAddPersonButton: shouldRenderAddPersonButton(state),
+    isCreateNobtButtonDisabled: isCreateNobtButtonDisabled(state),
+    isAddPersonButtonDisabled: isAddPersonButtonDisabled(state)
   }),
   {
-    addPerson,
+    addCurrentNameAsPerson,
     removePerson,
-    createNobt
+    createNobt,
+    updateNameOfPersonToAdd
   }
 )(AddMembersForm)
