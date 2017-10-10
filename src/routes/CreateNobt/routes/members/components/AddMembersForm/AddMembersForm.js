@@ -79,7 +79,6 @@ class AddMembersForm extends React.Component {
               autoComplete="off"
               type='text'
               icon="person"
-              autoFocus
               placeholder="Name"
               onChange={this.props.updateNameOfPersonToAdd}
               onKeyPress={this.handleOnKeyPress}

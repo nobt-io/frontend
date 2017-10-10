@@ -34,7 +34,6 @@ class BasicInformationForm extends React.Component {
             hint="Barbecue, London Trip, ..."
             theme={NobtNameInputTheme}
             value={this.props.nobtName}
-            autoFocus
             onChange={this.props.changeNobtName}
           />
         </div>
