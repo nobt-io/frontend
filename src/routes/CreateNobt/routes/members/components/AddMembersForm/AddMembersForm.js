@@ -72,37 +72,39 @@ class AddMembersForm extends React.Component {
       </section>
 
       <section>
-        <Box>
-          <Input
-            value={this.props.personToAdd}
-            autoComplete="off"
-            type='text'
-            icon="person"
-            autoFocus
-            placeholder="Name"
-            onChange={this.props.updateNameOfPersonToAdd}
-            onKeyPress={this.handleOnKeyPress}
-            theme={AddMemberInputTheme}
-          />
-        </Box>
+        <fieldset disabled={this.props.creationStatus === AsyncActionStatus.IN_PROGRESS}>
+          <Box>
+            <Input
+              value={this.props.personToAdd}
+              autoComplete="off"
+              type='text'
+              icon="person"
+              autoFocus
+              placeholder="Name"
+              onChange={this.props.updateNameOfPersonToAdd}
+              onKeyPress={this.handleOnKeyPress}
+              theme={AddMemberInputTheme}
+            />
+          </Box>
 
-        {
-          this.props.personNames.length > 0 && (
-            <Box>
-              <HOList
-                items={this.props.personNames}
-                renderItem={(name) => (
-                  <ListItem
-                    ripple={false}
-                    key={name}
-                    leftActions={[ <Avatar name={name} medium /> ]}
-                    legend={name}
-                    rightActions={[ <IconButton icon='clear' onClick={() => this.props.removePerson(name)} /> ]}
-                  />
-                )} />
-            </Box>
-          )
-        }
+          {
+            this.props.personNames.length > 0 && (
+              <Box>
+                <HOList
+                  items={this.props.personNames}
+                  renderItem={(name) => (
+                    <ListItem
+                      ripple={false}
+                      key={name}
+                      leftActions={[ <Avatar name={name} medium /> ]}
+                      legend={name}
+                      rightActions={[ <IconButton icon='clear' onClick={() => this.props.removePerson(name)} /> ]}
+                    />
+                  )} />
+              </Box>
+            )
+          }
+        </fieldset>
       </section>
 
       <section>
