@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import styles from "./AddMembersForm.scss";
-import PersonListTheme from "./ListTheme.scss";
 import HOList from "containers/HOList";
 import { IconButton } from "react-toolbox/lib/button";
 import { getCreationStatus, getPersonNames, getPersonToAdd } from "../../../../modules/selectors";
@@ -22,7 +21,6 @@ import {
 import { ListItem } from "react-toolbox/lib/list/index";
 import Box from "../../../../../../components/Box/Box";
 import Avatar from "../../../../../../components/Avatar/Avatar";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
 
 class AddMembersForm extends React.Component {
 
@@ -92,7 +90,6 @@ class AddMembersForm extends React.Component {
           this.props.personNames.length > 0 && (
             <Box>
               <HOList
-                theme={PersonListTheme}
                 items={this.props.personNames}
                 renderItem={(name) => (
                   <ListItem

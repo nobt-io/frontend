@@ -28,6 +28,10 @@
     padding: 1rem 0;
   }
 
+  ol, ul {
+    margin-bottom: 0; // Override bootstrap values
+  }
+
   fieldset {
     border: none;
     padding: 0;
