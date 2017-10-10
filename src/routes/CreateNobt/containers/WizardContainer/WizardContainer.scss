@@ -1,9 +1,13 @@
 .wizardContainer {
-  max-width: $appWidth;
+  max-width: $wizardWidth;
   margin: 0 auto;
 
   padding: 2rem;
 
   background-color: white;
   min-height: 100vh;
+
+  @media #{$mq-desktop}  {
+    padding-top: 10rem;
+  }
 }

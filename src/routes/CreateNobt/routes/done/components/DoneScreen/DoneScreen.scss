@@ -22,7 +22,7 @@
       color: $color-primary;
       text-decoration: none;
 
-      @media #{$sm-min}  {
+      @media #{$mq-desktop}  {
         font-size: large;
       }
 

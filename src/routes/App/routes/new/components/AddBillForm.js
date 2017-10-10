@@ -137,7 +137,7 @@ export default class AddBillForm extends React.Component {
       </div>
     )
   }
-};
+}
 
 AddBillForm.propTypes = {
   onCancel: React.PropTypes.func.isRequired,

@@ -1,4 +1,4 @@
-import withNobtLoader from "../../components/hoc/withNobtLoader";
+import withNobtLoader from "../../components/NobtLoader/withNobtLoader";
 import NobtContainer from "./containers/NobtContainer";
 import NewBillRoute from "./routes/new";
 import DetailRoute from "./routes/id";
@@ -7,7 +7,7 @@ import FilterOverlayRoute from "./routes/filter";
 import BalancesRoute from "./routes/balances";
 import reducer from "./modules/reducers";
 import { injectReducer } from "../../store/reducers";
-import EmptyLayout from "../../layouts/EmptyLayout";
+import AppLayout from "../../layouts/AppLayout";
 
 export default (store) => {
 
@@ -15,7 +15,7 @@ export default (store) => {
 
   return {
     path: ':nobtId',
-    component: withNobtLoader(EmptyLayout),
+    component: withNobtLoader(AppLayout),
     indexRoute: {
       component: NobtContainer
     },

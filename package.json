@@ -12,7 +12,8 @@
     "clean": "rimraf dist",
     "compile": "better-npm-run compile",
     "dev": "better-npm-run dev",
-    "test": "jest && travis-lint .travis.yml",
+    "lint": "babel-node node_modules/eslint/bin/eslint src && travis-lint .travis.yml",
+    "test": "jest",
     "deploy": "better-npm-run deploy"
   },
   "betterScripts": {
@@ -85,7 +86,8 @@
     "redux-thunk": "^2.0.0",
     "reselect": "^2.5.4",
     "reselect-change-memoize": "^1.1.0",
-    "yargs": "^6.0.0"
+    "yargs": "^6.0.0",
+    "react-css-themr": "^2.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -108,7 +110,9 @@
     "eslint": "^3.0.1",
     "eslint-config-standard": "^5.1.0",
     "eslint-config-standard-react": "^3.0.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
     "eslint-plugin-standard": "^2.0.0",
