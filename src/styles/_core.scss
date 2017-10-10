@@ -28,13 +28,18 @@
     padding: 1rem 0;
   }
 
-  ol, ul {
-    margin-bottom: 0; // Override bootstrap values
-  }
-
   fieldset {
     border: none;
     padding: 0;
+    margin: 0;
+  }
+
+  // Override bootstrap values
+  ol, ul {
+    margin-bottom: 0;
+  }
+
+  p {
     margin: 0;
   }
 }
