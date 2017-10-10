@@ -117,7 +117,9 @@ class AddMembersForm extends React.Component {
           }
 
         </div>
+      </section>
 
+      <section>
         <div className={styles.note}>
           <p>Don't worry about forgetting someone, <br /> you can add further people later.</p>
         </div>
