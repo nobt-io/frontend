@@ -8,17 +8,9 @@ import { isExistingMemberFactory } from "../../modules/addBillForm/selectors";
 
 class AddMember extends React.Component {
 
-  state = {
-    memberToAdd: ""
-  };
-
-  setMemberToAdd = (name) => this.setState({ memberToAdd: name });
-
   render = () => (
     <div className={styles.inputContainer}>
       <SingleInputInlineForm
-        value={this.state.memberToAdd}
-        onChange={this.setMemberToAdd}
         buttonProps={{
           icon: "check_circle",
           theme: addButtonTheme
@@ -33,13 +25,13 @@ class AddMember extends React.Component {
     </div>
   );
 
-  isNewMemberInvalid = () => {
-    let newMember = this.state.memberToAdd.trim();
+  isNewMemberInvalid = (name) => {
+    let newMember = name.trim();
     return this.props.isExistingMember(newMember) || newMember.length === 0;
   };
 
-  handleOnNewMember = () => {
-    let newMember = this.state.memberToAdd.trim();
+  handleOnNewMember = (name) => {
+    let newMember = name.trim();
     this.props.onNewMember(newMember);
   };
 
