@@ -1,45 +1,56 @@
+@mixin exports($name, $warn: true) {
+  @if (index($imported-modules, $name) == null) {
+    $imported-modules: append($imported-modules, $name) !global;
+    @content;
+  } @else if $warn == true {
+    @warn "Module `#{$name}` has already been imported.";
+  }
+}
+
 @import 'theme';
 
-:global {
-  @import '~normalize.css/normalize';
+exports("core") {
+  :global {
+    @import '~normalize.css/normalize';
 
-  // Some best-practice CSS that's useful for most apps
-  // Just remove them if they're not what you want
-  html {
-    box-sizing: border-box;
-  }
+    // Some best-practice CSS that's useful for most apps
+    // Just remove them if they're not what you want
+    html {
+      box-sizing: border-box;
+    }
 
-  html,
-  body,
-  #root {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Roboto', sans-serif;
-  }
+    html,
+    body,
+    #root {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Roboto', sans-serif;
+    }
 
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-  section, header {
-    padding: 1rem 0;
-  }
+    section, header {
+      padding: 1rem 0;
+    }
 
-  fieldset {
-    border: none;
-    padding: 0;
-    margin: 0;
-  }
+    fieldset {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
 
-  // Override bootstrap values
-  ol, ul {
-    margin-bottom: 0;
-  }
+    // Override bootstrap values
+    ol, ul {
+      margin-bottom: 0;
+    }
 
-  p {
-    margin: 0;
+    p {
+      margin: 0;
+    }
   }
 }
