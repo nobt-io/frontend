@@ -6,7 +6,6 @@ import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 import { ListItem } from "react-toolbox/lib/list";
 import Avatar from "components/Avatar";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
-import AppBarTheme from "../../../balances/themes/AppBarTheme.scss";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import { List, ListSubHeader } from "react-toolbox/lib/list/index";
@@ -24,7 +23,6 @@ class BillDetailPage extends React.Component {
       <div>
         <HeadRoom>
           <AppBar
-            theme={AppBarTheme}
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
             leftIcon={<FontIcon value="chevron_left" />}
             rightIcon={<FontIcon />}

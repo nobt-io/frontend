@@ -20,7 +20,6 @@ import InfoMessageListTheme from "./InfoMessageListTheme.scss";
 import AsyncActionStatus from "../../../../../../../../const/AsyncActionStatus";
 import { FormattedMessage } from "react-intl";
 import { SubTitle, Title } from "components/text";
-import AppBarTheme from "../../../../themes/AppBarTheme.scss"
 import AmountTheme from "../../../../themes/AmountTheme.scss"
 
 class PersonBalance extends React.Component {
@@ -33,7 +32,6 @@ class PersonBalance extends React.Component {
 
           <HeadRoom>
             <AppBar
-              theme={AppBarTheme}
               onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
               leftIcon={<FontIcon value="chevron_left" />}
               rightIcon={<FontIcon />}
