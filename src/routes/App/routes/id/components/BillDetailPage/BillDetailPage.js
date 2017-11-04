@@ -11,6 +11,7 @@ import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import { List, ListSubHeader } from "react-toolbox/lib/list/index";
 import { FormattedDate, FormattedMessage } from "react-intl";
 import DebtorAmountTheme from "./DebtorAmountTheme.scss";
+import Page from "components/Page";
 
 class BillDetailPage extends React.Component {
 
@@ -29,7 +30,7 @@ class BillDetailPage extends React.Component {
             title={bill.name}
           />
         </HeadRoom>
-        <div>
+        <Page>
           <List>
             <ListSubHeader caption="Debtee" />
             <ListItem
@@ -88,7 +89,7 @@ class BillDetailPage extends React.Component {
                 />)
             }
           </List>
-        </div>
+        </Page>
       </div>
     );
   };

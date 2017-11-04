@@ -21,6 +21,7 @@ import AsyncActionStatus from "../../../../../../../../const/AsyncActionStatus";
 import { FormattedMessage } from "react-intl";
 import { SubTitle, Title } from "components/text";
 import AmountTheme from "../../../../themes/AmountTheme.scss"
+import Page from "components/Page";
 
 class PersonBalance extends React.Component {
 
@@ -39,83 +40,87 @@ class PersonBalance extends React.Component {
             />
           </HeadRoom>
 
-          <div>
-            <Title>Summary</Title>
+          <Page>
 
-            <List theme={InfoMessageListTheme}>
-              <ListItem
-                ripple={false}
-                leftIcon="info_outline"
-                caption={<FormattedMessage
-                  id="PersonBalance.paidBillsSummary"
-                  defaultMessage="{name} {numberOfBills, plural,
+            <div>
+              <Title>Summary</Title>
+
+              <List theme={InfoMessageListTheme}>
+                <ListItem
+                  ripple={false}
+                  leftIcon="info_outline"
+                  caption={<FormattedMessage
+                    id="PersonBalance.paidBillsSummary"
+                    defaultMessage="{name} {numberOfBills, plural,
                                             =0 {did not pay any bills}
                                             =1 {paid 1 bill ({totalAmount})}
                                             other {paid {numberOfBills} bills ({totalAmount})}}."
-                  values={{
-                    name: this.props.balance.me.name,
-                    numberOfBills: this.props.paidBills.length,
-                    totalAmount: <Amount value={this.props.sumOfPaidBills} absolute={true} />
-                  }}
-                />
-                }
-              />
-
-              <ListItem
-                ripple={false}
-                leftIcon="info_outline"
-                caption={
-                  <FormattedMessage
-                    id="PersonBalance.paidBillsSummary"
-                    defaultMessage={
-                      this.props.bills.length !== this.props.relatedBills.length ?
-                        "{name} participates in {numberOfBills} of {allBills} bills." :
-                        "{name} participates in all {allBills} bills."
-                    }
                     values={{
                       name: this.props.balance.me.name,
-                      allBills: this.props.bills.length,
-                      numberOfBills: this.props.relatedBills.length
+                      numberOfBills: this.props.paidBills.length,
+                      totalAmount: <Amount value={this.props.sumOfPaidBills} absolute={true} />
                     }}
                   />
-                }
-              />
-            </List>
-          </div>
+                  }
+                />
 
-          <div>
-            <Title>Transactions</Title>
-            <SubTitle>
-              <FormattedMessage
-                id="PersonBalance.summary"
-                defaultMessage="{name} {verb} {amount} {preposition} {numberOfOtherPeople} {numberOfOtherPeople, plural,
+                <ListItem
+                  ripple={false}
+                  leftIcon="info_outline"
+                  caption={
+                    <FormattedMessage
+                      id="PersonBalance.paidBillsSummary"
+                      defaultMessage={
+                        this.props.bills.length !== this.props.relatedBills.length ?
+                          "{name} participates in {numberOfBills} of {allBills} bills." :
+                          "{name} participates in all {allBills} bills."
+                      }
+                      values={{
+                        name: this.props.balance.me.name,
+                        allBills: this.props.bills.length,
+                        numberOfBills: this.props.relatedBills.length
+                      }}
+                    />
+                  }
+                />
+              </List>
+            </div>
+
+            <div>
+              <Title>Transactions</Title>
+              <SubTitle>
+                <FormattedMessage
+                  id="PersonBalance.summary"
+                  defaultMessage="{name} {verb} {amount} {preposition} {numberOfOtherPeople} {numberOfOtherPeople, plural,
                                                                                                 =1 {person}
                                                                                                 other {persons}}."
-                values={{
-                  name: this.props.balance.me.name,
-                  verb: this.props.balance.me.amount > 0 ? "gets" : "owes",
-                  amount: <Amount value={this.props.balance.me.amount} absolute={true} />,
-                  preposition: this.props.balance.me.amount > 0 ? "from" : "to",
-                  numberOfOtherPeople: this.props.balance.persons.length
-                }}
-              />
-            </SubTitle>
-
-            <HOList
-              items={this.props.balance.persons}
-              renderItem={ (transaction) => (
-                <ListItem
-                  leftActions={[
-                    <Avatar name={transaction.name} medium />
-                  ]}
-                  ripple={false}
-                  key={transaction.name}
-                  caption={transaction.name}
-                  legend={<Amount theme={AmountTheme} value={transaction.amount} absolute={false} />}
+                  values={{
+                    name: this.props.balance.me.name,
+                    verb: this.props.balance.me.amount > 0 ? "gets" : "owes",
+                    amount: <Amount value={this.props.balance.me.amount} absolute={true} />,
+                    preposition: this.props.balance.me.amount > 0 ? "from" : "to",
+                    numberOfOtherPeople: this.props.balance.persons.length
+                  }}
                 />
-              )}
-            />
-          </div>
+              </SubTitle>
+
+              <HOList
+                items={this.props.balance.persons}
+                renderItem={ (transaction) => (
+                  <ListItem
+                    leftActions={[
+                      <Avatar name={transaction.name} medium />
+                    ]}
+                    ripple={false}
+                    key={transaction.name}
+                    caption={transaction.name}
+                    legend={<Amount theme={AmountTheme} value={transaction.amount} absolute={false} />}
+                  />
+                )}
+              />
+            </div>
+
+          </Page>
 
         </div>
       )}

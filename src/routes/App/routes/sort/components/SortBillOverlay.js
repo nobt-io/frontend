@@ -6,13 +6,13 @@ import { updateBillSortProperty } from "../../../modules/viewState/actions";
 import Dialog from "components/Dialog";
 import { getBillSortProperty } from "../../../modules/viewState/selectors";
 import HOList from "containers/HOList/HOList";
-import DialogTheme from "components/Dialog/DialogTheme.scss";
+import DialogTitle from "components/Dialog/DialogTitle";
 
 
 const SortBillOverlay = (props) => (
 
   <Dialog>
-    <h3 className={DialogTheme.header}>Sort bills</h3>
+    <DialogTitle>Sort bills</DialogTitle>
 
     <HOList
       selectable

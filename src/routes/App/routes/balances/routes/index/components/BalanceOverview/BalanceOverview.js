@@ -12,6 +12,7 @@ import { AppBar } from "react-toolbox/lib/app_bar/index";
 import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
+import Page from "components/Page";
 
 class BalanceOverview extends React.Component {
 
@@ -32,7 +33,7 @@ class BalanceOverview extends React.Component {
           />
         </HeadRoom>
 
-        <div>
+        <Page>
           <Title>Balance Overview</Title>
           <SubTitle>The balances of all users in this Nobt.</SubTitle>
 
@@ -53,7 +54,7 @@ class BalanceOverview extends React.Component {
               />
             )}
           />
-        </div>
+        </Page>
 
       </div>
     )

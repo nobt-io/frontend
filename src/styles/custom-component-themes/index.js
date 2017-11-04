@@ -4,7 +4,11 @@
  */
 
 import AppBarTheme from "./AppBarTheme.scss"
+import ListTheme from "./ListTheme.scss"
+import DialogTheme from "./DialogTheme.scss"
 
 export default {
-  RTAppBar: AppBarTheme
+  RTAppBar: AppBarTheme,
+  RTList: ListTheme,
+  RTDialog: DialogTheme
 }
