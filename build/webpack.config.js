@@ -44,7 +44,7 @@ let webpackConfig = {
             options: {
               cacheDirectory: true,
               plugins: [ 'transform-runtime' ],
-              presets: [ 'es2015', 'react', 'stage-0' ]
+              presets: [ 'env', 'react', 'stage-0' ]
             }
           }
         ],
