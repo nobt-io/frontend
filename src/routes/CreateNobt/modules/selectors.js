@@ -18,9 +18,13 @@ export const getNobtName = createSelector([getNewNobtSlice], (state) => state.ch
 export const getPersonNames = createSelector([getNewNobtSlice], (state) => state.personNames);
 export const getPersonToAdd = createSelector([getNewNobtSlice], (state) => state.personToAdd);
 
-export const isNameOfPersonToAddValid = createSelector([getPersonToAdd, getPersonNames], (personToAdd, names) => {
-  return personToAdd && names.indexOf(personToAdd) === -1;
+export const isNameOfPersonToAddADuplicate = createSelector([getPersonToAdd, getPersonNames], (personToAdd, names) => {
+  let trimmedName = personToAdd.trim();
+
+  return !!trimmedName && names.indexOf(trimmedName) !== -1;
 });
+
+export const isNameOfPersonToAddPresent = createSelector([getNewNobtSlice], state => state.personToAdd.trim().length > 0);
 
 export const getCreationStatus = createSelector([getNewNobtSlice], (state) => state.createNobtStatus);
 export const getCreatedNobtId = createSelector([getNewNobtSlice], (state) => state.createdNobtId);

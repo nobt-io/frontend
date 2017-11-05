@@ -83,6 +83,7 @@ class AddMembersForm extends React.Component {
               onChange={this.props.updateNameOfPersonToAdd}
               onKeyPress={this.handleOnKeyPress}
               theme={AddMemberInputTheme}
+              error={this.props.isAddPersonButtonDisabled && `${this.props.personToAdd} is already in the list.`}
             />
           </Box>
 

@@ -1,8 +1,9 @@
 import { createSelector } from "reselect";
 
-import { canCreateNobt, getPersonToAdd, isNameOfPersonToAddValid } from "./selectors";
+import { canCreateNobt, getPersonToAdd, isNameOfPersonToAddADuplicate, isNameOfPersonToAddPresent } from "./selectors";
 
-export const shouldRenderAddPersonButton = isNameOfPersonToAddValid;
+export const isAddPersonButtonDisabled = isNameOfPersonToAddADuplicate;
+export const shouldRenderAddPersonButton = isNameOfPersonToAddPresent;
+
 export const isCreateNobtButtonDisabled = createSelector(canCreateNobt, canCreateNobt => !canCreateNobt);
-export const isAddPersonButtonDisabled = createSelector(isNameOfPersonToAddValid, isNameValid => !isNameValid);
 export const getAddPersonButtonLabel = createSelector(getPersonToAdd, personToAdd => `Add '${personToAdd}'`);
