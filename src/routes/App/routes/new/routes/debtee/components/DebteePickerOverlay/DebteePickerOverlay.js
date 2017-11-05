@@ -34,8 +34,8 @@ class DebteePickerOverlay extends React.Component {
               onClick={ () => this.handleOnPersonPicked(name) }>
             </ListItem>
           )}>
+          <AddMember onNewMember={this.handleOnPersonPicked} />
         </HOList>
-        <AddMember onNewMember={this.handleOnPersonPicked} />
       </Dialog>    )
   };
 

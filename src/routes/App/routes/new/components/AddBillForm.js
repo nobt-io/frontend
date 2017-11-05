@@ -15,6 +15,7 @@ import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
 import { Snackbar } from "react-toolbox";
 import { ProgressBar } from "react-toolbox/lib/progress_bar/index";
+import { ListDivider } from "react-toolbox/lib/list/index";
 
 /*
  TODO:
@@ -118,8 +119,10 @@ export default class AddBillForm extends React.Component {
                       return <PercentalShareListItem key={share.name} share={share} onPercentageChange={this.props.onShareValueChanged} />;
                   }
                 }}
-              />
-              <AddMember onNewMember={this.props.onNewMember} />
+              >
+                <ListDivider />
+                <AddMember onNewMember={this.props.onNewMember} />
+              </HOList>
             </div>
 
           </fieldset>
