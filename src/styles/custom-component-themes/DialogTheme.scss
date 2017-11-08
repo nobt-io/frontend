@@ -1,0 +1,10 @@
+.dialog {
+  @media screen and (max-width: $layout-breakpoint-xs) {
+    width: 80vw !important;
+  }
+}
+
+.body {
+  padding: 0 2rem !important;
+  padding-bottom: 1rem !important;
+}

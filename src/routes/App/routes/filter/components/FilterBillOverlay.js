@@ -8,12 +8,12 @@ import HOList from "containers/HOList";
 import { ListDivider, ListItem } from "react-toolbox/lib/list";
 import Avatar from "components/Avatar";
 import { getBillFilter } from "../../../modules/viewState/selectors";
-import DialogTheme from "components/Dialog/DialogTheme.scss";
+import DialogTitle from "components/Dialog/DialogTitle";
 
 const FilterBillOverlay = (props) => (
 
   <Dialog>
-    <h3 className={DialogTheme.header}>Filter bills</h3>
+    <DialogTitle>Filter bills</DialogTitle>
     <HOList
       selectable
       items={props.members}

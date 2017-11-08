@@ -6,15 +6,19 @@
   margin-bottom: 0.5 * $unit;
 }
 
+.heading {
+  margin-bottom: 0;
+}
+
 .title {
   @include typo-headline(); // Reuse styling from react-toolbox for consistency reasons
   @include headingStyle();
 
-  padding: $unit 1.6 * $unit 0;
+  padding-top: $unit;
 }
 
 .subTitle {
   color: $color-text-secondary;
 
-  padding: 0 1.6 * $unit 0;
+  padding-top: $unit;
 }
