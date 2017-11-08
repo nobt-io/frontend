@@ -85,7 +85,7 @@ export default function currentNobt(state = initialState, action) {
   const handler = handlers[ action.type ];
 
   if (!handler) {
-    console.warn("No handler found for ", action);
+    _debug("reducer:currentNobt")("[WARN] No handler found for ", action);
     return state;
   }
 
