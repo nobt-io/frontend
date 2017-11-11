@@ -1,5 +1,6 @@
 import reducer, { initialState } from "./reducer";
-import { fetchNobtSucceeded, UPDATE_FETCH_NOBT_STATUS } from "./actions";
+import { fetchNobtFailed, fetchNobtStarted, fetchNobtSucceeded, UPDATE_FETCH_NOBT_STATUS } from "./actions";
+import AsyncActionStatus from "../../../../const/AsyncActionStatus";
 
 describe(`Action ${UPDATE_FETCH_NOBT_STATUS}`, () => {
 
@@ -60,6 +61,20 @@ describe(`Action ${UPDATE_FETCH_NOBT_STATUS}`, () => {
 
 
     expect(newState.data.transactions).toEqual([{}, {}])
+  });
+
+  it(`should handle fetchNobtStarted`, () => {
+
+    const newState = reducer(initialState, fetchNobtStarted());
+
+    expect(newState.fetchNobtStatus).toEqual(AsyncActionStatus.IN_PROGRESS);
+  });
+
+  it(`should handle fetchNobtFailed`, () => {
+
+    const newState = reducer(initialState, fetchNobtFailed());
+
+    expect(newState.fetchNobtStatus).toEqual(AsyncActionStatus.FAILED);
   })
 
 });
