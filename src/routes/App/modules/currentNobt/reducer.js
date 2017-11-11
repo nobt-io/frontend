@@ -1,4 +1,4 @@
-import { UPDATE_FETCH_NOBT_STATUS, ADD_MEMBER, INVALIDATE_NOBT } from "./actions";
+import { ADD_MEMBER, INVALIDATE_NOBT, UPDATE_FETCH_NOBT_STATUS } from "./actions";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import _debug from "debug";
 
@@ -11,7 +11,10 @@ const updateFetchNobtStatusActionPayloadHandler = {
         name: payload.nobt.name,
         currency: payload.nobt.currency,
         participatingPersons: payload.nobt.participatingPersons,
-        transactions: payload.nobt.transactions,
+        transactions: [
+          ...(payload.nobt.transactions || []),
+          ...(payload.nobt.debts || [])
+        ],
         bills: payload.nobt.expenses,
         createdOn: payload.nobt.createdOn
       }
@@ -28,6 +31,10 @@ const handlers = {
     return {
       ...state,
       ...newState,
+      data: {
+        ...(state.data),
+        ...(newState.data)
+      },
       nobtFetchTimestamp: Date.now(),
       fetchNobtStatus: action.payload.status
     }
@@ -60,7 +67,7 @@ const handlers = {
   },
 };
 
-const initialState = {
+export const initialState = {
   fetchNobtStatus: null,
   nobtFetchTimestamp: null,
   data: {
@@ -70,10 +77,17 @@ const initialState = {
     participatingPersons: [], // TODO rename to members
     transactions: [],
     bills: [],
+    createdOn: null
   }
 };
 
 export default function currentNobt(state = initialState, action) {
   const handler = handlers[ action.type ];
-  return handler ? handler(state, action) : state;
+
+  if (!handler) {
+    _debug("reducer:currentNobt")("[WARN] No handler found for ", action);
+    return state;
+  }
+
+  return handler(state, action);
 }
