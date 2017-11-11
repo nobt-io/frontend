@@ -3,7 +3,7 @@ import AsyncActionStatus from "const/AsyncActionStatus";
 import _debug from "debug";
 
 const updateFetchNobtStatusActionPayloadHandler = {
-  [AsyncActionStatus.IN_PROGRESS]: () => {},
+  [AsyncActionStatus.IN_PROGRESS]: () => ({}),
   [AsyncActionStatus.SUCCESSFUL]: (payload) => (
     {
       data: {
@@ -20,8 +20,8 @@ const updateFetchNobtStatusActionPayloadHandler = {
       }
     }
   ),
-  [AsyncActionStatus.FAILED]: () => {},
-  [null]: () => {}
+  [AsyncActionStatus.FAILED]: () => ({}),
+  [null]: () => ({})
 };
 
 const handlers = {
