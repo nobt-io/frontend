@@ -8,8 +8,8 @@ import LocationBuilder from "../../../../../../modules/navigation/LocationBuilde
 import { connect } from "react-redux";
 import { getAllMembers, getDebtee } from "../../../../modules/addBillForm/selectors";
 import Dialog from "components/Dialog";
-import DialogTheme from "components/Dialog/DialogTheme.scss";
 import { newDebteeSelected } from "../../../../modules/addBillForm/actions";
+import DialogTitle from "../../../../../../../../components/Dialog/DialogTitle";
 
 const log = _debug("DebteePicker");
 
@@ -19,24 +19,25 @@ class DebteePickerOverlay extends React.Component {
 
     return (
       <Dialog>
-        <h3 className={DialogTheme.header}>Who paid?</h3>
+        <DialogTitle>Who paid?</DialogTitle>
         <HOList
           selectable
           items={this.props.members}
-          renderItem={ (name) => (
+          renderItem={(name) => (
             <ListItem
               key={name}
               leftActions={[
-                <Avatar name={name} medium/>
+                <Avatar name={name} medium />
               ]}
-              rightIcon={ name === this.props.debtee ? "check_circle" : "radio_button_unchecked" }
+              rightIcon={name === this.props.debtee ? "check_circle" : "radio_button_unchecked"}
               caption={name}
-              onClick={ () => this.handleOnPersonPicked(name) }>
+              onClick={() => this.handleOnPersonPicked(name)}>
             </ListItem>
           )}>
           <AddMember onNewMember={this.handleOnPersonPicked} />
         </HOList>
-      </Dialog>    )
+      </Dialog>
+    )
   };
 
   handleOnPersonPicked = (person) => {

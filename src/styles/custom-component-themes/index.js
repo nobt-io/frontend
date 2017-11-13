@@ -3,8 +3,12 @@
  * For more information on how to use it see: https://github.com/react-toolbox/react-toolbox/tree/master#using-sass-imports-and-context
  */
 
+import AppBarTheme from "./AppBarTheme.scss"
 import ListTheme from "./ListTheme.scss"
+import DialogTheme from "./DialogTheme.scss"
 
 export default {
-  RTList: ListTheme
+  RTAppBar: AppBarTheme,
+  RTList: ListTheme,
+  RTDialog: DialogTheme
 }

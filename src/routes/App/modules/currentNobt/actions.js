@@ -5,7 +5,7 @@ import * as utils from "utils/sleep";
 export const UPDATE_FETCH_NOBT_STATUS = 'Nobt.UPDATE_FETCH_NOBT_STATUS';
 export const INVALIDATE_NOBT = 'Nobt.INVALIDATE';
 
-function fetchNobtStarted() {
+export function fetchNobtStarted() {
   return {
     type: UPDATE_FETCH_NOBT_STATUS,
     payload: {
@@ -37,7 +37,7 @@ export function updateHtmlTitle(nobtName) {
   }
 }
 
-function fetchNobtFailed(error) {
+export function fetchNobtFailed(error) {
   return {
     type: UPDATE_FETCH_NOBT_STATUS,
     payload: {

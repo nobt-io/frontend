@@ -6,12 +6,12 @@ import { makeGetBill } from "../../../../modules/currentNobt/selectors";
 import { ListItem } from "react-toolbox/lib/list";
 import Avatar from "components/Avatar";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
-import AppBarTheme from "../../../balances/themes/AppBarTheme.scss";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import { List, ListSubHeader } from "react-toolbox/lib/list/index";
 import { FormattedDate, FormattedMessage } from "react-intl";
 import DebtorAmountTheme from "./DebtorAmountTheme.scss";
+import Page from "components/Page";
 
 class BillDetailPage extends React.Component {
 
@@ -24,14 +24,13 @@ class BillDetailPage extends React.Component {
       <div>
         <HeadRoom>
           <AppBar
-            theme={AppBarTheme}
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
             leftIcon={<FontIcon value="chevron_left" />}
             rightIcon={<FontIcon />}
             title={bill.name}
           />
         </HeadRoom>
-        <div>
+        <Page>
           <List>
             <ListSubHeader caption="Debtee" />
             <ListItem
@@ -90,7 +89,7 @@ class BillDetailPage extends React.Component {
                 />)
             }
           </List>
-        </div>
+        </Page>
       </div>
     );
   };

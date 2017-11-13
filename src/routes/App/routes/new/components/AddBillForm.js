@@ -14,6 +14,7 @@ import { Link } from "react-router";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
 import { Snackbar } from "react-toolbox";
+import SharesListTheme from "./SharesListTheme.scss";
 import { ProgressBar } from "react-toolbox/lib/progress_bar/index";
 import { ListDivider } from "react-toolbox/lib/list/index";
 
@@ -106,6 +107,7 @@ export default class AddBillForm extends React.Component {
 
             <div className={`${styles.container} ${styles.shareListContainer}`}>
               <HOList
+                theme={SharesListTheme}
                 items={this.props.shares}
                 renderItem={share => {
                   switch (this.props.splitStrategy) {
