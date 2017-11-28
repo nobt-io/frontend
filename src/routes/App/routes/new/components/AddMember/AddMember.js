@@ -5,7 +5,6 @@ import { isExistingMemberFactory } from "../../modules/addBillForm/selectors";
 import { Input } from "react-toolbox/lib/input/index";
 import { IconButton } from "react-toolbox/lib/button/index";
 import { ListItem } from "react-toolbox/lib/list/index";
-import AddButtonTheme from "./AddButtonTheme.scss"
 
 class AddMember extends React.Component {
 
@@ -61,7 +60,6 @@ class AddMember extends React.Component {
       />}
       rightActions={[
         <IconButton
-          theme={AddButtonTheme}
           onClick={this.handleOnButtonClick}
           disabled={this.isNewMemberInvalid()}
           icon="person_add"

@@ -10,6 +10,8 @@ import { getAllMembers, getDebtee } from "../../../../modules/addBillForm/select
 import Dialog from "components/Dialog";
 import { newDebteeSelected } from "../../../../modules/addBillForm/actions";
 import DialogTitle from "../../../../../../../../components/Dialog/DialogTitle";
+import { IconButton } from "react-toolbox/lib/button/index";
+import { ListDivider } from "react-toolbox/lib/list/index";
 
 const log = _debug("DebteePicker");
 
@@ -29,11 +31,18 @@ class DebteePickerOverlay extends React.Component {
               leftActions={[
                 <Avatar name={name} medium />
               ]}
-              rightIcon={name === this.props.debtee ? "check_circle" : "radio_button_unchecked"}
+              rightActions={[
+                // Use an IconButton instead of an Icon in order to align things nicely.
+                <IconButton
+                  icon={name === this.props.debtee ? "check_circle" : "radio_button_unchecked"}
+                  ripple={false}
+                />
+              ]}
               caption={name}
               onClick={() => this.handleOnPersonPicked(name)}>
             </ListItem>
           )}>
+          <ListDivider />
           <AddMember onNewMember={this.handleOnPersonPicked} />
         </HOList>
       </Dialog>
