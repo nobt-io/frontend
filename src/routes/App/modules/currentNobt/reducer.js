@@ -77,6 +77,7 @@ export const initialState = {
     participatingPersons: [], // TODO rename to members
     transactions: [],
     bills: [],
+    payments: [],
     createdOn: null
   }
 };

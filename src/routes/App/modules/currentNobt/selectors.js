@@ -16,11 +16,35 @@ export const getCurrency = createSelector([ getCurrentNobt ], (nobt) => nobt.cur
 export const getBills = createSelector([ getCurrentNobt ], (nobt) => nobt.bills);
 export const getTransactions = createSelector([ getCurrentNobt ], (nobt) => nobt.transactions);
 export const getCreatedOn = createSelector([ getCurrentNobt ], (nobt) => nobt.createdOn);
+export const getPayments = createSelector([ getCurrentNobt ], nobt => nobt.payments);
 
 export const isNobtEmpty = createSelector([ getBills ], (bills) => bills.length === 0);
 export const isNobtDataOutdated = createSelector([ getNobtFetchTimestamp ], (timestamp) => timestamp === null);
+
 export const shouldFetchNobt = createSelector([ isNobtDataOutdated, getFetchNobtStatus ], (isOutdated, status) => {
   return isOutdated && status !== AsyncActionStatus.IN_PROGRESS;
+});
+
+export const getFeedItems = createSelector([ getBills, getPayments ], (bills, payments) => {
+
+  let billsAsFeedItems = bills.map(bill => ({
+    id: bill.id,
+    icon: 'receipt',
+    date: bill.createdOn
+  }));
+
+  let paymentsAsFeedItems = payments.map(payment => ({
+    id: payment.id,
+    icon: 'payment',
+    date: payment.createdOn
+  }));
+
+  const feedItems = [ ...billsAsFeedItems, ...paymentsAsFeedItems ];
+
+  return feedItems
+    .sort((leftFeedItem, rightFeedItem) => {
+      return leftFeedItem.date < rightFeedItem.date
+    });
 });
 
 export const getBalances = createSelector([ getTransactions, getMembers ], (transactions, members) => {

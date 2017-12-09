@@ -5,12 +5,11 @@ import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import AddBillFAB from "./AddBillFAB";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
-import { Button, IconButton } from "react-toolbox/lib/button/index";
+import { Button } from "react-toolbox/lib/button/index";
 import HeadRoom from "react-headroom";
 import Amount from "../../../components/Amount/Amount";
 import BrandedAppBar from "../../../components/BrandedAppBar";
-import { List, ListItem, ListSubHeader } from "react-toolbox/lib/list/index";
-import { FormattedRelative } from "react-intl";
+import Feed from "./Feed/Feed";
 
 export default class Nobt extends React.Component {
 
@@ -48,72 +47,7 @@ export default class Nobt extends React.Component {
             ? (<EmptyNobtPlaceholder />)
             : (
               <div>
-
-
-                <List>
-                  <ListSubHeader caption={<FormattedRelative value={new Date()} />} />
-                  <ListItem
-                    leftIcon="payment"
-                    caption="David paid Thomas"
-                    legend={<Amount value={30} />}
-                    rightActions={[
-                      <IconButton icon="chevron_right" />
-                    ]}
-                  />
-                  <ListItem
-                    leftIcon="payment"
-                    caption="Lisa paid Thomas"
-                    legend={<Amount value={26} />}
-                    rightActions={[
-                      <IconButton icon="chevron_right" />
-                    ]}
-                  />
-                  <ListItem
-                    leftIcon="payment"
-                    caption="David paid Sarah"
-                    legend={<Amount value={10} />}
-                    rightActions={[
-                      <IconButton icon="chevron_right" />
-                    ]}
-                  />
-                  <ListSubHeader caption={<FormattedRelative value={new Date(2017, 10, 10)} />} />
-                  <ListItem
-                    leftIcon="receipt"
-                    caption="David paid 'Bier'"
-                    legend={<Amount value={30} />}
-                    rightActions={[
-                      <IconButton icon="chevron_right" />
-                    ]}
-                  />
-                  <ListSubHeader caption={<FormattedRelative value={new Date(2017, 10, 7)} />} />
-                  <ListItem
-                    leftIcon="receipt"
-                    caption="David paid 'Punsch'"
-                    legend={<Amount value={15.50} />}
-                    rightActions={[
-                      <IconButton icon="chevron_right" />
-                    ]}
-                  />
-
-^^                  <ListItem
-                    leftIcon="payment"
-                    caption="David paid Sarah"
-                    legend={<Amount value={10} />}
-                    rightActions={[
-                      <IconButton icon="chevron_right" />
-                    ]}
-                  />
-                  <ListSubHeader caption={<FormattedRelative value={new Date(2017, 10, 3)} />} />
-                  <ListItem
-                    leftIcon="receipt"
-                    caption="David paid 'Bier'"
-                    legend={<Amount value={30} />}
-                    rightActions={[
-                      <IconButton icon="chevron_right" />
-                    ]}
-                  />
-                </List>
-
+                <Feed />
 
                 {
                   this.props.children

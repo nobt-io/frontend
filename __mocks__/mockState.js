@@ -46,7 +46,10 @@ export class AppStateBuilder {
 
 export class NobtStateBuilder {
 
-  data = {};
+  data = {
+    bills: [],
+    payments: []
+  };
   fetchNobtStatus = {};
   nobtFetchTimestamp = {};
 
@@ -104,6 +107,24 @@ export class NobtStateBuilder {
     return this;
   };
 
+  /**
+   * @param {BillBuilder} billBuilder
+   * @returns {NobtStateBuilder}
+   */
+  withBill = (billBuilder) => {
+    this.data.bills.push(billBuilder.build());
+    return this;
+  };
+
+  /**
+   * @param {PaymentBuilder} paymentBuilder
+   * @returns {NobtStateBuilder}
+   */
+  withPayment = (paymentBuilder) => {
+    this.data.payments.push(paymentBuilder.build());
+    return this;
+  };
+
   build = () => {
     return {
       data: {...this.data},
@@ -113,23 +134,96 @@ export class NobtStateBuilder {
   }
 }
 
+class BillBuilder {
+
+  /**
+   * @param {Number} id
+   * @returns {BillBuilder}
+   */
+  withId(id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * @param {Date} date
+   * @returns {BillBuilder}
+   */
+  withCreationDate(date) {
+    this.createdOn = date;
+    return this;
+  }
+
+  /**
+   *
+   * @returns {{id: *, createdOn: *}}
+   */
+  build() {
+    return {
+      id: this.id,
+      createdOn: this.createdOn
+    }
+  }
+}
+
+class PaymentBuilder {
+
+  /**
+   * @param {Number} id
+   * @returns {PaymentBuilder}
+   */
+  withId(id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * @param {Date} date
+   * @returns {PaymentBuilder}
+   */
+  withCreationDate(date) {
+    this.createdOn = date;
+    return this;
+  }
+
+  /**
+   *
+   * @returns {{id: *, createdOn: *}}
+   */
+  build() {
+    return {
+      id: this.id,
+      createdOn: this.createdOn
+    }
+  }
+}
+
 /**
- * @type {NobtStateBuilder}
+ * @returns {NobtStateBuilder}
  */
-export const aNobtState = new NobtStateBuilder()
+export const aNobtState = () => new NobtStateBuilder()
   .withId("3XtC8MMj4bpY")
   .withName("Some nobt")
   .withCurrency("EUR")
   .withParticipatingPersons("Thomas", "David", "Philipp");
 
 /**
- * @type {AppStateBuilder}
+ * @returns {AppStateBuilder}
  */
-export const anAppState = new AppStateBuilder()
-  .withCurrentNobt(aNobtState);
+export const anAppState = () => new AppStateBuilder()
+  .withCurrentNobt(aNobtState());
 
 /**
- * @type {StateBuilder}
+ * @returns {StateBuilder}
  */
-export const aStoreState = new StateBuilder()
-  .withApp(anAppState);
+export const aStoreState = () => new StateBuilder().withApp(anAppState());
+
+/**
+ * @returns {BillBuilder}
+ */
+export const aBill = () => new BillBuilder();
+
+/**
+ * @returns {PaymentBuilder}
+ */
+export const aPayment = () => new PaymentBuilder();

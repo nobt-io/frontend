@@ -6,7 +6,7 @@ import { aStoreState } from "./mockState";
  */
 export default ( stateModifier = (state) => (state), middlewares = [] ) => {
 
-  let modifiedState = stateModifier(aStoreState);
+  let modifiedState = stateModifier(aStoreState());
 
   return mockStore(middlewares)(modifiedState.build())
 };
