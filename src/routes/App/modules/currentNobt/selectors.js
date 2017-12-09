@@ -49,7 +49,9 @@ export const getSortedFeedItems = createSelector([ getBillsAsFeedItems, getPayme
 
   return [ ...billFeedItems, ...paymentFeedItems ]
     .sort((leftFeedItem, rightFeedItem) => {
-      return leftFeedItem.date < rightFeedItem.date
+
+      // Create a date object to ensure that comparison makes sense
+      return new Date(leftFeedItem.date) < new Date(rightFeedItem.date)
     });
 });
 
