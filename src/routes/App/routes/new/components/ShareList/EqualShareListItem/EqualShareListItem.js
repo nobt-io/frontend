@@ -1,7 +1,6 @@
 import React from "react";
 import Checkbox from "react-toolbox/lib/checkbox";
 import ShareListItem from "../ShareListItem";
-import CheckboxTheme from "./CheckboxTheme.scss";
 
 const EqualShareListItem = (props) => {
 
@@ -15,7 +14,6 @@ const EqualShareListItem = (props) => {
       name={name}
       amount={amount}
       control={<Checkbox
-        theme={CheckboxTheme}
         checked={value}
         onChange={ handleOnCheckboxChanged }
       />}

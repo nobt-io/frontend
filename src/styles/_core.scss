@@ -1,5 +1,17 @@
+$imported-modules: ();
+
+@mixin exports($name, $warn: true) {
+  @if (index($imported-modules, $name) == null) {
+    $imported-modules: append($imported-modules, $name) !global;
+    @content;
+  } @else if $warn == true {
+    @warn "Module `#{$name}` has already been imported.";
+  }
+}
+
 @import 'theme';
 
+exports("core") {
 :global {
   @import '~normalize.css/normalize';
 
@@ -25,16 +37,21 @@
   }
 
   section, header {
-    padding: 15px !important;
+    padding: 1rem 0;
   }
 
   ul, ol {
     margin-bottom: 0 !important;
   }
-
   fieldset {
     border: none;
     padding: 0;
     margin: 0;
   }
+
+  p {
+    margin: 0;
+  }
+}
+
 }

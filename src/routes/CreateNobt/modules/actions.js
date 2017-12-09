@@ -10,6 +10,7 @@ export const SELECT_CURRENCY = 'NewNobt.SELECT_CURRENCY';
 export const CHANGE_NOBT_NAME = 'NewNobt.CHANGE_NOBT_NAME';
 export const ADD_PERSON = 'NewNobt.ADD_PERSON';
 export const REMOVE_PERSON = 'NewNobt.REMOVE_PERSON';
+export const UPDATE_NAME_OF_PERSON_TO_ADD = 'NewNobt.UPDATE_NAME_OF_PERSON_TO_ADD';
 
 function createNobtStarted(id) {
   return {
@@ -83,17 +84,25 @@ export function changeNobtName(newName) {
     }
   }
 }
-export function addPerson(name) {
+
+export function addCurrentNameAsPerson() {
   return {
-    type: ADD_PERSON,
+    type: ADD_PERSON
+  }
+}
+
+export function removePerson(name) {
+  return {
+    type: REMOVE_PERSON,
     payload: {
       name
     }
   }
 }
-export function removePerson(name) {
+
+export function updateNameOfPersonToAdd(name) {
   return {
-    type: REMOVE_PERSON,
+    type: UPDATE_NAME_OF_PERSON_TO_ADD,
     payload: {
       name
     }

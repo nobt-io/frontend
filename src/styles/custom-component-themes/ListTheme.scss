@@ -1,6 +1,8 @@
-.item {
-  padding-left: 0;
-  padding-right: 0;
+// Override bootstrap values
+ol, ul {
+  &.list {
+    margin-bottom: 0;
+  }
 }
 
 .subheader {
