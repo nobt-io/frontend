@@ -77,7 +77,14 @@ export const initialState = {
     participatingPersons: [], // TODO rename to members
     transactions: [],
     bills: [],
-    payments: [],
+    payments: [
+      {
+        sender: "Thomas",
+        recipient: "David",
+        amount: 20,
+        createdOn: new Date()
+      }
+    ],
     createdOn: null
   }
 };
