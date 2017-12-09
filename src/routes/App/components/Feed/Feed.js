@@ -64,9 +64,6 @@ class Feed extends React.Component {
 
 const FeedWithIntl = injectIntl(Feed);
 const FeedWithNavigationAndIntl = withNavigation(FeedWithIntl);
+const connectedComponentFactory = connect((state) => ({feedItems: getSortedFeedItems(state)}), {});
 
-export default connect(
-  (state) => ({
-    feedItems: getSortedFeedItems(state)
-  }), {})
-(FeedWithNavigationAndIntl);
+export default connectedComponentFactory(FeedWithNavigationAndIntl);
