@@ -25,23 +25,29 @@ export const shouldFetchNobt = createSelector([ isNobtDataOutdated, getFetchNobt
   return isOutdated && status !== AsyncActionStatus.IN_PROGRESS;
 });
 
-export const getFeedItems = createSelector([ getBills, getPayments ], (bills, payments) => {
+const getDeNormalizedBills = createSelector([getBills], bills => bills.map(deNormalizeBill));
 
-  let billsAsFeedItems = bills.map(bill => ({
-    id: bill.id,
-    icon: 'receipt',
-    date: bill.createdOn
-  }));
+const getBillsAsFeedItems = createSelector([getDeNormalizedBills], bills => bills.map(bill => ({
+  id: bill.id,
+  type: 'bill',
+  date: bill.createdOn,
+  amount: bill.debtee.amount,
+  debtee: bill.debtee.name,
+  subject: bill.name
+})));
 
-  let paymentsAsFeedItems = payments.map(payment => ({
-    id: payment.id,
-    icon: 'payment',
-    date: payment.createdOn
-  }));
+const getPaymentsAsFeedItems = createSelector([getPayments], payments => payments.map(payment => ({
+  id: payment.id,
+  type: 'payment',
+  date: payment.createdOn,
+  amount: payment.amount,
+  sender: payment.sender,
+  recipient: payment.recipient
+})));
 
-  const feedItems = [ ...billsAsFeedItems, ...paymentsAsFeedItems ];
+export const getSortedFeedItems = createSelector([ getBillsAsFeedItems, getPaymentsAsFeedItems ], (billFeedItems, paymentFeedItems) => {
 
-  return feedItems
+  return [ ...billFeedItems, ...paymentFeedItems ]
     .sort((leftFeedItem, rightFeedItem) => {
       return leftFeedItem.date < rightFeedItem.date
     });

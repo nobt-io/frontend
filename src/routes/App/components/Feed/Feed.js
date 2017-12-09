@@ -4,21 +4,24 @@ import HOList from "../../../../containers/HOList/HOList";
 import Amount from "../../../../components/Amount/Amount";
 import { IconButton } from "react-toolbox/lib/button/index";
 import { injectIntl } from "react-intl";
+import { connect } from "react-redux";
+import { getSortedFeedItems } from "../../modules/currentNobt/selectors";
 
-const CashFlowGroup = ({name, cashFlows, renderCashFlow}) => (
+const FeedItemGroup = ({name, feedItems, renderFeedItem}) => (
   <div>
     <ListSubHeader caption={name} />
     {
-      cashFlows.map(renderCashFlow)
+      feedItems.map(renderFeedItem)
     }
   </div>
 );
 
-const CashFlow = ({icon, caption, amount, action}) => (
+const FeedItem = ({icon, caption, legend, action}) => (
   <ListItem
+    key={caption + legend}
     leftIcon={icon}
     caption={caption}
-    legend={<Amount value={amount} />}
+    legend={legend}
     rightActions={[
       action && <IconButton icon="chevron_right" onClick={action} />
     ]}
@@ -26,80 +29,124 @@ const CashFlow = ({icon, caption, amount, action}) => (
   />
 );
 
+const PaymentFeedItem = ({feedItem}) => {
+
+  const {sender, recipient, amount, action} = feedItem;
+
+  return (
+    <FeedItem
+      icon="payment"
+      caption={`${sender} paid ${recipient}`}
+      legend={<Amount value={amount} />}
+      action={action}
+    />
+  )
+
+};
+
+const BillFeedItem = ({feedItem}) => {
+
+  const {debtee, subject, amount, action} = feedItem;
+
+  return (
+    <FeedItem
+      icon="receipt"
+      caption={`${debtee} paid '${subject}'`}
+      legend={<Amount value={amount} />}
+      action={action}
+    />
+  )
+};
+
 class Feed extends React.Component {
 
   state = {
-    cashFlows: [
+    feedItems: [
       {
-        icon: "payment",
-        caption: "David paid Sarah",
+        type: "payment",
+        sender: "David",
+        recipient: "Sarah",
         amount: 30,
         createdOn: new Date(2017, 11, 8)
       },
       {
-        icon: "receipt",
-        caption: "Sarah paid 'Mittagessen'",
+        type: "bill",
+        debtee: "Sarah",
+        subject: "Mittagessen",
         amount: 35,
         createdOn: new Date(2017, 11, 7)
       },
       {
-        icon: "payment",
-        caption: "Thomas paid David",
+        type: "payment",
+        sender: "Thomas",
+        recipient: "David",
         amount: 20,
         createdOn: new Date(2017, 11, 7)
       },
       {
-        icon: "receipt",
-        caption: "David paid 'Bier'",
+        type: "bill",
+        debtee: "David",
+        subject: "Bier",
         amount: 12.50,
         createdOn: new Date(2017, 11, 6)
       },
       {
-        icon: "receipt",
-        caption: "David paid 'Tanken'",
+        type: "bill",
+        debtee: "David",
+        subject: "Tanken",
         amount: 50,
         createdOn: new Date(2017, 11, 6)
       }
     ]
   };
 
-  getGroupedCashFlows = () => {
+  getGroupedFeedItems = () => {
 
-    let now = Date.now();
+    const now = Date.now();
+    const formatFeedItemDate = feedItem => this.props.intl.formatRelative(feedItem.date, { now});
 
-    let relativeDates = this.state.cashFlows.map(cashFlow => this.props.intl.formatRelative(cashFlow.createdOn, {
-      now
-    }));
+    const relativeDates = this.props.feedItems.map(formatFeedItemDate);
 
-    let distinctRelativeDates = [...new Set(relativeDates)];
+    const distinctRelativeDates = [ ...new Set(relativeDates) ];
 
     return distinctRelativeDates.map(date => {
       return {
         relativeDate: date,
-        cashFlows: this.state.cashFlows.filter(cashFlow => this.props.intl.formatRelative(cashFlow.createdOn, {now}) === date)
+        feedItems: this.props.feedItems.filter(feedItem => formatFeedItemDate(feedItem) === date)
       }
     })
+  };
+
+  static feedItemRenderer = {
+    'bill': (feedItem) => <BillFeedItem feedItem={feedItem} />,
+    'payment': (feedItem) => <PaymentFeedItem feedItem={feedItem} />
+  };
+
+  renderFeedItem = (feedItem) => {
+    return Feed.feedItemRenderer[ feedItem.type ](feedItem);
   };
 
   render = () => (
 
     <HOList
-      items={this.getGroupedCashFlows()}
+      items={this.getGroupedFeedItems()}
       renderItem={group =>
-        <CashFlowGroup
+        <FeedItemGroup
+          key={group.relativeDate}
           name={group.relativeDate}
-          cashFlows={group.cashFlows}
-          renderCashFlow={cashFlow => <CashFlow
-            icon={cashFlow.icon}
-            caption={cashFlow.caption}
-            amount={cashFlow.amount}
-            action={() => {}}
-          />}
+          feedItems={group.feedItems}
+          renderFeedItem={this.renderFeedItem}
         >
-        </CashFlowGroup>
+        </FeedItemGroup>
       }
     />
   )
 }
 
-export default injectIntl(Feed);
+const FeedWithIntl = injectIntl(Feed);
+
+export default connect(
+  (state) => ({
+    feedItems: getSortedFeedItems(state)
+  }), {})
+(FeedWithIntl);

@@ -136,6 +136,8 @@ export class NobtStateBuilder {
 
 class BillBuilder {
 
+  shares = [];
+
   /**
    * @param {Number} id
    * @returns {BillBuilder}
@@ -146,11 +148,38 @@ class BillBuilder {
   }
 
   /**
-   * @param {Date} date
    * @returns {BillBuilder}
    */
   withCreationDate(date) {
     this.createdOn = date;
+    return this;
+  }
+
+  /**
+   * @param {String} name
+   * @returns {BillBuilder}
+   */
+  withName(name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * @param {String} name
+   * @returns {BillBuilder}
+   */
+  withDebtee(name) {
+    this.debtee = name;
+    return this;
+  }
+
+  /**
+   * @param {String} debtor
+   * @param {Number} amount
+   * @returns {BillBuilder}
+   */
+  addShare(debtor, amount) {
+    this.shares.push({debtor, amount});
     return this;
   }
 
@@ -161,7 +190,10 @@ class BillBuilder {
   build() {
     return {
       id: this.id,
-      createdOn: this.createdOn
+      createdOn: this.createdOn,
+      name: this.name,
+      debtee: this.debtee,
+      shares: this.shares
     }
   }
 }
@@ -178,11 +210,37 @@ class PaymentBuilder {
   }
 
   /**
-   * @param {Date} date
    * @returns {PaymentBuilder}
    */
   withCreationDate(date) {
     this.createdOn = date;
+    return this;
+  }
+
+  /**
+   * @param {String} name
+   * @returns {PaymentBuilder}
+   */
+  withSender(name) {
+    this.sender = name;
+    return this;
+  }
+
+  /**
+   * @param {String} name
+   * @returns {PaymentBuilder}
+   */
+  withRecipient(name) {
+    this.recipient = name;
+    return this;
+  }
+
+  /**
+   * @param {Number} amount
+   * @returns {PaymentBuilder}
+   */
+  withAmount(amount) {
+    this.amount = amount;
     return this;
   }
 
@@ -193,7 +251,10 @@ class PaymentBuilder {
   build() {
     return {
       id: this.id,
-      createdOn: this.createdOn
+      createdOn: this.createdOn,
+      sender: this.sender,
+      recipient: this.recipient,
+      amount: this.amount
     }
   }
 }

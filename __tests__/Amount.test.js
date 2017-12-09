@@ -2,7 +2,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Amount from "components/Amount";
 import { Provider } from "react-redux";
-import createMockStore from "../__mocks__/mockStore";
+import createMockStore from "../src/store/mockStore";
 
 test('should use absolute value of amount by default', () => {
 
