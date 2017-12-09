@@ -22,7 +22,7 @@ export default class About extends React.Component {
 
             <h2>You will <i className="fa fa-heart-o" style={{"color": "#d50000"}}></i> nobt.io</h2>
 
-            <p className={styles.description}>Nobt.io is a free service that helps you solve the tedious task of splitting several bills among your friends with ease.</p>
+            <p className={styles.description}>Nobt.io is a free service that solves the tedious task of splitting several bills among your friends with ease.</p>
             <p className={styles.examples}>Try it for your <b><RotatingText cursor={false} deletingInterval ={25} items={['next journey.', 'grill party.', 'shared flat.', 'holiday with friends.', 'after work beer.']}/></b></p>
 
             <StartButton active />
