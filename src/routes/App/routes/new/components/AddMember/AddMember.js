@@ -1,32 +1,43 @@
 import React from "react";
-import styles from "./AddMember.scss";
-import addButtonTheme from "./AddButtonTheme.scss";
-import inputTheme from "../InputTheme.scss";
-import SingleInputInlineForm from "components/SingleInputInlineForm";
+import InputTheme from "../InputTheme.scss";
 import { connect } from "react-redux";
 import { isExistingMemberFactory } from "../../modules/addBillForm/selectors";
+import { Input } from "react-toolbox/lib/input/index";
+import { IconButton } from "react-toolbox/lib/button/index";
+import { ListItem } from "react-toolbox/lib/list/index";
 
 class AddMember extends React.Component {
 
-  render = () => (
-    <div className={styles.inputContainer}>
-      <SingleInputInlineForm
-        buttonProps={{
-          icon: "check_circle",
-          theme: addButtonTheme
-        }}
-        inputProps={{
-          theme: inputTheme,
-          icon: "person_add",
-          placeholder: "Someone else?"
-        }}
-        isButtonDisabled={this.isNewMemberInvalid}
-        onSubmit={this.handleOnNewMember}/>
-    </div>
-  );
+  state = {
+    value: ""
+  };
 
-  isNewMemberInvalid = (name) => {
-    let newMember = name.trim();
+  handleOnInputKeyPress = (event) => {
+    let enterKey = 13;
+    if (event.charCode === enterKey && !this.isNewMemberInvalid()) {
+      this.handleOnButtonClick();
+    }
+  };
+
+  handleOnInputChange = (value) => {
+    this.setState({value});
+  };
+
+  handleOnButtonClick = () => {
+    let value = this.getValue();
+
+    this.handleOnNewMember(value);
+    this.handleOnInputChange("");
+  };
+
+  getValue = () => {
+    let {value} = this.state;
+
+    return value.trim();
+  };
+
+  isNewMemberInvalid = () => {
+    let newMember = this.getValue();
     return this.props.isExistingMember(newMember) || newMember.length === 0;
   };
 
@@ -34,6 +45,28 @@ class AddMember extends React.Component {
     let newMember = name.trim();
     this.props.onNewMember(newMember);
   };
+
+  render = () => (
+    <ListItem
+      ripple={false}
+      itemContent={<Input
+        value={this.state.value}
+        autoComplete="off"
+        type='text'
+        placeholder="Someone else?"
+        onKeyPress={this.handleOnInputKeyPress}
+        onChange={this.handleOnInputChange}
+        theme={InputTheme}
+      />}
+      rightActions={[
+        <IconButton
+          onClick={this.handleOnButtonClick}
+          disabled={this.isNewMemberInvalid()}
+          icon="person_add"
+        />
+      ]}
+    />
+  );
 
   static propTypes = {
     onNewMember: React.PropTypes.func.isRequired

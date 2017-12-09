@@ -87,7 +87,7 @@ class PersonBalance extends React.Component {
             </div>
 
             <div>
-              <Title>Transactions</Title>
+              <Title>Debts</Title>
               <SubTitle>
                 <FormattedMessage
                   id="PersonBalance.summary"
