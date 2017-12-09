@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import { push, goBack, go, goForward, replace } from "react-router-redux";
+import { go, goBack, goForward, push, replace } from "react-router-redux";
 
 // TODO there should be a component that allows functions like "pushPath" and "popPath" that encapsulates the call to LocationBuilder
 export default function withNavigation(WrappedComponent) {
 
   class PropsProxy extends React.Component {
+
+    static displayName = "Navigable";
 
     render() {
       return <WrappedComponent {...this.props}/>

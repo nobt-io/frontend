@@ -58,6 +58,34 @@ exports[`Feed should render feed correctly 1`] = `
             </span>
           </span>
         </span>
+        <span
+          className={undefined}
+        >
+          <span
+            className={undefined}
+            onClick={undefined}
+            onMouseDown={undefined}
+          >
+            <button
+              className=""
+              data-react-toolbox="button"
+              disabled={false}
+              href={undefined}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchStart={[Function]}
+              type="button"
+            >
+              <span
+                className="material-icons"
+                data-react-toolbox="font-icon"
+              >
+                chevron_right
+              </span>
+            </button>
+          </span>
+        </span>
       </span>
     </li>
     <li
@@ -105,6 +133,34 @@ exports[`Feed should render feed correctly 1`] = `
                 €45.00
               </span>
             </span>
+          </span>
+        </span>
+        <span
+          className={undefined}
+        >
+          <span
+            className={undefined}
+            onClick={undefined}
+            onMouseDown={undefined}
+          >
+            <button
+              className=""
+              data-react-toolbox="button"
+              disabled={false}
+              href={undefined}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchStart={[Function]}
+              type="button"
+            >
+              <span
+                className="material-icons"
+                data-react-toolbox="font-icon"
+              >
+                chevron_right
+              </span>
+            </button>
           </span>
         </span>
       </span>
@@ -210,6 +266,34 @@ exports[`Feed should render feed correctly 1`] = `
                 €30.00
               </span>
             </span>
+          </span>
+        </span>
+        <span
+          className={undefined}
+        >
+          <span
+            className={undefined}
+            onClick={undefined}
+            onMouseDown={undefined}
+          >
+            <button
+              className=""
+              data-react-toolbox="button"
+              disabled={false}
+              href={undefined}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchStart={[Function]}
+              type="button"
+            >
+              <span
+                className="material-icons"
+                data-react-toolbox="font-icon"
+              >
+                chevron_right
+              </span>
+            </button>
           </span>
         </span>
       </span>

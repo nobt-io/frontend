@@ -1,13 +1,14 @@
 import * as React from "react";
-import { ListItem, ListSubHeader } from "react-toolbox/lib/list/index";
+import { ListSubHeader } from "react-toolbox/lib/list/index";
 import HOList from "../../../../containers/HOList/HOList";
-import Amount from "../../../../components/Amount/Amount";
-import { IconButton } from "react-toolbox/lib/button/index";
 import { injectIntl } from "react-intl";
 import { connect } from "react-redux";
 import { getSortedFeedItems } from "../../modules/currentNobt/selectors";
+import withNavigation from "../../../../components/hoc/withNavigation";
+import BillFeedItem from "./BillFeedItem";
+import PaymentFeedItem from "./PaymentFeedItem";
 
-const FeedItemGroup = ({name, feedItems, renderFeedItem}) => (
+const FeedSection = ({name, feedItems, renderFeedItem}) => (
   <div>
     <ListSubHeader caption={name} />
     {
@@ -16,97 +17,15 @@ const FeedItemGroup = ({name, feedItems, renderFeedItem}) => (
   </div>
 );
 
-const FeedItem = ({icon, caption, legend, action}) => (
-  <ListItem
-    key={caption + legend}
-    leftIcon={icon}
-    caption={caption}
-    legend={legend}
-    rightActions={[
-      action && <IconButton icon="chevron_right" onClick={action} />
-    ]}
-    ripple={false}
-  />
-);
-
-const PaymentFeedItem = ({feedItem}) => {
-
-  const {sender, recipient, amount, action} = feedItem;
-
-  return (
-    <FeedItem
-      icon="payment"
-      caption={`${sender} paid ${recipient}`}
-      legend={<Amount value={amount} />}
-      action={action}
-    />
-  )
-
-};
-
-const BillFeedItem = ({feedItem}) => {
-
-  const {debtee, subject, amount, action} = feedItem;
-
-  return (
-    <FeedItem
-      icon="receipt"
-      caption={`${debtee} paid '${subject}'`}
-      legend={<Amount value={amount} />}
-      action={action}
-    />
-  )
-};
 
 class Feed extends React.Component {
 
-  state = {
-    feedItems: [
-      {
-        type: "payment",
-        sender: "David",
-        recipient: "Sarah",
-        amount: 30,
-        createdOn: new Date(2017, 11, 8)
-      },
-      {
-        type: "bill",
-        debtee: "Sarah",
-        subject: "Mittagessen",
-        amount: 35,
-        createdOn: new Date(2017, 11, 7)
-      },
-      {
-        type: "payment",
-        sender: "Thomas",
-        recipient: "David",
-        amount: 20,
-        createdOn: new Date(2017, 11, 7)
-      },
-      {
-        type: "bill",
-        debtee: "David",
-        subject: "Bier",
-        amount: 12.50,
-        createdOn: new Date(2017, 11, 6)
-      },
-      {
-        type: "bill",
-        debtee: "David",
-        subject: "Tanken",
-        amount: 50,
-        createdOn: new Date(2017, 11, 6)
-      }
-    ]
-  };
-
-  getGroupedFeedItems = () => {
+  getFeedSections = () => {
 
     const now = Date.now();
-    const formatFeedItemDate = feedItem => this.props.intl.formatRelative(feedItem.date, { now});
+    const formatFeedItemDate = feedItem => this.props.intl.formatRelative(feedItem.date, {now});
 
     const relativeDates = this.props.feedItems.map(formatFeedItemDate);
-
     const distinctRelativeDates = [ ...new Set(relativeDates) ];
 
     return distinctRelativeDates.map(date => {
@@ -129,24 +48,25 @@ class Feed extends React.Component {
   render = () => (
 
     <HOList
-      items={this.getGroupedFeedItems()}
-      renderItem={group =>
-        <FeedItemGroup
-          key={group.relativeDate}
-          name={group.relativeDate}
-          feedItems={group.feedItems}
+      items={this.getFeedSections()}
+      renderItem={section =>
+        <FeedSection
+          key={section.relativeDate}
+          name={section.relativeDate}
+          feedItems={section.feedItems}
           renderFeedItem={this.renderFeedItem}
         >
-        </FeedItemGroup>
+        </FeedSection>
       }
     />
   )
 }
 
 const FeedWithIntl = injectIntl(Feed);
+const FeedWithNavigationAndIntl = withNavigation(FeedWithIntl);
 
 export default connect(
   (state) => ({
     feedItems: getSortedFeedItems(state)
   }), {})
-(FeedWithIntl);
+(FeedWithNavigationAndIntl);
