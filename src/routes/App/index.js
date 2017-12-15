@@ -1,6 +1,5 @@
 import withNobtLoader from "../../components/NobtLoader/withNobtLoader";
 import NobtContainer from "./containers/NobtContainer";
-import NewBillRoute from "./routes/new";
 import BillRoute from "./routes/bill";
 import DetailRoute from "./routes/id";
 import SortOverlayRoute from "./routes/sort";
@@ -22,7 +21,6 @@ export default (store) => {
     },
     childRoutes: [
       BillRoute,
-      NewBillRoute,
       BalancesRoute,
       SortOverlayRoute,
       FilterOverlayRoute,

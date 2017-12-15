@@ -10,11 +10,10 @@ import AddMember from "../../../../new/components/AddMember/AddMember";
 import Avatar from "../../../../../../../components/Avatar/Avatar";
 import LocationBuilder from "../../../../../modules/navigation/LocationBuilder";
 import withNavigation from "../../../../../../../components/hoc/withNavigation";
-import { getShares } from "../../../../new/modules/addBillForm/selectors";
-import { newMemberAdded } from "../../../../new/modules/addBillForm/actions";
 import { Checkbox } from "react-toolbox/lib/checkbox/index";
-import { areAllMembersSelected, getAllMembers } from "../../../modules/addBillForm/selectors";
+import { areAllMembersSelected, getAllMembers, getShares } from "../../../modules/addBillForm/selectors";
 import Amount from "../../../../../../../components/Amount/Amount";
+import { newMemberAdded } from "../../../modules/addBillForm/actions";
 
 
 const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {

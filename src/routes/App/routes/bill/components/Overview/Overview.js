@@ -10,10 +10,9 @@ import Box from "../../../../../../components/Box/Box";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import withNavigation from "../../../../../../components/hoc/withNavigation";
 import connect from "react-redux/es/connect/connect";
-import { getAmount, getDebtee, getDescription } from "../../modules/addBillForm/selectors";
-import { getShares } from "../../../new/modules/addBillForm/selectors";
-import { addBill } from "../../../new/modules/addBillForm/actions";
+import { getAmount, getDebtee, getDescription, getShares } from "../../modules/addBillForm/selectors";
 import Button from "../../../../../../components/Button/Button";
+import { addBill } from "../../modules/addBillForm/actions";
 
 const overview = ({push, ...props}) => {
 
