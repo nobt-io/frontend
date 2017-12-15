@@ -39,6 +39,17 @@ export const getPersonValues = createSelector([
   return [...defaultPersonValues, ...existingPersonValues]
 });
 
+export const areAllMembersSelected = createSelector([getPersonValues], personValues => {
+
+  for (let obj of personValues) {
+    if (!obj.value) {
+      return false;
+    }
+  }
+
+  return true;
+});
+
 /**
  * Internal selector used to determine the "strategy" on how to split the bill. Listens on the splitStrategy property and therefore
  * gets executed every time, the user changes the strategy.
@@ -111,6 +122,7 @@ const getPercentualShares = createSelector([ getAmount, getPersonValues, getAllM
     var percentFactor = (percentage / 100);
     return Math.round(amount * percentFactor * 100) / 100;
   };
+
 
   var shares = personValues.map(pv => {
     return {
