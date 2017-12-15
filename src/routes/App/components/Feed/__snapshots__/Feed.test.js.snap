@@ -9,7 +9,7 @@ exports[`Feed should render feed correctly 1`] = `
     <h5
       className=""
     >
-      2 days ago
+      yesterday
     </h5>
     <li
       className="undefined "
@@ -219,7 +219,7 @@ exports[`Feed should render feed correctly 1`] = `
     <h5
       className=""
     >
-      4 days ago
+      3 days ago
     </h5>
     <li
       className="undefined "

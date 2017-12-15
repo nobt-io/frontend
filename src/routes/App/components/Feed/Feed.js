@@ -22,7 +22,8 @@ class Feed extends React.Component {
 
   getFeedSections = () => {
 
-    const now = Date.now();
+    const now = this.props.intl.now();
+
     const formatFeedItemDate = feedItem => this.props.intl.formatRelative(feedItem.date, {now});
 
     const relativeDates = this.props.feedItems.map(formatFeedItemDate);
