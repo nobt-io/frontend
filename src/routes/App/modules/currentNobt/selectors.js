@@ -45,14 +45,12 @@ const getPaymentsAsFeedItems = createSelector([getPayments], payments => payment
   recipient: payment.recipient
 })));
 
+let newestFirstComparator = function (leftFeedItem, rightFeedItem) {
+  return new Date(leftFeedItem.date) < new Date(rightFeedItem.date)
+};
+
 export const getSortedFeedItems = createSelector([ getBillsAsFeedItems, getPaymentsAsFeedItems ], (billFeedItems, paymentFeedItems) => {
-
-  return [ ...billFeedItems, ...paymentFeedItems ]
-    .sort((leftFeedItem, rightFeedItem) => {
-
-      // Create a date object to ensure that comparison makes sense
-      return new Date(leftFeedItem.date) < new Date(rightFeedItem.date)
-    });
+  return [ ...billFeedItems, ...paymentFeedItems ].sort(newestFirstComparator);
 });
 
 export const getBalances = createSelector([ getTransactions, getMembers ], (transactions, members) => {
