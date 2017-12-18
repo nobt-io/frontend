@@ -1,9 +1,0 @@
-.cardTitle {
-
-  // Selecting this div via the child-selectors feels hacky but we don't have a choice as
-  // long as (https://github.com/react-toolbox/react-toolbox/issues/1480) is not resolved.
-  > div {
-    overflow: auto;
-    margin-right: 3rem;
-  }
-}
