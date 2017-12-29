@@ -2,7 +2,7 @@ import React from "react";
 import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
-import Page from "components/Page";
+import { Main } from "components/Container";
 import { Input } from "react-toolbox/lib/input/index";
 import { List, ListItem } from "react-toolbox/lib/list/index";
 import Box from "../../../../../../components/Box/Box";
@@ -54,7 +54,7 @@ const overview = ({push, ...props}) => {
         />
       </HeadRoom>
 
-      <Page>
+      <Main>
         <Title>Subject</Title>
         <SubTitle>Enter a descriptive name for what was paid.</SubTitle>
         <Box>
@@ -100,7 +100,7 @@ const overview = ({push, ...props}) => {
 
         <Button raised primary onClick={handleOnSubmit} label="Add Bill"/>
 
-      </Page>
+      </Main>
 
     </div>
   );

@@ -11,7 +11,7 @@ import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import { List, ListSubHeader } from "react-toolbox/lib/list/index";
 import { FormattedDate, FormattedMessage } from "react-intl";
 import DebtorAmountTheme from "./DebtorAmountTheme.scss";
-import Page from "components/Page";
+import { Page } from "components/Container";
 
 class BillDetailPage extends React.Component {
 

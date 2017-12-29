@@ -3,7 +3,7 @@ import { AppBar } from "react-toolbox/lib/app_bar/index";
 import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
-import Page from "components/Page";
+import { Page } from "components/Container";
 import { ListDivider, ListItem } from "react-toolbox/lib/list/index";
 import HOList from "../../../../../../../containers/HOList/HOList";
 import { connect } from "react-redux";
