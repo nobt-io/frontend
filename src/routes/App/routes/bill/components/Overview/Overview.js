@@ -1,5 +1,4 @@
 import React from "react";
-import { AppBar } from "react-toolbox/lib/app_bar/index";
 import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
@@ -45,15 +44,12 @@ const overview = ({push, ...props}) => {
     props.onSubmit(props.nobtId, billToAdd);
   };
 
-  let debtors = props.shares.map(s => s.name).join(",");
-
   return (
     <div>
 
       <HeadRoom>
-        <AppBar
-          leftIcon={<FontIcon value="chevron_left" />}
-          rightIcon={<FontIcon />}
+        <BrandedAppBar
+          canGoBack={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
           title="Add Bill"
         />
       </HeadRoom>
@@ -108,7 +104,7 @@ const overview = ({push, ...props}) => {
 
     </div>
   );
-}
+};
 
 export default withNavigation(connect(
   (state, ownProps) => ({
