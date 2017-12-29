@@ -1,8 +1,6 @@
 .section {
-  background-color: white;
-  border-radius: $container-border-radius;
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border-bottom: 1px dotted $grey;
 }
 
 .sectionCaption{
@@ -12,6 +10,9 @@
   margin: .5rem 0;
 }
 
-.sectionLegend{
-  color: gray;
+.sectionGroup{
+  background-color: white;
+  border-radius: $container-border-radius;
+  margin-bottom: 1.5rem;
+  color: black;
 }

@@ -7,10 +7,14 @@
 }
 
 .heading {
-  color: white;
   font-size: 3.5rem;
-  text-align: center;
-  margin: 2rem;
+  margin: 2rem 0 1rem;
+}
+
+.subHeading{
+  opacity: 0.5;
+  font-size: 2rem;
+  margin: 0 0 2rem;
 }
 
 .title {
@@ -24,4 +28,11 @@
   color: $color-text-secondary;
 
   padding-top: $unit;
+}
+
+.legend{
+  font-size: 1.2rem;
+  line-height: 2rem;
+  color: $grey;
+  margin: 0;
 }
