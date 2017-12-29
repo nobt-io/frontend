@@ -4,7 +4,6 @@ import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
 import { Main } from "components/Container";
 import { Input } from "react-toolbox/lib/input/index";
-import { List, ListItem } from "react-toolbox/lib/list/index";
 import Box from "../../../../../../components/Box/Box";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import withNavigation from "../../../../../../components/hoc/withNavigation";
@@ -12,6 +11,7 @@ import connect from "react-redux/es/connect/connect";
 import { getAmount, getDebtee, getDescription, getShares } from "../../modules/addBillForm/selectors";
 import Button from "../../../../../../components/Button/Button";
 import { addBill } from "../../modules/addBillForm/actions";
+import { Selector, SelectorItem } from "components/Selector";
 
 const overview = ({push, ...props}) => {
 
@@ -69,34 +69,29 @@ const overview = ({push, ...props}) => {
 
         <Title>Debtee</Title>
         <SubTitle>Select the person who paid this bill.</SubTitle>
-        <Box>
-          <List selectable>
-            <ListItem
-              leftIcon="person"
-              caption={props.debtee == null ? "Select a Debtee" : props.debtee}
-              onClick={() => LocationBuilder.fromWindow().push("debtee").apply(push)}
-              legend={props.debtee == null ? null : "paid the bill"}
-              rightActions={[
-                <FontIcon value="edit" />
-              ]} />
-          </List>
-        </Box>
+        <Selector>
+          <SelectorItem
+            leftIcon="person"
+            caption={props.debtee == null ? "Select a Debtee" : props.debtee}
+            onClick={() => LocationBuilder.fromWindow().push("debtee").apply(push)}
+            legend={props.debtee == null ? " " : "paid the bill"}
+            rightActions={[
+              <FontIcon value="edit" />
+            ]} />
+        </Selector>
 
         <Title>Debtors</Title>
         <SubTitle>Select who is involved in this bill.</SubTitle>
-
-        <Box>
-          <List selectable>
-            <ListItem
-              leftIcon="group"
-              caption={formatDebtors(props.shares)}
-              legend={selectedDebtors(props.shares).length + " persons"}
-              onClick={() => LocationBuilder.fromWindow().push("debtors").apply(push)}
-              rightActions={[
-                <FontIcon value="edit" />
-              ]} />
-          </List>
-        </Box>
+        <Selector>
+          <SelectorItem
+            leftIcon="group"
+            caption={formatDebtors(props.shares)}
+            legend={selectedDebtors(props.shares).length === 0 ? " " : selectedDebtors(props.shares).length + " persons"}
+            onClick={() => LocationBuilder.fromWindow().push("debtors").apply(push)}
+            rightActions={[
+              <FontIcon value="edit" />
+            ]} />
+        </Selector>
 
         <Button raised primary onClick={handleOnSubmit} label="Add Bill"/>
 
