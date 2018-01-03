@@ -11,7 +11,7 @@ import Button from "components/Button";
 import { addBill } from "../../modules/addBillForm/actions";
 import { Selector, SelectorItem } from "components/Selector";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
-import { Heading, SubHeading, Legend } from "components/text";
+import { Heading, SubHeading, Caption, Legend } from "components/text";
 import { Section, SectionGroup} from "components/Section";
 
 const overview = ({push, ...props}) => {
@@ -60,20 +60,23 @@ const overview = ({push, ...props}) => {
         <SubHeading>Add a bill to your nobt.</SubHeading>
 
         <SectionGroup>
-          <Section caption="Subject">
+          <Section>
+            <Caption>What did you buy?</Caption>
             <NonLabelInputContainer>
               <Input placeholder="Trip Snacks, Train Tickets, Beer, ..." value={props.description} onChange={props.onDescriptionChanged}
                      legend="Enter a descriptive name for what was paid." />
             </NonLabelInputContainer>
           </Section>
 
-          <Section caption="Total">
+          <Section>
+            <Caption>How much did it cost?</Caption>
             <NonLabelInputContainer>
               <Input placeholder="13.37" type="number" value={props.amount} onChange={props.onAmountChanged} legend="Enter the total of this bill." />
             </NonLabelInputContainer>
           </Section>
 
-          <Section caption="Debtee">
+          <Section>
+            <Caption>Who paid?</Caption>
             <Selector>
               <SelectorItem
                 leftIcon="person"
@@ -87,7 +90,8 @@ const overview = ({push, ...props}) => {
             <Legend>Select the person who paid this bill.</Legend>
           </Section>
 
-          <Section caption="Debtors">
+          <Section>
+            <Caption>Who is involded?</Caption>
             <Selector>
               <SelectorItem
                 leftIcon="group"

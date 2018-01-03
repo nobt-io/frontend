@@ -17,6 +17,12 @@
   margin: 0 0 2rem;
 }
 
+.caption{
+  font-size: inherit;
+  font-weight: bold;
+  margin: .5rem 0;
+}
+
 .title {
   @include typo-headline(); // Reuse styling from react-toolbox for consistency reasons
   @include headingStyle();
