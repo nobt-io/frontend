@@ -7,5 +7,3 @@ function container(style) {
 
 exports.Page = container(styles.page);
 exports.Main = container(styles.main);
-
-exports.NonLabelInputContainer = container(styles.nonLabelInputContainer);

@@ -1,5 +1,5 @@
-import pureInput from "./Input";
-import pureInputLegend from "./InputLegend";
+import input from "./Input";
+import inputLegend from "./InputLegend";
 
-export const PureInput = pureInput;
-export const PureInputLegend = pureInputLegend;
+export const Input = input;
+export const InputLegend = inputLegend;

@@ -1,8 +1,8 @@
 import React from "react";
 import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
-import { Main, NonLabelInputContainer } from "components/Container";
-import Input from "components/Input";
+import { Main } from "components/Container";
+import { Input, InputLegend } from "components/Input";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import connect from "react-redux/es/connect/connect";
@@ -12,7 +12,7 @@ import { addBill } from "../../modules/addBillForm/actions";
 import { Selector, SelectorItem } from "components/Selector";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Heading, SubHeading, Caption, Legend } from "components/text";
-import { Section, SectionGroup} from "components/Section";
+import { Section, SectionGroup } from "components/Section";
 
 const overview = ({push, ...props}) => {
 
@@ -58,23 +58,17 @@ const overview = ({push, ...props}) => {
       <Main>
         <Heading>Add a bill</Heading>
         <SubHeading>Add a bill to your nobt.</SubHeading>
-
         <SectionGroup>
           <Section>
             <Caption>What did you buy?</Caption>
-            <NonLabelInputContainer>
-              <Input placeholder="Trip Snacks, Train Tickets, Beer, ..." value={props.description} onChange={props.onDescriptionChanged}
-                     legend="Enter a descriptive name for what was paid." />
-            </NonLabelInputContainer>
+            <Input placeholder="Trip Snacks, Train Tickets, Beer, ..." value={props.description} onChange={props.onDescriptionChanged} />
+            <InputLegend>Enter a descriptive name for what was paid.</InputLegend>
           </Section>
-
           <Section>
             <Caption>How much did it cost?</Caption>
-            <NonLabelInputContainer>
-              <Input placeholder="13.37" type="number" value={props.amount} onChange={props.onAmountChanged} legend="Enter the total of this bill." />
-            </NonLabelInputContainer>
+            <Input placeholder="13.37" type="number" value={props.amount} onChange={props.onAmountChanged}/>
+            <InputLegend>Enter the total of this bill.</InputLegend>
           </Section>
-
           <Section>
             <Caption>Who paid?</Caption>
             <Selector>
@@ -87,7 +81,7 @@ const overview = ({push, ...props}) => {
                   <FontIcon value="edit" />
                 ]} />
             </Selector>
-            <Legend>Select the person who paid this bill.</Legend>
+            <InputLegend>Select the person who paid this bill.</InputLegend>
           </Section>
 
           <Section>
@@ -102,11 +96,11 @@ const overview = ({push, ...props}) => {
                   <FontIcon value="edit" />
                 ]} />
             </Selector>
-            <Legend>Select who is involved in this bill.</Legend>
+            <InputLegend>Select who is involved in this bill.</InputLegend>
           </Section>
         </SectionGroup>
 
-        <Button raised primary onClick={handleOnSubmit} label="Add Bill" icon="check_circle"/>
+        <Button raised primary onClick={handleOnSubmit} label="Add Bill" icon="check_circle" />
 
       </Main>
 

@@ -12,5 +12,3 @@ export default ({value, onChange, type, placeholder}) => {
     </div>
   )
 }
-
-
