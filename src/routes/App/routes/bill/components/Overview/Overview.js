@@ -74,9 +74,9 @@ const overview = ({push, ...props}) => {
             <Selector>
               <SelectorItem
                 leftIcon="person"
-                caption={props.debtee == null ? "Select a Debtee" : props.debtee}
+                placeholder="Select a Debtee"
+                value={props.debtee !== null ? props.debtee + " paid the bill" : null}
                 onClick={() => LocationBuilder.fromWindow().push("debtee").apply(push)}
-                legend={props.debtee == null ? " " : "paid the bill"}
                 rightActions={[
                   <FontIcon value="edit" />
                 ]} />
@@ -89,8 +89,8 @@ const overview = ({push, ...props}) => {
             <Selector>
               <SelectorItem
                 leftIcon="group"
-                caption={formatDebtors(props.shares)}
-                legend={selectedDebtors(props.shares).length === 0 ? " " : selectedDebtors(props.shares).length + " persons"}
+                placeholder="Nobody is involved"
+                value={selectedDebtors(props.shares).length === 0 ? null : selectedDebtors(props.shares).length + " persons are involved"}
                 onClick={() => LocationBuilder.fromWindow().push("debtors").apply(push)}
                 rightActions={[
                   <FontIcon value="edit" />
