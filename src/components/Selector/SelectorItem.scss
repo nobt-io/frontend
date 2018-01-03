@@ -1,3 +1,11 @@
 .itemContentRoot{
-  height: 6.5rem !important;
+  height: 6rem !important;
+}
+
+.listItem{
+  border-bottom: 1px solid $color-accent-light;
+}
+
+.item{
+  padding: 0 0.5rem;
 }
