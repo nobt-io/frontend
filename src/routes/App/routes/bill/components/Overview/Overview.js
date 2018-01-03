@@ -1,5 +1,4 @@
 import React from "react";
-import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { Main } from "components/Container";
 import { Input, InputLegend } from "components/Input";
@@ -47,14 +46,10 @@ const overview = ({push, ...props}) => {
 
   return (
     <div>
-
-      <HeadRoom>
-        <BrandedAppBar
-          canGoBack={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
-          title="Add Bill"
-        />
-      </HeadRoom>
-
+      <BrandedAppBar
+        canGoBack={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
+        title="Add Bill"
+      />
       <Main>
         <Heading>Add a bill</Heading>
         <SubHeading>Add a bill to your nobt.</SubHeading>
@@ -66,7 +61,7 @@ const overview = ({push, ...props}) => {
           </Section>
           <Section>
             <Caption>How much did it cost?</Caption>
-            <Input placeholder="13.37" type="number" value={props.amount} onChange={props.onAmountChanged}/>
+            <Input placeholder="13.37" type="number" value={props.amount} onChange={props.onAmountChanged} />
             <InputLegend>Enter the total of this bill.</InputLegend>
           </Section>
           <Section>
@@ -83,7 +78,6 @@ const overview = ({push, ...props}) => {
             </Selector>
             <InputLegend>Select the person who paid this bill.</InputLegend>
           </Section>
-
           <Section>
             <Caption>Who is involded?</Caption>
             <Selector>
@@ -99,11 +93,8 @@ const overview = ({push, ...props}) => {
             <InputLegend>Select who is involved in this bill.</InputLegend>
           </Section>
         </SectionGroup>
-
         <Button raised primary onClick={handleOnSubmit} label="Add Bill" icon="check_circle" />
-
       </Main>
-
     </div>
   );
 };

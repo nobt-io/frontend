@@ -1,6 +1,5 @@
 import React from "react";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
-import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
 import { Page } from "components/Container";
@@ -23,16 +22,14 @@ const debteePage = ({members, debtee, onPersonPicked, replace}) => {
     LocationBuilder.fromWindow().pop().apply(replace);
   };
 
-  return(
+  return (
     <div>
-      <HeadRoom>
-        <AppBar
-          onLeftIconClick={ () => LocationBuilder.fromWindow().pop().apply(replace) }
-          leftIcon={<FontIcon value="chevron_left" />}
-          rightIcon={<FontIcon />}
-          title="Add Bill"
-        />
-      </HeadRoom>
+      <AppBar
+        onLeftIconClick={() => LocationBuilder.fromWindow().pop().apply(replace)}
+        leftIcon={<FontIcon value="chevron_left" />}
+        rightIcon={<FontIcon />}
+        title="Add Bill"
+      />
       <Page>
         <Title>Select debtee</Title>
         <SubTitle>Select the person who paid this bill.</SubTitle>

@@ -1,6 +1,5 @@
 import React from "react";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
-import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
 import { Page } from "components/Container";
@@ -20,14 +19,12 @@ const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMe
 
   return (
     <div>
-      <HeadRoom>
-        <AppBar
-          onLeftIconClick={() => LocationBuilder.fromWindow().pop().apply(replace)}
-          leftIcon={<FontIcon value="chevron_left" />}
-          rightIcon={<FontIcon />}
-          title="Add Bill"
-        />
-      </HeadRoom>
+      <AppBar
+        onLeftIconClick={() => LocationBuilder.fromWindow().pop().apply(replace)}
+        leftIcon={<FontIcon value="chevron_left" />}
+        rightIcon={<FontIcon />}
+        title="Add Bill"
+      />
       <Page>
         <Title>Debtors</Title>
         <SubTitle>Choose who is in.</SubTitle>
@@ -39,9 +36,9 @@ const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMe
             rightActions={[
               <Checkbox
                 checked={areAllMembersSelected}
-                onChange={ () => {
+                onChange={() => {
                   allMembers.forEach(member => onShareValueChanged(member, true))
-                } }
+                }}
               />
             ]}
           />
@@ -60,12 +57,12 @@ const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMe
                 <Checkbox
                   checked={share.value}
                   ripple={false}
-                  onChange={ (newState) => onShareValueChanged(share.name, newState) }
+                  onChange={(newState) => onShareValueChanged(share.name, newState)}
                 />
               ]}
               caption={share.name}
-              legend={share.value && <Amount value={share.amount}/>}
-              >
+              legend={share.value && <Amount value={share.amount} />}
+            >
             </ListItem>)
           }
 
