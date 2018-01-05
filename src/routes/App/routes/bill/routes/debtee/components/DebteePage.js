@@ -1,12 +1,9 @@
 import React from "react";
 import { SubHeading, Heading, Caption } from "components/text/index";
 import { Main } from "components/Container";
-import { ListItem } from "react-toolbox/lib/list/index";
-import HOList from "../../../../../../../containers/HOList/HOList";
 import { connect } from "react-redux";
 import { getAllMembers, getDebtee } from "../../../modules/addBillForm/selectors";
-import AddMember from "../../../../new/components/AddMember/AddMember";
-import Avatar from "../../../../../../../components/Avatar/Avatar";
+import AddMember from "components/AddMember";
 import { newDebteeSelected } from "../../../modules/addBillForm/actions";
 import LocationBuilder from "../../../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
@@ -34,13 +31,13 @@ const debteePage = ({members, debtee, onPersonPicked, replace}) => {
           <Section>
             <Caption>Persons</Caption>
             <List>
-              {members.map(name => (<SelectableItem name={name} selected={name === debtee} selectAction={name => selectPerson(name)}/>))}
+              {members.map(name => (<SelectableItem name={name} selected={name === debtee} selectAction={name => selectPerson(name)} />))}
             </List>
           </Section>
           <Section>
             <Caption>Someone else?</Caption>
             <List>
-              <AddMember onNewMember={(name) => selectPerson(name)} />
+              <AddMember placeholder="Bart, Milhouse, Nelson, ..." onNewMember={(name) => selectPerson(name)} />
             </List>
           </Section>
         </SectionGroup>

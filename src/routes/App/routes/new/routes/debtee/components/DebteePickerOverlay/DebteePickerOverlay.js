@@ -3,7 +3,7 @@ import HOList from "containers/HOList";
 import { ListItem } from "react-toolbox/lib/list";
 import Avatar from "components/Avatar";
 import _debug from "debug";
-import AddMember from "../../../../components/AddMember/AddMember";
+import AddMember from "components/AddMember";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
 import { connect } from "react-redux";
 import { getAllMembers, getDebtee } from "../../../../modules/addBillForm/selectors";

@@ -1,10 +1,10 @@
 import React from "react";
-import InputTheme from "../InputTheme.scss";
+import InputTheme from "../../routes/App/routes/new/components/InputTheme.scss";
 import { connect } from "react-redux";
 import { Input } from "react-toolbox/lib/input/index";
 import { IconButton } from "react-toolbox/lib/button/index";
 import { ListItem } from "react-toolbox/lib/list/index";
-import { isExistingMemberFactory } from "../../../bill/modules/addBillForm/selectors";
+import { isExistingMemberFactory } from "../../routes/App/routes/bill/modules/addBillForm/selectors";
 
 class AddMember extends React.Component {
 
@@ -46,6 +46,10 @@ class AddMember extends React.Component {
     this.props.onNewMember(newMember);
   };
 
+  getPlaceholder = () => {
+    return this.props.placeholder || "Someone else?"
+  };
+
   render = () => (
     <ListItem
       ripple={false}
@@ -53,7 +57,7 @@ class AddMember extends React.Component {
         value={this.state.value}
         autoComplete="off"
         type='text'
-        placeholder="Someone else?"
+        placeholder={this.getPlaceholder()}
         onKeyPress={this.handleOnInputKeyPress}
         onChange={this.handleOnInputChange}
         theme={InputTheme}
