@@ -8,7 +8,7 @@ import connect from "react-redux/es/connect/connect";
 import { getAmount, getDebtee, getDescription, getShares } from "../../modules/addBillForm/selectors";
 import Button from "components/Button";
 import { addBill } from "../../modules/addBillForm/actions";
-import { Selector, SelectorItem } from "components/Selector";
+import { List, SelectorItem } from "components/List";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Heading, SubHeading, Caption, Legend } from "components/text";
 import { Section, SectionGroup } from "components/Section";
@@ -66,7 +66,7 @@ const overview = ({push, ...props}) => {
           </Section>
           <Section>
             <Caption>Who paid?</Caption>
-            <Selector>
+            <List>
               <SelectorItem
                 leftIcon="person"
                 placeholder="Select a Debtee"
@@ -75,12 +75,12 @@ const overview = ({push, ...props}) => {
                 rightActions={[
                   <FontIcon value="edit" />
                 ]} />
-            </Selector>
+            </List>
             <InputLegend>Select the person who paid this bill.</InputLegend>
           </Section>
           <Section>
             <Caption>Who is involded?</Caption>
-            <Selector>
+            <List>
               <SelectorItem
                 leftIcon="group"
                 placeholder="Nobody is involved"
@@ -89,7 +89,7 @@ const overview = ({push, ...props}) => {
                 rightActions={[
                   <FontIcon value="edit" />
                 ]} />
-            </Selector>
+            </List>
             <InputLegend>Select who is involved in this bill.</InputLegend>
           </Section>
         </SectionGroup>

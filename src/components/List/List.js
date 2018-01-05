@@ -1,6 +1,6 @@
 import * as React from "react";
 import { List } from "react-toolbox/lib/list";
-import styles from "./Selector.scss"
+import styles from "./List.scss"
 
 
 export default ({children})=> (

@@ -1,19 +1,18 @@
 import React from "react";
-import { AppBar } from "react-toolbox/lib/app_bar/index";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
-import { SubTitle, Title } from "components/text/index";
-import { Page } from "components/Container";
-import { ListDivider, ListItem } from "react-toolbox/lib/list/index";
+import { SubHeading, Heading, Caption } from "components/text/index";
+import { Main } from "components/Container";
+import { ListItem } from "react-toolbox/lib/list/index";
 import HOList from "../../../../../../../containers/HOList/HOList";
 import { connect } from "react-redux";
 import { getAllMembers, getDebtee } from "../../../modules/addBillForm/selectors";
 import AddMember from "../../../../new/components/AddMember/AddMember";
-import { IconButton } from "react-toolbox/lib/button/index";
 import Avatar from "../../../../../../../components/Avatar/Avatar";
 import { newDebteeSelected } from "../../../modules/addBillForm/actions";
 import LocationBuilder from "../../../../../modules/navigation/LocationBuilder";
-import withNavigation from "../../../../../../../components/hoc/withNavigation";
-
+import withNavigation from "components/hoc/withNavigation";
+import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
+import { Section, SectionGroup } from "components/Section";
+import { List, SelectableItem } from "components/List"
 
 const debteePage = ({members, debtee, onPersonPicked, replace}) => {
 
@@ -24,39 +23,28 @@ const debteePage = ({members, debtee, onPersonPicked, replace}) => {
 
   return (
     <div>
-      <AppBar
-        onLeftIconClick={() => LocationBuilder.fromWindow().pop().apply(replace)}
-        leftIcon={<FontIcon value="chevron_left" />}
-        rightIcon={<FontIcon />}
+      <BrandedAppBar
+        canGoBack={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
         title="Add Bill"
       />
-      <Page>
-        <Title>Select debtee</Title>
-        <SubTitle>Select the person who paid this bill.</SubTitle>
-        <HOList
-          selectable
-          items={members}
-          renderItem={(name) => (
-            <ListItem
-              key={name}
-              leftActions={[
-                <Avatar name={name} medium />
-              ]}
-              rightActions={[
-                // Use an IconButton instead of an Icon in order to align things nicely.
-                <IconButton
-                  icon={name === debtee ? "check_circle" : "radio_button_unchecked"}
-                  ripple={false}
-                />
-              ]}
-              caption={name}
-              onClick={() => selectPerson(name)}>
-            </ListItem>
-          )}>
-          <ListDivider />
-          <AddMember onNewMember={(name) => selectPerson(name)} />
-        </HOList>
-      </Page>
+      <Main>
+        <Heading>Select debtee</Heading>
+        <SubHeading>Select the person who paid this bill.</SubHeading>
+        <SectionGroup>
+          <Section>
+            <Caption>Persons</Caption>
+            <List>
+              {members.map(name => (<SelectableItem name={name} selected={name === debtee} selectAction={name => selectPerson(name)}/>))}
+            </List>
+          </Section>
+          <Section>
+            <Caption>Someone else?</Caption>
+            <List>
+              <AddMember onNewMember={(name) => selectPerson(name)} />
+            </List>
+          </Section>
+        </SectionGroup>
+      </Main>
     </div>
   );
 };
