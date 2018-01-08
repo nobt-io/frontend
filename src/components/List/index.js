@@ -1,7 +1,9 @@
 import List from "./List";
 import SelectorItem from "./SelectorItem";
-import SelectableItem from "./SelectableItem";
+import RadioboxItem from "./RadioboxItem";
+import CheckboxItem from "./CheckboxItem";
 
 exports.List = List;
 exports.SelectorItem = SelectorItem;
-exports.SelectableItem = SelectableItem;
+exports.RadioboxItem = RadioboxItem;
+exports.CheckboxItem = CheckboxItem;

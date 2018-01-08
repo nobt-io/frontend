@@ -9,7 +9,7 @@ import LocationBuilder from "../../../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Section, SectionGroup } from "components/Section";
-import { List, SelectableItem } from "components/List"
+import { List, RadioboxItem } from "components/List"
 
 const debteePage = ({members, debtee, onPersonPicked, replace}) => {
 
@@ -21,8 +21,7 @@ const debteePage = ({members, debtee, onPersonPicked, replace}) => {
   return (
     <div>
       <BrandedAppBar
-        canGoBack={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
-        title="Add Bill"
+        onBackHandle={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
       />
       <Main>
         <Heading>Select debtee</Heading>
@@ -31,7 +30,7 @@ const debteePage = ({members, debtee, onPersonPicked, replace}) => {
           <Section>
             <Caption>Persons</Caption>
             <List>
-              {members.map(name => (<SelectableItem name={name} selected={name === debtee} selectAction={name => selectPerson(name)} />))}
+              {members.map(name => (<RadioboxItem name={name} selected={name === debtee} selectAction={name => selectPerson(name)} />))}
             </List>
           </Section>
           <Section>
