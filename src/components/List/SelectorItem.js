@@ -2,11 +2,11 @@ import * as React from "react";
 import { ListItem } from "react-toolbox/lib/list";
 import styles from "./SelectorItem.scss"
 
-export default (props) => {
+export default ({value, placeholder, ...props}) => {
 
-  const valueIsSet = (props.value !== null && props.value !== undefined && props.value.length !== 0);
+  const valueIsSet = (value !== null && value !== undefined && value.length !== 0);
 
   return valueIsSet
-    ? <ListItem selectable {...props} theme={styles} caption={props.value} legend={null} />
-    : <ListItem selectable {...props} theme={styles} caption={null} legend={props.placeholder} />
+    ? <ListItem selectable {...props} theme={styles} caption={value} key={value} legend={null} />
+    : <ListItem selectable {...props} theme={styles} caption={null} key={value} legend={placeholder} />
 }

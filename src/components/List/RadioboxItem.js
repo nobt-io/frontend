@@ -6,6 +6,7 @@ import { RadioButton } from "react-toolbox/lib/radio";
 
 export default ({name, selected, selectAction}) => (
   <ListItem caption={name}
+            key={name}
             theme={styles}
             leftActions={[ <Avatar name={name} medium /> ]}
             rightActions={[

@@ -4,16 +4,14 @@ import styles from "./RadioboxItem.scss"
 import Avatar from "components/Avatar";
 import { Checkbox } from "react-toolbox/lib/checkbox";
 
-export default ({name, selected, selectAction, noAvatar}) => {
-
-  return (
-    <ListItem key={name}
-              caption={name}
-              theme={styles}
-              leftActions={noAvatar ? [] : [ <Avatar name={name} medium /> ]}
-              rightActions={[
-                //e.stopPropagation() not working with react-toolbox
-                <span onClick={e => e.stopPropagation()}>
+export default ({name, selected, selectAction, noAvatar}) => (
+  <ListItem caption={name}
+            key={name}
+            theme={styles}
+            leftActions={noAvatar ? [] : [ <Avatar name={name} medium /> ]}
+            rightActions={[
+              //e.stopPropagation() not working with react-toolbox
+              <span onClick={e => e.stopPropagation()}>
                   <Checkbox
                     checked={selected}
                     onChange={() => {
@@ -21,10 +19,9 @@ export default ({name, selected, selectAction, noAvatar}) => {
                     }}
                   />
                 </span>
-              ]}
-              onClick={() => {
-                selectAction(name, !selected);
-              }}
-    />);
-}
+            ]}
+            onClick={() => {
+              selectAction(name, !selected);
+            }}
+  />);
 
