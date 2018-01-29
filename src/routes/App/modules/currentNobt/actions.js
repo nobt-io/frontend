@@ -62,6 +62,15 @@ export function fetchNobt(id) {
   }
 }
 
+export function deleteExpense(e) {
+
+  return (dispatch) => {
+    Client
+      .delete(e.actions.delete)
+      .then(() => dispatch(invalidateNobt()))
+  }
+}
+
 export function invalidateNobt() {
   return {
     type: INVALIDATE_NOBT

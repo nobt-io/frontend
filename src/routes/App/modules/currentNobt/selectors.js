@@ -75,7 +75,8 @@ const deNormalizeBill = (e) => {
       name: debteeName,
       amount: sumOfShares
     },
-    debtors: debtors
+    debtors: debtors,
+    actions: e._links
   };
 };
 
@@ -114,6 +115,27 @@ export const makeGetBill = () => createSelector([ getBills, getBillId ], (bills,
     .filter(bill => bill.id === billId)
     .map(deNormalizeBill)
     .find(first);
+});
+
+export const makeCanBillBeDeleted = () => createSelector([ getBills, getBillId ], (bills, billId) => {
+
+  var bill = bills
+    .filter(bill => bill.id === billId)
+    .find(first);
+
+  if (!bill) {
+    return false;
+  }
+
+  if (!bill.hasOwnProperty("_links")) {
+    return false;
+  }
+
+  if (!bill._links.hasOwnProperty("delete")) {
+    return false;
+  }
+
+  return true;
 });
 
 const getBalanceOwner = (state, props) => props.params[ balanceDetailPathVariable ];

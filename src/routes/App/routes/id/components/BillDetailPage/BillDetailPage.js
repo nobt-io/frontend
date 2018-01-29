@@ -2,7 +2,7 @@ import React from "react";
 import Amount from "components/Amount";
 import HeadRoom from "react-headroom";
 import { connect } from "react-redux";
-import { makeGetBill } from "../../../../modules/currentNobt/selectors";
+import { makeCanBillBeDeleted, makeGetBill } from "../../../../modules/currentNobt/selectors";
 import { ListItem } from "react-toolbox/lib/list";
 import Avatar from "components/Avatar";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
@@ -12,12 +12,21 @@ import { List, ListSubHeader } from "react-toolbox/lib/list/index";
 import { FormattedDate, FormattedMessage } from "react-intl";
 import DebtorAmountTheme from "./DebtorAmountTheme.scss";
 import Page from "components/Page";
+import { Snackbar } from "react-toolbox";
+import { deleteExpense } from "../../../../modules/currentNobt/actions";
+import withNavigation from "../../../../../../components/hoc/withNavigation";
+import withDelayable from "../../../../../../components/Delayable";
 
 class BillDetailPage extends React.Component {
 
   render = () => {
 
-    const {bill} = this.props;
+    if (!this.props.bill) {
+      LocationBuilder.fromWindow().pop().apply(this.props.replace);
+      return null;
+    }
+
+    const {bill, canBillBeDeleted} = this.props;
     const {debtee} = bill;
 
     return (
@@ -26,7 +35,6 @@ class BillDetailPage extends React.Component {
           <AppBar
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
             leftIcon={<FontIcon value="chevron_left" />}
-            rightIcon={<FontIcon />}
             title={bill.name}
           />
         </HeadRoom>
@@ -88,28 +96,57 @@ class BillDetailPage extends React.Component {
                   ]}
                 />)
             }
+
+          </List>
+
+          <List>
+            <ListSubHeader caption="Actions" />
+            <ListItem
+              primary
+              leftIcon="delete"
+              caption="Delete this bill"
+              disabled={!canBillBeDeleted || this.props.deleteBill.isRunning}
+              onClick={() => this.props.deleteBill.schedule(() => this.props.deleteExpense(bill), 4000)}
+            />
           </List>
         </Page>
+
+        <Snackbar
+          action={`Undo (${this.props.deleteBill.remainingTime / 1000})`}
+          active={this.props.deleteBill.isRunning}
+          label='Bill deleted.'
+          onClick={this.props.deleteBill.cancel}
+          type="warning"
+        />
       </div>
     );
   };
 }
 
 BillDetailPage.propTypes = {
-  bill: React.PropTypes.object.isRequired
+  bill: React.PropTypes.object.isRequired,
+  deleteBill: React.PropTypes.object.isRequired,
 };
 
 const makeMapStateToProps = () => {
   const getBill = makeGetBill();
+  const canBillBeDeleted = makeCanBillBeDeleted();
 
   return (state, props) => {
     return {
-      bill: getBill(state, props)
+      bill: getBill(state, props),
+      canBillBeDeleted: canBillBeDeleted(state, props)
     };
   };
 };
 
-export default connect(
-  makeMapStateToProps,
-  (dispatch) => ({})
-)(BillDetailPage);
+export default withDelayable('deleteBill')(
+  connect(
+    makeMapStateToProps,
+    (dispatch) => ({
+      deleteExpense: (e) => {
+        dispatch(deleteExpense(e))
+      }
+    })
+  )(withNavigation(BillDetailPage))
+);
