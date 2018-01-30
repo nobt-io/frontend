@@ -2,10 +2,9 @@ import React from "react";
 import { Heading, SubHeading, Caption } from "components/text/index";
 import { Main } from "components/Container";
 import { SectionGroup, Section } from "components/Section";
-import { List, CheckboxItem } from "components/List"
+import { List, CheckboxItem, AddMemberItem } from "components/List"
 import { ListDivider } from "react-toolbox/lib/list/index";
 import { connect } from "react-redux";
-import AddMember from "components/AddMember";
 import LocationBuilder from "../../../../../modules/navigation/LocationBuilder";
 import withNavigation from "../../../../../../../components/hoc/withNavigation";
 import { areAllMembersSelected, getAllMembers, getShares } from "../../../modules/addBillForm/selectors";
@@ -38,7 +37,7 @@ const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMe
           <Section>
             <Caption>Someone else?</Caption>
             <List>
-              <AddMember placeholder="Sheldon, Penny, Leonard, ..." onNewMember={(name) => onNewMember(name)} />
+              <AddMemberItem placeholder="Sheldon, Penny, Leonard, ..." onNewMember={(name) => onNewMember(name)} />
             </List>
           </Section>
         </SectionGroup>

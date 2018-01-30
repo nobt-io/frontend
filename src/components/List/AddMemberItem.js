@@ -1,5 +1,6 @@
 import React from "react";
-import InputTheme from "../../routes/App/routes/new/components/InputTheme.scss";
+import inputTheme from "./AddMemberItemInputTheme.scss";
+import itemTheme from "./AddMemberItemTheme.scss";
 import { connect } from "react-redux";
 import { Input } from "react-toolbox/lib/input/index";
 import { IconButton } from "react-toolbox/lib/button/index";
@@ -53,6 +54,7 @@ class AddMember extends React.Component {
   render = () => (
     <ListItem
       ripple={false}
+      theme={itemTheme}
       itemContent={<Input
         value={this.state.value}
         autoComplete="off"
@@ -60,7 +62,7 @@ class AddMember extends React.Component {
         placeholder={this.getPlaceholder()}
         onKeyPress={this.handleOnInputKeyPress}
         onChange={this.handleOnInputChange}
-        theme={InputTheme}
+        theme={inputTheme}
       />}
       rightActions={[
         <IconButton
