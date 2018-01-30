@@ -1,13 +1,14 @@
 import { createSelector } from "reselect";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import { getMembers } from "../../../../modules/currentNobt/selectors";
+import AsyncActionStatus from "const/AsyncActionStatus";
 
 const getAddBillFormSlice = (state) => state.App.addBillForm;
 
 export const getAmount = createSelector([ getAddBillFormSlice ], (state) => state.amount);
 export const getDebtee = createSelector([ getAddBillFormSlice ], (state) => state.debtee);
 export const getDescription = createSelector([ getAddBillFormSlice ], (state) => state.description);
-export const getAddBillStatus = createSelector([getAddBillFormSlice], state => state.addBillStatus);
+export const getAddBillStatus = createSelector([ getAddBillFormSlice ], state => state.addBillStatus);
 export const getSplitStrategy = createSelector([ getAddBillFormSlice ], (state) => {
   return state.splitStrategy
 });
@@ -17,7 +18,7 @@ export const getBillMembers = createSelector([ getAddBillFormSlice ], (state) =>
 });
 
 export const getAllMembers = createSelector([ getBillMembers, getMembers, getDebtee ], (billMembers, nobtMembers, debtee) => {
-  return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter( name => name !== null )
+  return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter(name => name !== null)
 });
 
 const getDefaultValues = createSelector([ getAddBillFormSlice ], (state) => state.defaultValues);
@@ -36,10 +37,10 @@ export const getPersonValues = createSelector([
   let defaultPersonValues = members.filter(name => !hasExplicitPersonValue(name)).map(createPersonValue);
   let existingPersonValues = state.personValues;
 
-  return [...defaultPersonValues, ...existingPersonValues]
+  return [ ...defaultPersonValues, ...existingPersonValues ]
 });
 
-export const areAllMembersSelected = createSelector([getPersonValues], personValues => {
+export const areAllMembersSelected = createSelector([ getPersonValues ], personValues => {
 
   for (let obj of personValues) {
     if (!obj.value) {
@@ -147,20 +148,29 @@ export const getShares = createSelector([ getShareSelector, (state) => state ], 
   return shares.sort(personNameComparator);
 });
 
-export const isValidBill = createSelector([ getShares, getAmount, getDescription, getDebtee ], (shares, amount, description, debtee) => {
+const isDescriptionValid = createSelector([ getDescription ], (description) => description.length > 0);
+const isAmountValid = createSelector([ getAmount ], (amount) => { return amount > 0;});
+const isDebteeValid = createSelector([ getDebtee ], (debtee) => { return debtee !== null; });
+const isDebtorsSelectionValid = createSelector([ getShares ], (shares) => { return shares.filter(s => s.amount > 0).length;});
 
-  var isAmountGreaterThanZero = amount > 0;
-  var isDescriptionNotEmpty = description.length > 0;
-  var isDebteeSelected = debtee !== null;
-  var hasAtLeastOneShareWithAmount = shares.filter(s => s.amount > 0).length;
+export const isValidBill = createSelector([ isDescriptionValid, isAmountValid, isDebteeValid, isDebtorsSelectionValid ],
+  (isDescriptionValid, isAmountValid, isDebteeValid, isDebtorsSelectionValid) => {
+    return isAmountValid && isDescriptionValid && isDebteeValid && isDebtorsSelectionValid;
+  });
 
-  return isAmountGreaterThanZero && isDescriptionNotEmpty && isDebteeSelected && hasAtLeastOneShareWithAmount;
-});
+const isAddBillStatusFailing = createSelector([getAddBillStatus], (status) => status === AsyncActionStatus.FAILED);
 
-export const isExistingMemberFactory = createSelector( [ getAllMembers ], members => {
+export const isDescriptionErrorShown = createSelector([ isAddBillStatusFailing, isDescriptionValid ], (failed, valid) => failed && !valid);
+export const isAmountErrorShown = createSelector([ isAddBillStatusFailing, isAmountValid ], (failed, valid) => failed && !valid);
+export const isDebteeErrorShown = createSelector([ isAddBillStatusFailing, isDebteeValid ], (failed, valid) => failed && !valid);
+export const isDebtorsSelectionErrorShown = createSelector([ isAddBillStatusFailing, isDebtorsSelectionValid ], (failed, valid) => failed && !valid);
+
+export const isExistingMemberFactory = createSelector([ getAllMembers ], members => {
   return (candidate) => members.indexOf(candidate) >= 0;
 });
 
 export const personNameComparator = (first, second) => {
   return first.name.localeCompare(second.name)
 };
+
+
