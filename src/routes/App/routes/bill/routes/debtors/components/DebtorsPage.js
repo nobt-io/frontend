@@ -31,7 +31,7 @@ const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMe
               <CheckboxItem name="Everyone" selected={areAllMembersSelected} selectAction={() => setAllValues(!areAllMembersSelected)} noAvatar />
               <ListDivider />
               {shares.map(share =>
-                <CheckboxItem name={share.name} selected={share.value} selectAction={(name, value) => onShareValueChanged(name, value)} />)}
+                <CheckboxItem key={share.name} name={share.name} selected={share.value} selectAction={(name, value) => onShareValueChanged(name, value)} />)}
             </List>
           </Section>
           <Section>

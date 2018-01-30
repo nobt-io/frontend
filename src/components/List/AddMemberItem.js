@@ -66,6 +66,7 @@ class AddMember extends React.Component {
       />}
       rightActions={[
         <IconButton
+          key="person_add"
           onClick={this.handleOnButtonClick}
           disabled={this.isNewMemberInvalid()}
           icon="person_add"

@@ -29,7 +29,7 @@ const debteePage = ({members, debtee, onPersonPicked, replace}) => {
           <Section>
             <Caption>Persons</Caption>
             <List>
-              {members.map(name => (<RadioboxItem name={name} selected={name === debtee} selectAction={name => selectPerson(name)} />))}
+              {members.map(name => (<RadioboxItem key={name} name={name} selected={name === debtee} selectAction={name => selectPerson(name)} />))}
             </List>
           </Section>
           <Section>
