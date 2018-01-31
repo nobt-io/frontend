@@ -9,7 +9,7 @@ import Button from "components/Button";
 import { addBill } from "../../modules/addBillForm/actions";
 import { List, SelectorItem } from "components/List";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
-import { Heading, SubHeading, Caption, Legend } from "components/text";
+import { Heading, SubHeading, Caption } from "components/text";
 import { Section, SectionGroup } from "components/Section";
 
 import {
@@ -23,18 +23,6 @@ import { invalidateNobt } from "../../../../modules/currentNobt/actions";
 
 
 class overview extends React.Component {
-
-
-  selectedDebtors = (shares) => {
-    return shares.filter(s => s.value);
-  };
-
-  formatDebtors = (shares) => {
-    let postFix = selectedDebtors(shares).length > 3 ? ", ..." : "";
-    let debtors = selectedDebtors(shares).slice(0, 3).map(s => s.name).join(", ");
-
-    return debtors + postFix;
-  };
 
   handleOnSubmit = () => {
     let billToAdd = {
@@ -60,6 +48,7 @@ class overview extends React.Component {
 
     if (newStatus === AsyncActionStatus.SUCCESSFUL) {
       this.props.onDispatch();
+      this.props.clearAddBillForm();
       this.props.replace(LocationBuilder.fromWindow().pop(1).apply(this.props.replace));
     }
   }
@@ -104,7 +93,7 @@ class overview extends React.Component {
               <SelectorItem
                 leftIcon="group"
                 placeholder="Nobody is involved"
-                value={this.selectedDebtors(this.props.shares).length === 0 ? null : this.selectedDebtors(this.props.shares).length + " persons are involved"}
+                value={this.props.shares.length === 0 ? null : this.props.shares.length + " persons are involved"}
                 onClick={() => LocationBuilder.fromWindow().push("debtors").apply(this.props.push)}
                 rightActions={[
                   <FontIcon key="edit" value="edit" />
@@ -136,6 +125,7 @@ export default withNavigation(connect(
   (dispatch) => ({
     onDescriptionChanged: description => dispatch({type: "DescriptionChanged", payload: {description}}),
     onAmountChanged: (amount) => dispatch({type: "AmountChanged", payload: {amount}}),
+    clearAddBillForm: () => dispatch({type: "ClearAddBillForm"}),
     onSubmit: (id, bill) => dispatch(addBill(id, bill)),
     onDispatch: () => dispatch(invalidateNobt())
   })
