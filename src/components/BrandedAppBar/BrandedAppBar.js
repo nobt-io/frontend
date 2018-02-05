@@ -5,7 +5,7 @@ import { FontIcon } from "react-toolbox/lib/font_icon/index";
 
 export default ({onBackHandle}) => {
 
-  const canGoBack = onBackHandle !== null;
+  const canGoBack = onBackHandle !== undefined;
 
   return (<AppBar
       theme={BrandedAppBarTheme}
