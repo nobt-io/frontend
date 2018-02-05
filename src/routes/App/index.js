@@ -20,7 +20,7 @@ export default (store) => {
       component: NobtContainer
     },
     childRoutes: [
-      BillRoute,
+      BillRoute(store),
       BalancesRoute,
       SortOverlayRoute,
       FilterOverlayRoute,

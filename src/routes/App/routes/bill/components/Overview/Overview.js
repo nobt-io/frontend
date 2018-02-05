@@ -39,24 +39,25 @@ class overview extends React.Component {
           }
         })
     };
-
     this.props.onSubmit(this.props.nobtId, billToAdd);
+  };
+
+  handleGoBack = () => {
+    LocationBuilder.fromWindow().pop().apply(this.props.replace);
   };
 
   componentWillReceiveProps(nextProps) {
     let newStatus = nextProps.addBillStatus;
-
     if (newStatus === AsyncActionStatus.SUCCESSFUL) {
-      this.props.onDispatch();
-      this.props.clearAddBillForm();
-      this.props.replace(LocationBuilder.fromWindow().pop(1).apply(this.props.replace));
+      this.props.invalidateNobtData();
+      LocationBuilder.fromWindow().pop().apply(this.props.replace);
     }
   }
 
   render = () => (
     <div>
       <BrandedAppBar
-        onBackHandle={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
+        onBackHandle={() => this.handleGoBack()}
         title="Add Bill"
       />
       <Main>
@@ -125,8 +126,7 @@ export default withNavigation(connect(
   (dispatch) => ({
     onDescriptionChanged: description => dispatch({type: "DescriptionChanged", payload: {description}}),
     onAmountChanged: (amount) => dispatch({type: "AmountChanged", payload: {amount}}),
-    clearAddBillForm: () => dispatch({type: "ClearAddBillForm"}),
     onSubmit: (id, bill) => dispatch(addBill(id, bill)),
-    onDispatch: () => dispatch(invalidateNobt())
+    invalidateNobtData: () => dispatch(invalidateNobt())
   })
 )(overview));
