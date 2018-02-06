@@ -6,7 +6,7 @@ const InputValidator = {
 
   validateInput: (amount) => {
     const newAmountIsNoValidNumber = (n) => n.match(/^[0-9.,]*$/) == null;
-    const getNumberOfOccurringSeparators = (n) => (amount.split(",").length - 1) + (amount.split(".").length - 1);
+    const getNumberOfOccurringSeparators = (n) => (n.split(",").length - 1) + (n.split(".").length - 1);
 
     const separatorOnCorrectPosition = (n) => {
       var separatorIndex = n.indexOf(',') + n.indexOf('.') + 1;

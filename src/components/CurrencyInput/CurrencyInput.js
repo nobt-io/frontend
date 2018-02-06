@@ -8,20 +8,26 @@ export const CurrencyInput = React.createClass({
     return {inputValue: "", value: 0}
   },
 
-  valueChanged: function (newValue) {
+  valueChanged: function (displayValue) {
 
     const previousValue = this.state.inputValue;
-    if (CurrencyInputValidator.amountsAreEqual(previousValue, newValue)) {
+    if (CurrencyInputValidator.amountsAreEqual(previousValue, displayValue)) {
       return;
     }
 
-    if (CurrencyInputValidator.validateInput(newValue)) {
-      const intValue = Number(newValue.replace(',', '.'));
-      this.setState({value: intValue, inputValue: newValue});
-      this.props.onChange(intValue);
+    if (CurrencyInputValidator.validateInput(displayValue)) {
+      const number = this.parseNumber(displayValue);
+      this.setState({value: number, inputValue: displayValue});
+      this.props.onChange(number);
     } else {
       this.setState({...this.state, inputValue: previousValue});
     }
+  },
+
+  parseNumber: function (displayValaue) {
+    let number = displayValaue.replace(',', '.');
+    let numberIsEmptyOrOnlySeperator = number === "." || number === "";
+    return Number(numberIsEmptyOrOnlySeperator ? 0 : number);
   },
 
   render: function () {
@@ -34,8 +40,8 @@ export const CurrencyInput = React.createClass({
     displayValue = displayValue || ""; //avoid NaN
 
     return (<Input
-      {...this.props}
       placeholder="0.00"
+      {...this.props}
       value={displayValue}
       step="0.01"
       lang="en-150" // Solves the "numbers with a comma are not valid decimal numbers"-problem: For more see: https://www.ctrl.blog/entry/html5-input-number-localization
