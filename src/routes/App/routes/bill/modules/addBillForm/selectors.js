@@ -154,7 +154,7 @@ export const getSharesWithValues = createSelector([getShares], (shares) => {
 const isDescriptionValid = createSelector([ getDescription ], (description) => description.length > 0);
 const isAmountValid = createSelector([ getAmount ], (amount) => { return amount > 0;});
 const isDebteeValid = createSelector([ getDebtee ], (debtee) => { return debtee !== null; });
-const isDebtorsSelectionValid = createSelector([ getShares ], (shares) => { return shares.filter(s => s.amount > 0).length;});
+const isDebtorsSelectionValid = createSelector([ getSharesWithValues ], (shares) => { return shares.length > 0;});
 
 export const isValidBill = createSelector([ isDescriptionValid, isAmountValid, isDebteeValid, isDebtorsSelectionValid ],
   (isDescriptionValid, isAmountValid, isDebteeValid, isDebtorsSelectionValid) => {
