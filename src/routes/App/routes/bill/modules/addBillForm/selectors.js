@@ -143,9 +143,12 @@ const getPercentualShares = createSelector([ getAmount, getPersonValues, getAllM
 
 
 export const getShares = createSelector([ getShareSelector, (state) => state ], (shareSelector, state) => {
-
-  var shares = shareSelector(state);
+  let shares = shareSelector(state);
   return shares.sort(personNameComparator);
+});
+
+export const getSharesWithValues = createSelector([getShares], (shares) => {
+  return shares.filter(share => share.amount !== null);
 });
 
 const isDescriptionValid = createSelector([ getDescription ], (description) => description.length > 0);

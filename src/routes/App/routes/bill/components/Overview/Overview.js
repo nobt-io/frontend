@@ -15,7 +15,7 @@ import { Section, SectionGroup } from "components/Section";
 import {
   getAddBillStatus,
   getAmount, getDebtee, getDescription, getShares, getSplitStrategy, isAmountErrorShown, isDebteeErrorShown, isDebtorsSelectionErrorShown,
-  isDescriptionErrorShown,
+  isDescriptionErrorShown, getSharesWithValues,
   isDescriptionValid
 } from "../../modules/addBillForm/selectors";
 import AsyncActionStatus from "const/AsyncActionStatus";
@@ -30,8 +30,7 @@ class overview extends React.Component {
       debtee: this.props.debtee,
       splitStrategy: this.props.splitStrategy,
       date: new Date(), // TODO: Add DatePicker
-      shares: this.props.shares
-        .filter(share => share.amount !== null)
+      shares: this.props.sharesWithValues
         .map(share => {
           return {
             debtor: share.name,
@@ -94,7 +93,7 @@ class overview extends React.Component {
               <SelectorItem
                 leftIcon="group"
                 placeholder="Nobody is involved"
-                value={this.props.shares.length === 0 ? null : this.props.shares.length + " persons are involved"}
+                value={this.props.sharesWithValues.length === 0 ? null : this.props.sharesWithValues.length + " persons are involved"}
                 onClick={() => LocationBuilder.fromWindow().push("debtors").apply(this.props.push)}
                 rightActions={[
                   <FontIcon key="edit" value="edit" />
@@ -115,6 +114,7 @@ export default withNavigation(connect(
     amount: getAmount(state),
     debtee: getDebtee(state),
     shares: getShares(state),
+    sharesWithValues: getSharesWithValues(state),
     nobtId: ownProps.params.nobtId,
     splitStrategy: getSplitStrategy(state),
     addBillStatus: getAddBillStatus(state),
