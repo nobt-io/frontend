@@ -9,9 +9,9 @@ const InputValidator = {
     const getNumberOfOccurringSeparators = (n) => (n.split(",").length - 1) + (n.split(".").length - 1);
 
     const separatorOnCorrectPosition = (n) => {
-      var separatorIndex = n.indexOf(',') + n.indexOf('.') + 1;
+      const separatorIndex = n.indexOf(',') + n.indexOf('.') + 1;
+      const noSeparatorFound = separatorIndex < 0;
 
-      var noSeparatorFound = separatorIndex < 0;
       if (noSeparatorFound) {
         return true;
       }

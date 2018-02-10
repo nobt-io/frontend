@@ -1,7 +1,7 @@
 import React from "react";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import { Main } from "components/Container";
-import { Input, InputLegend } from "components/Input";
+import { Input, InputLegend, CurrencyInput } from "components/Input";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import connect from "react-redux/es/connect/connect";
@@ -70,7 +70,7 @@ class overview extends React.Component {
           </Section>
           <Section>
             <Caption>How much did it cost?</Caption>
-            <Input placeholder="13.37" type="number" value={this.props.amount} onChange={this.props.onAmountChanged} />
+            <CurrencyInput placeholder="13.37" value={this.props.amount} onChange={this.props.onAmountChanged} />
             <InputLegend error={this.props.isAmountErrorShown}>Enter the total of this bill.</InputLegend>
           </Section>
           <Section>

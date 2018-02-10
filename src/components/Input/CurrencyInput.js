@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from "react-toolbox/lib/input";
+import Input from "./Input";
 import CurrencyInputValidator from './CurrencyInputValidator';
 
 export const CurrencyInput = React.createClass({
@@ -43,7 +43,6 @@ export const CurrencyInput = React.createClass({
       placeholder="0.00"
       {...this.props}
       value={displayValue}
-      step="0.01"
       lang="en-150" // Solves the "numbers with a comma are not valid decimal numbers"-problem: For more see: https://www.ctrl.blog/entry/html5-input-number-localization
       onChange={this.valueChanged}
     />)
