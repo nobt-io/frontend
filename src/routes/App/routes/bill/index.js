@@ -2,11 +2,12 @@ import BillWizardContainer from "./containers/BillWizardContainer";
 import OverviewPage from "./components/OverviewPage"
 import DebtorsPage from "./components/DebtorsPage"
 import DebteePage from "./components/DebteePage";
+import { clearAddBillForm } from "./modules/actions";
 
 export default ({dispatch}) => ({
   path: 'bill',
   component: BillWizardContainer,
-  onEnter: () => dispatch({type: "ClearAddBillForm"}),
+  onEnter: () => dispatch(clearAddBillForm()),
   indexRoute: {
     component: OverviewPage
   },

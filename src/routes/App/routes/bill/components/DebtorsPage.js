@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "../../../../../components/hoc/withNavigation";
 import { areAllMembersSelected, getAllMembers, getShares } from "../modules/selectors";
-import { newMemberAdded } from "../modules/actions";
+import { newMemberAdded, shareValueChanged } from "../modules/actions";
 import BrandedAppBar from "components/BrandedAppBar/index";
 import Button from "components/Button/index";
 import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
@@ -16,6 +16,7 @@ import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
 const goBack = (replace) => LocationBuilder.fromWindow().pop(1).apply(replace);
 
 const debteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {
+
   const setAllValues = (value) => allMembers.forEach(member => onShareValueChanged(member, value));
 
   return (
@@ -59,6 +60,6 @@ export default withNavigation(connect(
   }),
   (dispatch) => ({
     onNewMember: (member) => dispatch(newMemberAdded(member)),
-    onShareValueChanged: (name, value) => dispatch({type: "ShareValueChanged", payload: {name, value}})
+    onShareValueChanged: (name, value) => dispatch(shareValueChanged(name, value))
   })
 )(debteePage))

@@ -6,7 +6,7 @@ import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import connect from "react-redux/es/connect/connect";
 import Button from "components/Button/index";
-import { addBill } from "../modules/actions";
+import { addBill, amountChanged, descriptionChanged, focusIdChanged } from "../modules/actions";
 import { List, SelectorItem } from "components/List/index";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Heading, SubHeading, Caption } from "components/text/index";
@@ -131,10 +131,10 @@ export default withNavigation(connect(
     focusId: getFocusId(state)
   }),
   (dispatch) => ({
-    onDescriptionChanged: description => dispatch({type: "DescriptionChanged", payload: {description}}),
-    onAmountChanged: (amount) => dispatch({type: "AmountChanged", payload: {amount}}),
+    onDescriptionChanged: description => dispatch(descriptionChanged(description)),
+    onAmountChanged: (amount) => dispatch(amountChanged(amount)),
     onSubmit: (id, bill) => dispatch(addBill(id, bill)),
-    onFocusIdChanged: focusId => dispatch({type: "FocusIdChanged", payload: {focusId}}),
+    onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
     invalidateNobtData: () => dispatch(invalidateNobt())
   })
 )(withCtrlEnterAction((props) => addNobt(props), overview)));

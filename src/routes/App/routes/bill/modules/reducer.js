@@ -1,5 +1,8 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
-import { NEW_DEBTEE_SELECTED, NEW_MEMBER_ADDED, UPDATE_ADD_BILL_STATUS } from "./actions";
+import {
+  AMOUNT_CHANGED, CLEAR_ADD_BILL_FORM, DESCRIPTION_CHANGED, FOCUS_ID_CHANGED, NEW_DEBTEE_SELECTED, NEW_MEMBER_ADDED,
+  SHARE_VALUE_CHANGED, UPDATE_ADD_BILL_STATUS
+} from "./actions";
 
 export const addBillFormReducer = (state = initialState, action) => {
 
@@ -67,14 +70,7 @@ export const addBillFormReducer = (state = initialState, action) => {
       };
     }
 
-    case "SplitStrategyChanged": {
-      return {
-        ...state,
-        splitStrategy: action.payload.splitStrategy
-      }
-    }
-
-    case "ShareValueChanged": {
+    case SHARE_VALUE_CHANGED: {
 
       let others = state.personValues.filter(pv => pv.name !== action.payload.name);
 
@@ -87,28 +83,25 @@ export const addBillFormReducer = (state = initialState, action) => {
       }
     }
 
-    case "AmountChanged": {
+    case AMOUNT_CHANGED: {
       return {
         ...state,
         amount: action.payload.amount
       }
     }
 
-    case "DescriptionChanged": {
+    case DESCRIPTION_CHANGED: {
       return {
         ...state,
         description: action.payload.description
       }
     }
 
-    case "ClearAddBillForm": {
+    case CLEAR_ADD_BILL_FORM: {
       return initialState;
     }
 
-    case "FocusIdChanged": {
-
-      console.log("FocusIdChanged", action.payload.focusId);
-
+    case FOCUS_ID_CHANGED: {
       return {
         ...state,
         focusId: action.payload.focusId,
