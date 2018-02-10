@@ -7,6 +7,6 @@ export default ({value, placeholder, ...props}) => {
   const valueIsSet = (value !== null && value !== undefined && value.length !== 0);
 
   return valueIsSet
-    ? <ListItem selectable {...props} theme={styles} caption={value} key={value} legend={null} />
-    : <ListItem selectable {...props} theme={styles} caption={null} key={value} legend={placeholder} />
+    ? <ListItem to={"javascript:;"} selectable {...props} theme={styles} caption={value} key={value} legend={null} />
+    : <ListItem to={"javascript:;"} selectable {...props} theme={styles} caption={null} key={value} legend={placeholder} />
 }

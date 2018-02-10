@@ -1,7 +1,18 @@
-.listItem{
-  border-bottom: 1px solid $color-accent-light;
-}
-
 .item{
   padding: 0 0.5rem;
+}
+
+.listItem{
+  a {
+    display: block;
+    border-bottom: 1px solid $color-accent-light;
+  }
+  a:focus, a:hover, a:active, a:visited {
+    outline: none;
+    color: inherit;
+    text-decoration: none;
+  }
+  a:focus{
+    background-color: $color-accent-light;
+  }
 }
