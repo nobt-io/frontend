@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Input } from "react-toolbox/lib/input/index";
 import { IconButton } from "react-toolbox/lib/button/index";
 import { ListItem } from "react-toolbox/lib/list/index";
-import { isExistingMemberFactory } from "../../routes/App/routes/bill/modules/addBillForm/selectors";
+import { isExistingMemberFactory } from "../../routes/App/routes/bill/modules/selectors";
 
 class AddMember extends React.Component {
 

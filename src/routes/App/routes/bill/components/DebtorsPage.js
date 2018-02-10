@@ -1,15 +1,15 @@
 import React from "react";
 import { Heading, SubHeading, Caption } from "components/text/index";
-import { Main } from "components/Container";
-import { SectionGroup, Section } from "components/Section";
-import { List, CheckboxItem, AddMemberItem } from "components/List"
+import { Main } from "components/Container/index";
+import { SectionGroup, Section } from "components/Section/index";
+import { List, CheckboxItem, AddMemberItem } from "components/List/index"
 import { ListDivider } from "react-toolbox/lib/list/index";
 import { connect } from "react-redux";
-import LocationBuilder from "../../../../../modules/navigation/LocationBuilder";
-import withNavigation from "../../../../../../../components/hoc/withNavigation";
-import { areAllMembersSelected, getAllMembers, getShares } from "../../../modules/addBillForm/selectors";
-import { newMemberAdded } from "../../../modules/addBillForm/actions";
-import BrandedAppBar from "components/BrandedAppBar";
+import LocationBuilder from "../../../modules/navigation/LocationBuilder";
+import withNavigation from "../../../../../components/hoc/withNavigation";
+import { areAllMembersSelected, getAllMembers, getShares } from "../modules/selectors";
+import { newMemberAdded } from "../modules/actions";
+import BrandedAppBar from "components/BrandedAppBar/index";
 
 
 const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {

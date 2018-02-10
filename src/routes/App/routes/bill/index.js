@@ -1,17 +1,23 @@
 import BillWizardContainer from "./containers/BillWizardContainer";
-import OverviewComponent from "./components/Overview"
-import DebteeRoute from "./routes/debtee"
-import DebtorsRoute from "./routes/debtors"
+import OverviewPage from "./components/OverviewPage"
+import DebtorsPage from "./components/DebtorsPage"
+import DebteePage from "./components/DebteePage";
 
 export default ({dispatch}) => ({
   path: 'bill',
   component: BillWizardContainer,
   onEnter: () => dispatch({type: "ClearAddBillForm"}),
   indexRoute: {
-    component: OverviewComponent
+    component: OverviewPage
   },
   childRoutes: [
-    DebteeRoute,
-    DebtorsRoute
+    {
+      path: 'debtee',
+      component: DebteePage,
+    },
+    {
+      path: 'debtors',
+      component: DebtorsPage ,
+    }
   ]
 });

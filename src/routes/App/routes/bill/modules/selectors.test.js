@@ -1,4 +1,4 @@
-import { isExistingMemberFactory, personNameComparator } from "../../../new/modules/addBillForm/selectors";
+import { isExistingMemberFactory, personNameComparator } from "selectors";
 
 let mockState = function () {
   return {

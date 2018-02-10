@@ -3,7 +3,7 @@ import { combineReducers } from "redux"
 // Reducers are grouped by data that is independent from each other but routes may access the same data.
 import currentNobt from "./currentNobt/reducer"
 import viewState from "./viewState/reducer"
-import { addBillFormReducer } from "../routes/bill/modules/addBillForm/reducer";
+import { addBillFormReducer } from "../routes/bill/modules/reducer";
 
 let reducer = combineReducers({
   currentNobt,

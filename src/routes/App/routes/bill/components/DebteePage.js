@@ -1,14 +1,14 @@
 import React from "react";
 import { SubHeading, Heading, Caption } from "components/text/index";
-import { Main } from "components/Container";
+import { Main } from "components/Container/index";
 import { connect } from "react-redux";
-import { getAllMembers, getDebtee } from "../../../modules/addBillForm/selectors";
-import { newDebteeSelected } from "../../../modules/addBillForm/actions";
-import LocationBuilder from "../../../../../modules/navigation/LocationBuilder";
+import { getAllMembers, getDebtee } from "../modules/selectors";
+import { newDebteeSelected } from "../modules/actions";
+import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
-import { Section, SectionGroup } from "components/Section";
-import { List, RadioboxItem, AddMemberItem } from "components/List"
+import { Section, SectionGroup } from "components/Section/index";
+import { List, RadioboxItem, AddMemberItem } from "components/List/index"
 
 const debteePage = ({members, debtee, onPersonPicked, replace}) => {
 

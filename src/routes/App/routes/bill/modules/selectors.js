@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 import SplitStrategyNames from "const/SplitStrategyNames";
-import { getMembers } from "../../../../modules/currentNobt/selectors";
+import { getMembers } from "../../../modules/currentNobt/selectors";
 import AsyncActionStatus from "const/AsyncActionStatus";
 
 const getAddBillFormSlice = (state) => state.App.addBillForm;

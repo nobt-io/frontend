@@ -1,25 +1,25 @@
 import React from "react";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
-import { Main } from "components/Container";
-import { Input, InputLegend, CurrencyInput } from "components/Input";
-import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
+import { Main } from "components/Container/index";
+import { Input, InputLegend, CurrencyInput } from "components/Input/index";
+import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import connect from "react-redux/es/connect/connect";
-import Button from "components/Button";
-import { addBill } from "../../modules/addBillForm/actions";
-import { List, SelectorItem } from "components/List";
+import Button from "components/Button/index";
+import { addBill } from "../modules/actions";
+import { List, SelectorItem } from "components/List/index";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
-import { Heading, SubHeading, Caption } from "components/text";
-import { Section, SectionGroup } from "components/Section";
+import { Heading, SubHeading, Caption } from "components/text/index";
+import { Section, SectionGroup } from "components/Section/index";
 
 import {
   getAddBillStatus,
   getAmount, getDebtee, getDescription, getShares, getSplitStrategy, isAmountErrorShown, isDebteeErrorShown, isDebtorsSelectionErrorShown,
   isDescriptionErrorShown, getSharesWithValues,
   isDescriptionValid
-} from "../../modules/addBillForm/selectors";
+} from "../modules/selectors";
 import AsyncActionStatus from "const/AsyncActionStatus";
-import { invalidateNobt } from "../../../../modules/currentNobt/actions";
+import { invalidateNobt } from "../../../modules/currentNobt/actions";
 
 
 class overview extends React.Component {
