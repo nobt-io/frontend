@@ -11,39 +11,37 @@ import { List, SelectorItem } from "components/List/index";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Heading, SubHeading, Caption } from "components/text/index";
 import { Section, SectionGroup } from "components/Section/index";
+import AsyncActionStatus from "const/AsyncActionStatus";
+import { invalidateNobt } from "../../../modules/currentNobt/actions";
+import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
 
 import {
   getAddBillStatus,
   getAmount, getDebtee, getDescription, getShares, getSplitStrategy, isAmountErrorShown, isDebteeErrorShown, isDebtorsSelectionErrorShown,
-  isDescriptionErrorShown, getSharesWithValues,
+  isDescriptionErrorShown, getSharesWithValues, getFocusId,
   isDescriptionValid
 } from "../modules/selectors";
-import AsyncActionStatus from "const/AsyncActionStatus";
-import { invalidateNobt } from "../../../modules/currentNobt/actions";
 
+const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
+
+const addNobt = (props) => {
+  let billToAdd = {
+    name: props.description,
+    debtee: props.debtee,
+    splitStrategy: props.splitStrategy,
+    date: new Date(), // TODO: Add DatePicker
+    shares: props.sharesWithValues
+      .map(share => {
+        return {
+          debtor: share.name,
+          amount: share.amount
+        }
+      })
+  };
+  props.onSubmit(props.nobtId, billToAdd);
+};
 
 class overview extends React.Component {
-
-  handleOnSubmit = () => {
-    let billToAdd = {
-      name: this.props.description,
-      debtee: this.props.debtee,
-      splitStrategy: this.props.splitStrategy,
-      date: new Date(), // TODO: Add DatePicker
-      shares: this.props.sharesWithValues
-        .map(share => {
-          return {
-            debtor: share.name,
-            amount: share.amount
-          }
-        })
-    };
-    this.props.onSubmit(this.props.nobtId, billToAdd);
-  };
-
-  handleGoBack = () => {
-    LocationBuilder.fromWindow().pop().apply(this.props.replace);
-  };
 
   componentWillReceiveProps(nextProps) {
     let newStatus = nextProps.addBillStatus;
@@ -56,7 +54,7 @@ class overview extends React.Component {
   render = () => (
     <div>
       <BrandedAppBar
-        onBackHandle={() => this.handleGoBack()}
+        onBackHandle={() => goBack(this.props.replace)}
         title="Add Bill"
       />
       <Main>
@@ -77,10 +75,14 @@ class overview extends React.Component {
             <Caption>Who paid?</Caption>
             <List>
               <SelectorItem
+                focus={this.props.focusId === "debtee"}
                 leftIcon="person"
                 placeholder="Select a Debtee"
                 value={this.props.debtee !== null ? this.props.debtee + " paid the bill" : null}
-                onClick={() => LocationBuilder.fromWindow().push("debtee").apply(this.props.push)}
+                onClick={() => {
+                  LocationBuilder.fromWindow().push("debtee").apply(this.props.push);
+                  this.props.onFocusIdChanged("debtee");
+                }}
                 rightActions={[
                   <FontIcon key="edit" value="edit" />
                 ]} />
@@ -91,10 +93,14 @@ class overview extends React.Component {
             <Caption>Who is involved?</Caption>
             <List>
               <SelectorItem
+                focus={this.props.focusId === "debtor"}
                 leftIcon="group"
                 placeholder="Nobody is involved"
                 value={this.props.sharesWithValues.length === 0 ? null : this.props.sharesWithValues.length + " persons are involved"}
-                onClick={() => LocationBuilder.fromWindow().push("debtors").apply(this.props.push)}
+                onClick={() => {
+                  LocationBuilder.fromWindow().push("debtors").apply(this.props.push);
+                  this.props.onFocusIdChanged("debtor");
+                }}
                 rightActions={[
                   <FontIcon key="edit" value="edit" />
                 ]} />
@@ -102,7 +108,7 @@ class overview extends React.Component {
             <InputLegend error={this.props.isDebtorsSelectionErrorShown}>Select who is involved in this bill.</InputLegend>
           </Section>
         </SectionGroup>
-        <Button raised primary onClick={this.handleOnSubmit} label="Add Bill" icon="check_circle" />
+        <Button raised primary onClick={() => addNobt(this.props)} label="Add Bill" icon="check_circle" />
       </Main>
     </div>
   )
@@ -121,12 +127,14 @@ export default withNavigation(connect(
     isDescriptionErrorShown: isDescriptionErrorShown(state),
     isAmountErrorShown: isAmountErrorShown(state),
     isDebteeErrorShown: isDebteeErrorShown(state),
-    isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state)
+    isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state),
+    focusId: getFocusId(state)
   }),
   (dispatch) => ({
     onDescriptionChanged: description => dispatch({type: "DescriptionChanged", payload: {description}}),
     onAmountChanged: (amount) => dispatch({type: "AmountChanged", payload: {amount}}),
     onSubmit: (id, bill) => dispatch(addBill(id, bill)),
+    onFocusIdChanged: focusId => dispatch({type: "FocusIdChanged", payload: {focusId}}),
     invalidateNobtData: () => dispatch(invalidateNobt())
   })
-)(overview));
+)(withCtrlEnterAction((props) => addNobt(props), overview)));

@@ -2,11 +2,25 @@ import * as React from "react";
 import { ListItem } from "react-toolbox/lib/list";
 import styles from "./SelectorItem.scss"
 
-export default ({value, placeholder, ...props}) => {
+export default class listItem extends React.Component {
 
-  const valueIsSet = (value !== null && value !== undefined && value.length !== 0);
+  componentDidMount() {
+    if (this.props.focus) {
+      this.item.children[ 0 ].children[ 0 ].focus()
+    }
+  }
 
-  return valueIsSet
-    ? <ListItem to={"javascript:;"} selectable {...props} theme={styles} caption={value} key={value} legend={null} />
-    : <ListItem to={"javascript:;"} selectable {...props} theme={styles} caption={null} key={value} legend={placeholder} />
+  render() {
+    const value = this.props.value;
+    const valueIsSet = (value !== null && value !== undefined && value.length !== 0);
+
+    const none = "javascript:;"; //just used, to create a focusable <a>-tag.
+    const setRef = (item) => this.item = item;
+
+    const placeholder = this.props.placeholder;
+
+    return valueIsSet
+      ? <div ref={setRef}><ListItem to={none} selectable {...this.props} theme={styles} caption={value} key={value} legend={null} /></div>
+      : <div ref={setRef}><ListItem to={none} selectable {...this.props} theme={styles} caption={null} key={value} legend={placeholder} /></div>
+  }
 }

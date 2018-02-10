@@ -4,7 +4,7 @@ import styles from "./RadioboxItem.scss"
 import Avatar from "components/Avatar";
 import { RadioButton } from "react-toolbox/lib/radio";
 
-export default ({key, name, selected, selectAction}) => (
+export default ({key, name, selected, selectAction, autoFocus}) => (
   <ListItem caption={name}
             key={key}
             theme={styles}
@@ -13,6 +13,7 @@ export default ({key, name, selected, selectAction}) => (
               //e.stopPropagation() not working with react-toolbox
               <span key={name} onClick={e => e.stopPropagation()}>
                   <RadioButton
+                    autoFocus={autoFocus}
                     checked={selected}
                     onChange={() => {
                       selectAction(name, !selected);

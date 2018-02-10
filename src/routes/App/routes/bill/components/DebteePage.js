@@ -6,21 +6,19 @@ import { getAllMembers, getDebtee } from "../modules/selectors";
 import { newDebteeSelected } from "../modules/actions";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
+import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Section, SectionGroup } from "components/Section/index";
 import { List, RadioboxItem, AddMemberItem } from "components/List/index"
+import Button from "components/Button/index";
 
-const debteePage = ({members, debtee, onPersonPicked, replace}) => {
+const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 
-  const selectPerson = (name) => {
-    onPersonPicked(name);
-    LocationBuilder.fromWindow().pop().apply(replace);
-  };
-
+const debteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({members, debtee, onPersonPicked, replace}) => {
   return (
     <div>
       <BrandedAppBar
-        onBackHandle={() => LocationBuilder.fromWindow().pop(1).apply(replace)}
+        onBackHandle={() => goBack(replace)}
       />
       <Main>
         <Heading>Select debtee</Heading>
@@ -29,20 +27,22 @@ const debteePage = ({members, debtee, onPersonPicked, replace}) => {
           <Section>
             <Caption>Persons</Caption>
             <List>
-              {members.map(name => (<RadioboxItem key={name} name={name} selected={name === debtee} selectAction={name => selectPerson(name)} />))}
+              {members.map((name, i) => (<RadioboxItem autoFocus={i === 0} key={name} name={name} selected={name === debtee}
+                                                       selectAction={name => onPersonPicked(name)} />))}
             </List>
           </Section>
           <Section>
             <Caption>Someone else?</Caption>
             <List>
-              <AddMemberItem placeholder="Bart, Milhouse, Nelson, ..." onNewMember={(name) => selectPerson(name)} />
+              <AddMemberItem placeholder="Bart, Milhouse, Nelson, ..." onNewMember={(name) => onPersonPicked(name)} />
             </List>
           </Section>
         </SectionGroup>
+        <Button raised primary onClick={() => goBack(replace)} label="Back" icon="arrow_back" />
       </Main>
     </div>
   );
-};
+});
 
 export default withNavigation(connect(
   (state) => ({

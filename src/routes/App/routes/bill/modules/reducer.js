@@ -105,6 +105,15 @@ export const addBillFormReducer = (state = initialState, action) => {
       return initialState;
     }
 
+    case "FocusIdChanged": {
+
+      console.log("FocusIdChanged", action.payload.focusId);
+
+      return {
+        ...state,
+        focusId: action.payload.focusId,
+      }
+    }
     case UPDATE_ADD_BILL_STATUS: {
       return {
         ...state,

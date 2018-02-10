@@ -10,16 +10,18 @@ import withNavigation from "../../../../../components/hoc/withNavigation";
 import { areAllMembersSelected, getAllMembers, getShares } from "../modules/selectors";
 import { newMemberAdded } from "../modules/actions";
 import BrandedAppBar from "components/BrandedAppBar/index";
+import Button from "components/Button/index";
+import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
 
+const goBack = (replace) => LocationBuilder.fromWindow().pop(1).apply(replace);
 
-const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {
-
+const debteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {
   const setAllValues = (value) => allMembers.forEach(member => onShareValueChanged(member, value));
 
   return (
     <div>
       <BrandedAppBar
-        onBackHandle={() => LocationBuilder.fromWindow().pop(1).apply(replace)}
+        onBackHandle={() => goBack(replace)}
       />
       <Main>
         <Heading>Select debtors</Heading>
@@ -28,10 +30,12 @@ const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMe
           <Section>
             <Caption>Persons</Caption>
             <List>
-              <CheckboxItem name="Everyone" selected={areAllMembersSelected} selectAction={() => setAllValues(!areAllMembersSelected)} noAvatar />
+              <CheckboxItem autoFocus={true} name="Everyone" selected={areAllMembersSelected}
+                            selectAction={() => setAllValues(!areAllMembersSelected)} noAvatar />
               <ListDivider />
               {shares.map(share =>
-                <CheckboxItem key={share.name} name={share.name} selected={share.value} selectAction={(name, value) => onShareValueChanged(name, value)} />)}
+                <CheckboxItem key={share.name} name={share.name} selected={share.value}
+                              selectAction={(name, value) => onShareValueChanged(name, value)} />)}
             </List>
           </Section>
           <Section>
@@ -41,10 +45,11 @@ const debteePage = ({replace, shares, onNewMember, onShareValueChanged, areAllMe
             </List>
           </Section>
         </SectionGroup>
+        <Button raised primary onClick={() => goBack(replace)} label="Back" icon="arrow_back" />
       </Main>
     </div>
   );
-};
+});
 
 export default withNavigation(connect(
   (state) => ({
