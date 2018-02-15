@@ -1,15 +1,15 @@
 import React from "react";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
-import { Main } from "components/Container/index";
+import { Main } from "components/Container";
 import { Input, InputLegend, CurrencyInput } from "components/Input/index";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import connect from "react-redux/es/connect/connect";
 import Button from "components/Button/index";
 import { addBill, amountChanged, descriptionChanged, focusIdChanged } from "../modules/actions";
-import { List, SelectorItem } from "components/List/index";
+import { List, SelectorItem } from "components/List";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
-import { Heading, SubHeading, Caption } from "components/text/index";
+import { Heading, SubHeading, Caption } from "components/text";
 import { Section, SectionGroup } from "components/Section/index";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { invalidateNobt } from "../../../modules/currentNobt/actions";
@@ -18,8 +18,7 @@ import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
 import {
   getAddBillStatus,
   getAmount, getDebtee, getDescription, getShares, getSplitStrategy, isAmountErrorShown, isDebteeErrorShown, isDebtorsSelectionErrorShown,
-  isDescriptionErrorShown, getSharesWithValues, getFocusId,
-  isDescriptionValid
+  isDescriptionErrorShown, getSharesWithValues, getFocusId
 } from "../modules/selectors";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);

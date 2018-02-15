@@ -5,5 +5,5 @@ function container(style) {
   return ({children}) => (<div className={style}>{children}</div>);
 }
 
-exports.Page = container(styles.page);
-exports.Main = container(styles.main);
+export const Page = container(styles.page);
+export const Main = container(styles.main);
