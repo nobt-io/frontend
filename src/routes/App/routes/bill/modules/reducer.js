@@ -126,7 +126,7 @@ export const initialState = {
   splitStrategy: SplitStrategyNames.EQUAL,
   personValues: [],
   defaultValues: {
-    EQUAL: false,
+    EQUAL: true,
     PERCENTAGE: 0,
     UNEQUAL: 0
   }
