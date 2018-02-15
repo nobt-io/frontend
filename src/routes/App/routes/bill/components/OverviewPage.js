@@ -40,7 +40,7 @@ const addNobt = (props) => {
   props.onSubmit(props.nobtId, billToAdd);
 };
 
-class overview extends React.Component {
+class OverviewPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     let newStatus = nextProps.addBillStatus;
@@ -136,4 +136,4 @@ export default withNavigation(connect(
     onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
     invalidateNobtData: () => dispatch(invalidateNobt())
   })
-)(withCtrlEnterAction((props) => addNobt(props), overview)));
+)(withCtrlEnterAction((props) => addNobt(props), OverviewPage)));

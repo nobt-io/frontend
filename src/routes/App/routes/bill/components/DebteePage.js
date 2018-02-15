@@ -14,7 +14,7 @@ import Button from "components/Button/index";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 
-const debteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({members, debtee, onPersonPicked, replace}) => {
+const DebteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({members, debtee, onPersonPicked, replace}) => {
   return (
     <div>
       <BrandedAppBar
@@ -52,4 +52,4 @@ export default withNavigation(connect(
   (dispatch) => ({
     onPersonPicked: (debtee) => dispatch(newDebteeSelected(debtee)),
   })
-)(debteePage))
+)(DebteePage))

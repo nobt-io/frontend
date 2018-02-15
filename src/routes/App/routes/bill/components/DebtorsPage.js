@@ -15,7 +15,7 @@ import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop(1).apply(replace);
 
-const debteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {
+const DebtorsPage = withCtrlEnterAction(({replace}) => goBack(replace), ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {
 
   const setAllValues = (value) => allMembers.forEach(member => onShareValueChanged(member, value));
 
@@ -62,4 +62,4 @@ export default withNavigation(connect(
     onNewMember: (member) => dispatch(newMemberAdded(member)),
     onShareValueChanged: (name, value) => dispatch(shareValueChanged(name, value))
   })
-)(debteePage))
+)(DebtorsPage))

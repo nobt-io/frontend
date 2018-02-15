@@ -1,8 +1,8 @@
 import * as React from "react";
-import { ListItem } from "react-toolbox/lib/list";
+import { ListItem as RTListItem } from "react-toolbox/lib/list";
 import styles from "./SelectorItem.scss"
 
-export default class listItem extends React.Component {
+export default class SelectorItem extends React.Component {
 
   componentDidMount() {
     if (this.props.focus) {
@@ -20,7 +20,7 @@ export default class listItem extends React.Component {
     const placeholder = this.props.placeholder;
 
     return valueIsSet
-      ? <div ref={setRef}><ListItem to={none} selectable {...this.props} theme={styles} caption={value} key={value} legend={null} /></div>
-      : <div ref={setRef}><ListItem to={none} selectable {...this.props} theme={styles} caption={null} key={value} legend={placeholder} /></div>
+      ? <div ref={setRef}><RTListItem to={none} selectable {...this.props} theme={styles} caption={value} key={value} legend={null} /></div>
+      : <div ref={setRef}><RTListItem to={none} selectable {...this.props} theme={styles} caption={null} key={value} legend={placeholder} /></div>
   }
 }

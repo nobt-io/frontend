@@ -53,12 +53,10 @@ export function fetchNobt(id) {
 
     dispatch(fetchNobtStarted());
 
-    utils.sleep(0).then(() => {
-      Client.fetchNobt(id).then(
-        response => dispatch(fetchNobtSucceeded(response)),
-        error => dispatch(fetchNobtFailed(error))
-      )
-    })
+    Client.fetchNobt(id).then(
+      response => dispatch(fetchNobtSucceeded(response)),
+      error => dispatch(fetchNobtFailed(error))
+    )
   }
 }
 
