@@ -2,18 +2,20 @@ import React from "react";
 
 export default function withCtrlEnterAction(action, WrappedComponent) {
   return React.createClass({
-    showMessage() {
+    callAction() {
       action(this.props);
     },
-    keydownHandler(e) {
+    keyHandler(e) {
       const enterKey = 13;
-      if (e.keyCode === enterKey && e.ctrlKey) this.showMessage()
+      if (e.keyCode === enterKey && e.ctrlKey) {
+        this.callAction()
+      }
     },
     componentDidMount() {
-      document.addEventListener('keydown', this.keydownHandler);
+      document.addEventListener('keydown', this.keyHandler);
     },
     componentWillUnmount() {
-      document.removeEventListener('keydown', this.keydownHandler);
+      document.removeEventListener('keydown', this.keyHandler);
     },
     render() {
       return <WrappedComponent {...this.props}/>
