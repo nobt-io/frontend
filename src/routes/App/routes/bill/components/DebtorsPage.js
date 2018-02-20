@@ -11,11 +11,11 @@ import { areAllMembersSelected, getAllMembers, getShares } from "../modules/sele
 import { newMemberAdded, shareValueChanged } from "../modules/actions";
 import BrandedAppBar from "components/BrandedAppBar/index";
 import Button from "components/Button/index";
-import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
+import { withCtrlAndEnterKeyDownLister } from "components/hoc/keyDownListener";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop(1).apply(replace);
 
-const DebtorsPage = withCtrlEnterAction(({replace}) => goBack(replace), ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {
+const DebtorsPage = ({replace, shares, onNewMember, onShareValueChanged, areAllMembersSelected, allMembers}) => {
 
   const setAllValues = (value) => allMembers.forEach(member => onShareValueChanged(member, value));
 
@@ -50,7 +50,7 @@ const DebtorsPage = withCtrlEnterAction(({replace}) => goBack(replace), ({replac
       </Main>
     </div>
   );
-});
+};
 
 export default withNavigation(connect(
   (state) => ({
@@ -62,4 +62,4 @@ export default withNavigation(connect(
     onNewMember: (member) => dispatch(newMemberAdded(member)),
     onShareValueChanged: (name, value) => dispatch(shareValueChanged(name, value))
   })
-)(DebtorsPage))
+)(withCtrlAndEnterKeyDownLister(({replace}) => goBack(replace))(DebtorsPage)))

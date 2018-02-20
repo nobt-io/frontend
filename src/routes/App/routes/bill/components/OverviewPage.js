@@ -13,7 +13,7 @@ import { Heading, SubHeading, Caption } from "components/text";
 import { Section, SectionGroup } from "components/Section/index";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { invalidateNobt } from "../../../modules/currentNobt/actions";
-import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
+import { withCtrlAndEnterKeyDownLister } from "components/hoc/keyDownListener";
 
 import {
   getAddBillStatus,
@@ -136,4 +136,4 @@ export default withNavigation(connect(
     onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
     invalidateNobtData: () => dispatch(invalidateNobt())
   })
-)(withCtrlEnterAction((props) => addNobt(props), OverviewPage)));
+)(withCtrlAndEnterKeyDownLister((props) => addNobt(props))(OverviewPage)));

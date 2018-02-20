@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ListItem as RTListItem } from "react-toolbox/lib/list";
 import styles from "./SelectorItem.scss"
-import withCtrlCheckAction from "../hoc/withCtrlCheckAction";
+import { withCtrlKeyDownLister } from "components/hoc/keyDownListener";
 
 class SelectorItem extends React.Component {
 
@@ -12,7 +12,7 @@ class SelectorItem extends React.Component {
   }
 
   clickWrapper() {
-    if (!this.props.isCtrlClicked()) {
+    if (!this.props.isCtrlKeyDown()) {
       this.props.onClick();
     }
   }
@@ -36,4 +36,4 @@ class SelectorItem extends React.Component {
   }
 }
 
-export default withCtrlCheckAction(SelectorItem)
+export default withCtrlKeyDownLister()(SelectorItem)

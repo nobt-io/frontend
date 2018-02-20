@@ -6,15 +6,15 @@ import { getAllMembers, getDebtee } from "../modules/selectors";
 import { newDebteeSelected } from "../modules/actions";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
-import withCtrlEnterAction from "components/hoc/withCtrlEnterAction";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Section, SectionGroup } from "components/Section/index";
 import { List, RadioboxItem, AddMemberItem } from "components/List/index"
 import Button from "components/Button/index";
+import { withCtrlAndEnterKeyDownLister } from "components/hoc/keyDownListener";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 
-const DebteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({members, debtee, onPersonPicked, replace}) => {
+const DebteePage = ({members, debtee, onPersonPicked, replace}) => {
   return (
     <div>
       <BrandedAppBar
@@ -42,7 +42,7 @@ const DebteePage = withCtrlEnterAction(({replace}) => goBack(replace), ({members
       </Main>
     </div>
   );
-});
+};
 
 export default withNavigation(connect(
   (state) => ({
@@ -52,4 +52,4 @@ export default withNavigation(connect(
   (dispatch) => ({
     onPersonPicked: (debtee) => dispatch(newDebteeSelected(debtee)),
   })
-)(DebteePage))
+)(withCtrlAndEnterKeyDownLister(({replace}) => goBack(replace))(DebteePage)))
