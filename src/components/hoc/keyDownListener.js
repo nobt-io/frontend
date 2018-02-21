@@ -1,17 +1,27 @@
 import React from "react";
 
-const keyDownListenerHoc = (keyIdentifier, keyAssertion) => (keyDownHandle) => (WrappedComponent) => {
+const keyDownListenerHoc = (keyAssertion, propCreation) => (keyDownHandle) => (WrappedComponent) => {
   return class keyDownWrapper extends React.Component {
     constructor(props, context) {
       super(props, context);
       this.state = {keyIsDown: false};
 
       this.keyHandler = this.keyHandler.bind(this);
+      this.keyHandleDown = this.keyHandleDown.bind(this);
+      this.keyHandleUp = this.keyHandleUp.bind(this);
       this.isKeyDown = this.isKeyDown.bind(this);
     }
 
-    keyHandler(e) {
-      const keyIsDown = keyAssertion(e);
+    keyHandleDown(e) {
+      this.keyHandler(e, true)
+    }
+
+    keyHandleUp(e) {
+      this.keyHandler(e, false)
+    }
+
+    keyHandler(e, isDown) {
+      const keyIsDown = keyAssertion(e, isDown);
       this.setState({keyIsDown});
 
       if (keyIsDown && typeof keyDownHandle === "function") {
@@ -24,34 +34,29 @@ const keyDownListenerHoc = (keyIdentifier, keyAssertion) => (keyDownHandle) => (
     }
 
     componentDidMount() {
-      document.addEventListener('keydown', this.keyHandler);
-      document.addEventListener('keyup', this.keyHandler);
+      document.addEventListener('keydown', this.keyHandleDown);
+      document.addEventListener('keyup', this.keyHandleUp);
     }
 
     componentWillUnmount() {
-      document.removeEventListener('keydown', this.keyHandler);
-      document.removeEventListener('keyup', this.keyHandler);
+      document.removeEventListener('keydown', this.keyHandleDown);
+      document.removeEventListener('keyup', this.keyHandleUp);
     }
 
 
     render() {
-      const props = {...this.props};
-      props[ keyDownWrapper.getPropName(keyIdentifier) ] = this.isKeyDown;
+      let props = {...this.props};
+
+      if (typeof propCreation !== "undefined") {
+        props = {...props, ...propCreation(this.isKeyDown)};
+      }
 
       return <WrappedComponent {...props} />
-    }
-
-    static getPropName(keyIdentifier) {
-      return `is${keyDownWrapper.upperCaseFirstLetter(keyIdentifier)}KeyDown`;
-    }
-
-    static upperCaseFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
     }
   };
 };
 
 const keyDefinitions = {enterKey: 13};
 
-export const withCtrlKeyDownLister = keyDownListenerHoc("ctrl", e => e.ctrlKey);
-export const withCtrlAndEnterKeyDownLister = keyDownListenerHoc("ctrlAndEnter", e => e.ctrlKey && e.keyCode === keyDefinitions.enterKey);
+export const withCtrlKeyDownLister = keyDownListenerHoc(e => e.ctrlKey, (isKeyDownHandle) => ({isCtrlKeyDown: isKeyDownHandle}));
+export const withCtrlAndEnterKeyDownLister = keyDownListenerHoc((e, isKeyDown) => isKeyDown && e.ctrlKey && e.keyCode === keyDefinitions.enterKey);
