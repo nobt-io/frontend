@@ -21,9 +21,7 @@ const DebtorsPage = ({replace, shares, onNewMember, onShareValueChanged, areAllM
 
   return (
     <div>
-      <BrandedAppBar
-        onBackHandle={() => goBack(replace)}
-      />
+      <BrandedAppBar canGoBack={true} />
       <Main>
         <Heading>Select debtors</Heading>
         <SubHeading>Choose who is in.</SubHeading>

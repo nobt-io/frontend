@@ -21,8 +21,6 @@ import {
   isDescriptionErrorShown, getSharesWithValues, getFocusId
 } from "../modules/selectors";
 
-const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
-
 const addNobt = (props) => {
   let billToAdd = {
     name: props.description,
@@ -52,10 +50,7 @@ class OverviewPage extends React.Component {
 
   render = () => (
     <div>
-      <BrandedAppBar
-        onBackHandle={() => goBack(this.props.replace)}
-        title="Add Bill"
-      />
+      <BrandedAppBar canGoBack={true} />
       <Main>
         <Heading>Add a bill</Heading>
         <SubHeading>Add a bill to your nobt.</SubHeading>

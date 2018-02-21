@@ -19,7 +19,6 @@ export default class Nobt extends React.Component {
       <div className={styles.nobt}>
         <HeadRoom>
           <BrandedAppBar />
-
           <div className={styles.overviewContainer}>
             <div className={styles.nobtTitle}>{this.props.name}</div>
             <div className={styles.nobtMetadata}>

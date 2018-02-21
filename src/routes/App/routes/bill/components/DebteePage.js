@@ -17,9 +17,7 @@ const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 const DebteePage = ({members, debtee, onPersonPicked, replace}) => {
   return (
     <div>
-      <BrandedAppBar
-        onBackHandle={() => goBack(replace)}
-      />
+      <BrandedAppBar canGoBack={true} />
       <Main>
         <Heading>Select debtee</Heading>
         <SubHeading>Select the person who paid this bill.</SubHeading>
