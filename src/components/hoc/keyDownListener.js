@@ -1,6 +1,6 @@
 import React from "react";
 
-const keyDownListenerHoc = (keyAssertion, propCreation) => (keyDownHandle) => (WrappedComponent) => {
+const keyDownListenerHoc = (keyAssertion, propsCreator) => (keyDownHandle) => (WrappedComponent) => {
   return class keyDownWrapper extends React.Component {
     constructor(props, context) {
       super(props, context);
@@ -21,7 +21,7 @@ const keyDownListenerHoc = (keyAssertion, propCreation) => (keyDownHandle) => (W
     }
 
     keyHandler(e, isDown) {
-      const keyIsDown = keyAssertion(e, isDown);
+      const keyIsDown = keyAssertion(e) && isDown;
       this.setState({keyIsDown});
 
       if (keyIsDown && typeof keyDownHandle === "function") {
@@ -43,20 +43,16 @@ const keyDownListenerHoc = (keyAssertion, propCreation) => (keyDownHandle) => (W
       document.removeEventListener('keyup', this.keyHandleUp);
     }
 
-
     render() {
-      let props = {...this.props};
-
-      if (typeof propCreation !== "undefined") {
-        props = {...props, ...propCreation(this.isKeyDown)};
-      }
+      const additionalProps = typeof propsCreator !== "undefined" ? propsCreator(this.isKeyDown) : {};
+      const props = {...this.props, ...additionalProps};
 
       return <WrappedComponent {...props} />
     }
   };
 };
 
-const keyDefinitions = {enterKey: 13};
+const keyCodes = {enterKey: 13};
 
 export const withCtrlKeyDownLister = keyDownListenerHoc(e => e.ctrlKey, (isKeyDownHandle) => ({isCtrlKeyDown: isKeyDownHandle}));
-export const withCtrlAndEnterKeyDownLister = keyDownListenerHoc((e, isKeyDown) => isKeyDown && e.ctrlKey && e.keyCode === keyDefinitions.enterKey);
+export const withCtrlAndEnterKeyDownLister = keyDownListenerHoc(e => e.ctrlKey && e.keyCode === keyCodes.enterKey);
