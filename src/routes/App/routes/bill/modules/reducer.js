@@ -122,6 +122,7 @@ export const initialState = {
   addBillStatus: null,
   debtee: null,
   description: "",
+  focusId: "",
   amount: 0,
   splitStrategy: SplitStrategyNames.EQUAL,
   personValues: [],
