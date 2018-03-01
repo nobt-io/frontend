@@ -162,12 +162,12 @@ export const isValidBill = createSelector([ isDescriptionValid, isAmountValid, i
     return isAmountValid && isDescriptionValid && isDebteeValid && isDebtorsSelectionValid;
   });
 
-const isAddBillStatusFailing = createSelector([getAddBillStatus], (status) => status === AsyncActionStatus.FAILED);
+const didAddBillFail = createSelector([ getAddBillStatus ], (status) => status === AsyncActionStatus.FAILED);
 
-export const isDescriptionErrorShown = createSelector([ isAddBillStatusFailing, isDescriptionValid ], (failed, valid) => failed && !valid);
-export const isAmountErrorShown = createSelector([ isAddBillStatusFailing, isAmountValid ], (failed, valid) => failed && !valid);
-export const isDebteeErrorShown = createSelector([ isAddBillStatusFailing, isDebteeValid ], (failed, valid) => failed && !valid);
-export const isDebtorsSelectionErrorShown = createSelector([ isAddBillStatusFailing, isDebtorsSelectionValid ], (failed, valid) => failed && !valid);
+export const isDescriptionErrorShown = createSelector([ didAddBillFail, isDescriptionValid ], (failed, valid) => failed && !valid);
+export const isAmountErrorShown = createSelector([ didAddBillFail, isAmountValid ], (failed, valid) => failed && !valid);
+export const isDebteeErrorShown = createSelector([ didAddBillFail, isDebteeValid ], (failed, valid) => failed && !valid);
+export const isDebtorsSelectionErrorShown = createSelector([ didAddBillFail, isDebtorsSelectionValid ], (failed, valid) => failed && !valid);
 
 export const isExistingMemberFactory = createSelector([ getAllMembers ], members => {
   return (candidate) => members.indexOf(candidate) >= 0;
