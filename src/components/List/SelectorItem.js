@@ -20,9 +20,12 @@ class SelectorItem extends React.Component {
       ? {caption: value, legend: this.props.placeholder}
       : {caption: null, legend: null};
 
+    const onClick = this.props.onClick;
+    const propsWithoutClick = {...this.props, onClick: null};
+
     return (
-      <a className={styles.link} href="javascript:void(0);" ref={setRef} onClick={this.props.onClick}>
-        <RTListItem selectable {...this.props} theme={styles} key={value} {...listItemProps} />
+      <a className={styles.link} href="javascript:void(0);" ref={setRef} onClick={onClick}>
+        <RTListItem selectable {...propsWithoutClick} theme={styles} key={value} {...listItemProps} />
       </a>);
   }
 }
