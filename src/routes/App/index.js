@@ -1,6 +1,6 @@
 import withNobtLoader from "../../components/NobtLoader/withNobtLoader";
-import NewBillRoute from "./routes/new";
 import DetailRoute from "./routes/id";
+import BillRoute from "./routes/bill";
 import BalancesRoute from "./routes/balances";
 import reducer from "./modules/reducers";
 import { injectReducer } from "../../store/reducers";
@@ -18,7 +18,7 @@ export default (store) => {
       component: HomeScreen
     },
     childRoutes: [
-      NewBillRoute,
+      BillRoute(store),
       BalancesRoute,
       DetailRoute,
     ]

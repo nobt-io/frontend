@@ -21,7 +21,7 @@ import AsyncActionStatus from "../../../../../../../../const/AsyncActionStatus";
 import { FormattedMessage } from "react-intl";
 import { SubTitle, Title } from "components/text";
 import AmountTheme from "../../../../themes/AmountTheme.scss"
-import Page from "components/Page";
+import { Page } from "components/Container";
 
 class PersonBalance extends React.Component {
 

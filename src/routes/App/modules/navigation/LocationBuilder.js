@@ -20,14 +20,6 @@ export default class LocationBuilder {
   }
 
   /**
-   * @param location
-   * @returns {LocationBuilder}
-   */
-  static fromReduxLocation(location) {
-    return new LocationBuilder(location.pathname, location.origin);
-  }
-
-  /**
    * @returns {LocationBuilder}
    */
   static fromWindow() {
