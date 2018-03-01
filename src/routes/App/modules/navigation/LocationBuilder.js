@@ -23,7 +23,7 @@ export default class LocationBuilder {
    * @returns {LocationBuilder}
    */
   static fromWindow() {
-    return new LocationBuilder(window.location.pathname, location.origin)
+    return new LocationBuilder(window.location.pathname, window.location.origin)
   }
 
   /**

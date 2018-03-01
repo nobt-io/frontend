@@ -58,7 +58,7 @@ const handlers = {
     return {...state, data: newData}
   },
 
-  [INVALIDATE_NOBT]: (state, action) => {
+  [INVALIDATE_NOBT]: (state) => {
 
     return {
       ...state,
@@ -77,6 +77,7 @@ export const initialState = {
     participatingPersons: [], // TODO rename to members
     transactions: [],
     bills: [],
+    payments: [],
     createdOn: null
   }
 };

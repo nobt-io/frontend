@@ -12,6 +12,6 @@
     <orderEntry type="library" name="frontend-react-toolkit node_modules" level="project" />
     <orderEntry type="library" name="raven" level="application" />
     <orderEntry type="library" name="stacktrace" level="application" />
-    <orderEntry type="library" name="raven" level="project" />
+    <orderEntry type="library" name="raven" level="application" />
   </component>
 </module>

@@ -1,13 +1,11 @@
 import withNobtLoader from "../../components/NobtLoader/withNobtLoader";
-import NobtContainer from "./containers/NobtContainer";
-import BillRoute from "./routes/bill";
 import DetailRoute from "./routes/id";
-import SortOverlayRoute from "./routes/sort";
-import FilterOverlayRoute from "./routes/filter";
+import BillRoute from "./routes/bill";
 import BalancesRoute from "./routes/balances";
 import reducer from "./modules/reducers";
 import { injectReducer } from "../../store/reducers";
 import AppLayout from "../../layouts/AppLayout";
+import HomeScreen from "./components/HomeScreen";
 
 export default (store) => {
 
@@ -17,13 +15,11 @@ export default (store) => {
     path: ':nobtId',
     component: withNobtLoader(AppLayout),
     indexRoute: {
-      component: NobtContainer
+      component: HomeScreen
     },
     childRoutes: [
       BillRoute(store),
       BalancesRoute,
-      SortOverlayRoute,
-      FilterOverlayRoute,
       DetailRoute,
     ]
   }
