@@ -10,7 +10,6 @@ import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
 import { Section, SectionGroup } from "components/Section/index";
 import { List, RadioboxItem, AddMemberItem } from "components/List/index"
 import Button from "components/Button/index";
-import { withCtrlAndEnterKeyDownLister } from "components/hoc/keyDownListener";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 
@@ -50,4 +49,4 @@ export default withNavigation(connect(
   (dispatch) => ({
     onPersonPicked: (debtee) => dispatch(newDebteeSelected(debtee)),
   })
-)(withCtrlAndEnterKeyDownLister(({replace}) => goBack(replace))(DebteePage)))
+)(DebteePage))

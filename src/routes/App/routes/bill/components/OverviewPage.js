@@ -13,7 +13,6 @@ import { Heading, SubHeading, Caption } from "components/text";
 import { Section, SectionGroup } from "components/Section/index";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { invalidateNobt } from "../../../modules/currentNobt/actions";
-import { withCtrlAndEnterKeyDownLister } from "components/hoc/keyDownListener";
 
 import {
   getAddBillStatus,
@@ -21,7 +20,7 @@ import {
   isDescriptionErrorShown, getSharesWithValues, getFocusId
 } from "../modules/selectors";
 
-const addNobt = (props) => {
+const createBill = (props) => {
   let billToAdd = {
     name: props.description,
     debtee: props.debtee,
@@ -102,7 +101,7 @@ class OverviewPage extends React.Component {
             <InputLegend error={this.props.isDebtorsSelectionErrorShown}>Select who is involved in this bill.</InputLegend>
           </Section>
         </SectionGroup>
-        <Button raised primary onClick={() => addNobt(this.props)} label="Add Bill" icon="check_circle" />
+        <Button raised primary onClick={() => createBill(this.props)} label="Add Bill" icon="check_circle" />
       </Main>
     </div>
   )
@@ -131,4 +130,4 @@ export default withNavigation(connect(
     onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
     invalidateNobtData: () => dispatch(invalidateNobt())
   })
-)(withCtrlAndEnterKeyDownLister((props) => addNobt(props))(OverviewPage)));
+)(OverviewPage));

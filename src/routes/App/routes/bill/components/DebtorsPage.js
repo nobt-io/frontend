@@ -11,7 +11,6 @@ import { areAllMembersSelected, getAllMembers, getShares } from "../modules/sele
 import { newMemberAdded, shareValueChanged } from "../modules/actions";
 import BrandedAppBar from "components/BrandedAppBar/index";
 import Button from "components/Button/index";
-import { withCtrlAndEnterKeyDownLister } from "components/hoc/keyDownListener";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop(1).apply(replace);
 
@@ -60,4 +59,4 @@ export default withNavigation(connect(
     onNewMember: (member) => dispatch(newMemberAdded(member)),
     onShareValueChanged: (name, value) => dispatch(shareValueChanged(name, value))
   })
-)(withCtrlAndEnterKeyDownLister(({replace}) => goBack(replace))(DebtorsPage)))
+)(DebtorsPage))
