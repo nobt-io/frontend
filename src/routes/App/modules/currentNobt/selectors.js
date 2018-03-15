@@ -1,7 +1,6 @@
 import { createSelector } from "reselect";
 import _debug from "debug";
 import PersonBalanceFactory from "./PersonBalanceFactory";
-import { getBillFilter, getBillSortProperty } from "../viewState/selectors";
 import AsyncActionStatus from "../../../../const/AsyncActionStatus";
 import { pathVariable as balanceDetailPathVariable } from "../../routes/balances/routes/name/index";
 import { pathVariable as billDetailPathVariable } from "../../routes/id/index";
@@ -25,7 +24,7 @@ export const shouldFetchNobt = createSelector([ isNobtDataOutdated, getFetchNobt
   return isOutdated && status !== AsyncActionStatus.IN_PROGRESS;
 });
 
-const getDeNormalizedBills = createSelector([getBills], bills => bills.map(deNormalizeBill));
+export const getDeNormalizedBills = createSelector([getBills], bills => bills.map(deNormalizeBill));
 
 const getBillsAsFeedItems = createSelector([getDeNormalizedBills], bills => bills.map(bill => ({
   id: bill.id,
@@ -79,32 +78,6 @@ const deNormalizeBill = (e) => {
     actions: e._links
   };
 };
-
-export const getFilteredBills = createSelector([ getBills, getBillFilter, getBillSortProperty ], (bills, filter, sort) => {
-
-  const NO_FILTER = '';
-  const NO_SORT = () => 0;
-
-  const sortFunctions = {
-    "Amount": (e1, e2) => e2.debtee.amount - e1.debtee.amount,
-    "Date": (e1, e2) => new Date(e2.date).getTime() - new Date(e1.date).getTime()
-  };
-
-  let matchName = (name) => (filter === NO_FILTER) ? true : name === filter;
-
-  let matchDebtee = (bill) => matchName(bill.debtee);
-  let matchDebtors = (bill) => bill.debtors.map(d => d.name).filter(matchName).length > 0;
-
-  const filteredAndSortedBills = bills
-    .map(deNormalizeBill)
-    .filter(bill => (matchDebtee(bill) || matchDebtors(bill)))
-    .sort(sortFunctions[ sort ] || NO_SORT);
-
-  _debug('selectors:getFilteredBills')(filteredAndSortedBills);
-
-  return filteredAndSortedBills;
-
-});
 
 let first = () => true;
 

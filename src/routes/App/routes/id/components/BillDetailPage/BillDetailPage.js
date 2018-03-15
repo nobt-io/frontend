@@ -15,9 +15,13 @@ import Page from "components/Page";
 import { Snackbar } from "react-toolbox";
 import { deleteExpense } from "../../../../modules/currentNobt/actions";
 import withNavigation from "../../../../../../components/hoc/withNavigation";
-import withDelayable from "../../../../../../components/Delayable";
+import Dialog from "../../../../../../components/Dialog/Dialog";
 
 class BillDetailPage extends React.Component {
+
+  state = {
+    showDeleteBillConfirmationDialog: false
+  };
 
   render = () => {
 
@@ -26,7 +30,7 @@ class BillDetailPage extends React.Component {
       return null;
     }
 
-    const {bill, canBillBeDeleted} = this.props;
+    const {bill} = this.props;
     const {debtee} = bill;
 
     return (
@@ -105,28 +109,44 @@ class BillDetailPage extends React.Component {
               primary
               leftIcon="delete"
               caption="Delete this bill"
-              disabled={!canBillBeDeleted || this.props.deleteBill.isRunning}
-              onClick={() => this.props.deleteBill.schedule(() => this.props.deleteExpense(bill), 4000)}
+              onClick={this.showDialog}
             />
           </List>
-        </Page>
 
-        <Snackbar
-          action={`Undo (${this.props.deleteBill.remainingTime / 1000})`}
-          active={this.props.deleteBill.isRunning}
-          label='Bill deleted.'
-          onClick={this.props.deleteBill.cancel}
-          type="warning"
-        />
+          <Dialog
+            active={this.state.showDeleteBillConfirmationDialog}
+            title={`Delete '${this.props.bill.name}'?`}
+            onEscKeyDown={this.hideDialog}
+            onOverlayClick={this.hideDialog}
+            actions={[
+              {label: "Yes.", onClick: this.handleYesAction},
+              {label: "No.", onClick: this.hideDialog}
+            ]}>
+            <p>Do you really want to delete this bill? <br />
+              This cannot be undone.</p>
+          </Dialog>
+        </Page>
       </div>
     );
   };
-}
 
-BillDetailPage.propTypes = {
-  bill: React.PropTypes.object.isRequired,
-  deleteBill: React.PropTypes.object.isRequired,
-};
+  handleYesAction = () => {
+    this.props.deleteBill(this.props.bill);
+    this.hideDialog();
+  };
+
+  hideDialog = () => {
+    this.setState({
+      showDeleteBillConfirmationDialog: false
+    })
+  };
+
+  showDialog = () => {
+    this.setState({
+      showDeleteBillConfirmationDialog: true
+    })
+  }
+}
 
 const makeMapStateToProps = () => {
   const getBill = makeGetBill();
@@ -140,13 +160,9 @@ const makeMapStateToProps = () => {
   };
 };
 
-export default withDelayable('deleteBill')(
-  connect(
-    makeMapStateToProps,
-    (dispatch) => ({
-      deleteExpense: (e) => {
-        dispatch(deleteExpense(e))
-      }
-    })
-  )(withNavigation(BillDetailPage))
-);
+export default connect(
+  makeMapStateToProps,
+  (dispatch) => ({
+    deleteBill: (e) => dispatch(deleteExpense(e))
+  })
+)(withNavigation(BillDetailPage));
