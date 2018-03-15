@@ -55,8 +55,10 @@ class AddMembersForm extends React.Component {
   );
 
   handleOnKeyPress = (event) => {
-    let enterKey = 13;
-    if (event.charCode === enterKey && !this.props.isAddPersonButtonDisabled) {
+    const currentNameCanBeAdded = !this.props.isAddPersonButtonDisabled && this.props.shouldRenderAddPersonButton;
+    const enterKeyPressed = event.charCode === 13;
+
+    if (enterKeyPressed && currentNameCanBeAdded) {
       this.props.addCurrentNameAsPerson();
     }
   };

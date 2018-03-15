@@ -13,7 +13,7 @@ export const AddBillFAB = (props) => {
       className={styles.button}
       primary
       floating
-      onClick={ () => LocationBuilder.fromWindow().push("newBill").apply(props.push) }
+      onClick={ () => LocationBuilder.fromWindow().push("bill").apply(props.push) }
     />
   )
 };

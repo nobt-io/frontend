@@ -7,7 +7,21 @@
 }
 
 .heading {
-  margin-bottom: 0;
+  font-size: 3rem;
+  margin: 2rem 0 1rem;
+  font-weight: bold;
+}
+
+.subHeading{
+  opacity: 0.5;
+  font-size: 2rem;
+  margin: 0 0 2rem;
+}
+
+.caption{
+  font-size: inherit;
+  font-weight: bold;
+  margin: .5rem 0;
 }
 
 .title {
@@ -21,4 +35,11 @@
   color: $color-text-secondary;
 
   padding-top: $unit;
+}
+
+.legend{
+  font-size: 1.2rem;
+  line-height: 2rem;
+  color: $grey;
+  margin: 0;
 }

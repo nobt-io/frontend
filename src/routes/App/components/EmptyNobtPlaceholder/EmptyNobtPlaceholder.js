@@ -9,7 +9,7 @@ export const EmptyNobtPlaceholder = (props) => {
     <div className={styles.container}>
       <div style={{backgroundImage: "url('" + SafeBox + "')"}} className={styles.icon}></div>
       <div className={styles.topLabel}>No bills found.</div>
-      <div className={styles.linkLabel}><a href="#" onClick={ () => LocationBuilder.fromWindow().push("newBill").apply(props.push) }>Add</a> your first.</div>
+      <div className={styles.linkLabel}><a href="#" onClick={ () => LocationBuilder.fromWindow().push("bill").apply(props.push) }>Add</a> your first.</div>
     </div>
   );
 };
