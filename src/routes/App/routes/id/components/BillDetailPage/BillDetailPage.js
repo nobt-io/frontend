@@ -15,7 +15,16 @@ import { Page } from "components/Container";
 import { Snackbar } from "react-toolbox";
 import { deleteExpense } from "../../../../modules/currentNobt/actions";
 import withNavigation from "../../../../../../components/hoc/withNavigation";
-import Dialog from "../../../../../../components/Dialog/Dialog";
+import ConfirmationDialog from "components/ConfirmationDialog";
+
+const DeleteBillConfirmationDialog = ({active, billName, confirm, cancel}) => (<ConfirmationDialog
+  active={active}
+  title={`Delete '${billName}'?`}
+  confirm={confirm}
+  cancel={cancel}>
+  <p>Do you really want to delete this bill? <br />
+    This cannot be undone.</p>
+</ConfirmationDialog>);
 
 class BillDetailPage extends React.Component {
 
@@ -113,39 +122,22 @@ class BillDetailPage extends React.Component {
             />
           </List>
 
-          <Dialog
+          <DeleteBillConfirmationDialog
             active={this.state.showDeleteBillConfirmationDialog}
-            title={`Delete '${this.props.bill.name}'?`}
-            onEscKeyDown={this.hideDialog}
-            onOverlayClick={this.hideDialog}
-            actions={[
-              {label: "Yes.", onClick: this.handleYesAction},
-              {label: "No.", onClick: this.hideDialog}
-            ]}>
-            <p>Do you really want to delete this bill? <br />
-              This cannot be undone.</p>
-          </Dialog>
+            billName={this.props.bill.name}
+            confirm={this.handleConfirm}
+            cancel={this.handelCancel} />
+
         </Page>
       </div>
     );
   };
 
-  handleYesAction = () => {
-    this.props.deleteBill(this.props.bill);
-    this.hideDialog();
-  };
+  showDialog = () => this.setState({showDeleteBillConfirmationDialog: true});
 
-  hideDialog = () => {
-    this.setState({
-      showDeleteBillConfirmationDialog: false
-    })
-  };
+  handelCancel = () => this.setState({showDeleteBillConfirmationDialog: false});
+  handleConfirm = () => this.props.deleteBill(this.props.bill);
 
-  showDialog = () => {
-    this.setState({
-      showDeleteBillConfirmationDialog: true
-    })
-  }
 }
 
 const makeMapStateToProps = () => {
