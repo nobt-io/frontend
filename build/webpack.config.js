@@ -38,6 +38,7 @@ let webpackConfig = {
       {
         test: /\.(js|jsx)$/,
         include: /src/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'babel-loader',

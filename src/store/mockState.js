@@ -137,6 +137,7 @@ export class NobtStateBuilder {
 class BillBuilder {
 
   shares = [];
+  links = {};
 
   /**
    * @param {Number} id
@@ -152,6 +153,15 @@ class BillBuilder {
    */
   withCreationDate(date) {
     this.createdOn = date;
+    return this;
+  }
+
+  /**
+   * @param {String} href
+   * @returns {BillBuilder}
+   */
+  withDeleteLink(href) {
+    this.links.delete = {href};
     return this;
   }
 
@@ -193,7 +203,8 @@ class BillBuilder {
       createdOn: this.createdOn,
       name: this.name,
       debtee: this.debtee,
-      shares: this.shares
+      shares: this.shares,
+      _links: this.links
     }
   }
 }

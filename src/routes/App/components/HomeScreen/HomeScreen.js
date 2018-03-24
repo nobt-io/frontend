@@ -9,12 +9,10 @@ import { Button } from "react-toolbox/lib/button/index";
 import Amount from "../../../../components/Amount/Amount";
 import BrandedAppBar from "../../../../components/BrandedAppBar/index";
 import Feed from "../Feed/Feed";
-import { getCreatedOn, getCurrency, getFilteredBills, getMembers, getName, getTotal, isNobtEmpty } from "../../modules/currentNobt/selectors";
-import { getBillFilter, getBillSortProperty } from "../../modules/viewState/selectors";
-import { updateBillFilter, updateBillSortProperty } from "../../modules/viewState/actions";
+import { getCreatedOn, getCurrency, getDeNormalizedBills, getMembers, getName, getTotal, isNobtEmpty } from "../../modules/currentNobt/selectors";
 import { connect } from "react-redux";
 import withNavigation from "../../../../components/hoc/withNavigation";
-import { addMember, invalidateNobt } from "../../modules/currentNobt/actions";
+import { invalidateNobt } from "../../modules/currentNobt/actions";
 
 const GoToBalancesButton = ({push}) => (
   <Button
@@ -75,9 +73,7 @@ const mapStateToProps = (state) => {
     currency: getCurrency(state),
     total: getTotal(state),
     members: getMembers(state),
-    bills: getFilteredBills(state),
-    billFilter: getBillFilter(state),
-    billSortProperty: getBillSortProperty(state),
+    bills: getDeNormalizedBills(state),
     createdOn: getCreatedOn(state),
     isNobtEmpty: isNobtEmpty(state)
   };
@@ -85,9 +81,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    addMember: (name) => dispatch(addMember(name)),
-    updateBillFilter: (memberName) => dispatch(updateBillFilter(memberName)),
-    updateBillSortProperty: (property) => dispatch(updateBillSortProperty(property)),
     invalidateNobtData: () => dispatch(invalidateNobt())
   };
 };
