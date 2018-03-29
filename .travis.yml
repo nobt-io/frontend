@@ -2,9 +2,10 @@ sudo: false
 language: node_js
 node_js:
 - '8'
-cache: yarn
-install:
-- yarn install --non-interactive
+cache:
+  yarn: true
+  directories:
+    - node_modules
 script:
 - yarn run compile
 - yarn run test
