@@ -1,4 +1,4 @@
-let config = require("./build/webpack.config").default;
+let config = require("./webpack.config")({}, {});
 
 module.exports = {
   parser: "babel-eslint",

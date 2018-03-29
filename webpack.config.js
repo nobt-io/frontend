@@ -4,7 +4,7 @@ const DefinePlugin = require("webpack").DefinePlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 
-module.exports = (env, argv) => ({
+module.exports = (_, argv) => ({
 	entry: [
 		'babel-polyfill',
 		'./src/app.js'
