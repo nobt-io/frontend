@@ -1,4 +1,4 @@
-import LocationBuilder from "../src/routes/App/modules/navigation/LocationBuilder";
+import LocationBuilder from "./LocationBuilder";
 
 test('should remove parts', () => {
 

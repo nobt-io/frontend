@@ -2,11 +2,10 @@
   "name": "Frontend",
   "version": "0.0.1",
   "description": "Frontend for nobt.io",
-  "main": "index.js",
   "private": true,
   "engines": {
-    "node": ">=4.2.0",
-    "npm": "^3.0.0"
+    "node": ">=8.5.0",
+    "npm": "^5.0.0"
   },
   "scripts": {
     "clean": "rimraf dist",
@@ -14,7 +13,7 @@
     "dev": "better-npm-run dev",
     "lint": "eslint src && travis-lint .travis.yml",
     "test": "better-npm-run test",
-    "deploy": "better-npm-run deploy"
+    "deploy": "npm run clean && better-npm-run deploy"
   },
   "betterScripts": {
     "compile": {
@@ -47,29 +46,6 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:nobt-io/frontend.git"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "react",
-      "stage-2"
-    ],
-    "plugins": [
-      "transform-export-extensions"
-    ]
-  },
-  "jest": {
-    "modulePaths": [
-      "src"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.scss$": "identity-obj-proxy",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy"
-    },
-    "verbose": true
   },
   "dependencies": {
     "axios": "^0.14.0",

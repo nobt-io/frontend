@@ -35,7 +35,14 @@ module.exports = (_, argv) => ({
 				]
 			}, {
 				test: /\.(png|jpg)$/,
-				use: [ "file-loader" ]
+				use: [
+					{
+						loader: "file-loader",
+						options: {
+							name: "[name]_[hash:4].[ext]"
+						}
+					}
+				]
 			}
 		]
 	},
