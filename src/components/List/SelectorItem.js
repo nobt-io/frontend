@@ -17,8 +17,8 @@ class SelectorItem extends React.Component {
     const setRef = (item) => this.item = item;
 
     const listItemProps = valueIsSet
-      ? {caption: value, legend: this.props.placeholder}
-      : {caption: null, legend: null};
+      ? {caption: value, legend: null}
+      : {caption: null, legend: this.props.placeholder};
 
     const onClick = this.props.onClick;
     const propsWithoutClick = {...this.props, onClick: null};
