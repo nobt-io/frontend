@@ -4,8 +4,8 @@
   "description": "Frontend for nobt.io",
   "private": true,
   "engines": {
-    "node": ">=4.2.0",
-    "npm": "^3.0.0"
+    "node": ">=8.5.0",
+    "npm": "^5.0.0"
   },
   "scripts": {
     "clean": "rimraf dist",
