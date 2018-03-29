@@ -11,7 +11,7 @@
     "clean": "rimraf dist",
     "compile": "webpack --mode development",
     "dev": "webpack-dev-server --mode development",
-    "lint": "eslint src && travis-lint .travis.yml",
+    "lint": "eslint src",
     "test": "jest",
     "deploy": "yarn run clean && webpack --mode production"
   },
@@ -86,7 +86,6 @@
     "rimraf": "^2.5.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "travis-lint": "^1.0.0",
     "webpack": "^4.3.0",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"
