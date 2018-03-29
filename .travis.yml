@@ -1,19 +1,17 @@
 sudo: false
 language: node_js
 node_js:
-- '6'
-cache:
-  directories:
-  - node_modules
+- '8'
+cache: yarn
 install:
-- npm install
+- yarn install --non-interactive
 script:
-- npm run compile
-- npm run test
-- npm run lint
+- yarn run compile
+- yarn run test
+- yarn run lint
 before_deploy:
 - pip install --user awscli
-- npm run deploy
+- yarn run deploy
 deploy:
   - provider: script
     skip_cleanup: true
