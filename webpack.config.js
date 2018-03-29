@@ -2,7 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DefinePlugin = require("webpack").DefinePlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
+const CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = (env, argv) => ({
 	entry: [
@@ -59,7 +59,14 @@ module.exports = (env, argv) => ({
 			SENTRY_DSN: getAssertedEnvValue(argv.mode, "SENTRY_DSN"),
 			__DEV__: argv.mode === "development"
 		}),
-		new MiniCssExtractPlugin()
+		new MiniCssExtractPlugin(),
+		new CompressionPlugin({
+			asset: "gzipped/[path]",
+			algorithm: "gzip",
+			test: /\.(js|css)$/,
+			minRatio: 0.8,
+			deleteOriginalAssets: false
+		})
 	],
 	devServer: {
 		contentBase: './dist',
