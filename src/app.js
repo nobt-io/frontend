@@ -12,18 +12,8 @@ import AppContainer from "./containers/AppContainer"
 // noinspection ES6UnusedImports
 import globalCss from "./app.scss"
 
-// ========================================================
-// Browser History Setup
-// ========================================================
 const browserHistory = useRouterHistory(createBrowserHistory)();
 
-// ========================================================
-// Store and History Instantiation
-// ========================================================
-// Create redux store and sync with react-router-redux. We have installed the
-// react-router-redux reducer under the routerKey "router" in src/routes/index.js,
-// so we need to provide a custom `selectLocationState` to inform
-// react-router-redux of its location.
 const initialState = window.___INITIAL_STATE__;
 const store = createStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store, {
@@ -36,25 +26,14 @@ Raven.setDataCallback(attachStoreState);
 
 let routes = routeFactory(store);
 
-// ========================================================
-// Developer Tools Setup
-// ========================================================
 if (__DEV__) {
 	if (window.devToolsExtension) {
 		window.devToolsExtension.open()
 	}
 }
 
-// ========================================================
-// Render Setup
-// ========================================================
 const MOUNT_NODE = document.getElementById('root');
 
-// ========================================================
-// Go!
-// ========================================================
-
-// With this setup, HMR works but throws away local state, still it is better than nothing because you don't have to manually refresh the browser window.
 const render = (AppContainer) => ReactDOM.render(
 	<IntlProvider locale={navigator.language}>
 		<AppContainer
@@ -68,11 +47,3 @@ const render = (AppContainer) => ReactDOM.render(
 );
 
 render(AppContainer);
-
-if (module.hot) {
-	module.hot.accept(() => {
-			let NextAppContainer = require("./containers/AppContainer").default;
-			render(NextAppContainer)
-		}
-	)
-}
