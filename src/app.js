@@ -9,12 +9,13 @@ import { IntlProvider } from "react-intl";
 import routeFactory from "./routes";
 import AppContainer from "./containers/AppContainer"
 
+// noinspection ES6UnusedImports
+import globalCss from "./app.scss"
+
 // ========================================================
 // Browser History Setup
 // ========================================================
-const browserHistory = useRouterHistory(createBrowserHistory)({
-  basename: __BASENAME__
-});
+const browserHistory = useRouterHistory(createBrowserHistory)();
 
 // ========================================================
 // Store and History Instantiation
@@ -26,7 +27,7 @@ const browserHistory = useRouterHistory(createBrowserHistory)({
 const initialState = window.___INITIAL_STATE__;
 const store = createStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.router
+	selectLocationState: (state) => state.router
 });
 
 // Configure Raven to always attach the current state of the store to the event
@@ -38,10 +39,10 @@ let routes = routeFactory(store);
 // ========================================================
 // Developer Tools Setup
 // ========================================================
-if (__DEBUG__) {
-  if (window.devToolsExtension) {
-    window.devToolsExtension.open()
-  }
+if (__DEV__) {
+	if (window.devToolsExtension) {
+		window.devToolsExtension.open()
+	}
 }
 
 // ========================================================
@@ -55,23 +56,23 @@ const MOUNT_NODE = document.getElementById('root');
 
 // With this setup, HMR works but throws away local state, still it is better than nothing because you don't have to manually refresh the browser window.
 const render = (AppContainer) => ReactDOM.render(
-  <IntlProvider locale={navigator.language}>
-    <AppContainer
-      key={Math.random()}
-      store={store}
-      history={history}
-      routes={routes}
-    />
-  </IntlProvider>,
-  MOUNT_NODE
+	<IntlProvider locale={navigator.language}>
+		<AppContainer
+			key={Math.random()}
+			store={store}
+			history={history}
+			routes={routes}
+		/>
+	</IntlProvider>,
+	MOUNT_NODE
 );
 
 render(AppContainer);
 
 if (module.hot) {
-  module.hot.accept(() => {
-      let NextAppContainer = require("./containers/AppContainer").default;
-      render(NextAppContainer)
-    }
-  )
+	module.hot.accept(() => {
+			let NextAppContainer = require("./containers/AppContainer").default;
+			render(NextAppContainer)
+		}
+	)
 }

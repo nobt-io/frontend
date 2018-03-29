@@ -18,20 +18,19 @@
   },
   "betterScripts": {
     "compile": {
-      "command": "babel-node bin/compile",
+      "command": "webpack --mode development",
       "env": {
         "DEBUG": "app:*"
       }
     },
     "dev": {
-      "command": "nodemon --exec babel-node bin/server",
+      "command": "webpack-dev-server --mode development",
       "env": {
-        "NODE_ENV": "development",
         "DEBUG": "app:*"
       }
     },
     "deploy": {
-      "command": "npm run clean && npm run compile",
+      "command": "webpack --mode production",
       "env": {
         "NODE_ENV": "production",
         "DEBUG": "app:*"
@@ -47,7 +46,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:nobt-io/frontend.git"
+    "url": "git@github.com:nobt-io/frontend.git"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-2"
+    ],
+    "plugins": [
+      "transform-export-extensions"
+    ]
   },
   "jest": {
     "modulePaths": [
@@ -64,9 +73,10 @@
   },
   "dependencies": {
     "axios": "^0.14.0",
-    "babel-polyfill": "^6.9.0",
+    "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.5",
     "debug": "^2.2.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "fs-extra": "^0.30.0",
     "history": "~3.0.0",
     "immutability-helper": "^2.0.0",
@@ -100,7 +110,14 @@
     "yargs": "^6.0.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-export-extensions": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "better-npm-run": "0.0.10",
+    "css-loader": "^0.28.11",
     "eslint": "^3.0.1",
     "eslint-config-standard": "^5.1.0",
     "eslint-config-standard-react": "^3.0.0",
@@ -110,12 +127,19 @@
     "eslint-plugin-promise": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
     "eslint-plugin-standard": "^2.0.0",
-    "travis-lint": "^1.0.0",
-
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.1.0",
     "identity-obj-proxy": "^3.0.0",
-    "react-test-renderer": "^15.3.2",
     "jest": "^20.0.1",
+    "node-sass": "^4.8.3",
+    "react-test-renderer": "^15.3.2",
     "redux-mock-store": "^1.2.1",
-    "rimraf": "^2.5.1"
+    "rimraf": "^2.5.1",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "travis-lint": "^1.0.0",
+    "webpack": "^4.3.0",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
   }
 }
