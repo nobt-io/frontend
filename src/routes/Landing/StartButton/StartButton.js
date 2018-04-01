@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./StartButton.scss";
-import LocationBuilder from "../../../../App/modules/navigation/LocationBuilder";
+import LocationBuilder from "../../App/modules/navigation/LocationBuilder";
 
 const StartButton = (props) => {
 

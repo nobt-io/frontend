@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getCreatedNobtId } from "../../../../modules/selectors";
+import { getCreatedNobtId } from "../../modules/selectors";
 import { Link } from "react-router";
 import styles from "./DoneScreen.scss";
-import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
+import LocationBuilder from "../../../App/modules/navigation/LocationBuilder";
 import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
 import { CopyToClipboard } from "react-copy-to-clipboard/lib/Component";
 import { IconButton } from "react-toolbox/lib/button";

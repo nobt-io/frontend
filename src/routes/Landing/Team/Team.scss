@@ -57,27 +57,27 @@
 }
 
 #teamMember1 {
-  background-image: url('static/contributors/thomas_single.png')
+  background-image: url('../../../static/contributors/thomas_single.png')
 }
 
 #teamMember2 {
-  background-image: url('static/contributors/david_single.png')
+  background-image: url('../../../static/contributors/david_single.png')
 }
 
 #teamMember3 {
-  background-image: url('static/contributors/matthias_single.png')
+  background-image: url('../../../static/contributors/matthias_single.png')
 }
 
 @media #{$mq-desktop} {
   #teamMember1 {
-    background-image: url('static/contributors/thomas.png')
+    background-image: url('../../../static/contributors/thomas.png')
   }
 
   #teamMember2 {
-    background-image: url('static/contributors/david.png')
+    background-image: url('../../../static/contributors/david.png')
   }
 
   #teamMember3 {
-    background-image: url('static/contributors/matthias.png')
+    background-image: url('../../../static/contributors/matthias.png')
   }
 }

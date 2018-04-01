@@ -77,9 +77,7 @@ const initialState = {
   createdNobtId: ""
 };
 
-let newNobtReducer = (state = initialState, action) => {
-  const handler = handlers[ action.type ]
-  return handler ? handler(state, action) : state
-};
-
-export default newNobtReducer;
+export default (state = initialState, action) => {
+	const handler = handlers[ action.type ]
+	return handler ? handler(state, action) : state
+};;

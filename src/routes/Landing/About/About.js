@@ -10,7 +10,7 @@ import RotatingText from "react-rotating-text"
 import StepOneImage from "./step1.png";
 import StepTwoImage from "./step2.png";
 import StepThreeImage from "./step3.png";
-import StartButton from "../StartButton";
+import StartButton from "../StartButton/index";
 
 export default class About extends React.Component {
 

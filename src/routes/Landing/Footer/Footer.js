@@ -5,7 +5,7 @@ import Grid from "react-bootstrap/lib/Grid";
 import Row from "react-bootstrap/lib/Row";
 import Col from "react-bootstrap/lib/Col";
 
-import Logo from "components/Logo";
+import Logo from "components/Logo/index";
 
 export default class Footer extends React.Component {
   render = () => (
