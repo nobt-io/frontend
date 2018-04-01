@@ -20,18 +20,10 @@ export default class LocationBuilder {
   }
 
   /**
-   * @param location
-   * @returns {LocationBuilder}
-   */
-  static fromReduxLocation(location) {
-    return new LocationBuilder(location.pathname, location.origin);
-  }
-
-  /**
    * @returns {LocationBuilder}
    */
   static fromWindow() {
-    return new LocationBuilder(window.location.pathname, location.origin)
+    return new LocationBuilder(window.location.pathname, window.location.origin)
   }
 
   /**
@@ -40,7 +32,7 @@ export default class LocationBuilder {
    */
   endsWith(string) {
     return this._path.endsWith(string)
-  };
+  }
 
   /**
    * @param part

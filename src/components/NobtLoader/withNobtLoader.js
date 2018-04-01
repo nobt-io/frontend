@@ -7,7 +7,6 @@ import debug from "debug";
 import AsyncActionStatus from "../../const/AsyncActionStatus";
 import { Snackbar } from "react-toolbox/lib/snackbar/index";
 import { ProgressBar } from "react-toolbox/lib/progress_bar/index";
-import { SubTitle } from "../text/index";
 
 export default function withNobtLoader(WrappedComponent) {
 
@@ -38,14 +37,14 @@ export default function withNobtLoader(WrappedComponent) {
         <div>
           {
             this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
-              <WrappedComponent {...this.props}/>
+              <WrappedComponent {...this.props} />
             )
           }
 
           {
             this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
               <div className={styles.loader}>
-                <div className={styles.separator}/>
+                <div className={styles.separator} />
                 <div className={styles.progressBar}>
                   <ProgressBar type='circular' mode='indeterminate' multicolor />
                 </div>

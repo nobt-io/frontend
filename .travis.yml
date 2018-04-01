@@ -10,6 +10,7 @@ install:
 script:
 - npm run compile
 - npm run test
+- npm run lint
 before_deploy:
 - pip install --user awscli
 - npm run deploy

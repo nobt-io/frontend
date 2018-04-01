@@ -4,7 +4,7 @@ import { Button as RTButton } from "react-toolbox/lib/button";
 
 const Button = (props) => {
 
-  let givenTheme = props.theme;
+  let givenTheme = {...props.theme, button: styles.button};
 
   if (props.rightIcon) {
     givenTheme.icon = styles.rightIcon;
@@ -14,7 +14,7 @@ const Button = (props) => {
   delete otherProps.rightIcon;
 
   return (
-    <RTButton {...otherProps} theme={givenTheme} />
+    <RTButton {...otherProps} theme={givenTheme} raised />
   )
 };
 

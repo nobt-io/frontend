@@ -1,0 +1,18 @@
+@import "~react-toolbox/lib/colors";
+
+// TODO: Use colors defined in the included file above instead of hardcoding.
+
+$color-primary: #2D978D;
+$color-primary-dark: rgba(53, 53, 53, 50);
+$color-primary-light: #34ACA1;
+
+$color-accent: #979797;
+$color-accent-dark: white;
+$color-accent-light: #e3e3e3;
+$color-button-grey: #e8e8e8;
+
+$color-error: #de3226;
+
+$grey: grey;
+
+$color-button-grey-dark: darken($color-button-grey, 30);

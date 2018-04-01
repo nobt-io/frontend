@@ -6,29 +6,22 @@ import createLogger from "redux-logger";
 import { crashReporter } from "./crashReporter";
 
 export default (initialState = {}, history) => {
-  // ======================================================
-  // Middleware Configuration
-  // ======================================================
-  const middleware = [crashReporter, thunk, routerMiddleware(history)]
 
-  if (__DEBUG__) {
+	const middleware = [crashReporter, thunk, routerMiddleware(history)]
+
+	if (__DEV__) {
     const logger = createLogger();
     middleware.push(logger);
   }
-  // ======================================================
-  // Store Enhancers
-  // ======================================================
-  const enhancers = []
-  if (__DEBUG__) {
+
+	const enhancers = []
+	if (__DEV__) {
     const devToolsExtension = window.devToolsExtension
     if (typeof devToolsExtension === 'function') {
       enhancers.push(devToolsExtension())
     }
   }
 
-  // ======================================================
-  // Store Instantiation and HMR Setup
-  // ======================================================
   const store = createStore(
     makeRootReducer(),
     initialState,
@@ -37,14 +30,8 @@ export default (initialState = {}, history) => {
       ...enhancers
     )
   )
-  store.asyncReducers = {}
 
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      const reducers = require('./reducers').default
-      store.replaceReducer(reducers(store.asyncReducers))
-    })
-  }
+	store.asyncReducers = {}
 
   return store
 }

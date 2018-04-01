@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should display actual value if absolute property is falsy 1`] = `
+<span
+  className=""
+>
+  <span>
+    -€30.00
+  </span>
+</span>
+`;
+
+exports[`should use absolute value of amount by default 1`] = `
+<span
+  className=""
+>
+  <span>
+    €30.00
+  </span>
+</span>
+`;

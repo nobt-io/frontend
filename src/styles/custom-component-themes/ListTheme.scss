@@ -1,0 +1,6 @@
+// Override bootstrap values
+ol, ul {
+  &.list {
+    margin-bottom: 0;
+  }
+}
