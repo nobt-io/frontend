@@ -9,39 +9,11 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "compile": "better-npm-run compile",
-    "dev": "better-npm-run dev",
-    "lint": "eslint src && travis-lint .travis.yml",
-    "test": "better-npm-run test",
-    "deploy": "npm run clean && better-npm-run deploy"
-  },
-  "betterScripts": {
-    "compile": {
-      "command": "webpack --mode development",
-      "env": {
-        "DEBUG": "app:*"
-      }
-    },
-    "dev": {
-      "command": "webpack-dev-server --mode development",
-      "env": {
-        "DEBUG": "app:*"
-      }
-    },
-    "deploy": {
-      "command": "webpack --mode production",
-      "env": {
-        "NODE_ENV": "production",
-        "DEBUG": "app:*"
-      }
-    },
-    "test": {
-      "command": "jest",
-      "env": {
-        "NODE_ENV": "test",
-        "DEBUG": "app:*"
-      }
-    }
+    "compile": "webpack --mode development",
+    "dev": "webpack-dev-server --mode development",
+    "lint": "eslint src",
+    "test": "jest",
+    "deploy": "yarn run clean && webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -92,7 +64,6 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "better-npm-run": "0.0.10",
     "compression-webpack-plugin": "^1.1.11",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
@@ -115,7 +86,6 @@
     "rimraf": "^2.5.1",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "travis-lint": "^1.0.0",
     "webpack": "^4.3.0",
     "webpack-cli": "^2.0.13",
     "webpack-dev-server": "^3.1.1"
