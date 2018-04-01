@@ -78,8 +78,8 @@ module.exports = (_, argv) => {
 				favicon: path.resolve(__dirname, 'src', 'static', 'favicon.ico')
 			}),
 			new DefinePlugin({
-				COMMIT_HASH: isProduction ? requireEnv('COMMIT_HASH') : '',
-				SENTRY_DSN: isProduction ? requireEnv('SENTRY_DSN') : '',
+				COMMIT_HASH: isProduction ? requireEnv('COMMIT_HASH') : JSON.stringify(''),
+				SENTRY_DSN: isProduction ? requireEnv('SENTRY_DSN') : JSON.stringify(''),
 				__DEV__: argv.mode === "development"
 			}),
 			new MiniCssExtractPlugin(),
