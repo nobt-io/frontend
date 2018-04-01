@@ -4,7 +4,7 @@ import {
   SHARE_VALUE_CHANGED, UPDATE_ADD_BILL_STATUS
 } from "./actions";
 
-export const addBillFormReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
 
   function createPersonValue(member) {
     return {

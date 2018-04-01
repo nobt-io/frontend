@@ -9,156 +9,156 @@ import ContinueButton from "../../components/ContinueButton/index";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
 import { Snackbar } from "react-toolbox/lib/snackbar";
 import AsyncActionStatus from "const/AsyncActionStatus";
-import LocationBuilder from "../../../App/modules/navigation/LocationBuilder";
 import CreateNobtProgressBar from "./CreateNobtProgressBar/index"
 import { Input } from "react-toolbox/lib/input/index";
 import {
-  getAddPersonButtonLabel,
-  isAddPersonButtonDisabled,
-  isCreateNobtButtonDisabled,
-  shouldRenderAddPersonButton
+	getAddPersonButtonLabel,
+	isAddPersonButtonDisabled,
+	isCreateNobtButtonDisabled,
+	shouldRenderAddPersonButton
 } from "../../modules/selectors.ui";
 import { ListItem } from "react-toolbox/lib/list/index";
 import Box from "../../../../components/Box/Box";
 import Avatar from "../../../../components/Avatar/Avatar";
+import { Redirect } from "react-router";
 
 class AddMembersForm extends React.Component {
 
-  renderContinueButton = () => {
+	renderContinueButton = () => {
 
-    let {shouldRenderAddPersonButton} = this.props;
+		let {shouldRenderAddPersonButton} = this.props;
 
-    let buttonProps = shouldRenderAddPersonButton ?
-      this.getAddPersonButtonProps(this.props) :
-      this.getCreateNobtButtonProps(this.props);
+		let buttonProps = shouldRenderAddPersonButton ?
+			this.getAddPersonButtonProps(this.props) :
+			this.getCreateNobtButtonProps(this.props);
 
-    return (
-      <ContinueButton {...buttonProps} />
-    )
-  };
+		return (
+			<ContinueButton {...buttonProps} />
+		)
+	};
 
-  getAddPersonButtonProps = ({addPersonButtonLabel, addCurrentNameAsPerson, isAddPersonButtonDisabled}) => ({
-    label: addPersonButtonLabel,
-    icon: 'add',
-    onClick: addCurrentNameAsPerson,
-    disabled: isAddPersonButtonDisabled,
-    rightIcon: false
-  });
+	getAddPersonButtonProps = ({addPersonButtonLabel, addCurrentNameAsPerson, isAddPersonButtonDisabled}) => ({
+		label: addPersonButtonLabel,
+		icon: 'add',
+		onClick: addCurrentNameAsPerson,
+		disabled: isAddPersonButtonDisabled,
+		rightIcon: false
+	});
 
-  getCreateNobtButtonProps = ({createNobt, isCreateNobtButtonDisabled}) => ({
-      label: "Create Nobt",
-      icon: 'done',
-      onClick: createNobt,
-      disabled: isCreateNobtButtonDisabled,
-      rightIcon: false
-    }
-  );
+	getCreateNobtButtonProps = ({createNobt, isCreateNobtButtonDisabled}) => ({
+			label: "Create Nobt",
+			icon: 'done',
+			onClick: createNobt,
+			disabled: isCreateNobtButtonDisabled,
+			rightIcon: false
+		}
+	);
 
-  handleOnKeyPress = (event) => {
-    const currentNameCanBeAdded = !this.props.isAddPersonButtonDisabled && this.props.shouldRenderAddPersonButton;
-    const enterKeyPressed = event.charCode === 13;
+	handleOnKeyPress = (event) => {
+		const currentNameCanBeAdded = !this.props.isAddPersonButtonDisabled && this.props.shouldRenderAddPersonButton;
+		const enterKeyPressed = event.charCode === 13;
 
-    if (enterKeyPressed && currentNameCanBeAdded) {
-      this.props.addCurrentNameAsPerson();
-    }
-  };
+		if (enterKeyPressed && currentNameCanBeAdded) {
+			this.props.addCurrentNameAsPerson();
+		}
+	};
 
-  render = () => (
-    <div>
-      <section>
-        <h1>Add participants</h1>
+	render = () => (
+		<div>
+			<section>
+				<h1>Add participants</h1>
 
-        <div className={styles.introductionTextContainer}>
-          <p>Add anyone you want to split bills with.</p>
-        </div>
-      </section>
+				<div className={styles.introductionTextContainer}>
+					<p>Add anyone you want to split bills with.</p>
+				</div>
+			</section>
 
-      <section>
-        <fieldset disabled={this.props.creationStatus === AsyncActionStatus.IN_PROGRESS}>
-          <Box>
-            <Input
-              value={this.props.personToAdd}
-              autoComplete="off"
-              type='text'
-              icon="person"
-              placeholder="Name"
-              onChange={this.props.updateNameOfPersonToAdd}
-              onKeyPress={this.handleOnKeyPress}
-              theme={AddMemberInputTheme}
-              error={this.props.isAddPersonButtonDisabled && `${this.props.personToAdd} is already in the list.`}
-            />
-          </Box>
+			<section>
+				<fieldset disabled={this.props.creationStatus === AsyncActionStatus.IN_PROGRESS}>
+					<Box>
+						<Input
+							value={this.props.personToAdd}
+							autoComplete="off"
+							type='text'
+							icon="person"
+							placeholder="Name"
+							onChange={this.props.updateNameOfPersonToAdd}
+							onKeyPress={this.handleOnKeyPress}
+							theme={AddMemberInputTheme}
+							error={this.props.isAddPersonButtonDisabled && `${this.props.personToAdd} is already in the list.`}
+						/>
+					</Box>
 
-          {
-            this.props.personNames.length > 0 && (
-              <Box>
-                <HOList
-                  items={this.props.personNames}
-                  renderItem={(name) => (
-                    <ListItem
-                      ripple={false}
-                      key={name}
-                      leftActions={[ <Avatar name={name} medium /> ]}
-                      legend={name}
-                      rightActions={[ <IconButton icon='clear' onClick={() => this.props.removePerson(name)} /> ]}
-                    />
-                  )} />
-              </Box>
-            )
-          }
-        </fieldset>
-      </section>
+					{
+						this.props.personNames.length > 0 && (
+							<Box>
+								<HOList
+									items={this.props.personNames}
+									renderItem={(name) => (
+										<ListItem
+											ripple={false}
+											key={name}
+											leftActions={[ <Avatar name={name} medium /> ]}
+											legend={name}
+											rightActions={[ <IconButton icon='clear' onClick={() => this.props.removePerson(name)} /> ]}
+										/>
+									)} />
+							</Box>
+						)
+					}
+				</fieldset>
+			</section>
 
-      <section>
-        <div className={styles.createNobtButtonContainer}>
+			<section>
+				<div className={styles.createNobtButtonContainer}>
 
-          {
-            this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && this.renderContinueButton()
-          }
+					{
+						this.props.creationStatus !== AsyncActionStatus.IN_PROGRESS && this.renderContinueButton()
+					}
 
-          {
-            this.props.creationStatus === AsyncActionStatus.IN_PROGRESS && <CreateNobtProgressBar />
-          }
+					{
+						this.props.creationStatus === AsyncActionStatus.IN_PROGRESS && <CreateNobtProgressBar />
+					}
 
-        </div>
-      </section>
+				</div>
+			</section>
 
-      <section>
-        <div className={styles.note}>
-          <p>Don't worry about forgetting someone, <br /> you can add further people later.</p>
-        </div>
-      </section>
+			<section>
+				<div className={styles.note}>
+					<p>Don't worry about forgetting someone, <br /> you can add further people later.</p>
+				</div>
+			</section>
 
-      {
-        this.props.creationStatus === AsyncActionStatus.SUCCESSFUL && LocationBuilder.fromWindow().pop().push("done").apply(this.props.push)
-      }
+			{
+				this.props.creationStatus === AsyncActionStatus.SUCCESSFUL && <Redirect to="/create/done" />
+			}
 
-      <Snackbar
-        action='Retry?'
-        active={this.props.creationStatus === AsyncActionStatus.FAILED}
-        label='Failed to create nobt.'
-        type='warning'
-        onClick={this.props.createNobt}
-      />
-    </div>
-  )
+			<Snackbar
+				action='Retry?'
+				active={this.props.creationStatus === AsyncActionStatus.FAILED}
+				label='Failed to create nobt.'
+				type='warning'
+				onClick={this.props.createNobt}
+			/>
+		</div>
+	)
 }
 
 export default connect(
-  (state) => ({
-    personNames: getPersonNames(state),
-    creationStatus: getCreationStatus(state),
-    personToAdd: getPersonToAdd(state),
+	(state) => ({
+		personNames: getPersonNames(state),
+		creationStatus: getCreationStatus(state),
+		personToAdd: getPersonToAdd(state),
 
-    addPersonButtonLabel: getAddPersonButtonLabel(state),
-    shouldRenderAddPersonButton: shouldRenderAddPersonButton(state),
-    isCreateNobtButtonDisabled: isCreateNobtButtonDisabled(state),
-    isAddPersonButtonDisabled: isAddPersonButtonDisabled(state)
-  }),
-  {
-    addCurrentNameAsPerson,
-    removePerson,
-    createNobt,
-    updateNameOfPersonToAdd
-  }
+		addPersonButtonLabel: getAddPersonButtonLabel(state),
+		shouldRenderAddPersonButton: shouldRenderAddPersonButton(state),
+		isCreateNobtButtonDisabled: isCreateNobtButtonDisabled(state),
+		isAddPersonButtonDisabled: isAddPersonButtonDisabled(state)
+	}),
+	{
+		addCurrentNameAsPerson,
+		removePerson,
+		createNobt,
+		updateNameOfPersonToAdd
+	}
 )(AddMembersForm)
