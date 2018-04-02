@@ -32,21 +32,15 @@ class DoneScreen extends React.Component {
 							<IconButton icon="content_copy" />
 						</CopyToClipboard>
 						<IconMenu icon='share' menuRipple>
-							<MenuItem
-								icon={<i className="fa fa-whatsapp" />}
-								caption='Whatsapp'
-								onClick={() => window.location.href = `whatsapp://send?text=${this.absoluteLinkToNobt()}`}
-							/>
-							<MenuItem
-								icon={<i className="fa fa-telegram" />}
-								caption='Telegram'
-								onClick={() => window.location.href = `tg://msg_url?url=${this.absoluteLinkToNobt()}`}
-							/>
-							<MenuItem
-								icon={<i className="fa fa-envelope-o" />}
-								caption='E-Mail'
-								onClick={() => window.location.href = `mailto:?body=${this.absoluteLinkToNobt()}`}
-							/>
+							<a href={`whatsapp://send?text=${this.absoluteLinkToNobt()}`}>
+								<MenuItem icon={<i className="fa fa-whatsapp" />} caption='Whatsapp' />
+							</a>
+							<a href={`tg://msg_url?url=${this.absoluteLinkToNobt()}`}>
+								<MenuItem icon={<i className="fa fa-telegram" />} caption='Telegram' />
+							</a>
+							<a href={`mailto:?body=${this.absoluteLinkToNobt()}`}>
+								<MenuItem icon={<i className="fa fa-envelope-o" />} caption='E-Mail' />
+							</a>
 						</IconMenu>
 					</div>
 				</div>

@@ -1,21 +1,19 @@
-import LocationBuilder from "../../modules/navigation/LocationBuilder";
-import withNavigation from "../../../../components/hoc/withNavigation";
 import * as React from "react";
 import Amount from "../../../../components/Amount/Amount";
 import FeedItem from "./FeedItem";
+import Link from "../../../../components/nav/Link";
 
-const BillFeedItem = ({feedItem, push}) => {
+export default ({feedItem}) => {
 
-  const {id, debtee, subject, amount} = feedItem;
+	const {id: billId, debtee, subject, amount} = feedItem;
 
-  return (
-    <FeedItem
-      icon="receipt"
-      caption={`${debtee} paid '${subject}'`}
-      legend={<Amount value={amount} />}
-      onClick={() => LocationBuilder.fromWindow().push(id).apply(push)}
-    />
-  )
+	return (
+		<Link to={nobtId => `/${nobtId}/${billId}`}>
+			<FeedItem
+				icon="receipt"
+				caption={`${debtee} paid '${subject}'`}
+				legend={<Amount value={amount} />}
+			/>
+		</Link>
+	)
 };
-
-export default withNavigation(BillFeedItem);

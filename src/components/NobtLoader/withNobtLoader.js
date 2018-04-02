@@ -22,7 +22,8 @@ export default function withNobtLoader(WrappedComponent) {
     }
 
     static fetchNobtIfNecessary(props) {
-      let nobtId = props.routeParams.nobtId;
+
+      let nobtId = props.match.params.nobtId;
 
       if (props.shouldFetchNobt) {
 
