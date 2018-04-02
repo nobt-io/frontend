@@ -37,7 +37,9 @@ class BasicInformationForm extends React.Component {
           <CurrencySelect
             selectedCurreny={this.props.currency}
             onCurrencyChanged={option =>
-              this.props.selectCurrency(option.value)
+              option
+                ? this.props.selectCurrency(option.value)
+                : this.props.selectCurrency(null)
             }
           />
           <div className={styles.description}>
