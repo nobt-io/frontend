@@ -31,7 +31,5 @@ export default (initialState = {}, history) => {
     )
   )
 
-	store.asyncReducers = {}
-
   return store
 }
