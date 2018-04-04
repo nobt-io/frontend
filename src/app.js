@@ -1,16 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import createBrowserHistory from "history/lib/createBrowserHistory";
-import { useRouterHistory } from "react-router";
+import { Router, useRouterHistory } from "react-router";
 import { syncHistoryWithStore } from "react-router-redux";
 import createStore from "./store/createStore";
 import attachStoreStateFactory from "./store/attachStoreStateFactory";
 import { IntlProvider } from "react-intl";
 import routeFactory from "./routes";
-import AppContainer from "./containers/AppContainer"
-
 // noinspection ES6UnusedImports
 import globalCss from "./app.scss"
+import theme from "./styles/custom-component-themes";
+import { Provider } from "react-redux";
+import { ThemeProvider } from "react-css-themr";
 
 const browserHistory = useRouterHistory(createBrowserHistory)();
 
@@ -34,16 +35,13 @@ if (__DEV__) {
 
 const MOUNT_NODE = document.getElementById('root');
 
-const render = (AppContainer) => ReactDOM.render(
+ReactDOM.render(
 	<IntlProvider locale={navigator.language}>
-		<AppContainer
-			key={Math.random()}
-			store={store}
-			history={history}
-			routes={routes}
-		/>
+		<ThemeProvider theme={theme}>
+			<Provider store={store}>
+				<Router history={history} children={routes} />
+			</Provider>
+		</ThemeProvider>
 	</IntlProvider>,
 	MOUNT_NODE
 );
-
-render(AppContainer);
