@@ -26,7 +26,7 @@ const NobtFAB = (props) => (
         <Button icon="receipt" onClick={() => {
           // We need to deactivate the menu before we proceed. Otherwise we end up with an expanded menu if the user navigates back.
           toggleState(props);
-          LocationBuilder.fromWindow().push("newBill").apply(props.push);
+          LocationBuilder.fromWindow().push("bill").apply(props.push);
         }} />
       </Item>
       <Item disabled>
