@@ -1,5 +1,6 @@
 @import "colors";
 @import "custom-component-configurations/index";
+@import "animationMixins";
 
 // We import the globals file after our own definitions in order to overwrite them.
 @import "~react-toolbox/components/_globals";

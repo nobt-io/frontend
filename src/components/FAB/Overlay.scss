@@ -1,0 +1,16 @@
+.overlay {
+
+  background-color: rgba($color-accent-light, 0);
+  @include animateShow(background-color);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  &.active {
+    background-color: rgba($color-accent-light, 0.9);
+    @include animateHide(background-color);
+  }
+}

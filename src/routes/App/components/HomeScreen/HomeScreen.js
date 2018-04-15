@@ -3,7 +3,7 @@ import styles from "./HomeScreen.scss";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import EmptyNobtPlaceholder from "../EmptyNobtPlaceholder/index";
 import { FontIcon } from "react-toolbox/lib/font_icon";
-import AddBillFAB from "../AddBillFAB/index";
+import NobtFAB from "../NobtFAB";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
 import { Button } from "react-toolbox/lib/button/index";
 import Amount from "../../../../components/Amount/Amount";
@@ -50,7 +50,7 @@ class HomeScreen extends React.Component {
           this.props.isNobtEmpty ? <EmptyNobtPlaceholder /> : <Feed />
         }
 
-        <AddBillFAB />
+        <NobtFAB hash={this.props.location.hash}/>
       </div>
     );
   };

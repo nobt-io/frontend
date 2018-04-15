@@ -1,0 +1,7 @@
+@mixin animateHide($property) {
+  transition: $property 0.195s $animation-curve-fast-out-linear-in;
+}
+
+@mixin animateShow($property) {
+  transition: $property 0.225s $animation-curve-linear-out-slow-in;
+}

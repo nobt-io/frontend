@@ -1,0 +1,10 @@
+.container {
+  // Position FAB in the right bottom corner
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
