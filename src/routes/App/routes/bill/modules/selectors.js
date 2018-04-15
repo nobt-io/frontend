@@ -19,7 +19,7 @@ export const getBillMembers = createSelector([ getAddBillFormSlice ], (state) =>
 });
 
 export const getAllMembers = createSelector([ getBillMembers, getMembers, getDebtee ], (billMembers, nobtMembers, debtee) => {
-  return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter(name => name !== null)
+  return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter(name => name !== null).sort();
 });
 
 const getDefaultValues = createSelector([ getAddBillFormSlice ], (state) => state.defaultValues);
