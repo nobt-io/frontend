@@ -1,7 +1,7 @@
 import React from "react";
 import withNavigation from "components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
-import { FABMenu, Item, Items, Label, MenuButton, Overlay } from "components/FAB";
+import { FABMenu, Item, Items, Label, MenuButton, Overlay } from "../../../../components/FAB";
 import { Button } from "react-toolbox/lib/button"
 
 const hashFragment = '#chooseMenuAction';
