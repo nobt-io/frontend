@@ -1,4 +1,11 @@
-import { ADD_PERSON, REMOVE_PERSON, SELECT_CURRENCY, CHANGE_NOBT_NAME, UPDATE_CREATE_NOBT_STATUS } from "./actions"
+import {
+  ADD_PERSON,
+  CHANGE_NOBT_NAME,
+  REMOVE_PERSON,
+  SELECT_CURRENCY,
+  UPDATE_CREATE_NOBT_STATUS,
+  UPDATE_NAME_OF_PERSON_TO_ADD
+} from "./actions"
 import AsyncActionStatus from "../../../const/AsyncActionStatus"
 
 const handlers = {
@@ -13,14 +20,18 @@ const handlers = {
 
   [ADD_PERSON]: (state, action) => {
 
-    const nameToAdd = action.payload.name;
+    const nameToAdd = state.personToAdd;
     const existingNames = state.personNames;
 
     if (existingNames.find(name => name === nameToAdd) !== undefined) {
       return state;
     }
 
-    return {...state, personNames: [ ...existingNames, nameToAdd ]};
+    return {
+      ...state,
+      personNames: [ ...existingNames, nameToAdd ],
+      personToAdd: ""
+    };
   },
 
   [REMOVE_PERSON]: (state, action) => {
@@ -33,7 +44,7 @@ const handlers = {
 
   [UPDATE_CREATE_NOBT_STATUS]: (state, action) => {
 
-    let newState = updateCreateNobtStatusActionPayloadHandler[action.payload.status](action.payload);
+    let newState = updateCreateNobtStatusActionPayloadHandler[ action.payload.status ](action.payload);
 
     return {
       ...state,
@@ -41,11 +52,19 @@ const handlers = {
       createNobtStatus: action.payload.status
     }
   },
+
+  [UPDATE_NAME_OF_PERSON_TO_ADD]: (state, action) => {
+
+    return {
+      ...state,
+      personToAdd: action.payload.name,
+    }
+  }
 };
 
 const updateCreateNobtStatusActionPayloadHandler = {
   [AsyncActionStatus.IN_PROGRESS]: () => {},
-  [AsyncActionStatus.SUCCESSFUL]: (payload) => ({ createdNobtId: payload.id }),
+  [AsyncActionStatus.SUCCESSFUL]: (payload) => ({createdNobtId: payload.id}),
   [AsyncActionStatus.FAILED]: () => {},
 };
 
@@ -53,6 +72,7 @@ const initialState = {
   selectedCurrency: "EUR",
   chosenName: "",
   personNames: [],
+  personToAdd: "",
   createNobtStatus: null,
   createdNobtId: ""
 };

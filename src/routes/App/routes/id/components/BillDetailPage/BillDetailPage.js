@@ -2,20 +2,42 @@ import React from "react";
 import Amount from "components/Amount";
 import HeadRoom from "react-headroom";
 import { connect } from "react-redux";
-import { makeGetBill } from "../../../../modules/currentNobt/selectors";
+import { makeCanBillBeDeleted, makeGetBill } from "../../../../modules/currentNobt/selectors";
 import { ListItem } from "react-toolbox/lib/list";
-import { Avatar } from "components/Avatar";
+import Avatar from "components/Avatar";
 import { AppBar } from "react-toolbox/lib/app_bar/index";
-import AppBarTheme from "../../../balances/themes/AppBarTheme.scss";
 import { FontIcon } from "react-toolbox/lib/font_icon/index";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
 import { List, ListSubHeader } from "react-toolbox/lib/list/index";
 import { FormattedDate, FormattedMessage } from "react-intl";
 import DebtorAmountTheme from "./DebtorAmountTheme.scss";
+import { Page } from "components/Container";
+import { Snackbar } from "react-toolbox";
+import { deleteExpense } from "../../../../modules/currentNobt/actions";
+import withNavigation from "../../../../../../components/hoc/withNavigation";
+import ConfirmationDialog from "components/ConfirmationDialog";
+
+const DeleteBillConfirmationDialog = ({active, billName, confirm, cancel}) => (<ConfirmationDialog
+  active={active}
+  title={`Delete '${billName}'?`}
+  confirm={confirm}
+  cancel={cancel}>
+  <p>Do you really want to delete this bill? <br />
+    This cannot be undone.</p>
+</ConfirmationDialog>);
 
 class BillDetailPage extends React.Component {
 
+  state = {
+    showDeleteBillConfirmationDialog: false
+  };
+
   render = () => {
+
+    if (!this.props.bill) {
+      LocationBuilder.fromWindow().pop().apply(this.props.replace);
+      return null;
+    }
 
     const {bill} = this.props;
     const {debtee} = bill;
@@ -24,14 +46,12 @@ class BillDetailPage extends React.Component {
       <div>
         <HeadRoom>
           <AppBar
-            theme={AppBarTheme}
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
             leftIcon={<FontIcon value="chevron_left" />}
-            rightIcon={<FontIcon />}
             title={bill.name}
           />
         </HeadRoom>
-        <div>
+        <Page>
           <List>
             <ListSubHeader caption="Debtee" />
             <ListItem
@@ -89,28 +109,52 @@ class BillDetailPage extends React.Component {
                   ]}
                 />)
             }
+
           </List>
-        </div>
+
+          <List>
+            <ListSubHeader caption="Actions" />
+            <ListItem
+              primary
+              leftIcon="delete"
+              caption="Delete this bill"
+              onClick={this.showDialog}
+            />
+          </List>
+
+          <DeleteBillConfirmationDialog
+            active={this.state.showDeleteBillConfirmationDialog}
+            billName={this.props.bill.name}
+            confirm={this.handleConfirm}
+            cancel={this.handelCancel} />
+
+        </Page>
       </div>
     );
   };
-}
 
-BillDetailPage.propTypes = {
-  bill: React.PropTypes.object.isRequired
-};
+  showDialog = () => this.setState({showDeleteBillConfirmationDialog: true});
+
+  handelCancel = () => this.setState({showDeleteBillConfirmationDialog: false});
+  handleConfirm = () => this.props.deleteBill(this.props.bill);
+
+}
 
 const makeMapStateToProps = () => {
   const getBill = makeGetBill();
+  const canBillBeDeleted = makeCanBillBeDeleted();
 
   return (state, props) => {
     return {
-      bill: getBill(state, props)
+      bill: getBill(state, props),
+      canBillBeDeleted: canBillBeDeleted(state, props)
     };
   };
 };
 
 export default connect(
   makeMapStateToProps,
-  (dispatch) => ({})
-)(BillDetailPage);
+  (dispatch) => ({
+    deleteBill: (e) => dispatch(deleteExpense(e))
+  })
+)(withNavigation(BillDetailPage));

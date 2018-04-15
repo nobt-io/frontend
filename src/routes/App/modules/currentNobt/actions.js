@@ -1,11 +1,10 @@
 import Client from "api/api";
 import AsyncActionStatus from "const/AsyncActionStatus";
-import * as utils from "utils/sleep";
 
 export const UPDATE_FETCH_NOBT_STATUS = 'Nobt.UPDATE_FETCH_NOBT_STATUS';
 export const INVALIDATE_NOBT = 'Nobt.INVALIDATE';
 
-function fetchNobtStarted() {
+export function fetchNobtStarted() {
   return {
     type: UPDATE_FETCH_NOBT_STATUS,
     payload: {
@@ -37,7 +36,7 @@ export function updateHtmlTitle(nobtName) {
   }
 }
 
-function fetchNobtFailed(error) {
+export function fetchNobtFailed(error) {
   return {
     type: UPDATE_FETCH_NOBT_STATUS,
     payload: {
@@ -53,12 +52,19 @@ export function fetchNobt(id) {
 
     dispatch(fetchNobtStarted());
 
-    utils.sleep(1000).then(() => {
-      Client.fetchNobt(id).then(
-        response => dispatch(fetchNobtSucceeded(response)),
-        error => dispatch(fetchNobtFailed(error))
-      )
-    })
+    Client.fetchNobt(id).then(
+      response => dispatch(fetchNobtSucceeded(response)),
+      error => dispatch(fetchNobtFailed(error))
+    )
+  }
+}
+
+export function deleteExpense(e) {
+
+  return (dispatch) => {
+    Client
+      .delete(e.actions.delete)
+      .then(() => dispatch(invalidateNobt()))
   }
 }
 
