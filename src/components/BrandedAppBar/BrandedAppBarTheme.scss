@@ -2,4 +2,15 @@
   font-family: $logo-font;
   text-align: left !important;
   text-transform: none !important;
+  font-size: 1.8rem;
+  margin: 0;
+
+  a {
+    cursor: pointer;
+  }
+
+  a:hover, a:focus, a:visited {
+    text-decoration: none;
+  }
 }
+
