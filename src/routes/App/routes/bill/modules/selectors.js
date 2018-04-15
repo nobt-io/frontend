@@ -19,7 +19,7 @@ export const getBillMembers = createSelector([ getAddBillFormSlice ], (state) =>
 });
 
 export const getAllMembers = createSelector([ getBillMembers, getMembers, getDebtee ], (billMembers, nobtMembers, debtee) => {
-  return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter(name => name !== null).sort();
+  return [ ...new Set([ ...billMembers, ...nobtMembers, debtee ]) ].filter(name => name !== null).sort(personNameComparator);
 });
 
 const getDefaultValues = createSelector([ getAddBillFormSlice ], (state) => state.defaultValues);
@@ -145,7 +145,7 @@ const getPercentualShares = createSelector([ getAmount, getPersonValues, getAllM
 
 export const getShares = createSelector([ getShareSelector, (state) => state ], (shareSelector, state) => {
   let shares = shareSelector(state);
-  return shares.sort(personNameComparator);
+  return shares.sort((f, s) => personNameComparator(f, s, v => v.name));
 });
 
 export const getSharesWithValues = createSelector([getShares], (shares) => {
@@ -173,8 +173,8 @@ export const isExistingMemberFactory = createSelector([ getAllMembers ], members
   return (candidate) => members.indexOf(candidate) >= 0;
 });
 
-export const personNameComparator = (first, second) => {
-  return first.name.localeCompare(second.name)
+export const personNameComparator = (first, second, accessor = (n) => n) => {
+  return accessor(first).localeCompare(accessor(second));
 };
 
 
