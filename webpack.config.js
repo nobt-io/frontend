@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DefinePlugin = require("webpack").DefinePlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (_, argv) => {
 
@@ -74,8 +76,7 @@ module.exports = (_, argv) => {
 		},
 		plugins: [
 			new HtmlWebpackPlugin({
-				template: 'src/index.template.ejs',
-				favicon: path.resolve(__dirname, 'src', 'static', 'favicon.ico')
+				template: 'src/index.template.ejs'
 			}),
 			new DefinePlugin({
 				COMMIT_HASH: isProduction ? requireEnv('COMMIT_HASH') : JSON.stringify(''),
@@ -89,10 +90,19 @@ module.exports = (_, argv) => {
 				test: /\.(js|css|map)$/,
 				minRatio: 0.8,
 				deleteOriginalAssets: false
-			})
+			}),
+			new FaviconsWebpackPlugin({
+				logo: path.resolve(__dirname, 'src', 'static', 'logo.png'),
+				title: "Nobt.io"
+			}),
+			new CopyWebpackPlugin([
+				{ from: "static/*.txt", to: './dist' }
+			])
 		],
 		devServer: {
-			contentBase: './dist',
+			contentBase: [
+				'./src/static' // Serves static files during development
+			],
 			historyApiFallback: true,
 			port: 3000
 		}
