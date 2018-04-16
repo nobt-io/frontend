@@ -65,7 +65,10 @@ module.exports = (_, argv) => {
 			]
 		},
 		resolve: {
-			modules: [ path.resolve(__dirname, "src"), "node_modules" ]
+			modules: [
+				'./src',
+				'./node_modules'
+			]
 		},
 		output: {
 			path: __dirname + '/dist',
@@ -92,7 +95,7 @@ module.exports = (_, argv) => {
 				deleteOriginalAssets: false
 			}),
 			new FaviconsWebpackPlugin({
-				logo: path.resolve(__dirname, 'src', 'static', 'logo.png'),
+				logo: './src/static/logo.png',
 				title: "Nobt.io"
 			}),
 			new CopyWebpackPlugin([
