@@ -21,6 +21,10 @@ module.exports = (_, argv) => {
 		return envValue;
 	};
 
+	const COMMIT_HASH = isProduction ? requireEnv('COMMIT_HASH') : JSON.stringify('');
+	const SENTRY_DSN = isProduction ? requireEnv('SENTRY_DSN') : JSON.stringify('');
+	const __DEV__ = argv.mode === "development";
+
 	return {
 		entry: [
 			'babel-polyfill',
@@ -82,9 +86,9 @@ module.exports = (_, argv) => {
 				template: 'src/index.template.ejs'
 			}),
 			new DefinePlugin({
-				COMMIT_HASH: isProduction ? requireEnv('COMMIT_HASH') : JSON.stringify(''),
-				SENTRY_DSN: isProduction ? requireEnv('SENTRY_DSN') : JSON.stringify(''),
-				__DEV__: argv.mode === "development"
+				COMMIT_HASH,
+				SENTRY_DSN,
+				__DEV__
 			}),
 			new MiniCssExtractPlugin(),
 			new CompressionPlugin({
