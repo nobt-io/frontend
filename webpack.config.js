@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DefinePlugin = require("webpack").DefinePlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (_, argv) => {
 
@@ -18,6 +20,10 @@ module.exports = (_, argv) => {
 
 		return envValue;
 	};
+
+	const COMMIT_HASH = isProduction ? requireEnv('COMMIT_HASH') : JSON.stringify('');
+	const SENTRY_DSN = isProduction ? requireEnv('SENTRY_DSN') : JSON.stringify('');
+	const __DEV__ = argv.mode === "development";
 
 	return {
 		entry: [
@@ -63,7 +69,10 @@ module.exports = (_, argv) => {
 			]
 		},
 		resolve: {
-			modules: [ path.resolve(__dirname, "src"), "node_modules" ]
+			modules: [
+				'./src',
+				'./node_modules'
+			]
 		},
 		output: {
 			path: __dirname + '/dist',
@@ -74,13 +83,12 @@ module.exports = (_, argv) => {
 		},
 		plugins: [
 			new HtmlWebpackPlugin({
-				template: 'src/index.template.ejs',
-				favicon: path.resolve(__dirname, 'src', 'static', 'favicon.ico')
+				template: 'src/index.template.ejs'
 			}),
 			new DefinePlugin({
-				COMMIT_HASH: isProduction ? requireEnv('COMMIT_HASH') : JSON.stringify(''),
-				SENTRY_DSN: isProduction ? requireEnv('SENTRY_DSN') : JSON.stringify(''),
-				__DEV__: argv.mode === "development"
+				COMMIT_HASH,
+				SENTRY_DSN,
+				__DEV__
 			}),
 			new MiniCssExtractPlugin(),
 			new CompressionPlugin({
@@ -89,10 +97,19 @@ module.exports = (_, argv) => {
 				test: /\.(js|css|map)$/,
 				minRatio: 0.8,
 				deleteOriginalAssets: false
-			})
+			}),
+			new FaviconsWebpackPlugin({
+				logo: './src/static/logo.png',
+				title: "Nobt.io"
+			}),
+			new CopyWebpackPlugin([
+				{ from: "static/*.txt", to: './dist' }
+			])
 		],
 		devServer: {
-			contentBase: './dist',
+			contentBase: [
+				'./src/static' // Serves static files during development
+			],
 			historyApiFallback: true,
 			port: 3000
 		}
