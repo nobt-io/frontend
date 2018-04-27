@@ -8,6 +8,7 @@
     "npm": "^5.0.0"
   },
   "scripts": {
+    "api": "cd ../api; PORT=8080 MIGRATE_DATABASE_AT_STARTUP=false USE_IN_MEMORY_DATABASE=true ./gradlew run",
     "clean": "rimraf dist",
     "compile": "webpack --mode development",
     "dev": "webpack-dev-server --mode development",
