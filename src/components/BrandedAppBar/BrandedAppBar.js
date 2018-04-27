@@ -10,10 +10,11 @@ const goBack = (replace) => LocationBuilder.fromWindow().pop(1).apply(replace);
 const brandenAppBar = ({canGoBack, replace}) => {
   return (<AppBar
       theme={BrandedAppBarTheme}
-      title="nobt.io"
       leftIcon={canGoBack === true ? <FontIcon value="chevron_left" /> : null}
       onLeftIconClick={canGoBack === true ? () => goBack(replace) : null}
-    />
+    >
+      <h1 className={BrandedAppBarTheme.title}><a href={location.protocol + '//' + location.host}>nobt.io</a></h1>
+    </AppBar>
   )
 };
 
