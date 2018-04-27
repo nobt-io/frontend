@@ -1,0 +1,12 @@
+.label {
+  display: flex !important;
+  align-items: center;
+}
+
+.flag {
+  margin-right: 0.5rem;
+}
+
+:global(.Select) {
+  margin-bottom: 1.5rem;
+}
