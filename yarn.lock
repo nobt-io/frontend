@@ -2215,9 +2215,9 @@ cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   dependencies:
     cssom "0.3.x"
 
-"currency-flags@git+https://github.com/transferwise/currency-flags.git":
+currency-flags@^1.5.0:
   version "1.5.0"
-  resolved "git+https://github.com/transferwise/currency-flags.git#432be37e74015cc9875c50c9cbd3586528d37d89"
+  resolved "https://registry.yarnpkg.com/currency-flags/-/currency-flags-1.5.0.tgz#21dec87670fff6c51a24f6d7c2e915ce561de6c8"
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
