@@ -1,14 +1,10 @@
-import reducer from "./modules/reducer";
-import { injectReducer } from "../../store/reducers";
 import WizardContainer from "./containers/WizardContainer";
 import NameRoute from "./routes/name";
 import MembersRouteFactory from "./routes/members";
-import DoneRoute from "./routes/done";
+import DoneRouteFactory from "./routes/done";
 import LocationBuilder from "../App/modules/navigation/LocationBuilder";
 
 export default (store) => {
-
-  injectReducer(store, {key: 'createNobtForm', reducer});
 
   return {
     path: 'create',
@@ -19,7 +15,7 @@ export default (store) => {
     childRoutes: [
       NameRoute,
       MembersRouteFactory(store),
-      DoneRoute(store)
+      DoneRouteFactory(store)
     ]
   }
 }
