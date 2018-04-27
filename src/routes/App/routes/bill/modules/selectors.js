@@ -145,7 +145,7 @@ const getPercentualShares = createSelector([ getAmount, getPersonValues, getAllM
 
 export const getShares = createSelector([ getShareSelector, (state) => state ], (shareSelector, state) => {
   let shares = shareSelector(state);
-  return shares.sort((f, s) => personNameComparator(f, s, v => v.name));
+  return shares.sort((f, s) => personNameComparator(f.name, s.name));
 });
 
 export const getSharesWithValues = createSelector([getShares], (shares) => {
@@ -173,8 +173,8 @@ export const isExistingMemberFactory = createSelector([ getAllMembers ], members
   return (candidate) => members.indexOf(candidate) >= 0;
 });
 
-export const personNameComparator = (first, second, accessor = (n) => n) => {
-  return accessor(first).localeCompare(accessor(second));
+export const personNameComparator = (first, second) => {
+  return first.localeCompare(second);
 };
 
 
