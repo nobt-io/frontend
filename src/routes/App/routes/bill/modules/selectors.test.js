@@ -1,4 +1,4 @@
-import { isExistingMemberFactory, personNameComparator } from "./selectors";
+import { isExistingMemberFactory, getAllMembers, personNameComparator } from "./selectors";
 
 let mockState = function () {
   return {
@@ -37,22 +37,9 @@ it("should check for existing members", () => {
 
 });
 
-it("should sort persons by name", () => {
+it("should sort members by name", () => {
+  const allMembers = getAllMembers(mockState());
 
-  const personFactory = name => ({name});
-
-  const persons = [
-    personFactory("Thomas"),
-    personFactory("David"),
-    personFactory("Martin")
-  ];
-
-  let sortedPersons = persons.sort(personNameComparator);
-
-  expect(sortedPersons).toEqual([
-    personFactory("David"),
-    personFactory("Martin"),
-    personFactory("Thomas")
-  ])
+  expect(allMembers).toEqual([ "David", "Felix", "Matthias", "Thomas" ]);
 });
 
