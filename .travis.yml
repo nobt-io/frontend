@@ -11,13 +11,14 @@ script:
 - yarn run test
 - yarn run lint
 before_deploy:
-- pip install --user awscli
 - yarn run deploy
 deploy:
-- provider: script
-  skip_cleanup: true
-  script: ".aws/deploy"
-  access_key_id: AKIAIF35EA6NPCKM7MXA
+- provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: dist
+  fqdn: nobt.io
   on:
     branch: master
     repo: nobt-io/frontend

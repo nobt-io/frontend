@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DefinePlugin = require("webpack").DefinePlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -91,13 +90,6 @@ module.exports = (_, argv) => {
 				__DEV__
 			}),
 			new MiniCssExtractPlugin(),
-			new CompressionPlugin({
-				asset: "gzipped/[path]",
-				algorithm: "gzip",
-				test: /\.(js|css|map)$/,
-				minRatio: 0.8,
-				deleteOriginalAssets: false
-			}),
 			new FaviconsWebpackPlugin({
 				logo: './src/static/logo.png',
 				title: "Nobt.io"
