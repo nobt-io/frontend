@@ -23,11 +23,3 @@ The build configuration of travis is split into two parts: Regular build and dep
 ### Source Maps
 
 Generation of source maps is enabled for both, JS and CSS. However, we do not upload the source maps to Amazon S3. We just upload them to sentry.io which gives us nice stacktraces in error reports.
-
-### GZIP Compression
-
-Building the project with the command listed above enables several plugins in the webpack configuration. One of the most important ones is the compression plugin. It is configured to compress all JavaScript and CSS files and their respective source maps with gzip and place them to the "gzipped" folder in the "dist" folder. This is necessary in order to simplify deployment of those artifacts.
-
-Usually, gzip-compression is handled by the webserver that serves that files. Our app though is served by Amazon S3, which just hands out the files the way they are. This means we have to apply the gzip compression up-front and already store those files gzipped. That is reason why we have two "sync" commands in the deployment config found in the .travis.yml file. The first one uploads all the files that have not been processed by the compression plugin, like pictures and regular text files. The second command then uploads all JavaScript and CSS files from the "gzipped" folder and sets the content encoding correctly. This way, our S3 bucket always serves those files with gzip compression. It may be of importance that S3 completely ignores whether or not the browser requests the files gzipped. However, for the last 20 years (https://webmasters.stackexchange.com/a/22223), all browsers support gzip compression so we should not have a problem with serving those files gzipped all the time.
-
-All of this is only needed because sentry cannot yet handle gzipped files. As soon as sentry can do that, we can simply override the original files with the gzipped ones and just upload the whole dist folder.
