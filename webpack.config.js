@@ -91,13 +91,6 @@ module.exports = (_, argv) => {
 				__DEV__
 			}),
 			new MiniCssExtractPlugin(),
-			new CompressionPlugin({
-				asset: "gzipped/[path]",
-				algorithm: "gzip",
-				test: /\.(js|css|map)$/,
-				minRatio: 0.8,
-				deleteOriginalAssets: false
-			}),
 			new FaviconsWebpackPlugin({
 				logo: './src/static/logo.png',
 				title: "Nobt.io"
