@@ -10,6 +10,6 @@ describe("API-Factory", () => {
   it("should resolve API-Host for nobt.io", () => {
     var instance = factory("nobt.io");
 
-    expect(instance.defaults.baseURL).toBe("http://api.nobt.io");
+    expect(instance.defaults.baseURL).toBe("https://api.nobt.io");
   });
 });
