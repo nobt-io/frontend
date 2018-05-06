@@ -3,7 +3,7 @@ import debug from "debug";
 
 const apiBaseURLs = [
   {
-    url: "http://api.nobt.io",
+    url: "https://api.nobt.io",
     active: (host) => host === "nobt.io"
   },
   {
