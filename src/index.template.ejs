@@ -7,6 +7,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="You will love nobt.io. It is a free service that solves the tedious task of splitting several bills among your friends with ease.">
   <meta name="keywords" content="bills,friends,payments,settle up,split bills,money">
+
+  <!-- Start Single Page Apps for GitHub Pages -->
+  <script type="text/javascript">
+	  // Single Page Apps for GitHub Pages
+	  // https://github.com/rafrex/spa-github-pages
+	  // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+	  // ----------------------------------------------------------------------
+	  // This script checks to see if a redirect is present in the query string
+	  // and converts it back into the correct url and adds it to the
+	  // browser's history using window.history.replaceState(...),
+	  // which won't cause the browser to attempt to load the new url.
+	  // When the single page app is loaded further down in this file,
+	  // the correct url will be waiting in the browser's history for
+	  // the single page app to route accordingly.
+	  (function(l) {
+		  if (l.search) {
+			  var q = {};
+			  l.search.slice(1).split('&').forEach(function(v) {
+				  var a = v.split('=');
+				  q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+			  });
+			  if (q.p !== undefined) {
+				  window.history.replaceState(null, null,
+					  l.pathname.slice(0, -1) + (q.p || '') +
+					  (q.q ? ('?' + q.q) : '') +
+					  l.hash
+				  );
+			  }
+		  }
+	  }(window.location))
+  </script>
+  <!-- End Single Page Apps for GitHub Pages -->
+
   <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
