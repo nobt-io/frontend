@@ -95,8 +95,9 @@ module.exports = (_, argv) => {
 				title: "Nobt.io"
 			}),
 			new CopyWebpackPlugin([
-				{ from: "static/*.txt", to: './dist' },
-				{ from: "static/404.html", to: './dist' },
+				{ from: "./src/static/humans.txt" },
+				{ from: "./src/static/robots.txt" },
+				{ from: "./src/static/404.html" },
 			])
 		],
 		devServer: {
