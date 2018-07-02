@@ -38,8 +38,8 @@ class Feed extends React.Component {
   };
 
   static feedItemRenderer = {
-    'bill': (feedItem) => <BillFeedItem feedItem={feedItem} />,
-    'payment': (feedItem) => <PaymentFeedItem feedItem={feedItem} />
+    'bill': (feedItem) => <BillFeedItem key={feedItem.id} feedItem={feedItem} />,
+    'payment': (feedItem) => <PaymentFeedItem key={feedItem.id} feedItem={feedItem} />
   };
 
   renderFeedItem = (feedItem) => {

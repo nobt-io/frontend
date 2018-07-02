@@ -60,8 +60,6 @@ class HomeScreen extends React.Component {
     total: React.PropTypes.number.isRequired,
     members: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
     bills: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    billFilter: React.PropTypes.string.isRequired,
-    billSortProperty: React.PropTypes.string.isRequired,
     isNobtEmpty: React.PropTypes.bool.isRequired,
     createdOn: React.PropTypes.string.isRequired
   };
