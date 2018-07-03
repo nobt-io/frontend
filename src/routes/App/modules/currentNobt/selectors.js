@@ -44,8 +44,13 @@ const getPaymentsAsFeedItems = createSelector([getPayments], payments => payment
   recipient: payment.recipient
 })));
 
+// How to sort dates: https://stackoverflow.com/a/10124053
 let newestFirstComparator = function (leftFeedItem, rightFeedItem) {
-  return new Date(leftFeedItem.date) < new Date(rightFeedItem.date)
+	const rightDate = new Date(rightFeedItem.date);
+	const leftDate = new Date(leftFeedItem.date);
+
+	// We want newest first -> subtract right from left date
+	return rightDate - leftDate
 };
 
 export const getSortedFeedItems = createSelector([ getBillsAsFeedItems, getPaymentsAsFeedItems ], (billFeedItems, paymentFeedItems) => {
