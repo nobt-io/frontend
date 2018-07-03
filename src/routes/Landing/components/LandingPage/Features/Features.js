@@ -14,7 +14,7 @@ export default class Features extends React.Component {
             <div className={styles.feature}>
               <div className={styles.icon}><i className="fa fa-dashboard"></i></div>
               <h3>Easy to Use</h3>
-              <p>Nobt.io works without registration. Start by creating a nobt and share the link with your friends.</p>
+              <p>Nobt.io works without registration. Simply create a nobt and share the link with your friends.</p>
             </div>
           </Col>
           <Col sm={4}>
