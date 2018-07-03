@@ -26,7 +26,7 @@ export default class Features extends React.Component {
           </Col>
           <Col sm={4}>
             <div className={styles.feature}>
-              <div className={styles.icon}><i className="fa fa-github"></i></div>
+              <div className={styles.icon}><a href={"https://github.com/nobt-io"}><i className="fa fa-github"></i></a></div>
               <h3>Open Source</h3>
               <p>We believe that the Web should be open that's why we share everything about nobt.io, except your data.</p>
             </div>
