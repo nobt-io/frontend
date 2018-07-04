@@ -14,7 +14,7 @@ export default class Features extends React.Component {
             <div className={styles.feature}>
               <div className={styles.icon}><i className="fa fa-dashboard"></i></div>
               <h3>Easy to Use</h3>
-              <p>Nobt.io works without registration. Start by creating a nobt and share the link with your friends.</p>
+              <p>Nobt.io works without registration. Simply create a nobt and share the link with your friends.</p>
             </div>
           </Col>
           <Col sm={4}>
@@ -26,7 +26,7 @@ export default class Features extends React.Component {
           </Col>
           <Col sm={4}>
             <div className={styles.feature}>
-              <div className={styles.icon}><i className="fa fa-github"></i></div>
+              <div className={styles.icon}><a href={"https://github.com/nobt-io"}><i className="fa fa-github"></i></a></div>
               <h3>Open Source</h3>
               <p>We believe that the Web should be open that's why we share everything about nobt.io, except your data.</p>
             </div>
