@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./StartButton.scss";
-import LocationBuilder from "../../../../App/modules/navigation/LocationBuilder";
 
 const StartButton = (props) => {
 
@@ -8,7 +7,7 @@ const StartButton = (props) => {
 
   return (
     <a className={className} href="create">
-      Start splitting your bills
+      Get started - Create a Nobt
     </a>
   )
 };
