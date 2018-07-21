@@ -46,8 +46,6 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Courgette|Comfortaa:700" rel="stylesheet">
 
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
-
   <script type="application/javascript">
     Raven.config('<%= SENTRY_DSN %>', {
       release: '<%= COMMIT_HASH %>',
@@ -60,7 +58,27 @@
     document.addEventListener('ravenSuccess', function (event) {
       Raven.showReportDialog({eventId: event.data.event_id});
     }, false);
-  </script>
+	</script>
+	
+	<script type="application/javascript">
+		// Create a list of the features this browser needs.
+    // Beware of overly simplistic detects!
+    var features = [];
+    ('Intl' in window) || features.push('Intl.~locale.en');
+
+    // If any features need to be polyfilled, construct
+    // a script tag to load the polyfills and append it
+    // to the document
+    if (features.length) {
+        var scriptTag = document.createElement('script');
+
+        // Include a `ua` argument set to a supported browser to skip UA identification
+        // (improves response time) and avoid being treated as unknown UA (which would
+        // otherwise result in no polyfills, even with `always`, if UA is unknown)
+        scriptTag.src = 'https://cdn.polyfill.io/v2/polyfill.min.js?features='+features.join(',')+'&flags=gated,always&ua=chrome/50';
+        document.head.appendChild(scriptTag);
+    }
+	</script>
 </head>
 <body>
 <div id="root" style="min-height: 100%"></div>
