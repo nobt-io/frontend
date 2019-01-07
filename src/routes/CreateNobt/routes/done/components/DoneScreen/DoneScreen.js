@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getCreatedNobtId } from "../../../../modules/selectors";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import styles from "./DoneScreen.scss";
 import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
-import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
+import { IconMenu, MenuItem } from "react-toolbox-legacy/lib/menu";
 import { CopyToClipboard } from "react-copy-to-clipboard/lib/Component";
-import { IconButton } from "react-toolbox/lib/button";
-import { Snackbar } from "react-toolbox";
+import { IconButton } from "react-toolbox-legacy/lib/button";
+import { Snackbar } from "react-toolbox-legacy";
 
 class DoneScreen extends React.Component {
 

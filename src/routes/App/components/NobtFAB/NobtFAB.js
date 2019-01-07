@@ -2,7 +2,7 @@ import React from "react";
 import withNavigation from "components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import { FABMenu, Item, Items, Label, MenuButton, Overlay } from "../../../../components/FAB";
-import { Button } from "react-toolbox/lib/button"
+import { Button } from "react-toolbox-legacy/lib/button"
 
 const hashFragment = '#chooseMenuAction';
 

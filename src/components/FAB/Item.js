@@ -2,7 +2,7 @@ import * as React from "react";
 import classNames from "classnames";
 import styles from "./Item.scss"
 import ItemButtonTheme from "./ItemButtonTheme.scss"
-import { Button as RTButton } from "react-toolbox/lib/button/index";
+import { Button as RTButton } from "react-toolbox-legacy/lib/button/index";
 
 export default ({children, expanded, disabled}) =>
   <div className={classNames(styles.item, {

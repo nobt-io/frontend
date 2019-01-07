@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import { FormattedNumber } from "react-intl";
 import { connect } from "react-redux";
-import { getCurrency } from "../../routes/App/modules/currentNobt/selectors";
 import classnames from "classnames";
 
 const valueViewModel = (props) => (props.absolute) ? Math.abs(props.value): props.value;
@@ -28,18 +28,18 @@ Amount.defaultProps = {
 };
 
 Amount.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  absolute: React.PropTypes.bool,
-  theme: React.PropTypes.shape({
-    root: React.PropTypes.string,
-    positive: React.PropTypes.string,
-    negative: React.PropTypes.string
+  value: PropTypes.number.isRequired,
+  absolute: PropTypes.bool,
+  theme: PropTypes.shape({
+    root: PropTypes.string,
+    positive: PropTypes.string,
+    negative: PropTypes.string
   })
 };
 
 export default connect(
   (state) => ({
-    currency: getCurrency(state)
+    currency: state.App.currentNobt.data.currency
   }),
   () => ({})
 )(Amount)

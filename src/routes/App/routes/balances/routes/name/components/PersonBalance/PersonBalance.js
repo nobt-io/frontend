@@ -1,8 +1,8 @@
 import * as React from "react";
 import Amount from "components/Amount/index";
-import { List, ListItem } from "react-toolbox/lib/list";
+import { List, ListItem } from "react-toolbox-legacy/lib/list";
 import HOList from "../../../../../../../../containers/HOList";
-import { AppBar } from "react-toolbox/lib/app_bar/index";
+import { AppBar } from "react-toolbox-legacy/lib/app_bar/index";
 import Avatar from "components/Avatar/index";
 import { connect } from "react-redux";
 import {
@@ -14,8 +14,7 @@ import {
   makeGetRelatedBills
 } from "../../../../../../modules/currentNobt/selectors";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
-import HeadRoom from "react-headroom";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import InfoMessageListTheme from "./InfoMessageListTheme.scss";
 import AsyncActionStatus from "../../../../../../../../const/AsyncActionStatus";
 import { FormattedMessage } from "react-intl";
@@ -31,14 +30,12 @@ class PersonBalance extends React.Component {
       {this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
         <div>
 
-          <HeadRoom>
             <AppBar
               onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
               leftIcon={<FontIcon value="chevron_left" />}
               rightIcon={<FontIcon />}
               title={`${this.props.balance.me.name}`}
             />
-          </HeadRoom>
 
           <Page>
 

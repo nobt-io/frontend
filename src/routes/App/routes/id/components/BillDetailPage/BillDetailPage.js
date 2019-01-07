@@ -1,18 +1,17 @@
 import React from "react";
 import Amount from "components/Amount";
-import HeadRoom from "react-headroom";
 import { connect } from "react-redux";
 import { makeCanBillBeDeleted, makeGetBill } from "../../../../modules/currentNobt/selectors";
-import { ListItem } from "react-toolbox/lib/list";
+import { ListItem } from "react-toolbox-legacy/lib/list";
 import Avatar from "components/Avatar";
-import { AppBar } from "react-toolbox/lib/app_bar/index";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
+import { AppBar } from "react-toolbox-legacy/lib/app_bar/index";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import LocationBuilder from "../../../../modules/navigation/LocationBuilder";
-import { List, ListSubHeader } from "react-toolbox/lib/list/index";
+import { List, ListSubHeader } from "react-toolbox-legacy/lib/list/index";
 import { FormattedDate, FormattedMessage } from "react-intl";
 import DebtorAmountTheme from "./DebtorAmountTheme.scss";
 import { Page } from "components/Container";
-import { Snackbar } from "react-toolbox";
+import { Snackbar } from "react-toolbox-legacy";
 import { deleteExpense } from "../../../../modules/currentNobt/actions";
 import withNavigation from "../../../../../../components/hoc/withNavigation";
 import ConfirmationDialog from "components/ConfirmationDialog";
@@ -44,13 +43,11 @@ class BillDetailPage extends React.Component {
 
     return (
       <div>
-        <HeadRoom>
           <AppBar
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
             leftIcon={<FontIcon value="chevron_left" />}
             title={bill.name}
           />
-        </HeadRoom>
         <Page>
           <List>
             <ListSubHeader caption="Debtee" />

@@ -1,11 +1,12 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import styles from "./HomeScreen.scss";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import EmptyNobtPlaceholder from "../EmptyNobtPlaceholder/index";
-import { FontIcon } from "react-toolbox/lib/font_icon";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon";
 import NobtFAB from "../NobtFAB";
 import NobtItButtonTheme from "./NobtItButtonTheme.scss";
-import { Button } from "react-toolbox/lib/button/index";
+import { Button } from "react-toolbox-legacy/lib/button/index";
 import Amount from "../../../../components/Amount/Amount";
 import BrandedAppBar from "../../../../components/BrandedAppBar/index";
 import Feed from "../Feed/Feed";
@@ -56,12 +57,12 @@ class HomeScreen extends React.Component {
   };
 
   static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    total: React.PropTypes.number.isRequired,
-    members: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
-    bills: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    isNobtEmpty: React.PropTypes.bool.isRequired,
-    createdOn: React.PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
+    total: PropTypes.number.isRequired,
+    members: PropTypes.arrayOf(PropTypes.string).isRequired,
+    bills: PropTypes.arrayOf(PropTypes.object).isRequired,
+    isNobtEmpty: PropTypes.bool.isRequired,
+    createdOn: PropTypes.string.isRequired
   };
 }
 

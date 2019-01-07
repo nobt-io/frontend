@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from "react";
-import { List } from "react-toolbox/lib/list";
+import { List } from "react-toolbox-legacy/lib/list";
 
 export const HOList = (props) => (
   <List {...props}>
@@ -21,9 +22,9 @@ const createActualItems = (props) => {
 }
 
 HOList.propTypes = {
-  items: React.PropTypes.array.isRequired,
-  renderItem: React.PropTypes.func.isRequired,
-  shouldRenderItem: React.PropTypes.func,
+  items: PropTypes.array.isRequired,
+  renderItem: PropTypes.func.isRequired,
+  shouldRenderItem: PropTypes.func,
 };
 
 HOList.defaultProps = {

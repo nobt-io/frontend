@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import styles from "./NobtSummaryHeader.scss";
 import Amount from "components/Amount"
@@ -17,10 +18,10 @@ export const NobtSummaryHeader = (props) => {
 };
 
 NobtSummaryHeader.propTypes = {
-  nobtName: React.PropTypes.string.isRequired,
-  totalAmount: React.PropTypes.number.isRequired,
-  memberCount: React.PropTypes.number.isRequired,
-  isNobtEmpty: React.PropTypes.bool.isRequired
+  nobtName: PropTypes.string.isRequired,
+  totalAmount: PropTypes.number.isRequired,
+  memberCount: PropTypes.number.isRequired,
+  isNobtEmpty: PropTypes.bool.isRequired
 };
 
 export default NobtSummaryHeader

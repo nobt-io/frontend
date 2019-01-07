@@ -2,8 +2,7 @@ import { createSelector } from "reselect";
 import _debug from "debug";
 import PersonBalanceFactory from "./PersonBalanceFactory";
 import AsyncActionStatus from "../../../../const/AsyncActionStatus";
-import { pathVariable as balanceDetailPathVariable } from "../../routes/balances/routes/name/index";
-import { pathVariable as billDetailPathVariable } from "../../routes/id/index";
+import { balanceDetailPathVariable, billDetailPathVariable } from "../../index";
 
 export const getCurrentNobt = (state) => state.App.currentNobt.data;
 const getNobtFetchTimestamp = (state) => state.App.currentNobt.nobtFetchTimestamp;
@@ -86,7 +85,7 @@ const deNormalizeBill = (e) => {
 
 let first = () => true;
 
-const getBillId = (state, props) => parseInt(props.params[ billDetailPathVariable ]);
+const getBillId = (state, props) => parseInt(props.match.params[ billDetailPathVariable ]);
 
 export const makeGetBill = () => createSelector([ getBills, getBillId ], (bills, billId) => {
   return bills
@@ -116,7 +115,7 @@ export const makeCanBillBeDeleted = () => createSelector([ getBills, getBillId ]
   return true;
 });
 
-const getBalanceOwner = (state, props) => props.params[ balanceDetailPathVariable ];
+const getBalanceOwner = (state, props) => props.match.params[ balanceDetailPathVariable ];
 
 export const makeGetBalance = () => createSelector([ getBalances, getBalanceOwner ], (balances, balanceOwner) => {
   return balances

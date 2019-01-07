@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react'
-import Input from "react-toolbox/lib/input";
+import Input from "react-toolbox-legacy/lib/input";
 
 import PercentageInputValidator from "./PercentageInputValidator";
 
@@ -36,8 +37,8 @@ export const PercentageInput = React.createClass({
 });
 
 PercentageInput.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
-  value: React.PropTypes.number.isRequired
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired
 };
 
 export default PercentageInput;

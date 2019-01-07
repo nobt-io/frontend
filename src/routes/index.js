@@ -1,14 +1,13 @@
-import CoreLayout from "../layouts/CoreLayout";
-import LandingPageRoute from "./Landing";
-import AppRouteFactory from "./App";
-import CreateNobtRouteFactory from "./CreateNobt"
+import LandingPageRouteFactory from "./Landing";
+import { Switch } from "react-router-dom";
+import React from "react";
+import CreateNobtRouteFactory from "./CreateNobt/index"
+import AppRouteFactory from "./App/index"
 
-export default (store) => ({
-  path: '/',
-  component: CoreLayout,
-  indexRoute: LandingPageRoute,
-  childRoutes: [
-    CreateNobtRouteFactory(store),
-    AppRouteFactory(store)
-  ]
-})
+export default (store) => (
+	<Switch>
+		{LandingPageRouteFactory(store)}
+		{CreateNobtRouteFactory(store)}
+		{AppRouteFactory(store)}
+	</Switch>
+)

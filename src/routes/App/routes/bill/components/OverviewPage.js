@@ -1,5 +1,5 @@
 import React from "react";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import { Main } from "components/Container";
 import { Input, InputLegend, CurrencyInput } from "components/Input/index";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
@@ -108,13 +108,13 @@ class OverviewPage extends React.Component {
 }
 
 export default withNavigation(connect(
-  (state, ownProps) => ({
+  (state, props) => ({
     description: getDescription(state),
     amount: getAmount(state),
     debtee: getDebtee(state),
     shares: getShares(state),
     sharesWithValues: getSharesWithValues(state),
-    nobtId: ownProps.params.nobtId,
+    nobtId: props.match.params.nobtId,
     splitStrategy: getSplitStrategy(state),
     addBillStatus: getAddBillStatus(state),
     isDescriptionErrorShown: isDescriptionErrorShown(state),

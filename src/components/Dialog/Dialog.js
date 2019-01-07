@@ -1,5 +1,5 @@
 import React from "react";
-import { Dialog as RTDialog } from "react-toolbox/lib/dialog";
+import { Dialog as RTDialog } from "react-toolbox-legacy/lib/dialog";
 
 export default class Dialog extends React.Component {
 

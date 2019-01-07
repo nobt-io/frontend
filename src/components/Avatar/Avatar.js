@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import styles from "./Avatar.scss";
 import classNames from "classnames"
@@ -52,11 +53,11 @@ const Avatar = (props) => {
 };
 
 Avatar.propTypes = {
-  name: React.PropTypes.string.isRequired,
-  fontSize: React.PropTypes.number,
-  small: React.PropTypes.bool,
-  medium: React.PropTypes.bool,
-  big: React.PropTypes.bool,
+  name: PropTypes.string.isRequired,
+  fontSize: PropTypes.number,
+  small: PropTypes.bool,
+  medium: PropTypes.bool,
+  big: PropTypes.bool,
 };
 
 export default Avatar

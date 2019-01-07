@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List as RTList } from "react-toolbox/lib/list";
+import { List as RTList } from "react-toolbox-legacy/lib/list";
 import styles from "./List.scss"
 
 

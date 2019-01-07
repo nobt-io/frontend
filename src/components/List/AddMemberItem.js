@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import inputTheme from "./AddMemberItemInputTheme.scss";
 import itemTheme from "./AddMemberItemTheme.scss";
 import { connect } from "react-redux";
-import { Input } from "react-toolbox/lib/input/index";
-import { IconButton } from "react-toolbox/lib/button/index";
-import { ListItem as RTListItem } from "react-toolbox/lib/list/index";
+import { Input } from "react-toolbox-legacy/lib/input/index";
+import { IconButton } from "react-toolbox-legacy/lib/button/index";
+import { ListItem as RTListItem } from "react-toolbox-legacy/lib/list/index";
 import { isExistingMemberFactory } from "../../routes/App/routes/bill/modules/selectors";
 
 class AddMember extends React.Component {
@@ -76,7 +77,7 @@ class AddMember extends React.Component {
   );
 
   static propTypes = {
-    onNewMember: React.PropTypes.func.isRequired
+    onNewMember: PropTypes.func.isRequired
   }
 }
 

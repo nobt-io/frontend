@@ -1,3 +1,3 @@
-import withNobtLoader from "./withNobtLoader";
+import NobtLoader from "./NobtLoader";
 
-export default withNobtLoader
+export default NobtLoader

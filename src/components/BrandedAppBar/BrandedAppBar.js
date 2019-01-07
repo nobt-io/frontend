@@ -1,7 +1,7 @@
 import * as React from "react";
-import { AppBar } from "react-toolbox/lib/app_bar/index";
+import { AppBar } from "react-toolbox-legacy/lib/app_bar/index";
 import BrandedAppBarTheme from "./BrandedAppBarTheme.scss"
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import withNavigation from "../hoc/withNavigation";
 import LocationBuilder from "../../routes/App/modules/navigation/LocationBuilder";
 

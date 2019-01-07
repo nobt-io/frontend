@@ -21,7 +21,7 @@ describe("can bill be deleted", () => {
 
     var canBillBeDeleted = makeCanBillBeDeleted();
 
-    var canBeDeleted = canBillBeDeleted(storeState, {params: {billId: 1}});
+    var canBeDeleted = canBillBeDeleted(storeState, {match: { params: {billId: 1}}});
 
     expect(canBeDeleted).toBeTruthy();
   });
@@ -43,7 +43,7 @@ describe("can bill be deleted", () => {
 
     var canBillBeDeleted = makeCanBillBeDeleted();
 
-    var canBeDeleted = canBillBeDeleted(storeState, {params: {billId: 1}});
+    var canBeDeleted = canBillBeDeleted(storeState, {match: { params: {billId: 1}}});
 
     expect(canBeDeleted).toBeFalsy();
   });
@@ -65,7 +65,7 @@ describe("can bill be deleted", () => {
 
     var canBillBeDeleted = makeCanBillBeDeleted();
 
-    var canBeDeleted = canBillBeDeleted(storeState, {params: {billId: 2}});
+    var canBeDeleted = canBillBeDeleted(storeState, {match: { params: {billId: 2}}});
 
     expect(canBeDeleted).toBeFalsy();
   });

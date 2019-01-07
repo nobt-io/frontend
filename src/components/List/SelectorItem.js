@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ListItem as RTListItem } from "react-toolbox/lib/list";
+import { ListItem as RTListItem } from "react-toolbox-legacy/lib/list";
 import styles from "./SelectorItem.scss"
 
 class SelectorItem extends React.Component {

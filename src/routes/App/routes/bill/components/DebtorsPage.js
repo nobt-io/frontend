@@ -3,7 +3,7 @@ import { Heading, SubHeading, Caption } from "components/text/index";
 import { Main } from "components/Container/index";
 import { SectionGroup, Section } from "components/Section/index";
 import { List, CheckboxItem, AddMemberItem } from "components/List/index"
-import { ListDivider } from "react-toolbox/lib/list/index";
+import { ListDivider } from "react-toolbox-legacy/lib/list/index";
 import { connect } from "react-redux";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "../../../../../components/hoc/withNavigation";

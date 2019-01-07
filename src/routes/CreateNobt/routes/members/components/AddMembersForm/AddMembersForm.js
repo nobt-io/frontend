@@ -2,23 +2,23 @@ import * as React from "react";
 import { connect } from "react-redux";
 import styles from "./AddMembersForm.scss";
 import HOList from "containers/HOList";
-import { IconButton } from "react-toolbox/lib/button";
+import { IconButton } from "react-toolbox-legacy/lib/button";
 import { getCreationStatus, getPersonNames, getPersonToAdd } from "../../../../modules/selectors";
 import { addCurrentNameAsPerson, createNobt, removePerson, updateNameOfPersonToAdd } from "../../../../modules/actions";
 import ContinueButton from "../../../../components/ContinueButton";
 import AddMemberInputTheme from "./AddMemberInputTheme.scss";
-import { Snackbar } from "react-toolbox/lib/snackbar";
+import { Snackbar } from "react-toolbox-legacy/lib/snackbar";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
 import CreateNobtProgressBar from "../../components/CreateNobtProgressBar"
-import { Input } from "react-toolbox/lib/input/index";
+import { Input } from "react-toolbox-legacy/lib/input/index";
 import {
   getAddPersonButtonLabel,
   isAddPersonButtonDisabled,
   isCreateNobtButtonDisabled,
   shouldRenderAddPersonButton
 } from "../../../../modules/selectors.ui";
-import { ListItem } from "react-toolbox/lib/list/index";
+import { ListItem } from "react-toolbox-legacy/lib/list/index";
 import Box from "../../../../../../components/Box/Box";
 import Avatar from "../../../../../../components/Avatar/Avatar";
 

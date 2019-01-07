@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import styles from "./Person.scss";
 import classnames from "classnames";
@@ -36,9 +37,9 @@ export const Person = (props) => {
 };
 
 Person.propTypes = {
-  avatarClass: React.PropTypes.string,
-  avatarPosition: React.PropTypes.oneOf([ AvatarPosition.RIGHT, AvatarPosition.LEFT ]).isRequired,
-  name: React.PropTypes.string.isRequired,
+  avatarClass: PropTypes.string,
+  avatarPosition: PropTypes.oneOf([ AvatarPosition.RIGHT, AvatarPosition.LEFT ]).isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 Person.defaultProps = {
