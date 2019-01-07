@@ -1,15 +1,15 @@
 import * as React from "react";
-import { Button } from "react-toolbox/lib/button/index";
+import { Button } from "react-toolbox-legacy/lib/button/index";
 import ButtonTheme from "./ButtonTheme.scss"
 import withNavigation from "../../../../components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import { connect } from "react-redux";
 import { getConvertedAmount, isForeignCurrencyBill } from "../../routes/bill/modules/selectors";
-import { FontIcon } from "react-toolbox/lib/font_icon";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon";
 import { clearConversionInformation } from "../../routes/bill/modules/actions";
 import { getNobtCurrency } from "../../modules/currentNobt/selectors";
 import getCurrencySymbol from "currency-symbol-map";
-import { ListItem } from "react-toolbox/lib/list";
+import { ListItem } from "react-toolbox-legacy/lib/list";
 import ListItemTheme from "./ListItemTheme.scss"
 import List from "../../../../components/List/List";
 

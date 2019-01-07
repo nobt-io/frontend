@@ -35,7 +35,7 @@ Amount.propTypes = {
     positive: PropTypes.string,
     negative: PropTypes.string
   }),
-  currencyOverride: React.PropTypes.string
+  currencyOverride: PropTypes.string
 };
 
 export default connect(
