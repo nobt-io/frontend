@@ -1,2 +1,2 @@
-import List1 from "./api";
-export default List1;
+import Api from "./api";
+export default Api;

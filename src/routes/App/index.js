@@ -32,7 +32,6 @@ export default ({dispatch}) => {
 					</EnterableRoute>
 					<Route exact path={"/:nobtId/:billId"} component={withNavigation(BillDetailPage)} />
 					<Redirect from={"/:nobtId"} to={"/:nobtId"} />
-
 				</Switch>
 			</NobtLoader>
 		)} />

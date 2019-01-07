@@ -7,7 +7,6 @@ import { routerMiddleware } from "react-router-redux";
 
 export default (initialState = {}, history) => {
 	const reduxRouterMiddleware = routerMiddleware(history);
-
 	const middleware = [crashReporter, thunk, reduxRouterMiddleware];
 
   if (__DEV__) {
@@ -23,11 +22,9 @@ export default (initialState = {}, history) => {
     }
   }
 
-  const store = createStore(
-    rootReducer,
-    initialState,
-    compose(applyMiddleware(...middleware), ...enhancers)
+  return createStore(
+	  rootReducer,
+	  initialState,
+	  compose(applyMiddleware(...middleware), ...enhancers)
   );
-
-  return store;
 };

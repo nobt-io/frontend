@@ -1,11 +1,11 @@
-import List1 from "./List";
-import SelectorItem1 from "./SelectorItem";
-import RadioboxItem1 from "./RadioboxItem";
-import CheckboxItem1 from "./CheckboxItem";
-import AddMemberItem1 from "./AddMemberItem";
+import _List from "./List";
+import _SelectorItem from "./SelectorItem";
+import _RadioboxItem from "./RadioboxItem";
+import _CheckboxItem from "./CheckboxItem";
+import _AddMemberItem from "./AddMemberItem";
 
-export const List = List1;
-export const SelectorItem = SelectorItem1;
-export const RadioboxItem = RadioboxItem1;
-export const CheckboxItem = CheckboxItem1;
-export const AddMemberItem = AddMemberItem1;
+export const List = _List;
+export const SelectorItem = _SelectorItem;
+export const RadioboxItem = _RadioboxItem;
+export const CheckboxItem = _CheckboxItem;
+export const AddMemberItem = _AddMemberItem;

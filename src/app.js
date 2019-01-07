@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import createHistory from 'history/createBrowserHistory'
-import { Route, Router } from "react-router-dom";
+import { Router } from "react-router-dom";
 
 import createStore from "./store/createStore";
 import attachStoreStateFactory from "./store/attachStoreStateFactory";
@@ -27,7 +27,6 @@ if (__DEV__) {
 	if (window.devToolsExtension) {
 		window.devToolsExtension.open()
 	}
-
 }
 
 const MOUNT_NODE = document.getElementById('root');
