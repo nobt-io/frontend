@@ -1,7 +1,7 @@
 import React from "react";
 import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import { Main } from "components/Container";
-import { Input, InputLegend, CurrencyInput } from "components/Input/index";
+import { CurrencyInput, Input, InputLegend } from "components/Input/index";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";
 import withNavigation from "components/hoc/withNavigation";
 import connect from "react-redux/es/connect/connect";
@@ -9,16 +9,29 @@ import Button from "components/Button/index";
 import { addBill, amountChanged, descriptionChanged, focusIdChanged } from "../modules/actions";
 import { List, SelectorItem } from "components/List";
 import BrandedAppBar from "components/BrandedAppBar/BrandedAppBar";
-import { Heading, SubHeading, Caption } from "components/text";
+import { Caption, Heading, SubHeading } from "components/text";
 import { Section, SectionGroup } from "components/Section/index";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { invalidateNobt } from "../../../modules/currentNobt/actions";
+import ForeignCurrencyButton from "../../../components/ForeignCurrencyButton"
 
 import {
-  getAddBillStatus,
-  getAmount, getDebtee, getDescription, getShares, getSplitStrategy, isAmountErrorShown, isDebteeErrorShown, isDebtorsSelectionErrorShown,
-  isDescriptionErrorShown, getSharesWithValues, getFocusId
+	getAddBillStatus,
+	getAmount,
+	getConversionInformation,
+	getDebtee,
+	getDescription,
+	getFocusId,
+	getForeignCurrency,
+	getShares,
+	getSharesWithValues,
+	getSplitStrategy,
+	isAmountErrorShown,
+	isDebteeErrorShown,
+	isDebtorsSelectionErrorShown,
+	isDescriptionErrorShown
 } from "../modules/selectors";
+import { getNobtCurrency } from "../../../modules/currentNobt/selectors";
 
 const createBill = (props) => {
   let billToAdd = {
@@ -26,6 +39,10 @@ const createBill = (props) => {
     debtee: props.debtee,
     splitStrategy: props.splitStrategy,
     date: new Date(), // TODO: Add DatePicker
+    conversionInformation: {
+        foreignCurrency: props.conversionInformation.foreignCurrency.value,
+        rate: props.conversionInformation.rate
+    },
     shares: props.sharesWithValues
       .map(share => {
         return {
@@ -61,8 +78,9 @@ class OverviewPage extends React.Component {
           </Section>
           <Section>
             <Caption>How much did it cost?</Caption>
-            <CurrencyInput placeholder="13.37" value={this.props.amount} onChange={this.props.onAmountChanged} />
+            <CurrencyInput placeholder="13.37" value={this.props.amount} onChange={this.props.onAmountChanged} currency={(this.props.foreignCurrency || {}).value || this.props.nobtCurrency} />
             <InputLegend error={this.props.isAmountErrorShown}>Enter the total of this bill.</InputLegend>
+            <ForeignCurrencyButton />
           </Section>
           <Section>
             <Caption>Who paid?</Caption>
@@ -114,6 +132,7 @@ export default withNavigation(connect(
     debtee: getDebtee(state),
     shares: getShares(state),
     sharesWithValues: getSharesWithValues(state),
+    conversionInformation: getConversionInformation(state),
     nobtId: props.match.params.nobtId,
     splitStrategy: getSplitStrategy(state),
     addBillStatus: getAddBillStatus(state),
@@ -121,7 +140,9 @@ export default withNavigation(connect(
     isAmountErrorShown: isAmountErrorShown(state),
     isDebteeErrorShown: isDebteeErrorShown(state),
     isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state),
-    focusId: getFocusId(state)
+    focusId: getFocusId(state),
+    foreignCurrency: getForeignCurrency(state),
+    nobtCurrency: getNobtCurrency(state)
   }),
   (dispatch) => ({
     onDescriptionChanged: description => dispatch(descriptionChanged(description)),

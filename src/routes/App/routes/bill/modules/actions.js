@@ -3,6 +3,8 @@ import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
 
 export const UPDATE_ADD_BILL_STATUS = 'UPDATE_ADD_BILL_STATUS';
 export const NEW_DEBTEE_SELECTED = 'NEW_DEBTEE_SELECTED';
+export const SAVE_CONVERSION_INFORMATION = 'SAVE_CONVERSION_INFORMATION';
+export const CLEAR_CONVERSION_INFORMATION = 'CLEAR_CONVERSION_INFORMATION';
 export const NEW_MEMBER_ADDED = 'NEW_MEMBER_ADDED';
 export const FOCUS_ID_CHANGED = 'FOCUS_ID_CHANGED';
 export const AMOUNT_CHANGED = 'AMOUNT_CHANGED';
@@ -15,6 +17,10 @@ const createAction = (type, payload) => ({type, payload: {...payload}});
 export const focusIdChanged = (focusId) => createAction(FOCUS_ID_CHANGED, {focusId});
 export const newMemberAdded = (member) => createAction(NEW_MEMBER_ADDED, {member});
 export const newDebteeSelected = (debtee) => createAction(NEW_DEBTEE_SELECTED, {debtee});
+
+export const saveConversionInformation = (payload) => createAction(SAVE_CONVERSION_INFORMATION, payload);
+export const clearConversionInformation = () => createAction(CLEAR_CONVERSION_INFORMATION);
+
 export const addBillFailed = (error) => createAction(UPDATE_ADD_BILL_STATUS, {error, status: AsyncActionStatus.FAILED});
 export const addBillSucceeded = (response) => createAction(UPDATE_ADD_BILL_STATUS, {response, status: AsyncActionStatus.SUCCESSFUL});
 export const addBillStarted = () => createAction(UPDATE_ADD_BILL_STATUS, {status: AsyncActionStatus.IN_PROGRESS});

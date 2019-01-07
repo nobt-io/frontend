@@ -2232,6 +2232,11 @@ currency-flags@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/currency-flags/-/currency-flags-1.5.0.tgz#21dec87670fff6c51a24f6d7c2e915ce561de6c8"
 
+currency-symbol-map@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/currency-symbol-map/-/currency-symbol-map-4.0.4.tgz#3cfba625974dd3f86822d327ecbd10248695e95e"
+  integrity sha512-hkSCCopJXVsvIZIiumJc6FoNXR5LQ646c3ufzF0yfv3155PYygysHw24JuzPSg4j86EFpvtgeX+vEhzRtcJ5Ag==
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"

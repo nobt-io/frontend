@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 import SplitStrategyNames from "const/SplitStrategyNames";
 import AsyncActionStatus from "const/AsyncActionStatus";
+import convertAmount from "./convertAmount";
 
 const getAddBillFormSlice = (state) => state.App.addBillForm;
 
@@ -14,6 +15,22 @@ export const getAddBillStatus = createSelector([ getAddBillFormSlice ], state =>
 export const getSplitStrategy = createSelector([ getAddBillFormSlice ], (state) => {
   return state.splitStrategy
 });
+export const getForeignCurrency = createSelector([ getAddBillFormSlice ], (state) => {
+
+  if (!state.conversionInformation) {
+    return null;
+  }
+
+  return state.conversionInformation.foreignCurrency
+});
+export const getRate = createSelector([ getAddBillFormSlice ], (state) => {
+
+  if (!state.conversionInformation) {
+    return null;
+  }
+
+  return state.conversionInformation.rate
+});
 
 export const getBillMembers = createSelector([ getAddBillFormSlice ], (state) => {
   return state.personValues.map(pv => pv.name)
@@ -25,6 +42,23 @@ export const getAllMembers = createSelector([ getBillMembers, getMembers, getDeb
 
 const getDefaultValues = createSelector([ getAddBillFormSlice ], (state) => state.defaultValues);
 const getDefaultValueForSplitStrategy = createSelector([ getSplitStrategy, getDefaultValues ], (splitStrategy, defaultValues) => defaultValues[ splitStrategy ]);
+
+export const isForeignCurrencyBill = createSelector([getAddBillFormSlice], (state) => {
+  return !!state.conversionInformation
+});
+
+export const getConversionInformation = createSelector([getAddBillFormSlice], (state) => {
+  return state.conversionInformation
+});
+
+export const getConvertedAmount = createSelector([getAddBillFormSlice], (state) => {
+
+  if (state.conversionInformation == null) {
+    return state.amount;
+  }
+
+  return convertAmount(state.amount, state.conversionInformation.rate)
+});
 
 export const getPersonValues = createSelector([
   getAddBillFormSlice,
@@ -74,7 +108,7 @@ const getShareSelector = createSelector([ getSplitStrategy ], splitStrategy => {
   }
 });
 
-const getEqualShares = createSelector([ getAmount, getPersonValues, getAllMembers ], (amount, personValues, members) => {
+const getEqualShares = createSelector([ getConvertedAmount, getPersonValues, getAllMembers ], (amount, personValues, members) => {
 
   const noShare = (name) => { return {name: name, amount: null, value: false} };
 

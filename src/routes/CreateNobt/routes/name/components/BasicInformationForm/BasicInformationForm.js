@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { getCurrency, getNobtName } from "../../../../modules/selectors";
 import { changeNobtName, selectCurrency } from "../../../../modules/actions";
 import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
-import CurrencySelect from "../CurrencySelect/CurrencySelect";
+import CurrencySelect from "../../../../../../components/CurrencySelect/CurrencySelect";
 
 class BasicInformationForm extends React.Component {
   render = () => (
@@ -35,7 +35,7 @@ class BasicInformationForm extends React.Component {
         <div className={styles.formLine}>
           <label>Choose currency</label>
           <CurrencySelect
-            selectedCurreny={this.props.currency}
+            selectedCurrency={this.props.currency}
             onCurrencyChanged={option =>
               option
                 ? this.props.selectCurrency(option.value)

@@ -1,7 +1,15 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
 import {
-  AMOUNT_CHANGED, CLEAR_ADD_BILL_FORM, DESCRIPTION_CHANGED, FOCUS_ID_CHANGED, NEW_DEBTEE_SELECTED, NEW_MEMBER_ADDED,
-  SHARE_VALUE_CHANGED, UPDATE_ADD_BILL_STATUS
+  AMOUNT_CHANGED,
+  CLEAR_ADD_BILL_FORM,
+  CLEAR_CONVERSION_INFORMATION,
+  DESCRIPTION_CHANGED,
+  FOCUS_ID_CHANGED,
+  NEW_DEBTEE_SELECTED,
+  NEW_MEMBER_ADDED,
+  SAVE_CONVERSION_INFORMATION,
+  SHARE_VALUE_CHANGED,
+  UPDATE_ADD_BILL_STATUS
 } from "./actions";
 
 export const addBillFormReducer = (state = initialState, action) => {
@@ -86,7 +94,7 @@ export const addBillFormReducer = (state = initialState, action) => {
     case AMOUNT_CHANGED: {
       return {
         ...state,
-        amount: action.payload.amount
+        amount: parseFloat(action.payload.amount)
       }
     }
 
@@ -113,6 +121,23 @@ export const addBillFormReducer = (state = initialState, action) => {
         addBillStatus: action.payload.status
       }
     }
+    case SAVE_CONVERSION_INFORMATION: {
+
+      return {
+        ...state,
+        amount: parseFloat(action.payload.amount),
+        conversionInformation: {
+          foreignCurrency: action.payload.foreignCurrency,
+          rate: action.payload.rate
+        }
+      }
+    }
+    case CLEAR_CONVERSION_INFORMATION: {
+      return {
+        ...state,
+        conversionInformation: null
+      }
+    }
   }
 
   return state;
@@ -124,6 +149,7 @@ export const initialState = {
   description: "",
   focusId: "",
   amount: 0,
+  conversionInformation: null,
   splitStrategy: SplitStrategyNames.EQUAL,
   personValues: [],
   defaultValues: {

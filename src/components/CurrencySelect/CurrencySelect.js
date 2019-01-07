@@ -1,9 +1,9 @@
 import React from "react";
 import Select from "react-select";
-import "!style-loader!css-loader!react-select/dist/react-select.css";
-import "!style-loader!css-loader!currency-flags/dist/currency-flags.css";
 
 import CurrencySelectTheme from "./CurrencySelect.scss";
+import "react-select/dist/react-select.css"
+import "currency-flags/dist/currency-flags.css"
 import classnames from "classnames";
 
 const currencies = [
@@ -211,13 +211,13 @@ class CurrencyValue extends React.Component {
   );
 }
 
-export default ({ selectedCurreny, onCurrencyChanged }) => (
+export default ({ selectedCurrency, onCurrencyChanged, unavailableCurrencies = [] }) => (
   <Select
-    options={currencies}
+    options={currencies.filter(candidate => unavailableCurrencies.indexOf(candidate.value) === -1)}
     onChange={onCurrencyChanged}
     optionComponent={CurrencyOption}
     valueComponent={CurrencyValue}
     required
-    value={selectedCurreny}
+    value={selectedCurrency}
   />
 );

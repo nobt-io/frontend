@@ -12,6 +12,7 @@ import NobtLoader from "../../components/NobtLoader/NobtLoader";
 import { clearAddBillForm } from "./routes/bill/modules/actions";
 import HookableRoute from "../../utils/RouteExtensions/HookableRoute";
 import AppLayout from "../../layouts/AppLayout/AppLayout";
+import AmountConversionPage from "./routes/bill/components/AmountConversionPage";
 
 export const balanceDetailPathVariable = "name";
 export const billDetailPathVariable = "billId";
@@ -30,6 +31,7 @@ export default ({dispatch}) => {
 								<Route exact path={"/:nobtId/bill"} component={OverviewPage} />
 								<Route exact path={"/:nobtId/bill/debtee"} component={DebteePage} />
 								<Route exact path={"/:nobtId/bill/debtors"} component={DebtorsPage} />
+								<Route exact path={"/:nobtId/bill/convert"} component={AmountConversionPage} />
 							</Switch>
 						</HookableRoute>
 						<Route exact path={"/:nobtId/:billId"} component={withNavigation(BillDetailPage)} />
