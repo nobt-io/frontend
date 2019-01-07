@@ -39,12 +39,19 @@ module.exports = (_, argv) => {
 					use: [ 'babel-loader' ]
 				},
 				{
+					test: /\.css$/,
+					use: [MiniCssExtractPlugin.loader, 'css-loader']
+				},
+				{
 					test: /\.scss$/,
 					use: [
 						MiniCssExtractPlugin.loader,
 						{
 							loader: "css-loader",
-							options: {modules: true}
+							options: {
+								modules: true,
+								localIdentName: '[name]__[local]--[hash:base64:5]',
+							}
 						},
 						{
 							loader: "sass-loader",
