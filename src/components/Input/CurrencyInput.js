@@ -49,7 +49,7 @@ export class CurrencyInput extends React.Component {
 			onChange={this.valueChanged}
 		/>)
 	}
-};
+}
 
 CurrencyInput.propTypes = {
 	onChange: PropTypes.func.isRequired,
