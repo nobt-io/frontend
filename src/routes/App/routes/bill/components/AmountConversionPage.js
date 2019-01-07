@@ -40,7 +40,6 @@ const AmountConversionPage = ({amount, onAmountChanged, nobtCurrency, convertedA
 					</Section>
 				</SectionGroup>
 				<Button raised primary onClick={() => goBack(replace)} label="Accept" />
-				<Button raised onClick={() => goBack(replace)} label="Cancel" />
 			</Main>
 		</div>
 	);
