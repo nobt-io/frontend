@@ -96,6 +96,7 @@ class AmountConversionPage extends Component {
 						<Section>
 							<Caption>Select foreign currency</Caption>
 							<CurrencySelect selectedCurrency={this.state.foreignCurrency}
+											unavailableCurrencies={[nobtCurrency]}
 											onCurrencyChanged={(newValue) => this.setState({foreignCurrency: newValue})} />
 							<Caption>{this.getRateCaption()}</Caption>
 							<Input value={this.getRate()}

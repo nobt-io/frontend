@@ -211,9 +211,9 @@ class CurrencyValue extends React.Component {
   );
 }
 
-export default ({ selectedCurrency, onCurrencyChanged }) => (
+export default ({ selectedCurrency, onCurrencyChanged, unavailableCurrencies = [] }) => (
   <Select
-    options={currencies}
+    options={currencies.filter(candidate => unavailableCurrencies.indexOf(candidate.value) === -1)}
     onChange={onCurrencyChanged}
     optionComponent={CurrencyOption}
     valueComponent={CurrencyValue}
