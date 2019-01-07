@@ -29,7 +29,7 @@ const ForeignCurrencyButton = ({push, convertedAmount, clearConversionInformatio
 					<FontIcon key="edit" value="edit" onClick={goToConversionPage(push)} />
 				]} />
 		</List> :
-		<Button theme={ButtonTheme} icon={<i className={"fa fa-exchange"} />} label={"Convert"} raised primary onClick={goToConversionPage(push)} />
+		<Button theme={ButtonTheme} icon={<i className={"fa fa-refresh"} />} label={"Change currency"} raised primary onClick={goToConversionPage(push)} />
 	}
 </div>);
 

@@ -56,7 +56,7 @@ class AmountConversionPage extends Component {
 
 		console.log({rate});
 
-		return rate !== null && rate !== "";
+		return rate !== null && rate !== "" && !isNaN(rate);
 	};
 
 	hasAmount = () => {
@@ -80,7 +80,7 @@ class AmountConversionPage extends Component {
 	};
 
 	getRateCaption = () => {
-		return `Conversion rate${this.hasForeignCurrency() ? ` for 1 ${this.props.nobtCurrency} to ${this.getForeignCurrencyValue()}` : ''}:`;
+		return `Specify rate${this.hasForeignCurrency() ? ` for 1 ${this.props.nobtCurrency} to ${this.getForeignCurrencyValue()}` : ''}:`;
 	};
 
 	render = () => {
@@ -91,7 +91,7 @@ class AmountConversionPage extends Component {
 				<BrandedAppBar canGoBack={true} />
 				<Main>
 					<Heading>Convert amount</Heading>
-					<SubHeading>Convert to {nobtCurrency} from a foreign currency:</SubHeading>
+					<SubHeading>Convert from foreign currency</SubHeading>
 					<SectionGroup>
 						<Section>
 							<Caption>Select foreign currency</Caption>
