@@ -7,8 +7,6 @@ import {
   FOCUS_ID_CHANGED,
   NEW_DEBTEE_SELECTED,
   NEW_MEMBER_ADDED,
-  ON_CONVERSION_RATE_CHANGED,
-  ON_FOREIGN_CURRENCY_CHANGED,
   SAVE_CONVERSION_INFORMATION,
   SHARE_VALUE_CHANGED,
   UPDATE_ADD_BILL_STATUS
@@ -127,7 +125,7 @@ export const addBillFormReducer = (state = initialState, action) => {
 
       return {
         ...state,
-	    amount: parseFloat(action.payload.amount),
+        amount: parseFloat(action.payload.amount),
         conversionInformation: {
           foreignCurrency: action.payload.foreignCurrency,
           rate: action.payload.rate

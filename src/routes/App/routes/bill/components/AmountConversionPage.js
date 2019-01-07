@@ -54,8 +54,6 @@ class AmountConversionPage extends Component {
 	hasRate = () => {
 		const rate = this.state.rate;
 
-		console.log({rate});
-
 		return rate !== null && rate !== "" && !isNaN(rate);
 	};
 
@@ -96,27 +94,27 @@ class AmountConversionPage extends Component {
 						<Section>
 							<Caption>Select foreign currency</Caption>
 							<CurrencySelect selectedCurrency={this.state.foreignCurrency}
-											unavailableCurrencies={[nobtCurrency]}
+											unavailableCurrencies={[ nobtCurrency ]}
 											onCurrencyChanged={(newValue) => this.setState({foreignCurrency: newValue})} />
 							<Caption>{this.getRateCaption()}</Caption>
 							<Input value={this.getRate()}
-								   type={"number"}
-								   onChange={(newValue) => this.setState({rate: parseFloat(newValue)})}
-								   error={this.getRateError()}
+								type={"number"}
+								onChange={(newValue) => this.setState({rate: parseFloat(newValue)})}
+								error={this.getRateError()}
 							/>
 						</Section>
 						<Section>
 							<Caption>Amount in foreign currency:</Caption>
 							<CurrencyInput placeholder="13.37" value={this.state.amount}
-										   onChange={((newValue) => this.setState({amount: parseFloat(newValue)}))}
-										   currency={this.getForeignCurrencyValue() || nobtCurrency}
-										   error={this.getAmountError()}
+											onChange={((newValue) => this.setState({amount: parseFloat(newValue)}))}
+											currency={this.getForeignCurrencyValue() || nobtCurrency}
+											error={this.getAmountError()}
 							/>
 						</Section>
 						<Section>
 							<Caption>Converted amount:</Caption>
 							<Input icon={<span>{getCurrencySymbol(nobtCurrency)}</span>}
-								   disabled value={convertAmount(this.state.amount, this.state.rate)} />
+								disabled value={convertAmount(this.state.amount, this.state.rate)} />
 						</Section>
 					</SectionGroup>
 					<div style={{

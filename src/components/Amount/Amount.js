@@ -14,7 +14,7 @@ const computeClassNames = (props) => classnames({
 
 const Amount = (props) => (
   <span className={computeClassNames(props)}>
-	    <FormattedNumber value={valueViewModel(props)} currency={props.currencyOverride || props.currency} style="currency"/>
+    <FormattedNumber value={valueViewModel(props)} currency={props.currencyOverride || props.currency} style="currency"/>
   </span>
 );
 

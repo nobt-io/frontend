@@ -16,114 +16,147 @@ import { deleteExpense } from "../../../../modules/currentNobt/actions";
 import withNavigation from "../../../../../../components/hoc/withNavigation";
 import ConfirmationDialog from "components/ConfirmationDialog";
 
-const DeleteBillConfirmationDialog = ({active, billName, confirm, cancel}) => (<ConfirmationDialog
-  active={active}
-  title={`Delete '${billName}'?`}
-  confirm={confirm}
-  cancel={cancel}>
-  <p>Do you really want to delete this bill? <br />
-    This cannot be undone.</p>
-</ConfirmationDialog>);
+const DeleteBillConfirmationDialog = ({
+  active,
+  billName,
+  confirm,
+  cancel
+}) => (
+  <ConfirmationDialog
+    active={active}
+    title={`Delete '${billName}'?`}
+    confirm={confirm}
+    cancel={cancel}
+  >
+    <p>
+      Do you really want to delete this bill? <br />
+      This cannot be undone.
+    </p>
+  </ConfirmationDialog>
+);
 
 class BillDetailPage extends React.Component {
-
   state = {
     showDeleteBillConfirmationDialog: false
   };
 
   render = () => {
-
     if (!this.props.bill) {
-      LocationBuilder.fromWindow().pop().apply(this.props.replace);
+      LocationBuilder.fromWindow()
+        .pop()
+        .apply(this.props.replace);
       return null;
     }
 
-    const {bill, nobtCurrency} = this.props;
-    const {debtee} = bill;
+    const { bill, nobtCurrency } = this.props;
+    const { debtee } = bill;
 
     const items = [
       <ListItem
-          ripple={false}
-          leftActions={[
-            <Avatar name={debtee.name} small />
-          ]}
-          key={debtee.name}
-          caption={`${debtee.name} paid this bill.`}
+        ripple={false}
+        leftActions={[<Avatar name={debtee.name} small />]}
+        key={debtee.name}
+        caption={`${debtee.name} paid this bill.`}
       />,
       <ListItem
-          key="Date_Created"
-          ripple={false}
-          caption={<FormattedMessage
-              id="BillDetailPage.time_added_caption"
-              defaultMessage="Added on {timestamp}."
-              values={{
-                timestamp: <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='long' day='2-digit' />
-              }} />}
-          leftActions={[
-            <FontIcon value="access_time" />
-          ]}
+        key="Date_Created"
+        ripple={false}
+        caption={
+          <FormattedMessage
+            id="BillDetailPage.time_added_caption"
+            defaultMessage="Added on {timestamp}."
+            values={{
+              timestamp: (
+                <FormattedDate
+                  value={new Date(bill.createdOn)}
+                  year="numeric"
+                  month="long"
+                  day="2-digit"
+                />
+              )
+            }}
+          />
+        }
+        leftActions={[<FontIcon value="access_time" />]}
       />,
-	  <ListItem
-		ripple={false}
-		leftActions={[
-				<FontIcon value="payment" />
-				]}
-		key="amount"
-		caption={<FormattedMessage
-			id="BillDetailPage.invoiceTotal"
-			defaultMessage="The invoice total is {invoiceTotal}."
-			values={{
-				invoiceTotal: <Amount value={debtee.amount} />
-			}} />}
-	  />,
+      <ListItem
+        ripple={false}
+        leftActions={[<FontIcon value="payment" />]}
+        key="amount"
+        caption={
+          <FormattedMessage
+            id="BillDetailPage.invoiceTotal"
+            defaultMessage="The invoice total is {invoiceTotal}."
+            values={{
+              invoiceTotal: <Amount value={debtee.amount} />
+            }}
+          />
+        }
+      />
     ];
 
     if (bill.conversionInformation.foreignCurrency !== nobtCurrency) {
-    	items.push(<ListItem
-			ripple={false}
-			leftActions={[
-				<FontIcon value={<i className={"fa fa-exchange"}/>}/>
-			]}
-			key="exchange"
-			caption={<FormattedMessage
-				id="BillDetailPage.invoiceTotal"
-				defaultMessage="Converted from {originalAmount}."
-				values={{
-					originalAmount: <Amount currencyOverride={bill.conversionInformation.foreignCurrency} value={debtee.amount * bill.conversionInformation.rate} />
-				}} />}
-		/>);
+      items.push(
+        <ListItem
+          ripple={false}
+          leftActions={[
+            <FontIcon value={<i className={"fa fa-exchange"} />} />
+          ]}
+          key="exchange"
+          caption={
+            <FormattedMessage
+              id="BillDetailPage.invoiceTotal"
+              defaultMessage="Converted from {originalAmount}."
+              values={{
+                originalAmount: (
+                  <Amount
+                    currencyOverride={
+                      bill.conversionInformation.foreignCurrency
+                    }
+                    value={debtee.amount * bill.conversionInformation.rate}
+                  />
+                )
+              }}
+            />
+          }
+        />
+      );
     }
 
     return (
       <div>
         <AppBar
-          onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
+          onLeftIconClick={() =>
+              LocationBuilder.fromWindow()
+                .pop(1)
+                .apply(this.props.replace)
+            }
           leftIcon={<FontIcon value="chevron_left" />}
           title={bill.name}
         />
         <Page>
           <List>
             <ListSubHeader caption="Debtee" />
-			  {items}
-		  </List>
+            {items}
+          </List>
           <List>
             <ListSubHeader caption="Debtors" />
 
-            {
-              bill.debtors.map(debtor =>
-                <ListItem
-                  ripple={false}
-                  leftActions={[
-                    <Avatar name={debtor.name} small />
-                  ]}
-                  key={debtor.name}
-                  caption={debtor.name}
-                  rightActions={[
-                    <Amount theme={DebtorAmountTheme} value={debtor.amount * (-1)} absolute={false} />
-                  ]}
-                />)
-            }
-
+            {bill.debtors.map(debtor => (
+              <ListItem
+                ripple={false}
+                leftActions={[<Avatar name={debtor.name} small />]}
+                key={debtor.name}
+                caption={debtor.name}
+                rightActions={[
+                  <Amount
+                    theme={DebtorAmountTheme}
+                    value={debtor.amount * -1}
+                    absolute={false}
+                  />
+                ]}
+              />
+            ))}
           </List>
 
           <List>
@@ -140,18 +173,18 @@ class BillDetailPage extends React.Component {
             active={this.state.showDeleteBillConfirmationDialog}
             billName={this.props.bill.name}
             confirm={this.handleConfirm}
-            cancel={this.handelCancel} />
-
+            cancel={this.handelCancel}
+          />
         </Page>
       </div>
     );
   };
 
-  showDialog = () => this.setState({showDeleteBillConfirmationDialog: true});
+  showDialog = () => this.setState({ showDeleteBillConfirmationDialog: true });
 
-  handelCancel = () => this.setState({showDeleteBillConfirmationDialog: false});
+  handelCancel = () =>
+    this.setState({ showDeleteBillConfirmationDialog: false });
   handleConfirm = () => this.props.deleteBill(this.props.bill);
-
 }
 
 const makeMapStateToProps = () => {
@@ -167,9 +200,6 @@ const makeMapStateToProps = () => {
   };
 };
 
-export default connect(
-  makeMapStateToProps,
-  (dispatch) => ({
-    deleteBill: (e) => dispatch(deleteExpense(e))
-  })
-)(withNavigation(BillDetailPage));
+export default connect(makeMapStateToProps, dispatch => ({
+  deleteBill: e => dispatch(deleteExpense(e))
+}))(withNavigation(BillDetailPage));
