@@ -1,10 +1,11 @@
 import { createSelector } from "reselect";
 import SplitStrategyNames from "const/SplitStrategyNames";
-import { getMembers } from "../../../modules/currentNobt/selectors";
 import AsyncActionStatus from "const/AsyncActionStatus";
 
 const getAddBillFormSlice = (state) => state.App.addBillForm;
 
+export const getCurrentNobt = (state) => state.App.currentNobt.data;
+export const getMembers = createSelector([ getCurrentNobt ], (nobt) => nobt.participatingPersons);
 export const getAmount = createSelector([ getAddBillFormSlice ], (state) => state.amount);
 export const getDebtee = createSelector([ getAddBillFormSlice ], (state) => state.debtee);
 export const getDescription = createSelector([ getAddBillFormSlice ], (state) => state.description);

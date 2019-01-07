@@ -2,20 +2,28 @@ import WizardContainer from "./containers/WizardContainer";
 import NameRoute from "./routes/name";
 import MembersRouteFactory from "./routes/members";
 import DoneRouteFactory from "./routes/done";
-import LocationBuilder from "../App/modules/navigation/LocationBuilder";
+import { Redirect, Route, Switch } from "react-router-dom";
+import React from "react";
 
-export default (store) => {
+export default () => {
 
-  return {
-    path: 'create',
-    component: WizardContainer,
-    indexRoute: {
-      onEnter: (nextState, replace) => LocationBuilder.fromWindow().push("name").apply(replace)
-    },
-    childRoutes: [
-      NameRoute,
-      MembersRouteFactory(store),
-      DoneRouteFactory(store)
-    ]
-  }
+	const path = "/create/";
+
+	return (<Route
+		path={path}
+		render={props => {
+			return (
+				<WizardContainer>
+					<Switch>
+						{NameRoute(path)}
+						{MembersRouteFactory(store, path)}
+						{DoneRouteFactory(store, path)}
+						<Redirect exact from={path} to={path + "name"} />
+					</Switch>
+				</WizardContainer>
+			);
+		}}
+	/>)
 }
+
+

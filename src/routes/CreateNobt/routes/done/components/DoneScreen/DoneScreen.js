@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getCreatedNobtId } from "../../../../modules/selectors";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import styles from "./DoneScreen.scss";
 import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
 import { IconMenu, MenuItem } from "react-toolbox-legacy/lib/menu";

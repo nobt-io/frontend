@@ -1,2 +1,2 @@
-import List1 from "./HomeScreen";
-export const HomeScreen = List1;
+import _HomeScreen from "./HomeScreen";
+export default _HomeScreen;

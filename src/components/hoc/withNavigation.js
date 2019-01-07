@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { go, goBack, goForward, push, replace } from "react-router-redux";
-import { withRouter } from "react-router-dom";
 
 // TODO there should be a component that allows functions like "pushPath" and "popPath" that encapsulates the call to LocationBuilder
 export default function withNavigation(WrappedComponent) {
@@ -15,7 +14,7 @@ export default function withNavigation(WrappedComponent) {
     }
   }
 
-  return withRouter(connect(
+  return connect(
     (state) => ({}),
     (dispatch, props) => ({
       push: (path) => dispatch(push(path)),
@@ -24,5 +23,5 @@ export default function withNavigation(WrappedComponent) {
       goBack: () => dispatch(goBack()),
       goForward: () => dispatch(goForward()),
     })
-  )(PropsProxy))
+  )(PropsProxy)
 }

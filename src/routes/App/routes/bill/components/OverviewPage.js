@@ -108,13 +108,13 @@ class OverviewPage extends React.Component {
 }
 
 export default withNavigation(connect(
-  (state, ownProps) => ({
+  (state, props) => ({
     description: getDescription(state),
     amount: getAmount(state),
     debtee: getDebtee(state),
     shares: getShares(state),
     sharesWithValues: getSharesWithValues(state),
-    nobtId: ownProps.params.nobtId,
+    nobtId: props.match.params.nobtId,
     splitStrategy: getSplitStrategy(state),
     addBillStatus: getAddBillStatus(state),
     isDescriptionErrorShown: isDescriptionErrorShown(state),
