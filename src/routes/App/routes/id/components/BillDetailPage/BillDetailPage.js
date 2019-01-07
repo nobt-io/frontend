@@ -1,7 +1,7 @@
 import React from "react";
 import Amount from "components/Amount";
 import { connect } from "react-redux";
-import { makeCanBillBeDeleted, makeGetBill } from "../../../../modules/currentNobt/selectors";
+import { getNobtCurrency, makeCanBillBeDeleted, makeGetBill } from "../../../../modules/currentNobt/selectors";
 import { ListItem } from "react-toolbox-legacy/lib/list";
 import Avatar from "components/Avatar";
 import { AppBar } from "react-toolbox-legacy/lib/app_bar/index";
@@ -38,71 +38,74 @@ class BillDetailPage extends React.Component {
       return null;
     }
 
-    const {bill} = this.props;
+    const {bill, nobtCurrency} = this.props;
     const {debtee} = bill;
+
+    const items = [
+      <ListItem
+          ripple={false}
+          leftActions={[
+            <Avatar name={debtee.name} small />
+          ]}
+          key={debtee.name}
+          caption={`${debtee.name} paid this bill.`}
+      />,
+      <ListItem
+          key="Date_Created"
+          ripple={false}
+          caption={<FormattedMessage
+              id="BillDetailPage.time_added_caption"
+              defaultMessage="Added on {timestamp}."
+              values={{
+                timestamp: <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='long' day='2-digit' />
+              }} />}
+          leftActions={[
+            <FontIcon value="access_time" />
+          ]}
+      />,
+	  <ListItem
+		ripple={false}
+		leftActions={[
+				<FontIcon value="payment" />
+				]}
+		key="amount"
+		caption={<FormattedMessage
+			id="BillDetailPage.invoiceTotal"
+			defaultMessage="The invoice total is {invoiceTotal}."
+			values={{
+				invoiceTotal: <Amount value={debtee.amount} />
+			}} />}
+	  />,
+    ];
+
+    if (bill.conversionInformation.foreignCurrency !== nobtCurrency) {
+    	items.push(<ListItem
+			ripple={false}
+			leftActions={[
+				<FontIcon value={<i className={"fa fa-exchange"}/>}/>
+			]}
+			key="exchange"
+			caption={<FormattedMessage
+				id="BillDetailPage.invoiceTotal"
+				defaultMessage="Converted from {originalAmount}."
+				values={{
+					originalAmount: <Amount currencyOverride={bill.conversionInformation.foreignCurrency} value={debtee.amount * bill.conversionInformation.rate} />
+				}} />}
+		/>);
+    }
 
     return (
       <div>
-          <AppBar
-            onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
-            leftIcon={<FontIcon value="chevron_left" />}
-            title={bill.name}
-          />
+        <AppBar
+          onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
+          leftIcon={<FontIcon value="chevron_left" />}
+          title={bill.name}
+        />
         <Page>
           <List>
             <ListSubHeader caption="Debtee" />
-            <ListItem
-              ripple={false}
-              leftActions={[
-                <Avatar name={debtee.name} small />
-              ]}
-              key={debtee.name}
-              caption={`${debtee.name} paid this bill.`}
-            />
-
-            <ListItem
-              ripple={false}
-              leftActions={[
-                <FontIcon value="payment" />
-              ]}
-              key="amount"
-              caption={<FormattedMessage
-                id="BillDetailPage.invoiceTotal"
-                defaultMessage="The invoice total is {invoiceTotal}."
-                values={{
-                  invoiceTotal: <Amount value={debtee.amount} />
-                }} />}
-            />
-
-            { bill.conversionInformation !== null && <ListItem
-                ripple={false}
-                leftActions={[
-                  <FontIcon value={<i className={"fa fa-exchange"}/>}/>
-                ]}
-                key="exchange"
-                caption={<FormattedMessage
-                    id="BillDetailPage.invoiceTotal"
-                    defaultMessage="Converted from {originalAmount}."
-                    values={{
-                      originalAmount: <Amount currencyOverride={bill.conversionInformation.foreignCurrency} value={debtee.amount * bill.conversionInformation.rate} />
-                    }} />}
-            /> }
-
-            <ListItem
-              key="Date_Created"
-              ripple={false}
-              caption={<FormattedMessage
-                id="BillDetailPage.time_added_caption"
-                defaultMessage="Added on {timestamp}."
-                values={{
-                  timestamp: <FormattedDate value={new Date(bill.createdOn)} year='numeric' month='long' day='2-digit' />
-                }} />}
-              leftActions={[
-                <FontIcon value="access_time" />
-              ]}
-            />
-
-          </List>
+			  {items}
+		  </List>
           <List>
             <ListSubHeader caption="Debtors" />
 
@@ -158,6 +161,7 @@ const makeMapStateToProps = () => {
   return (state, props) => {
     return {
       bill: getBill(state, props),
+      nobtCurrency: getNobtCurrency(state),
       canBillBeDeleted: canBillBeDeleted(state, props)
     };
   };
