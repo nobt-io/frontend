@@ -1,3 +1,3 @@
-import NobtSummaryHeader from "./NobtSummaryHeader";
+import NobtSummaryHeader from './NobtSummaryHeader';
 
-export default NobtSummaryHeader
+export default NobtSummaryHeader;

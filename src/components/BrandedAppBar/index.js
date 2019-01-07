@@ -1,3 +1,3 @@
-import BrandedAppBar from "./BrandedAppBar";
+import BrandedAppBar from './BrandedAppBar';
 
-export default BrandedAppBar
+export default BrandedAppBar;

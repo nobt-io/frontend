@@ -17,12 +17,18 @@
 
       .imageDetailsWrapper {
         position: absolute;
-        top: 0; right: 0; bottom: 0; left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         display: none;
 
         .imageDetails {
           position: absolute;
-          top: 0; right: 0; bottom: 0; left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
 
           background-color: rgba(0, 0, 0, 0.8);
 
@@ -57,27 +63,27 @@
 }
 
 #teamMember1 {
-  background-image: url('static/contributors/thomas_single.png')
+  background-image: url('static/contributors/thomas_single.png');
 }
 
 #teamMember2 {
-  background-image: url('static/contributors/david_single.png')
+  background-image: url('static/contributors/david_single.png');
 }
 
 #teamMember3 {
-  background-image: url('static/contributors/matthias_single.png')
+  background-image: url('static/contributors/matthias_single.png');
 }
 
 @media #{$mq-desktop} {
   #teamMember1 {
-    background-image: url('static/contributors/thomas.png')
+    background-image: url('static/contributors/thomas.png');
   }
 
   #teamMember2 {
-    background-image: url('static/contributors/david.png')
+    background-image: url('static/contributors/david.png');
   }
 
   #teamMember3 {
-    background-image: url('static/contributors/matthias.png')
+    background-image: url('static/contributors/matthias.png');
   }
 }

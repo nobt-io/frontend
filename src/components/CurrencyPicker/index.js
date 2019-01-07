@@ -1,3 +1,3 @@
-import CurrencyPicker from './CurrencyPicker'
+import CurrencyPicker from './CurrencyPicker';
 
-export default CurrencyPicker
+export default CurrencyPicker;

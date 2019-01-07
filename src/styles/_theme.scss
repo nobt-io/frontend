@@ -1,9 +1,9 @@
-@import "colors";
-@import "custom-component-configurations/index";
-@import "animationMixins";
+@import 'colors';
+@import 'custom-component-configurations/index';
+@import 'animationMixins';
 
 // We import the globals file after our own definitions in order to overwrite them.
-@import "~react-toolbox/components/_globals";
+@import '~react-toolbox/components/_globals';
 
 //fonts
 
@@ -12,11 +12,11 @@ $handwritten-font: Courgette, cursive;
 
 //misc
 
-$container-border-radius: .2rem;
-$defaultShadow: 0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28); // Copied from Google Inbox
+$container-border-radius: 0.2rem;
+$defaultShadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28); // Copied from Google Inbox
 $wizardWidth: 480px;
 $maxAppWidth: 768px;
 
 //bootstrap 3 media queries
 
-$mq-desktop: "only screen and (min-width:768px)"; //bootstrap-base mediaquery: https://stackoverflow.com/a/33493510/2167804
+$mq-desktop: 'only screen and (min-width:768px)'; //bootstrap-base mediaquery: https://stackoverflow.com/a/33493510/2167804

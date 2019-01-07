@@ -1,3 +1,3 @@
-import Amount from './Amount'
+import Amount from './Amount';
 
-export default Amount
+export default Amount;

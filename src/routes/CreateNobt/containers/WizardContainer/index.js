@@ -1,2 +1,3 @@
-import WizardContainer from "./WizardContainer";
+import WizardContainer from './WizardContainer';
+
 export default WizardContainer;

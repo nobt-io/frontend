@@ -1,1 +1,1 @@
-export { Person, AvatarPosition } from "./Person"
+export { Person, AvatarPosition } from './Person';

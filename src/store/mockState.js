@@ -1,5 +1,4 @@
 export class StateBuilder {
-
   App = {};
   router = {};
 
@@ -7,21 +6,20 @@ export class StateBuilder {
    * @param {AppStateBuilder} appStateBuilder
    * @returns {StateBuilder}
    */
-  withApp = (appStateBuilder) => {
+  withApp = appStateBuilder => {
     this.App = appStateBuilder.build();
     return this;
   };
 
   build = () => {
     return {
-      App: {...this.App},
-      router: {...this.router}
-    }
-  }
+      App: { ...this.App },
+      router: { ...this.router },
+    };
+  };
 }
 
 export class AppStateBuilder {
-
   addBillForm = {};
   currentNobt = {};
   viewState = {};
@@ -30,25 +28,24 @@ export class AppStateBuilder {
    * @param {NobtStateBuilder} currentNobtStateBuilder
    * @return {AppStateBuilder}
    */
-  withCurrentNobt = (currentNobtStateBuilder) => {
+  withCurrentNobt = currentNobtStateBuilder => {
     this.currentNobt = currentNobtStateBuilder.build();
     return this;
   };
 
   build = () => {
     return {
-      addBillForm: {...this.addBillForm},
-      currentNobt: {...this.currentNobt},
-      viewState: {...this.viewState}
-    }
-  }
+      addBillForm: { ...this.addBillForm },
+      currentNobt: { ...this.currentNobt },
+      viewState: { ...this.viewState },
+    };
+  };
 }
 
 export class NobtStateBuilder {
-
   data = {
     bills: [],
-    payments: []
+    payments: [],
   };
   fetchNobtStatus = {};
   nobtFetchTimestamp = {};
@@ -57,7 +54,7 @@ export class NobtStateBuilder {
    * @param id
    * @returns {NobtStateBuilder}
    */
-  withId = (id) => {
+  withId = id => {
     this.data.id = id;
     return this;
   };
@@ -66,7 +63,7 @@ export class NobtStateBuilder {
    * @param name
    * @returns {NobtStateBuilder}
    */
-  withName = (name) => {
+  withName = name => {
     this.data.name = name;
     return this;
   };
@@ -75,7 +72,7 @@ export class NobtStateBuilder {
    * @param currency
    * @returns {NobtStateBuilder}
    */
-  withCurrency = (currency) => {
+  withCurrency = currency => {
     this.data.currency = currency;
     return this;
   };
@@ -85,7 +82,7 @@ export class NobtStateBuilder {
    * @returns {NobtStateBuilder}
    */
   withParticipatingPersons = (...persons) => {
-    this.data.persons = [ ...persons ];
+    this.data.persons = [...persons];
     return this;
   };
 
@@ -93,7 +90,7 @@ export class NobtStateBuilder {
    * @param status
    * @return {NobtStateBuilder}
    */
-  withFetchNobtStatus = (status) => {
+  withFetchNobtStatus = status => {
     this.fetchNobtStatus = status;
     return this;
   };
@@ -102,7 +99,7 @@ export class NobtStateBuilder {
    * @param timestamp
    * @return {NobtStateBuilder}
    */
-  withNobtFetchTimestamp = (timestamp) => {
+  withNobtFetchTimestamp = timestamp => {
     this.nobtFetchTimestamp = timestamp;
     return this;
   };
@@ -111,7 +108,7 @@ export class NobtStateBuilder {
    * @param {BillBuilder} billBuilder
    * @returns {NobtStateBuilder}
    */
-  withBill = (billBuilder) => {
+  withBill = billBuilder => {
     this.data.bills.push(billBuilder.build());
     return this;
   };
@@ -120,22 +117,21 @@ export class NobtStateBuilder {
    * @param {PaymentBuilder} paymentBuilder
    * @returns {NobtStateBuilder}
    */
-  withPayment = (paymentBuilder) => {
+  withPayment = paymentBuilder => {
     this.data.payments.push(paymentBuilder.build());
     return this;
   };
 
   build = () => {
     return {
-      data: {...this.data},
+      data: { ...this.data },
       fetchNobtStatus: this.fetchNobtStatus,
-      nobtFetchTimestamp: this.nobtFetchTimestamp
-    }
-  }
+      nobtFetchTimestamp: this.nobtFetchTimestamp,
+    };
+  };
 }
 
 class BillBuilder {
-
   shares = [];
   links = {};
 
@@ -161,7 +157,7 @@ class BillBuilder {
    * @returns {BillBuilder}
    */
   withDeleteLink(href) {
-    this.links.delete = {href};
+    this.links.delete = { href };
     return this;
   }
 
@@ -189,7 +185,7 @@ class BillBuilder {
    * @returns {BillBuilder}
    */
   addShare(debtor, amount) {
-    this.shares.push({debtor, amount});
+    this.shares.push({ debtor, amount });
     return this;
   }
 
@@ -204,13 +200,12 @@ class BillBuilder {
       name: this.name,
       debtee: this.debtee,
       shares: this.shares,
-      _links: this.links
-    }
+      _links: this.links,
+    };
   }
 }
 
 class PaymentBuilder {
-
   /**
    * @param {Number} id
    * @returns {PaymentBuilder}
@@ -265,25 +260,26 @@ class PaymentBuilder {
       createdOn: this.createdOn,
       sender: this.sender,
       recipient: this.recipient,
-      amount: this.amount
-    }
+      amount: this.amount,
+    };
   }
 }
 
 /**
  * @returns {NobtStateBuilder}
  */
-export const aNobtState = () => new NobtStateBuilder()
-  .withId("3XtC8MMj4bpY")
-  .withName("Some nobt")
-  .withCurrency("EUR")
-  .withParticipatingPersons("Thomas", "David", "Philipp");
+export const aNobtState = () =>
+  new NobtStateBuilder()
+    .withId('3XtC8MMj4bpY')
+    .withName('Some nobt')
+    .withCurrency('EUR')
+    .withParticipatingPersons('Thomas', 'David', 'Philipp');
 
 /**
  * @returns {AppStateBuilder}
  */
-export const anAppState = () => new AppStateBuilder()
-  .withCurrentNobt(aNobtState());
+export const anAppState = () =>
+  new AppStateBuilder().withCurrentNobt(aNobtState());
 
 /**
  * @returns {StateBuilder}

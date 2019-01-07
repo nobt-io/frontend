@@ -1,4 +1,4 @@
-@import "~react-toolbox/lib/mixins";
+@import '~react-toolbox/lib/mixins';
 
 @mixin headingStyle() {
   margin: 0;
@@ -12,20 +12,22 @@
   font-weight: bold;
 }
 
-.subHeading{
+.subHeading {
   opacity: 0.5;
   font-size: 2rem;
   margin: 0 0 2rem;
 }
 
-.caption{
+.caption {
   font-size: inherit;
   font-weight: bold;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 
 .title {
-  @include typo-headline(); // Reuse styling from react-toolbox for consistency reasons
+  @include typo-headline(
+
+  ); // Reuse styling from react-toolbox for consistency reasons
   @include headingStyle();
 
   padding-top: $unit;
@@ -37,7 +39,7 @@
   padding-top: $unit;
 }
 
-.legend{
+.legend {
   font-size: 1.2rem;
   line-height: 2rem;
   color: $grey;

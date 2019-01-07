@@ -1,3 +1,3 @@
-import DoneScreen from "./DoneScreen";
+import DoneScreen from './DoneScreen';
 
-export default DoneScreen
+export default DoneScreen;

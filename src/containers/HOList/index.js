@@ -1,3 +1,3 @@
-import HOList from './HOList'
+import HOList from './HOList';
 
-export default HOList
+export default HOList;

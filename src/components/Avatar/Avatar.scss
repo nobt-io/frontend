@@ -1,4 +1,4 @@
-@import "~react-toolbox/lib/list/config";
+@import '~react-toolbox/lib/list/config';
 
 @mixin applySize($size) {
   font-size: $size / 2;
@@ -17,14 +17,14 @@ $sizeIncrease: 0.6;
   vertical-align: middle;
 
   &.small {
-    @include applySize($list-item-icon-font-size)
+    @include applySize($list-item-icon-font-size);
   }
 
   &.medium {
-    @include applySize($list-item-icon-font-size + $sizeIncrease * 1)
+    @include applySize($list-item-icon-font-size + $sizeIncrease * 1);
   }
 
   &.large {
-    @include applySize($list-item-icon-font-size + $sizeIncrease * 2)
+    @include applySize($list-item-icon-font-size + $sizeIncrease * 2);
   }
 }

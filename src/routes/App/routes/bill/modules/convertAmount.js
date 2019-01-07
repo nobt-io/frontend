@@ -1,23 +1,21 @@
-import debug from "debug";
+import debug from 'debug';
 
 export default (amount, rate) => {
+  if (isNaN(amount)) {
+    throw new Error('amount is not a number');
+  }
 
-	if (isNaN(amount)) {
-		throw new Error("amount is not a number")
-	}
+  if (isNaN(rate)) {
+    debug('getConvertedAmount')(`rate ${rate} is NaN!`);
 
-	if (isNaN(rate)) {
+    return amount;
+  }
 
-		debug("getConvertedAmount")(`rate ${rate} is NaN!`);
+  const result = (1 / rate) * amount;
 
-		return amount;
-	}
+  if (!isFinite(result)) {
+    return '';
+  }
 
-	const result = 1 / rate * amount;
-
-	if (!isFinite(result)) {
-		return "";
-	}
-
-	return result.toFixed(2)
-}
+  return result.toFixed(2);
+};

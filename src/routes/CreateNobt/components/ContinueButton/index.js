@@ -1,3 +1,3 @@
-import continueButton from "./ContinueButton"
+import continueButton from './ContinueButton';
 
 export default continueButton;

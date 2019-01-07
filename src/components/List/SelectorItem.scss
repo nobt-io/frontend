@@ -6,7 +6,10 @@
   display: block;
   border-bottom: 1px solid $color-accent-light;
 
-  &:focus, a:hover, a:active, a:visited {
+  &:focus,
+  a:hover,
+  a:active,
+  a:visited {
     outline: none;
     color: inherit;
     text-decoration: none;

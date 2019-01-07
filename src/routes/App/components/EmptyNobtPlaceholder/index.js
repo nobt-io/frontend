@@ -1,3 +1,3 @@
-import EmptyNobtPlaceholder from "./EmptyNobtPlaceholder";
+import EmptyNobtPlaceholder from './EmptyNobtPlaceholder';
 
-export default EmptyNobtPlaceholder
+export default EmptyNobtPlaceholder;
