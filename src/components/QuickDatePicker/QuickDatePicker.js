@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import DatePicker from 'react-toolbox/lib/date_picker';
 
@@ -21,5 +22,5 @@ export default QuickDatePicker
 
 
 QuickDatePicker.propTypes = {
-  onDatePicked: React.PropTypes.func.isRequired,
+  onDatePicked: PropTypes.func.isRequired,
 };

@@ -1,1 +1,2 @@
-export default from "./Feed";
+import Feed from "./Feed";
+export default Feed;

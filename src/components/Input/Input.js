@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input } from "react-toolbox/lib/input/index";
+import { Input } from "react-toolbox-legacy/lib/input/index";
 import styles from "./Input.scss"
 
 export default ({type, placeholder, ...props}) => {

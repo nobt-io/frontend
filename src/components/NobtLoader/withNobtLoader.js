@@ -8,8 +8,8 @@ import {
 import styles from "./NobtLoader.scss";
 import debug from "debug";
 import AsyncActionStatus from "../../const/AsyncActionStatus";
-import { Snackbar } from "react-toolbox/lib/snackbar/index";
-import { ProgressBar } from "react-toolbox/lib/progress_bar/index";
+import { Snackbar } from "react-toolbox-legacy/lib/snackbar/index";
+import { ProgressBar } from "react-toolbox-legacy/lib/progress_bar/index";
 import UnknownNobt from "./UnknownNobt";
 
 export default function withNobtLoader(WrappedComponent) {

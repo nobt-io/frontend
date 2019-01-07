@@ -1,6 +1,6 @@
 import theme from "./ConfirmationDialog.scss"
 import React from "react";
-import { Dialog } from "react-toolbox/lib/dialog/index";
+import { Dialog } from "react-toolbox-legacy/lib/dialog/index";
 
 export default ({active, title, confirm, cancel, children}) => (<Dialog
   active={active}

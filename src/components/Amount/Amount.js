@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import { FormattedNumber } from "react-intl";
 import { connect } from "react-redux";
@@ -28,12 +29,12 @@ Amount.defaultProps = {
 };
 
 Amount.propTypes = {
-  value: React.PropTypes.number.isRequired,
-  absolute: React.PropTypes.bool,
-  theme: React.PropTypes.shape({
-    root: React.PropTypes.string,
-    positive: React.PropTypes.string,
-    negative: React.PropTypes.string
+  value: PropTypes.number.isRequired,
+  absolute: PropTypes.bool,
+  theme: PropTypes.shape({
+    root: PropTypes.string,
+    positive: PropTypes.string,
+    negative: PropTypes.string
   })
 };
 

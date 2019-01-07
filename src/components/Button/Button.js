@@ -1,6 +1,7 @@
+import PropTypes from 'prop-types';
 import React from "react";
 import styles from "./Button.scss";
-import { Button as RTButton } from "react-toolbox/lib/button";
+import { Button as RTButton } from "react-toolbox-legacy/lib/button";
 
 const Button = (props) => {
 
@@ -19,7 +20,7 @@ const Button = (props) => {
 };
 
 Button.propTypes = {
-  rightIcon: React.PropTypes.bool
+  rightIcon: PropTypes.bool
 };
 
 export default Button

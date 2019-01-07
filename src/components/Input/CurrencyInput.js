@@ -1,14 +1,15 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import Input from "./Input";
 import CurrencyInputValidator from './CurrencyInputValidator';
 
-export const CurrencyInput = React.createClass({
+export class CurrencyInput extends React.Component {
 
   getInitialState() {
     return {inputValue: "", value: 0}
-  },
+  }
 
-  valueChanged: function (displayValue) {
+  valueChanged(displayValue) {
 
     const previousValue = this.state.inputValue;
     if (CurrencyInputValidator.amountsAreEqual(previousValue, displayValue)) {
@@ -22,15 +23,15 @@ export const CurrencyInput = React.createClass({
     } else {
       this.setState({...this.state, inputValue: previousValue});
     }
-  },
+  }
 
-  parseNumber: function (displayValaue) {
+  parseNumber(displayValaue) {
     let number = displayValaue.replace(',', '.');
     let numberIsEmptyOrOnlySeperator = number === "." || number === "";
     return Number(numberIsEmptyOrOnlySeperator ? 0 : number);
-  },
+  }
 
-  render: function () {
+  render() {
 
     // TODO: Duplicating information from props in state is an anti-pattern in react.
     var displayValue =
@@ -47,11 +48,11 @@ export const CurrencyInput = React.createClass({
       onChange={this.valueChanged}
     />)
   }
-});
+};
 
 CurrencyInput.propTypes = {
-  onChange: React.PropTypes.func.isRequired,
-  value: React.PropTypes.number
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.number
 };
 
 export default CurrencyInput;

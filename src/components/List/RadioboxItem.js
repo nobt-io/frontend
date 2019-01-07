@@ -1,8 +1,8 @@
 import * as React from "react";
-import { ListItem as RTListItem } from "react-toolbox/lib/list";
+import { ListItem as RTListItem } from "react-toolbox-legacy/lib/list";
 import styles from "./RadioboxItem.scss"
 import Avatar from "components/Avatar";
-import { RadioButton } from "react-toolbox/lib/radio";
+import { RadioButton } from "react-toolbox-legacy/lib/radio";
 
 export default ({key, name, selected, selectAction, autoFocus}) => (
   <RTListItem caption={name}

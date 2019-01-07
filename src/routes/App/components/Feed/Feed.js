@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ListSubHeader } from "react-toolbox/lib/list/index";
+import { ListSubHeader } from "react-toolbox-legacy/lib/list/index";
 import HOList from "../../../../containers/HOList/HOList";
 import { injectIntl } from "react-intl";
 import { connect } from "react-redux";

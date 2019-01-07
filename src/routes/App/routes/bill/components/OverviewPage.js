@@ -1,5 +1,5 @@
 import React from "react";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import { Main } from "components/Container";
 import { Input, InputLegend, CurrencyInput } from "components/Input/index";
 import LocationBuilder from "../../../modules/navigation/LocationBuilder";

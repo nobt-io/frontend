@@ -1,8 +1,8 @@
 import * as React from "react";
 import Amount from "components/Amount/index";
-import { List, ListItem } from "react-toolbox/lib/list";
+import { List, ListItem } from "react-toolbox-legacy/lib/list";
 import HOList from "../../../../../../../../containers/HOList";
-import { AppBar } from "react-toolbox/lib/app_bar/index";
+import { AppBar } from "react-toolbox-legacy/lib/app_bar/index";
 import Avatar from "components/Avatar/index";
 import { connect } from "react-redux";
 import {
@@ -14,7 +14,7 @@ import {
   makeGetRelatedBills
 } from "../../../../../../modules/currentNobt/selectors";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
+import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import HeadRoom from "react-headroom";
 import InfoMessageListTheme from "./InfoMessageListTheme.scss";
 import AsyncActionStatus from "../../../../../../../../const/AsyncActionStatus";

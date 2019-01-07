@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Input } from "react-toolbox/lib/input";
+import { Input } from "react-toolbox-legacy/lib/input";
 import ContinueButton from "../../../../components/ContinueButton";
 import styles from "./BasicInformationForm.scss";
 import NobtNameInputTheme from "./NobtNameInputTheme.scss";

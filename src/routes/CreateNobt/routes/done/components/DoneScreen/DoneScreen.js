@@ -4,10 +4,10 @@ import { getCreatedNobtId } from "../../../../modules/selectors";
 import { Link } from "react-router";
 import styles from "./DoneScreen.scss";
 import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
-import { IconMenu, MenuItem } from "react-toolbox/lib/menu";
+import { IconMenu, MenuItem } from "react-toolbox-legacy/lib/menu";
 import { CopyToClipboard } from "react-copy-to-clipboard/lib/Component";
-import { IconButton } from "react-toolbox/lib/button";
-import { Snackbar } from "react-toolbox";
+import { IconButton } from "react-toolbox-legacy/lib/button";
+import { Snackbar } from "react-toolbox-legacy";
 
 class DoneScreen extends React.Component {
 
