@@ -1,7 +1,7 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
 import {
   AMOUNT_CHANGED,
-  CLEAR_ADD_BILL_FORM,
+  CLEAR_ADD_BILL_FORM, CLEAR_CONVERSION_INFORMATION,
   DESCRIPTION_CHANGED,
   FOCUS_ID_CHANGED,
   NEW_DEBTEE_SELECTED,
@@ -150,6 +150,11 @@ export const addBillFormReducer = (state = initialState, action) => {
           conversionRate: action.payload.conversionRate
         }
       }
+    }
+    case CLEAR_CONVERSION_INFORMATION: {
+      return {
+        ...state,
+        currencyConversionInformation: null      }
     }
   }
 
