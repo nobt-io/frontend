@@ -51,7 +51,7 @@ export const getConvertedAmount = createSelector([getConversionRate, getAmount],
     return null
   }
 
-  return conversionRate * amount
+  return 1 / conversionRate * amount
 });
 
 export const getPersonValues = createSelector([

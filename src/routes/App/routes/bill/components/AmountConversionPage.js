@@ -13,6 +13,7 @@ import { CurrencyInput } from "../../../../../components/Input";
 import Input from "../../../../../components/Input/Input";
 import CurrencySelect from "../../../../../components/CurrencySelect/CurrencySelect";
 import { getNobtCurrency } from "../../../modules/currentNobt/selectors";
+import getCurrencySymbol from "currency-symbol-map";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 
@@ -25,18 +26,20 @@ const AmountConversionPage = ({amount, onAmountChanged, nobtCurrency, convertedA
 				<SubHeading>Convert to {nobtCurrency} from a foreign currency:</SubHeading>
 				<SectionGroup>
 					<Section>
-						<Caption>Enter amount in foreign currency.</Caption>
-						<CurrencyInput placeholder="13.37" value={amount} onChange={onAmountChanged} currency={(foreignCurrency || {}).value || nobtCurrency} />
+						<Caption>Select the foreign currency</Caption>
+						<CurrencySelect selectedCurreny={foreignCurrency} onCurrencyChanged={onForeignCurrencyChanged} />
+						<Caption>Conversion rate for 1 {nobtCurrency} to {foreignCurrency.value}:</Caption>
+						<Input value={conversionRate} type={"number"} onChange={onConversionRateChanged} />
 					</Section>
 					<Section>
-						<Caption>Which currency is that?</Caption>
-						<CurrencySelect selectedCurreny={foreignCurrency} onCurrencyChanged={onForeignCurrencyChanged}/>
-						<Caption>What is the conversion rate to {nobtCurrency}?</Caption>
-						<Input value={conversionRate} type={"number"} onChange={onConversionRateChanged}/>
+						<Caption>Amount in foreign currency:</Caption>
+						<CurrencyInput placeholder="13.37" value={amount} onChange={onAmountChanged}
+									   currency={(foreignCurrency || {}).value || nobtCurrency} />
 					</Section>
 					<Section>
-						<Caption>Here is your amount in {nobtCurrency}:</Caption>
-						<Input disabled value={convertedAmount} />
+						<Caption>Converted amount:</Caption>
+						<Input icon={<span>{getCurrencySymbol(nobtCurrency)}</span>}
+							   disabled value={convertedAmount} />
 					</Section>
 				</SectionGroup>
 				<Button raised primary onClick={() => goBack(replace)} label="Accept" />

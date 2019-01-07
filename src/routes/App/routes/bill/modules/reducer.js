@@ -169,9 +169,10 @@ export const initialState = {
   amount: 50,
   currencyConversionInformation: {
     foreignCurrency: {
-      value: "AUD"
+      value: "AUD",
+      label: "Australian Dollar"
     },
-    conversionRate: 1.5
+    conversionRate: 1.63
   },
   splitStrategy: SplitStrategyNames.EQUAL,
   personValues: [],
