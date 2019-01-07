@@ -1,6 +1,5 @@
 import React from "react";
 import Amount from "components/Amount";
-import HeadRoom from "react-headroom";
 import { connect } from "react-redux";
 import { makeCanBillBeDeleted, makeGetBill } from "../../../../modules/currentNobt/selectors";
 import { ListItem } from "react-toolbox-legacy/lib/list";
@@ -44,13 +43,11 @@ class BillDetailPage extends React.Component {
 
     return (
       <div>
-        <HeadRoom>
           <AppBar
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
             leftIcon={<FontIcon value="chevron_left" />}
             title={bill.name}
           />
-        </HeadRoom>
         <Page>
           <List>
             <ListSubHeader caption="Debtee" />

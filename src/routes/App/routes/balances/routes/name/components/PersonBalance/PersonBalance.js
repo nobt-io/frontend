@@ -15,7 +15,6 @@ import {
 } from "../../../../../../modules/currentNobt/selectors";
 import LocationBuilder from "../../../../../../modules/navigation/LocationBuilder";
 import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
-import HeadRoom from "react-headroom";
 import InfoMessageListTheme from "./InfoMessageListTheme.scss";
 import AsyncActionStatus from "../../../../../../../../const/AsyncActionStatus";
 import { FormattedMessage } from "react-intl";
@@ -31,14 +30,12 @@ class PersonBalance extends React.Component {
       {this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
         <div>
 
-          <HeadRoom>
             <AppBar
               onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
               leftIcon={<FontIcon value="chevron_left" />}
               rightIcon={<FontIcon />}
               title={`${this.props.balance.me.name}`}
             />
-          </HeadRoom>
 
           <Page>
 

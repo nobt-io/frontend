@@ -9,7 +9,6 @@ import { HOList } from "containers/HOList/HOList";
 import { IconButton } from "react-toolbox-legacy/lib/button";
 import AmountTheme from "../../../../themes/AmountTheme.scss";
 import { AppBar } from "react-toolbox-legacy/lib/app_bar/index";
-import HeadRoom from "react-headroom";
 import { FontIcon } from "react-toolbox-legacy/lib/font_icon/index";
 import { SubTitle, Title } from "components/text/index";
 import { Page } from "components/Container";
@@ -24,14 +23,12 @@ class BalanceOverview extends React.Component {
     return (
       <div>
 
-        <HeadRoom>
           <AppBar
             onLeftIconClick={() => LocationBuilder.fromWindow().pop(1).apply(this.props.replace)}
             leftIcon={<FontIcon value="chevron_left" />}
             rightIcon={<FontIcon />}
             title="Balances"
           />
-        </HeadRoom>
 
         <Page>
           <Title>Balance Overview</Title>
