@@ -14,7 +14,7 @@ const computeClassNames = (props) => classnames({
 
 const Amount = (props) => (
   <span className={computeClassNames(props)}>
-    <FormattedNumber value={valueViewModel(props)} currency={props.currency} style="currency"/>
+	    <FormattedNumber value={valueViewModel(props)} currency={props.currencyOverride || props.currency} style="currency"/>
   </span>
 );
 
@@ -34,7 +34,8 @@ Amount.propTypes = {
     root: PropTypes.string,
     positive: PropTypes.string,
     negative: PropTypes.string
-  })
+  }),
+  currencyOverride: React.PropTypes.string
 };
 
 export default connect(

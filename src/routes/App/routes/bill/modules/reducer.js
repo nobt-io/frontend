@@ -1,13 +1,15 @@
 import SplitStrategyNames from "const/SplitStrategyNames";
 import {
   AMOUNT_CHANGED,
-  CLEAR_ADD_BILL_FORM, CLEAR_CONVERSION_INFORMATION,
+  CLEAR_ADD_BILL_FORM,
+  CLEAR_CONVERSION_INFORMATION,
   DESCRIPTION_CHANGED,
   FOCUS_ID_CHANGED,
   NEW_DEBTEE_SELECTED,
   NEW_MEMBER_ADDED,
   ON_CONVERSION_RATE_CHANGED,
   ON_FOREIGN_CURRENCY_CHANGED,
+  SAVE_CONVERSION_INFORMATION,
   SHARE_VALUE_CHANGED,
   UPDATE_ADD_BILL_STATUS
 } from "./actions";
@@ -121,40 +123,22 @@ export const addBillFormReducer = (state = initialState, action) => {
         addBillStatus: action.payload.status
       }
     }
-    case ON_FOREIGN_CURRENCY_CHANGED: {
-
-      let currentInformation = state.currencyConversionInformation || {
-        foreignCurrency: null,
-        conversionRate: null
-      };
+    case SAVE_CONVERSION_INFORMATION: {
 
       return {
         ...state,
-        currencyConversionInformation: {
+	    amount: parseFloat(action.payload.amount),
+        conversionInformation: {
           foreignCurrency: action.payload.foreignCurrency,
-          conversionRate: currentInformation.conversionRate
-        }
-      }
-    }
-    case ON_CONVERSION_RATE_CHANGED: {
-
-      let currentInformation = state.currencyConversionInformation || {
-        foreignCurrency: null,
-        conversionRate: null
-      };
-
-      return {
-        ...state,
-        currencyConversionInformation: {
-          foreignCurrency: currentInformation.foreignCurrency,
-          conversionRate: action.payload.conversionRate
+          rate: action.payload.rate
         }
       }
     }
     case CLEAR_CONVERSION_INFORMATION: {
       return {
         ...state,
-        currencyConversionInformation: null      }
+        conversionInformation: null
+      }
     }
   }
 
@@ -166,14 +150,8 @@ export const initialState = {
   debtee: null,
   description: "",
   focusId: "",
-  amount: 50,
-  currencyConversionInformation: {
-    foreignCurrency: {
-      value: "AUD",
-      label: "Australian Dollar"
-    },
-    conversionRate: 1.63
-  },
+  amount: 0,
+  conversionInformation: null,
   splitStrategy: SplitStrategyNames.EQUAL,
   personValues: [],
   defaultValues: {

@@ -3,8 +3,7 @@ import AsyncActionStatus from "../../../../../const/AsyncActionStatus";
 
 export const UPDATE_ADD_BILL_STATUS = 'UPDATE_ADD_BILL_STATUS';
 export const NEW_DEBTEE_SELECTED = 'NEW_DEBTEE_SELECTED';
-export const ON_FOREIGN_CURRENCY_CHANGED = 'ON_FOREIGN_CURRENCY_CHANGED';
-export const ON_CONVERSION_RATE_CHANGED = 'ON_CONVERSION_RATE_CHANGED';
+export const SAVE_CONVERSION_INFORMATION = 'SAVE_CONVERSION_INFORMATION';
 export const CLEAR_CONVERSION_INFORMATION = 'CLEAR_CONVERSION_INFORMATION';
 export const NEW_MEMBER_ADDED = 'NEW_MEMBER_ADDED';
 export const FOCUS_ID_CHANGED = 'FOCUS_ID_CHANGED';
@@ -19,8 +18,7 @@ export const focusIdChanged = (focusId) => createAction(FOCUS_ID_CHANGED, {focus
 export const newMemberAdded = (member) => createAction(NEW_MEMBER_ADDED, {member});
 export const newDebteeSelected = (debtee) => createAction(NEW_DEBTEE_SELECTED, {debtee});
 
-export const onForeignCurrencyChanged = (foreignCurrency) => createAction(ON_FOREIGN_CURRENCY_CHANGED, {foreignCurrency});
-export const onConversionRateChanged = (conversionRate) => createAction(ON_CONVERSION_RATE_CHANGED, {conversionRate});
+export const saveConversionInformation = (payload) => createAction(SAVE_CONVERSION_INFORMATION, payload);
 export const clearConversionInformation = () => createAction(CLEAR_CONVERSION_INFORMATION);
 
 export const addBillFailed = (error) => createAction(UPDATE_ADD_BILL_STATUS, {error, status: AsyncActionStatus.FAILED});

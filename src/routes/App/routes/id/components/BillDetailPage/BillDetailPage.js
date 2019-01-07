@@ -74,6 +74,20 @@ class BillDetailPage extends React.Component {
                 }} />}
             />
 
+            { bill.conversionInformation !== null && <ListItem
+                ripple={false}
+                leftActions={[
+                  <FontIcon value={<i className={"fa fa-exchange"}/>}/>
+                ]}
+                key="exchange"
+                caption={<FormattedMessage
+                    id="BillDetailPage.invoiceTotal"
+                    defaultMessage="Converted from {originalAmount}."
+                    values={{
+                      originalAmount: <Amount currencyOverride={bill.conversionInformation.foreignCurrency} value={debtee.amount * bill.conversionInformation.rate} />
+                    }} />}
+            /> }
+
             <ListItem
               key="Date_Created"
               ripple={false}

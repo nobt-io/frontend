@@ -16,7 +16,8 @@ const updateFetchNobtStatusActionPayloadHandler = {
           ...(payload.nobt.debts || [])
         ],
         bills: payload.nobt.expenses,
-        createdOn: payload.nobt.createdOn
+        createdOn: payload.nobt.createdOn,
+        conversionInformation: payload.nobt.conversionInformation
       }
     }
   ),

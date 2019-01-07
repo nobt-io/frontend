@@ -211,13 +211,13 @@ class CurrencyValue extends React.Component {
   );
 }
 
-export default ({ selectedCurreny, onCurrencyChanged }) => (
+export default ({ selectedCurrency, onCurrencyChanged }) => (
   <Select
     options={currencies}
     onChange={onCurrencyChanged}
     optionComponent={CurrencyOption}
     valueComponent={CurrencyValue}
     required
-    value={selectedCurreny}
+    value={selectedCurrency}
   />
 );

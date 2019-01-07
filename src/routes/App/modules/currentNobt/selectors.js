@@ -78,6 +78,7 @@ const deNormalizeBill = (e) => {
       name: debteeName,
       amount: sumOfShares
     },
+    conversionInformation: e.conversionInformation,
     debtors: debtors,
     actions: e._links
   };

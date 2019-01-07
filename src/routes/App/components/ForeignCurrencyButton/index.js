@@ -4,7 +4,7 @@ import ButtonTheme from "./ButtonTheme.scss"
 import withNavigation from "../../../../components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import { connect } from "react-redux";
-import { getConvertedAmount } from "../../routes/bill/modules/selectors";
+import { getConvertedAmount, isForeignCurrencyBill } from "../../routes/bill/modules/selectors";
 import { FontIcon } from "react-toolbox/lib/font_icon";
 import { clearConversionInformation } from "../../routes/bill/modules/actions";
 import { getNobtCurrency } from "../../modules/currentNobt/selectors";
@@ -15,9 +15,8 @@ import List from "../../../../components/List/List";
 
 const goToConversionPage = (push) => () => LocationBuilder.fromWindow().push("convert").apply(push);
 
-const ForeignCurrencyButton = ({push, convertedAmount, clearConversionInformation, nobtCurrency}) => (<div>
-	{!convertedAmount ?
-		<Button theme={ButtonTheme} icon={<i className={"fa fa-exchange"} />} label={"Convert"} raised primary onClick={goToConversionPage(push)} /> :
+const ForeignCurrencyButton = ({push, convertedAmount, clearConversionInformation, nobtCurrency, isForeignCurrencyBill}) => (<div>
+	{isForeignCurrencyBill ?
 		<List>
 			<ListItem
 				theme={ListItemTheme}
@@ -26,16 +25,19 @@ const ForeignCurrencyButton = ({push, convertedAmount, clearConversionInformatio
 				]}
 				caption={convertedAmount}
 				rightActions={[
-					<FontIcon key="clear" value="clear" onClick={() => clearConversionInformation()}/>,
-					<FontIcon key="edit" value="edit" onClick={goToConversionPage(push)}/>
+					<FontIcon key="clear" value="clear" onClick={() => clearConversionInformation()} />,
+					<FontIcon key="edit" value="edit" onClick={goToConversionPage(push)} />
 				]} />
-		</List>}
+		</List> :
+		<Button theme={ButtonTheme} icon={<i className={"fa fa-exchange"} />} label={"Convert"} raised primary onClick={goToConversionPage(push)} />
+	}
 </div>);
 
 export default withNavigation(connect(
 	(state, ownProps) => ({
+		nobtCurrency: getNobtCurrency(state),
 		convertedAmount: getConvertedAmount(state),
-		nobtCurrency: getNobtCurrency(state)
+		isForeignCurrencyBill: isForeignCurrencyBill(state)
 	}),
 	(dispatch) => ({
 		clearConversionInformation: () => dispatch(clearConversionInformation())
