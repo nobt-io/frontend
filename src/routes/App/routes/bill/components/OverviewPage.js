@@ -13,6 +13,7 @@ import { Heading, SubHeading, Caption } from "components/text";
 import { Section, SectionGroup } from "components/Section/index";
 import AsyncActionStatus from "const/AsyncActionStatus";
 import { invalidateNobt } from "../../../modules/currentNobt/actions";
+import ForeignCurrencyButton from "../../../components/ForeignCurrencyButton"
 
 import {
   getAddBillStatus,
@@ -63,6 +64,7 @@ class OverviewPage extends React.Component {
             <Caption>How much did it cost?</Caption>
             <CurrencyInput placeholder="13.37" value={this.props.amount} onChange={this.props.onAmountChanged} />
             <InputLegend error={this.props.isAmountErrorShown}>Enter the total of this bill.</InputLegend>
+            <ForeignCurrencyButton />
           </Section>
           <Section>
             <Caption>Who paid?</Caption>
