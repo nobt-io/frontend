@@ -12,7 +12,7 @@ import Button from "components/Button/index";
 import { CurrencyInput } from "../../../../../components/Input";
 import Input from "../../../../../components/Input/Input";
 import CurrencySelect from "../../../../../components/CurrencySelect/CurrencySelect";
-import { getCurrency } from "../../../modules/currentNobt/selectors";
+import { getNobtCurrency } from "../../../modules/currentNobt/selectors";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 
@@ -26,7 +26,7 @@ const AmountConversionPage = ({amount, onAmountChanged, nobtCurrency, convertedA
 				<SectionGroup>
 					<Section>
 						<Caption>Enter amount in foreign currency.</Caption>
-						<CurrencyInput placeholder="13.37" value={amount} onChange={onAmountChanged} />
+						<CurrencyInput placeholder="13.37" value={amount} onChange={onAmountChanged} currency={(foreignCurrency || {}).value || nobtCurrency} />
 					</Section>
 					<Section>
 						<Caption>Which currency is that?</Caption>
@@ -51,7 +51,7 @@ export default withNavigation(connect(
 		foreignCurrency: getForeignCurrency(state),
 		conversionRate: getConversionRate(state),
 		convertedAmount: getConvertedAmount(state),
-		nobtCurrency: getCurrency(state)
+		nobtCurrency: getNobtCurrency(state)
 	}),
 	(dispatch) => ({
 		onAmountChanged: (amount) => dispatch(amountChanged(amount)),

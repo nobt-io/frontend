@@ -16,10 +16,12 @@ import { invalidateNobt } from "../../../modules/currentNobt/actions";
 import ForeignCurrencyButton from "../../../components/ForeignCurrencyButton"
 
 import {
-  getAddBillStatus,
-  getAmount, getDebtee, getDescription, getShares, getSplitStrategy, isAmountErrorShown, isDebteeErrorShown, isDebtorsSelectionErrorShown,
-  isDescriptionErrorShown, getSharesWithValues, getFocusId
+    getAddBillStatus,
+    getAmount, getDebtee, getDescription, getShares, getSplitStrategy, isAmountErrorShown, isDebteeErrorShown, isDebtorsSelectionErrorShown,
+    isDescriptionErrorShown, getSharesWithValues, getFocusId, getForeignCurrency
 } from "../modules/selectors";
+import { getCurrency } from "../../../../CreateNobt/modules/selectors";
+import { getNobtCurrency } from "../../../modules/currentNobt/selectors";
 
 const createBill = (props) => {
   let billToAdd = {
@@ -62,7 +64,7 @@ class OverviewPage extends React.Component {
           </Section>
           <Section>
             <Caption>How much did it cost?</Caption>
-            <CurrencyInput placeholder="13.37" value={this.props.amount} onChange={this.props.onAmountChanged} />
+            <CurrencyInput placeholder="13.37" value={this.props.amount} onChange={this.props.onAmountChanged} currency={(this.props.foreignCurrency || {}).value || this.props.nobtCurrency} />
             <InputLegend error={this.props.isAmountErrorShown}>Enter the total of this bill.</InputLegend>
             <ForeignCurrencyButton />
           </Section>
@@ -123,7 +125,9 @@ export default withNavigation(connect(
     isAmountErrorShown: isAmountErrorShown(state),
     isDebteeErrorShown: isDebteeErrorShown(state),
     isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state),
-    focusId: getFocusId(state)
+    focusId: getFocusId(state),
+    foreignCurrency: getForeignCurrency(state),
+    nobtCurrency: getNobtCurrency(state)
   }),
   (dispatch) => ({
     onDescriptionChanged: description => dispatch(descriptionChanged(description)),

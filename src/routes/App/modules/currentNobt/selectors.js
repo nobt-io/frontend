@@ -10,7 +10,7 @@ export const getFetchNobtStatus = (state) => state.App.currentNobt.fetchNobtStat
 
 export const getName = createSelector([ getCurrentNobt ], (nobt) => nobt.name);
 export const getMembers = createSelector([ getCurrentNobt ], (nobt) => nobt.participatingPersons);
-export const getCurrency = createSelector([ getCurrentNobt ], (nobt) => nobt.currency);
+export const getNobtCurrency = createSelector([ getCurrentNobt ], (nobt) => nobt.currency);
 export const getBills = createSelector([ getCurrentNobt ], (nobt) => nobt.bills);
 export const getTransactions = createSelector([ getCurrentNobt ], (nobt) => nobt.transactions);
 export const getCreatedOn = createSelector([ getCurrentNobt ], (nobt) => nobt.createdOn);

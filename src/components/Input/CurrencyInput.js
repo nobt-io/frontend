@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react'
 import Input from "./Input";
 import CurrencyInputValidator from './CurrencyInputValidator';
+import getCurrencySymbol from "currency-symbol-map";
 
 export class CurrencyInput extends React.Component {
 
@@ -43,17 +44,19 @@ export class CurrencyInput extends React.Component {
 
 		return (<Input
 			placeholder="0.00"
-			{...this.props}
-			value={displayValue}
-			lang="en-150" // Solves the "numbers with a comma are not valid decimal numbers"-problem: For more see: https://www.ctrl.blog/entry/html5-input-number-localization
-			onChange={this.valueChanged}
-		/>)
-	}
+			icon={<span>{this.props.currency && getCurrencySymbol(this.props.currency)}</span>}
+      {...this.props}
+      value={displayValue}
+      lang="en-150" // Solves the "numbers with a comma are not valid decimal numbers"-problem: For more see: https://www.ctrl.blog/entry/html5-input-number-localization
+      onChange={this.valueChanged}
+    />)
+  }
 }
 
 CurrencyInput.propTypes = {
 	onChange: PropTypes.func.isRequired,
-	value: PropTypes.number
+	value: PropTypes.number,
+  currency: React.PropTypes.string
 };
 
 export default CurrencyInput;

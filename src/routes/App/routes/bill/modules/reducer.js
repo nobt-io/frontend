@@ -94,7 +94,7 @@ export const addBillFormReducer = (state = initialState, action) => {
     case AMOUNT_CHANGED: {
       return {
         ...state,
-        amount: action.payload.amount
+        amount: parseFloat(action.payload.amount)
       }
     }
 
@@ -166,10 +166,12 @@ export const initialState = {
   debtee: null,
   description: "",
   focusId: "",
-  amount: 0,
+  amount: 50,
   currencyConversionInformation: {
-    foreignCurrency: null,
-    conversionRate: null
+    foreignCurrency: {
+      value: "AUD"
+    },
+    conversionRate: 1.5
   },
   splitStrategy: SplitStrategyNames.EQUAL,
   personValues: [],

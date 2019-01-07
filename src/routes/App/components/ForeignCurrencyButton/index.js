@@ -1,23 +1,30 @@
 import * as React from "react";
 import { Button } from "react-toolbox/lib/button/index";
-import Theme from "./theme.scss"
+import ButtonTheme from "./ButtonTheme.scss"
 import withNavigation from "../../../../components/hoc/withNavigation";
 import LocationBuilder from "../../modules/navigation/LocationBuilder";
 import { connect } from "react-redux";
-import { getConvertedAmount, getForeignCurrency } from "../../routes/bill/modules/selectors";
-import { List, SelectorItem } from "../../../../components/List";
+import { getConvertedAmount } from "../../routes/bill/modules/selectors";
 import { FontIcon } from "react-toolbox/lib/font_icon";
-import Amount from "../../../../components/Amount/Amount";
 import { clearConversionInformation } from "../../routes/bill/modules/actions";
+import { getNobtCurrency } from "../../modules/currentNobt/selectors";
+import getCurrencySymbol from "currency-symbol-map";
+import { ListItem } from "react-toolbox/lib/list";
+import ListItemTheme from "./ListItemTheme.scss"
+import List from "../../../../components/List/List";
 
 const goToConversionPage = (push) => () => LocationBuilder.fromWindow().push("convert").apply(push);
 
-const ForeignCurrencyButton = ({push, convertedAmount, clearConversionInformation}) => (<div>
+const ForeignCurrencyButton = ({push, convertedAmount, clearConversionInformation, nobtCurrency}) => (<div>
 	{!convertedAmount ?
-		<Button theme={Theme} icon={<i className={"fa fa-exchange"} />} label={"Convert"} raised primary onClick={goToConversionPage(push)} /> :
+		<Button theme={ButtonTheme} icon={<i className={"fa fa-exchange"} />} label={"Convert"} raised primary onClick={goToConversionPage(push)} /> :
 		<List>
-			<SelectorItem
-				value={<Amount value={convertedAmount} />}
+			<ListItem
+				theme={ListItemTheme}
+				leftIcon={[
+					<span>{getCurrencySymbol(nobtCurrency)}</span>
+				]}
+				caption={convertedAmount}
 				rightActions={[
 					<FontIcon key="clear" value="clear" onClick={() => clearConversionInformation()}/>,
 					<FontIcon key="edit" value="edit" onClick={goToConversionPage(push)}/>
@@ -28,6 +35,7 @@ const ForeignCurrencyButton = ({push, convertedAmount, clearConversionInformatio
 export default withNavigation(connect(
 	(state, ownProps) => ({
 		convertedAmount: getConvertedAmount(state),
+		nobtCurrency: getNobtCurrency(state)
 	}),
 	(dispatch) => ({
 		clearConversionInformation: () => dispatch(clearConversionInformation())

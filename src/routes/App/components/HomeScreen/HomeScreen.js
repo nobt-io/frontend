@@ -10,7 +10,7 @@ import { Button } from "react-toolbox-legacy/lib/button/index";
 import Amount from "../../../../components/Amount/Amount";
 import BrandedAppBar from "../../../../components/BrandedAppBar/index";
 import Feed from "../Feed/Feed";
-import { getCreatedOn, getCurrency, getDeNormalizedBills, getMembers, getName, getTotal, isNobtEmpty } from "../../modules/currentNobt/selectors";
+import { getCreatedOn, getNobtCurrency, getDeNormalizedBills, getMembers, getName, getTotal, isNobtEmpty } from "../../modules/currentNobt/selectors";
 import { connect } from "react-redux";
 import withNavigation from "../../../../components/hoc/withNavigation";
 import { invalidateNobt } from "../../modules/currentNobt/actions";
@@ -69,7 +69,7 @@ class HomeScreen extends React.Component {
 const mapStateToProps = (state) => {
   return {
     name: getName(state),
-    currency: getCurrency(state),
+    currency: getNobtCurrency(state),
     total: getTotal(state),
     members: getMembers(state),
     bills: getDeNormalizedBills(state),
