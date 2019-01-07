@@ -14,6 +14,22 @@ export const getAddBillStatus = createSelector([ getAddBillFormSlice ], state =>
 export const getSplitStrategy = createSelector([ getAddBillFormSlice ], (state) => {
   return state.splitStrategy
 });
+export const getForeignCurrency = createSelector([ getAddBillFormSlice ], (state) => {
+
+  if (!state.currencyConversionInformation) {
+    return null;
+  }
+
+  return state.currencyConversionInformation.foreignCurrency
+});
+export const getConversionRate = createSelector([ getAddBillFormSlice ], (state) => {
+
+  if (!state.currencyConversionInformation) {
+    return null;
+  }
+
+  return state.currencyConversionInformation.conversionRate
+});
 
 export const getBillMembers = createSelector([ getAddBillFormSlice ], (state) => {
   return state.personValues.map(pv => pv.name)
@@ -25,6 +41,18 @@ export const getAllMembers = createSelector([ getBillMembers, getMembers, getDeb
 
 const getDefaultValues = createSelector([ getAddBillFormSlice ], (state) => state.defaultValues);
 const getDefaultValueForSplitStrategy = createSelector([ getSplitStrategy, getDefaultValues ], (splitStrategy, defaultValues) => defaultValues[ splitStrategy ]);
+
+export const getConvertedAmount = createSelector([getConversionRate, getAmount], (conversionRate, amount) => {
+  if (isNaN(conversionRate)) {
+    return null
+  }
+
+  if (isNaN(amount)) {
+    return null
+  }
+
+  return conversionRate * amount
+});
 
 export const getPersonValues = createSelector([
   getAddBillFormSlice,
