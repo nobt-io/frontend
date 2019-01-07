@@ -6,10 +6,11 @@ module.exports = {
     "babel",
     "react",
     "promise",
-    "import"
+    "import",
+    "prettier"
   ],
   extends: [
-    "eslint:recommended"
+    "eslint:recommended", "prettier", "prettier/react"
   ],
   env: {
     "browser": true,
