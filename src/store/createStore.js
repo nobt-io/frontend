@@ -6,8 +6,8 @@ import { crashReporter } from "./crashReporter";
 import { routerMiddleware } from "react-router-redux";
 
 export default (initialState = {}, history) => {
-	const reduxRouterMiddleware = routerMiddleware(history);
-	const middleware = [crashReporter, thunk, reduxRouterMiddleware];
+  const reduxRouterMiddleware = routerMiddleware(history);
+  const middleware = [ crashReporter, thunk, reduxRouterMiddleware ];
 
   if (__DEV__) {
     const logger = createLogger();
@@ -23,8 +23,8 @@ export default (initialState = {}, history) => {
   }
 
   return createStore(
-	  rootReducer,
-	  initialState,
-	  compose(applyMiddleware(...middleware), ...enhancers)
+    rootReducer,
+    initialState,
+    compose(applyMiddleware(...middleware), ...enhancers)
   );
 };
