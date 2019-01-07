@@ -8,7 +8,7 @@ import AddMembersForm from "./routes/members/components/AddMembersForm/AddMember
 import { getCreatedNobtId, getNobtName } from "./modules/selectors";
 import GuardedRoute from "../../utils/RouteExtensions/GuardedRoute";
 
-export default (store) => {
+export default ({getState}) => {
   return (<Route
     path={"/create/"}
     render={() => (
@@ -16,10 +16,10 @@ export default (store) => {
         <Switch>
           <Route exact path={"/create/name"} component={withNavigation(BasicInformationForm)} />
           <GuardedRoute exact path={"/create/members"}
-                        condition={() => getNobtName(store.getState())} fallBackPath={"/create/name"}
+                        condition={() => getNobtName(getState())} fallBackPath={"/create/name"}
                         component={withNavigation(AddMembersForm)} />
           <GuardedRoute exact path={"/create/done"}
-                        condition={() => getCreatedNobtId(store.getState())} fallBackPath={"/create/name"}
+                        condition={() => getCreatedNobtId(getState())} fallBackPath={"/create/name"}
                         component={withNavigation(DoneScreen)} />
           <Redirect from={"/create"} to={"/create/name"} />
         </Switch>
