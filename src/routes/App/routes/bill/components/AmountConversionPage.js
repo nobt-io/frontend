@@ -12,16 +12,17 @@ import Button from "components/Button/index";
 import { CurrencyInput } from "../../../../../components/Input";
 import Input from "../../../../../components/Input/Input";
 import CurrencySelect from "../../../../../components/CurrencySelect/CurrencySelect";
+import { getCurrency } from "../../../modules/currentNobt/selectors";
 
 const goBack = (replace) => LocationBuilder.fromWindow().pop().apply(replace);
 
-const AmountConversionPage = ({amount, onAmountChanged, convertedAmount, foreignCurrency, conversionRate, onForeignCurrencyChanged, onConversionRateChanged, replace}) => {
+const AmountConversionPage = ({amount, onAmountChanged, nobtCurrency, convertedAmount, foreignCurrency, conversionRate, onForeignCurrencyChanged, onConversionRateChanged, replace}) => {
 	return (
 		<div>
 			<BrandedAppBar canGoBack={true} />
 			<Main>
 				<Heading>Convert amount</Heading>
-				<SubHeading>Convert to EUR from a foreign currency.</SubHeading>
+				<SubHeading>Convert to {nobtCurrency} from a foreign currency:</SubHeading>
 				<SectionGroup>
 					<Section>
 						<Caption>Enter amount in foreign currency.</Caption>
@@ -30,11 +31,11 @@ const AmountConversionPage = ({amount, onAmountChanged, convertedAmount, foreign
 					<Section>
 						<Caption>Which currency is that?</Caption>
 						<CurrencySelect selectedCurreny={foreignCurrency} onCurrencyChanged={onForeignCurrencyChanged}/>
-						<Caption>What is the conversion rate to EUR?</Caption>
+						<Caption>What is the conversion rate to {nobtCurrency}?</Caption>
 						<Input value={conversionRate} type={"number"} onChange={onConversionRateChanged}/>
 					</Section>
 					<Section>
-						<Caption>Here is your amount in EUR</Caption>
+						<Caption>Here is your amount in {nobtCurrency}:</Caption>
 						<Input disabled value={convertedAmount} />
 					</Section>
 				</SectionGroup>
@@ -50,7 +51,8 @@ export default withNavigation(connect(
 		amount: getAmount(state),
 		foreignCurrency: getForeignCurrency(state),
 		conversionRate: getConversionRate(state),
-		convertedAmount: getConvertedAmount(state)
+		convertedAmount: getConvertedAmount(state),
+		nobtCurrency: getCurrency(state)
 	}),
 	(dispatch) => ({
 		onAmountChanged: (amount) => dispatch(amountChanged(amount)),
