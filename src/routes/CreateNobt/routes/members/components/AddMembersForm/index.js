@@ -1,3 +1,3 @@
-import AddMembersForm from "./AddMembersForm";
+import AddMembersForm from './AddMembersForm';
 
 export default AddMembersForm;

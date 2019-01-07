@@ -1,17 +1,15 @@
 import PropTypes from 'prop-types';
-import React from "react";
-import classes from "./AppLayout.scss";
+import React from 'react';
+import classes from './AppLayout.scss';
 
-const AppLayout = ({children}) => (
+const AppLayout = ({ children }) => (
   <div className={classes.layout}>
-    <div className={classes.container}>
-      {children}
-    </div>
+    <div className={classes.container}>{children}</div>
   </div>
 );
 
 AppLayout.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
 };
 
-export default AppLayout
+export default AppLayout;

@@ -1,6 +1,6 @@
 .header {
   height: 100%;
-  padding: 0px !important;
+  padding: 0 !important;
 
   overflow-y: hidden;
   background-size: cover;
@@ -96,14 +96,13 @@
     position: fixed !important;
     top: 0 !important;
 
-
     &.affixScroll {
       background-color: $color-primary-dark;
 
-      .logo h1, .navbar ul li a {
+      .logo h1,
+      .navbar ul li a {
         color: white;
       }
-
     }
 
     .logo {
@@ -146,4 +145,3 @@
     }
   }
 }
-

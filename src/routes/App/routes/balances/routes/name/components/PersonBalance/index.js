@@ -1,3 +1,3 @@
-import PersonBalance from "./PersonBalance";
+import PersonBalance from './PersonBalance';
 
-export default PersonBalance
+export default PersonBalance;

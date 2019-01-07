@@ -9,6 +9,7 @@ cache:
 script:
 - yarn run compile
 - yarn run test
+- yarn run prettier
 - yarn run lint
 before_deploy:
 - yarn run deploy

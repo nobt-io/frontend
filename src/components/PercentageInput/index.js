@@ -1,3 +1,3 @@
-import PercentageInput from './PercentageInput'
+import PercentageInput from './PercentageInput';
 
-export default PercentageInput
+export default PercentageInput;

@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
-import React from "react";
-import currencies from "./assets/currencies";
-import Dropdown from "react-toolbox-legacy/lib/dropdown";
+import React from 'react';
+import currencies from './assets/currencies';
+import Dropdown from 'react-toolbox-legacy/lib/dropdown';
 
-const CurrencyPicker = ({onCurrencyChanged, selectedCurrency, dropDownTheme}) => (
+const CurrencyPicker = ({
+  onCurrencyChanged,
+  selectedCurrency,
+  dropDownTheme,
+}) => (
   <Dropdown
     auto
     theme={dropDownTheme}
@@ -20,7 +24,7 @@ CurrencyPicker.propTypes = {
 };
 
 CurrencyPicker.defaultProps = {
-  onCurrencyChanged: (value) => { },
+  onCurrencyChanged: value => {},
   dropDownTheme: {},
 };
 

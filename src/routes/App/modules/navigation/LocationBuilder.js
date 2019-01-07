@@ -1,9 +1,14 @@
-import debug from "debug";
+import debug from 'debug';
 
 if (!String.prototype.endsWith) {
   String.prototype.endsWith = function(searchString, position) {
     var subjectString = this.toString();
-    if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+    if (
+      typeof position !== 'number' ||
+      !isFinite(position) ||
+      Math.floor(position) !== position ||
+      position > subjectString.length
+    ) {
       position = subjectString.length;
     }
     position -= searchString.length;
@@ -13,7 +18,6 @@ if (!String.prototype.endsWith) {
 }
 
 export default class LocationBuilder {
-
   constructor(path, origin) {
     this._path = path;
     this._origin = origin;
@@ -23,7 +27,10 @@ export default class LocationBuilder {
    * @returns {LocationBuilder}
    */
   static fromWindow() {
-    return new LocationBuilder(window.location.pathname, window.location.origin)
+    return new LocationBuilder(
+      window.location.pathname,
+      window.location.origin
+    );
   }
 
   /**
@@ -31,7 +38,7 @@ export default class LocationBuilder {
    * @returns {boolean}
    */
   endsWith(string) {
-    return this._path.endsWith(string)
+    return this._path.endsWith(string);
   }
 
   /**
@@ -39,11 +46,10 @@ export default class LocationBuilder {
    * @returns {LocationBuilder}
    */
   push(part) {
-
     let toAppend = part;
 
-    if (!this.endsWith("/")) {
-      toAppend = "/" + toAppend
+    if (!this.endsWith('/')) {
+      toAppend = '/' + toAppend;
     }
 
     this._path += toAppend;
@@ -56,13 +62,14 @@ export default class LocationBuilder {
    * @returns {LocationBuilder}
    */
   pop(numberOfPathElements = 1) {
-
-    let pathElements = this._path.split("/");
+    let pathElements = this._path.split('/');
     pathElements.splice(-1, numberOfPathElements);
 
-    let newPath = pathElements.join("/");
+    let newPath = pathElements.join('/');
 
-    debug(`Locations:removeParts(${numberOfPathElements})`)(`${this._path} -> ${newPath}`);
+    debug(`Locations:removeParts(${numberOfPathElements})`)(
+      `${this._path} -> ${newPath}`
+    );
 
     this._path = newPath;
 
@@ -73,7 +80,7 @@ export default class LocationBuilder {
    * @param {Function} func
    */
   apply(func) {
-    func(this._path)
+    func(this._path);
   }
 
   get path() {
@@ -81,6 +88,6 @@ export default class LocationBuilder {
   }
 
   get absolutePath() {
-    return this._origin + this.path
+    return this._origin + this.path;
   }
 }

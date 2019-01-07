@@ -1,14 +1,14 @@
 const InputValidator = {
-
   amountsAreEqual: (actualAmount, newAmount) => {
     return actualAmount === newAmount;
   },
 
-  validateInput: (amount) => {
-    const newAmountIsNoValidNumber = (n) => n.match(/^[0-9.,]*$/) == null;
-    const getNumberOfOccurringSeparators = (n) => (n.split(",").length - 1) + (n.split(".").length - 1);
+  validateInput: amount => {
+    const newAmountIsNoValidNumber = n => n.match(/^[0-9.,]*$/) == null;
+    const getNumberOfOccurringSeparators = n =>
+      n.split(',').length - 1 + (n.split('.').length - 1);
 
-    const separatorOnCorrectPosition = (n) => {
+    const separatorOnCorrectPosition = n => {
       const separatorIndex = n.indexOf(',') + n.indexOf('.') + 1;
       const noSeparatorFound = separatorIndex < 0;
 
@@ -28,7 +28,7 @@ const InputValidator = {
     }
 
     return separatorOnCorrectPosition(amount);
-  }
+  },
 };
 
 export default InputValidator;

@@ -23,7 +23,7 @@ $maxFabItems: 5;
 
   // By default, all items are hidden.
   @for $i from 0 to $maxFabItems {
-    @include hideItem($i)
+    @include hideItem($i);
   }
 
   &.expanded {

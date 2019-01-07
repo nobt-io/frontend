@@ -1,2 +1,3 @@
-import BasicInformationForm from "./BasicInformationForm";
+import BasicInformationForm from './BasicInformationForm';
+
 export default BasicInformationForm;

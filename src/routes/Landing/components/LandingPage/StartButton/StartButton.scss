@@ -1,13 +1,14 @@
-a.button{
+a.button {
   border: 1px solid white;
 }
 
-a.activeButton{
+a.activeButton {
   border: 1px solid $color-primary;
   background-color: $color-primary;
 }
 
-a.activeButton, a.button {
+a.activeButton,
+a.button {
   border-radius: 25px;
   color: white;
   display: inline-block;
@@ -17,15 +18,18 @@ a.activeButton, a.button {
   text-transform: uppercase;
   touch-action: manipulation;
   letter-spacing: 2px;
-  text-transform: uppercase;
   transition: background 500ms ease;
 
-  &:hover, &:focus, &:visited, &:link{
+  &:hover,
+  &:focus,
+  &:visited,
+  &:link {
     color: #fff;
     text-decoration: none;
   }
 
-  &:hover, &:focus{
+  &:hover,
+  &:focus {
     background-color: $color-primary;
     border-color: $color-primary;
   }

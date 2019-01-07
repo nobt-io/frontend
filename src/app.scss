@@ -1,4 +1,4 @@
-@import "~normalize.css/normalize.css";
+@import '~normalize.css/normalize.css';
 
 html {
   box-sizing: border-box;
@@ -18,11 +18,13 @@ body,
   box-sizing: inherit;
 }
 
-section, header {
+section,
+header {
   padding: 1rem 0;
 }
 
-ul, ol {
+ul,
+ol {
   margin-bottom: 0 !important;
 }
 

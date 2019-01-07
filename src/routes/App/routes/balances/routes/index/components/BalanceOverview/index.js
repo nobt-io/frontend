@@ -1,3 +1,3 @@
-import BalanceOverview from "./BalanceOverview";
+import BalanceOverview from './BalanceOverview';
 
-export default BalanceOverview
+export default BalanceOverview;

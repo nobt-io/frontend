@@ -1,17 +1,16 @@
-export const crashReporter = store => next => action => {
-
+export const crashReporter = () => next => action => {
   if (!Raven || !Raven.isSetup()) {
     return next(action);
   }
 
-  const {type, ...other} = {...action};
+  const { type, ...other } = { ...action };
 
   Raven.captureBreadcrumb({
-    category: "redux",
+    category: 'redux',
     message: type,
     data: {
-      ...other
-    }
+      ...other,
+    },
   });
 
   next(action);

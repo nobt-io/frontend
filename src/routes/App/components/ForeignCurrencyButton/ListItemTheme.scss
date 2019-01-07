@@ -1,7 +1,7 @@
-@import "~react-toolbox/lib/input/config";
+@import '~react-toolbox/lib/input/config';
 
 .left {
-  [data-react-toolbox="font-icon"] {
+  [data-react-toolbox='font-icon'] {
     color: $input-text-label-color;
   }
 }

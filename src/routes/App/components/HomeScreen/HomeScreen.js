@@ -1,32 +1,43 @@
 import PropTypes from 'prop-types';
-import React from "react";
-import styles from "./HomeScreen.scss";
-import LocationBuilder from "../../modules/navigation/LocationBuilder";
-import EmptyNobtPlaceholder from "../EmptyNobtPlaceholder/index";
-import { FontIcon } from "react-toolbox-legacy/lib/font_icon";
-import NobtFAB from "../NobtFAB";
-import NobtItButtonTheme from "./NobtItButtonTheme.scss";
-import { Button } from "react-toolbox-legacy/lib/button/index";
-import Amount from "../../../../components/Amount/Amount";
-import BrandedAppBar from "../../../../components/BrandedAppBar/index";
-import Feed from "../Feed/Feed";
-import { getCreatedOn, getNobtCurrency, getDeNormalizedBills, getMembers, getName, getTotal, isNobtEmpty } from "../../modules/currentNobt/selectors";
-import { connect } from "react-redux";
-import withNavigation from "../../../../components/hoc/withNavigation";
-import { invalidateNobt } from "../../modules/currentNobt/actions";
+import React from 'react';
+import styles from './HomeScreen.scss';
+import LocationBuilder from '../../modules/navigation/LocationBuilder';
+import EmptyNobtPlaceholder from '../EmptyNobtPlaceholder/index';
+import { FontIcon } from 'react-toolbox-legacy/lib/font_icon';
+import NobtFAB from '../NobtFAB';
+import NobtItButtonTheme from './NobtItButtonTheme.scss';
+import { Button } from 'react-toolbox-legacy/lib/button/index';
+import Amount from '../../../../components/Amount/Amount';
+import BrandedAppBar from '../../../../components/BrandedAppBar/index';
+import Feed from '../Feed/Feed';
+import {
+  getCreatedOn,
+  getDeNormalizedBills,
+  getMembers,
+  getName,
+  getNobtCurrency,
+  getTotal,
+  isNobtEmpty,
+} from '../../modules/currentNobt/selectors';
+import { connect } from 'react-redux';
+import withNavigation from '../../../../components/hoc/withNavigation';
+import { invalidateNobt } from '../../modules/currentNobt/actions';
 
-const GoToBalancesButton = ({push}) => (
+const GoToBalancesButton = ({ push }) => (
   <Button
     label="Show balances"
     primary
     raised
-    onClick={() => LocationBuilder.fromWindow().push("balances").apply(push)}
+    onClick={() =>
+      LocationBuilder.fromWindow()
+        .push('balances')
+        .apply(push)
+    }
     theme={NobtItButtonTheme}
   />
 );
 
 class HomeScreen extends React.Component {
-
   render = () => {
     return (
       <div className={styles.homeScreen}>
@@ -37,21 +48,27 @@ class HomeScreen extends React.Component {
           <div className={styles.nobtMetadata}>
             <ul>
               <li>
-                <div><FontIcon value="payment" /><Amount value={this.props.total} /></div>
+                <div>
+                  <FontIcon value="payment" />
+                  <Amount value={this.props.total} />
+                </div>
               </li>
               <li>
-                <div><FontIcon value="group" />{this.props.members.length}</div>
+                <div>
+                  <FontIcon value="group" />
+                  {this.props.members.length}
+                </div>
               </li>
             </ul>
           </div>
-          {!this.props.isNobtEmpty && <GoToBalancesButton push={this.props.push}/>}
+          {!this.props.isNobtEmpty && (
+            <GoToBalancesButton push={this.props.push} />
+          )}
         </div>
 
-        {
-          this.props.isNobtEmpty ? <EmptyNobtPlaceholder /> : <Feed />
-        }
+        {this.props.isNobtEmpty ? <EmptyNobtPlaceholder /> : <Feed />}
 
-        <NobtFAB hash={this.props.location.hash}/>
+        <NobtFAB hash={this.props.location.hash} />
       </div>
     );
   };
@@ -62,11 +79,11 @@ class HomeScreen extends React.Component {
     members: PropTypes.arrayOf(PropTypes.string).isRequired,
     bills: PropTypes.arrayOf(PropTypes.object).isRequired,
     isNobtEmpty: PropTypes.bool.isRequired,
-    createdOn: PropTypes.string.isRequired
+    createdOn: PropTypes.string.isRequired,
   };
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     name: getName(state),
     currency: getNobtCurrency(state),
@@ -74,14 +91,19 @@ const mapStateToProps = (state) => {
     members: getMembers(state),
     bills: getDeNormalizedBills(state),
     createdOn: getCreatedOn(state),
-    isNobtEmpty: isNobtEmpty(state)
+    isNobtEmpty: isNobtEmpty(state),
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = dispatch => {
   return {
-    invalidateNobtData: () => dispatch(invalidateNobt())
+    invalidateNobtData: () => dispatch(invalidateNobt()),
   };
 };
 
-export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(HomeScreen));
+export default withNavigation(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(HomeScreen)
+);

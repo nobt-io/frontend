@@ -1,3 +1,3 @@
-import BillDetailPage from "./BillDetailPage";
+import BillDetailPage from './BillDetailPage';
 
-export default BillDetailPage
+export default BillDetailPage;

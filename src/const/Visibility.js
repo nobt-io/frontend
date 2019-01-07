@@ -1,4 +1,4 @@
 export default {
   VISIBLE: 'VISIBLE',
-  HIDDEN: 'HIDDEN'
-}
+  HIDDEN: 'HIDDEN',
+};

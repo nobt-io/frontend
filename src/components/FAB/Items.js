@@ -1,7 +1,10 @@
-import * as React from "react"
-import styles from "./Items.scss"
+import * as React from 'react';
+import styles from './Items.scss';
 
-export default ({children, expanded}) =>
+export default ({ children, expanded }) => (
   <div className={styles.items}>
-    {React.Children.map(children, child => React.cloneElement(child, {expanded}))}
-  </div>;
+    {React.Children.map(children, child =>
+      React.cloneElement(child, { expanded })
+    )}
+  </div>
+);

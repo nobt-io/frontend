@@ -1,3 +1,3 @@
-import NobtLoader from "./NobtLoader";
+import NobtLoader from './NobtLoader';
 
-export default NobtLoader
+export default NobtLoader;
