@@ -14,8 +14,8 @@
     "dev": "webpack-dev-server --mode development --hot",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "prettier": "prettier --list-different 'src/**/*'",
-    "prettier:fix": "prettier --write 'src/**/*'",
+    "prettier": "prettier --list-different 'src/**/*.{js, scss, ts, tsx, html}' 'package.json'",
+    "prettier:fix": "prettier --write 'src/**/*.{js, scss, ts, tsx, html}' 'package.json'",
     "test": "jest",
     "deploy": "yarn run clean && webpack --mode production"
   },
