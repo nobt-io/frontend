@@ -1,4 +1,4 @@
-import Client from '../../../api/api';
+import Client from '../../../api';
 import AsyncActionStatus from '../../../const/AsyncActionStatus';
 import { getCurrency, getNobtName, getPersonNames } from './selectors';
 import { fetchNobtSucceeded } from '../../App/modules/currentNobt/actions';

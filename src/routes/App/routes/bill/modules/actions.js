@@ -1,4 +1,4 @@
-import Client from '../../../../../api/api';
+import Client from '../../../../../api';
 import AsyncActionStatus from '../../../../../const/AsyncActionStatus';
 
 export const UPDATE_ADD_BILL_STATUS = 'UPDATE_ADD_BILL_STATUS';

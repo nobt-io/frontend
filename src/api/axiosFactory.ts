@@ -23,12 +23,12 @@ const factory = (location: string) => {
 
   debug('api:factory')(`Running against API-Host: ${entry.url}`);
 
-  var instance = axios.create({
+  const instance = axios.create({
     baseURL: entry.url,
   });
 
   instance.interceptors.request.use(
-    function(config) {
+    config => {
       if (config.method) {
         debug('api:request')(`${config.method.toUpperCase()} ${config.url}`);
       }
@@ -39,7 +39,7 @@ const factory = (location: string) => {
 
       return config;
     },
-    function(error) {
+    error => {
       debug('api:request:error')(error);
 
       return Promise.reject(error);
@@ -47,12 +47,12 @@ const factory = (location: string) => {
   );
 
   instance.interceptors.response.use(
-    function(response) {
+    response => {
       debug('api:response')(response);
 
       return response;
     },
-    function(error) {
+    error => {
       debug('api:response:error')(error);
 
       if (error.response) {

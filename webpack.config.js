@@ -43,7 +43,7 @@ module.exports = (_, argv) => {
         },
         {
           test: /\.(ts|tsx)?$/,
-          use: ['babel-loader','ts-loader'],
+          use: ['babel-loader', 'ts-loader'],
           exclude: /node_modules/,
         },
         {
