@@ -4,15 +4,15 @@ import debug from 'debug';
 const apiBaseURLs = [
   {
     url: 'https://api.nobt.io',
-    active: host => host === 'nobt.io',
+    active: (host: string) => host === 'nobt.io',
   },
   {
     url: 'http://localhost:8080',
-    active: host => host.includes('localhost'),
+    active: (host: string) => host.includes('localhost'),
   },
 ];
 
-const factory = location => {
+const factory = (location: string) => {
   const entry =
     apiBaseURLs.find(e => e.active(location)) ||
     (() => {
@@ -23,13 +23,15 @@ const factory = location => {
 
   debug('api:factory')(`Running against API-Host: ${entry.url}`);
 
-  var instance = axios.create({
+  const instance = axios.create({
     baseURL: entry.url,
   });
 
   instance.interceptors.request.use(
-    function(config) {
-      debug('api:request')(`${config.method.toUpperCase()} ${config.url}`);
+    config => {
+      if (config.method) {
+        debug('api:request')(`${config.method.toUpperCase()} ${config.url}`);
+      }
 
       if (config.data) {
         debug('api:request:data')(config.data);
@@ -37,7 +39,7 @@ const factory = location => {
 
       return config;
     },
-    function(error) {
+    error => {
       debug('api:request:error')(error);
 
       return Promise.reject(error);
@@ -45,12 +47,12 @@ const factory = location => {
   );
 
   instance.interceptors.response.use(
-    function(response) {
+    response => {
       debug('api:response')(response);
 
       return response;
     },
-    function(error) {
+    error => {
       debug('api:response:error')(error);
 
       if (error.response) {

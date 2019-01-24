@@ -1,4 +1,4 @@
-import Client from 'api/api';
+import Client from 'api';
 import AsyncActionStatus from 'const/AsyncActionStatus';
 
 export const UPDATE_FETCH_NOBT_STATUS = 'Nobt.UPDATE_FETCH_NOBT_STATUS';

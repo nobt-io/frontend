@@ -14,20 +14,12 @@ exports[`Feed should render feed correctly 1`] = `
     <li
       className="undefined "
       onClick={[Function]}
-      onMouseDown={undefined}
-      onTouchStart={undefined}
     >
       <span
         className=""
       >
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-            onClick={undefined}
-            onMouseDown={undefined}
-          >
+        <span>
+          <span>
             <span
               className="material-icons"
               data-react-toolbox="font-icon"
@@ -58,19 +50,12 @@ exports[`Feed should render feed correctly 1`] = `
             </span>
           </span>
         </span>
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-            onClick={undefined}
-            onMouseDown={undefined}
-          >
+        <span>
+          <span>
             <button
               className=""
               data-react-toolbox="button"
               disabled={false}
-              href={undefined}
               onMouseDown={[Function]}
               onMouseLeave={[Function]}
               onMouseUp={[Function]}
@@ -91,20 +76,12 @@ exports[`Feed should render feed correctly 1`] = `
     <li
       className="undefined "
       onClick={[Function]}
-      onMouseDown={undefined}
-      onTouchStart={undefined}
     >
       <span
         className=""
       >
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-            onClick={undefined}
-            onMouseDown={undefined}
-          >
+        <span>
+          <span>
             <span
               className="material-icons"
               data-react-toolbox="font-icon"
@@ -135,19 +112,12 @@ exports[`Feed should render feed correctly 1`] = `
             </span>
           </span>
         </span>
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-            onClick={undefined}
-            onMouseDown={undefined}
-          >
+        <span>
+          <span>
             <button
               className=""
               data-react-toolbox="button"
               disabled={false}
-              href={undefined}
               onMouseDown={[Function]}
               onMouseLeave={[Function]}
               onMouseUp={[Function]}
@@ -168,20 +138,12 @@ exports[`Feed should render feed correctly 1`] = `
     <li
       className="undefined "
       onClick={[Function]}
-      onMouseDown={undefined}
-      onTouchStart={undefined}
     >
       <span
         className=""
       >
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-            onClick={undefined}
-            onMouseDown={undefined}
-          >
+        <span>
+          <span>
             <span
               className="material-icons"
               data-react-toolbox="font-icon"
@@ -224,20 +186,12 @@ exports[`Feed should render feed correctly 1`] = `
     <li
       className="undefined "
       onClick={[Function]}
-      onMouseDown={undefined}
-      onTouchStart={undefined}
     >
       <span
         className=""
       >
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-            onClick={undefined}
-            onMouseDown={undefined}
-          >
+        <span>
+          <span>
             <span
               className="material-icons"
               data-react-toolbox="font-icon"
@@ -268,19 +222,12 @@ exports[`Feed should render feed correctly 1`] = `
             </span>
           </span>
         </span>
-        <span
-          className={undefined}
-        >
-          <span
-            className={undefined}
-            onClick={undefined}
-            onMouseDown={undefined}
-          >
+        <span>
+          <span>
             <button
               className=""
               data-react-toolbox="button"
               disabled={false}
-              href={undefined}
               onMouseDown={[Function]}
               onMouseLeave={[Function]}
               onMouseUp={[Function]}

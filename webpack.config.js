@@ -42,6 +42,11 @@ module.exports = (_, argv) => {
           use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
         {
+          test: /\.(ts|tsx)?$/,
+          use: ['babel-loader', 'ts-loader'],
+          exclude: /node_modules/,
+        },
+        {
           test: /\.scss$/,
           use: [
             MiniCssExtractPlugin.loader,
@@ -81,6 +86,7 @@ module.exports = (_, argv) => {
       ],
     },
     resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
       modules: ['./src', './node_modules'],
     },
     output: {
