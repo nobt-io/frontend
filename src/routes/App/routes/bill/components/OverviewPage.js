@@ -44,10 +44,12 @@ const createBill = props => {
     debtee: props.debtee,
     splitStrategy: props.splitStrategy,
     date: new Date(), // TODO: Add DatePicker
-    conversionInformation: {
-      foreignCurrency: props.conversionInformation.foreignCurrency.value,
-      rate: props.conversionInformation.rate,
-    },
+    conversionInformation: props.conversionInformation
+      ? {
+          foreignCurrency: props.conversionInformation.foreignCurrency.value,
+          rate: props.conversionInformation.rate,
+        }
+      : null,
     shares: props.sharesWithValues.map(share => {
       return {
         debtor: share.name,
