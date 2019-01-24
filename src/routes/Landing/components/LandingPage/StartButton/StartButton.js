@@ -7,7 +7,7 @@ const StartButton = props => {
 
   return (
     <a className={className} href="create">
-      Start splitting your bills
+      Get started - Create a Nobt
     </a>
   );
 };
