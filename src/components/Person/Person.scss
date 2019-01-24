@@ -3,7 +3,6 @@
 $nameMargin: 0.8rem;
 
 .Person {
-
   .left {
     .name {
       margin-left: $nameMargin;
@@ -20,11 +19,10 @@ $nameMargin: 0.8rem;
 // layout only css:
 
 .Person {
-
   display: inline-block;
 
-  .left, .right {
-
+  .left,
+  .right {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -37,7 +35,7 @@ $nameMargin: 0.8rem;
     }
 
     .avatar {
-      order: 0
+      order: 0;
     }
   }
 
@@ -47,7 +45,7 @@ $nameMargin: 0.8rem;
     }
 
     .avatar {
-      order: 1
+      order: 1;
     }
   }
 }

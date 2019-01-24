@@ -1,9 +1,9 @@
-import React from "react";
-import BrandedAppBar from "../BrandedAppBar/BrandedAppBar";
-import styles from "./UnknownNobt.scss";
-import { FontIcon } from "react-toolbox/lib/font_icon/index";
+import React from 'react';
+import BrandedAppBar from '../BrandedAppBar/BrandedAppBar';
+import styles from './UnknownNobt.scss';
+import { FontIcon } from 'react-toolbox-legacy/lib/font_icon/index';
 
-export default props => (
+export default () => (
   <div>
     <BrandedAppBar />
 

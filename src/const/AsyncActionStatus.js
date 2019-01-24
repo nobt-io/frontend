@@ -1,5 +1,5 @@
 export default {
   IN_PROGRESS: 'IN_PROGRESS',
   SUCCESSFUL: 'SUCCESSFUL',
-  FAILED: 'FAILED'
+  FAILED: 'FAILED',
 };

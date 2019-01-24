@@ -1,4 +1,4 @@
-import Dialog from "./Dialog";
-import withNavigation from "../hoc/withNavigation";
+import Dialog from './Dialog';
+import withNavigation from '../hoc/withNavigation';
 
-export default withNavigation(Dialog)
+export default withNavigation(Dialog);

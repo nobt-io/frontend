@@ -1,16 +1,23 @@
-import SplitStrategyNames from "const/SplitStrategyNames";
+import SplitStrategyNames from 'const/SplitStrategyNames';
 import {
-  AMOUNT_CHANGED, CLEAR_ADD_BILL_FORM, DESCRIPTION_CHANGED, FOCUS_ID_CHANGED, NEW_DEBTEE_SELECTED, NEW_MEMBER_ADDED,
-  SHARE_VALUE_CHANGED, UPDATE_ADD_BILL_STATUS
-} from "./actions";
+  AMOUNT_CHANGED,
+  CLEAR_ADD_BILL_FORM,
+  CLEAR_CONVERSION_INFORMATION,
+  DESCRIPTION_CHANGED,
+  FOCUS_ID_CHANGED,
+  NEW_DEBTEE_SELECTED,
+  NEW_MEMBER_ADDED,
+  SAVE_CONVERSION_INFORMATION,
+  SHARE_VALUE_CHANGED,
+  UPDATE_ADD_BILL_STATUS,
+} from './actions';
 
 export const addBillFormReducer = (state = initialState, action) => {
-
   function createPersonValue(member) {
     return {
       name: member,
-      value: state.defaultValues[ state.splitStrategy ]
-    }
+      value: state.defaultValues[state.splitStrategy],
+    };
   }
 
   /**
@@ -21,10 +28,8 @@ export const addBillFormReducer = (state = initialState, action) => {
   }
 
   switch (action.type) {
-
     case NEW_MEMBER_ADDED: {
-
-      let {member} = action.payload;
+      let { member } = action.payload;
       let memberNotSet = !member;
 
       if (memberNotSet) {
@@ -33,16 +38,12 @@ export const addBillFormReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        personValues: [
-          ...state.personValues,
-          createPersonValue(member)
-        ]
+        personValues: [...state.personValues, createPersonValue(member)],
       };
     }
 
     case NEW_DEBTEE_SELECTED: {
-
-      let {debtee} = action.payload;
+      let { debtee } = action.payload;
 
       let debteeNotSet = !debtee;
       let debteeNotChanged = debtee === state.debtee;
@@ -55,7 +56,7 @@ export const addBillFormReducer = (state = initialState, action) => {
         // Member is already in the current bill, just update the debtee.
         return {
           ...state,
-          debtee
+          debtee,
         };
       }
 
@@ -63,38 +64,33 @@ export const addBillFormReducer = (state = initialState, action) => {
       return {
         ...state,
         debtee,
-        personValues: [
-          ...state.personValues,
-          createPersonValue(debtee)
-        ]
+        personValues: [...state.personValues, createPersonValue(debtee)],
       };
     }
 
     case SHARE_VALUE_CHANGED: {
-
-      let others = state.personValues.filter(pv => pv.name !== action.payload.name);
+      let others = state.personValues.filter(
+        pv => pv.name !== action.payload.name
+      );
 
       return {
         ...state,
-        personValues: [
-          ...others,
-          action.payload
-        ]
-      }
+        personValues: [...others, action.payload],
+      };
     }
 
     case AMOUNT_CHANGED: {
       return {
         ...state,
-        amount: action.payload.amount
-      }
+        amount: parseFloat(action.payload.amount),
+      };
     }
 
     case DESCRIPTION_CHANGED: {
       return {
         ...state,
-        description: action.payload.description
-      }
+        description: action.payload.description,
+      };
     }
 
     case CLEAR_ADD_BILL_FORM: {
@@ -105,13 +101,29 @@ export const addBillFormReducer = (state = initialState, action) => {
       return {
         ...state,
         focusId: action.payload.focusId,
-      }
+      };
     }
     case UPDATE_ADD_BILL_STATUS: {
       return {
         ...state,
-        addBillStatus: action.payload.status
-      }
+        addBillStatus: action.payload.status,
+      };
+    }
+    case SAVE_CONVERSION_INFORMATION: {
+      return {
+        ...state,
+        amount: parseFloat(action.payload.amount),
+        conversionInformation: {
+          foreignCurrency: action.payload.foreignCurrency,
+          rate: action.payload.rate,
+        },
+      };
+    }
+    case CLEAR_CONVERSION_INFORMATION: {
+      return {
+        ...state,
+        conversionInformation: null,
+      };
     }
   }
 
@@ -121,14 +133,15 @@ export const addBillFormReducer = (state = initialState, action) => {
 export const initialState = {
   addBillStatus: null,
   debtee: null,
-  description: "",
-  focusId: "",
+  description: '',
+  focusId: '',
   amount: 0,
+  conversionInformation: null,
   splitStrategy: SplitStrategyNames.EQUAL,
   personValues: [],
   defaultValues: {
     EQUAL: true,
     PERCENTAGE: 0,
-    UNEQUAL: 0
-  }
+    UNEQUAL: 0,
+  },
 };

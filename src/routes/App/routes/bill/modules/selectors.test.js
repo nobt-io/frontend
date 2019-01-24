@@ -1,45 +1,39 @@
-import { isExistingMemberFactory, getAllMembers, personNameComparator } from "./selectors";
+import { getAllMembers, isExistingMemberFactory } from './selectors';
 
-let mockState = function () {
+let mockState = function() {
   return {
     App: {
       addBillForm: {
         personValues: [
           {
-            name: "Felix",
-            value: 0
-          }
+            name: 'Felix',
+            value: 0,
+          },
         ],
-        debtee: "Matthias"
+        debtee: 'Matthias',
       },
       currentNobt: {
         data: {
-          participatingPersons: [
-            "Thomas",
-            "David"
-          ]
-        }
-      }
-    }
+          participatingPersons: ['Thomas', 'David'],
+        },
+      },
+    },
   };
 };
 
-it("should check for existing members", () => {
-
+it('should check for existing members', () => {
   const isExistingMember = isExistingMemberFactory(mockState());
 
-  expect(isExistingMember("Felix")).toBeTruthy();
-  expect(isExistingMember("Matthias")).toBeTruthy();
-  expect(isExistingMember("Thomas")).toBeTruthy();
-  expect(isExistingMember("David")).toBeTruthy();
+  expect(isExistingMember('Felix')).toBeTruthy();
+  expect(isExistingMember('Matthias')).toBeTruthy();
+  expect(isExistingMember('Thomas')).toBeTruthy();
+  expect(isExistingMember('David')).toBeTruthy();
 
-  expect(isExistingMember("Martin")).toBeFalsy();
-
+  expect(isExistingMember('Martin')).toBeFalsy();
 });
 
-it("should sort members by name", () => {
+it('should sort members by name', () => {
   const allMembers = getAllMembers(mockState());
 
-  expect(allMembers).toEqual([ "David", "Felix", "Matthias", "Thomas" ]);
+  expect(allMembers).toEqual(['David', 'Felix', 'Matthias', 'Thomas']);
 });
-

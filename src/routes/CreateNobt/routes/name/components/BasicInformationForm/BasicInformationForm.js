@@ -1,13 +1,13 @@
-import * as React from "react";
-import { Input } from "react-toolbox/lib/input";
-import ContinueButton from "../../../../components/ContinueButton";
-import styles from "./BasicInformationForm.scss";
-import NobtNameInputTheme from "./NobtNameInputTheme.scss";
-import { connect } from "react-redux";
-import { getCurrency, getNobtName } from "../../../../modules/selectors";
-import { changeNobtName, selectCurrency } from "../../../../modules/actions";
-import LocationBuilder from "../../../../../App/modules/navigation/LocationBuilder";
-import CurrencySelect from "../CurrencySelect/CurrencySelect";
+import * as React from 'react';
+import { Input } from 'react-toolbox-legacy/lib/input';
+import ContinueButton from '../../../../components/ContinueButton';
+import styles from './BasicInformationForm.scss';
+import NobtNameInputTheme from './NobtNameInputTheme.scss';
+import { connect } from 'react-redux';
+import { getCurrency, getNobtName } from '../../../../modules/selectors';
+import { changeNobtName, selectCurrency } from '../../../../modules/actions';
+import LocationBuilder from '../../../../../App/modules/navigation/LocationBuilder';
+import CurrencySelect from '../../../../../../components/CurrencySelect/CurrencySelect';
 
 class BasicInformationForm extends React.Component {
   render = () => (
@@ -35,7 +35,7 @@ class BasicInformationForm extends React.Component {
         <div className={styles.formLine}>
           <label>Choose currency</label>
           <CurrencySelect
-            selectedCurreny={this.props.currency}
+            selectedCurrency={this.props.currency}
             onCurrencyChanged={option =>
               option
                 ? this.props.selectCurrency(option.value)
@@ -58,7 +58,7 @@ class BasicInformationForm extends React.Component {
             onClick={() =>
               LocationBuilder.fromWindow()
                 .pop()
-                .push("members")
+                .push('members')
                 .apply(this.props.push)
             }
           />
@@ -71,10 +71,10 @@ class BasicInformationForm extends React.Component {
 export default connect(
   state => ({
     nobtName: getNobtName(state),
-    currency: getCurrency(state)
+    currency: getCurrency(state),
   }),
   {
     changeNobtName,
-    selectCurrency
+    selectCurrency,
   }
 )(BasicInformationForm);

@@ -1,38 +1,38 @@
-import React from "react";
-import inputTheme from "./AddMemberItemInputTheme.scss";
-import itemTheme from "./AddMemberItemTheme.scss";
-import { connect } from "react-redux";
-import { Input } from "react-toolbox/lib/input/index";
-import { IconButton } from "react-toolbox/lib/button/index";
-import { ListItem as RTListItem } from "react-toolbox/lib/list/index";
-import { isExistingMemberFactory } from "../../routes/App/routes/bill/modules/selectors";
+import PropTypes from 'prop-types';
+import React from 'react';
+import inputTheme from './AddMemberItemInputTheme.scss';
+import itemTheme from './AddMemberItemTheme.scss';
+import { connect } from 'react-redux';
+import { Input } from 'react-toolbox-legacy/lib/input/index';
+import { IconButton } from 'react-toolbox-legacy/lib/button/index';
+import { ListItem as RTListItem } from 'react-toolbox-legacy/lib/list/index';
+import { isExistingMemberFactory } from '../../routes/App/routes/bill/modules/selectors';
 
 class AddMember extends React.Component {
-
   state = {
-    value: ""
+    value: '',
   };
 
-  handleOnInputKeyPress = (event) => {
+  handleOnInputKeyPress = event => {
     let enterKey = 13;
     if (event.charCode === enterKey && !this.isNewMemberInvalid()) {
       this.handleOnButtonClick();
     }
   };
 
-  handleOnInputChange = (value) => {
-    this.setState({value});
+  handleOnInputChange = value => {
+    this.setState({ value });
   };
 
   handleOnButtonClick = () => {
     let value = this.getValue();
 
     this.handleOnNewMember(value);
-    this.handleOnInputChange("");
+    this.handleOnInputChange('');
   };
 
   getValue = () => {
-    let {value} = this.state;
+    let { value } = this.state;
 
     return value.trim();
   };
@@ -42,46 +42,46 @@ class AddMember extends React.Component {
     return this.props.isExistingMember(newMember) || newMember.length === 0;
   };
 
-  handleOnNewMember = (name) => {
+  handleOnNewMember = name => {
     let newMember = name.trim();
     this.props.onNewMember(newMember);
   };
 
   getPlaceholder = () => {
-    return this.props.placeholder || "Someone else?"
+    return this.props.placeholder || 'Someone else?';
   };
 
   render = () => (
     <RTListItem
       ripple={false}
       theme={itemTheme}
-      itemContent={<Input
-        value={this.state.value}
-        autoComplete="off"
-        type='text'
-        placeholder={this.getPlaceholder()}
-        onKeyPress={this.handleOnInputKeyPress}
-        onChange={this.handleOnInputChange}
-        theme={inputTheme}
-      />}
+      itemContent={
+        <Input
+          value={this.state.value}
+          autoComplete="off"
+          type="text"
+          placeholder={this.getPlaceholder()}
+          onKeyPress={this.handleOnInputKeyPress}
+          onChange={this.handleOnInputChange}
+          theme={inputTheme}
+        />
+      }
       rightActions={[
         <IconButton
           key="person_add"
           onClick={this.handleOnButtonClick}
           disabled={this.isNewMemberInvalid()}
           icon="person_add"
-        />
+        />,
       ]}
     />
   );
 
   static propTypes = {
-    onNewMember: React.PropTypes.func.isRequired
-  }
+    onNewMember: PropTypes.func.isRequired,
+  };
 }
 
-export default connect(
-  (state) => ({
-    isExistingMember: isExistingMemberFactory(state)
-  })
-)(AddMember)
+export default connect(state => ({
+  isExistingMember: isExistingMemberFactory(state),
+}))(AddMember);

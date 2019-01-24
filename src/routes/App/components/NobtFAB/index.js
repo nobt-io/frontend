@@ -1,3 +1,3 @@
-import NobtFAB from "./NobtFAB";
+import NobtFAB from './NobtFAB';
 
-export default NobtFAB
+export default NobtFAB;

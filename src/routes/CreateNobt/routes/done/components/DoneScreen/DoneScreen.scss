@@ -1,31 +1,34 @@
-.topContainer{
+.topContainer {
   text-align: center;
   margin: 4rem 0 3rem;
 
-  .checkContainer>i{
+  .checkContainer > i {
     color: $color-primary;
     font-size: 8rem;
   }
 }
 
 .linkSection {
-
   padding-top: 2rem;
 
   .nobtLinkContainer {
     background-color: $color-button-grey;
-    border-radius: .2rem;
+    border-radius: 0.2rem;
     padding: 1rem;
 
-    a, a:visited, a:hover, a:focus, a:active, a:link {
+    a,
+    a:visited,
+    a:hover,
+    a:focus,
+    a:active,
+    a:link {
       font-size: medium;
       color: $color-primary;
       text-decoration: none;
 
-      @media #{$mq-desktop}  {
+      @media #{$mq-desktop} {
         font-size: large;
       }
-
     }
 
     display: flex;
