@@ -12,6 +12,8 @@ import globalCss from './app.scss';
 import theme from './styles/custom-component-themes';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'react-css-themr';
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import muiTheme from './styles/muitheme';
 
 const history = createHistory();
 const initialState = window.___INITIAL_STATE__;
@@ -34,9 +36,11 @@ const MOUNT_NODE = document.getElementById('root');
 ReactDOM.render(
   <IntlProvider locale={navigator.language}>
     <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <Router history={history}>{routes}</Router>
-      </Provider>
+      <MuiThemeProvider theme={muiTheme}>
+        <Provider store={store}>
+          <Router history={history}>{routes}</Router>
+        </Provider>
+      </MuiThemeProvider>
     </ThemeProvider>
   </IntlProvider>,
   MOUNT_NODE
