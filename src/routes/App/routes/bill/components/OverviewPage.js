@@ -4,7 +4,6 @@ import { Main } from 'components/Container';
 import { CurrencyInput, Input, InputLegend } from 'components/Input/index';
 import LocationBuilder from '../../../modules/navigation/LocationBuilder';
 import withNavigation from 'components/hoc/withNavigation';
-import connect from 'react-redux/es/connect/connect';
 import Button from 'components/Button/index';
 import {
   addBill,
@@ -37,6 +36,7 @@ import {
   isDescriptionErrorShown,
 } from '../modules/selectors';
 import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
+import { connect } from "react-redux";
 
 const createBill = props => {
   let billToAdd = {

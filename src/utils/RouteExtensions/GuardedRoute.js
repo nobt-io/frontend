@@ -1,4 +1,4 @@
-import connect from 'react-redux/es/connect/connect';
+import { connect } from "react-redux";
 import { replace } from 'react-router-redux';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
