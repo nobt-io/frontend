@@ -33,12 +33,11 @@ describe('Create a new nobt', function() {
 
   it('should change button from create nobt if user starts typing', function() {
     cy.contains('button', 'Create Nobt')
-      .as('createBtn')
       .should('exist');
 
     cy.get('input').type('Matthias');
 
-    cy.contains('@createBtn').should('not.exist');
+    cy.contains('button', 'Create Nobt').should('not.exist');
     cy.contains('button', 'Matthias')
       .should('exist')
       .click();
@@ -55,10 +54,9 @@ describe('Create a new nobt', function() {
 
   it('should remove person from list', function() {
     cy.contains('li', 'Matthias')
-      .as('matthias')
       .contains('button', 'clear')
       .click();
-    cy.contains('@matthias').should('not.exist');
+    cy.contains('li', 'Matthias').should('not.exist');
   });
 
   it('should create nobt when clicking on button', async function() {
