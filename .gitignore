@@ -67,3 +67,6 @@ fabric.properties
 .idea/markdown-navigator
 .idea/markdown-navigator.xml
 .idea/markdown-exported-files.xml
+
+### Custom
+package-lock.json # We are using yarn, avoid committing package-lock.json
