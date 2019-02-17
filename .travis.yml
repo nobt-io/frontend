@@ -9,6 +9,7 @@ script:
 - yarn run test
 - yarn run prettier
 - yarn run lint
+- yarn run cypress run
 before_deploy:
 - yarn run deploy
 deploy:
