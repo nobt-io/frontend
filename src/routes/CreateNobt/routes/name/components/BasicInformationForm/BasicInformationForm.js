@@ -29,6 +29,7 @@ class BasicInformationForm extends React.Component {
             theme={NobtNameInputTheme}
             value={this.props.nobtName}
             onChange={this.props.changeNobtName}
+            data-cypress="nobt-name-input"
           />
         </div>
 

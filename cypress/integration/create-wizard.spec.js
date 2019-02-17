@@ -10,8 +10,7 @@ describe('Create a new nobt', function() {
   });
 
   it('should complete first page', function() {
-    cy.get('input')
-      .first()
+    cy.get('input[data-cypress=nobt-name-input]')
       .type('Cypress UI Test');
 
     cy.contains('Continue').click();
