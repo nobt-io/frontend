@@ -23,4 +23,5 @@ coverage
 .idea/markdown-exported-files.xml
 
 ### Custom
-package-lock.json # We are using yarn, avoid committing package-lock.json
+# We are using yarn, avoid committing package-lock.json
+package-lock.json
