@@ -4,6 +4,7 @@ cache:
   yarn: true
   directories:
     - node_modules
+    - ~/.cache
 script:
 - yarn run compile
 - cypress/run.sh

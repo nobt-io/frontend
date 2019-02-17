@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -x;
+set -e;
 
 yarn run ws -p 3000 -d dist --spa index.html &
 HTTP_SERVER_PID=$!
