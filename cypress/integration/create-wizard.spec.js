@@ -10,7 +10,7 @@ describe('Create a new nobt', function() {
   });
 
   it('should complete first page', function() {
-    cy.get('input[data-cypress=nobt-name-input]')
+    cy.get('input[data-cy=nobt-name-input]')
       .type('Cypress UI Test');
 
     cy.contains('Continue').click();
@@ -73,7 +73,5 @@ describe('Create a new nobt', function() {
     cy.contains('button', 'Create Nobt').click();
     cy.wait('@createNobt');
     cy.url().should('include', '/create/done');
-
-    // TODO: verify request payload
   });
 });

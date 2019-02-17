@@ -121,6 +121,7 @@ class AmountConversionPage extends Component {
                   this.setState({ rate: parseFloat(newValue) })
                 }
                 error={this.getRateError()}
+                data-cy={'rate-input'}
               />
             </Section>
             <Section>
@@ -133,6 +134,7 @@ class AmountConversionPage extends Component {
                 }
                 currency={this.getForeignCurrencyValue() || nobtCurrency}
                 error={this.getAmountError()}
+                data-cy={'foreign-amount-input'}
               />
             </Section>
             <Section>
@@ -141,6 +143,7 @@ class AmountConversionPage extends Component {
                 icon={<span>{getCurrencySymbol(nobtCurrency)}</span>}
                 disabled
                 value={convertAmount(this.state.amount, this.state.rate)}
+                data-cy={'converted-amount-input'}
               />
             </Section>
           </SectionGroup>

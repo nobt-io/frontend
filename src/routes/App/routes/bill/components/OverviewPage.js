@@ -84,7 +84,7 @@ class OverviewPage extends React.Component {
               placeholder="Trip Snacks, Train Tickets, Beer, ..."
               value={this.props.description}
               onChange={this.props.onDescriptionChanged}
-              name="description"
+              data-cy="description-input"
             />
             <InputLegend error={this.props.isDescriptionErrorShown}>
               Enter a descriptive name for what was paid.
@@ -100,7 +100,7 @@ class OverviewPage extends React.Component {
                 (this.props.foreignCurrency || {}).value ||
                 this.props.nobtCurrency
               }
-              name="amount"
+              data-cy="amount-input"
             />
             <InputLegend error={this.props.isAmountErrorShown}>
               Enter the total of this bill.
