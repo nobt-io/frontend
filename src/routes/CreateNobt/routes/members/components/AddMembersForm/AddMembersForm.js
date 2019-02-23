@@ -52,6 +52,7 @@ class AddMembersForm extends React.Component {
     onClick: addCurrentNameAsPerson,
     disabled: isAddPersonButtonDisabled,
     rightIcon: false,
+    'data-cy': 'add-person-button',
   });
 
   getCreateNobtButtonProps = ({ createNobt, isCreateNobtButtonDisabled }) => ({
@@ -60,6 +61,7 @@ class AddMembersForm extends React.Component {
     onClick: createNobt,
     disabled: isCreateNobtButtonDisabled,
     rightIcon: false,
+    'data-cy': 'create-nobt-button',
   });
 
   handleOnKeyPress = event => {
@@ -93,6 +95,7 @@ class AddMembersForm extends React.Component {
               autoComplete="off"
               type="text"
               icon="person"
+              data-cy={'name-input'}
               placeholder="Name"
               onChange={this.props.updateNameOfPersonToAdd}
               onKeyPress={this.handleOnKeyPress}
@@ -116,6 +119,7 @@ class AddMembersForm extends React.Component {
                     legend={name}
                     rightActions={[
                       <IconButton
+                        data-cy={'remove-person-button'}
                         icon="clear"
                         onClick={() => this.props.removePerson(name)}
                       />,

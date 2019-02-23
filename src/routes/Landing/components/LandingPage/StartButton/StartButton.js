@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './StartButton.scss';
 
-const StartButton = props => {
-  let className = props.active ? styles.activeButton : styles.button;
+const StartButton = ({ active, ...props }) => {
+  let className = active ? styles.activeButton : styles.button;
 
   return (
-    <a className={className} href="create">
+    <a className={className} href="create" {...props}>
       Get started - Create a Nobt
     </a>
   );
