@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('Add bill', function() {
+describe('Add a bill to the nobt', function() {
   beforeEach(function() {
     cy.fixture("empty-nobt-response").as("nobt")
   });

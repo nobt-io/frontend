@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('Empty app homescreen', function() {
+describe('The app homescreen with an empty feed', function() {
   beforeEach(function() {
     cy.fixture("empty-nobt-response").as("nobt");
   });

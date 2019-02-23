@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('App homescreen with feed', function() {
+describe('The app homescreen', function() {
   beforeEach(() => {
     cy.fixture("nobt-with-one-bill").as("nobt")
   });

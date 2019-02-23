@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('Create a new nobt', function() {
+describe('The wizard for creating a new nobt', function() {
   it('should go to wizard from landing page', function() {
     cy.visit('http://localhost:3000');
 
