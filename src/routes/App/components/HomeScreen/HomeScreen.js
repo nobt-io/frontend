@@ -26,6 +26,7 @@ import { invalidateNobt } from '../../modules/currentNobt/actions';
 const GoToBalancesButton = ({ push }) => (
   <Button
     label="Show balances"
+    data-cy={'show-balances-button'}
     primary
     raised
     onClick={() =>

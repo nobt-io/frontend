@@ -25,7 +25,7 @@ describe('The app homescreen', function() {
   });
 
   it('should navigate to balances page', function() {
-    cy.contains('button', 'Show balances').click()
+    cy.get("[data-cy=show-balances-button]").click()
 
     cy.url().should('contain', '/balances');
     cy.go("back")
