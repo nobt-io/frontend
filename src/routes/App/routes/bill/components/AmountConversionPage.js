@@ -175,8 +175,14 @@ class AmountConversionPage extends Component {
                 }
               }}
               label="Accept"
+              data-cy={'accept-button'}
             />
-            <Button raised onClick={() => goBack(replace)} label="Cancel" />
+            <Button
+              raised
+              onClick={() => goBack(replace)}
+              label="Cancel"
+              data-cy={'cancel-button'}
+            />
           </div>
         </Main>
       </div>

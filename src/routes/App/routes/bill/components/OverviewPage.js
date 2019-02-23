@@ -114,6 +114,7 @@ class OverviewPage extends React.Component {
                 focus={this.props.focusId === 'debtee'}
                 leftIcon="person"
                 placeholder="Select a Debtee"
+                data-cy={'select-debtee'}
                 value={
                   this.props.debtee !== null
                     ? this.props.debtee + ' paid the bill'
@@ -138,6 +139,7 @@ class OverviewPage extends React.Component {
               <SelectorItem
                 focus={this.props.focusId === 'debtor'}
                 leftIcon="group"
+                data-cy={'select-debtors'}
                 placeholder="Nobody is involved"
                 value={
                   this.props.sharesWithValues.length === 0
