@@ -14,7 +14,7 @@ describe('Details of a bill in foreign currency', function() {
       delay: 500,
       response: '@nobt',
     });
-    cy.visit('http://localhost:3000/' + this.nobt.id + "/1")
+    cy.visit(this.nobt.id + "/1")
   });
 
   it('should show the correct debtee', function() {

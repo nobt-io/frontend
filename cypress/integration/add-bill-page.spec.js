@@ -14,7 +14,7 @@ describe('Add a bill to the nobt', function() {
       delay: 500,
       response: '@nobt',
     });
-    cy.visit('http://localhost:3000/' + this.nobt.id + "/bill")
+    cy.visit(this.nobt.id + "/bill")
   });
 
   it('should set bill description', function() {

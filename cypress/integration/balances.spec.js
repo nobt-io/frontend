@@ -14,7 +14,7 @@ describe('The balances page', function() {
       delay: 500,
       response: 'fixture:nobt-with-one-bill',
     });
-    cy.visit('http://localhost:3000/' + this.nobt.id + "/balances")
+    cy.visit(this.nobt.id + "/balances")
   });
 
   it('should show correct balances', function() {

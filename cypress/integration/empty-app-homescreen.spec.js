@@ -14,7 +14,7 @@ describe('The app homescreen with an empty feed', function() {
       delay: 500,
       response: '@nobt',
     });
-    cy.visit('http://localhost:3000/' + this.nobt.id)
+    cy.visit(this.nobt.id)
   });
 
   it('should show empty overview screen', function() {
