@@ -19,22 +19,22 @@ describe('The app homescreen with an empty feed', function() {
 
   it('should show empty overview screen', function() {
     cy.contains('No bills found.').should('exist');
-    cy.contains('Show balances').should('not.exist');
+    cy.get('[data-cy=show-balances-button]').should('not.exist');
   });
 
   it('should have a menu to create new items', function() {
-    cy.contains('button', 'add').click();
-    cy.contains('button', 'payment')
+    cy.get("[data-cy=toggle-menu-button]").click({force: true});
+    cy.get("[data-cy=add-payment-button]")
       .should('exist')
       .should('be.disabled');
 
-    cy.contains('button', 'receipt')
+    cy.get("[data-cy=add-bill-button]")
       .should('exist')
       .should('be.enabled');
   });
 
   it('should navigate to bill wizard', function() {
-    cy.contains('button', 'receipt').click();
+    cy.get("[data-cy=add-bill-button]").click();
     cy.url().should('include', '/bill');
     cy.go("back")
   });
