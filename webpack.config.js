@@ -4,7 +4,6 @@ const DefinePlugin = require('webpack').DefinePlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WebpackBar = require('webpackbar');
 
 module.exports = (_, argv) => {
   const isProduction = argv.mode === 'production';
@@ -95,7 +94,6 @@ module.exports = (_, argv) => {
       filename: 'bundle.js',
     },
     plugins: [
-      new WebpackBar(),
       new HtmlWebpackPlugin({
         template: 'src/index.template.ejs',
       }),
