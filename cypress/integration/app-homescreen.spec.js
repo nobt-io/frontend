@@ -6,6 +6,10 @@ describe('The app homescreen', function() {
   });
 
   it('should navigate to homescreen', function() {
+
+    // Need to fix date otherwise would show different timestamps for the feed item
+    cy.clock(new Date(2019, 1, 5));
+
     cy.server();
     cy.route({
       method: 'GET',
@@ -15,6 +19,8 @@ describe('The app homescreen', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id)
+    cy.url().should("contain", "/")
+    cy.percySnapshot("Feed")
   });
 
   it('should navigate to bill detail page', function() {

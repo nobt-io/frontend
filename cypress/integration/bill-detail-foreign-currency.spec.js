@@ -15,6 +15,8 @@ describe('Details of a bill in foreign currency', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id + "/1")
+    cy.url().should("contain", "/1")
+    cy.percySnapshot("Details of bill with foreign currency")
   });
 
   it('should show the correct debtee', function() {

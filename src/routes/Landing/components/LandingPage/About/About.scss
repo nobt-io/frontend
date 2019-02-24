@@ -46,3 +46,9 @@
     }
   }
 }
+
+.rotatingText {
+  @media only percy {
+    visibility: hidden;
+  }
+}

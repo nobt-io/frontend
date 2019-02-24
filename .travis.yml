@@ -7,7 +7,7 @@ cache:
     - ~/.cache
 script:
 - yarn run compile
-- cypress/run.sh
+- node_modules/.bin/percy exec -- cypress/run.sh
 - yarn run test
 - yarn run prettier
 - yarn run lint

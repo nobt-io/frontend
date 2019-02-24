@@ -15,6 +15,8 @@ describe('The app homescreen with an empty feed', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id)
+    cy.url().should("contain", "/")
+    cy.percySnapshot("Empty feed")
   });
 
   it('should show empty overview screen', function() {
@@ -31,6 +33,8 @@ describe('The app homescreen with an empty feed', function() {
     cy.get("[data-cy=add-bill-button]")
       .should('exist')
       .should('be.enabled');
+
+    cy.percySnapshot("Add menu");
   });
 
   it('should navigate to bill wizard', function() {

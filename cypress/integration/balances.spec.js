@@ -15,6 +15,8 @@ describe('The balances page', function() {
       response: 'fixture:nobt-with-one-bill',
     });
     cy.visit(this.nobt.id + "/balances")
+      cy.url().should("contain", "/balances")
+    cy.percySnapshot("Balances page")
   });
 
   it('should show correct balances', function() {

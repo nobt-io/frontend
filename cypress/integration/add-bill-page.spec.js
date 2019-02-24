@@ -15,6 +15,8 @@ describe('Add a bill to the nobt', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id + "/bill")
+    cy.url().should("contain", "/bill")
+    cy.percySnapshot("Empty Add-Bill page")
   });
 
   it('should set bill description', function() {
@@ -28,6 +30,7 @@ describe('Add a bill to the nobt', function() {
   it('should open currency conversion page if button is clicked', function() {
     cy.get("[data-cy=change-currency-button]" ).click()
     cy.url().should("contain", "/convert")
+    cy.percySnapshot("Currency conversion page");
   });
 
   it('should autofill amount in currency conversion page', function() {
@@ -61,6 +64,8 @@ describe('Add a bill to the nobt', function() {
     cy.get("[data-cy=select-debtee]").click();
     cy.url().should('include', '/bill/debtee');
 
+    cy.percySnapshot("Debtee selection page");
+
     cy.contains('li', 'David').click();
     cy.contains('button', 'Back').click();
 
@@ -70,6 +75,7 @@ describe('Add a bill to the nobt', function() {
   it('should navigate to debtor selection', function() {
     cy.get("[data-cy=select-debtors]").click()
     cy.url().should("contain", "/debtors")
+    cy.percySnapshot("Debtor selection page");
     cy.go("back")
   });
 
