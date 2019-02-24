@@ -9,6 +9,10 @@
 
   .examples {
     padding: 5px 0 30px;
+
+    @media only percy {
+      visibility: hidden;
+    }
   }
 
   .Steps {
@@ -47,8 +51,3 @@
   }
 }
 
-.rotatingText {
-  @media only percy {
-    visibility: hidden;
-  }
-}
