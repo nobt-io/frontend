@@ -32,6 +32,7 @@ export default class About extends React.Component {
               Try it for your{' '}
               <b>
                 <RotatingText
+                  className={styles.rotatingText}
                   cursor={false}
                   deletingInterval={25}
                   items={[
