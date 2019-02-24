@@ -64,8 +64,7 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.0",
     "reselect": "^2.5.4",
-    "reselect-change-memoize": "^1.1.0",
-    "yargs": "^6.0.0"
+    "reselect-change-memoize": "^1.1.0"
   },
   "devDependencies": {
     "@percy/cypress": "^1.0.2",
