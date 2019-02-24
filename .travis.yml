@@ -6,13 +6,12 @@ cache:
     - node_modules
     - ~/.cache
 script:
-- yarn run compile
-- node_modules/.bin/percy exec -- cypress/run.sh
-- yarn run test
 - yarn run prettier
 - yarn run lint
-before_deploy:
-- yarn run deploy
+- yarn run test
+- yarn run build
+- node_modules/.bin/percy exec -- cypress/run.sh
+before_deploy: yarn run build:prod
 deploy:
 - provider: pages
   skip-cleanup: true
@@ -23,12 +22,7 @@ deploy:
   on:
     branch: master
     repo: nobt-io/frontend
-- provider: script
-  skip_cleanup: true
-  script: ".sentry/upload-sourcemaps"
-  on:
-    branch: master
-    repo: nobt-io/frontend
+after_deploy: .sentry/upload-sourcemaps
 notifications:
   email:
     on_success: never

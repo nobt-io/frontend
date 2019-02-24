@@ -1,5 +1,5 @@
 {
-  "name": "Frontend",
+  "name": "frontend",
   "version": "0.0.1",
   "description": "Frontend for nobt.io",
   "private": true,
@@ -10,12 +10,12 @@
   "scripts": {
     "api": "cd ../api; PORT=8080 MIGRATE_DATABASE_AT_STARTUP=false USE_IN_MEMORY_DATABASE=true ./gradlew run",
     "clean": "rimraf dist",
-    "compile": "webpack --mode development",
     "dev": "webpack-dev-server --mode development --hot",
+    "build": "webpack --mode development",
+    "build:prod": "yarn run clean && webpack --mode production",
     "lint": "eslint src && tslint -c tslint.json 'src/**/*.ts' 'src/**/*.tsx'",
     "prettier": "prettier --check 'src/**/*.{js, scss, ts, tsx, html}' 'package.json'",
-    "test": "jest",
-    "deploy": "yarn run clean && webpack --mode production"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
