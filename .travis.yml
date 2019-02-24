@@ -26,12 +26,16 @@ jobs:
 
     - stage: "Tests"
       name: "UI Tests with percy snapshots"
-      script: node_modules/.bin/percy exec -- cypress/run.sh
+      script:
+        - yarn run build
+        - node_modules/.bin/percy exec -- cypress/run.sh
       if: branch = master OR type = pull_request
 
     - stage: "Tests"
       name: "UI Tests without percy snapshots"
-      script: cypress/run.sh
+      script:
+        - yarn run build
+        - cypress/run.sh
       if: branch != master
 
     - stage: deploy
