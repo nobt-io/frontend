@@ -9,16 +9,10 @@ cache:
 jobs:
   include:
     - stage: "Tests"
-      name: "Formatting"
-      script: yarn run prettier
-
-    - stage: "Tests"
-      name: "Lint"
-      script: yarn run lint
-
-    - stage: "Tests"
-      name: "Unit Tests"
-      script: yarn run test
+      script:
+        - yarn run prettier
+        - yarn run lint
+        - yarn run test
 
       # The next two stages are mutually exclusive through their `if` condition.
       # tl;dr This saves us from wasting snapshots on percy.io.
@@ -33,7 +27,7 @@ jobs:
     - stage: "Tests"
       name: "UI Tests with percy snapshots"
       script: node_modules/.bin/percy exec -- cypress/run.sh
-      if: (branch = master) OR (type = pull_request)
+      if: branch = master OR type = pull_request
 
     - stage: "Tests"
       name: "UI Tests without percy snapshots"
@@ -50,10 +44,8 @@ jobs:
           keep-history: true
           local-dir: dist
           fqdn: nobt.io
-          on:
-            branch: master
-            repo: nobt-io/frontend
       after_deploy: .sentry/upload-sourcemaps
+      if: branch = master AND repo = nobt-io/frontend
 
 notifications:
   email:
