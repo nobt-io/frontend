@@ -5,24 +5,53 @@ cache:
   directories:
     - node_modules
     - ~/.cache
-script:
-- yarn run prettier
-- yarn run lint
-- yarn run test
-- yarn run build
-- node_modules/.bin/percy exec -- cypress/run.sh
-before_deploy: yarn run build:prod
-deploy:
-- provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: dist
-  fqdn: nobt.io
-  on:
-    branch: master
-    repo: nobt-io/frontend
-after_deploy: .sentry/upload-sourcemaps
+
+jobs:
+  include:
+    - stage: test
+      name: "Unit tests and static analysis"
+      script:
+        - yarn run prettier
+        - yarn run lint
+        - yarn run test
+
+      # The next two stages are mutually exclusive through their `if` condition.
+      # tl;dr This saves us from wasting snapshots on percy.io.
+
+      # We have branch builds and pull-request builds activated in travis.
+      # This means for each PR, travis runs two twice: one for the pushed branch and once for the pull request.
+      # However, we don't need to capture the snapshot twice, that would just waste snapshots.
+      # The tricky thing is, we cannot just disable branch builds because this would disable our continuous deployment to GitHub pages.
+      # That is why for ordinary branches, we just run the UI-tests and for poll-requests and master branch, we capture the snapshots
+      # so that we can use percy for visual review.
+
+    - stage: test
+      name: "UI Tests with percy snapshots"
+      script:
+        - yarn run build
+        - node_modules/.bin/percy exec -- cypress/run.sh
+      if: branch = master OR type = pull_request
+
+    - stage: test
+      name: "UI Tests without percy snapshots"
+      script:
+        - yarn run build
+        - cypress/run.sh
+      if: branch != master
+
+    - stage: deploy
+      name: "Deployment to Github Pages"
+      before_deploy: yarn run build:prod
+      deploy:
+        - provider: pages
+          skip-cleanup: true
+          github-token: $GITHUB_TOKEN
+          keep-history: true
+          local-dir: dist
+          fqdn: nobt.io
+      after_deploy: .sentry/upload-sourcemaps
+      if: branch = master AND repo = nobt-io/frontend AND type != pull_request
+
 notifications:
   email:
     on_success: never
