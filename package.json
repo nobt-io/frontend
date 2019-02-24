@@ -22,7 +22,7 @@
     "url": "git@github.com:nobt-io/frontend.git"
   },
   "dependencies": {
-    "@material-ui/core": "^3.8.2",
+    "@material-ui/core": "^3.9.2",
     "@types/debug": "^0.0.31",
     "@types/jest": "^23.3.12",
     "@types/react": "^16.8.3",

@@ -133,10 +133,10 @@
   dependencies:
     vary "^1.1.2"
 
-"@material-ui/core@^3.8.2":
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.8.2.tgz#24d78fb6093f5435c25a7cb76f17a6289215d805"
-  integrity sha512-OLPZqA0oeu1ritKxwDl6vfuVu+pxmcyF0C9iulvy41O9OJzjgFi89c8i8XOoJYcxW3HyuOvl+HGB4YX0sr2QZw==
+"@material-ui/core@^3.9.2":
+  version "3.9.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.9.2.tgz#41ed1a470e981d199829eb5d9317a671c66a6f7d"
+  integrity sha512-aukR3mSH3g115St2OnqoeMRtmxzxxx+Mch7pFKRV3Tz3URExBlZwOolimjxKZpG4LGec8HlhREawafLsDzjVWQ==
   dependencies:
     "@babel/runtime" "^7.2.0"
     "@material-ui/system" "^3.0.0-alpha.0"
@@ -158,7 +158,6 @@
     jss-nested "^6.0.1"
     jss-props-sort "^6.0.0"
     jss-vendor-prefixer "^7.0.0"
-    keycode "^2.1.9"
     normalize-scroll-left "^0.1.2"
     popper.js "^1.14.1"
     prop-types "^15.6.0"
@@ -6412,7 +6411,7 @@ kew@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/kew/-/kew-0.7.0.tgz#79d93d2d33363d6fdd2970b335d9141ad591d79b"
 
-keycode@^2.1.2, keycode@^2.1.9:
+keycode@^2.1.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
 
@@ -9154,15 +9153,7 @@ react-transition-group@1.x, react-transition-group@^1.2.0, react-transition-grou
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react-transition-group@^2.2.0:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.3.1.tgz#31d611b33e143a5e0f2d94c348e026a0f3b474b6"
-  dependencies:
-    dom-helpers "^3.3.1"
-    loose-envify "^1.3.1"
-    prop-types "^15.6.1"
-
-react-transition-group@^2.2.1:
+react-transition-group@^2.2.0, react-transition-group@^2.2.1:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.2.tgz#9457166a9ba6ce697a3e1b076b3c049b9fb2c408"
   integrity sha512-vwHP++S+f6KL7rg8V1mfs62+MBKtbMeZDR8KiNmD7v98Gs3UPGsDZDahPJH2PVprFW5YHJfh6cbNim3zPndaSQ==
