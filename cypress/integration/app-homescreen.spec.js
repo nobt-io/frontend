@@ -15,6 +15,8 @@ describe('The app homescreen', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id)
+    cy.url().should("contain", "/")
+    cy.percySnapshot("Feed")
   });
 
   it('should navigate to bill detail page', function() {

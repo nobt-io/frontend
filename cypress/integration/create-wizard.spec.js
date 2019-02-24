@@ -2,11 +2,12 @@
 
 describe('The wizard for creating a new nobt', function() {
   it('should go to wizard from landing page', function() {
-    cy.visit('http://localhost:3000');
+    cy.visit('http://localhost:3000').then(() => cy.percySnapshot("Landing page"));
 
     cy.get("[data-cy=start-button]").click();
 
     cy.url().should('include', '/create/name');
+    cy.percySnapshot("Create-nobt wizard - page 1");
   });
 
   it('should complete first page', function() {
@@ -15,9 +16,10 @@ describe('The wizard for creating a new nobt', function() {
 
     cy.get("[data-cy=continue-button]").click();
 
-    // TODO: Test different languages here
+    // TODO: Test different currencies here
 
     cy.url().should('include', '/create/members');
+    cy.percySnapshot("Create-nobt wizard - page 2");
   });
 
   it('should add member with enter key', function() {
@@ -73,5 +75,7 @@ describe('The wizard for creating a new nobt', function() {
     cy.get('[data-cy=create-nobt-button]').click();
     cy.wait('@createNobt');
     cy.url().should('include', '/create/done');
+
+    cy.percySnapshot("Create-nobt wizard - page 3");
   });
 });
