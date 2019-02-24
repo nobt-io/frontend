@@ -15,7 +15,9 @@ describe('The app homescreen with an empty feed', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id)
-    cy.url().should("contain", "/")
+
+    // Waits for the page to actually render
+    cy.contains("Cypress UI Test").should("exist")
     cy.percySnapshot("Empty feed")
   });
 

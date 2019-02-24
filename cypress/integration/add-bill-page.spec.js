@@ -15,7 +15,9 @@ describe('Add a bill to the nobt', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id + "/bill")
-    cy.url().should("contain", "/bill")
+
+    // Waits for the page to actually render
+    cy.contains("Add a bill").should("exist")
     cy.percySnapshot("Empty Add-Bill page")
   });
 

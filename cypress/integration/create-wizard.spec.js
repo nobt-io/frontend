@@ -76,6 +76,7 @@ describe('The wizard for creating a new nobt', function() {
     cy.wait('@createNobt');
     cy.url().should('include', '/create/done');
 
+
     cy.percySnapshot("Create-nobt wizard - page 3");
   });
 });

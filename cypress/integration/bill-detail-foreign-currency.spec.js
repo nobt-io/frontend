@@ -15,7 +15,9 @@ describe('Details of a bill in foreign currency', function() {
       response: '@nobt',
     });
     cy.visit(this.nobt.id + "/1")
-    cy.url().should("contain", "/1")
+
+    // Waits for the page to actually render
+    cy.contains("My first bill").should("exist")
     cy.percySnapshot("Details of bill with foreign currency")
   });
 
