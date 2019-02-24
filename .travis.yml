@@ -8,7 +8,8 @@ cache:
 
 jobs:
   include:
-    - stage: "Tests"
+    - stage: test
+      name: "Unit tests and static analysis"
       script:
         - yarn run prettier
         - yarn run lint
@@ -24,14 +25,14 @@ jobs:
       # That is why for ordinary branches, we just run the UI-tests and for poll-requests and master branch, we capture the snapshots
       # so that we can use percy for visual review.
 
-    - stage: "Tests"
+    - stage: test
       name: "UI Tests with percy snapshots"
       script:
         - yarn run build
         - node_modules/.bin/percy exec -- cypress/run.sh
       if: branch = master OR type = pull_request
 
-    - stage: "Tests"
+    - stage: test
       name: "UI Tests without percy snapshots"
       script:
         - yarn run build
@@ -39,7 +40,7 @@ jobs:
       if: branch != master
 
     - stage: deploy
-      name: "Deploy to Github Pages"
+      name: "Deployment to Github Pages"
       before_deploy: yarn run build:prod
       deploy:
         - provider: pages
@@ -49,7 +50,7 @@ jobs:
           local-dir: dist
           fqdn: nobt.io
       after_deploy: .sentry/upload-sourcemaps
-      if: branch = master AND repo = nobt-io/frontend
+      if: branch = master AND repo = nobt-io/frontend AND type != pull_request
 
 notifications:
   email:
