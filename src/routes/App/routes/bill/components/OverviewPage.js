@@ -84,6 +84,7 @@ class OverviewPage extends React.Component {
               placeholder="Trip Snacks, Train Tickets, Beer, ..."
               value={this.props.description}
               onChange={this.props.onDescriptionChanged}
+              data-cy="description-input"
             />
             <InputLegend error={this.props.isDescriptionErrorShown}>
               Enter a descriptive name for what was paid.
@@ -99,6 +100,7 @@ class OverviewPage extends React.Component {
                 (this.props.foreignCurrency || {}).value ||
                 this.props.nobtCurrency
               }
+              data-cy="amount-input"
             />
             <InputLegend error={this.props.isAmountErrorShown}>
               Enter the total of this bill.
@@ -112,6 +114,7 @@ class OverviewPage extends React.Component {
                 focus={this.props.focusId === 'debtee'}
                 leftIcon="person"
                 placeholder="Select a Debtee"
+                data-cy={'select-debtee'}
                 value={
                   this.props.debtee !== null
                     ? this.props.debtee + ' paid the bill'
@@ -136,6 +139,7 @@ class OverviewPage extends React.Component {
               <SelectorItem
                 focus={this.props.focusId === 'debtor'}
                 leftIcon="group"
+                data-cy={'select-debtors'}
                 placeholder="Nobody is involved"
                 value={
                   this.props.sharesWithValues.length === 0
@@ -161,7 +165,7 @@ class OverviewPage extends React.Component {
           raised
           primary
           onClick={() => createBill(this.props)}
-          label="Add Bill"
+          label="add bill"
           icon="check_circle"
         />
       </Main>

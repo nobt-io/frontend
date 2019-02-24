@@ -28,6 +28,7 @@ class SelectorItem extends React.Component {
         className={styles.link}
         href="javascript:void(0);"
         ref={setRef}
+        data-cy={this.props['data-cy']}
         onClick={onClick}
       >
         <RTListItem

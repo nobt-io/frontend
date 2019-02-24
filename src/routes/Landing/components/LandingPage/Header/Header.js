@@ -70,7 +70,7 @@ export default class Header extends React.Component {
               <div>
                 <h1>split your bills</h1>
                 <h1 className={styles.handwritten}>with ease</h1>
-                <StartButton />
+                <StartButton data-cy="start-button" />
               </div>
             </div>
           </Col>

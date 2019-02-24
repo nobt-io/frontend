@@ -29,6 +29,7 @@ class BasicInformationForm extends React.Component {
             theme={NobtNameInputTheme}
             value={this.props.nobtName}
             onChange={this.props.changeNobtName}
+            data-cy="nobt-name-input"
           />
         </div>
 
@@ -52,6 +53,7 @@ class BasicInformationForm extends React.Component {
 
         <div className={styles.continueButtonContainer}>
           <ContinueButton
+            data-cy={'continue-button'}
             label="Continue"
             disabled={!this.props.nobtName}
             icon="arrow_forward"

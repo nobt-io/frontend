@@ -38,6 +38,7 @@ const ForeignCurrencyButton = ({
           rightActions={[
             <FontIcon
               key="clear"
+              data-cy={'reset-conversion-button'}
               value="clear"
               onClick={() => clearConversionInformation()}
             />,
@@ -54,6 +55,7 @@ const ForeignCurrencyButton = ({
         theme={ButtonTheme}
         icon={<i className={'fa fa-refresh'} />}
         label={'Change currency'}
+        data-cy={'change-currency-button'}
         raised
         primary
         onClick={goToConversionPage(push)}

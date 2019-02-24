@@ -52,6 +52,7 @@ export class CurrencyInput extends React.Component {
         value={displayValue}
         lang="en-150" // Solves the "numbers with a comma are not valid decimal numbers"-problem: For more see: https://www.ctrl.blog/entry/html5-input-number-localization
         onChange={this.valueChanged}
+        data-cy={this.props['data-cy']}
       />
     );
   };

@@ -35,6 +35,7 @@ const NobtFAB = props => (
       <Item>
         <Label>Add a bill</Label>
         <Button
+          data-cy={'add-bill-button'}
           icon="receipt"
           onClick={() => {
             // We need to deactivate the menu before we proceed. Otherwise we end up with an expanded menu if the user navigates back.
@@ -47,11 +48,15 @@ const NobtFAB = props => (
       </Item>
       <Item disabled>
         <Label>Pay someone</Label>
-        <Button icon="payment" />
+        <Button icon="payment" data-cy={'add-payment-button'} />
       </Item>
     </Items>
     <MenuButton>
-      <Button icon="add" onClick={() => toggleState(props)} />
+      <Button
+        icon="add"
+        data-cy={'toggle-menu-button'}
+        onClick={() => toggleState(props)}
+      />
     </MenuButton>
   </FABMenu>
 );
