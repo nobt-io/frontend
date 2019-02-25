@@ -41,7 +41,7 @@ jobs:
 
     - stage: deploy
       name: "Deployment to Github Pages"
-      before_deploy: yarn run build:prod
+      script: yarn run build:prod
       deploy:
         - provider: pages
           skip-cleanup: true
