@@ -61,7 +61,7 @@
     "reduce-reducers": "^0.1.2",
     "redux": "^3.0.0",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.0.0",
+    "redux-thunk": "^2.3.0",
     "reselect": "^2.5.4",
     "reselect-change-memoize": "^1.1.0"
   },
