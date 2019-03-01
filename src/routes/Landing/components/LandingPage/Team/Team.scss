@@ -86,4 +86,18 @@
   #teamMember3 {
     background-image: url('static/contributors/matthias.png');
   }
+
+  @media percy {
+    #teamMember1 {
+      background-image: url('static/contributors/thomas_single.png');
+    }
+
+    #teamMember2 {
+      background-image: url('static/contributors/david_single.png');
+    }
+
+    #teamMember3 {
+      background-image: url('static/contributors/matthias_single.png');
+    }
+  }
 }
