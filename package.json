@@ -49,7 +49,7 @@
     "react-intl": "^2.8.0",
     "react-overlays": "^0.8.3",
     "react-redux": "^5.0.0",
-    "react-responsive-modal": "^1.2.3",
+    "react-responsive-modal": "^3.6.0",
     "react-rotating-text": "^1.2.0",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^4.0.0",
