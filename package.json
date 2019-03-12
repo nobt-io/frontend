@@ -30,7 +30,7 @@
     "axios": "^0.14.0",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",
-    "copy-webpack-plugin": "^4.5.1",
+    "copy-webpack-plugin": "^5.0.1",
     "currency-flags": "^1.5.0",
     "currency-symbol-map": "^4.0.4",
     "debug": "^4.1.1",
