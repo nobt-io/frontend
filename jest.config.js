@@ -1,7 +1,7 @@
 module.exports = {
   modulePaths: ['src'],
   moduleDirectories: ['node_modules'],
-  transformIgnorePatterns: ['node_modules/(?!(react-redux|lodash-es)/)'],
+  transformIgnorePatterns: ['node_modules/(?!(lodash-es)/)'],
   testPathIgnorePatterns: [
     "/node_modules/",
     "/cypress/"

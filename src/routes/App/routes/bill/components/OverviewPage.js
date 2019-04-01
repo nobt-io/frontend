@@ -4,7 +4,7 @@ import { Main } from 'components/Container';
 import { CurrencyInput, Input, InputLegend } from 'components/Input/index';
 import LocationBuilder from '../../../modules/navigation/LocationBuilder';
 import withNavigation from 'components/hoc/withNavigation';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import Button from 'components/Button/index';
 import {
   addBill,
