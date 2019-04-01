@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import styles from './DoneScreen.scss';
 import LocationBuilder from '../../../../../App/modules/navigation/LocationBuilder';
 import { IconMenu, MenuItem } from 'react-toolbox-legacy/lib/menu';
-import { CopyToClipboard } from 'react-copy-to-clipboard/lib/Component';
 import { IconButton } from 'react-toolbox-legacy/lib/button';
 import { Snackbar } from 'react-toolbox-legacy';
+import copyToClipboard from 'copy-to-clipboard';
 
 class DoneScreen extends React.Component {
   state = {
@@ -41,12 +41,15 @@ class DoneScreen extends React.Component {
             to={this.relativeLinkToNobt()}
           >{`nobt.io${this.relativeLinkToNobt()}`}</Link>
           <div>
-            <CopyToClipboard
-              text={this.absoluteLinkToNobt()}
-              onCopy={() => this.setState({ snackbarVisible: true })}
-            >
-              <IconButton icon="content_copy" />
-            </CopyToClipboard>
+            <IconButton
+              icon="content_copy"
+              onClick={() => {
+                copyToClipboard(this.absoluteLinkToNobt());
+                this.setState({
+                  snackbarVisible: true,
+                });
+              }}
+            />
             <IconMenu icon="share" menuRipple>
               <MenuItem
                 icon={<i className="fa fa-whatsapp" />}
