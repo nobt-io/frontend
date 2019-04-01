@@ -27,7 +27,7 @@ module.exports = (_, argv) => {
   const __DEV__ = argv.mode === 'development';
 
   return {
-    entry: ['babel-polyfill', './src/app.js'],
+    entry: ['@babel/polyfill', './src/app.js'],
     devtool: 'source-map',
     module: {
       rules: [
