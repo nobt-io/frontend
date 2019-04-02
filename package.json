@@ -33,7 +33,7 @@
     "history": "~4.7.2",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.4",
+    "react": "^16.8.6",
     "react-bootstrap": "^0.31.0",
     "react-css-themr": "^2.1.2",
     "react-dom": "^16.8.4",
