@@ -2,7 +2,7 @@
 
 describe('The balances page', function() {
   beforeEach(() => {
-    cy.fixture("nobt-with-one-bill").as("nobt")
+    cy.fixture('nobt-with-one-bill').as('nobt');
   });
 
   it('should navigate to balances screen', function() {
@@ -14,11 +14,11 @@ describe('The balances page', function() {
       delay: 500,
       response: 'fixture:nobt-with-one-bill',
     });
-    cy.visit(this.nobt.id + "/balances")
+    cy.visit(this.nobt.id + '/balances');
 
     // Waits for the page to actually render
-    cy.contains("Balance Overview").should("exist")
-    cy.percySnapshot("Balances page")
+    cy.contains('Balance Overview').should('exist');
+    cy.percySnapshot('Balances page');
   });
 
   it('should show correct balances', function() {

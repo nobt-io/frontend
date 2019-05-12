@@ -2,10 +2,7 @@ module.exports = {
   modulePaths: ['src'],
   moduleDirectories: ['node_modules'],
   transformIgnorePatterns: ['node_modules/(?!(lodash-es)/)'],
-  testPathIgnorePatterns: [
-    "/node_modules/",
-    "/cypress/"
-  ],
+  testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
   moduleNameMapper: {
     '^.+\\.scss$': 'identity-obj-proxy',
     '^.+\\.css': 'identity-obj-proxy',

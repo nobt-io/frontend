@@ -2,24 +2,25 @@
 
 describe('The wizard for creating a new nobt', function() {
   it('should go to wizard from landing page', function() {
-    cy.visit('http://localhost:3000').then(() => cy.percySnapshot("Landing page"));
+    cy.visit('http://localhost:3000').then(() =>
+      cy.percySnapshot('Landing page')
+    );
 
-    cy.get("[data-cy=start-button]").click();
+    cy.get('[data-cy=start-button]').click();
 
     cy.url().should('include', '/create/name');
-    cy.percySnapshot("Create-nobt wizard - page 1");
+    cy.percySnapshot('Create-nobt wizard - page 1');
   });
 
   it('should complete first page', function() {
-    cy.get('[data-cy=nobt-name-input]')
-      .type('Cypress UI Test');
+    cy.get('[data-cy=nobt-name-input]').type('Cypress UI Test');
 
-    cy.get("[data-cy=continue-button]").click();
+    cy.get('[data-cy=continue-button]').click();
 
     // TODO: Test different currencies here
 
     cy.url().should('include', '/create/members');
-    cy.percySnapshot("Create-nobt wizard - page 2");
+    cy.percySnapshot('Create-nobt wizard - page 2');
   });
 
   it('should add member with enter key', function() {
@@ -34,8 +35,7 @@ describe('The wizard for creating a new nobt', function() {
   });
 
   it('should change button from create nobt if user starts typing', function() {
-    cy.get('[data-cy=create-nobt-button]')
-      .should('exist');
+    cy.get('[data-cy=create-nobt-button]').should('exist');
 
     cy.get('[data-cy=name-input]').type('Matthias');
 
@@ -56,7 +56,7 @@ describe('The wizard for creating a new nobt', function() {
 
   it('should remove person from list', function() {
     cy.contains('li', 'Matthias')
-      .find("[data-cy=remove-person-button]")
+      .find('[data-cy=remove-person-button]')
       .click();
     cy.contains('li', 'Matthias').should('not.exist');
   });
@@ -76,7 +76,6 @@ describe('The wizard for creating a new nobt', function() {
     cy.wait('@createNobt');
     cy.url().should('include', '/create/done');
 
-
-    cy.percySnapshot("Create-nobt wizard - page 3");
+    cy.percySnapshot('Create-nobt wizard - page 3');
   });
 });

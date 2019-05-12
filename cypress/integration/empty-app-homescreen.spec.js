@@ -2,7 +2,7 @@
 
 describe('The app homescreen with an empty feed', function() {
   beforeEach(function() {
-    cy.fixture("empty-nobt-response").as("nobt");
+    cy.fixture('empty-nobt-response').as('nobt');
   });
 
   it('should navigate to empty homescreen', function() {
@@ -14,11 +14,11 @@ describe('The app homescreen with an empty feed', function() {
       delay: 500,
       response: '@nobt',
     });
-    cy.visit(this.nobt.id)
+    cy.visit(this.nobt.id);
 
     // Waits for the page to actually render
-    cy.contains("Cypress UI Test").should("exist")
-    cy.percySnapshot("Empty feed")
+    cy.contains('Cypress UI Test').should('exist');
+    cy.percySnapshot('Empty feed');
   });
 
   it('should show empty overview screen', function() {
@@ -27,21 +27,21 @@ describe('The app homescreen with an empty feed', function() {
   });
 
   it('should have a menu to create new items', function() {
-    cy.get("[data-cy=toggle-menu-button]").click({force: true});
-    cy.get("[data-cy=add-payment-button]")
+    cy.get('[data-cy=toggle-menu-button]').click({ force: true });
+    cy.get('[data-cy=add-payment-button]')
       .should('exist')
       .should('be.disabled');
 
-    cy.get("[data-cy=add-bill-button]")
+    cy.get('[data-cy=add-bill-button]')
       .should('exist')
       .should('be.enabled');
 
-    cy.percySnapshot("Add menu");
+    cy.percySnapshot('Add menu');
   });
 
   it('should navigate to bill wizard', function() {
-    cy.get("[data-cy=add-bill-button]").click();
+    cy.get('[data-cy=add-bill-button]').click();
     cy.url().should('include', '/bill');
-    cy.go("back")
+    cy.go('back');
   });
 });

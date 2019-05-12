@@ -33,9 +33,9 @@ const updateFetchNobtStatusActionPayloadHandler = {
 
 const handlers = {
   [UPDATE_FETCH_NOBT_STATUS]: (state, action) => {
-    const handler = updateFetchNobtStatusActionPayloadHandler[
-      action.payload.status
-      ] || emptyHandler;
+    const handler =
+      updateFetchNobtStatusActionPayloadHandler[action.payload.status] ||
+      emptyHandler;
     let newState = handler(action.payload);
 
     return {
@@ -76,34 +76,34 @@ const handlers = {
 };
 
 interface Share {
-  name: string,
-  amount: number
+  name: string;
+  amount: number;
 }
 
 interface Bill {
-  id: number,
-  name: string,
-  date: string,
-  createdOn: string,
-  debtee: Share,
-  debtors: Share[],
+  id: number;
+  name: string;
+  date: string;
+  createdOn: string;
+  debtee: Share;
+  debtors: Share[];
 }
 
 interface Nobt {
-  id: string,
-  name: string,
-  currency: string,
-  participatingPersons: string[],
-  bills: Bill[],
-  createdOn: string | null,
-  transactions: any[],
-  payments: any[]
+  id: string;
+  name: string;
+  currency: string;
+  participatingPersons: string[];
+  bills: Bill[];
+  createdOn: string | null;
+  transactions: any[];
+  payments: any[];
 }
 
 interface State {
-  fetchNobtStatus: AsyncActionStatus | null,
-  nobtFetchTimestamp: string | null,
-  data: Nobt
+  fetchNobtStatus: AsyncActionStatus | null;
+  nobtFetchTimestamp: string | null;
+  data: Nobt;
 }
 
 export const initialState: State = {
