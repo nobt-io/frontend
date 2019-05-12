@@ -3,11 +3,14 @@ import {
   INVALIDATE_NOBT,
   UPDATE_FETCH_NOBT_STATUS,
 } from './actions';
-import AsyncActionStatus from 'const/AsyncActionStatus';
+import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import _debug from 'debug';
 
+const emptyHandler = (status: any) => ({data: {}});
+
 const updateFetchNobtStatusActionPayloadHandler = {
-  [AsyncActionStatus.IN_PROGRESS]: () => ({}),
+  [AsyncActionStatus.IN_PROGRESS]: emptyHandler,
+  [AsyncActionStatus.FAILED]: emptyHandler,
   [AsyncActionStatus.SUCCESSFUL]: payload => ({
     data: {
       id: payload.nobt.id,
@@ -26,15 +29,14 @@ const updateFetchNobtStatusActionPayloadHandler = {
       conversionInformation: payload.nobt.conversionInformation,
     },
   }),
-  [AsyncActionStatus.FAILED]: () => ({}),
-  [null]: () => ({}),
 };
 
 const handlers = {
   [UPDATE_FETCH_NOBT_STATUS]: (state, action) => {
-    let newState = updateFetchNobtStatusActionPayloadHandler[
+    const handler = updateFetchNobtStatusActionPayloadHandler[
       action.payload.status
-    ](action.payload);
+      ] || emptyHandler;
+    let newState = handler(action.payload);
 
     return {
       ...state,
@@ -73,7 +75,38 @@ const handlers = {
   },
 };
 
-export const initialState = {
+interface Share {
+  name: string,
+  amount: number
+}
+
+interface Bill {
+  id: number,
+  name: string,
+  date: string,
+  createdOn: string,
+  debtee: Share,
+  debtors: Share[],
+}
+
+interface Nobt {
+  id: string,
+  name: string,
+  currency: string,
+  participatingPersons: string[],
+  bills: Bill[],
+  createdOn: string | null,
+  transactions: any[],
+  payments: any[]
+}
+
+interface State {
+  fetchNobtStatus: AsyncActionStatus | null,
+  nobtFetchTimestamp: string | null,
+  data: Nobt
+}
+
+export const initialState: State = {
   fetchNobtStatus: null,
   nobtFetchTimestamp: null,
   data: {

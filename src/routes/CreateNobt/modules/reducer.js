@@ -6,7 +6,7 @@ import {
   UPDATE_CREATE_NOBT_STATUS,
   UPDATE_NAME_OF_PERSON_TO_ADD,
 } from './actions';
-import AsyncActionStatus from '../../../const/AsyncActionStatus';
+import { AsyncActionStatus } from '../../../const/AsyncActionStatus';
 
 const handlers = {
   [SELECT_CURRENCY]: (state, action) => {

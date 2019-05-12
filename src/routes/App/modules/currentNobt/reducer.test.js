@@ -5,7 +5,7 @@ import {
   fetchNobtSucceeded,
   UPDATE_FETCH_NOBT_STATUS,
 } from './actions';
-import AsyncActionStatus from '../../../../const/AsyncActionStatus';
+import { AsyncActionStatus } from '../../../../const/AsyncActionStatus';
 
 describe(`Action ${UPDATE_FETCH_NOBT_STATUS}`, () => {
   it('should combine transactions and debts for backwards compatiblity', () => {

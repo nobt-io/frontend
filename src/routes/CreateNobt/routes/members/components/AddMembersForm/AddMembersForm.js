@@ -17,7 +17,7 @@ import {
 import ContinueButton from '../../../../components/ContinueButton';
 import AddMemberInputTheme from './AddMemberInputTheme.scss';
 import { Snackbar } from 'react-toolbox-legacy/lib/snackbar';
-import AsyncActionStatus from 'const/AsyncActionStatus';
+import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import LocationBuilder from '../../../../../App/modules/navigation/LocationBuilder';
 import CreateNobtProgressBar from '../../components/CreateNobtProgressBar';
 import { Input } from 'react-toolbox-legacy/lib/input/index';
