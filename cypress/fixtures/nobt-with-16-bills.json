@@ -1,0 +1,421 @@
+{
+  "id": "DE3oiHZTDWGO",
+  "name": "Cypress UI Test",
+  "expenses": [
+    {
+      "id": 1,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 2,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 3,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 4,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 5,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 6,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 7,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 8,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 9,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 10,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 11,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 12,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 13,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 14,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 15,
+      "name": "My first bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    },
+    {
+      "id": 16,
+      "name": "The last bill",
+      "debtee": "David",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "EUR",
+        "rate": 1.0000000000
+      },
+      "shares": [
+        {
+          "debtor": "David",
+          "amount": 10.00
+        },
+        {
+          "debtor": "Thomas",
+          "amount": 10.00
+        }
+      ],
+      "date": "2019-01-03",
+      "createdOn": "2019-01-03T17:13:05.047Z",
+      "_links": {
+        "delete": "http://localhost:8080/nobts/PloZvDH99U1z/expenses/1"
+      }
+    }
+  ],
+  "deletedExpenses": [],
+  "payments": [],
+  "createdOn": "2019-02-17T07:30:40.227Z",
+  "participatingPersons": [
+    "Thomas",
+    "David"
+  ],
+  "currency": "EUR",
+  "debts": [
+    {
+      "debtor": "Thomas",
+      "amount": 10.00,
+      "debtee": "David"
+    }
+  ]
+}
