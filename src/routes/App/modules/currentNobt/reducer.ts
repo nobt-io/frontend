@@ -6,7 +6,7 @@ import {
 import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import _debug from 'debug';
 
-const emptyHandler = (status: any) => ({data: {}});
+const emptyHandler = (status: any) => ({ data: {} });
 
 const updateFetchNobtStatusActionPayloadHandler = {
   [AsyncActionStatus.IN_PROGRESS]: emptyHandler,

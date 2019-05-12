@@ -156,11 +156,7 @@ class BillDetailPage extends React.Component {
     return (
       <div>
         <AppBar
-          onLeftIconClick={() =>
-            LocationBuilder.fromWindow()
-              .pop(1)
-              .apply(this.props.replace)
-          }
+          onLeftIconClick={() => this.props.goBack()}
           leftIcon={<FontIcon value="chevron_left" />}
           title={bill.name}
         />
