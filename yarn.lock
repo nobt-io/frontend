@@ -3328,9 +3328,10 @@ csstype@^2.0.0, csstype@^2.2.0, csstype@^2.5.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.0.tgz#6cf7b2fa7fc32aab3d746802c244d4eda71371a2"
   integrity sha512-by8hi8BlLbowQq0qtkx54d9aN73R9oUW20HISpka5kmgsR9F7nnxgfsemuR2sdCKZh+CDNf5egW9UZMm4mgJRg==
 
-currency-flags@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/currency-flags/-/currency-flags-1.5.0.tgz#21dec87670fff6c51a24f6d7c2e915ce561de6c8"
+currency-flags@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/currency-flags/-/currency-flags-1.8.0.tgz#8ff2c95ba335b5fd4b97ed20f1edd0214f758036"
+  integrity sha512-+Nq2CoUTsUnWQXCKLgPS3CgX9wscvjCvKPnSDpjOsVA8DgefVC0ZX4rtrPw4bf2Qrxfdw4m5puV7PBjdbhCbgw==
 
 currency-symbol-map@^4.0.4:
   version "4.0.4"
