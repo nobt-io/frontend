@@ -61,7 +61,7 @@
     "@percy/cypress": "^1.0.2",
     "@types/debug": "^0.0.31",
     "@types/jest": "^24.0.11",
-    "@types/react": "^16.8.10",
+    "@types/react": "^16.9.4",
     "@types/react-dom": "^16.8.3",
     "babel-eslint": "^8.2.2",
     "babel-loader": "^8.0",
