@@ -38,7 +38,7 @@
     "react-css-themr": "^2.1.2",
     "react-dom": "^16.8.4",
     "react-intl": "^2.8.0",
-    "react-overlays": "^0.8.3",
+    "react-overlays": "^2.0.0",
     "react-redux": "^6.0.1",
     "react-rotating-text": "^1.2.0",
     "react-router-dom": "^4.3.1",
