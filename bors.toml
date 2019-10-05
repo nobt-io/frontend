@@ -1,4 +1,2 @@
-status = [
-	"continuous-integration/travis-ci/push",
-	"percy/frontend"
-]
+status = ["continuous-integration/travis-ci/push"]
+pr_status = ["percy/frontend"]
