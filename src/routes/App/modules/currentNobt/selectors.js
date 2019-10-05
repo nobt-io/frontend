@@ -69,6 +69,8 @@ const getBillsAsFeedItems = createSelector(
       amount: bill.debtee.amount,
       debtee: bill.debtee.name,
       subject: bill.name,
+      deleted: !!bill.deletedOn,
+      deletedOn: bill.deletedOn,
     }))
 );
 
@@ -130,6 +132,7 @@ const deNormalizeBill = e => {
     conversionInformation: e.conversionInformation,
     debtors: debtors,
     actions: e._links,
+    deletedOn: e.deletedOn,
   };
 };
 

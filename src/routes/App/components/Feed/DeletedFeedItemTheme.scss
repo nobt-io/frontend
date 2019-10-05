@@ -1,0 +1,10 @@
+.itemContentRoot {
+  overflow: hidden;
+  opacity: 0.3;
+}
+
+.itemText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: line-through;
+}

@@ -1,0 +1,65 @@
+{
+  "id" : "OGjQc4NgsXip",
+  "name" : "Test for deleted bills",
+  "expenses" : [ {
+    "id" : 2,
+    "name" : "A valid bill",
+    "debtee" : "Person 2",
+    "splitStrategy" : "EQUAL",
+    "conversionInformation" : {
+      "foreignCurrency" : "EUR",
+      "rate" : 1
+    },
+    "shares" : [ {
+      "debtor" : "Person 3",
+      "amount" : 6.67
+    }, {
+      "debtor" : "Person 2",
+      "amount" : 6.67
+    }, {
+      "debtor" : "Person 1",
+      "amount" : 6.66
+    } ],
+    "date" : "2019-10-05",
+    "createdOn" : "2019-10-05T11:42:42.158Z",
+    "_links" : {
+      "delete" : "http://localhost:8080/nobts/OGjQc4NgsXip/expenses/2"
+    }
+  } ],
+  "deletedExpenses" : [ {
+    "deletedOn" : "2019-10-05T11:42:45.974Z",
+    "date" : "2019-10-05",
+    "debtee" : "Person 3",
+    "shares" : [ {
+      "debtor" : "Person 1",
+      "amount" : 3.34
+    }, {
+      "debtor" : "Person 2",
+      "amount" : 3.33
+    }, {
+      "debtor" : "Person 3",
+      "amount" : 3.33
+    } ],
+    "conversionInformation" : {
+      "foreignCurrency" : "EUR",
+      "rate" : 1
+    },
+    "createdOn" : "2019-10-05T11:42:29.349Z",
+    "splitStrategy" : "EQUAL",
+    "name" : "A bill to be deleted",
+    "id" : 1
+  } ],
+  "payments" : [ ],
+  "createdOn" : "2019-10-05T11:42:11.241Z",
+  "participatingPersons" : [ "Person 1", "Person 2", "Person 3" ],
+  "currency" : "EUR",
+  "debts" : [ {
+    "debtor" : "Person 3",
+    "amount" : 6.67,
+    "debtee" : "Person 2"
+  }, {
+    "debtor" : "Person 1",
+    "amount" : 6.66,
+    "debtee" : "Person 2"
+  } ]
+}
