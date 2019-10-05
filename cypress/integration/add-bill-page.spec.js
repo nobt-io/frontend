@@ -88,10 +88,10 @@ describe('Add a bill to the nobt', function() {
       method: 'POST',
       url: '/nobts/' + this.nobt.id + '/expenses',
       status: 200,
-      delay: 500,
+      delay: 4000,
       response: {},
     });
 
-    cy.contains('button', 'add bill').click();
+    cy.contains('button', 'add bill').click().should("be.disabled");
   });
 });

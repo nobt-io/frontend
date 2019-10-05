@@ -164,6 +164,7 @@ class OverviewPage extends React.Component {
         <Button
           raised
           primary
+          disabled={this.props.addBillStatus === AsyncActionStatus.IN_PROGRESS}
           onClick={() => createBill(this.props)}
           label="add bill"
           icon="check_circle"
