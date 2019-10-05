@@ -5,11 +5,12 @@ import Amount from '../../../../components/Amount/Amount';
 import FeedItem from './FeedItem';
 
 const BillFeedItem = ({ feedItem, push }) => {
-  const { id, debtee, subject, amount } = feedItem;
+  const { id, debtee, subject, amount, deleted } = feedItem;
 
   return (
     <FeedItem
       icon="receipt"
+      deleted={deleted}
       caption={`${debtee} paid '${subject}'`}
       legend={<Amount value={amount} />}
       onClick={() =>

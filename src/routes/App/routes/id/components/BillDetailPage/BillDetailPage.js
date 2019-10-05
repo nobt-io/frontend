@@ -53,7 +53,7 @@ class BillDetailPage extends React.Component {
     }
 
     const { bill, nobtCurrency } = this.props;
-    const { debtee } = bill;
+    const { debtee, deletedOn } = bill;
 
     const items = [
       <ListItem
@@ -127,6 +127,32 @@ class BillDetailPage extends React.Component {
       );
     }
 
+    if (deletedOn) {
+      items.push(
+        <ListItem
+          key="Date_Deleted"
+          ripple={false}
+          caption={
+            <FormattedMessage
+              id="BillDetailPage.time_added_caption"
+              defaultMessage="Deleted on {timestamp}."
+              values={{
+                timestamp: (
+                  <FormattedDate
+                    value={new Date(deletedOn)}
+                    year="numeric"
+                    month="long"
+                    day="2-digit"
+                  />
+                ),
+              }}
+            />
+          }
+          leftActions={[<FontIcon value="delete" />]}
+        />
+      );
+    }
+
     return (
       <div>
         <AppBar
@@ -163,15 +189,17 @@ class BillDetailPage extends React.Component {
             ))}
           </List>
 
-          <List>
-            <ListSubHeader caption="Actions" />
-            <ListItem
-              primary
-              leftIcon="delete"
-              caption="Delete this bill"
-              onClick={this.showDialog}
-            />
-          </List>
+          {this.props.canBillBeDeleted && (
+            <List>
+              <ListSubHeader caption="Actions" />
+              <ListItem
+                primary
+                leftIcon="delete"
+                caption="Delete this bill"
+                onClick={this.showDialog}
+              />
+            </List>
+          )}
 
           <DeleteBillConfirmationDialog
             active={this.state.showDeleteBillConfirmationDialog}
