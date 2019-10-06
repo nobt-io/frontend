@@ -14,6 +14,9 @@ describe('Deleted bills', function() {
       response: '@nobt',
     });
 
+    // Need to fix date otherwise would show different timestamps for the feed item
+    cy.clock(new Date(2019, 1, 5));
+
     cy.visit('http://localhost:3000/' + this.nobt.id)
 
     // Waits for the page to actually render
