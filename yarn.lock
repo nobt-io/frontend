@@ -8959,6 +8959,13 @@ react-router@^4.3.1:
     prop-types "^15.6.1"
     warning "^4.0.1"
 
+react-scroll-manager@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-scroll-manager/-/react-scroll-manager-1.0.0.tgz#027060b23807bd9e035eee15096ec1f612f46ff4"
+  integrity sha512-+FeAvT4Jdte7pApbfZuPcTUN0DIIl5zQ7oaTdTLXXDrMbguSa5bpfXvDA7MnbSi4vD8AzHXtpGSNZVTGGmjU6w==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-scrollspy@^3.1.1:
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/react-scrollspy/-/react-scrollspy-3.3.5.tgz#e3e605bfc153a23f5fdf1279dd9f397d6e76e228"

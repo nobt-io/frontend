@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import _debug from 'debug';
 import PersonBalanceFactory from './PersonBalanceFactory';
-import AsyncActionStatus from '../../../../const/AsyncActionStatus';
+import { AsyncActionStatus } from '../../../../const/AsyncActionStatus';
 import { balanceDetailPathVariable, billDetailPathVariable } from '../../index';
 
 export const getCurrentNobt = state => state.App.currentNobt.data;

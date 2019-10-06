@@ -16,7 +16,7 @@ import { List, SelectorItem } from 'components/List';
 import BrandedAppBar from 'components/BrandedAppBar/BrandedAppBar';
 import { Caption, Heading, SubHeading } from 'components/text';
 import { Section, SectionGroup } from 'components/Section/index';
-import AsyncActionStatus from 'const/AsyncActionStatus';
+import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import { invalidateNobt } from '../../../modules/currentNobt/actions';
 import ForeignCurrencyButton from '../../../components/ForeignCurrencyButton';
 

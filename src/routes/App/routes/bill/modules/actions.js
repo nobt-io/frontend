@@ -1,5 +1,5 @@
 import Client from '../../../../../api';
-import AsyncActionStatus from '../../../../../const/AsyncActionStatus';
+import { AsyncActionStatus } from '../../../../../const/AsyncActionStatus';
 
 export const UPDATE_ADD_BILL_STATUS = 'UPDATE_ADD_BILL_STATUS';
 export const NEW_DEBTEE_SELECTED = 'NEW_DEBTEE_SELECTED';

@@ -16,7 +16,7 @@ import {
 import LocationBuilder from '../../../../../../modules/navigation/LocationBuilder';
 import { FontIcon } from 'react-toolbox-legacy/lib/font_icon/index';
 import InfoMessageListTheme from './InfoMessageListTheme.scss';
-import AsyncActionStatus from '../../../../../../../../const/AsyncActionStatus';
+import { AsyncActionStatus } from '../../../../../../../../const/AsyncActionStatus';
 import { FormattedMessage } from 'react-intl';
 import { SubTitle, Title } from 'components/text';
 import AmountTheme from '../../../../themes/AmountTheme.scss';

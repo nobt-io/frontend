@@ -8,6 +8,7 @@
     "interface-name": false,
     "jsx-no-lambda": false,
     "jsx-boolean-value": false,
-    "curly": false
+    "curly": false,
+    "prefer-const": false
   }
 }

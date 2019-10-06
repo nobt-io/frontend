@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import SplitStrategyNames from 'const/SplitStrategyNames';
-import AsyncActionStatus from 'const/AsyncActionStatus';
+import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import convertAmount from './convertAmount';
 
 const getAddBillFormSlice = state => state.App.addBillForm;

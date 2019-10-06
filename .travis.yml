@@ -6,6 +6,7 @@ cache:
     - node_modules
     - ~/.cache
 addons:
+  chrome: stable
   apt:
     packages:
     - libgconf-2-4

@@ -13,7 +13,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "noImplicitAny": false
   },
   "include": ["src"]
 }

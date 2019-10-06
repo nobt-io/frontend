@@ -1,5 +1,5 @@
 import Client from 'api';
-import AsyncActionStatus from 'const/AsyncActionStatus';
+import { AsyncActionStatus } from 'const/AsyncActionStatus';
 
 export const UPDATE_FETCH_NOBT_STATUS = 'Nobt.UPDATE_FETCH_NOBT_STATUS';
 export const INVALIDATE_NOBT = 'Nobt.INVALIDATE';
