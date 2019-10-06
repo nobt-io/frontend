@@ -5,11 +5,7 @@
   "deletedExpenses": [],
   "payments": [],
   "createdOn": "2019-02-17T07:30:40.227Z",
-  "participatingPersons": [
-    "Thomas",
-    "David"
-  ],
+  "participatingPersons": ["Thomas", "David"],
   "currency": "EUR",
-  "debts": [
-  ]
+  "debts": []
 }

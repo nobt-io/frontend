@@ -3,4 +3,3 @@ export enum AsyncActionStatus {
   SUCCESSFUL = 'SUCCESSFUL',
   FAILED = 'FAILED',
 }
-

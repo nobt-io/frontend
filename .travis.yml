@@ -9,11 +9,11 @@ addons:
   chrome: stable
   apt:
     packages:
-    - libgconf-2-4
+      - libgconf-2-4
 jobs:
   include:
     - stage: test
-      name: "Unit tests and static analysis"
+      name: 'Unit tests and static analysis'
       script:
         - yarn run prettier
         - yarn run lint
@@ -28,23 +28,22 @@ jobs:
       # The tricky thing is, we cannot just disable branch builds because this would disable our continuous deployment to GitHub pages.
       # That is why for ordinary branches, we just run the UI-tests and for poll-requests and master branch, we capture the snapshots
       # so that we can use percy for visual review.
-
     - stage: test
-      name: "UI Tests with percy snapshots"
+      name: 'UI Tests with percy snapshots'
       script:
         - yarn run build
         - node_modules/.bin/percy exec -- cypress/run.sh
       if: branch = master OR type = pull_request
 
     - stage: test
-      name: "UI Tests without percy snapshots"
+      name: 'UI Tests without percy snapshots'
       script:
         - yarn run build
         - cypress/run.sh
       if: branch != master
 
     - stage: deploy
-      name: "Deployment to Github Pages"
+      name: 'Deployment to Github Pages'
       script: yarn run build:prod
       deploy:
         - provider: pages

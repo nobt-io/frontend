@@ -9,16 +9,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "AUD",
-        "rate": 1.6000000000
+        "rate": 1.6
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -31,15 +31,12 @@
   "deletedExpenses": [],
   "payments": [],
   "createdOn": "2019-02-17T07:30:40.227Z",
-  "participatingPersons": [
-    "Thomas",
-    "David"
-  ],
+  "participatingPersons": ["Thomas", "David"],
   "currency": "EUR",
   "debts": [
     {
       "debtor": "Thomas",
-      "amount": 10.00,
+      "amount": 10.0,
       "debtee": "David"
     }
   ]

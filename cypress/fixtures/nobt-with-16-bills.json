@@ -9,16 +9,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -34,16 +34,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -59,16 +59,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -84,16 +84,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -109,16 +109,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -134,16 +134,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -159,16 +159,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -184,16 +184,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -209,16 +209,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -234,16 +234,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -259,16 +259,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -284,16 +284,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -309,16 +309,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -334,16 +334,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -359,16 +359,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -384,16 +384,16 @@
       "splitStrategy": "EQUAL",
       "conversionInformation": {
         "foreignCurrency": "EUR",
-        "rate": 1.0000000000
+        "rate": 1.0
       },
       "shares": [
         {
           "debtor": "David",
-          "amount": 10.00
+          "amount": 10.0
         },
         {
           "debtor": "Thomas",
-          "amount": 10.00
+          "amount": 10.0
         }
       ],
       "date": "2019-01-03",
@@ -406,15 +406,12 @@
   "deletedExpenses": [],
   "payments": [],
   "createdOn": "2019-02-17T07:30:40.227Z",
-  "participatingPersons": [
-    "Thomas",
-    "David"
-  ],
+  "participatingPersons": ["Thomas", "David"],
   "currency": "EUR",
   "debts": [
     {
       "debtor": "Thomas",
-      "amount": 10.00,
+      "amount": 10.0,
       "debtee": "David"
     }
   ]
