@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FontIcon } from 'react-toolbox-legacy/lib/font_icon/index';
 import { Main } from 'components/Container';
 import { CurrencyInput, Input, InputLegend } from 'components/Input/index';
-import LocationBuilder from '../../../modules/navigation/LocationBuilder';
-import withNavigation from 'components/hoc/withNavigation';
 import { connect } from 'react-redux';
 import Button from 'components/Button/index';
 import {
@@ -13,7 +11,7 @@ import {
   focusIdChanged,
 } from '../modules/actions';
 import { List, SelectorItem } from 'components/List';
-import BrandedAppBar from 'components/BrandedAppBar/BrandedAppBar';
+import BrandedAppBar from 'components/BrandedAppBar';
 import { Caption, Heading, SubHeading } from 'components/text';
 import { Section, SectionGroup } from 'components/Section/index';
 import { AsyncActionStatus } from 'const/AsyncActionStatus';
@@ -37,6 +35,8 @@ import {
   isDescriptionErrorShown,
 } from '../modules/selectors';
 import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
+import { useHistory, useLocation } from 'react-router';
+import usePaths from '../../../../../hooks/usePaths';
 
 const createBill = props => {
   let billToAdd = {
@@ -60,18 +60,19 @@ const createBill = props => {
   props.onSubmit(props.nobtId, billToAdd);
 };
 
-class OverviewPage extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    let newStatus = nextProps.addBillStatus;
-    if (newStatus === AsyncActionStatus.SUCCESSFUL) {
-      this.props.invalidateNobtData();
-      LocationBuilder.fromWindow()
-        .pop()
-        .apply(this.props.replace);
-    }
-  }
+const OverviewPage = props => {
+  const { addBillStatus, nobtId } = props;
+  const history = useHistory();
+  const paths = usePaths();
 
-  render = () => (
+  useEffect(() => {
+    if (addBillStatus === AsyncActionStatus.SUCCESSFUL) {
+      props.invalidateNobtData();
+      history.replace(paths.feed());
+    }
+  }, [addBillStatus]);
+
+  return (
     <div>
       <BrandedAppBar canGoBack={true} />
       <Main>
@@ -82,11 +83,11 @@ class OverviewPage extends React.Component {
             <Caption>What did you buy?</Caption>
             <Input
               placeholder="Trip Snacks, Train Tickets, Beer, ..."
-              value={this.props.description}
-              onChange={this.props.onDescriptionChanged}
+              value={props.description}
+              onChange={props.onDescriptionChanged}
               data-cy="description-input"
             />
-            <InputLegend error={this.props.isDescriptionErrorShown}>
+            <InputLegend error={props.isDescriptionErrorShown}>
               Enter a descriptive name for what was paid.
             </InputLegend>
           </Section>
@@ -94,15 +95,14 @@ class OverviewPage extends React.Component {
             <Caption>How much did it cost?</Caption>
             <CurrencyInput
               placeholder="13.37"
-              value={this.props.amount}
-              onChange={this.props.onAmountChanged}
+              value={props.amount}
+              onChange={props.onAmountChanged}
               currency={
-                (this.props.foreignCurrency || {}).value ||
-                this.props.nobtCurrency
+                (props.foreignCurrency || {}).value || props.nobtCurrency
               }
               data-cy="amount-input"
             />
-            <InputLegend error={this.props.isAmountErrorShown}>
+            <InputLegend error={props.isAmountErrorShown}>
               Enter the total of this bill.
             </InputLegend>
             <ForeignCurrencyButton />
@@ -111,25 +111,21 @@ class OverviewPage extends React.Component {
             <Caption>Who paid?</Caption>
             <List>
               <SelectorItem
-                focus={this.props.focusId === 'debtee'}
+                focus={props.focusId === 'debtee'}
                 leftIcon="person"
                 placeholder="Select a Debtee"
                 data-cy={'select-debtee'}
                 value={
-                  this.props.debtee !== null
-                    ? this.props.debtee + ' paid the bill'
-                    : null
+                  props.debtee !== null ? props.debtee + ' paid the bill' : null
                 }
                 onClick={() => {
-                  LocationBuilder.fromWindow()
-                    .push('debtee')
-                    .apply(this.props.push);
-                  this.props.onFocusIdChanged('debtee');
+                  history.push(paths.newBill('debtee'));
+                  props.onFocusIdChanged('debtee');
                 }}
                 rightActions={[<FontIcon key="edit" value="edit" />]}
               />
             </List>
-            <InputLegend error={this.props.isDebteeErrorShown}>
+            <InputLegend error={props.isDebteeErrorShown}>
               Select the person who paid this bill.
             </InputLegend>
           </Section>
@@ -137,26 +133,23 @@ class OverviewPage extends React.Component {
             <Caption>Who is involved?</Caption>
             <List>
               <SelectorItem
-                focus={this.props.focusId === 'debtor'}
+                focus={props.focusId === 'debtor'}
                 leftIcon="group"
                 data-cy={'select-debtors'}
                 placeholder="Nobody is involved"
                 value={
-                  this.props.sharesWithValues.length === 0
+                  props.sharesWithValues.length === 0
                     ? null
-                    : this.props.sharesWithValues.length +
-                      ' persons are involved'
+                    : props.sharesWithValues.length + ' persons are involved'
                 }
                 onClick={() => {
-                  LocationBuilder.fromWindow()
-                    .push('debtors')
-                    .apply(this.props.push);
-                  this.props.onFocusIdChanged('debtor');
+                  history.push(paths.newBill('debtors'));
+                  props.onFocusIdChanged('debtor');
                 }}
                 rightActions={[<FontIcon key="edit" value="edit" />]}
               />
             </List>
-            <InputLegend error={this.props.isDebtorsSelectionErrorShown}>
+            <InputLegend error={props.isDebtorsSelectionErrorShown}>
               Select who is involved in this bill.
             </InputLegend>
           </Section>
@@ -164,43 +157,41 @@ class OverviewPage extends React.Component {
         <Button
           raised
           primary
-          disabled={this.props.addBillStatus === AsyncActionStatus.IN_PROGRESS}
-          onClick={() => createBill(this.props)}
+          disabled={props.addBillStatus === AsyncActionStatus.IN_PROGRESS}
+          onClick={() => createBill(props)}
           label="add bill"
           icon="check_circle"
         />
       </Main>
     </div>
   );
-}
+};
 
-export default withNavigation(
-  connect(
-    (state, props) => ({
-      description: getDescription(state),
-      amount: getAmount(state),
-      debtee: getDebtee(state),
-      shares: getShares(state),
-      sharesWithValues: getSharesWithValues(state),
-      conversionInformation: getConversionInformation(state),
-      nobtId: props.match.params.nobtId,
-      splitStrategy: getSplitStrategy(state),
-      addBillStatus: getAddBillStatus(state),
-      isDescriptionErrorShown: isDescriptionErrorShown(state),
-      isAmountErrorShown: isAmountErrorShown(state),
-      isDebteeErrorShown: isDebteeErrorShown(state),
-      isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state),
-      focusId: getFocusId(state),
-      foreignCurrency: getForeignCurrency(state),
-      nobtCurrency: getNobtCurrency(state),
-    }),
-    dispatch => ({
-      onDescriptionChanged: description =>
-        dispatch(descriptionChanged(description)),
-      onAmountChanged: amount => dispatch(amountChanged(amount)),
-      onSubmit: (id, bill) => dispatch(addBill(id, bill)),
-      onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
-      invalidateNobtData: () => dispatch(invalidateNobt()),
-    })
-  )(OverviewPage)
-);
+export default connect(
+  (state, props) => ({
+    description: getDescription(state),
+    amount: getAmount(state),
+    debtee: getDebtee(state),
+    shares: getShares(state),
+    sharesWithValues: getSharesWithValues(state),
+    conversionInformation: getConversionInformation(state),
+    nobtId: props.match.params.nobtId,
+    splitStrategy: getSplitStrategy(state),
+    addBillStatus: getAddBillStatus(state),
+    isDescriptionErrorShown: isDescriptionErrorShown(state),
+    isAmountErrorShown: isAmountErrorShown(state),
+    isDebteeErrorShown: isDebteeErrorShown(state),
+    isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state),
+    focusId: getFocusId(state),
+    foreignCurrency: getForeignCurrency(state),
+    nobtCurrency: getNobtCurrency(state),
+  }),
+  dispatch => ({
+    onDescriptionChanged: description =>
+      dispatch(descriptionChanged(description)),
+    onAmountChanged: amount => dispatch(amountChanged(amount)),
+    onSubmit: (id, bill) => dispatch(addBill(id, bill)),
+    onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
+    invalidateNobtData: () => dispatch(invalidateNobt()),
+  })
+)(OverviewPage);

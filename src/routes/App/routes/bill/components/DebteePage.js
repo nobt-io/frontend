@@ -4,19 +4,15 @@ import { Main } from 'components/Container/index';
 import { connect } from 'react-redux';
 import { getAllMembers, getDebtee } from '../modules/selectors';
 import { newDebteeSelected } from '../modules/actions';
-import LocationBuilder from '../../../modules/navigation/LocationBuilder';
-import withNavigation from 'components/hoc/withNavigation';
 import BrandedAppBar from 'components/BrandedAppBar/BrandedAppBar';
 import { Section, SectionGroup } from 'components/Section/index';
 import { AddMemberItem, List, RadioboxItem } from 'components/List/index';
 import Button from 'components/Button/index';
-
-const goBack = replace =>
-  LocationBuilder.fromWindow()
-    .pop()
-    .apply(replace);
+import { useHistory } from 'react-router-dom';
 
 const DebteePage = ({ members, debtee, onPersonPicked, replace }) => {
+  const history = useHistory();
+
   return (
     <div>
       <BrandedAppBar canGoBack={true} />
@@ -51,7 +47,7 @@ const DebteePage = ({ members, debtee, onPersonPicked, replace }) => {
         <Button
           raised
           primary
-          onClick={() => goBack(replace)}
+          onClick={() => history.goBack()}
           label="Back"
           icon="arrow_back"
         />
@@ -60,14 +56,12 @@ const DebteePage = ({ members, debtee, onPersonPicked, replace }) => {
   );
 };
 
-export default withNavigation(
-  connect(
-    state => ({
-      members: getAllMembers(state),
-      debtee: getDebtee(state),
-    }),
-    dispatch => ({
-      onPersonPicked: debtee => dispatch(newDebteeSelected(debtee)),
-    })
-  )(DebteePage)
-);
+export default connect(
+  state => ({
+    members: getAllMembers(state),
+    debtee: getDebtee(state),
+  }),
+  dispatch => ({
+    onPersonPicked: debtee => dispatch(newDebteeSelected(debtee)),
+  })
+)(DebteePage);

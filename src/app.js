@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import { Router } from 'react-router-dom';
 import createStore from './store/createStore';
 import { IntlProvider } from 'react-intl';
@@ -13,11 +13,13 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from 'react-css-themr';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import muiTheme from 'styles/muiTheme';
-import { ScrollManager } from 'react-scroll-manager';
+import { wrapHistory } from 'oaf-react-router';
 
-const history = createHistory();
+const history = createBrowserHistory();
+wrapHistory(history);
+
 const initialState = window.___INITIAL_STATE__;
-const store = createStore(initialState, history);
+const store = createStore(initialState);
 
 Sentry.init({
   dsn: 'https://bbc41d462f564d7e8f061eaf89c41e20@sentry.io/104728',
@@ -26,7 +28,6 @@ Sentry.init({
     if (event.exception) {
       Sentry.showReportDialog({ eventId: event.event_id });
     }
-
     event.extra.store = store.getState();
   },
 });
@@ -45,9 +46,7 @@ ReactDOM.render(
     <MuiThemeProvider theme={muiTheme}>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <ScrollManager history={history}>
-            <Router history={history}>{routes}</Router>
-          </ScrollManager>
+          <Router history={history}>{routes}</Router>
         </Provider>
       </ThemeProvider>
     </MuiThemeProvider>

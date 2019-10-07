@@ -1,11 +1,13 @@
-import LocationBuilder from '../../modules/navigation/LocationBuilder';
-import withNavigation from '../../../../components/hoc/withNavigation';
 import * as React from 'react';
 import Amount from '../../../../components/Amount/Amount';
 import FeedItem from './FeedItem';
+import { useHistory } from 'react-router-dom';
+import usePaths from '../../../../hooks/usePaths';
 
-const BillFeedItem = ({ feedItem, push }) => {
+const BillFeedItem = ({ feedItem }) => {
   const { id, debtee, subject, amount, deleted } = feedItem;
+  const history = useHistory();
+  const paths = usePaths();
 
   return (
     <FeedItem
@@ -13,13 +15,11 @@ const BillFeedItem = ({ feedItem, push }) => {
       deleted={deleted}
       caption={`${debtee} paid '${subject}'`}
       legend={<Amount value={amount} />}
-      onClick={() =>
-        LocationBuilder.fromWindow()
-          .push(id)
-          .apply(push)
-      }
+      onClick={() => {
+        history.push(paths.billDetails(id));
+      }}
     />
   );
 };
 
-export default withNavigation(BillFeedItem);
+export default BillFeedItem;

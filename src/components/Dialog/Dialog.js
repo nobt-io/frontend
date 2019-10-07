@@ -1,13 +1,16 @@
 import React from 'react';
 import { Dialog as RTDialog } from 'react-toolbox-legacy/lib/dialog';
+import { useHistory } from 'react-router-dom';
 
-export default class Dialog extends React.Component {
-  render = () => (
+export default function Dialog(props) {
+  const history = useHistory();
+
+  return (
     <RTDialog
       active={true}
-      onOverlayClick={this.props.goBack}
-      {...this.props}
-      theme={this.props.theme}
+      onOverlayClick={() => history.goBack()}
+      {...props}
+      theme={props.theme}
     />
   );
 }

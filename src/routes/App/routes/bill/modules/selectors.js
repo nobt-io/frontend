@@ -30,12 +30,9 @@ export const getAddBillStatus = createSelector(
   [getAddBillFormSlice],
   state => state.addBillStatus
 );
-export const getSplitStrategy = createSelector(
-  [getAddBillFormSlice],
-  state => {
-    return state.splitStrategy;
-  }
-);
+export const getSplitStrategy = createSelector([getAddBillFormSlice], state => {
+  return state.splitStrategy;
+});
 export const getForeignCurrency = createSelector(
   [getAddBillFormSlice],
   state => {
@@ -46,23 +43,17 @@ export const getForeignCurrency = createSelector(
     return state.conversionInformation.foreignCurrency;
   }
 );
-export const getRate = createSelector(
-  [getAddBillFormSlice],
-  state => {
-    if (!state.conversionInformation) {
-      return null;
-    }
-
-    return state.conversionInformation.rate;
+export const getRate = createSelector([getAddBillFormSlice], state => {
+  if (!state.conversionInformation) {
+    return null;
   }
-);
 
-export const getBillMembers = createSelector(
-  [getAddBillFormSlice],
-  state => {
-    return state.personValues.map(pv => pv.name);
-  }
-);
+  return state.conversionInformation.rate;
+});
+
+export const getBillMembers = createSelector([getAddBillFormSlice], state => {
+  return state.personValues.map(pv => pv.name);
+});
 
 export const getAllMembers = createSelector(
   [getBillMembers, getMembers, getDebtee],
@@ -144,24 +135,21 @@ export const areAllMembersSelected = createSelector(
  * Internal selector used to determine the "strategy" on how to split the bill. Listens on the splitStrategy property and therefore
  * gets executed every time, the user changes the strategy.
  */
-const getShareSelector = createSelector(
-  [getSplitStrategy],
-  splitStrategy => {
-    switch (splitStrategy) {
-      case SplitStrategyNames.EQUAL:
-        return getEqualShares;
+const getShareSelector = createSelector([getSplitStrategy], splitStrategy => {
+  switch (splitStrategy) {
+    case SplitStrategyNames.EQUAL:
+      return getEqualShares;
 
-      case SplitStrategyNames.UNEQUAL:
-        return getCustomShares;
+    case SplitStrategyNames.UNEQUAL:
+      return getCustomShares;
 
-      case SplitStrategyNames.PERCENTAGE:
-        return getPercentualShares;
+    case SplitStrategyNames.PERCENTAGE:
+      return getPercentualShares;
 
-      default:
-        throw new Error(`Unknown split-strategy '${splitStrategy}'.`);
-    }
+    default:
+      throw new Error(`Unknown split-strategy '${splitStrategy}'.`);
   }
-);
+});
 
 const getEqualShares = createSelector(
   [getConvertedAmount, getPersonValues, getAllMembers],
@@ -196,18 +184,15 @@ const getEqualShares = createSelector(
   }
 );
 
-const getCustomShares = createSelector(
-  [getPersonValues],
-  personValues => {
-    return personValues.map(pv => {
-      return {
-        name: pv.name,
-        amount: pv.value || 0,
-        value: pv.value,
-      };
-    });
-  }
-);
+const getCustomShares = createSelector([getPersonValues], personValues => {
+  return personValues.map(pv => {
+    return {
+      name: pv.name,
+      amount: pv.value || 0,
+      value: pv.value,
+    };
+  });
+});
 
 const getPercentualShares = createSelector(
   [getAmount, getPersonValues, getAllMembers],
@@ -257,29 +242,20 @@ export const getShares = createSelector(
   }
 );
 
-export const getSharesWithValues = createSelector(
-  [getShares],
-  shares => {
-    return shares.filter(share => share.amount !== null);
-  }
-);
+export const getSharesWithValues = createSelector([getShares], shares => {
+  return shares.filter(share => share.amount !== null);
+});
 
 const isDescriptionValid = createSelector(
   [getDescription],
   description => description.length > 0
 );
-const isAmountValid = createSelector(
-  [getAmount],
-  amount => {
-    return amount > 0;
-  }
-);
-const isDebteeValid = createSelector(
-  [getDebtee],
-  debtee => {
-    return debtee !== null;
-  }
-);
+const isAmountValid = createSelector([getAmount], amount => {
+  return amount > 0;
+});
+const isDebteeValid = createSelector([getDebtee], debtee => {
+  return debtee !== null;
+});
 const isDebtorsSelectionValid = createSelector(
   [getSharesWithValues],
   shares => {

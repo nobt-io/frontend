@@ -1,15 +1,10 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import logger from 'redux-logger';
 import { reduxBreadcrumbs } from './reduxBreadcrumbs';
-import { routerMiddleware } from 'react-router-redux';
 
-export default (initialState = {}, history) => {
-  const reduxRouterMiddleware = routerMiddleware(history);
-  const middleware = IS_PRODUCTION_BUILD
-    ? [reduxBreadcrumbs, thunk, reduxRouterMiddleware]
-    : [logger, thunk, reduxRouterMiddleware];
+export default (initialState = {}) => {
+  const middleware = IS_PRODUCTION_BUILD ? [reduxBreadcrumbs, thunk] : [thunk];
 
   const devToolsExtension = window.devToolsExtension;
   const enhancers =
@@ -20,9 +15,6 @@ export default (initialState = {}, history) => {
   return createStore(
     rootReducer,
     initialState,
-    compose(
-      applyMiddleware(...middleware),
-      ...enhancers
-    )
+    compose(applyMiddleware(...middleware), ...enhancers)
   );
 };

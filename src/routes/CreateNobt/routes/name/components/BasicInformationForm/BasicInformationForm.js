@@ -6,11 +6,13 @@ import NobtNameInputTheme from './NobtNameInputTheme.scss';
 import { connect } from 'react-redux';
 import { getCurrency, getNobtName } from '../../../../modules/selectors';
 import { changeNobtName, selectCurrency } from '../../../../modules/actions';
-import LocationBuilder from '../../../../../App/modules/navigation/LocationBuilder';
 import CurrencySelect from '../../../../../../components/CurrencySelect/CurrencySelect';
+import { useHistory } from 'react-router-dom';
 
-class BasicInformationForm extends React.Component {
-  render = () => (
+const BasicInformationForm = props => {
+  const history = useHistory();
+
+  return (
     <div className={styles.formContainer}>
       <h1 className={styles.title}>Create</h1>
 
@@ -27,8 +29,8 @@ class BasicInformationForm extends React.Component {
           <Input
             hint="Barbecue, London Trip, ..."
             theme={NobtNameInputTheme}
-            value={this.props.nobtName}
-            onChange={this.props.changeNobtName}
+            value={props.nobtName}
+            onChange={props.changeNobtName}
             data-cy="nobt-name-input"
           />
         </div>
@@ -36,11 +38,11 @@ class BasicInformationForm extends React.Component {
         <div className={styles.formLine}>
           <label>Choose currency</label>
           <CurrencySelect
-            selectedCurrency={this.props.currency}
+            selectedCurrency={props.currency}
             onCurrencyChanged={option =>
               option
-                ? this.props.selectCurrency(option.value)
-                : this.props.selectCurrency(null)
+                ? props.selectCurrency(option.value)
+                : props.selectCurrency(null)
             }
           />
           <div className={styles.description}>
@@ -55,20 +57,15 @@ class BasicInformationForm extends React.Component {
           <ContinueButton
             data-cy={'continue-button'}
             label="Continue"
-            disabled={!this.props.nobtName}
+            disabled={!props.nobtName}
             icon="arrow_forward"
-            onClick={() =>
-              LocationBuilder.fromWindow()
-                .pop()
-                .push('members')
-                .apply(this.props.push)
-            }
+            onClick={() => history.push('/create/members')}
           />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default connect(
   state => ({
