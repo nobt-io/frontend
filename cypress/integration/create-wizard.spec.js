@@ -1,6 +1,18 @@
 /// <reference types="Cypress" />
 
 describe('The wizard for creating a new nobt', function() {
+  it('should go to wizard start page when trying to enter at members page', function() {
+    cy.visit('http://localhost:3000/create/members');
+
+    cy.url().should('include', '/create/name');
+  });
+
+  it('should go to wizard start page when trying to enter at done page', function() {
+    cy.visit('http://localhost:3000/create/done');
+
+    cy.url().should('include', '/create/name');
+  });
+
   it('should go to wizard from landing page', function() {
     cy.visit('http://localhost:3000').then(() =>
       cy.percySnapshot('Landing page')

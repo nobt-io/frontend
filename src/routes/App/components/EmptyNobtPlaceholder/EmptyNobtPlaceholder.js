@@ -14,6 +14,7 @@ export const EmptyNobtPlaceholder = props => {
       <div className={styles.topLabel}>No bills found.</div>
       <div className={styles.linkLabel}>
         <a
+          data-cy="add-bill-link"
           href="#"
           onClick={() =>
             LocationBuilder.fromWindow()

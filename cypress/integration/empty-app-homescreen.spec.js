@@ -44,4 +44,10 @@ describe('The app homescreen with an empty feed', function() {
     cy.url().should('include', '/bill');
     cy.go('back');
   });
+
+  it('should navigate to bill wizard through link', function() {
+    cy.get('[data-cy=add-bill-link]').click();
+    cy.url().should('include', '/bill');
+    cy.go('back');
+  });
 });
