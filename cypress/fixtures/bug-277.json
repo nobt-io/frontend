@@ -1,0 +1,611 @@
+{
+  "id": "yIGHL7SzDSrJ",
+  "name": "Hunter valley trip ",
+  "expenses": [
+    {
+      "id": 9,
+      "name": "Beer 🍻",
+      "debtee": "Juliet",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Blair ",
+          "amount": 2.12
+        },
+        {
+          "debtor": "Matt",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Helen",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Megan Brown",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Rahul",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Viv",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Emily",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Juliet",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Megan buxton",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Ty",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Chris",
+          "amount": 2.08
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T23:49:19.894Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/9"
+      }
+    },
+    {
+      "id": 7,
+      "name": "More beers for the boys - 2 Crates",
+      "debtee": "Chris",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Blair ",
+          "amount": 13.16
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 13.14
+        },
+        {
+          "debtor": "Rahul",
+          "amount": 13.14
+        },
+        {
+          "debtor": "Helen",
+          "amount": 13.14
+        },
+        {
+          "debtor": "Matt",
+          "amount": 13.14
+        },
+        {
+          "debtor": "Chris",
+          "amount": 13.14
+        },
+        {
+          "debtor": "Megan buxton",
+          "amount": 13.14
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T22:32:49.455Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/7"
+      }
+    },
+    {
+      "id": 10,
+      "name": "Wine tour + pickup (without tax)",
+      "debtee": "Rahul",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Viv",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Chris",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Juliet",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Matt",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Megan Brown",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Emily",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Blair ",
+          "amount": 96.63
+        },
+        {
+          "debtor": "Rahul",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Megan buxton",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Helen",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 96.67
+        },
+        {
+          "debtor": "Ty",
+          "amount": 96.67
+        }
+      ],
+      "date": "2019-11-04",
+      "createdOn": "2019-11-04T00:41:53.778Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/10"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Car rental balance + fuel",
+      "debtee": "Chris",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Juliet",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Emily",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Matt",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Viv",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Chris",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Blair ",
+          "amount": 13.37
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Ty",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Helen",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Rahul",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Megan Brown",
+          "amount": 13.33
+        },
+        {
+          "debtor": "Megan buxton",
+          "amount": 13.33
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T10:19:29.764Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/5"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Car rental",
+      "debtee": "Chris",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Ty",
+          "amount": 115.0
+        },
+        {
+          "debtor": "Viv",
+          "amount": 115.0
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T10:18:23.454Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/4"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Brekkie & Snacks",
+      "debtee": "Helen",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Megan buxton",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Emily",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Blair ",
+          "amount": 8.87
+        },
+        {
+          "debtor": "Viv",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Rahul",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Helen",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Matt",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Megan Brown",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Ty",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Chris",
+          "amount": 8.83
+        },
+        {
+          "debtor": "Juliet",
+          "amount": 8.83
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T23:47:31.149Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/8"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Wine",
+      "debtee": "Rahul",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Chris",
+          "amount": 14.0
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T10:09:43.698Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/2"
+      }
+    },
+    {
+      "id": 11,
+      "name": "Beer",
+      "debtee": "Megan buxton",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Blair ",
+          "amount": 2.12
+        },
+        {
+          "debtor": "Matt",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Helen",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Megan Brown",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Rahul",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Viv",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Emily",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Juliet",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Megan buxton",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Ty",
+          "amount": 2.08
+        },
+        {
+          "debtor": "Chris",
+          "amount": 2.08
+        }
+      ],
+      "date": "2019-11-04",
+      "createdOn": "2019-11-04T00:54:39.456Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/11"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Beers for the boys",
+      "debtee": "Matt",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Chris",
+          "amount": 17.34
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 17.33
+        },
+        {
+          "debtor": "Rahul",
+          "amount": 17.33
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T21:01:06.839Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/6"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Wine",
+      "debtee": "Rahul",
+      "splitStrategy": "EQUAL",
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "shares": [
+        {
+          "debtor": "Ollie",
+          "amount": 32.0
+        }
+      ],
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T10:10:54.756Z",
+      "_links": {
+        "delete": "https://api.nobt.io/nobts/yIGHL7SzDSrJ/expenses/3"
+      }
+    }
+  ],
+  "deletedExpenses": [
+    {
+      "deletedOn": "2019-11-04T00:40:43.187Z",
+      "date": "2019-11-03",
+      "createdOn": "2019-11-03T10:08:14.849Z",
+      "debtee": "Rahul",
+      "splitStrategy": "EQUAL",
+      "shares": [
+        {
+          "debtor": "Rahul",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Ty",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Helen",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Megan Brown",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Blair ",
+          "amount": 98.37
+        },
+        {
+          "debtor": "Ollie",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Emily",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Juliet",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Matt",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Viv",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Chris",
+          "amount": 98.33
+        },
+        {
+          "debtor": "Megan buxton",
+          "amount": 98.33
+        }
+      ],
+      "conversionInformation": {
+        "foreignCurrency": "AUD",
+        "rate": 1.0
+      },
+      "name": "Wine tour + pickup",
+      "id": 1
+    }
+  ],
+  "payments": [],
+  "createdOn": "2019-11-03T10:06:55.088Z",
+  "participatingPersons": [
+    "Blair ",
+    "Ollie",
+    "Megan buxton",
+    "Helen",
+    "Emily",
+    "Viv",
+    "Ty",
+    "Chris",
+    "Matt",
+    "Juliet",
+    "Rahul",
+    "Megan Brown"
+  ],
+  "currency": "AUD",
+  "debts": [
+    {
+      "debtor": "Juliet",
+      "amount": 97.99,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Matt",
+      "amount": 84.13,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Helen",
+      "amount": 30.13,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Emily",
+      "amount": 122.99,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Megan Brown",
+      "amount": 122.99,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Ty",
+      "amount": 237.99,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Blair ",
+      "amount": 136.27,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Megan buxton",
+      "amount": 111.13,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Ollie",
+      "amount": 108.92,
+      "debtee": "Rahul"
+    },
+    {
+      "debtor": "Viv",
+      "amount": 237.99,
+      "debtee": "Chris"
+    },
+    {
+      "debtor": "Ollie",
+      "amount": 76.54,
+      "debtee": "Chris"
+    }
+  ]
+}

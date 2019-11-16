@@ -178,10 +178,15 @@ export const makeGetBalance = () =>
     [getBalances, getBalanceOwner],
     (balances, balanceOwner) => {
       return balances
-        .filter(balance => balance.me.name === balanceOwner)
+        .filter(balance => sanitizeName(balance.me.name) === balanceOwner)
         .find(first);
     }
   );
+
+// quickfix for bug 277
+function sanitizeName(name) {
+  return name.trim();
+}
 
 export const getSumOfPaidBills = paidBills => {
   return paidBills.reduce((amount, bill) => amount + bill.debtee.amount, 0);
