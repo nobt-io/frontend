@@ -2,24 +2,20 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import logger from 'redux-logger';
-import { crashReporter } from './crashReporter';
+import { reduxBreadcrumbs } from './reduxBreadcrumbs';
 import { routerMiddleware } from 'react-router-redux';
 
 export default (initialState = {}, history) => {
   const reduxRouterMiddleware = routerMiddleware(history);
-  const middleware = [crashReporter, thunk, reduxRouterMiddleware];
+  const middleware = IS_PRODUCTION_BUILD
+    ? [reduxBreadcrumbs, thunk, reduxRouterMiddleware]
+    : [logger, thunk, reduxRouterMiddleware];
 
-  if (__DEV__) {
-    middleware.push(logger);
-  }
-
-  const enhancers = [];
-  if (__DEV__) {
-    const devToolsExtension = window.devToolsExtension;
-    if (typeof devToolsExtension === 'function') {
-      enhancers.push(devToolsExtension());
-    }
-  }
+  const devToolsExtension = window.devToolsExtension;
+  const enhancers =
+    !IS_PRODUCTION_BUILD && typeof devToolsExtension === 'function'
+      ? [devToolsExtension()]
+      : [];
 
   return createStore(
     rootReducer,

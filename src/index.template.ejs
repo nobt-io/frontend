@@ -40,26 +40,11 @@
   </script>
   <!-- End Single Page Apps for GitHub Pages -->
 
-  <script src="https://cdn.ravenjs.com/3.26.2/raven.min.js" crossorigin="anonymous"></script>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Courgette|Comfortaa:700" rel="stylesheet">
 
-  <script type="application/javascript">
-    Raven.config('<%= SENTRY_DSN %>', {
-      release: '<%= COMMIT_HASH %>',
-      whitelistUrls: [
-      	/nobt\.io/
-      ]
-    }).install();
-
-    // ravenSuccess is an undocumented event but this is the cleanest way to always show the report dialog, no matter where the exception was triggered.
-    document.addEventListener('ravenSuccess', function (event) {
-      Raven.showReportDialog({eventId: event.data.event_id});
-    }, false);
-	</script>
-	
 	<script type="application/javascript">
 		// Create a list of the features this browser needs.
     // Beware of overly simplistic detects!

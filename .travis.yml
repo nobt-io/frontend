@@ -44,7 +44,7 @@ jobs:
 
     - stage: deploy
       name: 'Deployment to Github Pages'
-      script: yarn run build:prod
+      script: .sentry/new-release.sh
       deploy:
         - provider: pages
           skip-cleanup: true
@@ -52,7 +52,7 @@ jobs:
           keep-history: true
           local-dir: dist
           fqdn: nobt.io
-      after_deploy: .sentry/upload-sourcemaps
+      after_deploy: .sentry/new-deployment.sh
       if: branch = master AND repo = nobt-io/frontend AND type != pull_request
 
 notifications:

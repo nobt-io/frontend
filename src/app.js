@@ -1,9 +1,9 @@
+import * as Sentry from '@sentry/browser';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 import { Router } from 'react-router-dom';
 import createStore from './store/createStore';
-import attachStoreStateFactory from './store/attachStoreStateFactory';
 import { IntlProvider } from 'react-intl';
 import routeFactory from './routes';
 // noinspection ES6UnusedImports
@@ -19,13 +19,20 @@ const history = createHistory();
 const initialState = window.___INITIAL_STATE__;
 const store = createStore(initialState, history);
 
-// Configure Raven to always attach the current state of the store to the event
-let attachStoreState = attachStoreStateFactory(store);
+Sentry.init({
+  dsn: 'https://bbc41d462f564d7e8f061eaf89c41e20@sentry.io/104728',
+  whitelistUrls: [/nobt\.io/],
+  beforeSend(event, hint) {
+    if (event.exception) {
+      Sentry.showReportDialog({ eventId: event.event_id });
+    }
 
-Raven.setDataCallback(attachStoreState);
+    event.extra.store = store.getState();
+  },
+});
 
 let routes = routeFactory(store);
-if (__DEV__) {
+if (!IS_PRODUCTION_BUILD) {
   if (window.devToolsExtension) {
     window.devToolsExtension.open();
   }

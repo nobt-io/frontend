@@ -11,8 +11,7 @@
     "api": "cd ../api; PORT=8080 MIGRATE_DATABASE_AT_STARTUP=false USE_IN_MEMORY_DATABASE=true ./gradlew run",
     "clean": "rimraf dist",
     "dev": "webpack-dev-server --mode development --hot",
-    "build": "webpack --mode development",
-    "build:prod": "yarn run clean && webpack --mode production",
+    "build": "yarn run clean && webpack --mode production",
     "lint": "eslint src && tslint -c tslint.json 'src/**/*.ts' 'src/**/*.tsx'",
     "prettier": "prettier --check '**/*.{js,scss,ts,tsx,html,json,yml}'",
     "test": "jest"
@@ -24,6 +23,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.4",
     "@material-ui/core": "^3.9.3",
+    "@sentry/browser": "^5.9.0",
     "axios": "^0.18.1",
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.0.8",
@@ -60,6 +60,7 @@
     "@babel/preset-env": "^7.4",
     "@babel/preset-react": "^7.0",
     "@percy/cypress": "^1.0.2",
+    "@sentry/cli": "^1.49.0",
     "@types/debug": "^0.0.31",
     "@types/jest": "^24.0.11",
     "@types/react": "^16.9.5",

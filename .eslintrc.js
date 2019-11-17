@@ -10,8 +10,8 @@ module.exports = {
     jest: true,
   },
   globals: {
-    __DEV__: false,
-    Raven: false,
+    IS_PRODUCTION_BUILD: false,
+    Sentry: false,
     exports: false,
     module: false,
   },

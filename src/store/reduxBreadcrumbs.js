@@ -1,11 +1,9 @@
-export const crashReporter = () => next => action => {
-  if (!Raven || !Raven.isSetup()) {
-    return next(action);
-  }
+import * as Sentry from '@sentry/browser';
 
+export const reduxBreadcrumbs = () => next => action => {
   const { type, ...other } = { ...action };
 
-  Raven.captureBreadcrumb({
+  Sentry.addBreadcrumb({
     category: 'redux',
     message: type,
     data: {

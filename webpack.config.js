@@ -8,24 +8,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = (_, argv) => {
   const isProduction = argv.mode === 'production';
 
-  const requireEnv = envName => {
-    const envValue = JSON.stringify(process.env[envName]);
-
-    if (!envValue) {
-      throw new Error(`${envName} is not defined!`);
-    }
-
-    return envValue;
-  };
-
-  const COMMIT_HASH = isProduction
-    ? requireEnv('COMMIT_HASH')
-    : JSON.stringify('');
-  const SENTRY_DSN = isProduction
-    ? requireEnv('SENTRY_DSN')
-    : JSON.stringify('');
-  const __DEV__ = argv.mode === 'development';
-
   return {
     entry: ['@babel/polyfill', './src/app.js'],
     devtool: 'source-map',
@@ -98,9 +80,7 @@ module.exports = (_, argv) => {
         template: 'src/index.template.ejs',
       }),
       new DefinePlugin({
-        COMMIT_HASH,
-        SENTRY_DSN,
-        __DEV__,
+        IS_PRODUCTION_BUILD: isProduction,
       }),
       new MiniCssExtractPlugin(),
       new FaviconsWebpackPlugin({
