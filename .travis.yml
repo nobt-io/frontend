@@ -44,7 +44,9 @@ jobs:
 
     - stage: deploy
       name: 'Deployment to Github Pages'
-      script: .sentry/new-release.sh
+      script:
+        - yarn run build
+        - .sentry/new-release.sh
       deploy:
         - provider: pages
           skip-cleanup: true
