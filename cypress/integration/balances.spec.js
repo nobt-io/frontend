@@ -1,24 +1,12 @@
 /// <reference types="Cypress" />
 
 describe('The balances page', function() {
-  beforeEach(() => {
-    cy.fixture('nobt-with-one-bill').as('nobt');
-  });
-
   it('should navigate to balances screen', function() {
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/nobts/' + this.nobt.id,
-      status: 200,
-      delay: 500,
-      response: 'fixture:nobt-with-one-bill',
+    cy.visit('/balances', {
+      nobtFixture: 'nobt-with-one-bill',
     });
-    cy.visit(this.nobt.id + '/balances');
 
-    // Waits for the page to actually render
-    cy.contains('Balance Overview').should('exist');
-    cy.percySnapshot('Balances page');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should show correct balances', function() {
@@ -37,6 +25,7 @@ describe('The balances page', function() {
     cy.contains('li', 'David')
       .contains('-€10.00')
       .should('exist');
+    cy.document().toMatchImageSnapshot("Thomas's account");
 
     cy.go('back');
 
@@ -46,6 +35,7 @@ describe('The balances page', function() {
     cy.contains('li', 'Thomas')
       .contains('€10.00')
       .should('exist');
+    cy.document().toMatchImageSnapshot("David's account");
 
     cy.go('back');
     cy.go('back');

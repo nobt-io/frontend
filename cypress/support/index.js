@@ -14,5 +14,5 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
+import 'cypress-plugin-snapshots/commands';
 import './commands';
-import './assertions';

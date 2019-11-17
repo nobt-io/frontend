@@ -5,23 +5,23 @@ describe('The wizard for creating a new nobt', function() {
     cy.visit('http://localhost:3000/create/members');
 
     cy.url().should('include', '/create/name');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should go to wizard start page when trying to enter at done page', function() {
     cy.visit('http://localhost:3000/create/done');
 
     cy.url().should('include', '/create/name');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should go to wizard from landing page', function() {
-    cy.visit('http://localhost:3000').then(() =>
-      cy.percySnapshot('Landing page')
-    );
+    cy.visit('http://localhost:3000');
 
     cy.get('[data-cy=start-button]').click();
 
     cy.url().should('include', '/create/name');
-    cy.percySnapshot('Create-nobt wizard - page 1');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should complete first page', function() {
@@ -32,7 +32,7 @@ describe('The wizard for creating a new nobt', function() {
     // TODO: Test different currencies here
 
     cy.url().should('include', '/create/members');
-    cy.percySnapshot('Create-nobt wizard - page 2');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should add member with enter key', function() {
@@ -48,8 +48,11 @@ describe('The wizard for creating a new nobt', function() {
 
   it('should change button from create nobt if user starts typing', function() {
     cy.get('[data-cy=create-nobt-button]').should('exist');
+    cy.document().toMatchImageSnapshot('button before typing');
 
     cy.get('[data-cy=name-input]').type('Matthias');
+
+    cy.document().toMatchImageSnapshot('button after typing');
 
     cy.get('[data-cy=create-nobt-button]').should('not.exist');
     cy.get('[data-cy=add-person-button]')
@@ -62,6 +65,7 @@ describe('The wizard for creating a new nobt', function() {
 
     cy.get('[data-cy=add-person-button]').should('be.disabled');
     // TODO: Test error message here?
+    cy.document().toMatchImageSnapshot();
 
     cy.get('[data-cy=name-input]').clear();
   });
@@ -71,16 +75,16 @@ describe('The wizard for creating a new nobt', function() {
       .find('[data-cy=remove-person-button]')
       .click();
     cy.contains('li', 'Matthias').should('not.exist');
+    cy.document().toMatchImageSnapshot();
   });
 
-  it('should create nobt when clicking on button', async function() {
+  it('should create nobt when clicking on button', function() {
     cy.server();
 
     cy.route({
       method: 'POST',
       url: 'http://localhost:8080/nobts',
       status: 201,
-      delay: 500,
       response: 'fixture:empty-nobt-response',
     }).as('createNobt');
 
@@ -88,6 +92,6 @@ describe('The wizard for creating a new nobt', function() {
     cy.wait('@createNobt');
     cy.url().should('include', '/create/done');
 
-    cy.percySnapshot('Create-nobt wizard - page 3');
+    cy.document().toMatchImageSnapshot();
   });
 });

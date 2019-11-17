@@ -1,27 +1,14 @@
 /// <reference types="Cypress" />
 
 describe('The app homescreen', function() {
-  beforeEach(() => {
-    cy.fixture('nobt-with-one-bill').as('nobt');
-  });
-
   it('should navigate to homescreen', function() {
     // Need to fix date otherwise would show different timestamps for the feed item
     cy.clock(new Date(2019, 1, 5));
-
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: '/nobts/' + this.nobt.id,
-      status: 200,
-      delay: 500,
-      response: '@nobt',
+    cy.visit('/', {
+      nobtFixture: 'nobt-with-one-bill',
     });
-    cy.visit(this.nobt.id);
 
-    // Waits for the page to actually render
-    cy.contains('Cypress UI Test').should('exist');
-    cy.percySnapshot('Feed');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should navigate to bill detail page', function() {
@@ -30,6 +17,7 @@ describe('The app homescreen', function() {
       .click();
 
     cy.url().should('contain', '/1');
+    cy.document().toMatchImageSnapshot();
     cy.go('back');
   });
 
@@ -37,6 +25,7 @@ describe('The app homescreen', function() {
     cy.get('[data-cy=show-balances-button]').click();
 
     cy.url().should('contain', '/balances');
+    cy.document().toMatchImageSnapshot();
     cy.go('back');
   });
 });

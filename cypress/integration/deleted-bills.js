@@ -1,30 +1,16 @@
 /// <reference types="Cypress" />
 
 describe('Deleted bills', function() {
-  beforeEach(function() {
-    cy.fixture('nobt-with-deleted-bill').as('nobt');
-  });
-
   it('should show deleted bills in the feed', function() {
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: 'http://localhost:8080/nobts/' + this.nobt.id,
-      status: 200,
-      response: '@nobt',
-    });
-
     // Need to fix date otherwise would show different timestamps for the feed item
     cy.clock(new Date(2019, 1, 5));
+    cy.visit('/', {
+      nobtFixture: 'nobt-with-deleted-bill',
+    });
 
-    cy.visit('http://localhost:3000/' + this.nobt.id);
-
-    // Waits for the page to actually render
     cy.contains('A bill to be deleted').should('exist');
     cy.contains('A valid bill').should('exist');
-
-    // The percy snapshot guarantees we are always rendering deleted bills the same way
-    cy.percySnapshot('Feed with a deleted bill');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should mention the deleted date in the bills details', function() {
@@ -32,9 +18,11 @@ describe('Deleted bills', function() {
 
     // We purposely don't match against the formatted date because that might be platform/browser specific
     cy.contains('Deleted on').should('exist');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should not have a delete action', function() {
     cy.contains('Delete this bill').should('not.exist');
+    cy.document().toMatchImageSnapshot();
   });
 });
