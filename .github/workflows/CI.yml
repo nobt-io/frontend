@@ -71,6 +71,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout source-code
+        uses: actions/checkout@v1
+
       - name: Download bundle
         uses: actions/download-artifact@v1
         with:
