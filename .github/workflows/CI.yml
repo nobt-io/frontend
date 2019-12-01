@@ -74,6 +74,30 @@ jobs:
       - name: Checkout source-code
         uses: actions/checkout@v1
 
+      - name: Install NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.15
+
+      - uses: actions/cache@v1
+        name: Cache node_modules
+        with:
+          path: node_modules
+          key: node_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            node_modules-
+
+      - uses: actions/cache@v1
+        name: Cache cypress
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            cypress-
+
+      - name: Install dependencies
+        run: yarn
+
       - name: Download bundle
         uses: actions/download-artifact@v1
         with:
