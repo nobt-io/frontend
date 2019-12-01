@@ -105,6 +105,8 @@ jobs:
 
       - name: Notify sentry about new release
         run: .sentry/new-release.sh
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Deploy to GitHub pages
         uses: peaceiris/actions-gh-pages@v2.5.0
@@ -115,5 +117,8 @@ jobs:
 
       - name: Notify sentry about new deployment
         run: .sentry/new-deployment.sh
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+
     needs: build
     if: github.ref == 'refs/heads/master'
