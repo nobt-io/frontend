@@ -49,21 +49,21 @@ jobs:
         run: cypress/run.sh
 
       - name: Upload snapshot archive
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: snapshots
           path: ./cypress/integration/__image_snapshots__
 
       - name: Upload video recordings
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v1
         if: failure()
         with:
           name: video-recordings
           path: ./cypress/videos
 
       - name: Upload generated bundle
-        uses: actions/upload-artifact@master
+        uses: actions/upload-artifact@v1
         with:
           name: bundle
           path: ./dist
