@@ -72,24 +72,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download bundle
-        uses: actions/download-artifact@master
+        uses: actions/download-artifact@v1
         with:
           name: bundle
 
       - name: List directory contents
         run: ls -la
 
-      - name: Notify sentry about new release
-        run: .sentry/new-release.sh
+      - name: Log github.ref
+        run: echo ${{ github.ref }}
 
-      - name: Deploy to GitHub pages
-        uses: peaceiris/actions-gh-pages@v2.5.0
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./dist
-
-      - name: Notify sentry about new deployment
-        run: .sentry/new-deployment.sh
+    #      - name: Notify sentry about new release
+    #        run: .sentry/new-release.sh
+    #
+    #      - name: Deploy to GitHub pages
+    #        uses: peaceiris/actions-gh-pages@v2.5.0
+    #        env:
+    #          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+    #          PUBLISH_BRANCH: gh-pages
+    #          PUBLISH_DIR: ./dist
+    #
+    #      - name: Notify sentry about new deployment
+    #        run: .sentry/new-deployment.sh
     needs: build
-    if: github.ref == 'master'
+#    if: github.ref == 'master'
