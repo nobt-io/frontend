@@ -24,4 +24,37 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-import '@percy/cypress';
+Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+  if (!options || !options.nobtFixture) {
+    return originalFn(url, options);
+  }
+
+  return cy.fixture(options.nobtFixture).then(nobt => {
+    cy.server();
+    cy.route({
+      method: 'GET',
+      url: 'http://localhost:8080/nobts/' + nobt.id,
+      status: 200,
+      response: nobt,
+    }).as('fetchNobt');
+
+    originalFn(nobt.id + url, options);
+
+    return cy.wait('@fetchNobt');
+  });
+});
+
+Cypress.Commands.overwrite(
+  'toMatchImageSnapshot',
+  (originalFn, subject, options) => {
+    cy.wait(1000); // make sure everything is rendered correctly
+
+    cy.viewport('iphone-6+');
+    originalFn(subject, { ...options, capture: 'viewport' });
+
+    cy.wait(1000); // make sure everything is rendered correctly
+
+    cy.viewport('macbook-15');
+    return originalFn(subject, { ...options, capture: 'viewport' });
+  }
+);

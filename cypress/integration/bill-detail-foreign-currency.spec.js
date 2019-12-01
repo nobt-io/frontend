@@ -1,24 +1,12 @@
 /// <reference types="Cypress" />
 
 describe('Details of a bill in foreign currency', function() {
-  beforeEach(function() {
-    cy.fixture('nobt-with-foreign-bill').as('nobt');
-  });
-
   it('should navigate to details of bill', function() {
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: 'http://localhost:8080/nobts/' + this.nobt.id,
-      status: 200,
-      delay: 500,
-      response: '@nobt',
+    cy.visit('/1', {
+      nobtFixture: 'nobt-with-foreign-bill',
     });
-    cy.visit(this.nobt.id + '/1');
 
-    // Waits for the page to actually render
-    cy.contains('My first bill').should('exist');
-    cy.percySnapshot('Details of bill with foreign currency');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should show the correct debtee', function() {

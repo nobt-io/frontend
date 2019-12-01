@@ -1,4 +1,10 @@
 {
   "baseUrl": "http://localhost:3000",
-  "video": false
+  "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
+  "env": {
+    "cypress-plugin-snapshots": {
+      "autoCleanUp": true,
+      "screenshotConfig": {}
+    }
+  }
 }

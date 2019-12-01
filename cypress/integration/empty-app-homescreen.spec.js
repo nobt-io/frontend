@@ -1,24 +1,12 @@
 /// <reference types="Cypress" />
 
 describe('The app homescreen with an empty feed', function() {
-  beforeEach(function() {
-    cy.fixture('empty-nobt-response').as('nobt');
-  });
-
   it('should navigate to empty homescreen', function() {
-    cy.server();
-    cy.route({
-      method: 'GET',
-      url: 'http://localhost:8080/nobts/' + this.nobt.id,
-      status: 200,
-      delay: 500,
-      response: '@nobt',
+    cy.visit('/', {
+      nobtFixture: 'empty-nobt-response',
     });
-    cy.visit(this.nobt.id);
 
-    // Waits for the page to actually render
-    cy.contains('Cypress UI Test').should('exist');
-    cy.percySnapshot('Empty feed');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should show empty overview screen', function() {
@@ -36,7 +24,7 @@ describe('The app homescreen with an empty feed', function() {
       .should('exist')
       .should('be.enabled');
 
-    cy.percySnapshot('Add menu');
+    cy.document().toMatchImageSnapshot();
   });
 
   it('should navigate to bill wizard', function() {
