@@ -5,8 +5,6 @@ import { Section, SectionGroup } from 'components/Section/index';
 import { AddMemberItem, CheckboxItem, List } from 'components/List/index';
 import { ListDivider } from 'react-toolbox-legacy/lib/list/index';
 import { connect } from 'react-redux';
-import LocationBuilder from '../../../modules/navigation/LocationBuilder';
-import withNavigation from '../../../../../components/hoc/withNavigation';
 import {
   areAllMembersSelected,
   getAllMembers,
@@ -15,11 +13,7 @@ import {
 import { newMemberAdded, shareValueChanged } from '../modules/actions';
 import BrandedAppBar from 'components/BrandedAppBar/index';
 import Button from 'components/Button/index';
-
-const goBack = replace =>
-  LocationBuilder.fromWindow()
-    .pop(1)
-    .apply(replace);
+import { useHistory } from 'react-router-dom';
 
 const DebtorsPage = ({
   replace,
@@ -31,6 +25,7 @@ const DebtorsPage = ({
 }) => {
   const setAllValues = value =>
     allMembers.forEach(member => onShareValueChanged(member, value));
+  const history = useHistory();
 
   return (
     <div>
@@ -75,7 +70,7 @@ const DebtorsPage = ({
         <Button
           raised
           primary
-          onClick={() => goBack(replace)}
+          onClick={() => history.goBack()}
           label="Back"
           icon="arrow_back"
         />
@@ -84,17 +79,15 @@ const DebtorsPage = ({
   );
 };
 
-export default withNavigation(
-  connect(
-    state => ({
-      shares: getShares(state),
-      allMembers: getAllMembers(state),
-      areAllMembersSelected: areAllMembersSelected(state),
-    }),
-    dispatch => ({
-      onNewMember: member => dispatch(newMemberAdded(member)),
-      onShareValueChanged: (name, value) =>
-        dispatch(shareValueChanged(name, value)),
-    })
-  )(DebtorsPage)
-);
+export default connect(
+  state => ({
+    shares: getShares(state),
+    allMembers: getAllMembers(state),
+    areAllMembersSelected: areAllMembersSelected(state),
+  }),
+  dispatch => ({
+    onNewMember: member => dispatch(newMemberAdded(member)),
+    onShareValueChanged: (name, value) =>
+      dispatch(shareValueChanged(name, value)),
+  })
+)(DebtorsPage);

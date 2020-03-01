@@ -65,9 +65,6 @@ export const canCreateNobt = createSelector(
 );
 
 // different from the other selectors, as it returns a function and not an object
-export const isEvilTwinFactory = createSelector(
-  [getPersonNames],
-  names => {
-    return candidate => names.indexOf(candidate) > -1;
-  }
-);
+export const isEvilTwinFactory = createSelector([getPersonNames], names => {
+  return candidate => names.indexOf(candidate) > -1;
+});

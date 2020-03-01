@@ -1,14 +1,9 @@
-import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
+import { useEffect } from 'react';
 
-export default class HookableRoute extends Route {
-  componentWillMount() {
-    this.props.onEnter();
-    super.componentWillMount();
-  }
+export default function HookableRoute({ children, onEnter }) {
+  useEffect(() => {
+    onEnter();
+  }, []);
+
+  return children;
 }
-
-HookableRoute.propTypes = {
-  onEnter: PropTypes.func,
-  fallbackPath: PropTypes.string,
-};

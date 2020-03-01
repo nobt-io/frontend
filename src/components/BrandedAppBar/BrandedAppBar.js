@@ -2,20 +2,16 @@ import * as React from 'react';
 import { AppBar } from 'react-toolbox-legacy/lib/app_bar/index';
 import BrandedAppBarTheme from './BrandedAppBarTheme.scss';
 import { FontIcon } from 'react-toolbox-legacy/lib/font_icon/index';
-import withNavigation from '../hoc/withNavigation';
-import LocationBuilder from '../../routes/App/modules/navigation/LocationBuilder';
+import { useHistory } from 'react-router-dom';
 
-const goBack = replace =>
-  LocationBuilder.fromWindow()
-    .pop(1)
-    .apply(replace);
+const BrandedAppBar = ({ canGoBack }) => {
+  const history = useHistory();
 
-const brandenAppBar = ({ canGoBack, replace }) => {
   return (
     <AppBar
       theme={BrandedAppBarTheme}
       leftIcon={canGoBack === true ? <FontIcon value="chevron_left" /> : null}
-      onLeftIconClick={canGoBack === true ? () => goBack(replace) : null}
+      onLeftIconClick={canGoBack === true ? () => history.goBack() : null}
     >
       <h1 className={BrandedAppBarTheme.title}>
         <a href={location.protocol + '//' + location.host}>nobt.io</a>
@@ -24,4 +20,4 @@ const brandenAppBar = ({ canGoBack, replace }) => {
   );
 };
 
-export default withNavigation(brandenAppBar);
+export default BrandedAppBar;

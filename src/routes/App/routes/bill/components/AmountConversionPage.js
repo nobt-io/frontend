@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Caption, Heading, SubHeading } from 'components/text/index';
 import { Main } from 'components/Container/index';
 import { connect } from 'react-redux';
 import { getAmount, getForeignCurrency, getRate } from '../modules/selectors';
-import LocationBuilder from '../../../modules/navigation/LocationBuilder';
-import withNavigation from 'components/hoc/withNavigation';
 import BrandedAppBar from 'components/BrandedAppBar/BrandedAppBar';
 import { Section, SectionGroup } from 'components/Section/index';
 import Button from 'components/Button/index';
@@ -15,21 +13,11 @@ import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
 import getCurrencySymbol from 'currency-symbol-map';
 import { saveConversionInformation } from '../modules/actions';
 import convertAmount from '../modules/convertAmount';
+import { useHistory } from 'react-router-dom';
+import usePaths from '../../../../../hooks/usePaths';
 
-const goBack = replace =>
-  LocationBuilder.fromWindow()
-    .pop()
-    .apply(replace);
+/*
 
-class AmountConversionPage extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      amount: props.amount,
-      foreignCurrency: props.foreignCurrency,
-      rate: props.rate,
-    };
-  }
 
   state = {
     amount: '',
@@ -37,10 +25,18 @@ class AmountConversionPage extends Component {
     rate: '',
     saveAttempted: false,
   };
+ */
 
-  getForeignCurrencyValue = () => {
-    const foreignCurrency = this.state.foreignCurrency;
+const AmountConversionPage = props => {
+  let { nobtCurrency, saveConversionInformation } = props;
+  const history = useHistory();
+  const paths = usePaths();
+  const [amount, setAmount] = useState(props.amount);
+  const [foreignCurrency, setForeignCurrency] = useState(props.foreignCurrency);
+  const [rate, setRate] = useState(props.rate);
+  const [saveAttempted, setSaveAttempted] = useState(false);
 
+  const getForeignCurrencyValue = () => {
     if (foreignCurrency) {
       return foreignCurrency.value;
     }
@@ -48,159 +44,131 @@ class AmountConversionPage extends Component {
     return null;
   };
 
-  hasForeignCurrency = () => {
-    return this.state.foreignCurrency != null;
+  const hasForeignCurrency = () => {
+    return foreignCurrency != null;
   };
 
-  hasRate = () => {
-    const rate = this.state.rate;
-
+  const hasRate = () => {
     return rate !== null && rate !== '' && !isNaN(rate);
   };
 
-  hasAmount = () => {
-    return this.state.amount !== 0;
+  const hasAmount = () => {
+    return amount !== 0;
   };
 
-  getRate = () => {
-    if (this.hasRate()) {
-      return this.state.rate;
+  const getRate = () => {
+    if (hasRate()) {
+      return rate;
     }
 
     return '';
   };
 
-  getRateError = () => {
-    return (
-      this.state.saveAttempted && !this.hasRate() && 'This field is mandatory.'
-    );
+  const getRateError = () => {
+    return saveAttempted && !hasRate() && 'This field is mandatory.';
   };
 
-  getAmountError = () => {
-    return (
-      this.state.saveAttempted &&
-      !this.hasAmount() &&
-      'This field is mandatory.'
-    );
+  const getAmountError = () => {
+    return saveAttempted && !hasAmount() && 'This field is mandatory.';
   };
 
-  getRateCaption = () => {
+  const getRateCaption = () => {
     return `Specify rate${
-      this.hasForeignCurrency()
-        ? ` for 1 ${
-            this.props.nobtCurrency
-          } to ${this.getForeignCurrencyValue()}`
+      hasForeignCurrency()
+        ? ` for 1 ${nobtCurrency} to ${getForeignCurrencyValue()}`
         : ''
     }:`;
   };
 
-  render = () => {
-    let { nobtCurrency, replace, saveConversionInformation } = this.props;
+  return (
+    <div>
+      <BrandedAppBar canGoBack={true} />
+      <Main>
+        <Heading>Convert amount</Heading>
+        <SubHeading>Convert from foreign currency</SubHeading>
+        <SectionGroup>
+          <Section>
+            <Caption>Select foreign currency</Caption>
+            <CurrencySelect
+              selectedCurrency={foreignCurrency}
+              unavailableCurrencies={[nobtCurrency]}
+              onCurrencyChanged={setForeignCurrency}
+            />
+            <Caption>{getRateCaption()}</Caption>
+            <Input
+              value={getRate()}
+              type={'number'}
+              onChange={newValue => setRate(parseFloat(newValue))}
+              error={getRateError()}
+              data-cy={'rate-input'}
+            />
+          </Section>
+          <Section>
+            <Caption>Amount in foreign currency:</Caption>
+            <CurrencyInput
+              placeholder="13.37"
+              value={amount}
+              onChange={newValue => setAmount(parseFloat(newValue))}
+              currency={getForeignCurrencyValue() || nobtCurrency}
+              error={getAmountError()}
+              data-cy={'foreign-amount-input'}
+            />
+          </Section>
+          <Section>
+            <Caption>Converted amount:</Caption>
+            <Input
+              icon={<span>{getCurrencySymbol(nobtCurrency)}</span>}
+              disabled
+              value={convertAmount(amount, rate)}
+              data-cy={'converted-amount-input'}
+            />
+          </Section>
+        </SectionGroup>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Button
+            raised
+            primary
+            onClick={() => {
+              setSaveAttempted(true);
 
-    return (
-      <div>
-        <BrandedAppBar canGoBack={true} />
-        <Main>
-          <Heading>Convert amount</Heading>
-          <SubHeading>Convert from foreign currency</SubHeading>
-          <SectionGroup>
-            <Section>
-              <Caption>Select foreign currency</Caption>
-              <CurrencySelect
-                selectedCurrency={this.state.foreignCurrency}
-                unavailableCurrencies={[nobtCurrency]}
-                onCurrencyChanged={newValue =>
-                  this.setState({ foreignCurrency: newValue })
-                }
-              />
-              <Caption>{this.getRateCaption()}</Caption>
-              <Input
-                value={this.getRate()}
-                type={'number'}
-                onChange={newValue =>
-                  this.setState({ rate: parseFloat(newValue) })
-                }
-                error={this.getRateError()}
-                data-cy={'rate-input'}
-              />
-            </Section>
-            <Section>
-              <Caption>Amount in foreign currency:</Caption>
-              <CurrencyInput
-                placeholder="13.37"
-                value={this.state.amount}
-                onChange={newValue =>
-                  this.setState({ amount: parseFloat(newValue) })
-                }
-                currency={this.getForeignCurrencyValue() || nobtCurrency}
-                error={this.getAmountError()}
-                data-cy={'foreign-amount-input'}
-              />
-            </Section>
-            <Section>
-              <Caption>Converted amount:</Caption>
-              <Input
-                icon={<span>{getCurrencySymbol(nobtCurrency)}</span>}
-                disabled
-                value={convertAmount(this.state.amount, this.state.rate)}
-                data-cy={'converted-amount-input'}
-              />
-            </Section>
-          </SectionGroup>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <Button
-              raised
-              primary
-              onClick={() => {
-                this.setState({
-                  saveAttempted: true,
+              if (hasRate() && hasForeignCurrency() && hasAmount()) {
+                saveConversionInformation({
+                  amount,
+                  foreignCurrency,
+                  rate,
                 });
+                history.replace(paths.newBill());
+              }
+            }}
+            label="Accept"
+            data-cy={'accept-button'}
+          />
+          <Button
+            raised
+            onClick={() => history.replace(paths.newBill())}
+            label="Cancel"
+            data-cy={'cancel-button'}
+          />
+        </div>
+      </Main>
+    </div>
+  );
+};
 
-                if (
-                  this.hasRate() &&
-                  this.hasForeignCurrency() &&
-                  this.hasAmount()
-                ) {
-                  saveConversionInformation({
-                    amount: this.state.amount,
-                    foreignCurrency: this.state.foreignCurrency,
-                    rate: this.state.rate,
-                  });
-                  goBack(replace);
-                }
-              }}
-              label="Accept"
-              data-cy={'accept-button'}
-            />
-            <Button
-              raised
-              onClick={() => goBack(replace)}
-              label="Cancel"
-              data-cy={'cancel-button'}
-            />
-          </div>
-        </Main>
-      </div>
-    );
-  };
-}
-
-export default withNavigation(
-  connect(
-    state => ({
-      amount: getAmount(state),
-      foreignCurrency: getForeignCurrency(state),
-      rate: getRate(state),
-      nobtCurrency: getNobtCurrency(state),
-    }),
-    dispatch => ({
-      saveConversionInformation: payload =>
-        dispatch(saveConversionInformation(payload)),
-    })
-  )(AmountConversionPage)
-);
+export default connect(
+  state => ({
+    amount: getAmount(state),
+    foreignCurrency: getForeignCurrency(state),
+    rate: getRate(state),
+    nobtCurrency: getNobtCurrency(state),
+  }),
+  dispatch => ({
+    saveConversionInformation: payload =>
+      dispatch(saveConversionInformation(payload)),
+  })
+)(AmountConversionPage);

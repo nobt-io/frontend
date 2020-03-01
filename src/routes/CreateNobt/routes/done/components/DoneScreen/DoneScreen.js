@@ -1,31 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getCreatedNobtId } from '../../../../modules/selectors';
-import { Link } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import styles from './DoneScreen.scss';
-import LocationBuilder from '../../../../../App/modules/navigation/LocationBuilder';
 import { IconMenu, MenuItem } from 'react-toolbox-legacy/lib/menu';
 import { IconButton } from 'react-toolbox-legacy/lib/button';
 import { Snackbar } from 'react-toolbox-legacy';
 import copyToClipboard from 'copy-to-clipboard';
 
-class DoneScreen extends React.Component {
-  state = {
-    snackbarVisible: false,
-  };
+const DoneScreen = props => {
+  const [snakeBarVisible, setSnakeBarVisible] = useState(false);
+  const location = useLocation();
+  const history = useHistory();
+  const nobtId = props.nobtId;
+  const absoluteLinkToNobt = `${location.href}/${nobtId}`;
+  const relativeLinkToNobt = `/${nobtId}`;
 
-  absoluteLinkToNobt = () =>
-    LocationBuilder.fromWindow()
-      .pop()
-      .pop()
-      .push(this.props.nobtId).absolutePath;
-  relativeLinkToNobt = () =>
-    LocationBuilder.fromWindow()
-      .pop()
-      .pop()
-      .push(this.props.nobtId).path;
+  useEffect(() => {
+    if (!nobtId) {
+      history.replace('/create/name');
+    }
+  }, [nobtId]);
 
-  render = () => (
+  return (
     <div>
       <div className={styles.topContainer}>
         <div className={styles.checkContainer}>
@@ -37,17 +34,13 @@ class DoneScreen extends React.Component {
       <div className={styles.linkSection}>
         <label>Link to your nobt:</label>
         <div className={styles.nobtLinkContainer}>
-          <Link
-            to={this.relativeLinkToNobt()}
-          >{`nobt.io${this.relativeLinkToNobt()}`}</Link>
+          <Link to={relativeLinkToNobt}>{`nobt.io${relativeLinkToNobt}`}</Link>
           <div>
             <IconButton
               icon="content_copy"
               onClick={() => {
-                copyToClipboard(this.absoluteLinkToNobt());
-                this.setState({
-                  snackbarVisible: true,
-                });
+                copyToClipboard(absoluteLinkToNobt);
+                setSnakeBarVisible(true);
               }}
             />
             <IconMenu icon="share" menuRipple>
@@ -55,21 +48,21 @@ class DoneScreen extends React.Component {
                 icon={<i className="fa fa-whatsapp" />}
                 caption="Whatsapp"
                 onClick={() =>
-                  (window.location.href = `whatsapp://send?text=${this.absoluteLinkToNobt()}`)
+                  (window.location.href = `whatsapp://send?text=${absoluteLinkToNobt}`)
                 }
               />
               <MenuItem
                 icon={<i className="fa fa-telegram" />}
                 caption="Telegram"
                 onClick={() =>
-                  (window.location.href = `tg://msg_url?url=${this.absoluteLinkToNobt()}`)
+                  (window.location.href = `tg://msg_url?url=${absoluteLinkToNobt}`)
                 }
               />
               <MenuItem
                 icon={<i className="fa fa-envelope-o" />}
                 caption="E-Mail"
                 onClick={() =>
-                  (window.location.href = `mailto:?body=${this.absoluteLinkToNobt()}`)
+                  (window.location.href = `mailto:?body=${absoluteLinkToNobt}`)
                 }
               />
             </IconMenu>
@@ -82,15 +75,14 @@ class DoneScreen extends React.Component {
 
       <Snackbar
         label="Link copied to clipboard."
-        active={this.state.snackbarVisible}
-        onTimeout={() => this.setState({ snackbarVisible: false })}
+        active={snakeBarVisible}
+        onTimeout={() => setSnakeBarVisible(false)}
         timeout={1500}
-        ref="snackbar"
         type="accept"
       />
     </div>
   );
-}
+};
 
 export default connect(
   state => ({

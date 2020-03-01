@@ -13,7 +13,6 @@ import {
   makeGetPaidBills,
   makeGetRelatedBills,
 } from '../../../../../../modules/currentNobt/selectors';
-import LocationBuilder from '../../../../../../modules/navigation/LocationBuilder';
 import { FontIcon } from 'react-toolbox-legacy/lib/font_icon/index';
 import InfoMessageListTheme from './InfoMessageListTheme.scss';
 import { AsyncActionStatus } from '../../../../../../../../const/AsyncActionStatus';
@@ -21,21 +20,29 @@ import { FormattedMessage } from 'react-intl';
 import { SubTitle, Title } from 'components/text';
 import AmountTheme from '../../../../themes/AmountTheme.scss';
 import { Page } from 'components/Container';
+import { useHistory } from 'react-router-dom';
+import usePaths from '../../../../../../../../hooks/usePaths';
 
-class PersonBalance extends React.Component {
-  render = () => (
+const PersonBalance = ({
+  balance,
+  sumOfPaidBills,
+  paidBills,
+  bills,
+  relatedBills,
+  fetchStatus,
+}) => {
+  const history = useHistory();
+  const paths = usePaths();
+
+  return (
     <div>
-      {this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
+      {fetchStatus === AsyncActionStatus.SUCCESSFUL && (
         <div>
           <AppBar
-            onLeftIconClick={() =>
-              LocationBuilder.fromWindow()
-                .pop(1)
-                .apply(this.props.replace)
-            }
+            onLeftIconClick={() => history.replace(paths.balances())}
             leftIcon={<FontIcon value="chevron_left" />}
             rightIcon={<FontIcon />}
-            title={`${this.props.balance.me.name}`}
+            title={`${balance.me.name}`}
           />
 
           <Page>
@@ -54,13 +61,10 @@ class PersonBalance extends React.Component {
                                             =1 {paid 1 bill ({totalAmount})}
                                             other {paid {numberOfBills} bills ({totalAmount})}}."
                       values={{
-                        name: this.props.balance.me.name,
-                        numberOfBills: this.props.paidBills.length,
+                        name: balance.me.name,
+                        numberOfBills: paidBills.length,
                         totalAmount: (
-                          <Amount
-                            value={this.props.sumOfPaidBills}
-                            absolute={true}
-                          />
+                          <Amount value={sumOfPaidBills} absolute={true} />
                         ),
                       }}
                     />
@@ -74,15 +78,14 @@ class PersonBalance extends React.Component {
                     <FormattedMessage
                       id="PersonBalance.paidBillsSummary"
                       defaultMessage={
-                        this.props.bills.length !==
-                        this.props.relatedBills.length
+                        bills.length !== relatedBills.length
                           ? '{name} participates in {numberOfBills} of {allBills} bills.'
                           : '{name} participates in all {allBills} bills.'
                       }
                       values={{
-                        name: this.props.balance.me.name,
-                        allBills: this.props.bills.length,
-                        numberOfBills: this.props.relatedBills.length,
+                        name: balance.me.name,
+                        allBills: bills.length,
+                        numberOfBills: relatedBills.length,
                       }}
                     />
                   }
@@ -99,23 +102,19 @@ class PersonBalance extends React.Component {
                                                                                                 =1 {person}
                                                                                                 other {persons}}."
                   values={{
-                    name: this.props.balance.me.name,
-                    verb: this.props.balance.me.amount > 0 ? 'gets' : 'owes',
+                    name: balance.me.name,
+                    verb: balance.me.amount > 0 ? 'gets' : 'owes',
                     amount: (
-                      <Amount
-                        value={this.props.balance.me.amount}
-                        absolute={true}
-                      />
+                      <Amount value={balance.me.amount} absolute={true} />
                     ),
-                    preposition:
-                      this.props.balance.me.amount > 0 ? 'from' : 'to',
-                    numberOfOtherPeople: this.props.balance.persons.length,
+                    preposition: balance.me.amount > 0 ? 'from' : 'to',
+                    numberOfOtherPeople: balance.persons.length,
                   }}
                 />
               </SubTitle>
 
               <HOList
-                items={this.props.balance.persons}
+                items={balance.persons}
                 renderItem={transaction => (
                   <ListItem
                     leftActions={[<Avatar name={transaction.name} medium />]}
@@ -138,7 +137,7 @@ class PersonBalance extends React.Component {
       )}
     </div>
   );
-}
+};
 
 const makeMapStateToProps = () => {
   const getBalance = makeGetBalance();
@@ -159,7 +158,4 @@ const makeMapStateToProps = () => {
   };
 };
 
-export default connect(
-  makeMapStateToProps,
-  () => ({})
-)(PersonBalance);
+export default connect(makeMapStateToProps, () => ({}))(PersonBalance);

@@ -4,7 +4,6 @@ import HOList from '../../../../containers/HOList/HOList';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { getSortedFeedItems } from '../../modules/currentNobt/selectors';
-import withNavigation from '../../../../components/hoc/withNavigation';
 import BillFeedItem from './BillFeedItem';
 import PaymentFeedItem from './PaymentFeedItem';
 
@@ -15,57 +14,56 @@ const FeedSection = ({ name, feedItems, renderFeedItem }) => (
   </div>
 );
 
-class Feed extends React.Component {
-  getFeedSections = () => {
-    const now = this.props.intl.now();
+const Feed = props => {
+  const getFeedSections = () => {
+    const now = props.intl.now();
 
     const formatFeedItemDate = feedItem =>
-      this.props.intl.formatRelative(feedItem.date, { now });
+      props.intl.formatRelative(feedItem.date, { now });
 
-    const relativeDates = this.props.feedItems.map(formatFeedItemDate);
+    const relativeDates = props.feedItems.map(formatFeedItemDate);
     const distinctRelativeDates = [...new Set(relativeDates)];
 
     return distinctRelativeDates.map(date => {
       return {
         relativeDate: date,
-        feedItems: this.props.feedItems.filter(
+        feedItems: props.feedItems.filter(
           feedItem => formatFeedItemDate(feedItem) === date
         ),
       };
     });
   };
 
-  static feedItemRenderer = {
+  const feedItemRenderer = {
     bill: feedItem => <BillFeedItem key={feedItem.id} feedItem={feedItem} />,
     payment: feedItem => (
       <PaymentFeedItem key={feedItem.id} feedItem={feedItem} />
     ),
   };
 
-  renderFeedItem = feedItem => {
-    return Feed.feedItemRenderer[feedItem.type](feedItem);
+  const renderFeedItem = feedItem => {
+    return feedItemRenderer[feedItem.type](feedItem);
   };
 
-  render = () => (
+  return (
     <HOList
-      items={this.getFeedSections()}
+      items={getFeedSections()}
       renderItem={section => (
         <FeedSection
           key={section.relativeDate}
           name={section.relativeDate}
           feedItems={section.feedItems}
-          renderFeedItem={this.renderFeedItem}
+          renderFeedItem={renderFeedItem}
         />
       )}
     />
   );
-}
+};
 
 const FeedWithIntl = injectIntl(Feed);
-const FeedWithNavigationAndIntl = withNavigation(FeedWithIntl);
 const connectedComponentFactory = connect(
   state => ({ feedItems: getSortedFeedItems(state) }),
   {}
 );
 
-export default connectedComponentFactory(FeedWithNavigationAndIntl);
+export default connectedComponentFactory(FeedWithIntl);

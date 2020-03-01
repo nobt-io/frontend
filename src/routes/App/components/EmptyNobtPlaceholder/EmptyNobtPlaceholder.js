@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './EmptyNobtPlaceholder.scss';
-import withNavigation from 'components/hoc/withNavigation';
-import LocationBuilder from '../../modules/navigation/LocationBuilder';
 import SafeBox from './safebox.png';
+import { useHistory } from 'react-router-dom';
 
 export const EmptyNobtPlaceholder = props => {
+  const history = useHistory();
+
   return (
     <div className={styles.container}>
       <div
@@ -16,11 +17,7 @@ export const EmptyNobtPlaceholder = props => {
         <a
           data-cy="add-bill-link"
           href="#"
-          onClick={() =>
-            LocationBuilder.fromWindow()
-              .push('bill')
-              .apply(props.push)
-          }
+          onClick={() => history.push('/bill')}
         >
           Add
         </a>{' '}
@@ -30,4 +27,4 @@ export const EmptyNobtPlaceholder = props => {
   );
 };
 
-export default withNavigation(EmptyNobtPlaceholder);
+export default EmptyNobtPlaceholder;
