@@ -20,7 +20,11 @@ module.exports = (_, argv) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+          use: [
+            MiniCssExtractPlugin.loader,
+            { loader: 'css-loader', options: { importLoaders: 1 } },
+            'postcss-loader',
+          ],
         },
         {
           test: /\.(ts|tsx)?$/,
@@ -85,7 +89,11 @@ module.exports = (_, argv) => {
       new MiniCssExtractPlugin(),
       new FaviconsWebpackPlugin({
         logo: './src/static/logo.png',
-        title: 'Nobt.io',
+        favicons: {
+          appName: 'Nobt.io',
+          appDescription: 'Split your bills with ease!',
+          developerName: null,
+        },
       }),
       new CopyWebpackPlugin([
         { from: './src/static/humans.txt' },
