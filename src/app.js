@@ -7,9 +7,9 @@ import createStore from './store/createStore';
 import { IntlProvider } from 'react-intl';
 import routeFactory from './routes';
 // noinspection ES6UnusedImports
-import globalLegacyCss from './app.scss';
-// noinspection ES6UnusedImports
 import globalCss from './styles.css';
+// noinspection ES6UnusedImports
+import globalLegacyCss from './app.scss';
 import theme from './styles/custom-component-themes';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'react-css-themr';
