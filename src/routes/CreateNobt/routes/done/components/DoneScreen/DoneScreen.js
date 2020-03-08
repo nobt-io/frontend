@@ -28,7 +28,7 @@ const DoneScreen = props => {
         <div className={styles.checkContainer}>
           <i className="fa fa-check-circle" />
         </div>
-        <h1>Congratulations</h1>
+        <h1 className="text-5xl">Congratulations</h1>
         <p>Your nobt was created successfully.</p>
       </div>
       <div className={styles.linkSection}>

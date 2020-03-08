@@ -1,0 +1,7 @@
+/**
+ * Prior to using tailwind, `section` tags had a vertical padding of 1rem.
+ * Until we have refactoring all the usages of sections to use components for this styling, we apply it here.
+ */
+section {
+	padding: 1rem 0;
+}

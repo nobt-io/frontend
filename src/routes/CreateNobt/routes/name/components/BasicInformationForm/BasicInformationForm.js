@@ -14,7 +14,7 @@ const BasicInformationForm = props => {
 
   return (
     <div className={styles.formContainer}>
-      <h1 className={styles.title}>Create</h1>
+      <h1 className="text-5xl">Create</h1>
 
       <div className={styles.introductionTextContainer}>
         <p>
