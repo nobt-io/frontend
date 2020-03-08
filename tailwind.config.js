@@ -1,8 +1,13 @@
 module.exports = {
   theme: {
+    container: {
+      padding: '1.5rem',
+      center: true,
+    },
     extend: {
       fontFamily: {
         logo: ['Comfortaa'],
+        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
         green: {

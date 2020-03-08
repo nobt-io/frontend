@@ -13,8 +13,6 @@ import globalLegacyCss from './app.scss';
 import theme from './styles/custom-component-themes';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'react-css-themr';
-import { MuiThemeProvider } from '@material-ui/core/styles';
-import muiTheme from 'styles/muiTheme';
 import { wrapHistory } from 'oaf-react-router';
 
 const history = createBrowserHistory();
@@ -45,13 +43,11 @@ const MOUNT_NODE = document.getElementById('root');
 
 ReactDOM.render(
   <IntlProvider locale={navigator.language}>
-    <MuiThemeProvider theme={muiTheme}>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <Router history={history}>{routes}</Router>
-        </Provider>
-      </ThemeProvider>
-    </MuiThemeProvider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <Router history={history}>{routes}</Router>
+      </Provider>
+    </ThemeProvider>
   </IntlProvider>,
   MOUNT_NODE
 );

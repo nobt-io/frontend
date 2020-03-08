@@ -1,8 +1,5 @@
 import React from 'react';
 import styles from './Team.scss';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Grid from 'react-bootstrap/lib/Grid';
 
 export default class Team extends React.Component {
   hideDetails = pictureElement => {
@@ -95,139 +92,149 @@ export default class Team extends React.Component {
   };
 
   render = () => (
-    <section className={styles.Team} id={this.props.id}>
-      <Grid>
-        <Row>
-          <Col md={8} mdOffset={2}>
-            <h2>The team behind nobt.io.</h2>
-            <p className={styles.CoffeeInfo}>
-              Crafted with <i className="fa fa-coffee" /> in Vienna.
-            </p>
-            <p>
-              What started as a hackathon by three motivated developers soon
-              turned out to be an actually helpful companion in our daily life.
-              Nobt.io is our effort to share this idea with all of you. We hope
-              you enjoy it as much as we do.
-            </p>
-            <div className={styles.teamImages}>
-              <div className={styles.imageFrame} id={styles.teamMember1}>
-                <div className={styles.imageDetailsWrapper}>
-                  <div className={styles.imageDetails}>
-                    <div>
-                      <h3>Thomas</h3>
-                      <ul>
-                        <li>
-                          <a
-                            href="https://github.com/thomaseizinger"
-                            target="_blank"
-                          >
-                            <i className="fa fa-github" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://www.xing.com/profile/Thomas_Eizinger"
-                            target="_blank"
-                          >
-                            <i className="fa fa-xing-square" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://www.linkedin.com/in/thomas-eizinger-b45a37144/"
-                            target="_blank"
-                          >
-                            <i className="fa fa-linkedin-square" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="http://eizinger.io" target="_blank">
-                            <i className="fa fa-home" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.imageFrame} id={styles.teamMember2}>
-                <div className={styles.imageDetailsWrapper}>
-                  <div className={styles.imageDetails}>
-                    <div>
-                      <h3>David</h3>
-                      <ul>
-                        <li>
-                          <a href="https://github.com/duffleit" target="_blank">
-                            <i className="fa fa-github" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://www.xing.com/profile/David_Leitner4"
-                            target="_blank"
-                          >
-                            <i className="fa fa-xing-square" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://www.linkedin.com/in/david-leitner-7768a3136/"
-                            target="_blank"
-                          >
-                            <i className="fa fa-linkedin-square" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="http://leitner.io" target="_blank">
-                            <i className="fa fa-home" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.imageFrame} id={styles.teamMember3}>
-                <div className={styles.imageDetailsWrapper}>
-                  <div className={styles.imageDetails}>
-                    <div>
-                      <h3>Matthias</h3>
-                      <ul>
-                        <li>
-                          <a href="https://github.com/KreMat" target="_blank">
-                            <i className="fa fa-github" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://www.xing.com/profile/Matthias_Kreuzriegler"
-                            target="_blank"
-                          >
-                            <i className="fa fa-xing-square" />
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="https://www.linkedin.com/in/mkreuzriegler/"
-                            target="_blank"
-                          >
-                            <i className="fa fa-linkedin-square" />
-                          </a>
-                        </li>
-                        <li>
-                          <a href="http://kreuzriegler.at" target="_blank">
-                            <i className="fa fa-home" />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+    <section
+      className={`text-center container lg:grid lg:grid-cols-12`}
+      id={this.props.id}
+    >
+      <div className="lg:col-span-8 lg:col-start-3">
+        <h2 className="text-5xl">The team behind nobt.io.</h2>
+        <p className={'my-12'}>
+          Crafted with <i className="fa fa-coffee" /> in Vienna.
+        </p>
+        <p>
+          What started as a hackathon by three motivated developers soon turned
+          out to be an actually helpful companion in our daily life. Nobt.io is
+          our effort to share this idea with all of you. We hope you enjoy it as
+          much as we do.
+        </p>
+      </div>
+
+      <div
+        className={'mt-8 md:grid md:grid-cols-3 lg:col-span-8 lg:col-start-3'}
+      >
+        <div className="m-auto my-3">
+          <div className={`${styles.image}`} id={styles.teamMember1}>
+            <div className={styles.imageDetailsWrapper}>
+              <div className={styles.imageDetails}>
+                <div>
+                  <h3>Thomas</h3>
+                  <ul>
+                    <li>
+                      <a
+                        href="https://github.com/thomaseizinger"
+                        target="_blank"
+                      >
+                        <i className="fa fa-github" />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.xing.com/profile/Thomas_Eizinger"
+                        target="_blank"
+                      >
+                        <i className="fa fa-xing-square" />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.linkedin.com/in/thomas-eizinger-b45a37144/"
+                        target="_blank"
+                      >
+                        <i className="fa fa-linkedin-square" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://eizinger.io" target="_blank">
+                        <i className="fa fa-home" />
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </Col>
-        </Row>
-      </Grid>
+          </div>
+        </div>
+
+        <div className="m-auto my-3">
+          <div className={styles.image} id={styles.teamMember2}>
+            <div className={styles.imageDetailsWrapper}>
+              <div className={styles.imageDetails}>
+                <div>
+                  <h3>David</h3>
+                  <ul>
+                    <li>
+                      <a href="https://github.com/duffleit" target="_blank">
+                        <i className="fa fa-github" />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.xing.com/profile/David_Leitner4"
+                        target="_blank"
+                      >
+                        <i className="fa fa-xing-square" />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.linkedin.com/in/david-leitner-7768a3136/"
+                        target="_blank"
+                      >
+                        <i className="fa fa-linkedin-square" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://leitner.io" target="_blank">
+                        <i className="fa fa-home" />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="m-auto my-3">
+          <div className={styles.image} id={styles.teamMember3}>
+            <div className={styles.imageDetailsWrapper}>
+              <div className={styles.imageDetails}>
+                <div>
+                  <h3>Matthias</h3>
+                  <ul>
+                    <li>
+                      <a href="https://github.com/KreMat" target="_blank">
+                        <i className="fa fa-github" />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.xing.com/profile/Matthias_Kreuzriegler"
+                        target="_blank"
+                      >
+                        <i className="fa fa-xing-square" />
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.linkedin.com/in/mkreuzriegler/"
+                        target="_blank"
+                      >
+                        <i className="fa fa-linkedin-square" />
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://kreuzriegler.at" target="_blank">
+                        <i className="fa fa-home" />
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }
