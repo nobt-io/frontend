@@ -90,8 +90,7 @@ module.exports = (_, argv) => {
       new CopyWebpackPlugin([
         { from: './src/static/humans.txt' },
         { from: './src/static/robots.txt' },
-        { from: './src/static/404.html' },
-        { from: './src/static/CNAME' },
+        { from: './src/static/_redirects' },
       ]),
     ],
     devServer: {
