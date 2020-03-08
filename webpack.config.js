@@ -4,6 +4,8 @@ const DefinePlugin = require('webpack').DefinePlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob');
 
 module.exports = (_, argv) => {
   const isProduction = argv.mode === 'production';
@@ -99,19 +101,19 @@ module.exports = (_, argv) => {
         IS_PRODUCTION_BUILD: isProduction,
       }),
       new MiniCssExtractPlugin(),
-      new FaviconsWebpackPlugin({
-        logo: './src/static/logo.png',
-        favicons: {
-          appName: 'Nobt.io',
-          appDescription: 'Split your bills with ease!',
-          developerName: null,
-        },
-      }),
-      new CopyWebpackPlugin([
-        { from: './src/static/humans.txt' },
-        { from: './src/static/robots.txt' },
-        { from: './src/static/_redirects' },
-      ]),
+      ...(isProduction
+        ? [
+            new FaviconsWebpackPlugin('./src/static/logo.png'),
+            new CopyWebpackPlugin([
+              { from: './src/static/humans.txt' },
+              { from: './src/static/robots.txt' },
+              { from: './src/static/_redirects' },
+            ]),
+            new PurgecssPlugin({
+              paths: glob.sync(`./src/**/*`, { nodir: true }),
+            }),
+          ]
+        : []),
     ],
     devServer: {
       contentBase: [
