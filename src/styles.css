@@ -1,4 +1,7 @@
 @import "hacks.css";
+@import "~font-awesome/css/font-awesome.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Courgette|Comfortaa:700");
 
 @tailwind base;
 @tailwind components;
