@@ -98,7 +98,7 @@ const AddMembersForm = props => {
   return (
     <div>
       <section>
-        <h1>Add participants</h1>
+        <h1 className="text-5xl">Add participants</h1>
 
         <div className={styles.introductionTextContainer}>
           <p>Add anyone you want to split bills with.</p>

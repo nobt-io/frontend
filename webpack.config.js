@@ -4,6 +4,8 @@ const DefinePlugin = require('webpack').DefinePlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob');
 
 module.exports = (_, argv) => {
   const isProduction = argv.mode === 'production';
@@ -20,7 +22,11 @@ module.exports = (_, argv) => {
         },
         {
           test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+          use: [
+            MiniCssExtractPlugin.loader,
+            { loader: 'css-loader', options: { importLoaders: 1 } },
+            'postcss-loader',
+          ],
         },
         {
           test: /\.(ts|tsx)?$/,
@@ -64,6 +70,18 @@ module.exports = (_, argv) => {
             },
           ],
         },
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name]_[hash:4].[ext]',
+                outputPath: 'fonts/',
+              },
+            },
+          ],
+        },
       ],
     },
     resolve: {
@@ -83,15 +101,19 @@ module.exports = (_, argv) => {
         IS_PRODUCTION_BUILD: isProduction,
       }),
       new MiniCssExtractPlugin(),
-      new FaviconsWebpackPlugin({
-        logo: './src/static/logo.png',
-        title: 'Nobt.io',
-      }),
-      new CopyWebpackPlugin([
-        { from: './src/static/humans.txt' },
-        { from: './src/static/robots.txt' },
-        { from: './src/static/_redirects' },
-      ]),
+      ...(isProduction
+        ? [
+            new FaviconsWebpackPlugin('./src/static/logo.png'),
+            new CopyWebpackPlugin([
+              { from: './src/static/humans.txt' },
+              { from: './src/static/robots.txt' },
+              { from: './src/static/_redirects' },
+            ]),
+            new PurgecssPlugin({
+              paths: glob.sync(`./src/**/*`, { nodir: true }),
+            }),
+          ]
+        : []),
     ],
     devServer: {
       contentBase: [

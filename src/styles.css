@@ -1,0 +1,21 @@
+@import "hacks.css";
+@import "~font-awesome/css/font-awesome.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Courgette|Comfortaa:700");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+	font-size: 10px;
+	@apply text-black;
+}
+
+body {
+	font-size: 14px;
+}
+
+fieldset {
+	border: 0;
+}

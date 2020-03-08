@@ -12,7 +12,7 @@ module.exports = {
   verbose: true,
   moduleFileExtensions: ['js', 'json', 'jsx', 'node', 'ts', 'tsx'],
   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
-    '^.+\\.ts?$': 'ts-jest',
+    '^.+\\.(js|jsx)?$': 'babel-jest',
+    '^.+\\.(ts|tsx)?$': 'ts-jest',
   },
 };

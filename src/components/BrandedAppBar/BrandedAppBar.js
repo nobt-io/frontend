@@ -1,22 +1,14 @@
 import * as React from 'react';
-import { AppBar } from 'react-toolbox-legacy/lib/app_bar/index';
-import BrandedAppBarTheme from './BrandedAppBarTheme.scss';
-import { FontIcon } from 'react-toolbox-legacy/lib/font_icon/index';
-import { useHistory } from 'react-router-dom';
+import BackLink from '../BackLink';
 
 const BrandedAppBar = ({ canGoBack }) => {
-  const history = useHistory();
-
   return (
-    <AppBar
-      theme={BrandedAppBarTheme}
-      leftIcon={canGoBack === true ? <FontIcon value="chevron_left" /> : null}
-      onLeftIconClick={canGoBack === true ? () => history.goBack() : null}
-    >
-      <h1 className={BrandedAppBarTheme.title}>
-        <a href={location.protocol + '//' + location.host}>nobt.io</a>
+    <div className={`bg-black h-24 px-10 flex flex-row items-center}`}>
+      {canGoBack === true ? <BackLink /> : null}
+      <h1 className="text-white hover:no-underline cursor-pointer font-logo text-3xl flex items-center">
+        nobt.io
       </h1>
-    </AppBar>
+    </div>
   );
 };
 
