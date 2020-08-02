@@ -5,6 +5,7 @@ import {
 } from './actions';
 import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import _debug from 'debug';
+import { Nobt } from '../../../../hooks/useNobt';
 
 const emptyHandler = (status: any) => ({ data: {} });
 
@@ -75,31 +76,6 @@ const handlers = {
   },
 };
 
-interface Share {
-  name: string;
-  amount: number;
-}
-
-interface Bill {
-  id: number;
-  name: string;
-  date: string;
-  createdOn: string;
-  debtee: Share;
-  debtors: Share[];
-}
-
-interface Nobt {
-  id: string;
-  name: string;
-  currency: string;
-  participatingPersons: string[];
-  bills: Bill[];
-  createdOn: string | null;
-  transactions: any[];
-  payments: any[];
-}
-
 interface State {
   fetchNobtStatus: AsyncActionStatus | null;
   nobtFetchTimestamp: string | null;
@@ -117,7 +93,7 @@ export const initialState: State = {
     transactions: [],
     bills: [],
     payments: [],
-    createdOn: null,
+    createdOn: '',
   },
 };
 

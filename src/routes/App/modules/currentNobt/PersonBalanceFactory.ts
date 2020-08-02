@@ -1,13 +1,13 @@
+import { Transaction } from '../../../../hooks/useNobt';
+
 export default class PersonBalanceFactory {
-  constructor(transactions) {
-    this.transactions = transactions;
-  }
+  constructor(private readonly transactions: Transaction[]) {}
 
   /**
    * @param {string} ownName
    * @return {{me: {name: string, amount: number}, persons: Array}}
    */
-  computeBalanceForPerson(ownName) {
+  public computeBalanceForPerson(ownName: string) {
     let summaries = this.transactions
       .filter(tx => {
         return tx.debtee === ownName || tx.debtor === ownName;

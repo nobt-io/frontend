@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchNobt } from '../../routes/App/modules/currentNobt/actions';
 import {
+  getCurrentNobt,
   getFetchNobtStatus,
   shouldFetchNobt,
 } from '../../routes/App/modules/currentNobt/selectors';
@@ -12,6 +13,7 @@ import { Snackbar } from 'react-toolbox-legacy/lib/snackbar/index';
 import { ProgressBar } from 'react-toolbox-legacy/lib/progress_bar/index';
 import UnknownNobt from './UnknownNobt';
 import { withRouter } from 'react-router-dom';
+import { NobtContext } from '../../hooks/useNobt';
 
 class NobtLoader extends React.Component {
   constructor(props) {
@@ -36,8 +38,11 @@ class NobtLoader extends React.Component {
   render() {
     return (
       <div>
-        {this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL &&
-          this.props.children}
+        {this.props.fetchStatus === AsyncActionStatus.SUCCESSFUL && (
+          <NobtContext.Provider value={this.props.nobt}>
+            {this.props.children}
+          </NobtContext.Provider>
+        )}
 
         {this.props.fetchStatus === AsyncActionStatus.IN_PROGRESS && (
           <div className={styles.loader}>
@@ -67,6 +72,7 @@ export default withRouter(
     state => ({
       shouldFetchNobt: shouldFetchNobt(state),
       fetchStatus: getFetchNobtStatus(state),
+      nobt: getCurrentNobt(state),
     }),
     dispatch => ({
       fetchNobt: id => dispatch(fetchNobt(id)),

@@ -5,19 +5,20 @@ import EmptyNobtPlaceholder from '../EmptyNobtPlaceholder/index';
 import { FontIcon } from 'react-toolbox-legacy/lib/font_icon';
 import NobtFAB from '../NobtFAB';
 import NobtItButtonTheme from './NobtItButtonTheme.scss';
-import { Button } from 'react-toolbox-legacy/lib/button/index';
+import { Button } from 'react-toolbox-legacy/lib/button';
 import Amount from '../../../../components/Amount/Amount';
 import BrandedAppBar from '../../../../components/BrandedAppBar/index';
 import Feed from '../Feed/Feed';
 import {
   getMembers,
   getName,
-  getTotal,
   isNobtEmpty,
 } from '../../modules/currentNobt/selectors';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import usePaths from '../../../../hooks/usePaths';
+import { useNobt } from '../../../../hooks/useNobt';
+import { useTotal } from '../../../../hooks/useTotal';
 
 const GoToBalancesButton = () => {
   const history = useHistory();
@@ -35,7 +36,9 @@ const GoToBalancesButton = () => {
   );
 };
 
-const HomeScreen = ({ name, total, members, isNobtEmpty }) => {
+const HomeScreen = ({ name, members, isNobtEmpty }) => {
+  const total = useTotal();
+
   return (
     <div className={styles.homeScreen}>
       <BrandedAppBar />
@@ -78,7 +81,6 @@ HomeScreen.propTypes = {
 const mapStateToProps = state => {
   return {
     name: getName(state),
-    total: getTotal(state),
     members: getMembers(state),
     isNobtEmpty: isNobtEmpty(state),
   };

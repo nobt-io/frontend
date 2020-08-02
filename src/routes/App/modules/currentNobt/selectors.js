@@ -6,6 +6,7 @@ import {
   balanceDetailPathVariable,
   billDetailPathVariable,
 } from '../../../index';
+import { sumBill } from '../../../../hooks/useTotal';
 
 export const getCurrentNobt = state => state.App.currentNobt.data;
 const getNobtFetchTimestamp = state => state.App.currentNobt.nobtFetchTimestamp;
@@ -191,16 +192,3 @@ export const makeGetRelatedBills = () =>
       )
       .map(deNormalizeBill);
   });
-
-export const getTotal = createSelector([getBills], bills => {
-  const nobtTotal = bills
-    .map(sumBill)
-    .reduce((sum, current) => sum + current, 0);
-
-  _debug('selectors:getTotal')(`Nobt total: ${nobtTotal}.`);
-
-  return nobtTotal;
-});
-
-const sumBill = bill =>
-  bill.shares.map(share => share.amount).reduce((sum, amount) => sum + amount);
