@@ -1,12 +1,11 @@
 import { createSelector } from 'reselect';
-import _debug from 'debug';
-import PersonBalanceFactory from './PersonBalanceFactory';
 import { AsyncActionStatus } from '../../../../const/AsyncActionStatus';
 import {
   balanceDetailPathVariable,
   billDetailPathVariable,
 } from '../../../index';
 import { sumBill } from '../../../../hooks/useTotal';
+import { computeBalanceForPerson } from '../../../../hooks/useBalance';
 
 export const getCurrentNobt = state => state.App.currentNobt.data;
 const getNobtFetchTimestamp = state => state.App.currentNobt.nobtFetchTimestamp;
@@ -99,8 +98,7 @@ export const getSortedFeedItems = createSelector(
 export const getBalances = createSelector(
   [getTransactions, getMembers],
   (transactions, members) => {
-    const factory = new PersonBalanceFactory(transactions);
-    return members.map(m => factory.computeBalanceForPerson(m));
+    return members.map(m => computeBalanceForPerson(transactions, m));
   }
 );
 
@@ -159,18 +157,6 @@ export const makeCanBillBeDeleted = () =>
 
 const getBalanceOwner = (state, props) =>
   props.match.params[balanceDetailPathVariable];
-
-export const makeGetBalance = () =>
-  createSelector([getBalances, getBalanceOwner], (balances, balanceOwner) => {
-    return balances
-      .filter(balance => sanitizeName(balance.me.name) === balanceOwner)
-      .find(first);
-  });
-
-// quickfix for bug 277
-function sanitizeName(name) {
-  return name.trim();
-}
 
 export const getSumOfPaidBills = paidBills => {
   return paidBills.reduce((amount, bill) => amount + bill.debtee.amount, 0);

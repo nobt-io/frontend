@@ -9,7 +9,6 @@ import {
   getBills,
   getFetchNobtStatus,
   getSumOfPaidBills,
-  makeGetBalance,
   makeGetPaidBills,
   makeGetRelatedBills,
 } from '../../../../../../modules/currentNobt/selectors';
@@ -20,11 +19,12 @@ import { FormattedMessage } from 'react-intl';
 import { SubTitle, Title } from 'components/text';
 import AmountTheme from '../../../../themes/AmountTheme.scss';
 import { Page } from 'components/Container';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import usePaths from '../../../../../../../../hooks/usePaths';
+import { balanceDetailPathVariable } from '../../../../../../../index';
+import { useBalance } from '../../../../../../../../hooks/useBalance';
 
 const PersonBalance = ({
-  balance,
   sumOfPaidBills,
   paidBills,
   bills,
@@ -33,6 +33,10 @@ const PersonBalance = ({
 }) => {
   const history = useHistory();
   const paths = usePaths();
+
+  const params = useParams();
+  const balanceOwner = params[balanceDetailPathVariable];
+  const balance = useBalance(balanceOwner);
 
   return (
     <div>
@@ -140,7 +144,6 @@ const PersonBalance = ({
 };
 
 const makeMapStateToProps = () => {
-  const getBalance = makeGetBalance();
   const getPaidBills = makeGetPaidBills();
   const getRelatedBills = makeGetRelatedBills();
 
@@ -148,7 +151,6 @@ const makeMapStateToProps = () => {
     let paidBills = getPaidBills(state, props);
 
     return {
-      balance: getBalance(state, props),
       sumOfPaidBills: getSumOfPaidBills(paidBills),
       paidBills: paidBills,
       bills: getBills(state),
