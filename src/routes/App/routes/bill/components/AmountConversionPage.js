@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Caption, Heading, SubHeading } from 'components/text/index';
 import { Main } from 'components/Container/index';
 import { connect } from 'react-redux';

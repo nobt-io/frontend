@@ -1,4 +1,3 @@
-import { createSelectorWithChangeCallback } from 'reselect-change-memoize';
 import { createSelector } from 'reselect';
 //
 // function createSelector(loggerName, ...args) {

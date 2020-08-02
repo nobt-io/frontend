@@ -15,7 +15,6 @@ import BrandedAppBar from 'components/BrandedAppBar';
 import { Caption, Heading, SubHeading } from 'components/text';
 import { Section, SectionGroup } from 'components/Section/index';
 import { AsyncActionStatus } from 'const/AsyncActionStatus';
-import { invalidateNobt } from '../../../modules/currentNobt/actions';
 import ForeignCurrencyButton from '../../../components/ForeignCurrencyButton';
 
 import {
@@ -35,7 +34,7 @@ import {
   isDescriptionErrorShown,
 } from '../modules/selectors';
 import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
-import { useHistory, useLocation, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import usePaths from '../../../../../hooks/usePaths';
 import { nobtIdPathVariable } from '../../../../../app';
 
