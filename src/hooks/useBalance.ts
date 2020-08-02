@@ -9,6 +9,12 @@ export interface Balance {
   }>;
 }
 
+/**
+ * Computes the "balance" of a single person within the nobt.
+ *
+ * This functionality requires from rather convoluted handling of the data that we get from the server.
+ * Moving this to the backend would simplify things here: https://github.com/nobt-io/api/issues/101
+ */
 export function useBalance(name: string): Balance {
   const nobt = useNobt();
   const balance = useMemo(
