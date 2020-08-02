@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch, useParams } from 'react-router-dom';
+import { Route, Switch, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 import Client from '../../api';
 import { useDispatch } from 'react-redux';
@@ -9,7 +9,7 @@ import AppLayout from '../../layouts/AppLayout';
 import UnknownNobt from '../../components/UnknownNobt/UnknownNobt';
 import { Snackbar } from 'react-toolbox-legacy/lib/snackbar';
 import LoadingNobt from '../../components/LoadingNobt/LoadingNobt';
-import { Nobt, NobtContext } from '../../hooks/useNobt';
+import { NobtContext } from '../../hooks/useNobt';
 import HomeScreen from './components/HomeScreen';
 import BalanceOverview from './routes/balances/routes/index/components/BalanceOverview/BalanceOverview';
 import PersonBalance from './routes/balances/routes/name/components/PersonBalance';
@@ -26,6 +26,7 @@ import {
   nobtIdPathVariable,
 } from '../../app';
 import { useRouteMatch } from 'react-router';
+import { Nobt } from '../../nobt';
 
 export default function App() {
   const params = useParams();
@@ -119,7 +120,7 @@ export default function App() {
             <Route
               exact
               path={`${path}/:${billDetailPathVariable}`}
-              component={BillDetailPage}
+              render={() => <BillDetailPage invalidateNobtData={revalidate} />}
             />
           </Switch>
         </NobtContext.Provider>

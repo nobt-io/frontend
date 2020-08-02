@@ -2,7 +2,8 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Amount from 'components/Amount/index';
 import { IntlProvider } from 'react-intl';
-import { Nobt, NobtContext } from '../../hooks/useNobt';
+import { NobtContext } from '../../hooks/useNobt';
+import { Nobt } from '../../nobt';
 
 test('should use absolute value of amount by default', () => {
   let cmp = renderer.create(

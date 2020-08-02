@@ -64,9 +64,10 @@ export interface Expense {
   };
   shares: Share[];
   date: string;
+  deletedOn?: string;
   createdOn: string;
-  _links: {
-    delete: string | null;
+  _links?: {
+    delete?: string;
   };
 }
 

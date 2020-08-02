@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Amount from 'components/Amount';
-import { connect } from 'react-redux';
-import {
-  getNobtCurrency,
-  makeCanBillBeDeleted,
-  makeGetBill,
-} from '../../../../modules/currentNobt/selectors';
 import { ListItem } from 'react-toolbox-legacy/lib/list';
 import Avatar from 'components/Avatar';
 import { AppBar } from 'react-toolbox-legacy/lib/app_bar/index';
@@ -14,10 +8,12 @@ import { List, ListSubHeader } from 'react-toolbox-legacy/lib/list/index';
 import { FormattedDate, FormattedMessage } from 'react-intl';
 import DebtorAmountTheme from './DebtorAmountTheme.scss';
 import { Page } from 'components/Container';
-import { deleteExpense } from '../../../../modules/currentNobt/actions';
 import ConfirmationDialog from 'components/ConfirmationDialog';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import usePaths from '../../../../../../hooks/usePaths';
+import { billDetailPathVariable } from '../../../../../../app';
+import { useNobt } from '../../../../../../hooks/useNobt';
+import Client from 'api';
 
 const DeleteBillConfirmationDialog = ({
   active,
@@ -38,11 +34,14 @@ const DeleteBillConfirmationDialog = ({
   </ConfirmationDialog>
 );
 
-const BillDetailPage = props => {
-  const { bill, nobtCurrency } = props;
-  const { debtee, deletedOn } = bill;
+export default function BillDetailPage({ invalidateNobtData }) {
+  const params = useParams();
+  const billId = params[billDetailPathVariable];
+  const nobt = useNobt();
   const history = useHistory();
   const paths = usePaths();
+
+  const bill = nobt.bill(billId);
 
   useEffect(() => {
     if (!bill) {
@@ -54,6 +53,9 @@ const BillDetailPage = props => {
     return null;
   }
 
+  const nobtCurrency = nobt.currency;
+  const { debtee, deletedOn } = bill;
+
   const [
     showDeleteBillConfirmationDialog,
     setShowDeleteBillConfirmationDialog,
@@ -61,7 +63,11 @@ const BillDetailPage = props => {
 
   const showDialog = () => setShowDeleteBillConfirmationDialog(true);
   const handelCancel = () => setShowDeleteBillConfirmationDialog(false);
-  const handleConfirm = () => props.deleteBill(props.bill);
+  const handleConfirm = async () => {
+    await Client.delete(bill.deleteLink);
+    await invalidateNobtData();
+    history.replace(paths.feed());
+  };
 
   const items = [
     <ListItem
@@ -189,7 +195,7 @@ const BillDetailPage = props => {
           ))}
         </List>
 
-        {props.canBillBeDeleted && (
+        {bill.canBeDeleted && (
           <List>
             <ListSubHeader caption="Actions" />
             <ListItem
@@ -210,21 +216,4 @@ const BillDetailPage = props => {
       </Page>
     </div>
   );
-};
-
-const makeMapStateToProps = () => {
-  const getBill = makeGetBill();
-  const canBillBeDeleted = makeCanBillBeDeleted();
-
-  return (state, props) => {
-    return {
-      bill: getBill(state, props),
-      nobtCurrency: getNobtCurrency(state),
-      canBillBeDeleted: canBillBeDeleted(state, props),
-    };
-  };
-};
-
-export default connect(makeMapStateToProps, dispatch => ({
-  deleteBill: e => dispatch(deleteExpense(e)),
-}))(BillDetailPage);
+}

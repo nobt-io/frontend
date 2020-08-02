@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 import { AsyncActionStatus } from '../../../../const/AsyncActionStatus';
-import { computeBalanceForPerson, sumBill } from '../../../../hooks/useNobt';
 import {
   balanceDetailPathVariable,
   billDetailPathVariable,
 } from '../../../../app';
+import { computeBalanceForPerson, sumShares } from '../../../../nobt';
 
 export const getCurrentNobt = state => state.App.currentNobt.data;
 const getNobtFetchTimestamp = state => state.App.currentNobt.nobtFetchTimestamp;
@@ -103,7 +103,7 @@ export const getBalances = createSelector(
 
 const deNormalizeBill = e => {
   const debteeName = e.debtee;
-  const sumOfShares = sumBill(e);
+  const sumOfShares = sumShares(e.shares);
 
   const debtors = e.shares.map(share => ({
     name: share.debtor,
