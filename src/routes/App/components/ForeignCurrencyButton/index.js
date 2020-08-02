@@ -8,22 +8,22 @@ import {
 } from '../../routes/bill/modules/selectors';
 import { FontIcon } from 'react-toolbox-legacy/lib/font_icon';
 import { clearConversionInformation } from '../../routes/bill/modules/actions';
-import { getNobtCurrency } from '../../modules/currentNobt/selectors';
 import getCurrencySymbol from 'currency-symbol-map';
 import { ListItem } from 'react-toolbox-legacy/lib/list';
 import ListItemTheme from './ListItemTheme.scss';
 import List from '../../../../components/List/List';
 import { useHistory } from 'react-router-dom';
 import usePaths from '../../../../hooks/usePaths';
+import { useNobt } from '../../../../hooks/useNobt';
 
 const ForeignCurrencyButton = ({
   convertedAmount,
   clearConversionInformation,
-  nobtCurrency,
   isForeignCurrencyBill,
 }) => {
   const history = useHistory();
   const paths = usePaths();
+  const nobt = useNobt();
 
   return (
     <div>
@@ -31,7 +31,7 @@ const ForeignCurrencyButton = ({
         <List>
           <ListItem
             theme={ListItemTheme}
-            leftIcon={[<span>{getCurrencySymbol(nobtCurrency)}</span>]}
+            leftIcon={[<span>{getCurrencySymbol(nobt.currency)}</span>]}
             caption={convertedAmount}
             rightActions={[
               <FontIcon
@@ -65,7 +65,6 @@ const ForeignCurrencyButton = ({
 
 export default connect(
   state => ({
-    nobtCurrency: getNobtCurrency(state),
     convertedAmount: getConvertedAmount(state),
     isForeignCurrencyBill: isForeignCurrencyBill(state),
   }),

@@ -9,12 +9,12 @@ import Button from 'components/Button/index';
 import { CurrencyInput } from '../../../../../components/Input';
 import Input from '../../../../../components/Input/Input';
 import CurrencySelect from '../../../../../components/CurrencySelect/CurrencySelect';
-import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
 import getCurrencySymbol from 'currency-symbol-map';
 import { saveConversionInformation } from '../modules/actions';
 import convertAmount from '../modules/convertAmount';
 import { useHistory } from 'react-router-dom';
 import usePaths from '../../../../../hooks/usePaths';
+import { useNobt } from '../../../../../hooks/useNobt';
 
 /*
 
@@ -28,13 +28,14 @@ import usePaths from '../../../../../hooks/usePaths';
  */
 
 const AmountConversionPage = props => {
-  let { nobtCurrency, saveConversionInformation } = props;
+  let { saveConversionInformation } = props;
   const history = useHistory();
   const paths = usePaths();
   const [amount, setAmount] = useState(props.amount);
   const [foreignCurrency, setForeignCurrency] = useState(props.foreignCurrency);
   const [rate, setRate] = useState(props.rate);
   const [saveAttempted, setSaveAttempted] = useState(false);
+  const nobt = useNobt();
 
   const getForeignCurrencyValue = () => {
     if (foreignCurrency) {
@@ -75,7 +76,7 @@ const AmountConversionPage = props => {
   const getRateCaption = () => {
     return `Specify rate${
       hasForeignCurrency()
-        ? ` for 1 ${nobtCurrency} to ${getForeignCurrencyValue()}`
+        ? ` for 1 ${nobt.currency} to ${getForeignCurrencyValue()}`
         : ''
     }:`;
   };
@@ -91,7 +92,7 @@ const AmountConversionPage = props => {
             <Caption>Select foreign currency</Caption>
             <CurrencySelect
               selectedCurrency={foreignCurrency}
-              unavailableCurrencies={[nobtCurrency]}
+              unavailableCurrencies={[nobt.currency]}
               onCurrencyChanged={setForeignCurrency}
             />
             <Caption>{getRateCaption()}</Caption>
@@ -109,7 +110,7 @@ const AmountConversionPage = props => {
               placeholder="13.37"
               value={amount}
               onChange={newValue => setAmount(parseFloat(newValue))}
-              currency={getForeignCurrencyValue() || nobtCurrency}
+              currency={getForeignCurrencyValue() || nobt.currency}
               error={getAmountError()}
               data-cy={'foreign-amount-input'}
             />
@@ -117,7 +118,7 @@ const AmountConversionPage = props => {
           <Section>
             <Caption>Converted amount:</Caption>
             <Input
-              icon={<span>{getCurrencySymbol(nobtCurrency)}</span>}
+              icon={<span>{getCurrencySymbol(nobt.currency)}</span>}
               disabled
               value={convertAmount(amount, rate)}
               data-cy={'converted-amount-input'}
@@ -165,7 +166,6 @@ export default connect(
     amount: getAmount(state),
     foreignCurrency: getForeignCurrency(state),
     rate: getRate(state),
-    nobtCurrency: getNobtCurrency(state),
   }),
   dispatch => ({
     saveConversionInformation: payload =>

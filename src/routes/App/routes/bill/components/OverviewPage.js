@@ -33,10 +33,10 @@ import {
   isDebtorsSelectionErrorShown,
   isDescriptionErrorShown,
 } from '../modules/selectors';
-import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
 import { useHistory, useParams } from 'react-router';
 import usePaths from '../../../../../hooks/usePaths';
 import { nobtIdPathVariable } from '../../../../../app';
+import { useNobt } from '../../../../../hooks/useNobt';
 
 const createBill = (props, nobtId) => {
   let billToAdd = {
@@ -64,12 +64,11 @@ const OverviewPage = props => {
   const { addBillStatus } = props;
   const history = useHistory();
   const paths = usePaths();
-  const params = useParams();
-  const nobtId = params[nobtIdPathVariable];
+  const nobt = useNobt();
 
   useEffect(() => {
     if (addBillStatus === AsyncActionStatus.SUCCESSFUL) {
-      mutate(nobtId);
+      mutate(nobt.id);
       history.replace(paths.feed());
     }
   }, [addBillStatus]);
@@ -99,9 +98,7 @@ const OverviewPage = props => {
               placeholder="13.37"
               value={props.amount}
               onChange={props.onAmountChanged}
-              currency={
-                (props.foreignCurrency || {}).value || props.nobtCurrency
-              }
+              currency={(props.foreignCurrency || {}).value || nobt.currency}
               data-cy="amount-input"
             />
             <InputLegend error={props.isAmountErrorShown}>
@@ -160,7 +157,7 @@ const OverviewPage = props => {
           raised
           primary
           disabled={props.addBillStatus === AsyncActionStatus.IN_PROGRESS}
-          onClick={() => createBill(props, nobtId)}
+          onClick={() => createBill(props, nobt.id)}
           label="add bill"
           icon="check_circle"
         />
@@ -185,7 +182,6 @@ export default connect(
     isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state),
     focusId: getFocusId(state),
     foreignCurrency: getForeignCurrency(state),
-    nobtCurrency: getNobtCurrency(state),
   }),
   dispatch => ({
     onDescriptionChanged: description =>

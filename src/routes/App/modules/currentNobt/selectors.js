@@ -16,10 +16,6 @@ export const getMembers = createSelector(
   [getCurrentNobt],
   nobt => nobt.participatingPersons
 );
-export const getNobtCurrency = createSelector(
-  [getCurrentNobt],
-  nobt => nobt.currency
-);
 export const getBills = createSelector([getCurrentNobt], nobt => nobt.bills);
 export const getTransactions = createSelector(
   [getCurrentNobt],
