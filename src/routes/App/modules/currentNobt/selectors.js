@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import { AsyncActionStatus } from '../../../../const/AsyncActionStatus';
 import {
   balanceDetailPathVariable,
   billDetailPathVariable,
@@ -8,10 +7,7 @@ import { computeBalanceForPerson, sumShares } from '../../../../nobt';
 
 export const getCurrentNobt = state => state.App.currentNobt.data;
 const getNobtFetchTimestamp = state => state.App.currentNobt.nobtFetchTimestamp;
-export const getFetchNobtStatus = state =>
-  state.App.currentNobt.fetchNobtStatus;
 
-export const getName = createSelector([getCurrentNobt], nobt => nobt.name);
 export const getMembers = createSelector(
   [getCurrentNobt],
   nobt => nobt.participatingPersons
@@ -20,10 +16,6 @@ export const getBills = createSelector([getCurrentNobt], nobt => nobt.bills);
 export const getTransactions = createSelector(
   [getCurrentNobt],
   nobt => nobt.transactions
-);
-export const getCreatedOn = createSelector(
-  [getCurrentNobt],
-  nobt => nobt.createdOn
 );
 export const getPayments = createSelector(
   [getCurrentNobt],
@@ -37,13 +29,6 @@ export const isNobtEmpty = createSelector(
 export const isNobtDataOutdated = createSelector(
   [getNobtFetchTimestamp],
   timestamp => timestamp === null
-);
-
-export const shouldFetchNobt = createSelector(
-  [isNobtDataOutdated, getFetchNobtStatus],
-  (isOutdated, status) => {
-    return isOutdated && status !== AsyncActionStatus.IN_PROGRESS;
-  }
 );
 
 export const getDeNormalizedBills = createSelector([getBills], bills =>
