@@ -52,7 +52,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "reselect-change-memoize": "^1.1.0"
+    "reselect-change-memoize": "^1.1.0",
+    "swr": "^0.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4",

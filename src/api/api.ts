@@ -1,12 +1,12 @@
 import factory from 'api/axiosFactory';
-import { AxiosInstance } from 'axios';
+import { AxiosInstance, AxiosPromise } from 'axios';
 
 class Client {
   public static delete(uri: string) {
     return Client.instance().delete(uri);
   }
 
-  public static fetchNobt(identifier: string) {
+  public static fetchNobt(identifier: string): AxiosPromise<NobtResponse> {
     return Client.instance().get(`nobts/${identifier}`);
   }
 
@@ -33,6 +33,46 @@ class Client {
 
     return Client.axiosInstance;
   }
+}
+
+export interface NobtResponse {
+  id: string;
+  name: string;
+  expenses: Expense[];
+  deletedExpenses: Expense[];
+  payments: any[];
+  createdOn: string;
+  participatingPersons: string[];
+  currency: string;
+  debts: Debt[];
+}
+
+export interface Debt {
+  debtor: string;
+  amount: number;
+  debtee: string;
+}
+
+export interface Expense {
+  id: number;
+  name: string;
+  debtee: string;
+  splitStrategy: string;
+  conversionInformation: {
+    foreignCurrency: string;
+    rate: number;
+  };
+  shares: Share[];
+  date: string;
+  createdOn: string;
+  _links: {
+    delete: string | null;
+  };
+}
+
+export interface Share {
+  debtor: string;
+  amount: number;
 }
 
 export interface CreateNobtPayload {

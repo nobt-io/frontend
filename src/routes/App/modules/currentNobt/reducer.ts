@@ -5,7 +5,6 @@ import {
 } from './actions';
 import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import _debug from 'debug';
-import { Nobt } from '../../../../hooks/useNobt';
 
 const emptyHandler = (status: any) => ({ data: {} });
 
@@ -79,7 +78,7 @@ const handlers = {
 interface State {
   fetchNobtStatus: AsyncActionStatus | null;
   nobtFetchTimestamp: string | null;
-  data: Nobt;
+  data: any;
 }
 
 export const initialState: State = {

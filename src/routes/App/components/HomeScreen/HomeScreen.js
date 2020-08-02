@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './HomeScreen.scss';
 import EmptyNobtPlaceholder from '../EmptyNobtPlaceholder/index';
@@ -9,16 +8,9 @@ import { Button } from 'react-toolbox-legacy/lib/button';
 import Amount from '../../../../components/Amount/Amount';
 import BrandedAppBar from '../../../../components/BrandedAppBar/index';
 import Feed from '../Feed/Feed';
-import {
-  getMembers,
-  getName,
-  isNobtEmpty,
-} from '../../modules/currentNobt/selectors';
-import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import usePaths from '../../../../hooks/usePaths';
 import { useNobt } from '../../../../hooks/useNobt';
-import { useTotal } from '../../../../hooks/useTotal';
 
 const GoToBalancesButton = () => {
   const history = useHistory();
@@ -36,55 +28,37 @@ const GoToBalancesButton = () => {
   );
 };
 
-const HomeScreen = ({ name, members, isNobtEmpty }) => {
-  const total = useTotal();
+export default function HomeScreen() {
+  const nobt = useNobt();
 
   return (
     <div className={styles.homeScreen}>
       <BrandedAppBar />
 
       <div className={styles.overviewContainer}>
-        <div className={styles.nobtTitle}>{name}</div>
+        <div className={styles.nobtTitle}>{nobt.name}</div>
         <div className={styles.nobtMetadata}>
           <ul>
             <li>
               <div>
                 <FontIcon value="payment" />
-                <Amount value={total} />
+                <Amount value={nobt.total} />
               </div>
             </li>
             <li>
               <div>
                 <FontIcon value="group" />
-                {members.length}
+                {nobt.numberOfMembers}
               </div>
             </li>
           </ul>
         </div>
-        {!isNobtEmpty && <GoToBalancesButton />}
+        {!nobt.isEmpty && <GoToBalancesButton />}
       </div>
 
-      {isNobtEmpty ? <EmptyNobtPlaceholder /> : <Feed />}
+      {nobt.isEmpty ? <EmptyNobtPlaceholder /> : <Feed />}
 
       <NobtFAB />
     </div>
   );
-};
-
-HomeScreen.propTypes = {
-  name: PropTypes.string.isRequired,
-  total: PropTypes.number.isRequired,
-  members: PropTypes.arrayOf(PropTypes.string).isRequired,
-  isNobtEmpty: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = state => {
-  return {
-    name: getName(state),
-    members: getMembers(state),
-    isNobtEmpty: isNobtEmpty(state),
-  };
-};
-const mapDispatchToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+}

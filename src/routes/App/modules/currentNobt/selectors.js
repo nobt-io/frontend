@@ -1,11 +1,10 @@
 import { createSelector } from 'reselect';
 import { AsyncActionStatus } from '../../../../const/AsyncActionStatus';
+import { computeBalanceForPerson, sumBill } from '../../../../hooks/useNobt';
 import {
   balanceDetailPathVariable,
   billDetailPathVariable,
-} from '../../../index';
-import { sumBill } from '../../../../hooks/useTotal';
-import { computeBalanceForPerson } from '../../../../hooks/useBalance';
+} from '../../../../app';
 
 export const getCurrentNobt = state => state.App.currentNobt.data;
 const getNobtFetchTimestamp = state => state.App.currentNobt.nobtFetchTimestamp;

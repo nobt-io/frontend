@@ -35,10 +35,11 @@ import {
   isDescriptionErrorShown,
 } from '../modules/selectors';
 import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useLocation, useParams } from 'react-router';
 import usePaths from '../../../../../hooks/usePaths';
+import { nobtIdPathVariable } from '../../../../../app';
 
-const createBill = props => {
+const createBill = (props, nobtId) => {
   let billToAdd = {
     name: props.description,
     debtee: props.debtee,
@@ -57,13 +58,15 @@ const createBill = props => {
       };
     }),
   };
-  props.onSubmit(props.nobtId, billToAdd);
+  props.onSubmit(nobtId, billToAdd);
 };
 
 const OverviewPage = props => {
-  const { addBillStatus, nobtId } = props;
+  const { addBillStatus } = props;
   const history = useHistory();
   const paths = usePaths();
+  const params = useParams();
+  const nobtId = params[nobtIdPathVariable];
 
   useEffect(() => {
     if (addBillStatus === AsyncActionStatus.SUCCESSFUL) {
@@ -158,7 +161,7 @@ const OverviewPage = props => {
           raised
           primary
           disabled={props.addBillStatus === AsyncActionStatus.IN_PROGRESS}
-          onClick={() => createBill(props)}
+          onClick={() => createBill(props, nobtId)}
           label="add bill"
           icon="check_circle"
         />
@@ -168,14 +171,13 @@ const OverviewPage = props => {
 };
 
 export default connect(
-  (state, props) => ({
+  state => ({
     description: getDescription(state),
     amount: getAmount(state),
     debtee: getDebtee(state),
     shares: getShares(state),
     sharesWithValues: getSharesWithValues(state),
     conversionInformation: getConversionInformation(state),
-    nobtId: props.match.params.nobtId,
     splitStrategy: getSplitStrategy(state),
     addBillStatus: getAddBillStatus(state),
     isDescriptionErrorShown: isDescriptionErrorShown(state),
@@ -192,6 +194,5 @@ export default connect(
     onAmountChanged: amount => dispatch(amountChanged(amount)),
     onSubmit: (id, bill) => dispatch(addBill(id, bill)),
     onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
-    invalidateNobtData: () => dispatch(invalidateNobt()),
   })
 )(OverviewPage);

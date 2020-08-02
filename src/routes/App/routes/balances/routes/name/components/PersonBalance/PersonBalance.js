@@ -21,8 +21,8 @@ import AmountTheme from '../../../../themes/AmountTheme.scss';
 import { Page } from 'components/Container';
 import { useHistory, useParams } from 'react-router-dom';
 import usePaths from '../../../../../../../../hooks/usePaths';
-import { balanceDetailPathVariable } from '../../../../../../../index';
-import { useBalance } from '../../../../../../../../hooks/useBalance';
+import { useNobt } from '../../../../../../../../hooks/useNobt';
+import { balanceDetailPathVariable } from '../../../../../../../../app';
 
 const PersonBalance = ({
   sumOfPaidBills,
@@ -33,10 +33,11 @@ const PersonBalance = ({
 }) => {
   const history = useHistory();
   const paths = usePaths();
-
   const params = useParams();
   const balanceOwner = params[balanceDetailPathVariable];
-  const balance = useBalance(balanceOwner);
+  const nobt = useNobt();
+
+  const balance = nobt.balanceOf(balanceOwner);
 
   return (
     <div>
