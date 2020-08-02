@@ -44,7 +44,7 @@ export class Nobt {
   constructor(
     public id: string,
     public name: string,
-    private currency: string,
+    public currency: string,
     private participatingPersons: string[],
     private debts: Debt[],
     private bills: Bill[],
