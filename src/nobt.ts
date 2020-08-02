@@ -57,6 +57,7 @@ export class Nobt {
     return this.bills.length === 0 && this.deletedBills.length === 0;
   }
 
+  // TODO: `number` should be fine here, but it is hard to enforce the type on the outside
   public bill(id: number | string): Bill | undefined {
     if (typeof id === 'string') {
       id = parseInt(id, 10);
