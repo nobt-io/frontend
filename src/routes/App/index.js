@@ -31,8 +31,12 @@ import { Nobt } from '../../nobt';
 export default function App() {
   const params = useParams();
   const nobtId = params[nobtIdPathVariable];
-  const { data: nobt, error, revalidate } = useSWR(nobtId, () =>
-    Client.fetchNobt(nobtId).then(response => response.data)
+  const { data: nobt, error, revalidate } = useSWR(
+    nobtId,
+    () => Client.fetchNobt(nobtId).then(response => response.data),
+    {
+      revalidateOnFocus: false,
+    }
   );
   const dispatch = useDispatch();
   useEffect(() => {
@@ -93,13 +97,7 @@ export default function App() {
               path={`${path}/bill`}
             >
               <Switch>
-                <Route
-                  exact
-                  path={`${path}/bill`}
-                  render={() => (
-                    <OverviewPage invalidateNobtData={revalidate} />
-                  )}
-                />
+                <Route exact path={`${path}/bill`} component={OverviewPage} />
                 <Route
                   exact
                   path={`${path}/bill/debtee`}
@@ -120,7 +118,7 @@ export default function App() {
             <Route
               exact
               path={`${path}/:${billDetailPathVariable}`}
-              render={() => <BillDetailPage invalidateNobtData={revalidate} />}
+              component={BillDetailPage}
             />
           </Switch>
         </NobtContext.Provider>

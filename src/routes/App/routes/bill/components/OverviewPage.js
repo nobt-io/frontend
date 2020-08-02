@@ -16,7 +16,7 @@ import { Caption, Heading, SubHeading } from 'components/text';
 import { Section, SectionGroup } from 'components/Section/index';
 import { AsyncActionStatus } from 'const/AsyncActionStatus';
 import ForeignCurrencyButton from '../../../components/ForeignCurrencyButton';
-
+import { mutate } from 'swr';
 import {
   getAddBillStatus,
   getAmount,
@@ -69,7 +69,7 @@ const OverviewPage = props => {
 
   useEffect(() => {
     if (addBillStatus === AsyncActionStatus.SUCCESSFUL) {
-      props.invalidateNobtData();
+      mutate(nobtId);
       history.replace(paths.feed());
     }
   }, [addBillStatus]);

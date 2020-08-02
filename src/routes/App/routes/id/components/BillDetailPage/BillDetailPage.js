@@ -14,6 +14,7 @@ import usePaths from '../../../../../../hooks/usePaths';
 import { billDetailPathVariable } from '../../../../../../app';
 import { useNobt } from '../../../../../../hooks/useNobt';
 import Client from 'api';
+import { mutate } from 'swr';
 
 const DeleteBillConfirmationDialog = ({
   active,
@@ -34,7 +35,7 @@ const DeleteBillConfirmationDialog = ({
   </ConfirmationDialog>
 );
 
-export default function BillDetailPage({ invalidateNobtData }) {
+export default function BillDetailPage() {
   const params = useParams();
   const billId = params[billDetailPathVariable];
   const nobt = useNobt();
@@ -65,7 +66,7 @@ export default function BillDetailPage({ invalidateNobtData }) {
   const handelCancel = () => setShowDeleteBillConfirmationDialog(false);
   const handleConfirm = async () => {
     await Client.delete(bill.deleteLink);
-    await invalidateNobtData();
+    mutate(nobt.id);
     history.replace(paths.feed());
   };
 
