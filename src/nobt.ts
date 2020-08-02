@@ -1,69 +1,10 @@
-import { Debt, NobtResponse } from './api/api';
+import { Debt, Expense, NobtResponse } from './api/api';
 
-export interface Share {
-  debtor: string;
-  amount: number;
-}
-
-export class Bill {
-  constructor(
-    public readonly id: number,
-    public readonly name: string,
-    public readonly debteeName: string,
-    public readonly date: string,
-    public readonly createdOn: string,
-    public readonly deletedOn: string | undefined,
-    public readonly conversionInformation: {
-      foreignCurrency: string;
-      rate: number;
-    },
-    public readonly shares: Share[],
-    public readonly links: {
-      delete?: string;
-    }
-  ) {}
-
-  public get canBeDeleted(): boolean {
-    return this.deleteLink !== undefined;
-  }
-
-  public get deleteLink(): string | undefined {
-    return this.links.delete;
-  }
-
-  public get debtors() {
-    return this.shares.map(share => ({
-      name: share.debtor,
-      amount: share.amount,
-    }));
-  }
-
-  public get debtee() {
-    return {
-      name: this.debteeName,
-      amount: this.sum,
-    };
-  }
-
-  public get sum() {
-    return sumShares(this.shares);
-  }
-}
-
-export function sumShares(shares: Share[]): number {
-  return shares
-    .map(share => share.amount)
-    .reduce((sum, amount) => sum + amount);
-}
-
-export interface Balance {
-  me: { name: string; amount: number };
-  persons: Array<{
-    name: string;
-    amount: number;
-  }>;
-}
-
+/**
+ * Defines the nobt model (as in the M in MVC) used throughout the frontend.
+ *
+ * It is purposely framework agnostic.
+ */
 export class Nobt {
   public static fromServerResponse(response: NobtResponse) {
     return new Nobt(
@@ -72,34 +13,8 @@ export class Nobt {
       response.currency,
       response.participatingPersons,
       response.debts,
-      response.expenses.map(
-        expense =>
-          new Bill(
-            expense.id,
-            expense.name,
-            expense.debtee,
-            expense.date,
-            expense.createdOn,
-            expense.deletedOn,
-            expense.conversionInformation,
-            expense.shares,
-            expense._links || {}
-          )
-      ),
-      response.deletedExpenses.map(
-        expense =>
-          new Bill(
-            expense.id,
-            expense.name,
-            expense.debtee,
-            expense.date,
-            expense.createdOn,
-            expense.deletedOn,
-            expense.conversionInformation,
-            expense.shares,
-            expense._links || {}
-          )
-      ),
+      response.expenses.map(Bill.fromServerResponse),
+      response.deletedExpenses.map(Bill.fromServerResponse),
       response.createdOn
     );
   }
@@ -148,6 +63,84 @@ export class Nobt {
     }
     return this.bills.concat(this.deletedBills).find(bill => bill.id === id);
   }
+}
+
+export class Bill {
+  public static fromServerResponse(expense: Expense) {
+    return new Bill(
+      expense.id,
+      expense.name,
+      expense.debtee,
+      expense.date,
+      expense.createdOn,
+      expense.deletedOn,
+      expense.conversionInformation,
+      expense.shares,
+      expense._links || {}
+    );
+  }
+
+  constructor(
+    public readonly id: number,
+    public readonly name: string,
+    public readonly debteeName: string,
+    public readonly date: string,
+    public readonly createdOn: string,
+    public readonly deletedOn: string | undefined,
+    public readonly conversionInformation: {
+      foreignCurrency: string;
+      rate: number;
+    },
+    public readonly shares: Share[],
+    public readonly links: {
+      delete?: string;
+    }
+  ) {}
+
+  public get canBeDeleted(): boolean {
+    return this.deleteLink !== undefined;
+  }
+
+  public get deleteLink(): string | undefined {
+    return this.links.delete;
+  }
+
+  public get debtors() {
+    return this.shares.map(share => ({
+      name: share.debtor,
+      amount: share.amount,
+    }));
+  }
+
+  public get debtee() {
+    return {
+      name: this.debteeName,
+      amount: this.sum,
+    };
+  }
+
+  public get sum() {
+    return sumShares(this.shares);
+  }
+}
+
+export interface Share {
+  debtor: string;
+  amount: number;
+}
+
+export function sumShares(shares: Share[]): number {
+  return shares
+    .map(share => share.amount)
+    .reduce((sum, amount) => sum + amount);
+}
+
+export interface Balance {
+  me: { name: string; amount: number };
+  persons: Array<{
+    name: string;
+    amount: number;
+  }>;
 }
 
 // quickfix for bug 277
