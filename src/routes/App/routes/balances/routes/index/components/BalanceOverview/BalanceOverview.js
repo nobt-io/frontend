@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getBalances } from '../../../../../../modules/currentNobt/selectors';
 import Avatar from 'components/Avatar/index';
 import { ListItem } from 'react-toolbox-legacy/lib/list';
 import Amount from 'components/Amount/Amount';
@@ -13,10 +11,13 @@ import { SubTitle, Title } from 'components/text/index';
 import { Page } from 'components/Container';
 import { useHistory } from 'react-router-dom';
 import usePaths from '../../../../../../../../hooks/usePaths';
+import { useNobt } from '../../../../../../../../hooks/useNobt';
+import NoUnderlineLink from '../../../../../../../../components/NoUnderlineLink';
 
-const BalanceOverview = ({ balances }) => {
+export default function BalanceOverview() {
   const history = useHistory();
   const paths = usePaths();
+  const nobt = useNobt();
 
   return (
     <div>
@@ -32,32 +33,26 @@ const BalanceOverview = ({ balances }) => {
         <SubTitle>The balances of all users in this Nobt.</SubTitle>
 
         <HOList
-          items={balances}
+          items={nobt.balances}
           renderItem={balance => (
-            <ListItem
-              leftActions={[<Avatar name={balance.me.name} medium />]}
-              key={balance.me.name}
-              caption={balance.me.name}
-              legend={
-                <Amount
-                  theme={AmountTheme}
-                  value={balance.me.amount}
-                  absolute={false}
-                />
-              }
-              rightActions={[<IconButton icon="chevron_right" />]}
-              onClick={() => history.push(paths.balanceFor(balance.me.name))}
-            />
+            <NoUnderlineLink to={paths.balanceFor(balance.me.name)}>
+              <ListItem
+                leftActions={[<Avatar name={balance.me.name} medium />]}
+                key={balance.me.name}
+                caption={balance.me.name}
+                legend={
+                  <Amount
+                    theme={AmountTheme}
+                    value={balance.me.amount}
+                    absolute={false}
+                  />
+                }
+                rightActions={[<IconButton icon="chevron_right" />]}
+              />
+            </NoUnderlineLink>
           )}
         />
       </Page>
     </div>
   );
-};
-
-export default connect(
-  state => ({
-    balances: getBalances(state),
-  }),
-  {}
-)(BalanceOverview);
+}

@@ -3,20 +3,13 @@ import {
   balanceDetailPathVariable,
   billDetailPathVariable,
 } from '../../../../app';
-import { computeBalanceForPerson, sumShares } from '../../../../nobt';
+import { sumShares } from '../../../../nobt';
 
 export const getCurrentNobt = state => state.App.currentNobt.data;
 const getNobtFetchTimestamp = state => state.App.currentNobt.nobtFetchTimestamp;
 
-export const getMembers = createSelector(
-  [getCurrentNobt],
-  nobt => nobt.participatingPersons
-);
 export const getBills = createSelector([getCurrentNobt], nobt => nobt.bills);
-export const getTransactions = createSelector(
-  [getCurrentNobt],
-  nobt => nobt.transactions
-);
+
 export const getPayments = createSelector(
   [getCurrentNobt],
   nobt => nobt.payments
@@ -75,13 +68,6 @@ export const getSortedFeedItems = createSelector(
   }
 );
 
-export const getBalances = createSelector(
-  [getTransactions, getMembers],
-  (transactions, members) => {
-    return members.map(m => computeBalanceForPerson(transactions, m));
-  }
-);
-
 const deNormalizeBill = e => {
   const debteeName = e.debtee;
   const sumOfShares = sumShares(e.shares);
@@ -106,34 +92,6 @@ const deNormalizeBill = e => {
     deletedOn: e.deletedOn,
   };
 };
-
-let first = () => true;
-
-const getBillId = (state, props) =>
-  parseInt(props.match.params[billDetailPathVariable]);
-
-export const makeGetBill = () =>
-  createSelector([getBills, getBillId], (bills, billId) => {
-    return bills
-      .filter(bill => bill.id === billId)
-      .map(deNormalizeBill)
-      .find(first);
-  });
-
-export const makeCanBillBeDeleted = () =>
-  createSelector([getBills, getBillId], (bills, billId) => {
-    var bill = bills.filter(bill => bill.id === billId).find(first);
-
-    if (!bill) {
-      return false;
-    }
-
-    if (!bill.hasOwnProperty('_links')) {
-      return false;
-    }
-
-    return bill._links.hasOwnProperty('delete');
-  });
 
 const getBalanceOwner = (state, props) =>
   props.match.params[balanceDetailPathVariable];

@@ -112,7 +112,7 @@ export class Nobt {
     public id: string,
     public name: string,
     public currency: string,
-    private participatingPersons: string[],
+    private members: string[],
     private debts: Debt[],
     private bills: Bill[],
     private deletedBills: Bill[],
@@ -127,11 +127,15 @@ export class Nobt {
   }
 
   public get numberOfMembers(): number {
-    return this.participatingPersons.length;
+    return this.members.length;
   }
 
   public balanceOf(name: string): Balance {
     return computeBalanceForPerson(this.debts, sanitizeName(name));
+  }
+
+  public get balances(): Balance[] {
+    return this.members.map(name => computeBalanceForPerson(this.debts, name));
   }
 
   public get isEmpty() {

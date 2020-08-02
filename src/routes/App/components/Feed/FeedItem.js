@@ -3,15 +3,10 @@ import { ListItem } from 'react-toolbox-legacy/lib/list/index';
 import FeedItemTheme from './FeedItemTheme.scss';
 import DeletedFeedItemTheme from './DeletedFeedItemTheme.scss';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import NoUnderlineLink from '../../../../components/NoUnderlineLink';
 
 export default ({ icon, caption, legend, deleted, link }) => (
-  <Link
-    to={link}
-    style={{
-      textDecoration: 'none',
-    }}
-  >
+  <NoUnderlineLink to={link}>
     <ListItem
       key={caption + legend}
       leftIcon={icon}
@@ -21,5 +16,5 @@ export default ({ icon, caption, legend, deleted, link }) => (
       rightActions={[link && <IconButton icon="chevron_right" />]}
       ripple={false}
     />
-  </Link>
+  </NoUnderlineLink>
 );
