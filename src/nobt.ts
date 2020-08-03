@@ -29,8 +29,8 @@ export class Nobt {
     public currency: string,
     private members: string[],
     private debts: Debt[],
-    private bills: Bill[],
-    private deletedBills: Bill[],
+    public bills: Bill[],
+    public deletedBills: Bill[],
     private createdOn: string
   ) {}
 
@@ -63,6 +63,14 @@ export class Nobt {
       id = parseInt(id, 10);
     }
     return this.bills.concat(this.deletedBills).find(bill => bill.id === id);
+  }
+
+  public billsPaidBy(name: string): Bill[] {
+    return this.bills.filter(bill => bill.debtee.name === name);
+  }
+
+  public billsRelatedTo(name: string): Bill[] {
+    return this.bills.filter(bill => bill.involves(name));
   }
 }
 
@@ -123,6 +131,18 @@ export class Bill {
   public get sum() {
     return sumShares(this.shares);
   }
+
+  public involves(name: string): boolean {
+    if (this.debteeName === name) {
+      return true;
+    }
+
+    return this.shares.map(share => share.debtor).includes(name);
+  }
+}
+
+export function sumBills(bills: Bill[]): number {
+  return bills.map(bill => bill.sum).reduce((sum, next) => sum + next);
 }
 
 export interface Share {
