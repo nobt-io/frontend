@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './EmptyNobtPlaceholder.scss';
 import SafeBox from './safebox.png';
-import { useHistory } from 'react-router-dom';
+import NoUnderlineLink from '../../../../components/NoUnderlineLink';
+import usePaths from '../../../../hooks/usePaths';
 
-export const EmptyNobtPlaceholder = props => {
-  const history = useHistory();
+export default function EmptyNobtPlaceholder() {
+  const paths = usePaths();
 
   return (
     <div className={styles.container}>
@@ -14,17 +15,11 @@ export const EmptyNobtPlaceholder = props => {
       />
       <div className={styles.topLabel}>No bills found.</div>
       <div className={styles.linkLabel}>
-        <a
-          data-cy="add-bill-link"
-          href="#"
-          onClick={() => history.push('/bill')}
-        >
+        <NoUnderlineLink data-cy="add-bill-link" to={paths.newBill()}>
           Add
-        </a>{' '}
+        </NoUnderlineLink>{' '}
         your first.
       </div>
     </div>
   );
-};
-
-export default EmptyNobtPlaceholder;
+}
