@@ -4,13 +4,6 @@ import { List, ListItem } from 'react-toolbox-legacy/lib/list';
 import HOList from '../../../../../../../../containers/HOList';
 import { AppBar } from 'react-toolbox-legacy/lib/app_bar/index';
 import Avatar from 'components/Avatar/index';
-import { connect } from 'react-redux';
-import {
-  getBills,
-  getSumOfPaidBills,
-  makeGetPaidBills,
-  makeGetRelatedBills,
-} from '../../../../../../modules/currentNobt/selectors';
 import { FontIcon } from 'react-toolbox-legacy/lib/font_icon/index';
 import InfoMessageListTheme from './InfoMessageListTheme.scss';
 import { FormattedMessage } from 'react-intl';
@@ -21,8 +14,9 @@ import { useHistory, useParams } from 'react-router-dom';
 import usePaths from '../../../../../../../../hooks/usePaths';
 import { useNobt } from '../../../../../../../../hooks/useNobt';
 import { balanceDetailPathVariable } from '../../../../../../../../app';
+import { sumBills } from '../../../../../../../../nobt';
 
-const PersonBalance = ({ sumOfPaidBills, paidBills, bills, relatedBills }) => {
+export default function PersonBalance() {
   const history = useHistory();
   const paths = usePaths();
   const params = useParams();
@@ -30,6 +24,10 @@ const PersonBalance = ({ sumOfPaidBills, paidBills, bills, relatedBills }) => {
   const nobt = useNobt();
 
   const balance = nobt.balanceOf(balanceOwner);
+  const paidBills = nobt.billsPaidBy(balanceOwner);
+  const sumOfPaidBills = sumBills(paidBills);
+  const bills = nobt.bills;
+  const relatedBills = nobt.billsRelatedTo(balanceOwner);
 
   return (
     <div>
@@ -128,22 +126,4 @@ const PersonBalance = ({ sumOfPaidBills, paidBills, bills, relatedBills }) => {
       </Page>
     </div>
   );
-};
-
-const makeMapStateToProps = () => {
-  const getPaidBills = makeGetPaidBills();
-  const getRelatedBills = makeGetRelatedBills();
-
-  return (state, props) => {
-    let paidBills = getPaidBills(state, props);
-
-    return {
-      sumOfPaidBills: getSumOfPaidBills(paidBills),
-      paidBills: paidBills,
-      bills: getBills(state),
-      relatedBills: getRelatedBills(state, props),
-    };
-  };
-};
-
-export default connect(makeMapStateToProps, () => ({}))(PersonBalance);
+}
