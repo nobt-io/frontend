@@ -14,7 +14,7 @@ describe('Deleted bills', function() {
   });
 
   it('should mention the deleted date in the bills details', function() {
-    cy.contains('A bill to be deleted').click();
+    cy.contains('A bill to be deleted').click({ force: true });
 
     // We purposely don't match against the formatted date because that might be platform/browser specific
     cy.contains('Deleted on').should('exist');

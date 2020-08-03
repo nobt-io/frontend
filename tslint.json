@@ -9,6 +9,7 @@
     "jsx-no-lambda": false,
     "jsx-boolean-value": false,
     "curly": false,
-    "prefer-const": false
+    "prefer-const": false,
+    "max-classes-per-file": false
   }
 }

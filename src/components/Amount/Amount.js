@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { FormattedNumber } from 'react-intl';
-import { connect } from 'react-redux';
 import classnames from 'classnames';
+import { useNobt } from '../../hooks/useNobt';
 
 const valueViewModel = props =>
   props.absolute ? Math.abs(props.value) : props.value;
@@ -16,15 +16,19 @@ const computeClassNames = props =>
       props.theme.negative != null && props.value < 0,
   });
 
-const Amount = props => (
-  <span className={computeClassNames(props)}>
-    <FormattedNumber
-      value={valueViewModel(props)}
-      currency={props.currencyOverride || props.currency}
-      style="currency"
-    />
-  </span>
-);
+export default function Amount(props) {
+  const nobt = useNobt();
+
+  return (
+    <span className={computeClassNames(props)}>
+      <FormattedNumber
+        value={valueViewModel(props)}
+        currency={props.currencyOverride || nobt.currency}
+        style="currency"
+      />
+    </span>
+  );
+}
 
 Amount.defaultProps = {
   absolute: true,
@@ -45,10 +49,3 @@ Amount.propTypes = {
   }),
   currencyOverride: PropTypes.string,
 };
-
-export default connect(
-  state => ({
-    currency: state.App.currentNobt.data.currency,
-  }),
-  () => ({})
-)(Amount);

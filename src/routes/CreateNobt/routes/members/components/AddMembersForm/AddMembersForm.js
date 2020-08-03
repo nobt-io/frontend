@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import styles from './AddMembersForm.scss';
 import HOList from 'containers/HOList';
@@ -30,7 +31,6 @@ import {
 import { ListItem } from 'react-toolbox-legacy/lib/list/index';
 import Box from '../../../../../../components/Box/Box';
 import Avatar from '../../../../../../components/Avatar/Avatar';
-import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const AddMembersForm = props => {

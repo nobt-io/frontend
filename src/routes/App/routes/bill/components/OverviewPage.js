@@ -15,9 +15,8 @@ import BrandedAppBar from 'components/BrandedAppBar';
 import { Caption, Heading, SubHeading } from 'components/text';
 import { Section, SectionGroup } from 'components/Section/index';
 import { AsyncActionStatus } from 'const/AsyncActionStatus';
-import { invalidateNobt } from '../../../modules/currentNobt/actions';
 import ForeignCurrencyButton from '../../../components/ForeignCurrencyButton';
-
+import { mutate } from 'swr';
 import {
   getAddBillStatus,
   getAmount,
@@ -34,11 +33,12 @@ import {
   isDebtorsSelectionErrorShown,
   isDescriptionErrorShown,
 } from '../modules/selectors';
-import { getNobtCurrency } from '../../../modules/currentNobt/selectors';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import usePaths from '../../../../../hooks/usePaths';
+import { nobtIdPathVariable } from '../../../../../app';
+import { useNobt } from '../../../../../hooks/useNobt';
 
-const createBill = props => {
+const createBill = (props, nobtId) => {
   let billToAdd = {
     name: props.description,
     debtee: props.debtee,
@@ -57,17 +57,18 @@ const createBill = props => {
       };
     }),
   };
-  props.onSubmit(props.nobtId, billToAdd);
+  props.onSubmit(nobtId, billToAdd);
 };
 
 const OverviewPage = props => {
-  const { addBillStatus, nobtId } = props;
+  const { addBillStatus } = props;
   const history = useHistory();
   const paths = usePaths();
+  const nobt = useNobt();
 
   useEffect(() => {
     if (addBillStatus === AsyncActionStatus.SUCCESSFUL) {
-      props.invalidateNobtData();
+      mutate(nobt.id);
       history.replace(paths.feed());
     }
   }, [addBillStatus]);
@@ -97,9 +98,7 @@ const OverviewPage = props => {
               placeholder="13.37"
               value={props.amount}
               onChange={props.onAmountChanged}
-              currency={
-                (props.foreignCurrency || {}).value || props.nobtCurrency
-              }
+              currency={(props.foreignCurrency || {}).value || nobt.currency}
               data-cy="amount-input"
             />
             <InputLegend error={props.isAmountErrorShown}>
@@ -158,7 +157,7 @@ const OverviewPage = props => {
           raised
           primary
           disabled={props.addBillStatus === AsyncActionStatus.IN_PROGRESS}
-          onClick={() => createBill(props)}
+          onClick={() => createBill(props, nobt.id)}
           label="add bill"
           icon="check_circle"
         />
@@ -168,14 +167,13 @@ const OverviewPage = props => {
 };
 
 export default connect(
-  (state, props) => ({
+  state => ({
     description: getDescription(state),
     amount: getAmount(state),
     debtee: getDebtee(state),
     shares: getShares(state),
     sharesWithValues: getSharesWithValues(state),
     conversionInformation: getConversionInformation(state),
-    nobtId: props.match.params.nobtId,
     splitStrategy: getSplitStrategy(state),
     addBillStatus: getAddBillStatus(state),
     isDescriptionErrorShown: isDescriptionErrorShown(state),
@@ -184,7 +182,6 @@ export default connect(
     isDebtorsSelectionErrorShown: isDebtorsSelectionErrorShown(state),
     focusId: getFocusId(state),
     foreignCurrency: getForeignCurrency(state),
-    nobtCurrency: getNobtCurrency(state),
   }),
   dispatch => ({
     onDescriptionChanged: description =>
@@ -192,6 +189,5 @@ export default connect(
     onAmountChanged: amount => dispatch(amountChanged(amount)),
     onSubmit: (id, bill) => dispatch(addBill(id, bill)),
     onFocusIdChanged: focusId => dispatch(focusIdChanged(focusId)),
-    invalidateNobtData: () => dispatch(invalidateNobt()),
   })
 )(OverviewPage);

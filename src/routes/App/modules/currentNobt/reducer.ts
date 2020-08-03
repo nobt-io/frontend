@@ -75,35 +75,10 @@ const handlers = {
   },
 };
 
-interface Share {
-  name: string;
-  amount: number;
-}
-
-interface Bill {
-  id: number;
-  name: string;
-  date: string;
-  createdOn: string;
-  debtee: Share;
-  debtors: Share[];
-}
-
-interface Nobt {
-  id: string;
-  name: string;
-  currency: string;
-  participatingPersons: string[];
-  bills: Bill[];
-  createdOn: string | null;
-  transactions: any[];
-  payments: any[];
-}
-
 interface State {
   fetchNobtStatus: AsyncActionStatus | null;
   nobtFetchTimestamp: string | null;
-  data: Nobt;
+  data: any;
 }
 
 export const initialState: State = {
@@ -117,7 +92,7 @@ export const initialState: State = {
     transactions: [],
     bills: [],
     payments: [],
-    createdOn: null,
+    createdOn: '',
   },
 };
 
