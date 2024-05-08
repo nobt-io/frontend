@@ -135,7 +135,7 @@ const makeMapStateToProps = () => {
   const getRelatedBills = makeGetRelatedBills();
 
   return (state, props) => {
-    let paidBills = getPaidBills(state, props);
+    let paidBills = getPaidBills(state, props).filter(bill => !bill.deletedOn);
 
     return {
       sumOfPaidBills: getSumOfPaidBills(paidBills),
